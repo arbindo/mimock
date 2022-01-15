@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+  postgres-db:
+    container_name: pg_container
+    image: postgres:13.5-alpine
+    restart: always
+    env_file:
+      - local.env
+    ports:
+      - "5432:5432"
+
+  mimock:
+    depends_on:
+      - postgres-db
+    build:
+      context: .
+    container_name: mimock
+    ports:
+      - "9002:9002"
+    networks:
+      - mimock-network
+    image: mimock
+
+networks:
+  mimock-network:
+    driver: bridge
