@@ -1,6 +1,5 @@
 package com.arbindo.mimock.init;
 
-import liquibase.pro.packaged.I;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +12,7 @@ import java.sql.DriverManager;
 @Configuration
 @Log4j2
 public class InitDatabase {
-    @Value("${app.database_password}")
+    @Value("${spring.datasource.password}")
     private String dbPassword;
 
     @Bean

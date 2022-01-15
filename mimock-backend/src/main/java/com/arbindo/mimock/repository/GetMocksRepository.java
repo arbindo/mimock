@@ -1,13 +1,8 @@
 package com.arbindo.mimock.repository;
 
 import com.arbindo.mimock.init.InitDatabase;
-import liquibase.pro.packaged.G;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
