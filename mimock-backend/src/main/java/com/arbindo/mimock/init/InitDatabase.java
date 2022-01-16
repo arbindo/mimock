@@ -12,27 +12,33 @@ import java.sql.DriverManager;
 @Configuration
 @Log4j2
 public class InitDatabase {
+    @Value("${spring.datasource.url}")
+    private String dbURL;
+
+    @Value("${spring.datasource.username}")
+    private String dbUser;
+
     @Value("${spring.datasource.password}")
     private String dbPassword;
 
-    @Bean
-    InitDatabase init() {
-        return new InitDatabase();
-    }
+    @Value("${spring.datasource.driver-class-name}")
+    private String dbDriver;
 
-    public Connection initConnection() {
+    private Connection connection;
+
+    public void initConnection() {
         Connection connection;
-
         try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/mimock_db",
-                    "mimock",
-                    dbPassword);
+            Class.forName(this.dbDriver);
+            connection = DriverManager.getConnection(this.dbURL, this.dbUser, dbPassword);
             log.log(Level.INFO, "Database connection initialized");
-            return connection;
+            this.connection = connection;
         } catch (Exception e) {
             log.log(Level.ERROR, e.getMessage());
         }
-        return null;
+    }
+
+    public Connection getConnection() {
+        return this.connection;
     }
 }

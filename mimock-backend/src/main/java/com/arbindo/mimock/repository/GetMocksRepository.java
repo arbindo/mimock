@@ -3,21 +3,22 @@ package com.arbindo.mimock.repository;
 import com.arbindo.mimock.init.InitDatabase;
 import org.springframework.stereotype.Component;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
 public class GetMocksRepository {
-    private final InitDatabase initDatabase;
+    private final Connection connection;
 
     public GetMocksRepository(final InitDatabase initDatabase) {
-        this.initDatabase = initDatabase;
+        this.connection = initDatabase.getConnection();
     }
 
     public String getMocks(String route, String method) {
         try {
-            Statement stmt = this.initDatabase.initConnection().createStatement();
+            Statement stmt = this.connection.createStatement();
             String query = String.format("SELECT * FROM mimock_schema.mocks WHERE route = '%s' AND method = '%s'", route, method);
             ResultSet result = stmt.executeQuery(query);
 
