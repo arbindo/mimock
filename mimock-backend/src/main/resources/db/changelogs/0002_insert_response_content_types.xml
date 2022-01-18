@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0002_insert_response_content_types">
+        <sql>
+            INSERT INTO mimock_schema.response_content_types(description, response_type, created_at)
+            VALUES ('AAC audio', 'audio/aac', current_timestamp),
+                   ('AbiWord document', 'application/x-abiword', current_timestamp),
+                   ('Archive document (multiple files embedded)', 'application/x-freearc', current_timestamp),
+                   ('AVI: Audio Video Interleave', 'video/x-msvideo', current_timestamp),
+                   ('Amazon Kindle eBook format', 'application/vnd.amazon.ebook', current_timestamp),
+                   ('Any kind of binary data', 'application/octet-stream', current_timestamp),
+                   ('Windows OS/2 Bitmap Graphics', 'image/bmp', current_timestamp),
+                   ('BZip archive', 'application/x-bzip', current_timestamp),
+                   ('BZip2 archive', 'application/x-bzip2', current_timestamp),
+                   ('CD audio', 'application/x-cdf', current_timestamp),
+                   ('C-Shell script', 'application/x-csh', current_timestamp),
+                   ('Cascading Style Sheets (CSS)', 'text/css', current_timestamp),
+                   ('Comma-separated values (CSV)', 'text/csv', current_timestamp),
+                   ('Microsoft Word', 'application/msword', current_timestamp),
+                   ('Microsoft Word (OpenXML)',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document', current_timestamp),
+                   ('MS Embedded OpenType fonts', 'application/vnd.ms-fontobject', current_timestamp),
+                   ('Electronic publication (EPUB)', 'application/epub+zip', current_timestamp),
+                   ('GZip Compressed Archive', 'application/gzip', current_timestamp),
+                   ('Graphics Interchange Format (GIF)', 'image/gif', current_timestamp),
+                   ('HyperText Markup Language (HTML)', 'text/html', current_timestamp),
+                   ('Icon format', 'image/vnd.microsoft.icon', current_timestamp),
+                   ('iCalendar format', 'text/calendar', current_timestamp),
+                   ('Java Archive (JAR)', 'application/java-archive', current_timestamp),
+                   ('JPEG images', 'image/jpeg', current_timestamp),
+                   ('JavaScript', 'text/javascript', current_timestamp),
+                   ('JSON format', 'application/json', current_timestamp),
+                   ('JSON-LD format', 'application/ld+json', current_timestamp),
+                   ('Musical Instrument Digital Interface (MIDI)', 'audio/midi', current_timestamp),
+                   ('Musical Instrument Digital Interface (MIDI)', 'audio/x-midi', current_timestamp),
+                   ('MP3 audio', 'audio/mpeg', current_timestamp),
+                   ('MP4 video', 'video/mp4', current_timestamp),
+                   ('MPEG Video', 'video/mpeg', current_timestamp),
+                   ('Apple Installer Package', 'application/vnd.apple.installer+xml', current_timestamp),
+                   ('OpenDocument presentation document', 'application/vnd.oasis.opendocument.presentation',
+                    current_timestamp),
+                   ('OpenDocument spreadsheet document', 'application/vnd.oasis.opendocument.spreadsheet',
+                    current_timestamp),
+                   ('OpenDocument text document', 'application/vnd.oasis.opendocument.text', current_timestamp),
+                   ('OGG audio', 'audio/ogg', current_timestamp),
+                   ('OGG video', 'video/ogg', current_timestamp),
+                   ('OGG', 'application/ogg', current_timestamp),
+                   ('Opus audio', 'audio/opus', current_timestamp),
+                   ('OpenType font', 'font/otf', current_timestamp),
+                   ('Portable Network Graphics', 'image/png', current_timestamp),
+                   ('Adobe Portable Document Format (PDF)', 'application/pdf', current_timestamp),
+                   ('Hypertext Preprocessor', 'application/x-httpd-php', current_timestamp),
+                   ('Microsoft PowerPoint', 'application/vnd.ms-powerpoint', current_timestamp),
+                   ('Microsoft PowerPoint (OpenXML)',
+                    'application/vnd.openxmlformats-officedocument.presentationml.presentation', current_timestamp),
+                   ('RAR archive', 'application/vnd.rar', current_timestamp),
+                   ('Rich Text Format (RTF)', 'application/rtf', current_timestamp),
+                   ('Bourne shell script', 'application/x-sh', current_timestamp),
+                   ('Scalable Vector Graphics (SVG)', 'image/svg+xml', current_timestamp),
+                   ('Small web format (SWF) or Adobe Flash document', 'application/x-shockwave-flash',
+                    current_timestamp),
+                   ('Tape Archive (TAR)', 'application/x-tar', current_timestamp),
+                   ('Tagged Image File Format (TIFF)', 'image/tiff', current_timestamp),
+                   ('MPEG transport stream', 'video/mp2t', current_timestamp),
+                   ('TrueType Font', 'font/ttf', current_timestamp),
+                   ('Text', 'text/plain', current_timestamp),
+                   ('Microsoft Visio', 'application/vnd.visio', current_timestamp),
+                   ('Waveform Audio Format', 'audio/wav', current_timestamp),
+                   ('WEBM audio', 'audio/webm', current_timestamp),
+                   ('WEBM video', 'video/webm', current_timestamp),
+                   ('WEBP image', 'image/webp', current_timestamp),
+                   ('Web Open Font Format (WOFF)', 'font/woff', current_timestamp),
+                   ('Web Open Font Format (WOFF)', 'font/woff2', current_timestamp),
+                   ('XHTML', 'application/xhtml+xml', current_timestamp),
+                   ('Microsoft Excel', 'application/vnd.ms-excel', current_timestamp),
+                   ('Microsoft Excel (OpenXML)', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    current_timestamp),
+                   ('XML', 'application/xml', current_timestamp),
+                   ('XUL', 'application/vnd.mozilla.xul+xml', current_timestamp),
+                   ('ZIP archive', 'application/zip', current_timestamp),
+                   ('3GPP video container', 'video/3gpp', current_timestamp),
+                   ('3GPP audio container', 'audio/3gpp', current_timestamp),
+                   ('3GPP2 video container', 'video/3gpp2', current_timestamp),
+                   ('3GPP2 audio container', 'audio/3gpp2', current_timestamp),
+                   ('7-zip archive', 'application/x-7z-compressed', current_timestamp)
+            ;
+        </sql>
+        <rollback>
+            <sql>
+                TRUNCATE TABLE mimock_schema.response_content_types;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

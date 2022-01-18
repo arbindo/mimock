@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0007_create_table_mocks">
+        <sql>
+            CREATE TABLE mimock_schema.mocks
+            (
+                id                       integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
+                route                    text    NOT NULL,
+                method_id                integer NOT NULL,
+                response_content_type_id integer NOT NULL,
+                status_code              integer NOT NULL DEFAULT 200,
+                query_params             text,
+                textual_response_id      integer,
+                binary_response_id       integer,
+                created_at               date    NOT NULL,
+                updated_at               date,
+                deleted_at               date,
+                PRIMARY KEY (id),
+                CONSTRAINT http_method_fk FOREIGN KEY (method_id)
+                    REFERENCES mimock_schema.http_methods (id) MATCH SIMPLE
+                    ON UPDATE NO ACTION
+                    ON DELETE NO ACTION
+                    NOT VALID,
+                CONSTRAINT response_content_type_fk FOREIGN KEY (response_content_type_id)
+                    REFERENCES mimock_schema.response_content_types (id) MATCH SIMPLE
+                    ON UPDATE NO ACTION
+                    ON DELETE NO ACTION
+                    NOT VALID,
+                CONSTRAINT textual_response_fk FOREIGN KEY (textual_response_id)
+                    REFERENCES mimock_schema.http_methods (id) MATCH SIMPLE
+                    ON UPDATE NO ACTION
+                    ON DELETE NO ACTION
+                    NOT VALID,
+                CONSTRAINT binary_response_fk FOREIGN KEY (binary_response_id)
+                    REFERENCES mimock_schema.http_methods (id) MATCH SIMPLE
+                    ON UPDATE NO ACTION
+                    ON DELETE NO ACTION
+                    NOT VALID
+            );
+        </sql>
+        <rollback>
+            <sql>
+                DROP TABLE mimock_schema.mocks;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
