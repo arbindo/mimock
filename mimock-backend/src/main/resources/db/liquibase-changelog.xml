@@ -3,5 +3,11 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <include file="/db/changelogs/0001_create_table_mocks.xml"/>
+    <include file="changelogs/0001_create_table_response_content_types.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0002_insert_response_content_types.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0003_create_table_textual_responses.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0004_create_table_binary_responses.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0005_create_table_http_methods.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0006_insert_http_methods.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0007_create_table_mocks.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
