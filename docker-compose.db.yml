@@ -9,20 +9,6 @@ services:
     ports:
       - "5432:5432"
 
-  mimock:
-    depends_on:
-      - postgres-db
-    build:
-      context: .
-    container_name: mimock
-    ports:
-      - "9002:9002"
-    networks:
-      - mimock-network
-    env_file:
-      - local.env
-    image: mimock
-
 networks:
   mimock-network:
     driver: bridge

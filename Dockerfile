@@ -1,8 +1,13 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM alpine:3.15.0
 
 WORKDIR /home/mimock
 
-COPY ./mimock-backend .
+COPY ${PWD}/mimock-backend/ .
+
+RUN chmod 755 -R .
+
+RUN apk add openjdk11
+RUN apk add openjdk11-jre
 
 RUN ./mvnw clean package
 
