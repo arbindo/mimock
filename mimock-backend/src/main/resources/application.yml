@@ -1,0 +1,27 @@
+server:
+  servlet:
+    context-path: /api/mimock/v1
+  ssl:
+    enabled: '${MIOMCK_KEYSTORE_ENABLE}'
+    key-store: '${MIMOCK_KEYSTORE_PATH}'
+    key-store-password: '${MIOMCK_KEYSTORE_PASSWORD}'
+    key-store-type: PKCS12
+    enabled-protocols: TLSv1.3
+
+spring:
+  devtools:
+    restart:
+      enabled: 'true'
+      poll-interval: 1s
+    livereload:
+      enabled: 'true'
+
+  datasource:
+    url: '${MIMOCK_DB_URL}'
+    username: mimock
+    password: '${MIMOCK_DB_PASSWORD}'
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: ./db/liquibase-changelog.xml
+    default-schema: mimock_schema
