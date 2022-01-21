@@ -9,6 +9,7 @@ RUN chmod 755 -R .
 RUN apk add openjdk11
 RUN apk add openjdk11-jre
 
+RUN sed -i 's/\r$//' mvnw
 RUN ./mvnw clean package
 
 EXPOSE 8080
