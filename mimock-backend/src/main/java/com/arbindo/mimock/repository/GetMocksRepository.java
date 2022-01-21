@@ -19,7 +19,7 @@ public class GetMocksRepository {
     public String getMocks(String route, String method) {
         try {
             Statement stmt = this.connection.createStatement();
-            String query = String.format("SELECT * FROM mimock_schema.mocks WHERE route = '%s' AND method = '%s'", route, method);
+            String query = String.format("SELECT * FROM mocks WHERE route = '%s' AND method = '%s'", route, method);
             ResultSet result = stmt.executeQuery(query);
 
             String response = "";
