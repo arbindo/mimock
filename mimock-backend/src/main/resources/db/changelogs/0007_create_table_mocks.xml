@@ -5,7 +5,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet author="neel" id="0007_create_table_mocks">
         <sql>
-            CREATE TABLE mimock_schema.mocks
+            CREATE TABLE mocks
             (
                 id                       integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
                 route                    text    NOT NULL,
@@ -20,22 +20,22 @@
                 deleted_at               date,
                 PRIMARY KEY (id),
                 CONSTRAINT http_method_fk FOREIGN KEY (method_id)
-                    REFERENCES mimock_schema.http_methods (id) MATCH SIMPLE
+                    REFERENCES http_methods (id) MATCH SIMPLE
                     ON UPDATE NO ACTION
                     ON DELETE NO ACTION
                     NOT VALID,
                 CONSTRAINT response_content_type_fk FOREIGN KEY (response_content_type_id)
-                    REFERENCES mimock_schema.response_content_types (id) MATCH SIMPLE
+                    REFERENCES response_content_types (id) MATCH SIMPLE
                     ON UPDATE NO ACTION
                     ON DELETE NO ACTION
                     NOT VALID,
                 CONSTRAINT textual_response_fk FOREIGN KEY (textual_response_id)
-                    REFERENCES mimock_schema.http_methods (id) MATCH SIMPLE
+                    REFERENCES http_methods (id) MATCH SIMPLE
                     ON UPDATE NO ACTION
                     ON DELETE NO ACTION
                     NOT VALID,
                 CONSTRAINT binary_response_fk FOREIGN KEY (binary_response_id)
-                    REFERENCES mimock_schema.http_methods (id) MATCH SIMPLE
+                    REFERENCES http_methods (id) MATCH SIMPLE
                     ON UPDATE NO ACTION
                     ON DELETE NO ACTION
                     NOT VALID
@@ -43,7 +43,7 @@
         </sql>
         <rollback>
             <sql>
-                DROP TABLE mimock_schema.mocks;
+                DROP TABLE mocks;
             </sql>
         </rollback>
     </changeSet>

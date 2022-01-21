@@ -5,7 +5,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet author="neel" id="0001_create_table_response_content_types">
         <sql>
-            CREATE TABLE mimock_schema.response_content_types
+            CREATE TABLE response_content_types
             (
                 id            integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
                 response_type text    NOT NULL,
@@ -19,7 +19,7 @@
         </sql>
         <rollback>
             <sql>
-                DROP TABLE mimock_schema.response_content_types;
+                DROP TABLE response_content_types;
             </sql>
         </rollback>
     </changeSet>

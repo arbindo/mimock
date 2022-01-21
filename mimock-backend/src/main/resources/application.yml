@@ -18,10 +18,11 @@ spring:
 
   datasource:
     url: '${MIMOCK_DB_URL}'
-    username: mimock
+    username: '${MIMOCK_DB_USER}'
     password: '${MIMOCK_DB_PASSWORD}'
     driver-class-name: org.postgresql.Driver
 
   liquibase:
-    change-log: ./db/liquibase-changelog.xml
-    default-schema: mimock_schema
+    change-log: classpath:/db/liquibase-changelog.xml
+    default-schema: ${MIMOCK_DB_SCHEMA}
+    liquibase-schema: ${MIMOCK_DB_SCHEMA}

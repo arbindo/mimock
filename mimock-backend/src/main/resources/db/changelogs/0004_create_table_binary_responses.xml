@@ -5,7 +5,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet author="neel" id="0004_create_table_binary_responses">
         <sql>
-            CREATE TABLE mimock_schema.binary_responses
+            CREATE TABLE binary_responses
             (
                 id            integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
                 response_file bytea   NOT NULL,
@@ -17,7 +17,7 @@
         </sql>
         <rollback>
             <sql>
-                DROP TABLE mimock_schema.binary_responses;
+                DROP TABLE binary_responses;
             </sql>
         </rollback>
     </changeSet>

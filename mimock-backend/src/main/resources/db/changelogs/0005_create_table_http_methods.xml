@@ -5,7 +5,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet author="neel" id="0005_create_table_http_methods">
         <sql>
-            CREATE TABLE mimock_schema.http_methods
+            CREATE TABLE http_methods
             (
                 id         integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
                 method     text    NOT NULL,
@@ -18,7 +18,7 @@
         </sql>
         <rollback>
             <sql>
-                DROP TABLE mimock_schema.http_methods;
+                DROP TABLE http_methods;
             </sql>
         </rollback>
     </changeSet>

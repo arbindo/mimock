@@ -5,7 +5,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet author="neel" id="0002_insert_response_content_types">
         <sql>
-            INSERT INTO mimock_schema.response_content_types(description, response_type, created_at)
+            INSERT INTO response_content_types(description, response_type, created_at)
             VALUES ('AAC audio', 'audio/aac', current_timestamp),
                    ('AbiWord document', 'application/x-abiword', current_timestamp),
                    ('Archive document (multiple files embedded)', 'application/x-freearc', current_timestamp),
@@ -90,7 +90,7 @@
         </sql>
         <rollback>
             <sql>
-                TRUNCATE TABLE mimock_schema.response_content_types;
+                TRUNCATE TABLE response_content_types;
             </sql>
         </rollback>
     </changeSet>

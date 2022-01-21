@@ -5,7 +5,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet author="neel" id="0006_insert_http_methods">
         <sql>
-            INSERT INTO mimock_schema.http_methods(method, created_at)
+            INSERT INTO http_methods(method, created_at)
             VALUES ('GET', current_timestamp),
                    ('HEAD', current_timestamp),
                    ('POST', current_timestamp),
@@ -19,7 +19,7 @@
         </sql>
         <rollback>
             <sql>
-                TRUNCATE TABLE mimock_schema.http_methods;
+                TRUNCATE TABLE http_methods;
             </sql>
         </rollback>
     </changeSet>
