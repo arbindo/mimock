@@ -1,8 +1,8 @@
 server:
   ssl:
-    enabled: '${MIOMCK_KEYSTORE_ENABLE}'
-    key-store: '${MIMOCK_KEYSTORE_PATH}'
-    key-store-password: '${MIOMCK_KEYSTORE_PASSWORD}'
+    enabled: 'true'
+    key-store: src/main/resources/keystore/keystore.p12
+    key-store-password: ironclaw
     key-store-type: PKCS12
     enabled-protocols: TLSv1.3
 
@@ -15,17 +15,17 @@ spring:
       enabled: 'true'
 
   datasource:
-    url: '${MIMOCK_DB_URL}'
-    username: '${MIMOCK_DB_USER}'
-    password: '${MIMOCK_DB_PASSWORD}'
+    url: jdbc:postgresql://localhost:5427/mimock_db
+    username: mimock
+    password: ironclaw
     driver-class-name: org.postgresql.Driver
     hikari:
-      schema: ${MIMOCK_DB_SCHEMA}
+      schema: mimock_schema_dev
 
   liquibase:
     change-log: classpath:/db/liquibase-changelog.xml
-    default-schema: ${MIMOCK_DB_SCHEMA}
-    liquibase-schema: ${MIMOCK_DB_SCHEMA}
+    default-schema: mimock_schema_dev
+    liquibase-schema: mimock_schema_dev
 
 app:
   url_prefix: /api/mimock/v1

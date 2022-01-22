@@ -13,3 +13,9 @@ docker-compose -f docker-compose.db.yml -d up
 ```shell
 docker-compose up
 ```
+
+## For running app with dev config
+
+```shell
+--spring.config.location=classpath:/application.dev.yml 
+```
