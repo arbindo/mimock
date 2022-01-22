@@ -3,12 +3,12 @@ services:
   mimock-pg-database:
     container_name: mimock-pg-database
     image: postgres:13.5-alpine
-    restart: on-failure
     env_file:
       - local.env
+    networks:
+      - mimock-network
     ports:
-      - "5432:5432"
+      - "5427:5432"
 
 networks:
   mimock-network:
-    driver: bridge

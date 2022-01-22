@@ -3,7 +3,6 @@ package com.arbindo.mimock.init;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.Connection;
@@ -24,6 +23,9 @@ public class InitDatabase {
     @Value("${spring.datasource.driver-class-name}")
     private String dbDriver;
 
+    @Value("${spring.datasource.hikari.schema}")
+    private String dbSchema;
+
     private Connection connection;
 
     public void initConnection() {
@@ -32,6 +34,7 @@ public class InitDatabase {
             Class.forName(this.dbDriver);
             connection = DriverManager.getConnection(this.dbURL, this.dbUser, dbPassword);
             log.log(Level.INFO, "Database connection initialized");
+            connection.setSchema(dbSchema);
             this.connection = connection;
         } catch (Exception e) {
             log.log(Level.ERROR, e.getMessage());

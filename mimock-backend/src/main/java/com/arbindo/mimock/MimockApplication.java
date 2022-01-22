@@ -28,13 +28,11 @@ public class MimockApplication {
     @Bean
     public static BeanFactoryPostProcessor dependsOnPostProcessor() {
         return bf -> {
-            String[] liquibase = bf.getBeanNamesForType(Liquibase.class);
-            Stream.of(liquibase)
+            Stream.of(bf.getBeanNamesForType(Liquibase.class))
                     .map(bf::getBeanDefinition)
                     .forEach(it -> it.setDependsOn("databaseStartupValidator"));
 
-            String[] jpa = bf.getBeanNamesForType(EntityManagerFactory.class);
-            Stream.of(jpa)
+            Stream.of(bf.getBeanNamesForType(EntityManagerFactory.class))
                     .map(bf::getBeanDefinition)
                     .forEach(it -> it.setDependsOn("databaseStartupValidator"));
         };
@@ -42,9 +40,10 @@ public class MimockApplication {
 
     @Bean
     public DatabaseStartupValidator databaseStartupValidator(DataSource dataSource) {
-        var dsv = new DatabaseStartupValidator();
-        dsv.setDataSource(dataSource);
-        dsv.setValidationQuery(DatabaseDriver.POSTGRESQL.getValidationQuery());
-        return dsv;
+        var validator = new DatabaseStartupValidator();
+        validator.setDataSource(dataSource);
+        validator.setInterval(5);
+        validator.setTimeout(60);
+        return validator;
     }
 }

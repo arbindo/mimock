@@ -7,17 +7,17 @@
         <sql>
             CREATE TABLE mocks
             (
-                id                       integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
-                route                    text    NOT NULL,
-                method_id                integer NOT NULL,
-                response_content_type_id integer NOT NULL,
-                status_code              integer NOT NULL DEFAULT 200,
-                query_params             text,
-                textual_response_id      integer,
-                binary_response_id       integer,
-                created_at               date    NOT NULL,
-                updated_at               date,
-                deleted_at               date,
+                id                       BIGSERIAL NOT NULL,
+                route                    TEXT      NOT NULL,
+                method_id                INT       NOT NULL,
+                response_content_type_id INT       NOT NULL,
+                status_code              INT       NOT NULL DEFAULT 200,
+                query_params             TEXT,
+                textual_response_id      INT,
+                binary_response_id       INT,
+                created_at               INT       NOT NULL,
+                updated_at               INT,
+                deleted_at               INT,
                 PRIMARY KEY (id),
                 CONSTRAINT http_method_fk FOREIGN KEY (method_id)
                     REFERENCES http_methods (id) MATCH SIMPLE

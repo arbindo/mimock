@@ -1,6 +1,4 @@
 server:
-  servlet:
-    context-path: /api/mimock/v1
   ssl:
     enabled: '${MIOMCK_KEYSTORE_ENABLE}'
     key-store: '${MIMOCK_KEYSTORE_PATH}'
@@ -21,6 +19,8 @@ spring:
     username: '${MIMOCK_DB_USER}'
     password: '${MIMOCK_DB_PASSWORD}'
     driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: ${MIMOCK_DB_SCHEMA}
 
   liquibase:
     change-log: classpath:/db/liquibase-changelog.xml

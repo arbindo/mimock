@@ -7,11 +7,11 @@
         <sql>
             CREATE TABLE textual_responses
             (
-                id            integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
-                response_body text    NOT NULL,
-                created_at    date    NOT NULL,
-                updated_at    date,
-                deleted_at    date,
+                id            BIGSERIAL NOT NULL,
+                response_body text      NOT NULL,
+                created_at    TIMESTAMP NOT NULL,
+                updated_at    TIMESTAMP,
+                deleted_at    TIMESTAMP,
                 PRIMARY KEY (id)
             );
         </sql>

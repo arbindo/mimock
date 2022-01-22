@@ -7,12 +7,12 @@
         <sql>
             CREATE TABLE response_content_types
             (
-                id            integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
-                response_type text    NOT NULL,
-                description   text    NOT NULL,
-                created_at    date    NOT NULL,
-                updated_at    date,
-                deleted_at    date,
+                id            BIGSERIAL    NOT NULL,
+                response_type VARCHAR(255) NOT NULL,
+                description   VARCHAR(255) NOT NULL,
+                created_at    TIMESTAMP    NOT NULL,
+                updated_at    TIMESTAMP,
+                deleted_at    TIMESTAMP,
                 PRIMARY KEY (id),
                 CONSTRAINT unique_response_type UNIQUE (response_type)
             );
