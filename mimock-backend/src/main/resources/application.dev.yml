@@ -1,6 +1,6 @@
 server:
   ssl:
-    enabled: 'true'
+    enabled: false
     key-store: src/main/resources/keystore/keystore.p12
     key-store-password: ironclaw
     key-store-type: PKCS12
@@ -9,10 +9,10 @@ server:
 spring:
   devtools:
     restart:
-      enabled: 'true'
+      enabled: true
       poll-interval: 1s
     livereload:
-      enabled: 'true'
+      enabled: true
 
   datasource:
     url: jdbc:postgresql://localhost:5427/mimock_db

@@ -7,7 +7,7 @@
         <sql>
             CREATE TABLE mocks
             (
-                id                       BIGSERIAL NOT NULL,
+                mock_id                  UUID      NOT NULL,
                 route                    TEXT      NOT NULL,
                 method_id                INT       NOT NULL,
                 response_content_type_id INT       NOT NULL,
@@ -15,10 +15,10 @@
                 query_params             TEXT,
                 textual_response_id      INT,
                 binary_response_id       INT,
-                created_at               INT       NOT NULL,
-                updated_at               INT,
-                deleted_at               INT,
-                PRIMARY KEY (id),
+                created_at               TIMESTAMP NOT NULL,
+                updated_at               TIMESTAMP,
+                deleted_at               TIMESTAMP,
+                PRIMARY KEY (mock_id),
                 CONSTRAINT http_method_fk FOREIGN KEY (method_id)
                     REFERENCES http_methods (id) MATCH SIMPLE
                     ON UPDATE NO ACTION
