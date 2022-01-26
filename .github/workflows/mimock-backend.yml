@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'mimock-backend/**'
+      - '.github/workflows/**'
     branches: [ main ]
 
 jobs:
@@ -25,6 +26,6 @@ jobs:
     steps:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
-        
+
       - name: Run mimock tests in CI mode
         run: make test-ci
