@@ -12,7 +12,7 @@ jobs:
     name: Mimock Linter
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code into the Go module directory
+      - name: Check out code
         uses: actions/checkout@v2
 
       - name: Run linter for mimock backend code
@@ -24,7 +24,7 @@ jobs:
     name: Test Mimock
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code into the Go module directory
+      - name: Check out code
         uses: actions/checkout@v2
 
       - name: Run mimock tests in CI mode
