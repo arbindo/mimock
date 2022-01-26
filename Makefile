@@ -10,5 +10,8 @@ cd_backend:
 generate-mvnw: cd_backend
 	mvn -N io.takari:maven:wrapper; cd ..
 
-test: cd_backend
+test-local: cd_backend
 	./mvnw clean test -Dspring.config.location=classpath:/application.test.yml
+
+test-ci:
+	docker-compose -f docker-compose.test.yml up --abort-on-container-exit --exit-code-from mimock-test

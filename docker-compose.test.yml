@@ -4,25 +4,24 @@ services:
     container_name: mimock-pg-database
     image: postgres:13.5-alpine
     env_file:
-      - local.env
+      - local-test.env
     networks:
       - mimock-network
     ports:
       - "5427:5432"
 
-  mimock:
+  mimock-test:
     depends_on:
       - mimock-pg-database
     build:
       context: .
-    container_name: mimock
+      dockerfile: Test.Dockerfile
+    container_name: mimock-test
     networks:
       - mimock-network
-    ports:
-      - "9002:8080"
     env_file:
-      - local.env
-    image: mimock
+      - local-test.env
+    image: mimock-test
 
 networks:
   mimock-network:

@@ -1,0 +1,24 @@
+name: Mimock Backend Pipeline
+
+on:
+  push:
+    paths:
+      - 'mimock-backend/**'
+    branches: [ main ]
+
+jobs:
+  mimock-lint:
+    name: Mimock Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run linter for mimock backend code
+        run: echo "Yet to implement!"
+
+  mimock-test:
+    needs:
+      - mimock-lint
+    name: Test Mimock
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run mimock tests in CI mode
+        run: make test-ci
