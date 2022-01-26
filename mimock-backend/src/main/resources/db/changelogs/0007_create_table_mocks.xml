@@ -19,26 +19,10 @@
                 updated_at               TIMESTAMP,
                 deleted_at               TIMESTAMP,
                 PRIMARY KEY (mock_id),
-                CONSTRAINT http_method_fk FOREIGN KEY (method_id)
-                    REFERENCES http_methods (id) MATCH SIMPLE
-                    ON UPDATE NO ACTION
-                    ON DELETE NO ACTION
-                    NOT VALID,
-                CONSTRAINT response_content_type_fk FOREIGN KEY (response_content_type_id)
-                    REFERENCES response_content_types (id) MATCH SIMPLE
-                    ON UPDATE NO ACTION
-                    ON DELETE NO ACTION
-                    NOT VALID,
-                CONSTRAINT textual_response_fk FOREIGN KEY (textual_response_id)
-                    REFERENCES http_methods (id) MATCH SIMPLE
-                    ON UPDATE NO ACTION
-                    ON DELETE NO ACTION
-                    NOT VALID,
-                CONSTRAINT binary_response_fk FOREIGN KEY (binary_response_id)
-                    REFERENCES http_methods (id) MATCH SIMPLE
-                    ON UPDATE NO ACTION
-                    ON DELETE NO ACTION
-                    NOT VALID
+                CONSTRAINT http_method_fk FOREIGN KEY (method_id) REFERENCES http_methods (id),
+                CONSTRAINT response_content_type_fk FOREIGN KEY (response_content_type_id) REFERENCES response_content_types (id),
+                CONSTRAINT textual_response_fk FOREIGN KEY (textual_response_id) REFERENCES textual_responses (id),
+                CONSTRAINT binary_response_fk FOREIGN KEY (binary_response_id) REFERENCES binary_responses (id)
             );
         </sql>
         <rollback>

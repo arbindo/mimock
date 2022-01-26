@@ -1,12 +1,10 @@
 package com.arbindo.mimock;
 
-import com.arbindo.mimock.init.InitDatabase;
 import liquibase.Liquibase;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.support.DatabaseStartupValidator;
 
@@ -16,11 +14,6 @@ import java.util.stream.Stream;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class MimockApplication {
-
-    public MimockApplication(InitDatabase initDatabase) {
-        initDatabase.initConnection();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(MimockApplication.class, args);
     }

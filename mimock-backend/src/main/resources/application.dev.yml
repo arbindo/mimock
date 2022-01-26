@@ -14,6 +14,14 @@ spring:
     livereload:
       enabled: true
 
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
   datasource:
     url: jdbc:postgresql://localhost:5427/mimock_db
     username: mimock
