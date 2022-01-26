@@ -87,12 +87,34 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <executable>true</executable>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <profiles>
+                        <profile>${app.profiles}</profile>
+                    </profiles>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>spring.datasource.url</name>
+                            <value>jdbc:postgresql://localhost:5427/mimock_db</value>
+                        </property>
+                        <property>
+                            <name>spring.config.location</name>
+                            <value>classpath:/application-test.yml</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
             </plugin>
 
@@ -113,5 +135,44 @@
         </plugins>
 
     </build>
+
+    <!--    plugin to start pg database container-->
+    <profiles>
+        <profile>
+            <id>startDatabase</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>start-db-container</id>
+                                <phase>initialize</phase>
+                                <inherited>false</inherited>
+                                <configuration>
+                                    <target>
+                                        <exec executable="docker-compose">
+                                            <arg value="-f"/>
+                                            <arg value="../docker-compose.db.yml"/>
+                                            <arg value="up"/>
+                                            <arg value="-d"/>
+                                        </exec>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
 </project>

@@ -1,8 +1,10 @@
-start-database:
-	docker-compose -f docker-compose.db.yml up
+# Makefile for mimock
 
-start-app-local:
-	docker-compose up
+APP_CONFIG_FILE := 'classpath:/application.yml'
+APP_DB_URL := 'jdbc:postgresql://localhost:5427/mimock_db'
+
+TEST_CONFIG_FILE := 'classpath:/application.test.yml'
+TEST_DB_URL := 'jdbc:postgresql://localhost:5427/mimock_db'
 
 cd_backend:
 	cd ./mimock-backend
@@ -10,8 +12,14 @@ cd_backend:
 generate-mvnw: cd_backend
 	mvn -N io.takari:maven:wrapper; cd ..
 
-test-local: cd_backend
-	./mvnw clean test -Dspring.config.location=classpath:/application.test.yml
+start-database:
+	docker-compose -f docker-compose.db.yml up
+
+start-app-local: start-database
+	./mimock-backend/mvnw clean spring-boot:run -Dspring.config.location=$(APP_CONFIG_FILE) -Dspring.datasource.url=$(APP_DB_URL)
+
+test-local: start-database
+	./mimock-backend/mvnw clean test -Dspring.config.location=$(TEST_CONFIG_FILE) -Dspring.datasource.url=$(TEST_DB_URL)
 
 test-ci:
 	docker-compose -f docker-compose.test.yml up --abort-on-container-exit --exit-code-from mimock-test
