@@ -1,31 +1,35 @@
 package com.arbindo.mimock.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
 @Entity
 @Table(name = "mocks")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class Mock {
-
     @Id
     @Column(name = "mock_id", nullable = false)
+    @Type(type = "org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
-    @Lob
     @Column(name = "route", nullable = false, length = 2048)
     private String route;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "method_id", nullable = false)
-    private HttpMethod method;
+    private HttpMethod httpMethod;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "response_content_type_id", nullable = false)
@@ -46,9 +50,11 @@ public class Mock {
     private BinaryResponse binaryResponse;
 
     @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
     private ZonedDateTime createdAt;
 
     @Column(name = "updated_at")
+    @UpdateTimestamp
     private ZonedDateTime updatedAt;
 
     @Column(name = "deleted_at")

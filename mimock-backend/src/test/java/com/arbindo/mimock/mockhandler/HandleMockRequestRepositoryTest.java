@@ -1,7 +1,8 @@
 package com.arbindo.mimock.mockhandler;
 
+import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.db.*;
-import com.arbindo.mimock.mockhandler.entities.*;
+import com.arbindo.mimock.repository.MocksRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +17,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class HandleMockRequestRepositoryTest {
+class HandleMockRequestRepositoryTest {
     @Autowired
     MocksDBHelper mocksDBHelper;
 
@@ -24,7 +25,7 @@ public class HandleMockRequestRepositoryTest {
     HttpMethodDBHelper httpMethodsDBHelper;
 
     @Autowired
-    HandleMockRequestRepository handleMockRequestRepository;
+    MocksRepository repository;
 
     @Autowired
     TextualResponseDBHelper textualResponseDBHelper;
@@ -47,10 +48,10 @@ public class HandleMockRequestRepositoryTest {
                 .id(httpMethodsDBHelper.getHttpMethodByMethod("POST").getId())
                 .build();
 
-        TextualResponseBody textualResponseBody = TextualResponseBody.builder()
+        TextualResponse textualResponse = TextualResponse.builder()
                 .responseBody("{testResponse: 'This is a response'}")
                 .build();
-        textualResponseBody = textualResponseDBHelper.save(textualResponseBody);
+        textualResponse = textualResponseDBHelper.save(textualResponse);
 
         ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("application/json");
 
@@ -60,38 +61,38 @@ public class HandleMockRequestRepositoryTest {
         UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
-        Mocks testMock1 = Mocks.builder()
+        Mock testMock1 = Mock.builder()
                 .id(expectedMockId)
                 .route(expectedRoute)
                 .httpMethod(expectedHttpMethod)
                 .queryParams(expectedQueryParams)
-                .textualResponse(textualResponseBody)
+                .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .build();
 
-        Mocks testMock2 = Mocks.builder()
+        Mock testMock2 = Mock.builder()
                 .id(mockId)
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
-                .textualResponse(textualResponseBody)
+                .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .build();
 
-        Mocks mock1 = mocksDBHelper.save(testMock1);
+        Mock mock1 = mocksDBHelper.save(testMock1);
         assertNotNull(mock1);
 
-        Mocks mock2 = mocksDBHelper.save(testMock2);
+        Mock mock2 = mocksDBHelper.save(testMock2);
         assertNotNull(mock2);
 
-        Mocks actualMockFromDB = handleMockRequestRepository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
+        Mock actualMockFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
 
         assertEquals(expectedMockId, actualMockFromDB.getId());
         assertEquals(expectedRoute, actualMockFromDB.getRoute());
         assertEquals(expectedHttpMethod.getMethod(), actualMockFromDB.getHttpMethod().getMethod());
-        assertEquals(textualResponseBody.getResponseBody(), actualMockFromDB.getTextualResponse().getResponseBody());
+        assertEquals(textualResponse.getResponseBody(), actualMockFromDB.getTextualResponse().getResponseBody());
         assertNotNull(actualMockFromDB.getCreatedAt().toString());
     }
 
@@ -107,11 +108,11 @@ public class HandleMockRequestRepositoryTest {
                 .id(httpMethodsDBHelper.getHttpMethodByMethod("POST").getId())
                 .build();
 
-        BinaryResponseBody binaryResponseBody = BinaryResponseBody.builder()
+        BinaryResponse binaryResponse = BinaryResponse.builder()
                 .responseFile(generateFile())
                 .build();
         deleteTestFile();
-        binaryResponseBody = binaryResponseDBHelper.save(binaryResponseBody);
+        binaryResponse = binaryResponseDBHelper.save(binaryResponse);
 
         ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("text/plain");
 
@@ -121,38 +122,38 @@ public class HandleMockRequestRepositoryTest {
         UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
-        Mocks testMock1 = Mocks.builder()
+        Mock testMock1 = Mock.builder()
                 .id(expectedMockId)
                 .route(expectedRoute)
                 .httpMethod(expectedHttpMethod)
                 .queryParams(expectedQueryParams)
-                .binaryResponse(binaryResponseBody)
+                .binaryResponse(binaryResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .build();
 
-        Mocks testMock2 = Mocks.builder()
+        Mock testMock2 = Mock.builder()
                 .id(mockId)
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
-                .binaryResponse(binaryResponseBody)
+                .binaryResponse(binaryResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .build();
 
-        Mocks mock1 = mocksDBHelper.save(testMock1);
+        Mock mock1 = mocksDBHelper.save(testMock1);
         assertNotNull(mock1);
 
-        Mocks mock2 = mocksDBHelper.save(testMock2);
+        Mock mock2 = mocksDBHelper.save(testMock2);
         assertNotNull(mock2);
 
-        Mocks actualMockFromDB = handleMockRequestRepository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
+        Mock actualMockFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
 
         assertEquals(expectedMockId, actualMockFromDB.getId());
         assertEquals(expectedRoute, actualMockFromDB.getRoute());
         assertEquals(expectedHttpMethod.getMethod(), actualMockFromDB.getHttpMethod().getMethod());
-        assertEquals(binaryResponseBody.getResponseFile(), actualMockFromDB.getBinaryResponse().getResponseFile());
+        assertEquals(binaryResponse.getResponseFile(), actualMockFromDB.getBinaryResponse().getResponseFile());
         assertNotNull(actualMockFromDB.getCreatedAt().toString());
     }
 
@@ -176,7 +177,7 @@ public class HandleMockRequestRepositoryTest {
         UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
-        Mocks testMock1 = Mocks.builder()
+        Mock testMock1 = Mock.builder()
                 .id(expectedMockId)
                 .route(expectedRoute)
                 .httpMethod(expectedHttpMethod)
@@ -185,7 +186,7 @@ public class HandleMockRequestRepositoryTest {
                 .statusCode(200)
                 .build();
 
-        Mocks testMock2 = Mocks.builder()
+        Mock testMock2 = Mock.builder()
                 .id(mockId)
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
@@ -194,13 +195,13 @@ public class HandleMockRequestRepositoryTest {
                 .statusCode(400)
                 .build();
 
-        Mocks mock1 = mocksDBHelper.save(testMock1);
+        Mock mock1 = mocksDBHelper.save(testMock1);
         assertNotNull(mock1);
 
-        Mocks mock2 = mocksDBHelper.save(testMock2);
+        Mock mock2 = mocksDBHelper.save(testMock2);
         assertNotNull(mock2);
 
-        Mocks actualMockFromDB = handleMockRequestRepository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
+        Mock actualMockFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
 
         assertEquals(expectedMockId, actualMockFromDB.getId());
         assertEquals(expectedRoute, actualMockFromDB.getRoute());
@@ -220,7 +221,7 @@ public class HandleMockRequestRepositoryTest {
         String route = "/api/mock/test";
         String queryParam = "version=1.0.0&auto=true";
 
-        Mocks actualMockFromDB = handleMockRequestRepository.findOneByRouteAndHttpMethodAndQueryParams(route, httpMethod, queryParam);
+        Mock actualMockFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(route, httpMethod, queryParam);
 
         assertNull(actualMockFromDB);
     }

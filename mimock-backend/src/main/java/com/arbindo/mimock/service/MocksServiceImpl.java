@@ -59,7 +59,7 @@ public class MocksServiceImpl implements MocksService {
             Mock mock = Mock.builder()
                     .id(mockId)
                     .route(request.getRoute())
-                    .method(httpMethod)
+                    .httpMethod(httpMethod)
                     .responseContentType(responseContentType)
                     .statusCode(request.getStatusCode())
                     .queryParams(request.getQueryParams())
