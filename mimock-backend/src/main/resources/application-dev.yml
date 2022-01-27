@@ -29,6 +29,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     hikari:
       schema: mimock_schema_dev
+      auto-commit: false
 
   liquibase:
     change-log: classpath:/db/liquibase-changelog.xml
