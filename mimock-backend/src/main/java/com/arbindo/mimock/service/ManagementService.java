@@ -5,7 +5,7 @@ import com.arbindo.mimock.entities.ResponseContentType;
 
 import java.util.List;
 
-public interface AdminService {
+public interface ManagementService {
 
     List<HttpMethod> listAllSupportedHttpMethods();
 

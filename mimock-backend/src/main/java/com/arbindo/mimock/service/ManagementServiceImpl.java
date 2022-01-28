@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AdminServiceImpl implements AdminService{
+public class ManagementServiceImpl implements ManagementService {
 
     @Autowired
     HttpMethodsRepository httpMethodsRepository;
