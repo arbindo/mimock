@@ -12,5 +12,7 @@ public class Messages {
 
     public static final String GET_RESOURCE_FAILED = "Unable to find the resource!";
 
+    public static final String DELETE_RESOURCE_FAILED = "Unable to delete the resource!";
+
 
 }

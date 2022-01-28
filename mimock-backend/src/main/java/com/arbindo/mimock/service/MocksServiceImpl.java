@@ -13,9 +13,11 @@ import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -39,10 +41,32 @@ public class MocksServiceImpl implements MocksService {
     @Override
     public Mock getMockById(String mockId) {
         if(Extensions.IsNotNullOrEmpty(mockId)){
-            return mocksRepository.getById(UUID.fromString(mockId));
+            try{
+               Optional<Mock> mock = mocksRepository.findById(UUID.fromString(mockId));
+               return mock.orElseThrow(EntityNotFoundException::new);
+            }catch (Exception e) {
+                log.log(Level.DEBUG, e.getMessage());
+            }
         }
         log.log(Level.DEBUG, "Invalid Mock Id!");
         return null;
+    }
+
+    @Override
+    public boolean deleteMockById(String mockId) {
+        if(Extensions.IsNotNullOrEmpty(mockId)){
+            try{
+                Mock mock = getMockById(mockId);
+                if(mock != null){
+                    mocksRepository.delete(mock);
+                    return true;
+                }
+            } catch (Exception e){
+                log.log(Level.DEBUG, e.getMessage());
+            }
+        }
+        log.log(Level.DEBUG, "Invalid Mock Id!");
+        return false;
     }
 
     @Transactional

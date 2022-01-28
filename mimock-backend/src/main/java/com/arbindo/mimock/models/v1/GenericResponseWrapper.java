@@ -1,12 +1,12 @@
 package com.arbindo.mimock.models.v1;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@Builder
 public class GenericResponseWrapper<T> {
     private String code;
     private String message;
