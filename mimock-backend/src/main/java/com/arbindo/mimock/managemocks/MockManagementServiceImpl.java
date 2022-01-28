@@ -1,13 +1,12 @@
-package com.arbindo.mimock.service;
+package com.arbindo.mimock.managemocks;
 
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.entities.ResponseContentType;
-import com.arbindo.mimock.models.v1.CreateMockRequest;
+import com.arbindo.mimock.managemocks.models.v1.CreateMockRequest;
 import com.arbindo.mimock.repository.HttpMethodsRepository;
 import com.arbindo.mimock.repository.MocksRepository;
 import com.arbindo.mimock.repository.ResponseContentTypesRepository;
-import com.arbindo.mimock.utilities.Extensions;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import java.util.UUID;
 
 @Service
 @Log4j2
-public class MocksServiceImpl implements MocksService {
+public class MockManagementServiceImpl implements MockManagementService {
 
     @Autowired
     private MocksRepository mocksRepository;
@@ -40,7 +39,7 @@ public class MocksServiceImpl implements MocksService {
 
     @Override
     public Mock getMockById(String mockId) {
-        if(Extensions.IsNotNullOrEmpty(mockId)){
+        if(ValidationUtil.IsNotNullOrEmpty(mockId)){
             try{
                Optional<Mock> mock = mocksRepository.findById(UUID.fromString(mockId));
                return mock.orElseThrow(EntityNotFoundException::new);
@@ -54,7 +53,7 @@ public class MocksServiceImpl implements MocksService {
 
     @Override
     public boolean deleteMockById(String mockId) {
-        if(Extensions.IsNotNullOrEmpty(mockId)){
+        if(ValidationUtil.IsNotNullOrEmpty(mockId)){
             try{
                 Mock mock = getMockById(mockId);
                 if(mock != null){
@@ -72,7 +71,7 @@ public class MocksServiceImpl implements MocksService {
     @Transactional
     @Override
     public Mock createMock(CreateMockRequest request) {
-        if(Extensions.IsArgNull(request)){
+        if(ValidationUtil.IsArgNull(request)){
             log.log(Level.DEBUG, "CreateMockRequest is null!");
             return null;
         }
@@ -98,14 +97,14 @@ public class MocksServiceImpl implements MocksService {
     }
 
     private HttpMethod GetHttpMethod(String httpMethodString) throws Exception {
-        if(Extensions.IsNotNullOrEmpty(httpMethodString)){
+        if(ValidationUtil.IsNotNullOrEmpty(httpMethodString)){
             return httpMethodsRepository.findByMethod(httpMethodString);
         }
         throw new Exception(String.format("Unable to extract HTTP Method!! Invalid method: %s", httpMethodString));
     }
 
     private ResponseContentType GetResponseContentType(String responseContentTypeString) throws Exception {
-        if(Extensions.IsNotNullOrEmpty(responseContentTypeString)){
+        if(ValidationUtil.IsNotNullOrEmpty(responseContentTypeString)){
             return responseContentTypesRepository.findByResponseType(responseContentTypeString);
         }
         throw new Exception(String.format("Unable to extract Response Content Type!! Invalid responseContentType: %s", responseContentTypeString));

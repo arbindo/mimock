@@ -1,13 +1,12 @@
-package com.arbindo.mimock.service;
+package com.arbindo.mimock.managemocks;
 
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.models.v1.CreateMockRequest;
+import com.arbindo.mimock.managemocks.models.v1.CreateMockRequest;
 
 import java.util.List;
 
-public interface MocksService {
-
+public interface MockManagementService {
     List<Mock> getMocks();
     Mock getMockById(String mockId);
     boolean deleteMockById(String mockId);

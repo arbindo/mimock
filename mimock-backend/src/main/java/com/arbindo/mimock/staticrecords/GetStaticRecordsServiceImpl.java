@@ -1,4 +1,4 @@
-package com.arbindo.mimock.service;
+package com.arbindo.mimock.staticrecords;
 
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.ResponseContentType;
@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ManagementServiceImpl implements ManagementService {
-
+public class GetStaticRecordsServiceImpl implements GetStaticRecordsService {
     @Autowired
     HttpMethodsRepository httpMethodsRepository;
 

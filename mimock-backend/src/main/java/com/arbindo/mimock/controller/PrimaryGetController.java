@@ -1,10 +1,7 @@
 package com.arbindo.mimock.controller;
 
-import com.arbindo.mimock.repository.GetMocksRepository;
-import com.arbindo.mimock.service.GetMocksService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +15,11 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+// TODO: [EXPERIMENTAL] Remove this code once proper generic controller is ready
 @RestController
 @Log4j2
 @ComponentScan
 public class PrimaryGetController {
-    @Autowired
-    GetMocksService getMocksServices;
-
     @RequestMapping("/{basePath}/**")
     public String serveRequest(@PathVariable String basePath, HttpServletRequest request) {
         final String path =
@@ -50,7 +45,7 @@ public class PrimaryGetController {
 
         log.log(Level.INFO, requestMethod + " : " + requestMethod + " : " + moduleName);
 
-        return getMocksServices.getMocks(path, requestMethod);
+        return null;
     }
 
     private StringBuilder extractQueryParams(HttpServletRequest request) {

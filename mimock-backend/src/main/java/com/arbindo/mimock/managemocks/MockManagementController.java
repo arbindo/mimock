@@ -1,11 +1,9 @@
-package com.arbindo.mimock.controller;
+package com.arbindo.mimock.managemocks;
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.models.v1.CreateMockRequest;
-import com.arbindo.mimock.models.v1.GenericResponseWrapper;
-import com.arbindo.mimock.service.MocksServiceImpl;
-import com.arbindo.mimock.utilities.Constants;
-import com.arbindo.mimock.utilities.Messages;
+import com.arbindo.mimock.managemocks.models.v1.CreateMockRequest;
+import com.arbindo.mimock.managemocks.models.v1.GenericResponseWrapper;
+import com.arbindo.mimock.constants.UrlConfig;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,18 +16,18 @@ import java.util.List;
 
 @RestController
 @Log4j2
-@RequestMapping(Constants.MOCKS_PATH)
-public class MimockController {
+@RequestMapping(UrlConfig.MOCKS_PATH)
+public class MockManagementController {
 
     @Autowired
-    private MocksServiceImpl mocksService;
+    private MockManagementService mockManagementService;
 
     @PostMapping
     public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@RequestBody CreateMockRequest request) {
-        Mock mock = mocksService.createMock(request);
-        if(mock != null){
+        Mock mock = mockManagementService.createMock(request);
+        if (mock != null) {
             final URI location = ServletUriComponentsBuilder
-                    .fromCurrentServletMapping().path(Constants.MOCKS_PATH + "/{mockId}").build()
+                    .fromCurrentServletMapping().path(UrlConfig.MOCKS_PATH + "/{mockId}").build()
                     .expand(mock.getId()).toUri();
             GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.CREATED,
                     Messages.CREATE_RESOURCE_SUCCESS(location.toString()), mock);
@@ -42,14 +40,14 @@ public class MimockController {
 
     @GetMapping
     public ResponseEntity<List<Mock>> getAllMocks() {
-        return ResponseEntity.ok(mocksService.getMocks());
+        return ResponseEntity.ok(mockManagementService.getMocks());
     }
 
 
     @GetMapping("{mockId}")
-    public ResponseEntity<GenericResponseWrapper<Mock>> getMockById(@PathVariable String mockId){
-        Mock mock = mocksService.getMockById(mockId);
-        if(mock != null){
+    public ResponseEntity<GenericResponseWrapper<Mock>> getMockById(@PathVariable String mockId) {
+        Mock mock = mockManagementService.getMockById(mockId);
+        if (mock != null) {
             GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK, Messages.GET_RESOURCE_SUCCESS, mock);
             return ResponseEntity.ok(genericResponseWrapper);
         }
@@ -58,9 +56,9 @@ public class MimockController {
     }
 
     @DeleteMapping("{mockId}")
-    public ResponseEntity<GenericResponseWrapper<Mock>> deleteMockById(@PathVariable String mockId){
-        boolean isMockDeleted = mocksService.deleteMockById(mockId);
-        if(isMockDeleted){
+    public ResponseEntity<GenericResponseWrapper<Mock>> deleteMockById(@PathVariable String mockId) {
+        boolean isMockDeleted = mockManagementService.deleteMockById(mockId);
+        if (isMockDeleted) {
             return ResponseEntity.noContent().build();
         }
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST, Messages.DELETE_RESOURCE_FAILED, null);

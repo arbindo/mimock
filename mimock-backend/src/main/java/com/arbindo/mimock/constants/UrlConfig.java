@@ -1,6 +1,6 @@
-package com.arbindo.mimock.utilities;
+package com.arbindo.mimock.constants;
 
-public class Constants {
+public class UrlConfig {
 
     public static final String API_PATH = "/api/mimock";
     public static final String VERSION = "/v1";
