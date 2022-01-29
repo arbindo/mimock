@@ -96,6 +96,41 @@ public class MockManagementServiceImpl implements MockManagementService {
         return null;
     }
 
+    @Transactional
+    @Override
+    public Mock updateMock(String mockId, CreateMockRequest request) {
+        if(ValidationUtil.IsNullOrEmpty(mockId)){
+            log.log(Level.DEBUG, "Invalid MockId!");
+            return null;
+        }
+        if(ValidationUtil.IsArgNull(request)){
+            log.log(Level.DEBUG, "UpdateMockRequest is null!");
+            return null;
+        }
+        try{
+            Mock mock = getMockById(mockId);
+            if(mock != null){
+                HttpMethod httpMethod = GetHttpMethod(request.getHttpMethod());
+                ResponseContentType responseContentType = GetResponseContentType(request.getResponseContentType());
+                Mock updatedMock = Mock.builder()
+                        .id(mock.getId())
+                        .route(request.getRoute())
+                        .httpMethod(httpMethod)
+                        .responseContentType(responseContentType)
+                        .statusCode(request.getStatusCode())
+                        .queryParams(request.getQueryParams())
+                        .createdAt(mock.getCreatedAt())
+                        .updatedAt(ZonedDateTime.now())
+                        .build();
+                mocksRepository.save(updatedMock);
+                return updatedMock;
+            }
+        }catch (Exception e){
+            log.log(Level.DEBUG, e.getMessage());
+        }
+        return null;
+    }
+
     private HttpMethod GetHttpMethod(String httpMethodString) throws Exception {
         if(ValidationUtil.IsNotNullOrEmpty(httpMethodString)){
             return httpMethodsRepository.findByMethod(httpMethodString);

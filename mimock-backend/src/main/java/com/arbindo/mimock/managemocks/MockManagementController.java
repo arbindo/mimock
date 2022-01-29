@@ -65,6 +65,19 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
+    @PutMapping("{mockId}")
+    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @RequestBody CreateMockRequest request){
+        Mock updatedMock = mockManagementService.updateMock(mockId, request);
+        if (updatedMock != null) {
+            GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,
+                    Messages.UPDATE_RESOURCE_SUCCESS, updatedMock);
+            return ResponseEntity.ok(genericResponseWrapper);
+        }
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
+                Messages.UPDATE_RESOURCE_FAILED, null);
+        return ResponseEntity.badRequest().body(genericResponseWrapper);
+    }
+
     private GenericResponseWrapper<Mock> getGenericResponseWrapper(HttpStatus httpStatus, String responseMessage, Mock mock) {
         return GenericResponseWrapper.<Mock>builder()
                 .code(httpStatus.toString())

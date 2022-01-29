@@ -6,6 +6,10 @@ public class ValidationUtil {
         return (str != null && !str.trim().isEmpty());
     }
 
+    public static boolean IsNullOrEmpty(String str){
+        return (str == null || str.trim().isEmpty());
+    }
+
     public static boolean IsArgNull(Object obj){
         return obj == null;
     }
