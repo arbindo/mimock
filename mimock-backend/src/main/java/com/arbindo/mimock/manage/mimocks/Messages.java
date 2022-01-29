@@ -1,4 +1,4 @@
-package com.arbindo.mimock.managemocks;
+package com.arbindo.mimock.manage.mimocks;
 
 public class Messages {
 

@@ -11,6 +11,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,7 +87,10 @@ class HandleMockRequestRepositoryTest {
         Mock mock2 = mocksDBHelper.save(testMock2);
         assertNotNull(mock2);
 
-        Mock actualMockFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
+        Optional<Mock> resultFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
+        assertTrue(resultFromDB.isPresent());
+
+        Mock actualMockFromDB = resultFromDB.get();
 
         assertEquals(expectedMockId, actualMockFromDB.getId());
         assertEquals(expectedRoute, actualMockFromDB.getRoute());
@@ -147,7 +151,10 @@ class HandleMockRequestRepositoryTest {
         Mock mock2 = mocksDBHelper.save(testMock2);
         assertNotNull(mock2);
 
-        Mock actualMockFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
+        Optional<Mock> resultFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
+        assertTrue(resultFromDB.isPresent());
+
+        Mock actualMockFromDB = resultFromDB.get();
 
         assertEquals(expectedMockId, actualMockFromDB.getId());
         assertEquals(expectedRoute, actualMockFromDB.getRoute());
@@ -200,7 +207,10 @@ class HandleMockRequestRepositoryTest {
         Mock mock2 = mocksDBHelper.save(testMock2);
         assertNotNull(mock2);
 
-        Mock actualMockFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
+        Optional<Mock> resultFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(expectedRoute, expectedHttpMethod, expectedQueryParams);
+        assertTrue(resultFromDB.isPresent());
+
+        Mock actualMockFromDB = resultFromDB.get();
 
         assertEquals(expectedMockId, actualMockFromDB.getId());
         assertEquals(expectedRoute, actualMockFromDB.getRoute());
@@ -220,9 +230,8 @@ class HandleMockRequestRepositoryTest {
         String route = "/api/mock/test";
         String queryParam = "version=1.0.0&auto=true";
 
-        Mock actualMockFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(route, httpMethod, queryParam);
-
-        assertNull(actualMockFromDB);
+        Optional<Mock> resultFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(route, httpMethod, queryParam);
+        assertFalse(resultFromDB.isPresent());
     }
 
     byte[] generateFile() throws Exception {
