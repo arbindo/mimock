@@ -17,7 +17,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class HandleMockRequestRepositoryTest {
+class MimockMockRepositoryTest {
     @Autowired
     MocksDBHelper mocksDBHelper;
 
