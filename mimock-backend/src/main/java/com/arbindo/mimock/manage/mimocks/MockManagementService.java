@@ -1,8 +1,8 @@
-package com.arbindo.mimock.managemocks;
+package com.arbindo.mimock.manage.mimocks;
 
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.managemocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 
 import java.util.List;
 

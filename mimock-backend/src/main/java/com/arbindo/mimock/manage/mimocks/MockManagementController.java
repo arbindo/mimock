@@ -1,9 +1,9 @@
-package com.arbindo.mimock.managemocks;
+package com.arbindo.mimock.manage.mimocks;
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.managemocks.models.v1.MockRequest;
-import com.arbindo.mimock.managemocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
+import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,8 +1,9 @@
-package com.arbindo.mimock.managemocks;
+package com.arbindo.mimock.manage.mimocks;
 
 import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.managemocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import com.arbindo.mimock.repository.*;
+import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +43,11 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Override
     public Mock getMockById(String mockId) {
-        if(ValidationUtil.IsNotNullOrEmpty(mockId)){
-            try{
-               Optional<Mock> mock = mocksRepository.findById(UUID.fromString(mockId));
-               return mock.orElseThrow(EntityNotFoundException::new);
-            }catch (Exception e) {
+        if (ValidationUtil.IsNotNullOrEmpty(mockId)) {
+            try {
+                Optional<Mock> mock = mocksRepository.findById(UUID.fromString(mockId));
+                return mock.orElseThrow(EntityNotFoundException::new);
+            } catch (Exception e) {
                 log.log(Level.DEBUG, e.getMessage());
             }
         }
@@ -56,14 +57,14 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Override
     public boolean deleteMockById(String mockId) {
-        if(ValidationUtil.IsNotNullOrEmpty(mockId)){
-            try{
+        if (ValidationUtil.IsNotNullOrEmpty(mockId)) {
+            try {
                 Mock mock = getMockById(mockId);
-                if(mock != null){
+                if (mock != null) {
                     mocksRepository.delete(mock);
                     return true;
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 log.log(Level.DEBUG, e.getMessage());
             }
         }
@@ -73,10 +74,10 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Override
     public boolean deleteAllMocks() {
-        try{
+        try {
             mocksRepository.deleteAll();
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             log.log(Level.DEBUG, e.getMessage());
         }
         log.log(Level.DEBUG, "Unable to delete all mocks!");
@@ -86,7 +87,7 @@ public class MockManagementServiceImpl implements MockManagementService {
     @Transactional
     @Override
     public Mock createMock(MockRequest request) {
-        if(ValidationUtil.IsArgNull(request)){
+        if (ValidationUtil.IsArgNull(request)) {
             log.log(Level.DEBUG, "CreateMockRequest is null!");
             return null;
         }
@@ -106,7 +107,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                     .createdAt(ZonedDateTime.now())
                     .build();
 
-            if(request.getExpectedTextResponse() != null){
+            if (request.getExpectedTextResponse() != null) {
                 TextualResponse textualResponse = TextualResponse.builder()
                         .responseBody(request.getExpectedTextResponse())
                         .createdAt(ZonedDateTime.now())
@@ -115,7 +116,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                 mock.setTextualResponse(textualResponse);
             }
 
-            if(request.getBinaryFile() != null){
+            if (request.getBinaryFile() != null) {
                 MultipartFile file = request.getBinaryFile();
                 BinaryResponse binaryResponse = BinaryResponse.builder()
                         .responseFile(file.getBytes())
@@ -126,7 +127,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             }
 
             return mocksRepository.save(mock);
-        } catch (Exception e){
+        } catch (Exception e) {
             log.log(Level.DEBUG, e.getMessage());
         }
         return null;
@@ -135,17 +136,17 @@ public class MockManagementServiceImpl implements MockManagementService {
     @Transactional
     @Override
     public Mock updateMock(String mockId, MockRequest request) {
-        if(ValidationUtil.IsNullOrEmpty(mockId)){
+        if (ValidationUtil.IsNullOrEmpty(mockId)) {
             log.log(Level.DEBUG, "Invalid MockId!");
             return null;
         }
-        if(ValidationUtil.IsArgNull(request)){
+        if (ValidationUtil.IsArgNull(request)) {
             log.log(Level.DEBUG, "UpdateMockRequest is null!");
             return null;
         }
-        try{
+        try {
             Mock mock = getMockById(mockId);
-            if(mock != null){
+            if (mock != null) {
                 HttpMethod httpMethod = GetHttpMethod(request.getHttpMethod());
                 ResponseContentType responseContentType = GetResponseContentType(request.getResponseContentType());
 
@@ -161,9 +162,9 @@ public class MockManagementServiceImpl implements MockManagementService {
                         .updatedAt(ZonedDateTime.now())
                         .build();
 
-                if(request.getExpectedTextResponse() != null){
+                if (request.getExpectedTextResponse() != null) {
                     TextualResponse existingTextualResponse = mock.getTextualResponse();
-                    if(existingTextualResponse != null){
+                    if (existingTextualResponse != null) {
                         existingTextualResponse.setResponseBody(request.getExpectedTextResponse());
                         existingTextualResponse.setUpdatedAt(ZonedDateTime.now());
                         textualResponseRepository.save(existingTextualResponse);
@@ -178,10 +179,10 @@ public class MockManagementServiceImpl implements MockManagementService {
                     }
                 }
 
-                if(request.getBinaryFile() != null){
+                if (request.getBinaryFile() != null) {
                     MultipartFile file = request.getBinaryFile();
                     BinaryResponse existingBinaryResponse = mock.getBinaryResponse();
-                    if(existingBinaryResponse != null){
+                    if (existingBinaryResponse != null) {
                         existingBinaryResponse.setResponseFile(file.getBytes());
                         existingBinaryResponse.setUpdatedAt(ZonedDateTime.now());
                         binaryResponseRepository.save(existingBinaryResponse);
@@ -199,21 +200,21 @@ public class MockManagementServiceImpl implements MockManagementService {
                 mocksRepository.save(updatedMock);
                 return updatedMock;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             log.log(Level.DEBUG, e.getMessage());
         }
         return null;
     }
 
     private HttpMethod GetHttpMethod(String httpMethodString) throws Exception {
-        if(ValidationUtil.IsNotNullOrEmpty(httpMethodString)){
+        if (ValidationUtil.IsNotNullOrEmpty(httpMethodString)) {
             return httpMethodsRepository.findByMethod(httpMethodString);
         }
         throw new Exception(String.format("Unable to extract HTTP Method!! Invalid method: %s", httpMethodString));
     }
 
     private ResponseContentType GetResponseContentType(String responseContentTypeString) throws Exception {
-        if(ValidationUtil.IsNotNullOrEmpty(responseContentTypeString)){
+        if (ValidationUtil.IsNotNullOrEmpty(responseContentTypeString)) {
             return responseContentTypesRepository.findByResponseType(responseContentTypeString);
         }
         throw new Exception(String.format("Unable to extract Response Content Type!! Invalid responseContentType: %s", responseContentTypeString));
