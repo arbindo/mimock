@@ -10,6 +10,7 @@ public interface MockManagementService {
     List<Mock> getMocks();
     Mock getMockById(String mockId);
     boolean deleteMockById(String mockId);
+    boolean deleteAllMocks();
     Mock createMock(MockRequest request);
     Mock updateMock(String mockId, MockRequest request);
 }

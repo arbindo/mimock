@@ -14,6 +14,8 @@ public class Messages {
 
     public static final String DELETE_RESOURCE_FAILED = "Unable to delete the resource!";
 
+    public static final String DELETE_ALL_RESOURCES_FAILED = "Unable to delete all the resources!";
+
     public static final String UPDATE_RESOURCE_SUCCESS = "Resource updated successfully!";
 
     public static final String UPDATE_RESOURCE_FAILED = "The resource update has failed!";

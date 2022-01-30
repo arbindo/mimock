@@ -73,6 +73,18 @@ public class MockManagementServiceImpl implements MockManagementService {
         return false;
     }
 
+    @Override
+    public boolean deleteAllMocks() {
+        try{
+            mocksRepository.deleteAll();
+            return true;
+        } catch (Exception e){
+            log.log(Level.DEBUG, e.getMessage());
+        }
+        log.log(Level.DEBUG, "Unable to delete all mocks!");
+        return false;
+    }
+
     @Transactional
     @Override
     public Mock createMock(MockRequest request) {

@@ -65,6 +65,17 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
+    @DeleteMapping
+    public ResponseEntity<GenericResponseWrapper<Boolean>> deleteAllMocks() {
+        boolean allMocksDeleted = mockManagementService.deleteAllMocks();
+        if(allMocksDeleted){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.badRequest().body(GenericResponseWrapper.<Boolean>builder()
+                .code(HttpStatus.BAD_REQUEST.toString())
+                .message(Messages.DELETE_ALL_RESOURCES_FAILED).build());
+    }
+
     @PutMapping("{mockId}")
     public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @RequestBody MockRequest request){
         Mock updatedMock = mockManagementService.updateMock(mockId, request);
