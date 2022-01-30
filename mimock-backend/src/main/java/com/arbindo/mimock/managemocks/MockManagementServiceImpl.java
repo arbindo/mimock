@@ -3,7 +3,7 @@ package com.arbindo.mimock.managemocks;
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.entities.ResponseContentType;
-import com.arbindo.mimock.managemocks.models.v1.CreateMockRequest;
+import com.arbindo.mimock.managemocks.models.v1.MockRequest;
 import com.arbindo.mimock.repository.HttpMethodsRepository;
 import com.arbindo.mimock.repository.MocksRepository;
 import com.arbindo.mimock.repository.ResponseContentTypesRepository;
@@ -70,7 +70,7 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Transactional
     @Override
-    public Mock createMock(CreateMockRequest request) {
+    public Mock createMock(MockRequest request) {
         if(ValidationUtil.IsArgNull(request)){
             log.log(Level.DEBUG, "CreateMockRequest is null!");
             return null;
@@ -86,6 +86,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                     .responseContentType(responseContentType)
                     .statusCode(request.getStatusCode())
                     .queryParams(request.getQueryParams())
+                    .description(request.getDescription())
                     .createdAt(ZonedDateTime.now())
                     .build();
 
@@ -98,7 +99,7 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Transactional
     @Override
-    public Mock updateMock(String mockId, CreateMockRequest request) {
+    public Mock updateMock(String mockId, MockRequest request) {
         if(ValidationUtil.IsNullOrEmpty(mockId)){
             log.log(Level.DEBUG, "Invalid MockId!");
             return null;
@@ -119,6 +120,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                         .responseContentType(responseContentType)
                         .statusCode(request.getStatusCode())
                         .queryParams(request.getQueryParams())
+                        .description(request.getDescription())
                         .createdAt(mock.getCreatedAt())
                         .updatedAt(ZonedDateTime.now())
                         .build();

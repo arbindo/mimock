@@ -15,6 +15,7 @@
             query_params             VARCHAR(1024),
             textual_response_id      INT,
             binary_response_id       INT,
+            description              VARCHAR(255),
             created_at               TIMESTAMP NOT NULL,
             updated_at               TIMESTAMP,
             deleted_at               TIMESTAMP,

@@ -1,7 +1,7 @@
 package com.arbindo.mimock.managemocks;
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.managemocks.models.v1.CreateMockRequest;
+import com.arbindo.mimock.managemocks.models.v1.MockRequest;
 import com.arbindo.mimock.managemocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.constants.UrlConfig;
 import lombok.extern.log4j.Log4j2;
@@ -23,7 +23,7 @@ public class MockManagementController {
     private MockManagementService mockManagementService;
 
     @PostMapping
-    public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@RequestBody CreateMockRequest request) {
+    public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@RequestBody MockRequest request) {
         Mock mock = mockManagementService.createMock(request);
         if (mock != null) {
             final URI location = ServletUriComponentsBuilder
@@ -66,7 +66,7 @@ public class MockManagementController {
     }
 
     @PutMapping("{mockId}")
-    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @RequestBody CreateMockRequest request){
+    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @RequestBody MockRequest request){
         Mock updatedMock = mockManagementService.updateMock(mockId, request);
         if (updatedMock != null) {
             GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,

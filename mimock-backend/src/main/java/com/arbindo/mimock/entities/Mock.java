@@ -49,6 +49,9 @@ public class Mock {
     @JoinColumn(name = "binary_response_id")
     private BinaryResponse binaryResponse;
 
+    @Column(name = "description", length = 255)
+    private String description;
+
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
     private ZonedDateTime createdAt;

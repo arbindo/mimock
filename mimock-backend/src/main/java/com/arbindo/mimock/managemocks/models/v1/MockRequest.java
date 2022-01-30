@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 @Builder
-public class CreateMockRequest {
+public class MockRequest {
 
     private String route;
     private String httpMethod;
@@ -17,5 +17,6 @@ public class CreateMockRequest {
     private int statusCode;
     private String expectedTextResponse;
     private MultipartFile binaryFile;
+    private String description;
 
 }
