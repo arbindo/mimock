@@ -24,9 +24,9 @@ spring:
         default_schema: ${MIMOCK_DB_SCHEMA}
 
   datasource:
-    url: '${MIMOCK_DB_URL}' # E.g: jdbc:postgresql://localhost:5427/mimock_db
-    username: '${MIMOCK_DB_USER}'
-    password: '${MIMOCK_DB_PASSWORD}'
+    url: ${MIMOCK_DB_URL} # E.g: jdbc:postgresql://localhost:5427/mimock_db
+    username: ${MIMOCK_DB_USER}
+    password: ${MIMOCK_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
       schema: ${MIMOCK_DB_SCHEMA}
@@ -35,6 +35,8 @@ spring:
     change-log: classpath:/db/liquibase-changelog.xml
     default-schema: ${MIMOCK_DB_SCHEMA}
     liquibase-schema: ${MIMOCK_DB_SCHEMA}
+    user: ${MIMOCK_DB_USER}
+    password: ${MIMOCK_DB_PASSWORD}
 
 app:
   url_prefix: /api/mimock/v1

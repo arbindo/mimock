@@ -24,6 +24,8 @@ spring:
     change-log: classpath:/db/liquibase-changelog.xml
     default-schema: mimock_schema_test
     liquibase-schema: mimock_schema_test
+    user: mimock
+    password: ironclaw
 
 app:
   url_prefix: /api/mimock/v1
