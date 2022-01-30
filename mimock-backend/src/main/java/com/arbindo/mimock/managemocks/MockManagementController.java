@@ -7,6 +7,7 @@ import com.arbindo.mimock.constants.UrlConfig;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,8 +23,8 @@ public class MockManagementController {
     @Autowired
     private MockManagementService mockManagementService;
 
-    @PostMapping
-    public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@RequestBody MockRequest request) {
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<GenericResponseWrapper<Mock>> createMock(MockRequest request) {
         Mock mock = mockManagementService.createMock(request);
         if (mock != null) {
             final URI location = ServletUriComponentsBuilder
@@ -76,8 +77,8 @@ public class MockManagementController {
                 .message(Messages.DELETE_ALL_RESOURCES_FAILED).build());
     }
 
-    @PutMapping("{mockId}")
-    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @RequestBody MockRequest request){
+    @PutMapping(value = "{mockId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, MockRequest request){
         Mock updatedMock = mockManagementService.updateMock(mockId, request);
         if (updatedMock != null) {
             GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,

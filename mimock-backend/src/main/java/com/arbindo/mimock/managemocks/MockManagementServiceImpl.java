@@ -1,18 +1,13 @@
 package com.arbindo.mimock.managemocks;
 
-import com.arbindo.mimock.entities.HttpMethod;
-import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.entities.ResponseContentType;
-import com.arbindo.mimock.entities.TextualResponse;
+import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.managemocks.models.v1.MockRequest;
-import com.arbindo.mimock.repository.HttpMethodsRepository;
-import com.arbindo.mimock.repository.MocksRepository;
-import com.arbindo.mimock.repository.ResponseContentTypesRepository;
-import com.arbindo.mimock.repository.TextualResponseRepository;
+import com.arbindo.mimock.repository.*;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -36,6 +31,9 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Autowired
     private TextualResponseRepository textualResponseRepository;
+
+    @Autowired
+    private BinaryResponseRepository binaryResponseRepository;
 
     @Override
     public List<Mock> getMocks() {
@@ -117,6 +115,16 @@ public class MockManagementServiceImpl implements MockManagementService {
                 mock.setTextualResponse(textualResponse);
             }
 
+            if(request.getBinaryFile() != null){
+                MultipartFile file = request.getBinaryFile();
+                BinaryResponse binaryResponse = BinaryResponse.builder()
+                        .responseFile(file.getBytes())
+                        .createdAt(ZonedDateTime.now())
+                        .build();
+                binaryResponseRepository.save(binaryResponse);
+                mock.setBinaryResponse(binaryResponse);
+            }
+
             return mocksRepository.save(mock);
         } catch (Exception e){
             log.log(Level.DEBUG, e.getMessage());
@@ -167,6 +175,24 @@ public class MockManagementServiceImpl implements MockManagementService {
                                 .build();
                         textualResponseRepository.save(textualResponse);
                         updatedMock.setTextualResponse(textualResponse);
+                    }
+                }
+
+                if(request.getBinaryFile() != null){
+                    MultipartFile file = request.getBinaryFile();
+                    BinaryResponse existingBinaryResponse = mock.getBinaryResponse();
+                    if(existingBinaryResponse != null){
+                        existingBinaryResponse.setResponseFile(file.getBytes());
+                        existingBinaryResponse.setUpdatedAt(ZonedDateTime.now());
+                        binaryResponseRepository.save(existingBinaryResponse);
+                        updatedMock.setBinaryResponse(existingBinaryResponse);
+                    } else {
+                        BinaryResponse binaryResponse = BinaryResponse.builder()
+                                .responseFile(file.getBytes())
+                                .createdAt(ZonedDateTime.now())
+                                .build();
+                        binaryResponseRepository.save(binaryResponse);
+                        updatedMock.setBinaryResponse(binaryResponse);
                     }
                 }
 
