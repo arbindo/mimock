@@ -1,6 +1,7 @@
 package com.arbindo.mimock.generic.helpers;
 
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Level;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.util.UriEncoder;
 
@@ -16,8 +17,12 @@ public class QueryParamHelper {
         StringBuilder queryParamAndValue = new StringBuilder();
         List<String> queryParamsList = getQueryParamsList(request);
 
-        int counter = 0;
+        if (isQueryParamEmpty(queryParamsList)) {
+            log.log(Level.INFO, "No query params found. Returning empty string");
+            return new StringBuilder();
+        }
 
+        int counter = 0;
         while (counter < queryParamsList.size()) {
             String queryParamName = queryParamsList.get(counter);
             queryParamAndValue.append(queryParamName);
@@ -34,6 +39,10 @@ public class QueryParamHelper {
             counter++;
         }
         return queryParamAndValue;
+    }
+
+    private boolean isQueryParamEmpty(List<String> queryParamsList) {
+        return queryParamsList.size() == 0;
     }
 
     private List<String> getQueryParamsList(HttpServletRequest request) {
