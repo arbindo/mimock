@@ -9,14 +9,26 @@ on:
 
 jobs:
   mimock-lint:
-    name: Mimock Linter
+    name: Mimock Format check and Linter
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Run linter for mimock backend code
-        run: echo "Yet to implement!"
+      - name: Check format using checkstyle
+        run: ./mvnw checkstyle:check
+
+      - name: Generate checkstyle report
+        run: ./mvnw clean site
+
+      - name: Publish style report
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-without-markdown
+          path: |
+            target/site/css
+            target/site/images
+            target/site/checkstyle.html
 
   mimock-test:
     needs:

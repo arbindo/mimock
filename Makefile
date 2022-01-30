@@ -18,6 +18,12 @@ start-database:
 start-app-local: start-database
 	./mimock-backend/mvnw clean spring-boot:run -Dspring.config.location=$(APP_CONFIG_FILE) -Dspring.datasource.url=$(APP_DB_URL)
 
+format-check:
+	./mimock-backend/mvnw checkstyle:check
+
+format-report:
+	./mimock-backend/mvnw  clean site
+
 test-local: start-database
 	./mimock-backend/mvnw clean test -Dspring.config.location=$(TEST_CONFIG_FILE) -Dspring.datasource.url=$(TEST_DB_URL)
 
