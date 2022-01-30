@@ -21,6 +21,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: ${MIMOCK_DB_SCHEMA}
 
   datasource:
     url: '${MIMOCK_DB_URL}'

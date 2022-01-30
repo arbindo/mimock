@@ -3,10 +3,12 @@ package com.arbindo.mimock.managemocks;
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.entities.ResponseContentType;
+import com.arbindo.mimock.entities.TextualResponse;
 import com.arbindo.mimock.managemocks.models.v1.MockRequest;
 import com.arbindo.mimock.repository.HttpMethodsRepository;
 import com.arbindo.mimock.repository.MocksRepository;
 import com.arbindo.mimock.repository.ResponseContentTypesRepository;
+import com.arbindo.mimock.repository.TextualResponseRepository;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Autowired
     private ResponseContentTypesRepository responseContentTypesRepository;
+
+    @Autowired
+    private TextualResponseRepository textualResponseRepository;
 
     @Override
     public List<Mock> getMocks() {
@@ -79,6 +84,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             UUID mockId = UUID.randomUUID();
             HttpMethod httpMethod = GetHttpMethod(request.getHttpMethod());
             ResponseContentType responseContentType = GetResponseContentType(request.getResponseContentType());
+
             Mock mock = Mock.builder()
                     .id(mockId)
                     .route(request.getRoute())
@@ -89,6 +95,15 @@ public class MockManagementServiceImpl implements MockManagementService {
                     .description(request.getDescription())
                     .createdAt(ZonedDateTime.now())
                     .build();
+
+            if(request.getExpectedTextResponse() != null){
+                TextualResponse textualResponse = TextualResponse.builder()
+                        .responseBody(request.getExpectedTextResponse())
+                        .createdAt(ZonedDateTime.now())
+                        .build();
+                textualResponseRepository.save(textualResponse);
+                mock.setTextualResponse(textualResponse);
+            }
 
             return mocksRepository.save(mock);
         } catch (Exception e){
@@ -113,6 +128,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             if(mock != null){
                 HttpMethod httpMethod = GetHttpMethod(request.getHttpMethod());
                 ResponseContentType responseContentType = GetResponseContentType(request.getResponseContentType());
+
                 Mock updatedMock = Mock.builder()
                         .id(mock.getId())
                         .route(request.getRoute())
@@ -124,6 +140,24 @@ public class MockManagementServiceImpl implements MockManagementService {
                         .createdAt(mock.getCreatedAt())
                         .updatedAt(ZonedDateTime.now())
                         .build();
+
+                if(request.getExpectedTextResponse() != null){
+                    TextualResponse existingTextualResponse = mock.getTextualResponse();
+                    if(existingTextualResponse != null){
+                        existingTextualResponse.setResponseBody(request.getExpectedTextResponse());
+                        existingTextualResponse.setUpdatedAt(ZonedDateTime.now());
+                        textualResponseRepository.save(existingTextualResponse);
+                        updatedMock.setTextualResponse(existingTextualResponse);
+                    } else {
+                        TextualResponse textualResponse = TextualResponse.builder()
+                                .responseBody(request.getExpectedTextResponse())
+                                .createdAt(ZonedDateTime.now())
+                                .build();
+                        textualResponseRepository.save(textualResponse);
+                        updatedMock.setTextualResponse(textualResponse);
+                    }
+                }
+
                 mocksRepository.save(updatedMock);
                 return updatedMock;
             }
