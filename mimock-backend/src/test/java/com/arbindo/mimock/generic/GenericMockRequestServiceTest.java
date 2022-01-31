@@ -65,7 +65,7 @@ class GenericMockRequestServiceTest {
 
         StringBuilder queryParams = this.genericMockRequestService.extractQueryParams(mockHttpServletRequest);
 
-        assertEquals(queryParams.toString(), "version=1.0");
+        assertEquals("version=1.0", queryParams.toString());
     }
 
     @Test

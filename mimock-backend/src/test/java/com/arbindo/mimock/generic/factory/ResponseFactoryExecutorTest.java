@@ -30,8 +30,8 @@ class ResponseFactoryExecutorTest {
 
         ResponseFactory responseFactory = responseFactoryExecutor.responseFactory(textualResponseMock);
 
-        assertEquals(responseFactory.getClass(), TextualResponseImpl.class);
-        assertEquals(responseFactory.responseBody(), textualResponse.getResponseBody());
+        assertEquals(TextualResponseImpl.class, responseFactory.getClass());
+        assertEquals(textualResponse.getResponseBody(), responseFactory.responseBody());
     }
 
     @Test
@@ -48,8 +48,8 @@ class ResponseFactoryExecutorTest {
 
         ResponseFactory responseFactory = responseFactoryExecutor.responseFactory(binaryResponseMock);
 
-        assertEquals(responseFactory.getClass(), BinaryResponseImpl.class);
-        assertEquals(responseFactory.responseBody(), binaryResponse.getResponseFile());
+        assertEquals(BinaryResponseImpl.class, responseFactory.getClass());
+        assertEquals(binaryResponse.getResponseFile(), responseFactory.responseBody());
     }
 
     @Test
@@ -61,7 +61,7 @@ class ResponseFactoryExecutorTest {
 
         ResponseFactory responseFactory = responseFactoryExecutor.responseFactory(binaryResponseMock);
 
-        assertEquals(responseFactory.getClass(), NullResponseImpl.class);
+        assertEquals(NullResponseImpl.class, responseFactory.getClass());
         assertNull(responseFactory.responseBody());
     }
 }

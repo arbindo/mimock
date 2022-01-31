@@ -9,7 +9,7 @@ on:
 
 jobs:
   mimock-lint:
-    name: Mimock Format check and Linter
+    name: Mimock Linter
     runs-on: ubuntu-latest
     steps:
       - name: Check out code

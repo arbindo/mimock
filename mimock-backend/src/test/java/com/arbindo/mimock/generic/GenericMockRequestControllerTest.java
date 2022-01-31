@@ -38,11 +38,6 @@ class GenericMockRequestControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @BeforeAll
-    static void setupDataSource() {
-
-    }
-
     @Test
     void shouldReturnHttpOK_WhenMatchingMockExists_WithoutQueryParamsAndTextualResponseAndStatus200() throws Exception {
         String route = "/api/testmock/testroute";

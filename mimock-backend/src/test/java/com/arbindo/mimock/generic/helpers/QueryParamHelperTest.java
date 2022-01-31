@@ -27,7 +27,7 @@ class QueryParamHelperTest {
 
         StringBuilder queryParams = queryParamHelper.extractQueryParams(mockHttpServletRequest);
 
-        assertEquals(queryParams.toString(), "version=1.0");
+        assertEquals("version=1.0", queryParams.toString());
     }
 
     @Test
@@ -39,7 +39,7 @@ class QueryParamHelperTest {
 
         StringBuilder queryParams = queryParamHelper.extractQueryParams(mockHttpServletRequest);
 
-        assertEquals(queryParams.toString(), "version=1.0&active=true");
+        assertEquals("version=1.0&active=true", queryParams.toString());
     }
 
     @Test
@@ -49,6 +49,6 @@ class QueryParamHelperTest {
 
         StringBuilder queryParams = queryParamHelper.extractQueryParams(mockHttpServletRequest);
 
-        assertEquals(queryParams.toString(), "");
+        assertEquals("", queryParams.toString());
     }
 }
