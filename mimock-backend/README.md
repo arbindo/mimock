@@ -23,5 +23,5 @@ docker-compose up
 ## For running tests locally
 
 ```shell
-./mvnw clean initialize test -P startDatabase 
+./mvnw clean test -P startDatabase 
 ```

@@ -10,7 +10,7 @@ RUN apk add openjdk11
 RUN apk add openjdk11-jre
 
 RUN sed -i 's/\r$//' mvnw
-RUN ./mvnw clean package
+RUN ./mvnw clean package -P packageJar -Dmaven.test.skip=true
 
 EXPOSE 8080
 

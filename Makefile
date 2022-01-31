@@ -25,7 +25,7 @@ format-report:
 	./mimock-backend/mvnw  clean site
 
 test-local: start-database
-	./mimock-backend/mvnw clean test -Dspring.config.location=$(TEST_CONFIG_FILE) -Dspring.datasource.url=$(TEST_DB_URL)
+	./mimock-backend/mvnw clean test -Dspring.config.location=$(TEST_CONFIG_FILE) -Dspring.datasource.url=$(TEST_DB_URL) -P startDatabase
 
 test-ci:
 	docker-compose -f docker-compose.test.yml up --abort-on-container-exit --exit-code-from mimock-test

@@ -2,7 +2,6 @@ package com.arbindo.mimock.repository;
 
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.db.*;
-import org.hibernate.annotations.SQLInsert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

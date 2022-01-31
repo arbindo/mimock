@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 jobs:
-  mimock-lint:
+  lint:
     name: Mimock Linter
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +32,7 @@ jobs:
             mimock-backend/target/site/images
             mimock-backend/target/site/checkstyle.html
 
-  mimock-test:
+  test:
     needs:
       - mimock-lint
     name: Test Mimock
@@ -44,3 +44,44 @@ jobs:
       - name: Run mimock tests in CI mode
         working-directory: mimock-backend
         run: ./mvnw clean initialize test -P startDatabase
+
+  package-jar:
+    needs:
+      - mimock-test
+    name: Package Mimock JAR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Build Mimock JAR
+        working-directory: mimock-backend
+        run: ./mvnw clean package -P packageJar -Dmaven.test.skip=true
+
+      - name: Publish JAR
+        uses: actions/upload-artifact@v2
+        with:
+          name: mimock-jar
+          path: |
+            mimock-backend/target/mimock-*.jar
+
+  export-docker-image:
+    needs:
+      - mimock-test
+    name: Export mimock docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Build mimock docker image
+        run: |
+          docker build -t mimock-backend:${{ github.sha }} .
+          docker save -o mimock-backend.tar mimock-backend:${{ github.sha }}
+
+      - name: Publish TAR of docker image
+        uses: actions/upload-artifact@v2
+        with:
+          name: mimock-docker-image
+          path: |
+            mimock-backend.tar
