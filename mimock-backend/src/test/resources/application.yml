@@ -1,0 +1,31 @@
+logging:
+  level:
+    root: ERROR
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5427/mimock_db
+    username: mimock
+    password: ironclaw
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: mimock_schema_test
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: mimock_schema_test
+
+  liquibase:
+    change-log: classpath:/db/liquibase-changelog.xml
+    default-schema: mimock_schema_test
+    liquibase-schema: mimock_schema_test
+    user: mimock
+    password: ironclaw
+
+app:
+  url_prefix: /api/mimock/v1

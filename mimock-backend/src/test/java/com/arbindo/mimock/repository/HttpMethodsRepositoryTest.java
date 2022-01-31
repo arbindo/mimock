@@ -1,7 +1,10 @@
 package com.arbindo.mimock.repository;
 
 import com.arbindo.mimock.entities.HttpMethod;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -9,21 +12,54 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class HttpMethodsRepositoryTest {
+
     @Autowired
     HttpMethodsRepository httpMethodsRepository;
 
-    @Test
-    void shouldReturnHttpMethodForValidMethod() {
-        HttpMethod get = httpMethodsRepository.findByMethod("GET");
-
-        assertNotNull(get);
-        assertEquals(get.getMethod(), "GET");
+    @ParameterizedTest
+    @ValueSource(strings = {"GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"})
+    void shouldReturnHttpMethodForValidMethod(String method) {
+        // Act
+        HttpMethod httpMethod = httpMethodsRepository.findByMethod(method);
+        // Assert
+        assertNotNull(httpMethod);
+        assertEquals(method, httpMethod.getMethod());
     }
 
-    @Test
-    void shouldReturnNullForInValidMethod() {
-        HttpMethod get = httpMethodsRepository.findByMethod("TEST");
+    @ParameterizedTest
+    @ValueSource(strings = {"TEST", "RANDOM", "EXEC", "123X"})
+    void shouldReturnNullForInvalidMethod(String method) {
+        // Act
+        HttpMethod httpMethod = httpMethodsRepository.findByMethod(method);
+        // Assert
+        assertNull(httpMethod);
+    }
 
-        assertNull(get);
+    @ParameterizedTest
+    @EmptySource
+    @NullSource
+    void shouldReturnNullForInvalidMethodWhenEmptyOrNull(String method) {
+        // Act
+        HttpMethod httpMethod = httpMethodsRepository.findByMethod(method);
+        // Assert
+        assertNull(httpMethod);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"get", "Head", "pOSt", "put", "Delete", "connect", "Options", "trace", "PaTch"})
+    void shouldReturnNullForCaseSensitiveMethodStrings(String method) {
+        // Act
+        HttpMethod httpMethod = httpMethodsRepository.findByMethod(method);
+        // Assert
+        assertNull(httpMethod);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"get OR 1=1", "GET; DROP TABLE mocks;"})
+    void shouldReturnNullForInvalidMethodForSqlInjectionStrings(String method) {
+        // Act
+        HttpMethod httpMethod = httpMethodsRepository.findByMethod(method);
+        // Assert
+        assertNull(httpMethod);
     }
 }
