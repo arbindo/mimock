@@ -2,15 +2,15 @@ package com.arbindo.mimock.utils;
 
 public class ValidationUtil {
 
-    public static boolean IsNotNullOrEmpty(String str) {
+    public static boolean isNotNullOrEmpty(String str) {
         return (str != null && !str.trim().isEmpty());
     }
 
-    public static boolean IsNullOrEmpty(String str) {
+    public static boolean isNullOrEmpty(String str) {
         return (str == null || str.trim().isEmpty());
     }
 
-    public static boolean IsArgNull(Object obj) {
+    public static boolean isArgNull(Object obj) {
         return obj == null;
     }
 

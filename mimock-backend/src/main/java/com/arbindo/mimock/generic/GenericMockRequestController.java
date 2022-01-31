@@ -60,11 +60,11 @@ public class GenericMockRequestController {
     }
 
     private String generateFullPath(String basePath, String pathParamMatchingPattern) {
+        final String forwardSlash = "/";
         String fullPath;
-        String FORWARD_SLASH = "/";
 
         if (!pathParamMatchingPattern.isEmpty()) {
-            fullPath = FORWARD_SLASH + basePath + FORWARD_SLASH + pathParamMatchingPattern;
+            fullPath = forwardSlash + basePath + forwardSlash + pathParamMatchingPattern;
         } else {
             fullPath = basePath;
         }

@@ -31,7 +31,7 @@ public class MockManagementController {
                     .fromCurrentServletMapping().path(UrlConfig.MOCKS_PATH + "/{mockId}").build()
                     .expand(mock.getId()).toUri();
             GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.CREATED,
-                    Messages.CREATE_RESOURCE_SUCCESS(location.toString()), mock);
+                    Messages.createResourceSuccess(location.toString()), mock);
             return ResponseEntity.created(location).body(genericResponseWrapper);
         }
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
@@ -62,14 +62,18 @@ public class MockManagementController {
         if (isMockDeleted) {
             return ResponseEntity.noContent().build();
         }
-        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST, Messages.DELETE_RESOURCE_FAILED, null);
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(
+                HttpStatus.BAD_REQUEST,
+                Messages.DELETE_RESOURCE_FAILED,
+                null
+        );
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
     @DeleteMapping
     public ResponseEntity<GenericResponseWrapper<Boolean>> deleteAllMocks() {
         boolean allMocksDeleted = mockManagementService.deleteAllMocks();
-        if(allMocksDeleted){
+        if (allMocksDeleted) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.badRequest().body(GenericResponseWrapper.<Boolean>builder()
@@ -78,7 +82,7 @@ public class MockManagementController {
     }
 
     @PutMapping(value = "{mockId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, MockRequest request){
+    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, MockRequest request) {
         Mock updatedMock = mockManagementService.updateMock(mockId, request);
         if (updatedMock != null) {
             GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,

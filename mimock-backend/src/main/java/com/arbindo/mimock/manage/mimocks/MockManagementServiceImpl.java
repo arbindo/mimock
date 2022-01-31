@@ -43,7 +43,7 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Override
     public Mock getMockById(String mockId) {
-        if (ValidationUtil.IsNotNullOrEmpty(mockId)) {
+        if (ValidationUtil.isNotNullOrEmpty(mockId)) {
             try {
                 Optional<Mock> mock = mocksRepository.findById(UUID.fromString(mockId));
                 return mock.orElseThrow(EntityNotFoundException::new);
@@ -57,7 +57,7 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Override
     public boolean deleteMockById(String mockId) {
-        if (ValidationUtil.IsNotNullOrEmpty(mockId)) {
+        if (ValidationUtil.isNotNullOrEmpty(mockId)) {
             try {
                 Mock mock = getMockById(mockId);
                 if (mock != null) {
@@ -87,14 +87,14 @@ public class MockManagementServiceImpl implements MockManagementService {
     @Transactional
     @Override
     public Mock createMock(MockRequest request) {
-        if (ValidationUtil.IsArgNull(request)) {
+        if (ValidationUtil.isArgNull(request)) {
             log.log(Level.DEBUG, "CreateMockRequest is null!");
             return null;
         }
         try {
             UUID mockId = UUID.randomUUID();
-            HttpMethod httpMethod = GetHttpMethod(request.getHttpMethod());
-            ResponseContentType responseContentType = GetResponseContentType(request.getResponseContentType());
+            HttpMethod httpMethod = getHttpMethod(request.getHttpMethod());
+            ResponseContentType responseContentType = getResponseContentType(request.getResponseContentType());
 
             Mock mock = Mock.builder()
                     .id(mockId)
@@ -136,19 +136,19 @@ public class MockManagementServiceImpl implements MockManagementService {
     @Transactional
     @Override
     public Mock updateMock(String mockId, MockRequest request) {
-        if (ValidationUtil.IsNullOrEmpty(mockId)) {
+        if (ValidationUtil.isNullOrEmpty(mockId)) {
             log.log(Level.DEBUG, "Invalid MockId!");
             return null;
         }
-        if (ValidationUtil.IsArgNull(request)) {
+        if (ValidationUtil.isArgNull(request)) {
             log.log(Level.DEBUG, "UpdateMockRequest is null!");
             return null;
         }
         try {
             Mock mock = getMockById(mockId);
             if (mock != null) {
-                HttpMethod httpMethod = GetHttpMethod(request.getHttpMethod());
-                ResponseContentType responseContentType = GetResponseContentType(request.getResponseContentType());
+                HttpMethod httpMethod = getHttpMethod(request.getHttpMethod());
+                ResponseContentType responseContentType = getResponseContentType(request.getResponseContentType());
 
                 Mock updatedMock = Mock.builder()
                         .id(mock.getId())
@@ -206,15 +206,15 @@ public class MockManagementServiceImpl implements MockManagementService {
         return null;
     }
 
-    private HttpMethod GetHttpMethod(String httpMethodString) throws Exception {
-        if (ValidationUtil.IsNotNullOrEmpty(httpMethodString)) {
+    private HttpMethod getHttpMethod(String httpMethodString) throws Exception {
+        if (ValidationUtil.isNotNullOrEmpty(httpMethodString)) {
             return httpMethodsRepository.findByMethod(httpMethodString);
         }
         throw new Exception(String.format("Unable to extract HTTP Method!! Invalid method: %s", httpMethodString));
     }
 
-    private ResponseContentType GetResponseContentType(String responseContentTypeString) throws Exception {
-        if (ValidationUtil.IsNotNullOrEmpty(responseContentTypeString)) {
+    private ResponseContentType getResponseContentType(String responseContentTypeString) throws Exception {
+        if (ValidationUtil.isNotNullOrEmpty(responseContentTypeString)) {
             return responseContentTypesRepository.findByResponseType(responseContentTypeString);
         }
         throw new Exception(String.format("Unable to extract Response Content Type!! Invalid responseContentType: %s", responseContentTypeString));

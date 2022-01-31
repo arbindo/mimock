@@ -2,7 +2,7 @@ package com.arbindo.mimock.manage.mimocks;
 
 public class Messages {
 
-    public static String CREATE_RESOURCE_SUCCESS(String id){
+    public static String createResourceSuccess(String id) {
         return String.format("Resource created successfully. The resource can be found at %s", id);
     }
 
@@ -19,7 +19,6 @@ public class Messages {
     public static final String UPDATE_RESOURCE_SUCCESS = "Resource updated successfully!";
 
     public static final String UPDATE_RESOURCE_FAILED = "The resource update has failed!";
-
 
 
 }
