@@ -39,9 +39,9 @@ class DomainModelMapperTest {
 
         DomainModelForMock mappedModel = domainModelMapper.mappedModel(testMock);
 
-        assertEquals(mappedModel.getResponseBody(), "{'message': 'Hello World!'}");
-        assertEquals(mappedModel.getStatusCode(), 200);
-        assertEquals(mappedModel.getResponseContentType(), "application/json");
+        assertEquals("{'message': 'Hello World!'}", mappedModel.getResponseBody());
+        assertEquals(200, mappedModel.getStatusCode());
+        assertEquals("application/json", mappedModel.getResponseContentType());
     }
 
     @Test
@@ -64,8 +64,8 @@ class DomainModelMapperTest {
 
         DomainModelForMock mappedModel = domainModelMapper.mappedModel(testMock);
 
-        assertEquals(mappedModel.getResponseBody(), bytes);
-        assertEquals(mappedModel.getStatusCode(), 200);
-        assertEquals(mappedModel.getResponseContentType(), "application/json");
+        assertEquals(bytes, mappedModel.getResponseBody());
+        assertEquals(200, mappedModel.getStatusCode());
+        assertEquals("application/json", mappedModel.getResponseContentType());
     }
 }
