@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @Log4j2
 @AllArgsConstructor
 public class GenericMockRequestController {
+
     @Autowired
     GenericMockRequestService genericMockRequestService;
 

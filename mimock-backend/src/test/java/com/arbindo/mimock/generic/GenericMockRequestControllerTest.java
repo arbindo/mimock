@@ -22,11 +22,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(value = GenericMockRequestController.class, excludeAutoConfiguration = {SecurityAutoConfiguration.class})
 class GenericMockRequestControllerTest {
+
     @Autowired
     GenericMockRequestController genericMockRequestController;
 
     @MockBean
-    GenericMockRequestService mockService;
+    GenericMockRequestService genericMockRequestService;
 
     @MockBean
     DataSource mockDataSource;
@@ -54,8 +55,8 @@ class GenericMockRequestControllerTest {
                 .responseBody(expectedResponseBody)
                 .build();
 
-        lenient().when(mockService.extractQueryParams(any())).thenReturn(new StringBuilder());
-        lenient().when(mockService.serveMockRequest(any())).thenReturn(expectedMock);
+        lenient().when(genericMockRequestService.extractQueryParams(any())).thenReturn(new StringBuilder());
+        lenient().when(genericMockRequestService.serveMockRequest(any())).thenReturn(expectedMock);
 
         MvcResult result = mockMvc.perform(get(route))
                 .andExpect(status().isOk())
@@ -77,8 +78,8 @@ class GenericMockRequestControllerTest {
                 .responseBody(expectedResponseBody)
                 .build();
 
-        lenient().when(mockService.extractQueryParams(any())).thenReturn(new StringBuilder("version=2.0&active=true"));
-        lenient().when(mockService.serveMockRequest(any())).thenReturn(expectedMock);
+        lenient().when(genericMockRequestService.extractQueryParams(any())).thenReturn(new StringBuilder("version=2.0&active=true"));
+        lenient().when(genericMockRequestService.serveMockRequest(any())).thenReturn(expectedMock);
 
         MvcResult result = mockMvc.perform(get(route))
                 .andExpect(status().isOk())
@@ -100,8 +101,8 @@ class GenericMockRequestControllerTest {
                 .responseBody(expectedResponseBody)
                 .build();
 
-        lenient().when(mockService.extractQueryParams(any())).thenReturn(new StringBuilder("version=2.0&active=true"));
-        lenient().when(mockService.serveMockRequest(any())).thenReturn(expectedMock);
+        lenient().when(genericMockRequestService.extractQueryParams(any())).thenReturn(new StringBuilder("version=2.0&active=true"));
+        lenient().when(genericMockRequestService.serveMockRequest(any())).thenReturn(expectedMock);
 
         MvcResult result = mockMvc.perform(get(route))
                 .andExpect(status().isBadRequest())
@@ -115,8 +116,8 @@ class GenericMockRequestControllerTest {
     void shouldReturnHttpNotFound_WhenMatchingMockDoesNotExist() throws Exception {
         String route = "/api/testmock/testroute?version=2.0&active=true";
 
-        lenient().when(mockService.extractQueryParams(any())).thenReturn(new StringBuilder("version=2.0&active=true"));
-        lenient().when(mockService.serveMockRequest(any())).thenThrow(MatchingMockNotFoundException.class);
+        lenient().when(genericMockRequestService.extractQueryParams(any())).thenReturn(new StringBuilder("version=2.0&active=true"));
+        lenient().when(genericMockRequestService.serveMockRequest(any())).thenThrow(MatchingMockNotFoundException.class);
 
         mockMvc.perform(get(route))
                 .andExpect(status().isNotFound());
