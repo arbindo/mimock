@@ -40,5 +40,6 @@
         <module name="MethodCount">
             <property name="maxTotal" value="30"/>
         </module>
+        <module name="UnusedImports"/>
     </module>
 </module>

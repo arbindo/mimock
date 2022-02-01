@@ -1,10 +1,8 @@
-package com.arbindo.mimock.manage.mocks;
+package com.arbindo.mimock.manage.mimocks;
 
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.helpers.db.HttpMethodDBHelper;
 import com.arbindo.mimock.helpers.db.ResponseContentTypeDBHelper;
-import com.arbindo.mimock.manage.mimocks.MockManagementService;
-import com.arbindo.mimock.manage.mimocks.MockManagementServiceImpl;
 import com.arbindo.mimock.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.arbindo.mimock.helpers.entities.MocksGenerator.GenerateListOfMocks;
-import static org.mockito.Mockito.lenient;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.lenient;
 
 
 @ExtendWith(MockitoExtension.class)

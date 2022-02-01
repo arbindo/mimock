@@ -1,9 +1,7 @@
-package com.arbindo.mimock.manage.mocks;
+package com.arbindo.mimock.manage.mimocks;
 
 import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.manage.mimocks.MockManagementController;
-import com.arbindo.mimock.manage.mimocks.MockManagementService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +12,17 @@ import org.springframework.jdbc.support.DatabaseStartupValidator;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.arbindo.mimock.helpers.entities.MocksGenerator.GenerateListOfMocks;
 import static com.arbindo.mimock.helpers.general.JsonMapper.ConvertToJson;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.lenient;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebMvcTest(value = MockManagementController.class, excludeAutoConfiguration = {SecurityAutoConfiguration.class})
 public class MockManagementControllerTest {
