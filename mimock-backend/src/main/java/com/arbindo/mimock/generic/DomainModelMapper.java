@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Component
 public class DomainModelMapper {
+
     @Autowired
     private ResponseFactoryExecutor responseFactoryExecutor;
 

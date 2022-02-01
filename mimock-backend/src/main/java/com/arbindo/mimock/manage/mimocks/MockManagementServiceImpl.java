@@ -4,6 +4,8 @@ import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import com.arbindo.mimock.repository.*;
 import com.arbindo.mimock.utils.ValidationUtil;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import java.util.UUID;
 
 @Service
 @Log4j2
+@Builder
+@AllArgsConstructor
 public class MockManagementServiceImpl implements MockManagementService {
 
     @Autowired

@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import static com.arbindo.mimock.helpers.entities.MocksGenerator.GenerateListOfMocks;
 import static com.arbindo.mimock.helpers.general.JsonMapper.ConvertToJson;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.lenient;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -54,8 +54,8 @@ public class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH;
         String expectedContentType = "application/json";
-        String expectedResponseBody = "[]";
         List<Mock> expectedMocks = new ArrayList<Mock>();
+        String expectedResponseBody = ConvertToJson(expectedMocks);
 
         lenient().when(mockManagementService.getMocks()).thenReturn(expectedMocks);
 
@@ -87,6 +87,22 @@ public class MockManagementControllerTest {
 
         // Assert
         assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpOk_ListMocksApi_ReturnsNull() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH;
+
+        lenient().when(mockManagementService.getMocks()).thenReturn(null);
+
+        // Act
+        MvcResult result = mockMvc.perform(get(route))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        // Assert
+        assertEquals("", result.getResponse().getContentAsString());
     }
 
 
