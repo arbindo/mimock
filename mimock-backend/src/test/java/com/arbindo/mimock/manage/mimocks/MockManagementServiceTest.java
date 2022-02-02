@@ -1,8 +1,9 @@
 package com.arbindo.mimock.manage.mimocks;
 
-import com.arbindo.mimock.entities.Mock;
+import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.db.HttpMethodDBHelper;
 import com.arbindo.mimock.helpers.db.ResponseContentTypeDBHelper;
+import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import com.arbindo.mimock.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -68,7 +68,7 @@ public class MockManagementServiceTest {
     @Test
     void shouldReturnListOfMocks_WhenDBHasMocks(){
         // Arrange
-        List<Mock> mockList = GenerateListOfMocks();
+        List<Mock> mockList = generateListOfMocks();
         lenient().when(mockRepository.findAll()).thenReturn(mockList);
 
         // Act
@@ -110,7 +110,7 @@ public class MockManagementServiceTest {
     @NullSource
     void shouldReturnNull_WhenMockIdIsNullOrEmpty(String mockId){
         // Arrange
-        Optional<Mock> mock = GenerateOptionalMock();
+        Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
 
         // Act
@@ -124,7 +124,7 @@ public class MockManagementServiceTest {
     @ValueSource(strings = {"Test", "UUID", "RandomString"})
     void shouldReturnNull_WhenMockIdIsInvalidFormat(String mockId){
         // Arrange
-        Optional<Mock> mock = GenerateOptionalMock();
+        Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
 
         // Act
@@ -137,7 +137,7 @@ public class MockManagementServiceTest {
     @Test
     void shouldReturnMock_WhenMockIdIsValid(){
         // Arrange
-        Optional<Mock> mock = GenerateOptionalMock();
+        Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
 
         // Act
@@ -151,7 +151,7 @@ public class MockManagementServiceTest {
     @Test
     void shouldReturnNull_WhenMockDoesNotExists(){
         // Arrange
-        Optional<Mock> mock = GenerateOptionalMock();
+        Optional<Mock> mock = generateOptionalMock();
         Optional<Mock> emptyMock = Optional.empty();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(emptyMock);
 
@@ -168,7 +168,7 @@ public class MockManagementServiceTest {
     @NullSource
     void shouldReturnFalse_ForDeleteMockById_WhenMockIdIsNullOrEmpty(String mockId){
         // Arrange
-        Optional<Mock> mock = GenerateOptionalMock();
+        Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
 
         // Act
@@ -184,7 +184,7 @@ public class MockManagementServiceTest {
     @ValueSource(strings = {"Test", "UUID", "RandomString"})
     void shouldReturnFalse_ForDeleteMockById_WhenMockIdIsInvalidFormat(String mockId){
         // Arrange
-        Optional<Mock> mock = GenerateOptionalMock();
+        Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
 
         // Act
@@ -199,7 +199,7 @@ public class MockManagementServiceTest {
     @Test
     void shouldReturnTrue_ForDeleteMockById_WhenMockIdIsValid(){
         // Arrange
-        Optional<Mock> mock = GenerateOptionalMock();
+        Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
 
         // Act
@@ -214,7 +214,7 @@ public class MockManagementServiceTest {
     @Test
     void shouldReturnFalse_ForDeleteMockById_WhenMockIdDoesNotExist(){
         // Arrange
-        Optional<Mock> mock = GenerateOptionalMock();
+        Optional<Mock> mock = generateOptionalMock();
         Optional<Mock> emptyMock = Optional.empty();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(emptyMock);
 
@@ -247,6 +247,97 @@ public class MockManagementServiceTest {
 
         // Assert
         assertFalse(result);
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void shouldReturnNull_ForCreateMock_WhenMockRequestIsNull(MockRequest request){
+        // Act
+        Mock result = mockManagementService.createMock(request);
+
+        // Assert
+        assertNull(result);
+        verify(mockRepository, times(0)).save(any(Mock.class));
+    }
+
+    @Test
+    void shouldReturnMock_ForCreateMock_WhenMockRequestIsValid(){
+        // Arrange
+        MockRequest request = createMockRequest();
+        Mock expectedMock = generateMock(request);
+        HttpMethod httpMethod = generateHttpMethod();
+        ResponseContentType responseContentType = generateResponseContentType();
+
+        lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
+        lenient().when(mockResponseContentTypesRepository.findByResponseType(anyString())).thenReturn(responseContentType);
+        lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
+
+        // Act
+        Mock result = mockManagementService.createMock(request);
+
+        // Assert
+        assertEquals(expectedMock, result);
+        verify(mockTextualResponseRepository, times(1)).save(any(TextualResponse.class));
+        verify(mockBinaryResponseRepository, times(1)).save(any(BinaryResponse.class));
+        verify(mockRepository, times(1)).save(any(Mock.class));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void shouldReturnNull_ForUpdateMock_WhenMockRequestIsNull(MockRequest request){
+        // Act
+        Mock result = mockManagementService.updateMock("mockId", request);
+
+        // Assert
+        assertNull(result);
+        verify(mockRepository, times(0)).save(any(Mock.class));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void shouldReturnNull_ForUpdateMock_WhenMockIdIsNullOrEmpty(String mockId){
+        // Act
+        Mock result = mockManagementService.updateMock(mockId, null);
+
+        // Assert
+        assertNull(result);
+        verify(mockRepository, times(0)).save(any(Mock.class));
+    }
+
+    @Test
+    void shouldReturnMock_ForUpdateMock_WhenMockRequestIsValid(){
+        // Arrange
+        MockRequest request = createMockRequest();
+        Optional<Mock> optionalMock = generateOptionalMock(request);
+        assertTrue(optionalMock.isPresent());
+        Mock expectedMock = optionalMock.get();
+        HttpMethod httpMethod = optionalMock.get().getHttpMethod();
+        ResponseContentType responseContentType = optionalMock.get().getResponseContentType();
+
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
+        lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
+        lenient().when(mockResponseContentTypesRepository.findByResponseType(anyString())).thenReturn(responseContentType);
+        lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
+
+        // Act
+        Mock result = mockManagementService.updateMock(expectedMock.getId().toString(), request);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(expectedMock.getId(), result.getId());
+        assertEquals(expectedMock.getRoute(), result.getRoute());
+        assertEquals(expectedMock.getHttpMethod().getMethod(), result.getHttpMethod().getMethod());
+        assertEquals(expectedMock.getResponseContentType().getResponseType(), result.getResponseContentType().getResponseType());
+        assertEquals(expectedMock.getStatusCode(), result.getStatusCode());
+        assertEquals(expectedMock.getQueryParams(), result.getQueryParams());
+        assertEquals(expectedMock.getTextualResponse(), result.getTextualResponse());
+        assertEquals(expectedMock.getBinaryResponse(), result.getBinaryResponse());
+        assertEquals(expectedMock.getCreatedAt(), result.getCreatedAt());
+        assertNotEquals(expectedMock.getUpdatedAt(), result.getUpdatedAt());
+        verify(mockTextualResponseRepository, times(1)).save(any(TextualResponse.class));
+        verify(mockBinaryResponseRepository, times(1)).save(any(BinaryResponse.class));
+        verify(mockRepository, times(1)).save(any(Mock.class));
     }
 
 

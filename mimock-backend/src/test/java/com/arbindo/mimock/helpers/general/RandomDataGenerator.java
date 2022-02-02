@@ -30,8 +30,11 @@ public class RandomDataGenerator {
     }
 
     public static int generateRandomNumber(){
-        return random.nextInt();
+        return random.nextInt(10000);
     }
 
+    public static int generateRandomNumber(int bound){
+        return random.nextInt(bound);
+    }
 
 }

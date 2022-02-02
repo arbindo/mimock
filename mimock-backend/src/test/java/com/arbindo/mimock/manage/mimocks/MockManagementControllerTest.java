@@ -81,7 +81,7 @@ public class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH;
         String expectedContentType = "application/json";
-        List<Mock> expectedMocks = GenerateListOfMocks();
+        List<Mock> expectedMocks = generateListOfMocks();
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
         lenient().when(mockManagementService.getMocks()).thenReturn(expectedMocks);
@@ -137,7 +137,7 @@ public class MockManagementControllerTest {
     @Test
     void shouldReturnHttpOk_GetMockByIdApi_ReturnsValidMockData() throws Exception {
         // Arrange
-        Mock mock = GenerateMock();
+        Mock mock = generateMock();
         String mockId = mock.getId().toString();
         String route = UrlConfig.MOCKS_PATH + "/" + mockId;
 
@@ -182,7 +182,7 @@ public class MockManagementControllerTest {
     @Test
     void shouldReturnHttpNoContent_DeleteMockByIdApi_ReturnsNoContent() throws Exception {
         // Arrange
-        Mock mock = GenerateMock();
+        Mock mock = generateMock();
         String mockId = mock.getId().toString();
         String route = UrlConfig.MOCKS_PATH + "/" + mockId;
 
@@ -239,7 +239,7 @@ public class MockManagementControllerTest {
         // Arrange
         MockMultipartFile file = getMockMultipartFile();
         MockRequest mockRequest = createMockRequestWithFile(file);
-        Mock createdMock = GenerateMock(mockRequest);
+        Mock createdMock = generateMock(mockRequest);
         String route = UrlConfig.MOCKS_PATH;
 
         lenient().when(mockManagementService.createMock(any(MockRequest.class))).thenReturn(createdMock);
@@ -303,7 +303,7 @@ public class MockManagementControllerTest {
         // Arrange
         MockMultipartFile file = getMockMultipartFile();
         MockRequest mockRequest = createMockRequestWithFile(file);
-        Mock mock = GenerateMock(mockRequest);
+        Mock mock = generateMock(mockRequest);
         String route = UrlConfig.MOCKS_PATH + "/" + mock.getId();
 
         lenient().when(mockManagementService.updateMock(anyString(), any(MockRequest.class))).thenReturn(mock);
@@ -341,7 +341,7 @@ public class MockManagementControllerTest {
         // Arrange
         MockMultipartFile file = getMockMultipartFile();
         MockRequest mockRequest = createMockRequestWithFile(file);
-        Mock mock = GenerateMock(mockRequest);
+        Mock mock = generateMock(mockRequest);
         String route = UrlConfig.MOCKS_PATH + "/" + mock.getId();
 
         lenient().when(mockManagementService.updateMock(anyString(), any(MockRequest.class))).thenReturn(null);
