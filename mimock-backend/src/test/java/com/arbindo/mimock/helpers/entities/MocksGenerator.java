@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.arbindo.mimock.helpers.general.RandomDataGenerator.*;
 
@@ -22,6 +23,11 @@ public class MocksGenerator {
             mockList.add(GenerateMock());
         }
         return mockList;
+    }
+
+    public static Optional<Mock> GenerateOptionalMock(){
+        Mock mock = GenerateMock();
+        return Optional.of(mock);
     }
 
     public static Mock GenerateMock(){
