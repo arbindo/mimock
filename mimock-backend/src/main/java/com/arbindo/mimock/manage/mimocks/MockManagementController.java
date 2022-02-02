@@ -44,7 +44,6 @@ public class MockManagementController {
         return ResponseEntity.ok(mockManagementService.getMocks());
     }
 
-
     @GetMapping("{mockId}")
     public ResponseEntity<GenericResponseWrapper<Mock>> getMockById(@PathVariable String mockId) {
         Mock mock = mockManagementService.getMockById(mockId);

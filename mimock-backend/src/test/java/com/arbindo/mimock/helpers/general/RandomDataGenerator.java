@@ -9,27 +9,27 @@ public class RandomDataGenerator {
 
     private static final Random random = new Random();
 
-    public static UUID GenerateRandomUUID(){
+    public static UUID generateRandomUUID(){
         return UUID.randomUUID();
     }
 
-    public static String GenerateRandomAlphanumericString(){
-        return GenerateRandomAlphanumericString(10);
+    public static String generateRandomAlphanumericString(){
+        return generateRandomAlphanumericString(10);
     }
 
-    public static String GenerateRandomAlphanumericString(int length){
+    public static String generateRandomAlphanumericString(int length){
        return RandomStringUtils.randomAlphanumeric(length);
     }
 
-    public static String GenerateRandomAlphabeticString(){
-        return GenerateRandomAlphabeticString(10);
+    public static String generateRandomAlphabeticString(){
+        return generateRandomAlphabeticString(10);
     }
 
-    public static String GenerateRandomAlphabeticString(int length){
+    public static String generateRandomAlphabeticString(int length){
         return RandomStringUtils.randomAlphabetic(length);
     }
 
-    public static int GenerateRandomNumber(){
+    public static int generateRandomNumber(){
         return random.nextInt();
     }
 

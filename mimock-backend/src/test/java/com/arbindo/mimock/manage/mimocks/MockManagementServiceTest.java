@@ -58,7 +58,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnListOfMocks(){
+    void shouldReturnListOfMocks_WhenDBHasMocks(){
         // Arrange
         List<Mock> mockList = GenerateListOfMocks();
         lenient().when(mockRepository.findAll()).thenReturn(mockList);
@@ -72,7 +72,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnEmptyListOfMocks(){
+    void shouldReturnEmptyListOfMocks_WhenDBHasNoMocks(){
         // Arrange
         List<Mock> mockList = new ArrayList<>();
         lenient().when(mockRepository.findAll()).thenReturn(mockList);
@@ -86,7 +86,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnNullForListOfMocks(){
+    void shouldReturnNullForListOfMocks_WhenDBNotSynced(){
         // Arrange
         lenient().when(mockRepository.findAll()).thenReturn(null);
 

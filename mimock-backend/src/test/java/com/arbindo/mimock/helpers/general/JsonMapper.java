@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 public class JsonMapper {
-    public static String ConvertToJson(Object object){
+    public static String convertObjectToJsonString(Object object){
         ObjectWriter ow = new ObjectMapper().writer();
         try {
             return ow.writeValueAsString(object);
