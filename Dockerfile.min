@@ -1,0 +1,11 @@
+FROM alpine:3.15.0
+
+WORKDIR /home/mimock
+
+COPY ${PWD}/mimock-backend/target/mimock*.jar .
+
+RUN apk add openjdk11-jre
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","./target/mimock-0.0.1.jar"]

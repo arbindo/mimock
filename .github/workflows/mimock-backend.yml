@@ -45,10 +45,10 @@ jobs:
         working-directory: mimock-backend
         run: ./mvnw clean initialize test -P startDatabase
 
-  package-jar:
+  package-app:
     needs:
       - test
-    name: Package Mimock JAR
+    name: Package Mimock
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -65,23 +65,14 @@ jobs:
           path: |
             mimock-backend/target/mimock-*.jar
 
-  export-docker-image:
-    needs:
-      - test
-    name: Export mimock docker image
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
       - name: Build mimock docker image
         run: |
-          docker build -t mimock-backend:${{ github.sha }} .
-          docker save -o mimock-backend.tar mimock-backend:${{ github.sha }}
+          docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.min
+          docker save -o mimock-backend.zip mimock-backend:${{ github.sha }}
 
-      - name: Publish TAR of docker image
+      - name: Publish docker image archive
         uses: actions/upload-artifact@v2
         with:
           name: mimock-docker-image
           path: |
-            mimock-backend.tar
+            mimock-backend.zip
