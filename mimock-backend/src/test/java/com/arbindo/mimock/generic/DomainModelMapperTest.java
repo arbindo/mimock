@@ -6,6 +6,7 @@ import com.arbindo.mimock.entities.ResponseContentType;
 import com.arbindo.mimock.entities.TextualResponse;
 import com.arbindo.mimock.generic.factory.TextualResponseImpl;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
+import com.arbindo.mimock.generic.model.ResponseType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,6 +43,7 @@ class DomainModelMapperTest {
         assertEquals("{'message': 'Hello World!'}", mappedModel.getResponseBody());
         assertEquals(200, mappedModel.getStatusCode());
         assertEquals("application/json", mappedModel.getResponseContentType());
+        assertEquals(ResponseType.TEXTUAL_RESPONSE, mappedModel.getResponseType());
     }
 
     @Test
@@ -66,6 +68,7 @@ class DomainModelMapperTest {
 
         assertEquals(bytes, mappedModel.getResponseBody());
         assertEquals(200, mappedModel.getStatusCode());
+        assertEquals(ResponseType.BINARY_RESPONSE, mappedModel.getResponseType());
         assertEquals("application/json", mappedModel.getResponseContentType());
     }
 }

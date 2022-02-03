@@ -14,4 +14,5 @@ public class DomainModelForMock {
     private String responseContentType;
     private Integer statusCode;
     private Object responseBody;
+    private ResponseType responseType;
 }
