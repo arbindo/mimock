@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class MockManagementController {
     private MockManagementService mockManagementService;
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<GenericResponseWrapper<Mock>> createMock(MockRequest request) {
+    public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@Valid MockRequest request) {
         Mock mock = mockManagementService.createMock(request);
         if (mock != null) {
             final URI location = ServletUriComponentsBuilder
@@ -81,7 +82,7 @@ public class MockManagementController {
     }
 
     @PutMapping(value = "{mockId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, MockRequest request) {
+    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @Valid MockRequest request) {
         Mock updatedMock = mockManagementService.updateMock(mockId, request);
         if (updatedMock != null) {
             GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,
