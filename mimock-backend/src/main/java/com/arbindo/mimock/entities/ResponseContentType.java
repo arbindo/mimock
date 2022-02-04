@@ -38,4 +38,9 @@ public class ResponseContentType {
 
     @Column(name = "deleted_at")
     private ZonedDateTime deletedAt;
+
+    @Override
+    public String toString() {
+        return responseType;
+    }
 }

@@ -5,6 +5,7 @@ import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -23,6 +25,9 @@ public class MockManagementController {
 
     @Autowired
     private MockManagementService mockManagementService;
+
+    @Autowired
+    private ExportImportService exportImportService;
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@Valid MockRequest request) {
@@ -93,6 +98,36 @@ public class MockManagementController {
                 Messages.UPDATE_RESOURCE_FAILED, null);
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
+
+    @GetMapping(UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT)
+    public void exportTemplateCsv(HttpServletResponse response) {
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=" + exportImportService.generateFileName();
+        try {
+            response.setContentType("text/csv");
+            response.setHeader(headerKey, headerValue);
+            exportImportService.exportMockTemplateCsv(response.getWriter());
+        } catch (Exception e){
+            log.log(Level.DEBUG, e.getMessage());
+            response.setStatus(500);
+        }
+    }
+
+    @GetMapping(UrlConfig.MOCKS_CSV_EXPORT)
+    public void exportAllMocksInCsvFormat(HttpServletResponse response) {
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=" + exportImportService.generateFileName();
+        try {
+            List<Mock> mockList = mockManagementService.getMocks();
+            response.setContentType("text/csv");
+            response.setHeader(headerKey, headerValue);
+            exportImportService.exportMockListToCsv(response.getWriter(), mockList);
+        } catch (Exception e){
+            log.log(Level.DEBUG, e.getMessage());
+            response.setStatus(500);
+        }
+    }
+
 
     private GenericResponseWrapper<Mock> getGenericResponseWrapper(HttpStatus httpStatus, String responseMessage, Mock mock) {
         return GenericResponseWrapper.<Mock>builder()

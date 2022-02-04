@@ -1,0 +1,13 @@
+package com.arbindo.mimock.manage.mimocks;
+
+import com.arbindo.mimock.entities.Mock;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+public interface ExportImportService {
+    String generateFileName();
+    void exportMockTemplateCsv(PrintWriter writer) throws IOException;
+    void exportMockListToCsv(PrintWriter writer, List<Mock> mockList) throws IOException;
+}
