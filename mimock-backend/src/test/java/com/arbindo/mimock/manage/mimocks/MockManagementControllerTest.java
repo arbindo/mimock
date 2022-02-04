@@ -6,6 +6,9 @@ import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -25,7 +28,8 @@ import java.util.UUID;
 
 import static com.arbindo.mimock.helpers.entities.MocksGenerator.*;
 import static com.arbindo.mimock.helpers.general.JsonMapper.convertObjectToJsonString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static com.arbindo.mimock.helpers.general.RandomDataGenerator.generateRandomAlphabeticString;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
@@ -296,6 +300,183 @@ public class MockManagementControllerTest {
 
         // Assert
         assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void shouldReturnHttpBadRequest_CreateMockApi_WithInvalidParametersForRouteInRequest_ReturnsValidationErrors(String testData) throws Exception {
+        // Arrange
+        MockMultipartFile file = getMockMultipartFile();
+        MockRequest mockRequest = createMockRequestWithFile(file);
+
+        // Modify the MockRequest.Route to check
+        mockRequest.setRoute(testData);
+
+        String route = UrlConfig.MOCKS_PATH;
+
+        // Act and Assert
+        mockMvc.perform(multipart(route)
+                        .file(file)
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("description", mockRequest.getDescription()))
+                .andExpect(status().isBadRequest())
+                .andExpect(response -> assertNotNull(response.getResolvedException()))
+                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("Route is required")))
+                .andReturn();
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void shouldReturnHttpBadRequest_CreateMockApi_WithInvalidParametersForHttpMethodInRequest_ReturnsValidationErrors(String testData) throws Exception {
+        // Arrange
+        MockMultipartFile file = getMockMultipartFile();
+        MockRequest mockRequest = createMockRequestWithFile(file);
+
+        // Modify the MockRequest.HttpMethod to check
+        mockRequest.setHttpMethod(testData);
+
+        String route = UrlConfig.MOCKS_PATH;
+
+        // Act and Assert
+        mockMvc.perform(multipart(route)
+                        .file(file)
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("description", mockRequest.getDescription()))
+                .andExpect(status().isBadRequest())
+                .andExpect(response -> assertNotNull(response.getResolvedException()))
+                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("HttpMethod is required")))
+                .andReturn();
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    void shouldReturnHttpBadRequest_CreateMockApi_WithInvalidParametersForResponseContentTypeInRequest_ReturnsValidationErrors(String testData) throws Exception {
+        // Arrange
+        MockMultipartFile file = getMockMultipartFile();
+        MockRequest mockRequest = createMockRequestWithFile(file);
+
+        // Modify the MockRequest.ResponseContentType to check
+        mockRequest.setResponseContentType(testData);
+
+        String route = UrlConfig.MOCKS_PATH;
+
+        // Act and Assert
+        mockMvc.perform(multipart(route)
+                        .file(file)
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("description", mockRequest.getDescription()))
+                .andExpect(status().isBadRequest())
+                .andExpect(response -> assertNotNull(response.getResolvedException()))
+                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("ResponseContentType is required")))
+                .andReturn();
+    }
+
+    @Test
+    void shouldReturnHttpBadRequest_CreateMockApi_WithInvalidParametersForStatusCodeInRequest_ReturnsValidationErrors() throws Exception {
+        // Arrange
+        MockMultipartFile file = getMockMultipartFile();
+        MockRequest mockRequest = createMockRequestWithFile(file);
+
+        String route = UrlConfig.MOCKS_PATH;
+
+        // Act and Assert
+        mockMvc.perform(multipart(route)
+                        .file(file)
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                         // Remove the MockRequest.StatusCode to check
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("description", mockRequest.getDescription()))
+                .andExpect(status().isBadRequest())
+                .andExpect(response -> assertNotNull(response.getResolvedException()))
+                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("statusCode")))
+                .andReturn();
+    }
+
+    @Test
+    void shouldReturnHttpBadRequest_CreateMockApi_WithInvalidParametersForDescriptionInRequest_ReturnsValidationErrors() throws Exception {
+        // Arrange
+        MockMultipartFile file = getMockMultipartFile();
+        MockRequest mockRequest = createMockRequestWithFile(file);
+
+        // Modify the MockRequest.Description with empty value
+        mockRequest.setDescription("");
+
+        String route = UrlConfig.MOCKS_PATH;
+
+        // Act and Assert
+        mockMvc.perform(multipart(route)
+                        .file(file)
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("description", mockRequest.getDescription()))
+                .andExpect(status().isBadRequest())
+                .andExpect(response -> assertNotNull(response.getResolvedException()))
+                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("Description should be at least 1-250 characters")))
+                .andReturn();
+
+        // Modify the MockRequest.Description with longer value
+        mockRequest.setDescription(generateRandomAlphabeticString(300));
+
+        // Act and Assert
+        mockMvc.perform(multipart(route)
+                        .file(file)
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("description", mockRequest.getDescription()))
+                .andExpect(status().isBadRequest())
+                .andExpect(response -> assertNotNull(response.getResolvedException()))
+                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("Description should be at least 1-250 characters")))
+                .andReturn();
+    }
+
+    @Test
+    void shouldReturnHttpBadRequest_CreateMockApi_WithInvalidParametersForQueryParamsInRequest_ReturnsValidationErrors() throws Exception {
+        // Arrange
+        MockMultipartFile file = getMockMultipartFile();
+        MockRequest mockRequest = createMockRequestWithFile(file);
+
+        String route = UrlConfig.MOCKS_PATH;
+
+        // Modify the MockRequest.QueryParams with longer value
+        mockRequest.setQueryParams(generateRandomAlphabeticString(2000));
+
+        // Act and Assert
+        mockMvc.perform(multipart(route)
+                        .file(file)
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("queryParams", mockRequest.getQueryParams())
+                        .param("description", mockRequest.getDescription()))
+                .andExpect(status().isBadRequest())
+                .andExpect(response -> assertNotNull(response.getResolvedException()))
+                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("QueryParams can be maximum of 1024 characters")))
+                .andReturn();
     }
 
     @Test
