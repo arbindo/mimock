@@ -24,6 +24,11 @@ import java.util.List;
 public class ExportImportServiceImpl implements ExportImportService {
 
     @Override
+    public String generateTemplateFileName() {
+        return "mocks_template.csv";
+    }
+
+    @Override
     public String generateFileName() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentDateTime = dateFormat.format(new Date());
@@ -78,7 +83,7 @@ public class ExportImportServiceImpl implements ExportImportService {
         log.log(Level.DEBUG, "CSV Header Write Completed!");
     }
 
-    private String[] getCsvHeaders() {
+    public String[] getCsvHeaders() {
         return new String[]{"Mock Id", "Route", "Description", "Http Method", "Response Content Type", "Status Code", "Query Params"};
     }
 

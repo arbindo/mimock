@@ -565,8 +565,8 @@ public class MockManagementControllerTest {
         String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT;
         String expectedContentType = "text/csv";
 
-        String fileName = "mocks.csv";
-        lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
+        String fileName = "mocks_template.csv";
+        lenient().when(exportImportService.generateTemplateFileName()).thenReturn(fileName);
 
         // Act
         mockMvc.perform(get(route))
@@ -585,8 +585,8 @@ public class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT;
 
-        String fileName = "mocks.csv";
-        lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
+        String fileName = "mocks_template.csv";
+        lenient().when(exportImportService.generateTemplateFileName()).thenReturn(fileName);
         doThrow(IOException.class).when(exportImportService).exportMockTemplateCsv(any(PrintWriter.class));
 
         // Act
@@ -600,7 +600,7 @@ public class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_EXPORT;
         String expectedContentType = "text/csv";
-        String fileName = "mocks.csv";
+        String fileName = "mocks_2022-02-04_19-31-05.csv";
 
         List<Mock> expectedMocks = generateListOfMocks();
 
@@ -624,7 +624,7 @@ public class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_EXPORT;
         String expectedContentType = "text/csv";
-        String fileName = "mocks.csv";
+        String fileName = "mocks_2022-02-04_19-31-05.csv";
 
         List<Mock> expectedMocks = generateListOfMocks();
 

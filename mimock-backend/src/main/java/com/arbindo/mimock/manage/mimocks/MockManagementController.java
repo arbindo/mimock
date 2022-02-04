@@ -102,7 +102,7 @@ public class MockManagementController {
     @GetMapping(UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT)
     public void exportTemplateCsv(HttpServletResponse response) {
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=" + exportImportService.generateFileName();
+        String headerValue = "attachment; filename=" + exportImportService.generateTemplateFileName();
         try {
             response.setContentType("text/csv");
             response.setHeader(headerKey, headerValue);
