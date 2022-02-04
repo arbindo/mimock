@@ -1,4 +1,7 @@
 server:
+  error:
+    whitelabel:
+      enabled: false
   ssl:
     enabled: false
     key-store: src/main/resources/keystore/keystore.p12
@@ -41,4 +44,4 @@ spring:
     password: ironclaw
 
 app:
-  url_prefix: /api/mimock/v1
+  url_prefix: /api/mimock
