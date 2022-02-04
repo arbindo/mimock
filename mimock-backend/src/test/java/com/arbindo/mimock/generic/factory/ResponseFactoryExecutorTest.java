@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class ResponseFactoryExecutorTest {
+public class ResponseFactoryExecutorTest {
 
     @Autowired
     ResponseFactoryExecutor responseFactoryExecutor;

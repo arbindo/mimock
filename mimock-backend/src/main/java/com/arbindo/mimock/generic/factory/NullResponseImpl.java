@@ -15,6 +15,6 @@ public class NullResponseImpl implements ResponseFactory {
 
     @Override
     public ResponseType responseType() {
-        return null;
+        return ResponseType.NULL_RESPONSE;
     }
 }
