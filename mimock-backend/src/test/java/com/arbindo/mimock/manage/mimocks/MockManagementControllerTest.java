@@ -2,9 +2,9 @@ package com.arbindo.mimock.manage.mimocks;
 
 import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.entities.Mock;
+import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -59,10 +59,8 @@ public class MockManagementControllerTest {
     @MockBean
     DatabaseStartupValidator mockDataStartupValidator;
 
-    @BeforeAll
-    static void setupDataSource(){
-
-    }
+    @MockBean
+    DefaultHttpInterceptor defaultHttpInterceptor;
 
     @Test
     void shouldReturnHttpOk_ListMocksApi_ReturnsEmpty() throws Exception {
@@ -260,13 +258,13 @@ public class MockManagementControllerTest {
 
         // Act
         MvcResult result = mockMvc.perform(multipart(route)
-                                .file(file)
-                                .param("route", mockRequest.getRoute())
-                                .param("httpMethod", mockRequest.getHttpMethod())
-                                .param("responseContentType", mockRequest.getResponseContentType())
-                                .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
-                                .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
-                                .param("description", mockRequest.getDescription()))
+                        .file(file)
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("description", mockRequest.getDescription()))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(expectedContentType))
                 .andReturn();
@@ -404,7 +402,7 @@ public class MockManagementControllerTest {
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
-                         // Remove the MockRequest.StatusCode to check
+                        // Remove the MockRequest.StatusCode to check
                         .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
                         .param("description", mockRequest.getDescription()))
                 .andExpect(status().isBadRequest())
