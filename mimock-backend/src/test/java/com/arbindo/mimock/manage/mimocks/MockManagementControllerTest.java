@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequ
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,10 +34,9 @@ import static com.arbindo.mimock.helpers.general.RandomDataGenerator.generateRan
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(value = MockManagementController.class, excludeAutoConfiguration = {SecurityAutoConfiguration.class})
 public class MockManagementControllerTest {
@@ -48,6 +49,9 @@ public class MockManagementControllerTest {
 
     @MockBean
     MockManagementService mockManagementService;
+
+    @MockBean
+    ExportImportService exportImportService;
 
     @MockBean
     DataSource mockDataSource;
@@ -553,6 +557,86 @@ public class MockManagementControllerTest {
 
         // Assert
         assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpOk_ExportTemplateCsv_ReturnCsvTemplateFile() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT;
+        String expectedContentType = "text/csv";
+
+        String fileName = "mocks.csv";
+        lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
+
+        // Act
+        mockMvc.perform(get(route))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(expectedContentType))
+                .andExpect(header().exists("Content-Disposition"))
+                .andExpect(header().string("Content-Disposition", "attachment; filename=" + fileName))
+                .andReturn();
+
+        // Assert
+        verify(exportImportService, times(1)).exportMockTemplateCsv(any(PrintWriter.class));
+    }
+
+    @Test
+    void shouldReturnHttpInternalServerError_WhenExportTemplateCsv_ThrowsException() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT;
+
+        String fileName = "mocks.csv";
+        lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
+        doThrow(IOException.class).when(exportImportService).exportMockTemplateCsv(any(PrintWriter.class));
+
+        // Act
+        mockMvc.perform(get(route))
+                .andExpect(status().isInternalServerError())
+                .andReturn();
+    }
+
+    @Test
+    void shouldReturnHttpOk_ExportMocksCsv_ReturnCsvFile() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_EXPORT;
+        String expectedContentType = "text/csv";
+        String fileName = "mocks.csv";
+
+        List<Mock> expectedMocks = generateListOfMocks();
+
+        lenient().when(mockManagementService.getMocks()).thenReturn(expectedMocks);
+        lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
+
+        // Act
+        mockMvc.perform(get(route))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(expectedContentType))
+                .andExpect(header().exists("Content-Disposition"))
+                .andExpect(header().string("Content-Disposition", "attachment; filename=" + fileName))
+                .andReturn();
+
+        // Assert
+        verify(exportImportService, times(1)).exportMockListToCsv(any(PrintWriter.class), anyList());
+    }
+
+    @Test
+    void shouldReturnHttpInternalServerError_WhenExportMocksCsv_ThrowsException() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_EXPORT;
+        String expectedContentType = "text/csv";
+        String fileName = "mocks.csv";
+
+        List<Mock> expectedMocks = generateListOfMocks();
+
+        lenient().when(mockManagementService.getMocks()).thenReturn(expectedMocks);
+        lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
+
+        doThrow(IOException.class).when(exportImportService).exportMockListToCsv(any(PrintWriter.class), anyList());
+
+        // Act
+        mockMvc.perform(get(route))
+                .andExpect(status().isInternalServerError())
+                .andReturn();
     }
 
 
