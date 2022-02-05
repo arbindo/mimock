@@ -19,6 +19,9 @@ public class DefaultInterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(defaultHttpInterceptor)
                 .addPathPatterns("/**")
+                .excludePathPatterns(UrlConfig.SWAGGER_API_PATH + "/**")
+                .excludePathPatterns(UrlConfig.SWAGGER_UI_PATH + "/**")
+                .excludePathPatterns(UrlConfig.SWAGGER_UI_HTML_PATH)
                 .excludePathPatterns(UrlConfig.API_PATH + UrlConfig.VERSION + "/**")
                 .excludePathPatterns("/")
                 .excludePathPatterns("index.html")

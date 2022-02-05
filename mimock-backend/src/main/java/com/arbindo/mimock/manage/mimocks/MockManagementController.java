@@ -4,6 +4,8 @@ import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import java.util.List;
 @RestController
 @Log4j2
 @RequestMapping(UrlConfig.MOCKS_PATH)
+@Tag(name = "Mock Management", description = "Handles operations related to mock resource.")
 public class MockManagementController {
 
     @Autowired
@@ -29,6 +32,7 @@ public class MockManagementController {
     @Autowired
     private ExportImportService exportImportService;
 
+    @Operation(summary = "Create Mock", description = "Creates a mock as per the given data in multi-part form.", tags = { "Mock Management" })
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@Valid MockRequest request) {
         Mock mock = mockManagementService.createMock(request);
@@ -45,11 +49,13 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
+    @Operation(summary = "List Mocks", description = "List all mocks.", tags = { "Mock Management" })
     @GetMapping
     public ResponseEntity<List<Mock>> getAllMocks() {
         return ResponseEntity.ok(mockManagementService.getMocks());
     }
 
+    @Operation(summary = "Get Mock", description = "Get mock based on the given mockId.", tags = { "Mock Management" })
     @GetMapping("{mockId}")
     public ResponseEntity<GenericResponseWrapper<Mock>> getMockById(@PathVariable String mockId) {
         Mock mock = mockManagementService.getMockById(mockId);
@@ -61,6 +67,7 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
+    @Operation(summary = "Delete Mock", description = "Deletes mock based on the given mockId.", tags = { "Mock Management" })
     @DeleteMapping("{mockId}")
     public ResponseEntity<GenericResponseWrapper<Mock>> deleteMockById(@PathVariable String mockId) {
         boolean isMockDeleted = mockManagementService.deleteMockById(mockId);
@@ -75,6 +82,7 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
+    @Operation(summary = "Delete Mocks", description = "Deletes all mocks.", tags = { "Mock Management" })
     @DeleteMapping
     public ResponseEntity<GenericResponseWrapper<Boolean>> deleteAllMocks() {
         boolean allMocksDeleted = mockManagementService.deleteAllMocks();
@@ -86,6 +94,7 @@ public class MockManagementController {
                 .message(Messages.DELETE_ALL_RESOURCES_FAILED).build());
     }
 
+    @Operation(summary = "Update Mock", description = "Updates mock for the given mockId using the data in multi-part form.", tags = { "Mock Management" })
     @PutMapping(value = "{mockId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @Valid MockRequest request) {
         Mock updatedMock = mockManagementService.updateMock(mockId, request);
@@ -99,6 +108,7 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
+    @Operation(summary = "Export Mock CSV Template", description = "Exports the mock template CSV file which can used while import operation.", tags = { "Mock Management" })
     @GetMapping(UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT)
     public void exportTemplateCsv(HttpServletResponse response) {
         String headerKey = "Content-Disposition";
@@ -113,6 +123,7 @@ public class MockManagementController {
         }
     }
 
+    @Operation(summary = "Export Mocks", description = "Exports the mocks in CSV file format.", tags = { "Mock Management" })
     @GetMapping(UrlConfig.MOCKS_CSV_EXPORT)
     public void exportAllMocksInCsvFormat(HttpServletResponse response) {
         String headerKey = "Content-Disposition";

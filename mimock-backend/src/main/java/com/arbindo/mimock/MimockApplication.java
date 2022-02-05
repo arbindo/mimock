@@ -1,5 +1,9 @@
 package com.arbindo.mimock;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import liquibase.Liquibase;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.boot.SpringApplication;
@@ -38,5 +42,15 @@ public class MimockApplication {
         validator.setInterval(5);
         validator.setTimeout(60);
         return validator;
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI().info(new Info()
+                .title("Mimock")
+                .description("Utility to set up mock rest api endpoints to mimic actual endpoints")
+                .contact(new Contact().name("Mimock").url("http://www.mimock.io/"))
+                .license(new License().name("Apache License 2.0").url("https://github.com/neel1996/mimock/blob/main/LICENSE"))
+                .version("v0.1"));
     }
 }

@@ -8,6 +8,9 @@ public class UrlConfig {
 
     public static final String API_PATH = "/api/mimock";
     public static final String VERSION = "/v1";
+    public static final String SWAGGER_API_PATH = "/v3/api-docs";
+    public static final String SWAGGER_UI_PATH = "/swagger-ui";
+    public static final String SWAGGER_UI_HTML_PATH = "/swagger-ui.html";
 
     // region RESOURCES
     public static final String MANAGE = "/manage";

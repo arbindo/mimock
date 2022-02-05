@@ -1,5 +1,6 @@
 package com.arbindo.mimock.entities;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
@@ -20,44 +21,56 @@ public class Mock {
     @Id
     @Column(name = "mock_id", nullable = false)
     @Type(type = "org.hibernate.type.PostgresUUIDType")
+    @Schema(description = "Mock Id")
     private UUID id;
 
     @Column(name = "route", nullable = false, length = 2048)
+    @Schema(example = "/github/v3/pull", description = "Route of the mock")
     private String route;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "method_id", nullable = false)
+    @Schema(description = "Represents the HTTP method")
     private HttpMethod httpMethod;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "response_content_type_id", nullable = false)
+    @Schema(description = "Represents the response content type")
     private ResponseContentType responseContentType;
 
     @Column(name = "status_code", nullable = false)
+    @Schema(example = "200", description = "Expected status code of the mock")
     private Integer statusCode;
 
     @Column(name = "query_params", length = 1024)
+    @Schema(example = "name=John&age=10", description = "Associated query params of the mock")
     private String queryParams;
 
     @ManyToOne
     @JoinColumn(name = "textual_response_id")
+    @Schema(description = "Represents the expected textual response")
     private TextualResponse textualResponse;
 
     @ManyToOne
     @JoinColumn(name = "binary_response_id")
+    @Schema(description = "Represents the expected binary response")
     private BinaryResponse binaryResponse;
 
     @Column(name = "description", length = 255)
+    @Schema(example = "This is my new mock!!!", description = "Custom Description of the Mock")
     private String description;
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
+    @Schema(description = "Creation Timestamp")
     private ZonedDateTime createdAt;
 
     @Column(name = "updated_at")
     @UpdateTimestamp
+    @Schema(description = "Update Timestamp")
     private ZonedDateTime updatedAt;
 
     @Column(name = "deleted_at")
+    @Schema(description = "Delete Timestamp")
     private ZonedDateTime deletedAt;
 }
