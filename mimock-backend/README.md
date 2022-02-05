@@ -20,13 +20,18 @@ Click here to view [Open API 3 - Swagger Documentation](http://localhost:8080/v3
 docker-compose up
 ```
 
-## For running app locally with dev config
+## To run the spring-boot app locally with dev config
 
 ```shell
 ./mvnw initialize spring-boot:run -Dapp.profiles=dev -P startDatabase
 ```
+## To run checkstyle linter
 
-## For running tests locally
+```shell
+./mvnw checkstyle:check
+```
+
+## To run the tests locally
 
 ```shell
 ./mvnw clean test -P startDatabase 
