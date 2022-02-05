@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.stereotype.Service;
+import org.supercsv.cellprocessor.Optional;
+import org.supercsv.cellprocessor.constraint.NotNull;
+import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
@@ -71,8 +74,9 @@ public class ExportImportServiceImpl implements ExportImportService {
 
     private void writeData(List<Mock> mockList, ICsvBeanWriter csvWriter) throws IOException {
         String[] nameMapping = getNameMappings();
+        CellProcessor[] cellProcessors = getExportCellProcessors();
         for(Mock mock : mockList){
-            csvWriter.write(mock, nameMapping);
+            csvWriter.write(mock, nameMapping, cellProcessors);
         }
         log.log(Level.DEBUG, "CSV Data Write Completed!");
     }
@@ -99,5 +103,17 @@ public class ExportImportServiceImpl implements ExportImportService {
 
     private String[] getNameMappings(){
         return new String[]{"id", "route", "description", "httpMethod", "statusCode", "responseContentType", "queryParams"};
+    }
+
+    private static CellProcessor[] getExportCellProcessors(){
+        return new CellProcessor[]{
+                new NotNull(), // id
+                new NotNull(), // route
+                new Optional(), // description
+                new NotNull(), // httpMethod
+                new NotNull(), // statusCode
+                new Optional(), // responseContentType
+                new Optional() // queryParams
+        };
     }
 }

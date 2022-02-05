@@ -50,7 +50,7 @@ class ExportImportServiceTest {
     }
 
     @Test
-    void shouldWriteMockHeadersToCsvWriter_Success() throws IOException {
+    void shouldWriteMockTemplateHeadersToCsvWriter_Success() throws IOException {
         // Arrange
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -58,7 +58,7 @@ class ExportImportServiceTest {
         mockExportImportService.exportMockTemplateCsv(printWriter);
 
         // Assert
-        String expectedResult = Arrays.toString(ExportImportServiceImpl.getCsvHeaders())
+        String expectedResult = Arrays.toString(ExportImportServiceImpl.getCsvTemplateHeaders())
                 .replace("[", "")
                 .replace("]", "")
                 .replace(", ", ",");
