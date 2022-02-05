@@ -23,13 +23,15 @@ public class GetStaticRecordsController {
     @Autowired
     GetStaticRecordsService getStaticRecordsService;
 
-    @Operation(summary = "List Http Methods", description = "List all supported HTTP Methods in Mimock Platform.", tags = { "Static Records" })
+    @Operation(summary = "List Http Methods", description = "List all supported HTTP Methods in Mimock Platform.",
+            tags = { "Static Records" })
     @GetMapping(value = "/http-methods")
     public ResponseEntity<List<HttpMethod>> listAllSupportedHttpMethods() {
         return ResponseEntity.ok(getStaticRecordsService.listAllSupportedHttpMethods());
     }
 
-    @Operation(summary = "List Response Content Types", description = "List all supported Response Content Types in Mimock Platform.", tags = { "Static Records" })
+    @Operation(summary = "List Response Content Types", description = "List all supported Response Content Types " +
+            "in Mimock Platform.", tags = { "Static Records" })
     @GetMapping(value = "/response-content-types")
     public ResponseEntity<List<ResponseContentType>> listAllSupportedResponseContentTypes() {
         return ResponseEntity.ok(getStaticRecordsService.listAllSupportedResponseContentTypes());

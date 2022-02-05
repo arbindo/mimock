@@ -32,7 +32,8 @@ public class MockManagementController {
     @Autowired
     private ExportImportService exportImportService;
 
-    @Operation(summary = "Create Mock", description = "Creates a mock as per the given data in multi-part form.", tags = { "Mock Management" })
+    @Operation(summary = "Create Mock", description = "Creates a mock as per the given data in multi-part form.",
+            tags = { "Mock Management" })
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@Valid MockRequest request) {
         Mock mock = mockManagementService.createMock(request);
@@ -94,7 +95,8 @@ public class MockManagementController {
                 .message(Messages.DELETE_ALL_RESOURCES_FAILED).build());
     }
 
-    @Operation(summary = "Update Mock", description = "Updates mock for the given mockId using the data in multi-part form.", tags = { "Mock Management" })
+    @Operation(summary = "Update Mock", description = "Updates mock for the given mockId using the data in multi-part form.",
+            tags = { "Mock Management" })
     @PutMapping(value = "{mockId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @Valid MockRequest request) {
         Mock updatedMock = mockManagementService.updateMock(mockId, request);
@@ -108,7 +110,8 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
-    @Operation(summary = "Export Mock CSV Template", description = "Exports the mock template CSV file which can used while import operation.", tags = { "Mock Management" })
+    @Operation(summary = "Export Mock CSV Template", description = "Exports the mock template CSV file which can used" +
+            " while import operation.", tags = { "Mock Management" })
     @GetMapping(UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT)
     public void exportTemplateCsv(HttpServletResponse response) {
         String headerKey = "Content-Disposition";
