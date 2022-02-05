@@ -1,6 +1,12 @@
 # mimock
 
-Backend spring-boot api for mimock
+Backend spring-boot api for mimock platform
+
+## Documentation
+
+Click here to view [Swagger UI](http://localhost:8080/swagger-ui/index.html)
+
+Click here to view [Open API 3 - Swagger Documentation](http://localhost:8080/v3/api-docs/)
 
 ## To start postgresql DB container
 
