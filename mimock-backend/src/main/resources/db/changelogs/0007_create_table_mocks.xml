@@ -19,6 +19,7 @@
             created_at               TIMESTAMP NOT NULL,
             updated_at               TIMESTAMP,
             deleted_at               TIMESTAMP,
+            entity_status            VARCHAR(16) NOT NULL DEFAULT 'NONE',
             PRIMARY KEY (mock_id),
             CONSTRAINT http_method_fk FOREIGN KEY (method_id) REFERENCES http_methods (id),
             CONSTRAINT response_content_type_fk FOREIGN KEY (response_content_type_id) REFERENCES response_content_types (id),

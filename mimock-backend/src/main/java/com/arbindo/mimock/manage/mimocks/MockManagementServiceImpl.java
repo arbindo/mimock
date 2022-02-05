@@ -109,6 +109,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                     .queryParams(request.getQueryParams())
                     .description(request.getDescription())
                     .createdAt(ZonedDateTime.now())
+                    .entityStatus(EntityStatus.NONE)
                     .build();
 
             if (request.getExpectedTextResponse() != null) {
@@ -164,6 +165,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                         .description(request.getDescription())
                         .createdAt(mock.getCreatedAt())
                         .updatedAt(ZonedDateTime.now())
+                        .entityStatus(EntityStatus.NONE)
                         .build();
 
                 if (request.getExpectedTextResponse() != null) {

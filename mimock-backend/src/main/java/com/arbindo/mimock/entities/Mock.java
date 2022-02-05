@@ -18,6 +18,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "mocks")
 public class Mock {
+
     @Id
     @Column(name = "mock_id", nullable = false)
     @Type(type = "org.hibernate.type.PostgresUUIDType")
@@ -73,4 +74,9 @@ public class Mock {
     @Column(name = "deleted_at")
     @Schema(description = "Delete Timestamp")
     private ZonedDateTime deletedAt;
+
+    @Column(name = "entity_status", nullable = false, columnDefinition = "NOT NULL DEFAULT 'NONE'")
+    @Enumerated(EnumType.STRING)
+    @Schema(description = "Indicates the entity status")
+    private EntityStatus entityStatus;
 }

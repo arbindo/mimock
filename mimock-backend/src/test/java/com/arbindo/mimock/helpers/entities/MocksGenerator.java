@@ -48,6 +48,7 @@ public class MocksGenerator {
                 .statusCode(generateRandomNumber())
                 .textualResponse(generateTextualResponse())
                 .binaryResponse(generateBinaryResponse())
+                .entityStatus(EntityStatus.NONE)
                 .build();
     }
 
@@ -63,6 +64,7 @@ public class MocksGenerator {
                 .textualResponse(generateTextualResponse(request.getExpectedTextResponse()))
                 .binaryResponse(generateBinaryResponse(request.getBinaryFile()))
                 .createdAt(ZonedDateTime.now())
+                .entityStatus(EntityStatus.NONE)
                 .build();
     }
 

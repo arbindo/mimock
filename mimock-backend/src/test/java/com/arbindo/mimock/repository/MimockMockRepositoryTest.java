@@ -70,6 +70,7 @@ class MimockMockRepositoryTest {
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
+                .entityStatus(EntityStatus.NONE)
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -80,6 +81,7 @@ class MimockMockRepositoryTest {
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
+                .entityStatus(EntityStatus.NONE)
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -134,6 +136,7 @@ class MimockMockRepositoryTest {
                 .binaryResponse(binaryResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
+                .entityStatus(EntityStatus.NONE)
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -144,6 +147,7 @@ class MimockMockRepositoryTest {
                 .binaryResponse(binaryResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
+                .entityStatus(EntityStatus.NONE)
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -191,6 +195,7 @@ class MimockMockRepositoryTest {
                 .queryParams(expectedQueryParams)
                 .responseContentType(responseContentType)
                 .statusCode(200)
+                .entityStatus(EntityStatus.NONE)
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -200,6 +205,7 @@ class MimockMockRepositoryTest {
                 .queryParams(queryParams)
                 .responseContentType(responseContentType)
                 .statusCode(400)
+                .entityStatus(EntityStatus.NONE)
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
