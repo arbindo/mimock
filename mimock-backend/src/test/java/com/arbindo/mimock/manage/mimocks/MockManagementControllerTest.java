@@ -357,34 +357,6 @@ class MockManagementControllerTest {
                 .andReturn();
     }
 
-    @ParameterizedTest
-    @NullSource
-    @EmptySource
-    void shouldReturnHttpBadRequest_CreateMockApi_WithInvalidParametersForResponseContentTypeInRequest_ReturnsValidationErrors(String testData) throws Exception {
-        // Arrange
-        MockMultipartFile file = getMockMultipartFile();
-        MockRequest mockRequest = createMockRequestWithFile(file);
-
-        // Modify the MockRequest.ResponseContentType to check
-        mockRequest.setResponseContentType(testData);
-
-        String route = UrlConfig.MOCKS_PATH;
-
-        // Act and Assert
-        mockMvc.perform(multipart(route)
-                        .file(file)
-                        .param("route", mockRequest.getRoute())
-                        .param("httpMethod", mockRequest.getHttpMethod())
-                        .param("responseContentType", mockRequest.getResponseContentType())
-                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
-                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
-                        .param("description", mockRequest.getDescription()))
-                .andExpect(status().isBadRequest())
-                .andExpect(response -> assertNotNull(response.getResolvedException()))
-                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("ResponseContentType is required")))
-                .andReturn();
-    }
-
     @Test
     void shouldReturnHttpBadRequest_CreateMockApi_WithInvalidParametersForStatusCodeInRequest_ReturnsValidationErrors() throws Exception {
         // Arrange

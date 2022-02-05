@@ -23,13 +23,12 @@ public class MockRequest {
     @Schema(example = "GET", description = "Name of the HTTP Method")
     private String httpMethod;
 
-    @NotBlank(message = "ResponseContentType is required")
-    @Schema(example = "application/json", description = "Name of the Response Content Type")
-    private String responseContentType;
-
     @NotNull(message = "StatusCode is required")
     @Schema(example = "200", description = "Expected status code of the mock")
     private int statusCode;
+
+    @Schema(example = "application/json", description = "Name of the Response Content Type")
+    private String responseContentType;
 
     @Size(max = 1024, message = "QueryParams can be maximum of 1024 characters")
     @Schema(example = "name=John&age=10", description = "Associated query params of the mock")
