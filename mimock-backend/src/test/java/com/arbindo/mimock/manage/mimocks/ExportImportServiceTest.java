@@ -56,8 +56,9 @@ class ExportImportServiceTest {
         PrintWriter printWriter = new PrintWriter(stringWriter);
         // Act
         mockExportImportService.exportMockTemplateCsv(printWriter);
+
         // Assert
-        String expectedResult = Arrays.toString(mockExportImportService.getCsvHeaders())
+        String expectedResult = Arrays.toString(ExportImportServiceImpl.getCsvHeaders())
                 .replace("[", "")
                 .replace("]", "")
                 .replace(", ", ",");
@@ -75,7 +76,7 @@ class ExportImportServiceTest {
         mockExportImportService.exportMockListToCsv(printWriter, mockList);
 
         // Assert
-        String expectedResultHeaders = Arrays.toString(mockExportImportService.getCsvHeaders())
+        String expectedResultHeaders = Arrays.toString(ExportImportServiceImpl.getCsvHeaders())
                 .replace("[", "")
                 .replace("]", "")
                 .replace(", ", ",");

@@ -40,7 +40,7 @@ public class ExportImportServiceImpl implements ExportImportService {
         ICsvBeanWriter csvWriter = null;
         try{
             csvWriter = new CsvBeanWriter(writer, CsvPreference.STANDARD_PREFERENCE);
-            writeHeaders(csvWriter);
+            writeTemplateHeaders(csvWriter);
         }catch (Exception e){
             log.log(Level.DEBUG, e.getMessage());
         } finally {
@@ -83,11 +83,21 @@ public class ExportImportServiceImpl implements ExportImportService {
         log.log(Level.DEBUG, "CSV Header Write Completed!");
     }
 
-    public String[] getCsvHeaders() {
-        return new String[]{"Mock Id", "Route", "Description", "Http Method", "Response Content Type", "Status Code", "Query Params"};
+    private void writeTemplateHeaders(ICsvBeanWriter csvWriter) throws IOException {
+        String[] csvHeader = getCsvTemplateHeaders();
+        csvWriter.writeHeader(csvHeader);
+        log.log(Level.DEBUG, "CSV Template Header Write Completed!");
+    }
+
+    protected static String[] getCsvTemplateHeaders() {
+        return new String[]{"Route", "Description", "Http Method", "Status Code", "Response Content Type", "Query Params"};
+    }
+
+    protected static String[] getCsvHeaders() {
+        return new String[]{"Mock Id", "Route", "Description", "Http Method", "Status Code", "Response Content Type", "Query Params"};
     }
 
     private String[] getNameMappings(){
-        return new String[]{"id", "route", "description", "httpMethod", "responseContentType", "statusCode", "queryParams"};
+        return new String[]{"id", "route", "description", "httpMethod", "statusCode", "responseContentType", "queryParams"};
     }
 }

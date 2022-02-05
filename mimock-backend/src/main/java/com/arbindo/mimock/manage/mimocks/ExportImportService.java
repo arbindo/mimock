@@ -9,7 +9,6 @@ import java.util.List;
 public interface ExportImportService {
     String generateTemplateFileName();
     String generateFileName();
-    String[] getCsvHeaders();
     void exportMockTemplateCsv(PrintWriter writer) throws IOException;
     void exportMockListToCsv(PrintWriter writer, List<Mock> mockList) throws IOException;
 }
