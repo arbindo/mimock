@@ -6,7 +6,6 @@ import com.arbindo.mimock.generic.helpers.QueryParamHelper;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
 import com.arbindo.mimock.repository.HttpMethodsRepository;
 import com.arbindo.mimock.repository.MocksRepository;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
@@ -18,20 +17,26 @@ import java.util.Optional;
 
 @Service
 @Log4j2
-@AllArgsConstructor
 @Builder
 public class GenericMockRequestService {
-    @Autowired
-    QueryParamHelper queryParamHelper;
+    private QueryParamHelper queryParamHelper;
+
+    private DomainModelMapper domainModelMapper;
+
+    private MocksRepository repository;
+
+    private final HttpMethodsRepository httpMethodsRepository;
 
     @Autowired
-    DomainModelMapper domainModelMapper;
-
-    @Autowired
-    MocksRepository repository;
-
-    @Autowired
-    HttpMethodsRepository httpMethodsRepository;
+    public GenericMockRequestService(QueryParamHelper queryParamHelper,
+                                     DomainModelMapper domainModelMapper,
+                                     MocksRepository repository,
+                                     HttpMethodsRepository httpMethodsRepository) {
+        this.queryParamHelper = queryParamHelper;
+        this.domainModelMapper = domainModelMapper;
+        this.repository = repository;
+        this.httpMethodsRepository = httpMethodsRepository;
+    }
 
 
     public StringBuilder extractQueryParams(HttpServletRequest request) {
@@ -39,7 +44,7 @@ public class GenericMockRequestService {
         return queryParamHelper.extractQueryParams(request);
     }
 
-    public DomainModelForMock serveMockRequest(GenericRequestModel request) throws Exception {
+    public DomainModelForMock serveMockRequest(GenericRequestModel request) throws MatchingMockNotFoundException {
         log.log(Level.INFO, "Fetching matching mock from the DB");
 
         String route = request.getRoute();

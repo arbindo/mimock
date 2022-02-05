@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(classes = ResponseFactoryExecutor.class)
 class ResponseFactoryExecutorTest {
 
     @Autowired

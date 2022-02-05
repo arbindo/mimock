@@ -17,8 +17,8 @@ class ResponseContentTypesRepositoryTest {
     ResponseContentTypesRepository responseContentTypesRepository;
 
     @ParameterizedTest
-    @ValueSource(strings = {"application/java-archive","application/octet-stream","application/ogg","application/pdf",
-            "application/x-shockwave-flash","application/json","application/xml","application/zip"})
+    @ValueSource(strings = {"application/java-archive", "application/octet-stream", "application/ogg", "application/pdf",
+            "application/x-shockwave-flash", "application/json", "application/xml", "application/zip"})
     void shouldReturnResponseContentTypeForValidApplicationType(String applicationResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
@@ -28,8 +28,8 @@ class ResponseContentTypesRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"application/EDI-X12","application/EDIFACT","application/javascript","application/xhtm,xml",
-            "application/l,json","application/excel","application/x-www-form-urlencoded"})
+    @ValueSource(strings = {"application/EDI-X12", "application/EDIFACT", "application/javascript", "application/xhtm,xml",
+            "application/l,json", "application/excel", "application/x-www-form-urlencoded"})
     void shouldReturnNullForInvalidApplicationType(String applicationResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
@@ -38,7 +38,7 @@ class ResponseContentTypesRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"audio/mpeg","audio/ogg","audio/opus","audio/wav","audio/webm"})
+    @ValueSource(strings = {"audio/mpeg", "audio/ogg", "audio/opus", "audio/wav", "audio/webm"})
     void shouldReturnResponseContentTypeForValidAudioType(String audioResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(audioResponseType);
@@ -48,7 +48,7 @@ class ResponseContentTypesRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"audio/x-ms-wma","audio/vnd.rn-realaudio","audio/x-wav"})
+    @ValueSource(strings = {"audio/x-ms-wma", "audio/vnd.rn-realaudio", "audio/x-wav"})
     void shouldReturnNullForInvalidAudioType(String audioResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(audioResponseType);
@@ -57,7 +57,7 @@ class ResponseContentTypesRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"image/gif","image/jpeg","image/png","image/svg+xml"})
+    @ValueSource(strings = {"image/gif", "image/jpeg", "image/png", "image/svg+xml"})
     void shouldReturnResponseContentTypeForValidImageType(String imageResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(imageResponseType);
@@ -67,7 +67,7 @@ class ResponseContentTypesRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"image/vnd.microsoft.icon ","image/x-icon","image/vnd.djvu"})
+    @ValueSource(strings = {"image/vnd.microsoft.icon ", "image/x-icon", "image/vnd.djvu"})
     void shouldReturnNullForInvalidImageType(String imageResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(imageResponseType);
@@ -76,7 +76,7 @@ class ResponseContentTypesRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"video/mpeg","video/mp4","video/x-msvideo","video/webm"})
+    @ValueSource(strings = {"video/mpeg", "video/mp4", "video/x-msvideo", "video/webm"})
     void shouldReturnResponseContentTypeForValidVideoType(String videoResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(videoResponseType);
@@ -86,7 +86,7 @@ class ResponseContentTypesRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"video/quicktime","video/x-ms-wmv","video/x-flv"})
+    @ValueSource(strings = {"video/quicktime", "video/x-ms-wmv", "video/x-flv"})
     void shouldReturnNullForInvalidVideoType(String videoResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(videoResponseType);
@@ -95,7 +95,7 @@ class ResponseContentTypesRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"text/css","text/csv","text/html","text/javascript","text/plain"})
+    @ValueSource(strings = {"text/css", "text/csv", "text/html", "text/javascript", "text/plain"})
     void shouldReturnResponseContentTypeForValidTextType(String textResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(textResponseType);
@@ -114,7 +114,7 @@ class ResponseContentTypesRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"multipart/mixed","multipart/alternative","multipart/related","multipart/form-data"})
+    @ValueSource(strings = {"multipart/mixed", "multipart/alternative", "multipart/related", "multipart/form-data"})
     void shouldReturnNullForInvalidMultipartType(String multiPartResponseType) {
         // Act
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(multiPartResponseType);

@@ -27,6 +27,10 @@
         <module name="MethodLength">
             <property name="max" value="100"/>
         </module>
+        <module name="ExecutableStatementCount">
+            <property name="max" value="40"/>
+            <property name="tokens" value="CTOR_DEF,METHOD_DEF"/>
+        </module>
         <module name="MethodName">
             <property name="format" value="^[a-z](_?[a-zA-Z0-9]+)*$"/>
         </module>

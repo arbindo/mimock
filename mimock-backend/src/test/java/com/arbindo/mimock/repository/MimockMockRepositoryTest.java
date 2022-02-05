@@ -26,9 +26,6 @@ class MimockMockRepositoryTest {
     HttpMethodDBHelper httpMethodsDBHelper;
 
     @Autowired
-    MocksRepository repository;
-
-    @Autowired
     TextualResponseDBHelper textualResponseDBHelper;
 
     @Autowired
@@ -36,6 +33,9 @@ class MimockMockRepositoryTest {
 
     @Autowired
     ResponseContentTypeDBHelper responseContentTypeDBHelper;
+
+    @Autowired
+    MocksRepository repository;
 
     @Transactional
     @Test

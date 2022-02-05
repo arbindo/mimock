@@ -17,8 +17,12 @@ import java.util.Optional;
 @SpringBootTest
 public class GenericMockRequestController {
 
-    @Autowired
     GenericMockRequestService genericMockRequestService;
+
+    @Autowired
+    public GenericMockRequestController(GenericMockRequestService genericMockRequestService) {
+        this.genericMockRequestService = genericMockRequestService;
+    }
 
     public Optional<DomainModelForMock> serveRequest(String basePath, HttpServletRequest request) {
         StringBuilder queryParamAndValue = genericMockRequestService.extractQueryParams(request);

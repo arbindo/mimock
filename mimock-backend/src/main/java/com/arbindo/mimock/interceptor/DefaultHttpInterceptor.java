@@ -22,11 +22,14 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Component
 @Log4j2
 public class DefaultHttpInterceptor implements HandlerInterceptor {
-    @Autowired
-    private GenericMockRequestController genericMockRequestController;
+    private final GenericMockRequestController genericMockRequestController;
+    private final WriterCollection writerCollection;
 
     @Autowired
-    private WriterCollection writerCollection;
+    DefaultHttpInterceptor(GenericMockRequestController genericMockRequestController, WriterCollection writerCollection) {
+        this.genericMockRequestController = genericMockRequestController;
+        this.writerCollection = writerCollection;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

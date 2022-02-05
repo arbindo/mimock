@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
-public class ExportImportServiceTest {
+class ExportImportServiceTest {
 
     ExportImportService mockExportImportService;
 

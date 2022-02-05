@@ -2,6 +2,10 @@ package com.arbindo.mimock.constants;
 
 public class UrlConfig {
 
+    private UrlConfig() throws IllegalAccessException {
+        throw new IllegalAccessException(ExceptionMessages.ILLEGAL_INSTANTIATION_EXCEPTION_MSG);
+    }
+
     public static final String API_PATH = "/api/mimock";
     public static final String VERSION = "/v1";
 

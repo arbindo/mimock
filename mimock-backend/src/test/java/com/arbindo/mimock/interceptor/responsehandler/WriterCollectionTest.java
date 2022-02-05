@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = WriterCollection.class)
 class WriterCollectionTest {
+
     @Autowired
     WriterCollection writerCollection;
 

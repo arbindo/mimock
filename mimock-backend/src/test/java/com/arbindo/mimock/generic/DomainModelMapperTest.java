@@ -4,7 +4,7 @@ import com.arbindo.mimock.entities.BinaryResponse;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.entities.ResponseContentType;
 import com.arbindo.mimock.entities.TextualResponse;
-import com.arbindo.mimock.generic.factory.TextualResponseImpl;
+import com.arbindo.mimock.generic.factory.ResponseFactoryExecutor;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
 import com.arbindo.mimock.generic.model.ResponseType;
 import org.junit.jupiter.api.Test;
@@ -13,9 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@SpringBootTest(classes = {DomainModelMapper.class, ResponseFactoryExecutor.class})
 class DomainModelMapperTest {
 
     @Autowired

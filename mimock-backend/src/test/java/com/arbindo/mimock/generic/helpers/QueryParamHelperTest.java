@@ -1,19 +1,13 @@
 package com.arbindo.mimock.generic.helpers;
 
-import com.arbindo.mimock.constants.UrlConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import java.net.URI;
-import java.net.http.HttpRequest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-@SpringBootTest
+@SpringBootTest(classes = QueryParamHelper.class)
 class QueryParamHelperTest {
 
     @Autowired

@@ -7,34 +7,34 @@ import java.util.UUID;
 
 public class RandomDataGenerator {
 
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
-    public static UUID generateRandomUUID(){
+    public static UUID generateRandomUUID() {
         return UUID.randomUUID();
     }
 
-    public static String generateRandomAlphanumericString(){
+    public static String generateRandomAlphanumericString() {
         return generateRandomAlphanumericString(10);
     }
 
-    public static String generateRandomAlphanumericString(int length){
-       return RandomStringUtils.randomAlphanumeric(length);
+    public static String generateRandomAlphanumericString(int length) {
+        return RandomStringUtils.randomAlphanumeric(length);
     }
 
-    public static String generateRandomAlphabeticString(){
+    public static String generateRandomAlphabeticString() {
         return generateRandomAlphabeticString(10);
     }
 
-    public static String generateRandomAlphabeticString(int length){
+    public static String generateRandomAlphabeticString(int length) {
         return RandomStringUtils.randomAlphabetic(length);
     }
 
-    public static int generateRandomNumber(){
-        return random.nextInt(10000);
+    public static int generateRandomNumber() {
+        return RANDOM.nextInt(10000);
     }
 
-    public static int generateRandomNumber(int bound){
-        return random.nextInt(bound);
+    public static int generateRandomNumber(int bound) {
+        return RANDOM.nextInt(bound);
     }
 
 }

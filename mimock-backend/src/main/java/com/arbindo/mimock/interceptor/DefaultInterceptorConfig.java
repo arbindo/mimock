@@ -8,8 +8,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Component
 public class DefaultInterceptorConfig implements WebMvcConfigurer {
+    private final DefaultHttpInterceptor defaultHttpInterceptor;
+
     @Autowired
-    private DefaultHttpInterceptor defaultHttpInterceptor;
+    public DefaultInterceptorConfig(DefaultHttpInterceptor defaultHttpInterceptor) {
+        this.defaultHttpInterceptor = defaultHttpInterceptor;
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

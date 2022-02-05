@@ -39,10 +39,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(value = MockManagementController.class, excludeAutoConfiguration = {SecurityAutoConfiguration.class})
-public class MockManagementControllerTest {
-
-    @Autowired
-    MockManagementController mockManagementController;
+class MockManagementControllerTest {
 
     @Autowired
     MockMvc mockMvc;

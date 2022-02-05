@@ -17,7 +17,7 @@ public class QueryParamHelper {
         StringBuilder queryParamAndValue = new StringBuilder();
         List<String> queryParamsList = getQueryParamsList(request);
 
-        if (isQueryParamEmpty(queryParamsList)) {
+        if (queryParamsList.isEmpty()) {
             log.log(Level.INFO, "No query params found. Returning empty string");
             return new StringBuilder();
         }
@@ -39,10 +39,6 @@ public class QueryParamHelper {
             counter++;
         }
         return queryParamAndValue;
-    }
-
-    private boolean isQueryParamEmpty(List<String> queryParamsList) {
-        return queryParamsList.size() == 0;
     }
 
     private List<String> getQueryParamsList(HttpServletRequest request) {

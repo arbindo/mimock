@@ -1,6 +1,12 @@
 package com.arbindo.mimock.manage.mimocks;
 
+import com.arbindo.mimock.constants.ExceptionMessages;
+
 public class Messages {
+
+    private Messages() throws IllegalAccessException {
+        throw new IllegalAccessException(ExceptionMessages.ILLEGAL_INSTANTIATION_EXCEPTION_MSG);
+    }
 
     public static String createResourceSuccess(String id) {
         return String.format("Resource created successfully. The resource can be found at %s", id);

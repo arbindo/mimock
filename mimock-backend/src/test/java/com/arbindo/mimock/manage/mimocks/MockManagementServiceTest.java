@@ -29,7 +29,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
-public class MockManagementServiceTest {
+class MockManagementServiceTest {
 
     @Autowired
     HttpMethodDBHelper httpMethodsDBHelper;
@@ -55,7 +55,7 @@ public class MockManagementServiceTest {
     MockManagementService mockManagementService;
 
     @BeforeEach
-    void setupMock(){
+    void setupMock() {
         this.mockManagementService = MockManagementServiceImpl.builder()
                 .mocksRepository(mockRepository)
                 .httpMethodsRepository(mockHttpMethodsRepository)
@@ -66,7 +66,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnListOfMocks_WhenDBHasMocks(){
+    void shouldReturnListOfMocks_WhenDBHasMocks() {
         // Arrange
         List<Mock> mockList = generateListOfMocks();
         lenient().when(mockRepository.findAll()).thenReturn(mockList);
@@ -80,7 +80,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnEmptyListOfMocks_WhenDBHasNoMocks(){
+    void shouldReturnEmptyListOfMocks_WhenDBHasNoMocks() {
         // Arrange
         List<Mock> mockList = new ArrayList<>();
         lenient().when(mockRepository.findAll()).thenReturn(mockList);
@@ -94,7 +94,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnNullForListOfMocks_WhenDBNotSynced(){
+    void shouldReturnNullForListOfMocks_WhenDBNotSynced() {
         // Arrange
         lenient().when(mockRepository.findAll()).thenReturn(null);
 
@@ -108,7 +108,7 @@ public class MockManagementServiceTest {
     @ParameterizedTest
     @EmptySource
     @NullSource
-    void shouldReturnNull_WhenMockIdIsNullOrEmpty(String mockId){
+    void shouldReturnNull_WhenMockIdIsNullOrEmpty(String mockId) {
         // Arrange
         Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
@@ -122,7 +122,7 @@ public class MockManagementServiceTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"Test", "UUID", "RandomString"})
-    void shouldReturnNull_WhenMockIdIsInvalidFormat(String mockId){
+    void shouldReturnNull_WhenMockIdIsInvalidFormat(String mockId) {
         // Arrange
         Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
@@ -135,7 +135,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnMock_WhenMockIdIsValid(){
+    void shouldReturnMock_WhenMockIdIsValid() {
         // Arrange
         Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
@@ -149,7 +149,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnNull_WhenMockDoesNotExists(){
+    void shouldReturnNull_WhenMockDoesNotExists() {
         // Arrange
         Optional<Mock> mock = generateOptionalMock();
         Optional<Mock> emptyMock = Optional.empty();
@@ -166,7 +166,7 @@ public class MockManagementServiceTest {
     @ParameterizedTest
     @EmptySource
     @NullSource
-    void shouldReturnFalse_ForDeleteMockById_WhenMockIdIsNullOrEmpty(String mockId){
+    void shouldReturnFalse_ForDeleteMockById_WhenMockIdIsNullOrEmpty(String mockId) {
         // Arrange
         Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
@@ -182,7 +182,7 @@ public class MockManagementServiceTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"Test", "UUID", "RandomString"})
-    void shouldReturnFalse_ForDeleteMockById_WhenMockIdIsInvalidFormat(String mockId){
+    void shouldReturnFalse_ForDeleteMockById_WhenMockIdIsInvalidFormat(String mockId) {
         // Arrange
         Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
@@ -197,7 +197,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnTrue_ForDeleteMockById_WhenMockIdIsValid(){
+    void shouldReturnTrue_ForDeleteMockById_WhenMockIdIsValid() {
         // Arrange
         Optional<Mock> mock = generateOptionalMock();
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
@@ -212,7 +212,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnFalse_ForDeleteMockById_WhenMockIdDoesNotExist(){
+    void shouldReturnFalse_ForDeleteMockById_WhenMockIdDoesNotExist() {
         // Arrange
         Optional<Mock> mock = generateOptionalMock();
         Optional<Mock> emptyMock = Optional.empty();
@@ -228,7 +228,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldDeleteAllMocks_Success(){
+    void shouldDeleteAllMocks_Success() {
         // Act
         boolean result = mockManagementService.deleteAllMocks();
 
@@ -238,7 +238,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldDeleteAllMocks_ThrowsException(){
+    void shouldDeleteAllMocks_ThrowsException() {
         // Arrange
         doThrow(new RuntimeException()).when(mockRepository).deleteAll();
 
@@ -251,7 +251,7 @@ public class MockManagementServiceTest {
 
     @ParameterizedTest
     @NullSource
-    void shouldReturnNull_ForCreateMock_WhenMockRequestIsNull(MockRequest request){
+    void shouldReturnNull_ForCreateMock_WhenMockRequestIsNull(MockRequest request) {
         // Act
         Mock result = mockManagementService.createMock(request);
 
@@ -261,7 +261,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnMock_ForCreateMock_WhenMockRequestIsValid(){
+    void shouldReturnMock_ForCreateMock_WhenMockRequestIsValid() {
         // Arrange
         MockRequest request = createMockRequest();
         Mock expectedMock = generateMock(request);
@@ -284,7 +284,7 @@ public class MockManagementServiceTest {
 
     @ParameterizedTest
     @NullSource
-    void shouldReturnNull_ForUpdateMock_WhenMockRequestIsNull(MockRequest request){
+    void shouldReturnNull_ForUpdateMock_WhenMockRequestIsNull(MockRequest request) {
         // Act
         Mock result = mockManagementService.updateMock("mockId", request);
 
@@ -296,7 +296,7 @@ public class MockManagementServiceTest {
     @ParameterizedTest
     @NullSource
     @EmptySource
-    void shouldReturnNull_ForUpdateMock_WhenMockIdIsNullOrEmpty(String mockId){
+    void shouldReturnNull_ForUpdateMock_WhenMockIdIsNullOrEmpty(String mockId) {
         // Act
         Mock result = mockManagementService.updateMock(mockId, null);
 
@@ -306,7 +306,7 @@ public class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnMock_ForUpdateMock_WhenMockRequestIsValid(){
+    void shouldReturnMock_ForUpdateMock_WhenMockRequestIsValid() {
         // Arrange
         MockRequest request = createMockRequest();
         Optional<Mock> optionalMock = generateOptionalMock(request);
@@ -339,7 +339,5 @@ public class MockManagementServiceTest {
         verify(mockBinaryResponseRepository, times(1)).save(any(BinaryResponse.class));
         verify(mockRepository, times(1)).save(any(Mock.class));
     }
-
-
 
 }
