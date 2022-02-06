@@ -60,12 +60,31 @@ public class MockManagementServiceImpl implements MockManagementService {
     }
 
     @Override
-    public boolean deleteMockById(String mockId) {
+    public boolean hardDeleteMockById(String mockId) {
         if (ValidationUtil.isNotNullOrEmpty(mockId)) {
             try {
                 Mock mock = getMockById(mockId);
                 if (mock != null) {
                     mocksRepository.delete(mock);
+                    return true;
+                }
+            } catch (Exception e) {
+                log.log(Level.DEBUG, e.getMessage());
+            }
+        }
+        log.log(Level.DEBUG, "Invalid Mock Id!");
+        return false;
+    }
+
+    @Override
+    public boolean softDeleteMockById(String mockId) {
+        if (ValidationUtil.isNotNullOrEmpty(mockId)) {
+            try {
+                Mock mock = getMockById(mockId);
+                if (mock != null) {
+                    // Perform only soft delete
+                    mock.setEntityStatus(EntityStatus.DELETED);
+                    mock.setDeletedAt(ZonedDateTime.now());
                     return true;
                 }
             } catch (Exception e) {

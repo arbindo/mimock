@@ -68,10 +68,26 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
-    @Operation(summary = "Delete Mock", description = "Deletes mock based on the given mockId.", tags = { "Mock Management" })
+    @Operation(summary = "Delete Mock", description = "Performs soft delete on mock based on the given mockId.", tags = { "Mock Management" })
     @DeleteMapping("{mockId}")
-    public ResponseEntity<GenericResponseWrapper<Mock>> deleteMockById(@PathVariable String mockId) {
-        boolean isMockDeleted = mockManagementService.deleteMockById(mockId);
+    public ResponseEntity<GenericResponseWrapper<Mock>> softDeleteMockById(@PathVariable String mockId) {
+        boolean isMockDeleted = mockManagementService.softDeleteMockById(mockId);
+        if (isMockDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(
+                HttpStatus.BAD_REQUEST,
+                Messages.DELETE_RESOURCE_FAILED,
+                null
+        );
+        return ResponseEntity.badRequest().body(genericResponseWrapper);
+    }
+
+    @Operation(hidden = true, summary = "Force Delete Mock", description = "Performs hard delete on mock based on the given mockId.",
+            tags = { "Mock Management" })
+    @DeleteMapping("{mockId}" + UrlConfig.FORCE_DELETE_ACTION)
+    public ResponseEntity<GenericResponseWrapper<Mock>> hardDeleteMockById(@PathVariable String mockId) {
+        boolean isMockDeleted = mockManagementService.hardDeleteMockById(mockId);
         if (isMockDeleted) {
             return ResponseEntity.noContent().build();
         }

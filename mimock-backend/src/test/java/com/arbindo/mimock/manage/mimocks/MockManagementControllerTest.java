@@ -166,7 +166,7 @@ class MockManagementControllerTest {
         String mockId = UUID.randomUUID().toString();
         String route = UrlConfig.MOCKS_PATH + "/" + mockId;
 
-        lenient().when(mockManagementService.deleteMockById(mockId)).thenReturn(false);
+        lenient().when(mockManagementService.softDeleteMockById(mockId)).thenReturn(false);
 
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST, Messages.DELETE_RESOURCE_FAILED, null);
         String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
@@ -189,7 +189,47 @@ class MockManagementControllerTest {
         String mockId = mock.getId().toString();
         String route = UrlConfig.MOCKS_PATH + "/" + mockId;
 
-        lenient().when(mockManagementService.deleteMockById(mockId)).thenReturn(true);
+        lenient().when(mockManagementService.softDeleteMockById(mockId)).thenReturn(true);
+
+        // Act
+        MvcResult result = mockMvc.perform(delete(route))
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+        // Assert
+        assertEquals("", result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpBadRequest_ForceDeleteMockByIdApi_ReturnsNullData() throws Exception {
+        // Arrange
+        String mockId = UUID.randomUUID().toString();
+        String route = UrlConfig.MOCKS_PATH + "/" + mockId + UrlConfig.FORCE_DELETE_ACTION;
+
+        lenient().when(mockManagementService.hardDeleteMockById(mockId)).thenReturn(false);
+
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST, Messages.DELETE_RESOURCE_FAILED, null);
+        String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
+        String expectedContentType = "application/json";
+
+        // Act
+        MvcResult result = mockMvc.perform(delete(route))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        // Assert
+        assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpNoContent_ForceDeleteMockByIdApi_ReturnsNoContent() throws Exception {
+        // Arrange
+        Mock mock = generateMock();
+        String mockId = mock.getId().toString();
+        String route = UrlConfig.MOCKS_PATH + "/" + mockId + UrlConfig.FORCE_DELETE_ACTION;
+
+        lenient().when(mockManagementService.hardDeleteMockById(mockId)).thenReturn(true);
 
         // Act
         MvcResult result = mockMvc.perform(delete(route))

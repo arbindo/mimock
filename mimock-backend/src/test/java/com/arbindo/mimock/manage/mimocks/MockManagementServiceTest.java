@@ -173,7 +173,7 @@ class MockManagementServiceTest {
 
         // Act
         assertTrue(mock.isPresent());
-        boolean result = mockManagementService.deleteMockById(mockId);
+        boolean result = mockManagementService.softDeleteMockById(mockId);
 
         // Assert
         assertFalse(result);
@@ -189,7 +189,7 @@ class MockManagementServiceTest {
 
         // Act
         assertTrue(mock.isPresent());
-        boolean result = mockManagementService.deleteMockById(mockId);
+        boolean result = mockManagementService.softDeleteMockById(mockId);
 
         // Assert
         assertFalse(result);
@@ -204,11 +204,11 @@ class MockManagementServiceTest {
 
         // Act
         assertTrue(mock.isPresent());
-        boolean result = mockManagementService.deleteMockById(mock.get().getId().toString());
+        boolean result = mockManagementService.softDeleteMockById(mock.get().getId().toString());
 
         // Assert
         assertTrue(result);
-        verify(mockRepository, times(1)).delete(mock.get());
+        verify(mockRepository, times(0)).delete(mock.get());
     }
 
     @Test
@@ -220,7 +220,71 @@ class MockManagementServiceTest {
 
         // Act
         assertTrue(mock.isPresent());
-        boolean result = mockManagementService.deleteMockById(mock.get().getId().toString());
+        boolean result = mockManagementService.softDeleteMockById(mock.get().getId().toString());
+
+        // Assert
+        assertFalse(result);
+        verify(mockRepository, times(0)).delete(mock.get());
+    }
+
+    @ParameterizedTest
+    @EmptySource
+    @NullSource
+    void shouldReturnFalse_ForForceDeleteMockById_WhenMockIdIsNullOrEmpty(String mockId) {
+        // Arrange
+        Optional<Mock> mock = generateOptionalMock();
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
+
+        // Act
+        assertTrue(mock.isPresent());
+        boolean result = mockManagementService.hardDeleteMockById(mockId);
+
+        // Assert
+        assertFalse(result);
+        verify(mockRepository, times(0)).delete(mock.get());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Test", "UUID", "RandomString"})
+    void shouldReturnFalse_ForForceDeleteMockById_WhenMockIdIsInvalidFormat(String mockId) {
+        // Arrange
+        Optional<Mock> mock = generateOptionalMock();
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
+
+        // Act
+        assertTrue(mock.isPresent());
+        boolean result = mockManagementService.hardDeleteMockById(mockId);
+
+        // Assert
+        assertFalse(result);
+        verify(mockRepository, times(0)).delete(mock.get());
+    }
+
+    @Test
+    void shouldReturnTrue_ForForceDeleteMockById_WhenMockIdIsValid() {
+        // Arrange
+        Optional<Mock> mock = generateOptionalMock();
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
+
+        // Act
+        assertTrue(mock.isPresent());
+        boolean result = mockManagementService.hardDeleteMockById(mock.get().getId().toString());
+
+        // Assert
+        assertTrue(result);
+        verify(mockRepository, times(1)).delete(mock.get());
+    }
+
+    @Test
+    void shouldReturnFalse_ForForceDeleteMockById_WhenMockIdDoesNotExist() {
+        // Arrange
+        Optional<Mock> mock = generateOptionalMock();
+        Optional<Mock> emptyMock = Optional.empty();
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(emptyMock);
+
+        // Act
+        assertTrue(mock.isPresent());
+        boolean result = mockManagementService.hardDeleteMockById(mock.get().getId().toString());
 
         // Assert
         assertFalse(result);
