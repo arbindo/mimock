@@ -75,8 +75,8 @@ public class Mock {
     @Schema(description = "Delete Timestamp")
     private ZonedDateTime deletedAt;
 
-    @Column(name = "entity_status", nullable = false, columnDefinition = "NOT NULL DEFAULT 'NONE'")
-    @Enumerated(EnumType.STRING)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "entity_status_id", nullable = false)
     @Schema(description = "Indicates the entity status")
     private EntityStatus entityStatus;
 }

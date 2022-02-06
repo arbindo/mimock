@@ -2,6 +2,7 @@ package com.arbindo.mimock.repository;
 
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.db.*;
+import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,6 +36,9 @@ class MimockMockRepositoryTest {
     ResponseContentTypeDBHelper responseContentTypeDBHelper;
 
     @Autowired
+    EntityStatusDBHelper entityStatusDBHelper;
+
+    @Autowired
     MocksRepository repository;
 
     @Transactional
@@ -56,6 +60,8 @@ class MimockMockRepositoryTest {
 
         ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("application/json");
 
+        EntityStatus entityStatus = entityStatusDBHelper.findByStatus(Status.NONE.name());
+
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
         String queryParams = "version=1.0.0&auto=false";
@@ -70,7 +76,7 @@ class MimockMockRepositoryTest {
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
-                .entityStatus(EntityStatus.NONE)
+                .entityStatus(entityStatus)
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -81,7 +87,7 @@ class MimockMockRepositoryTest {
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
-                .entityStatus(EntityStatus.NONE)
+                .entityStatus(entityStatus)
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -122,6 +128,8 @@ class MimockMockRepositoryTest {
 
         ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("text/plain");
 
+        EntityStatus entityStatus = entityStatusDBHelper.findByStatus(Status.NONE.name());
+
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
         String queryParams = "version=1.0.0&auto=false";
@@ -136,7 +144,7 @@ class MimockMockRepositoryTest {
                 .binaryResponse(binaryResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
-                .entityStatus(EntityStatus.NONE)
+                .entityStatus(entityStatus)
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -147,7 +155,7 @@ class MimockMockRepositoryTest {
                 .binaryResponse(binaryResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
-                .entityStatus(EntityStatus.NONE)
+                .entityStatus(entityStatus)
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -182,6 +190,8 @@ class MimockMockRepositoryTest {
 
         ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("application/json");
 
+        EntityStatus entityStatus = entityStatusDBHelper.findByStatus(Status.NONE.name());
+
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
         String queryParams = "version=1.0.0&auto=false";
@@ -195,7 +205,7 @@ class MimockMockRepositoryTest {
                 .queryParams(expectedQueryParams)
                 .responseContentType(responseContentType)
                 .statusCode(200)
-                .entityStatus(EntityStatus.NONE)
+                .entityStatus(entityStatus)
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -205,7 +215,7 @@ class MimockMockRepositoryTest {
                 .queryParams(queryParams)
                 .responseContentType(responseContentType)
                 .statusCode(400)
-                .entityStatus(EntityStatus.NONE)
+                .entityStatus(entityStatus)
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);

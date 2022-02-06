@@ -2,6 +2,7 @@ package com.arbindo.mimock.manage.mimocks;
 
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import com.arbindo.mimock.repository.*;
 import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.AllArgsConstructor;
@@ -39,6 +40,9 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Autowired
     private BinaryResponseRepository binaryResponseRepository;
+
+    @Autowired
+    private EntityStatusRepository entityStatusRepository;
 
     @Override
     public List<Mock> getMocks() {
@@ -82,9 +86,11 @@ public class MockManagementServiceImpl implements MockManagementService {
             try {
                 Mock mock = getMockById(mockId);
                 if (mock != null) {
-                    // Perform only soft delete
-                    mock.setEntityStatus(EntityStatus.DELETED);
+                    // Perform only soft delete i.e. Mark EntityStatus as DELETED
+                    EntityStatus entityStatus = getDeletedMockEntityStatus();
+                    mock.setEntityStatus(entityStatus);
                     mock.setDeletedAt(ZonedDateTime.now());
+                    mocksRepository.save(mock);
                     return true;
                 }
             } catch (Exception e) {
@@ -128,7 +134,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                     .queryParams(request.getQueryParams())
                     .description(request.getDescription())
                     .createdAt(ZonedDateTime.now())
-                    .entityStatus(EntityStatus.NONE)
+                    .entityStatus(getDefaultMockEntityStatus())
                     .build();
 
             if (request.getExpectedTextResponse() != null) {
@@ -184,7 +190,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                         .description(request.getDescription())
                         .createdAt(mock.getCreatedAt())
                         .updatedAt(ZonedDateTime.now())
-                        .entityStatus(EntityStatus.NONE)
+                        .entityStatus(getDefaultMockEntityStatus())
                         .build();
 
                 if (request.getExpectedTextResponse() != null) {
@@ -244,5 +250,13 @@ public class MockManagementServiceImpl implements MockManagementService {
         }
         throw new Exception(String.format("Unable to extract Response Content Type!! Invalid responseContentType: %s",
                 responseContentTypeString));
+    }
+
+    private EntityStatus getDefaultMockEntityStatus() {
+       return entityStatusRepository.findByStatus(Status.NONE.name());
+    }
+
+    private EntityStatus getDeletedMockEntityStatus() {
+        return entityStatusRepository.findByStatus(Status.DELETED.name());
     }
 }

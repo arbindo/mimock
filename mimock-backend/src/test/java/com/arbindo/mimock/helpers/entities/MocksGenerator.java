@@ -1,6 +1,7 @@
 package com.arbindo.mimock.helpers.entities;
 
 import com.arbindo.mimock.entities.*;
+import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,7 +49,7 @@ public class MocksGenerator {
                 .statusCode(generateRandomNumber())
                 .textualResponse(generateTextualResponse())
                 .binaryResponse(generateBinaryResponse())
-                .entityStatus(EntityStatus.NONE)
+                .entityStatus(generateDefaultEntityStatus())
                 .build();
     }
 
@@ -64,7 +65,14 @@ public class MocksGenerator {
                 .textualResponse(generateTextualResponse(request.getExpectedTextResponse()))
                 .binaryResponse(generateBinaryResponse(request.getBinaryFile()))
                 .createdAt(ZonedDateTime.now())
-                .entityStatus(EntityStatus.NONE)
+                .entityStatus(generateDefaultEntityStatus())
+                .build();
+    }
+
+    public static EntityStatus generateDefaultEntityStatus(){
+        return EntityStatus.builder()
+                .status(Status.NONE.name())
+                .createdAt(ZonedDateTime.now())
                 .build();
     }
 

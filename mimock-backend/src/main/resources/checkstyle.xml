@@ -6,7 +6,7 @@
 
 <module name="Checker">
     <module name="FileLength">
-        <property name="max" value="250"/>
+        <property name="max" value="300"/>
         <property name="fileExtensions" value="java"/>
     </module>
     <module name="LineLength">
@@ -17,7 +17,7 @@
     <module name="FileTabCharacter"/>
     <module name="FileLength">
         <!-- should be reduced to 200 -->
-        <property name="max" value="250"/>
+        <property name="max" value="300"/>
     </module>
     <module name="TreeWalker">
         <module name="StaticVariableName"/>

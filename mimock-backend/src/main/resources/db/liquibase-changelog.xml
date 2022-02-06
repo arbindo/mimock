@@ -9,5 +9,7 @@
     <include file="changelogs/0004_create_table_binary_responses.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0005_create_table_http_methods.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0006_insert_http_methods.xml" relativeToChangelogFile="true"/>
-    <include file="changelogs/0007_create_table_mocks.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0007_create_table_entity_status.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0008_insert_entity_status.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0009_create_table_mocks.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

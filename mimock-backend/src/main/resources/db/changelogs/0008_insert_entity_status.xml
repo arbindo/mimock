@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="aravind" id="0008_insert_entity_status">
+        <sql>
+            INSERT INTO entity_status(status, created_at)
+            VALUES ('NONE', current_timestamp),
+                   ('ARCHIVED', current_timestamp),
+                   ('DELETED', current_timestamp)
+            ;
+        </sql>
+        <rollback>
+            <sql>
+                TRUNCATE TABLE entity_status;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

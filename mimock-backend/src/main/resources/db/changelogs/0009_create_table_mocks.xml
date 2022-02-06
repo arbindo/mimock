@@ -3,7 +3,7 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="neel" id="0007_create_table_mocks">
+    <changeSet author="neel" id="0009_create_table_mocks">
         <sql>
             CREATE TABLE mocks
             (
@@ -19,12 +19,13 @@
             created_at               TIMESTAMP NOT NULL,
             updated_at               TIMESTAMP,
             deleted_at               TIMESTAMP,
-            entity_status            VARCHAR(16) NOT NULL DEFAULT 'NONE',
+            entity_status_id         INT NOT NULL,
             PRIMARY KEY (mock_id),
             CONSTRAINT http_method_fk FOREIGN KEY (method_id) REFERENCES http_methods (id),
             CONSTRAINT response_content_type_fk FOREIGN KEY (response_content_type_id) REFERENCES response_content_types (id),
             CONSTRAINT textual_response_fk FOREIGN KEY (textual_response_id) REFERENCES textual_responses (id),
-            CONSTRAINT binary_response_fk FOREIGN KEY (binary_response_id) REFERENCES binary_responses (id)
+            CONSTRAINT binary_response_fk FOREIGN KEY (binary_response_id) REFERENCES binary_responses (id),
+            CONSTRAINT entity_status_fk FOREIGN KEY (entity_status_id) REFERENCES entity_status (id)
             );
         </sql>
         <rollback>
