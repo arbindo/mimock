@@ -1,5 +1,6 @@
 package com.arbindo.mimock.staticrecords;
 
+import com.arbindo.mimock.entities.EntityStatus;
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.ResponseContentType;
 import com.arbindo.mimock.constants.UrlConfig;
@@ -35,5 +36,12 @@ public class GetStaticRecordsController {
     @GetMapping(value = "/response-content-types")
     public ResponseEntity<List<ResponseContentType>> listAllSupportedResponseContentTypes() {
         return ResponseEntity.ok(getStaticRecordsService.listAllSupportedResponseContentTypes());
+    }
+
+    @Operation(summary = "List Entity Status", description = "List all supported Entity Status in Mimock Platform.",
+            tags = { "Static Records" })
+    @GetMapping(value = "/entity-status")
+    public ResponseEntity<List<EntityStatus>> listAllSupportedEntityStatus() {
+        return ResponseEntity.ok(getStaticRecordsService.listAllSupportedEntityStatus());
     }
 }

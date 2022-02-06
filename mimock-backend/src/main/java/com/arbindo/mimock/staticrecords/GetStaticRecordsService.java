@@ -1,5 +1,6 @@
 package com.arbindo.mimock.staticrecords;
 
+import com.arbindo.mimock.entities.EntityStatus;
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.ResponseContentType;
 
@@ -10,4 +11,6 @@ public interface GetStaticRecordsService {
     List<HttpMethod> listAllSupportedHttpMethods();
 
     List<ResponseContentType> listAllSupportedResponseContentTypes();
+
+    List<EntityStatus> listAllSupportedEntityStatus();
 }
