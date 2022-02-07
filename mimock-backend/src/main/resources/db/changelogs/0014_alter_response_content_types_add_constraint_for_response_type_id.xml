@@ -12,7 +12,7 @@
         <rollback>
             <sql>
                 ALTER TABLE response_content_types
-                ALTER COLUMN response_type_id SET NULL;
+                    ALTER COLUMN response_type_id DROP NOT NULL;
             </sql>
         </rollback>
     </changeSet>

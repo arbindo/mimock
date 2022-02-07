@@ -7,8 +7,11 @@
         <sql>
             CREATE TABLE response_types
             (
-                id   BIGSERIAL    NOT NULL,
-                name VARCHAR(255) NOT NULL,
+                id         BIGSERIAL   NOT NULL,
+                name       VARCHAR(20) NOT NULL,
+                created_at TIMESTAMP   NOT NULL,
+                updated_at TIMESTAMP,
+                deleted_at TIMESTAMP,
                 PRIMARY KEY (id),
                 CONSTRAINT unique_response_types_name UNIQUE (name)
             );

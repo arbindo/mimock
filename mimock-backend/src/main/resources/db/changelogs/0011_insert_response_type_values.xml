@@ -5,10 +5,10 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet author="neel" id="0011_insert_response_type_values">
         <sql>
-            INSERT INTO response_types (name)
-            VALUES ('TEXTUAL_RESPONSE'),
-                   ('BINARY_RESPONSE'),
-                   ('EMPTY_RESPONSE')
+            INSERT INTO response_types (name, created_at)
+            VALUES ('TEXTUAL_RESPONSE', current_timestamp),
+                   ('BINARY_RESPONSE', current_timestamp),
+                   ('EMPTY_RESPONSE', current_timestamp)
             ;
         </sql>
         <rollback>

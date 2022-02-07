@@ -1,7 +1,7 @@
 package com.arbindo.mimock.generic.factory;
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.generic.model.ResponseType;
+import com.arbindo.mimock.generic.model.TypeOfResponse;
 
 public class NullResponseImpl implements ResponseFactory {
 
@@ -14,7 +14,7 @@ public class NullResponseImpl implements ResponseFactory {
     }
 
     @Override
-    public ResponseType responseType() {
-        return ResponseType.NULL_RESPONSE;
+    public TypeOfResponse typeOfResponse() {
+        return TypeOfResponse.EMPTY_RESPONSE;
     }
 }

@@ -1,7 +1,7 @@
 package com.arbindo.mimock.interceptor.responsehandler;
 
 import com.arbindo.mimock.generic.model.DomainModelForMock;
-import com.arbindo.mimock.generic.model.ResponseType;
+import com.arbindo.mimock.generic.model.TypeOfResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +33,7 @@ class BinaryResponseWriterTest {
                 .responseContentType(contentType)
                 .statusCode(200)
                 .responseBody(expectedResponseBody)
-                .responseType(ResponseType.BINARY_RESPONSE)
+                .typeOfResponse(TypeOfResponse.BINARY_RESPONSE)
                 .build();
 
         binaryResponseWriter.write(mock, mockHttpServletResponse);
@@ -55,7 +55,7 @@ class BinaryResponseWriterTest {
                 .responseContentType(contentType)
                 .statusCode(200)
                 .responseBody(responseBody)
-                .responseType(ResponseType.BINARY_RESPONSE)
+                .typeOfResponse(TypeOfResponse.BINARY_RESPONSE)
                 .build();
 
         IOException ioException = assertThrows(IOException.class, () -> {

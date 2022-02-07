@@ -27,7 +27,7 @@ public class DomainModelMapper {
                 .responseContentType(mock.getResponseContentType().getResponseType())
                 .statusCode(mock.getStatusCode())
                 .responseBody(responseFactory.responseBody())
-                .responseType(responseFactory.responseType())
+                .typeOfResponse(responseFactory.typeOfResponse())
                 .build();
     }
 }

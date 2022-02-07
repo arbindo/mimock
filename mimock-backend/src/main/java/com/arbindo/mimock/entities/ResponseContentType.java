@@ -46,6 +46,10 @@ public class ResponseContentType {
     @Schema(description = "Delete Timestamp")
     private ZonedDateTime deletedAt;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "response_type_id", nullable = false)
+    private ResponseType type;
+
     @Override
     public String toString() {
         return responseType;

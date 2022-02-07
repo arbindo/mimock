@@ -95,12 +95,18 @@
         </sql>
         <rollback>
             <sql>
-                UPDATE response_content_types SET response_type_id = (SELECT id FROM response_types WHERE name =
-                'EMPTY_RESPONSE')
+                UPDATE response_content_types
+                SET response_type_id = (SELECT id
+                                        FROM response_types
+                                        WHERE name =
+                                              'EMPTY_RESPONSE')
                 WHERE response_type_id = (SELECT id FROM response_types WHERE name = 'TEXTUAL_RESPONSE');
 
-                UPDATE response_content_types SET response_type_id = (SELECT id FROM response_types WHERE name =
-                'EMPTY_RESPONSE')
+                UPDATE response_content_types
+                SET response_type_id = (SELECT id
+                                        FROM response_types
+                                        WHERE name =
+                                              'EMPTY_RESPONSE')
                 WHERE response_type_id = (SELECT id FROM response_types WHERE name = 'BINARY_RESPONSE');
             </sql>
         </rollback>

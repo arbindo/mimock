@@ -1,0 +1,324 @@
+{
+  "info": {
+    "_postman_id": "b1200a8b-85cb-40d9-aaba-6cfd520f4939",
+    "name": "Mimock",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Mocks",
+      "item": [
+        {
+          "name": "Create Mock",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "binaryFile",
+                  "contentType": "",
+                  "type": "file",
+                  "src": "sample.txt"
+                },
+                {
+                  "key": "route",
+                  "value": "/azure-api/deploy",
+                  "type": "text"
+                },
+                {
+                  "key": "httpMethod",
+                  "value": "POST",
+                  "type": "text"
+                },
+                {
+                  "key": "responseContentType",
+                  "value": "application/json",
+                  "type": "text"
+                },
+                {
+                  "key": "queryParams",
+                  "value": "serviceName=Student;",
+                  "type": "text"
+                },
+                {
+                  "key": "statusCode",
+                  "value": "201",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Azure Deployment API",
+                  "type": "text"
+                }
+              ],
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mimock/v1/mocks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mimock",
+                "v1",
+                "mocks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Mock By Id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "binaryFile",
+                  "contentType": "",
+                  "type": "file",
+                  "src": "sample.txt"
+                },
+                {
+                  "key": "route",
+                  "value": "/azure-api/deploy/v2",
+                  "type": "text"
+                },
+                {
+                  "key": "httpMethod",
+                  "value": "POST",
+                  "type": "text"
+                },
+                {
+                  "key": "responseContentType",
+                  "value": "application/json",
+                  "type": "text"
+                },
+                {
+                  "key": "queryParams",
+                  "value": "serviceName=Student;",
+                  "type": "text"
+                },
+                {
+                  "key": "statusCode",
+                  "value": "201",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Azure Deployment API",
+                  "type": "text"
+                }
+              ],
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mimock/v1/mocks/{{mockId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mimock",
+                "v1",
+                "mocks",
+                "{{mockId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Mocks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mimock/v1/mocks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mimock",
+                "v1",
+                "mocks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Mock By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mimock/v1/mocks/{{mockId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mimock",
+                "v1",
+                "mocks",
+                "{{mockId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Mock By Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mimock/v1/mocks/{{mockId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mimock",
+                "v1",
+                "mocks",
+                "{{mockId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete All Mocks",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mimock/v1/mocks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mimock",
+                "v1",
+                "mocks"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "List All Supported HTTP Methods",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mimock/v1/manage/http-methods",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mimock",
+                "v1",
+                "manage",
+                "http-methods"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List All Supported Response Content Types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mimock/v1/manage/response-content-types",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mimock",
+                "v1",
+                "manage",
+                "response-content-types"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "mockId",
+      "value": "f3bd4cb2-2af5-49b2-af39-9ec7addd571f",
+      "type": "string"
+    },
+    {
+      "value": "",
+      "type": "string",
+      "disabled": true
+    }
+  ]
+}

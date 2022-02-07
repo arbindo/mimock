@@ -1,6 +1,6 @@
 package com.arbindo.mimock.interceptor.responsehandler;
 
-import com.arbindo.mimock.generic.model.ResponseType;
+import com.arbindo.mimock.generic.model.TypeOfResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,21 +15,21 @@ class WriterCollectionTest {
 
     @Test
     void shouldReturnTextualResponseWriter_WhenResponseTypeIsTextual() {
-        ResponseWriter responseWriter = writerCollection.getWriterFor(ResponseType.TEXTUAL_RESPONSE);
+        ResponseWriter responseWriter = writerCollection.getWriterFor(TypeOfResponse.TEXTUAL_RESPONSE);
 
         assertEquals(TextualResponseWriter.class, responseWriter.getClass());
     }
 
     @Test
     void shouldReturnBinaryResponseWriter_WhenResponseTypeIsBinary() {
-        ResponseWriter responseWriter = writerCollection.getWriterFor(ResponseType.BINARY_RESPONSE);
+        ResponseWriter responseWriter = writerCollection.getWriterFor(TypeOfResponse.BINARY_RESPONSE);
 
         assertEquals(BinaryResponseWriter.class, responseWriter.getClass());
     }
 
     @Test
     void shouldReturnEmptyResponseWriter_WhenResponseTypeIsNull() {
-        ResponseWriter responseWriter = writerCollection.getWriterFor(ResponseType.NULL_RESPONSE);
+        ResponseWriter responseWriter = writerCollection.getWriterFor(TypeOfResponse.EMPTY_RESPONSE);
 
         assertEquals(EmptyResponseWriter.class, responseWriter.getClass());
     }

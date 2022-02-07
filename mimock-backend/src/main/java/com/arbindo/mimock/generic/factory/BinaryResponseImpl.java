@@ -1,7 +1,7 @@
 package com.arbindo.mimock.generic.factory;
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.generic.model.ResponseType;
+import com.arbindo.mimock.generic.model.TypeOfResponse;
 
 public class BinaryResponseImpl implements ResponseFactory {
     private final Mock mock;
@@ -16,7 +16,7 @@ public class BinaryResponseImpl implements ResponseFactory {
     }
 
     @Override
-    public ResponseType responseType() {
-        return ResponseType.BINARY_RESPONSE;
+    public TypeOfResponse typeOfResponse() {
+        return TypeOfResponse.BINARY_RESPONSE;
     }
 }

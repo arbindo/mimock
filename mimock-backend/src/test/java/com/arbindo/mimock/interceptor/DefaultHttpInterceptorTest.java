@@ -2,7 +2,7 @@ package com.arbindo.mimock.interceptor;
 
 import com.arbindo.mimock.generic.GenericMockRequestController;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
-import com.arbindo.mimock.generic.model.ResponseType;
+import com.arbindo.mimock.generic.model.TypeOfResponse;
 import com.arbindo.mimock.interceptor.responsehandler.TextualResponseWriter;
 import com.arbindo.mimock.interceptor.responsehandler.WriterCollection;
 import org.junit.jupiter.api.Test;
@@ -55,18 +55,18 @@ class DefaultHttpInterceptorTest {
                 .responseContentType(expectedContentType)
                 .statusCode(expectedStatus)
                 .responseBody(expectedResponseBody)
-                .responseType(ResponseType.TEXTUAL_RESPONSE)
+                .typeOfResponse(TypeOfResponse.TEXTUAL_RESPONSE)
                 .build();
 
         lenient().when(genericMockRequestController.serveRequest(expectedURI, mockHttpServletRequest)).thenReturn(Optional.of(expectedMock));
-        lenient().when(mockWriterCollection.getWriterFor(ResponseType.TEXTUAL_RESPONSE)).thenReturn(mockTextualResponseWriter);
+        lenient().when(mockWriterCollection.getWriterFor(TypeOfResponse.TEXTUAL_RESPONSE)).thenReturn(mockTextualResponseWriter);
 
         boolean interceptorStatus = defaultHttpInterceptor.preHandle(mockHttpServletRequest, mockHttpServletResponse, new Object());
 
         verify(genericMockRequestController, times(1)).serveRequest(expectedURI, mockHttpServletRequest);
         verify(mockHttpServletResponse, times(1)).setStatus(expectedStatus);
         verify(mockHttpServletResponse, times(1)).setHeader("content-type", expectedContentType);
-        verify(mockWriterCollection, times(1)).getWriterFor(ResponseType.TEXTUAL_RESPONSE);
+        verify(mockWriterCollection, times(1)).getWriterFor(TypeOfResponse.TEXTUAL_RESPONSE);
         verify(mockTextualResponseWriter, times(1)).write(expectedMock, mockHttpServletResponse);
 
         assertFalse(interceptorStatus);
@@ -108,11 +108,11 @@ class DefaultHttpInterceptorTest {
         DomainModelForMock expectedMock = DomainModelForMock.builder()
                 .statusCode(200)
                 .responseContentType(expectedContentType)
-                .responseType(ResponseType.TEXTUAL_RESPONSE)
+                .typeOfResponse(TypeOfResponse.TEXTUAL_RESPONSE)
                 .build();
 
         lenient().when(genericMockRequestController.serveRequest(expectedURI, mockHttpServletRequest)).thenReturn(Optional.of(expectedMock));
-        lenient().when(mockWriterCollection.getWriterFor(ResponseType.TEXTUAL_RESPONSE)).thenReturn(mockTextualResponseWriter);
+        lenient().when(mockWriterCollection.getWriterFor(TypeOfResponse.TEXTUAL_RESPONSE)).thenReturn(mockTextualResponseWriter);
         doThrow(IOException.class).when(mockTextualResponseWriter).write(expectedMock, mockHttpServletResponse);
 
         boolean interceptorStatus = defaultHttpInterceptor.preHandle(mockHttpServletRequest, mockHttpServletResponse, new Object());

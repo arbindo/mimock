@@ -1,7 +1,10 @@
 package com.arbindo.mimock.generic.model;
 
-public enum ResponseType {
+import lombok.ToString;
+
+@ToString
+public enum TypeOfResponse {
     TEXTUAL_RESPONSE,
     BINARY_RESPONSE,
-    NULL_RESPONSE
+    EMPTY_RESPONSE
 }

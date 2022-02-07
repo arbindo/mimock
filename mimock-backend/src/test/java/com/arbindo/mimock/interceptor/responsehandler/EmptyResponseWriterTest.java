@@ -1,7 +1,7 @@
 package com.arbindo.mimock.interceptor.responsehandler;
 
 import com.arbindo.mimock.generic.model.DomainModelForMock;
-import com.arbindo.mimock.generic.model.ResponseType;
+import com.arbindo.mimock.generic.model.TypeOfResponse;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ class EmptyResponseWriterTest {
                 .responseContentType(contentType)
                 .statusCode(200)
                 .responseBody(expectedResponseBody)
-                .responseType(ResponseType.TEXTUAL_RESPONSE)
+                .typeOfResponse(TypeOfResponse.TEXTUAL_RESPONSE)
                 .build();
 
         lenient().when(mockHttpServletResponse.getWriter()).thenReturn(mockPrintWriter);

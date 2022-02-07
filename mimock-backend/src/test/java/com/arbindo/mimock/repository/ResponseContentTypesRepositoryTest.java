@@ -1,6 +1,7 @@
 package com.arbindo.mimock.repository;
 
 import com.arbindo.mimock.entities.ResponseContentType;
+import com.arbindo.mimock.generic.model.TypeOfResponse;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
@@ -148,5 +149,103 @@ class ResponseContentTypesRepositoryTest {
         ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
         // Assert
         assertNull(responseType);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "text/css",
+            "text/csv",
+            "text/html",
+            "text/calendar",
+            "text/javascript",
+            "application/json",
+            "application/ld+json",
+            "text/plain",
+            "application/xhtml+xml",
+            "application/xml",
+            "application/vnd.mozilla.xul+xml"
+    })
+    void shouldReturnResponseContentTypeForTextualResponseContentTypes(String applicationResponseType) {
+        // Act
+        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
+        // Assert
+        assertNotNull(responseType);
+        assertEquals(applicationResponseType, responseType.getResponseType());
+        assertEquals(TypeOfResponse.TEXTUAL_RESPONSE, responseType.getType().getName());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "audio/aac",
+            "application/x-abiword",
+            "application/x-freearc",
+            "video/x-msvideo",
+            "application/vnd.amazon.ebook",
+            "application/octet-stream",
+            "image/bmp",
+            "application/x-bzip",
+            "application/x-bzip2",
+            "application/x-cdf",
+            "application/x-csh",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/vnd.ms-fontobject",
+            "application/epub+zip",
+            "application/gzip",
+            "image/gif",
+            "image/vnd.microsoft.icon",
+            "application/java-archive",
+            "image/jpeg",
+            "audio/midi",
+            "audio/x-midi",
+            "audio/mpeg",
+            "video/mp4",
+            "video/mpeg",
+            "application/vnd.apple.installer+xml",
+            "application/vnd.oasis.opendocument.presentation",
+            "application/vnd.oasis.opendocument.spreadsheet",
+            "application/vnd.oasis.opendocument.text",
+            "audio/ogg",
+            "video/ogg",
+            "application/ogg",
+            "audio/opus",
+            "font/otf",
+            "image/png",
+            "application/pdf",
+            "application/x-httpd-php",
+            "application/vnd.ms-powerpoint",
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "application/vnd.rar",
+            "application/rtf",
+            "application/x-sh",
+            "image/svg+xml",
+            "application/x-shockwave-flash",
+            "application/x-tar",
+            "image/tiff",
+            "video/mp2t",
+            "font/ttf",
+            "application/vnd.visio",
+            "audio/wav",
+            "audio/webm",
+            "video/webm",
+            "image/webp",
+            "font/woff",
+            "font/woff2",
+            "application/vnd.ms-excel",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "application/zip",
+            "video/3gpp",
+            "audio/3gpp",
+            "video/3gpp2",
+            "audio/3gpp2",
+            "application/x-7z-compressed"
+    })
+    void shouldReturnResponseContentTypeForBinaryResponseContentTypes(String applicationResponseType) {
+        // Act
+        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
+        // Assert
+        assertNotNull(responseType);
+        assertEquals(applicationResponseType, responseType.getResponseType());
+        assertEquals(TypeOfResponse.BINARY_RESPONSE, responseType.getType().getName());
     }
 }

@@ -63,7 +63,7 @@ public class DefaultHttpInterceptor implements HandlerInterceptor {
     private void writeResponse(HttpServletResponse response, DomainModelForMock matchingMock) {
         try {
             log.log(Level.INFO, "Writing response the matching mock");
-            writerCollection.getWriterFor(matchingMock.getResponseType()).write(matchingMock, response);
+            writerCollection.getWriterFor(matchingMock.getTypeOfResponse()).write(matchingMock, response);
         } catch (IOException e) {
             log.log(Level.ERROR, "Response writer exited with a failure : {}", e.getMessage());
             log.log(Level.INFO, "Sending back internal server error");
