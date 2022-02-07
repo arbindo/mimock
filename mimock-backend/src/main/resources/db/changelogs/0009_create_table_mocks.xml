@@ -7,25 +7,25 @@
         <sql>
             CREATE TABLE mocks
             (
-            mock_id                  UUID      NOT NULL,
-            route                    VARCHAR(2048) NOT NULL,
-            method_id                INT       NOT NULL,
-            response_content_type_id INT       NOT NULL,
-            status_code              INT       NOT NULL DEFAULT 200,
-            query_params             VARCHAR(1024),
-            textual_response_id      INT,
-            binary_response_id       INT,
-            description              VARCHAR(255),
-            created_at               TIMESTAMP NOT NULL,
-            updated_at               TIMESTAMP,
-            deleted_at               TIMESTAMP,
-            entity_status_id         INT NOT NULL,
-            PRIMARY KEY (mock_id),
-            CONSTRAINT http_method_fk FOREIGN KEY (method_id) REFERENCES http_methods (id),
-            CONSTRAINT response_content_type_fk FOREIGN KEY (response_content_type_id) REFERENCES response_content_types (id),
-            CONSTRAINT textual_response_fk FOREIGN KEY (textual_response_id) REFERENCES textual_responses (id),
-            CONSTRAINT binary_response_fk FOREIGN KEY (binary_response_id) REFERENCES binary_responses (id),
-            CONSTRAINT entity_status_fk FOREIGN KEY (entity_status_id) REFERENCES entity_status (id)
+                mock_id                  UUID          NOT NULL,
+                route                    VARCHAR(2048) NOT NULL,
+                method_id                INT           NOT NULL,
+                response_content_type_id INT           NOT NULL,
+                status_code              INT           NOT NULL DEFAULT 200,
+                query_params             VARCHAR(1024),
+                textual_response_id      INT,
+                binary_response_id       INT,
+                description              VARCHAR(255),
+                created_at               TIMESTAMP     NOT NULL,
+                updated_at               TIMESTAMP,
+                deleted_at               TIMESTAMP,
+                entity_status_id         INT           NOT NULL,
+                PRIMARY KEY (mock_id),
+                CONSTRAINT http_method_fk FOREIGN KEY (method_id) REFERENCES http_methods (id),
+                CONSTRAINT response_content_type_fk FOREIGN KEY (response_content_type_id) REFERENCES response_content_types (id),
+                CONSTRAINT textual_response_fk FOREIGN KEY (textual_response_id) REFERENCES textual_responses (id),
+                CONSTRAINT binary_response_fk FOREIGN KEY (binary_response_id) REFERENCES binary_responses (id),
+                CONSTRAINT entity_status_fk FOREIGN KEY (entity_status_id) REFERENCES entity_status (id)
             );
         </sql>
         <rollback>

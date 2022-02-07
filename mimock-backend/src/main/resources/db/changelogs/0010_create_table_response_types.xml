@@ -3,22 +3,19 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="aravind" id="0007_create_table_entity_status">
+    <changeSet author="neel" id="0010_create_table_response_types">
         <sql>
-            CREATE TABLE entity_status
+            CREATE TABLE response_types
             (
-                id         BIGSERIAL   NOT NULL,
-                status     VARCHAR(16) NOT NULL,
-                created_at TIMESTAMP   NOT NULL,
-                updated_at TIMESTAMP,
-                deleted_at TIMESTAMP,
+                id   BIGSERIAL    NOT NULL,
+                name VARCHAR(255) NOT NULL,
                 PRIMARY KEY (id),
-                CONSTRAINT unique_status UNIQUE (status)
+                CONSTRAINT unique_response_types_name UNIQUE (name)
             );
         </sql>
         <rollback>
             <sql>
-                DROP TABLE entity_status;
+                DROP TABLE response_types;
             </sql>
         </rollback>
     </changeSet>

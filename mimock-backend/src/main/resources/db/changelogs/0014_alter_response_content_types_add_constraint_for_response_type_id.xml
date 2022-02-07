@@ -3,22 +3,16 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="aravind" id="0007_create_table_entity_status">
+    <changeSet author="neel" id="0014_alter_response_content_types_add_constraint_for_response_type_id">
         <sql>
-            CREATE TABLE entity_status
-            (
-                id         BIGSERIAL   NOT NULL,
-                status     VARCHAR(16) NOT NULL,
-                created_at TIMESTAMP   NOT NULL,
-                updated_at TIMESTAMP,
-                deleted_at TIMESTAMP,
-                PRIMARY KEY (id),
-                CONSTRAINT unique_status UNIQUE (status)
-            );
+            ALTER TABLE response_content_types
+                ALTER
+                    COLUMN response_type_id SET NOT NULL;
         </sql>
         <rollback>
             <sql>
-                DROP TABLE entity_status;
+                ALTER TABLE response_content_types
+                ALTER COLUMN response_type_id SET NULL;
             </sql>
         </rollback>
     </changeSet>
