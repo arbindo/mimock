@@ -4,14 +4,20 @@ import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.db.*;
 import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import javax.transaction.Transactional;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -235,6 +241,78 @@ class MimockMockRepositoryTest {
         assertNull(actualMockFromDB.getTextualResponse());
         assertNull(actualMockFromDB.getBinaryResponse());
         assertNotNull(actualMockFromDB.getCreatedAt().toString());
+    }
+
+    @Transactional
+    @ParameterizedTest
+    @ValueSource(strings = {"NONE", "ARCHIVED", "DELETED"})
+    void shouldFindAllMocksByEntityStatus(String expectedEntityStatus){
+        HttpMethod expectedHttpMethod = HttpMethod.builder()
+                .method("GET")
+                .id(httpMethodsDBHelper.getHttpMethodByMethod("GET").getId())
+                .build();
+        HttpMethod httpMethod = HttpMethod.builder()
+                .method("POST")
+                .id(httpMethodsDBHelper.getHttpMethodByMethod("POST").getId())
+                .build();
+
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("application/json");
+
+        EntityStatus entityStatus = entityStatusDBHelper.findByStatus(expectedEntityStatus);
+        EntityStatus deletedEntityStatus = entityStatusDBHelper.findByStatus(Status.DELETED.name());
+
+        String expectedRoute = "/api/mock/test";
+        String expectedQueryParams = "version=1.0.0&auto=true";
+        String queryParams = "version=1.0.0&auto=false";
+        UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
+        UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
+
+        Mock testMock1 = Mock.builder()
+                .id(expectedMockId)
+                .route(expectedRoute)
+                .httpMethod(expectedHttpMethod)
+                .queryParams(expectedQueryParams)
+                .responseContentType(responseContentType)
+                .statusCode(200)
+                .entityStatus(entityStatus)
+                .build();
+
+        Mock testMock2 = Mock.builder()
+                .id(mockId)
+                .route(expectedRoute)
+                .httpMethod(httpMethod)
+                .queryParams(queryParams)
+                .responseContentType(responseContentType)
+                .statusCode(400)
+                .entityStatus(deletedEntityStatus)
+                .build();
+
+        Mock mock1 = mocksDBHelper.save(testMock1);
+        assertNotNull(mock1);
+
+        Mock mock2 = mocksDBHelper.save(testMock2);
+        assertNotNull(mock2);
+
+        List<Mock> mockList = new ArrayList<>();
+        mockList.add(mock1);
+        mockList.add(mock2);
+        long expectedCount = mockList.stream().filter(mock -> mock.getEntityStatus().getStatus().equals(expectedEntityStatus)).count();
+
+        Page<Mock> resultFromDB = repository.findAllByEntityStatus(entityStatus, Pageable.unpaged());
+        assertNotNull(resultFromDB);
+
+        List<Mock> actualMocksFromDB = resultFromDB.getContent();
+        assertEquals(expectedCount, actualMocksFromDB.size());
+        Mock actualMockFromDB = actualMocksFromDB.get(0);
+        assertNotNull(actualMockFromDB);
+        assertEquals(expectedMockId, actualMockFromDB.getId());
+        assertEquals(expectedRoute, actualMockFromDB.getRoute());
+        assertEquals(expectedHttpMethod.getMethod(), actualMockFromDB.getHttpMethod().getMethod());
+        assertNull(actualMockFromDB.getTextualResponse());
+        assertNull(actualMockFromDB.getBinaryResponse());
+        assertNotNull(actualMockFromDB.getCreatedAt().toString());
+        assertEquals(expectedEntityStatus, actualMockFromDB.getEntityStatus().getStatus());
+
     }
 
     @Test

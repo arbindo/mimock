@@ -4,6 +4,7 @@ import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.db.HttpMethodDBHelper;
 import com.arbindo.mimock.helpers.db.ResponseContentTypeDBHelper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import com.arbindo.mimock.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +110,63 @@ class MockManagementServiceTest {
 
         // Assert
         assertNull(result);
+    }
+
+    @Test
+    void shouldReturnFilteredListOfMocks_WhenEntityStatusIsValid() {
+        // Arrange
+        Page<Mock> pageable = generateMocksPageable();
+        EntityStatus entityStatus = generateDefaultEntityStatus();
+
+        lenient().when(mockRepository.findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class)))
+                .thenReturn(pageable);
+        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
+
+        // Act
+        Page<Mock> result = mockManagementService.getAllActiveMocks(Pageable.unpaged(), Status.NONE);
+
+        // Assert
+        assertEquals(pageable.getTotalElements(), result.getTotalElements());
+
+        verify(mockRepository, times(1)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockEntityStatusRepository, times(1)).findByStatus(anyString());
+    }
+
+    @Test
+    void shouldReturnNonFilteredListOfMocks_WhenEntityStatusIsInvalid() {
+        // Arrange
+        Page<Mock> pageable = generateMocksPageable();
+
+        lenient().when(mockRepository.findAll(any(Pageable.class))).thenReturn(pageable);
+        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(null);
+
+        // Act
+        Page<Mock> result = mockManagementService.getAllActiveMocks(Pageable.unpaged(), Status.NONE);
+
+        // Assert
+        assertEquals(pageable.getTotalElements(), result.getTotalElements());
+
+        verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockRepository, times(1)).findAll(any(Pageable.class));
+        verify(mockEntityStatusRepository, times(1)).findByStatus(anyString());
+    }
+
+    @Test
+    void shouldReturnNonFilteredListOfMocks_WhenStatusParameterIsNull() {
+        // Arrange
+        Page<Mock> pageable = generateMocksPageable();
+
+        lenient().when(mockRepository.findAll(any(Pageable.class))).thenReturn(pageable);
+
+        // Act
+        Page<Mock> result = mockManagementService.getAllActiveMocks(Pageable.unpaged(), null);
+
+        // Assert
+        assertEquals(pageable.getTotalElements(), result.getTotalElements());
+
+        verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockRepository, times(1)).findAll(any(Pageable.class));
+        verify(mockEntityStatusRepository, times(0)).findByStatus(anyString());
     }
 
     @ParameterizedTest

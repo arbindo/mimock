@@ -5,6 +5,7 @@ import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -13,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.support.DatabaseStartupValidator;
 import org.springframework.mock.web.MockMultipartFile;
@@ -108,6 +112,83 @@ class MockManagementControllerTest {
 
         // Act
         MvcResult result = mockMvc.perform(get(route))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        // Assert
+        assertEquals("", result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpBadRequest_FilteredListMocksApi_WithoutStatusQueryParam() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_FILTER;
+        Page<Mock> expectedMocks = new PageImpl<>(new ArrayList<>());
+
+        lenient().when(mockManagementService.getAllActiveMocks(any(Pageable.class), any(Status.class)))
+                .thenReturn(expectedMocks);
+
+        // Act
+        MvcResult result = mockMvc.perform(get(route))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        // Assert
+        assertEquals("", result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpOk_FilteredListMocksApi_ReturnsEmpty() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_FILTER;
+        String expectedContentType = "application/json";
+        Page<Mock> expectedMocks = new PageImpl<>(new ArrayList<>());
+        String expectedResponseBody = convertObjectToJsonString(expectedMocks);
+
+        lenient().when(mockManagementService.getAllActiveMocks(any(Pageable.class), any(Status.class)))
+                .thenReturn(expectedMocks);
+
+        // Act
+        MvcResult result = mockMvc.perform(get(route).param("status", "NONE"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        // Assert
+        assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpOk_FilteredListMocksApi_ReturnsListOfMocks() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_FILTER;
+        String expectedContentType = "application/json";
+        Page<Mock> expectedMocks = generateMocksPageable();
+        String expectedResponseBody = convertObjectToJsonString(expectedMocks);
+
+        lenient().when(mockManagementService.getAllActiveMocks(any(Pageable.class), any(Status.class)))
+                .thenReturn(expectedMocks);
+
+        // Act
+        MvcResult result = mockMvc.perform(get(route).param("status", "NONE"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        // Assert
+        assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpOk_FilteredListMocksApi_ReturnsNull() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_FILTER;
+
+        lenient().when(mockManagementService.getAllActiveMocks(any(Pageable.class), any(Status.class)))
+                .thenReturn(null);
+
+        // Act
+        MvcResult result = mockMvc.perform(get(route).param("status", "NONE"))
                 .andExpect(status().isOk())
                 .andReturn();
 

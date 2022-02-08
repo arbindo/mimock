@@ -3,6 +3,8 @@ package com.arbindo.mimock.helpers.entities;
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +20,10 @@ public class MocksGenerator {
 
     public static List<Mock> generateListOfMocks(){
         return generateListOfMocks(10);
+    }
+
+    public static Page<Mock> generateMocksPageable(){
+        return new PageImpl<>(generateListOfMocks(10));
     }
 
     public static List<Mock> generateListOfMocks(int count){
