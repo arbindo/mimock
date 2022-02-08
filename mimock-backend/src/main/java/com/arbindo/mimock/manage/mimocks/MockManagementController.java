@@ -4,11 +4,16 @@ import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +58,16 @@ public class MockManagementController {
     @Operation(summary = "List Mocks", description = "List all mocks.", tags = { "Mock Management" })
     @GetMapping
     public ResponseEntity<List<Mock>> getAllMocks() {
-        return ResponseEntity.ok(mockManagementService.getMocks());
+        return ResponseEntity.ok(mockManagementService.getAllMocks());
+    }
+
+    @Operation(summary = "Filter Mocks By Status", description = "List all mocks based on the status filter (NONE, ARCHIVED, DELETED)",
+            tags = { "Mock Management" })
+    @GetMapping(UrlConfig.MOCKS_FILTER)
+    public ResponseEntity<Page<Mock>> getAllMocksWithFilter(@SortDefault(sort = "createdAt",
+            direction = Sort.Direction.DESC) Pageable pageable, @RequestParam Status status) {
+        Page<Mock> mockPageable = mockManagementService.getAllActiveMocks(pageable, status);
+        return ResponseEntity.ok(mockPageable);
     }
 
     @Operation(summary = "Get Mock", description = "Get mock based on the given mockId.", tags = { "Mock Management" })
@@ -83,7 +97,7 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
-    @Operation(hidden = true, summary = "Force Delete Mock", description = "Performs hard delete on mock based on the given mockId.",
+    @Operation(summary = "Force Delete Mock", description = "Performs hard delete on mock based on the given mockId.",
             tags = { "Mock Management" })
     @DeleteMapping("{mockId}" + UrlConfig.FORCE_DELETE_ACTION)
     public ResponseEntity<GenericResponseWrapper<Mock>> hardDeleteMockById(@PathVariable String mockId) {
@@ -148,7 +162,7 @@ public class MockManagementController {
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=" + exportImportService.generateFileName();
         try {
-            List<Mock> mockList = mockManagementService.getMocks();
+            List<Mock> mockList = mockManagementService.getAllMocks();
             response.setContentType("text/csv");
             response.setHeader(headerKey, headerValue);
             exportImportService.exportMockListToCsv(response.getWriter(), mockList);

@@ -67,7 +67,7 @@ class MockManagementControllerTest {
         List<Mock> expectedMocks = new ArrayList<Mock>();
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
-        lenient().when(mockManagementService.getMocks()).thenReturn(expectedMocks);
+        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
 
         // Act
         MvcResult result = mockMvc.perform(get(route))
@@ -87,7 +87,7 @@ class MockManagementControllerTest {
         List<Mock> expectedMocks = generateListOfMocks();
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
-        lenient().when(mockManagementService.getMocks()).thenReturn(expectedMocks);
+        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
 
         // Act
         MvcResult result = mockMvc.perform(get(route))
@@ -104,7 +104,7 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH;
 
-        lenient().when(mockManagementService.getMocks()).thenReturn(null);
+        lenient().when(mockManagementService.getAllMocks()).thenReturn(null);
 
         // Act
         MvcResult result = mockMvc.perform(get(route))
@@ -611,7 +611,7 @@ class MockManagementControllerTest {
 
         List<Mock> expectedMocks = generateListOfMocks();
 
-        lenient().when(mockManagementService.getMocks()).thenReturn(expectedMocks);
+        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
         lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
 
         // Act
@@ -635,7 +635,7 @@ class MockManagementControllerTest {
 
         List<Mock> expectedMocks = generateListOfMocks();
 
-        lenient().when(mockManagementService.getMocks()).thenReturn(expectedMocks);
+        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
         lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
 
         doThrow(IOException.class).when(exportImportService).exportMockListToCsv(any(PrintWriter.class), anyList());

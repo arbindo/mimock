@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,8 +47,19 @@ public class MockManagementServiceImpl implements MockManagementService {
     private EntityStatusRepository entityStatusRepository;
 
     @Override
-    public List<Mock> getMocks() {
+    public List<Mock> getAllMocks() {
         return mocksRepository.findAll();
+    }
+
+    @Override
+    public Page<Mock> getAllActiveMocks(Pageable pageable, Status status) {
+        if(ValidationUtil.isArgNotNull(status)){
+            EntityStatus entityStatus = findByEntityStatus(status.name());
+            if(ValidationUtil.isArgNotNull(entityStatus)){
+                return mocksRepository.findAllByEntityStatus(entityStatus, pageable);
+            }
+        }
+        return mocksRepository.findAll(pageable);
     }
 
     @Override
@@ -253,10 +266,15 @@ public class MockManagementServiceImpl implements MockManagementService {
     }
 
     private EntityStatus getDefaultMockEntityStatus() {
-       return entityStatusRepository.findByStatus(Status.NONE.name());
+       return findByEntityStatus(Status.NONE.name());
     }
 
     private EntityStatus getDeletedMockEntityStatus() {
-        return entityStatusRepository.findByStatus(Status.DELETED.name());
+        return findByEntityStatus(Status.DELETED.name());
     }
+
+    private EntityStatus findByEntityStatus(String status){
+        return entityStatusRepository.findByStatus(status);
+    }
+
 }

@@ -76,7 +76,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findAll()).thenReturn(mockList);
 
         // Act
-        List<Mock> result = mockManagementService.getMocks();
+        List<Mock> result = mockManagementService.getAllMocks();
 
         // Assert
         assertIterableEquals(mockList, result);
@@ -90,7 +90,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findAll()).thenReturn(mockList);
 
         // Act
-        List<Mock> result = mockManagementService.getMocks();
+        List<Mock> result = mockManagementService.getAllMocks();
 
         // Assert
         assertIterableEquals(mockList, result);
@@ -103,7 +103,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findAll()).thenReturn(null);
 
         // Act
-        List<Mock> result = mockManagementService.getMocks();
+        List<Mock> result = mockManagementService.getAllMocks();
 
         // Assert
         assertNull(result);

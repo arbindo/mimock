@@ -16,6 +16,7 @@ public class UrlConfig {
     // region RESOURCES
     public static final String MANAGE = "/manage";
     public static final String MOCKS = "/mocks";
+    public static final String MOCKS_FILTER = "/filter";
     public static final String MOCKS_CSV_EXPORT = "/csv/export";
     public static final String MOCKS_CSV_TEMPLATE_EXPORT = "/csv/template/export";
     // endregion
