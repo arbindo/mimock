@@ -377,6 +377,7 @@ class MockManagementControllerTest {
         // Act
         MvcResult result = mockMvc.perform(multipart(route)
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
@@ -408,6 +409,7 @@ class MockManagementControllerTest {
         // Act
         MvcResult result = mockMvc.perform(multipart(route)
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
@@ -438,6 +440,7 @@ class MockManagementControllerTest {
         // Act and Assert
         mockMvc.perform(multipart(route)
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
@@ -466,6 +469,7 @@ class MockManagementControllerTest {
         // Act and Assert
         mockMvc.perform(multipart(route)
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
@@ -489,6 +493,7 @@ class MockManagementControllerTest {
         // Act and Assert
         mockMvc.perform(multipart(route)
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
@@ -515,6 +520,7 @@ class MockManagementControllerTest {
         // Act and Assert
         mockMvc.perform(multipart(route)
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
@@ -532,6 +538,7 @@ class MockManagementControllerTest {
         // Act and Assert
         mockMvc.perform(multipart(route)
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
@@ -558,6 +565,7 @@ class MockManagementControllerTest {
         // Act and Assert
         mockMvc.perform(multipart(route)
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
@@ -595,6 +603,7 @@ class MockManagementControllerTest {
 
         MvcResult result = mockMvc.perform(builder
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())
@@ -633,6 +642,7 @@ class MockManagementControllerTest {
 
         MvcResult result = mockMvc.perform(builder
                         .file(file)
+                        .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
                         .param("responseContentType", mockRequest.getResponseContentType())

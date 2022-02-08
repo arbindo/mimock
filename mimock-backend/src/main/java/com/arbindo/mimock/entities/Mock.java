@@ -25,6 +25,11 @@ public class Mock {
     @Schema(description = "Mock Id")
     private UUID id;
 
+
+    @Column(name = "mock_name", nullable = false)
+    @Schema(example = "Weather api mock", description = "Field to set an unique searchable field for mocks")
+    private String mockName;
+
     @Column(name = "route", nullable = false, length = 2048)
     @Schema(example = "/github/v3/pull", description = "Route of the mock")
     private String route;

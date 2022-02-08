@@ -2,6 +2,7 @@ package com.arbindo.mimock.helpers.general;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.time.Instant;
 import java.util.Random;
 import java.util.UUID;
 
@@ -37,4 +38,8 @@ public class RandomDataGenerator {
         return RANDOM.nextInt(bound);
     }
 
+    public static String generateUniqueMockName() {
+        long l = Instant.now().toEpochMilli();
+        return "Mock name - " + l;
+    }
 }

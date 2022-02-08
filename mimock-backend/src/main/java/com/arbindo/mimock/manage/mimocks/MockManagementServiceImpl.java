@@ -53,9 +53,9 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Override
     public Page<Mock> getAllActiveMocks(Pageable pageable, Status status) {
-        if(ValidationUtil.isArgNotNull(status)){
+        if (ValidationUtil.isArgNotNull(status)) {
             EntityStatus entityStatus = findByEntityStatus(status.name());
-            if(ValidationUtil.isArgNotNull(entityStatus)){
+            if (ValidationUtil.isArgNotNull(entityStatus)) {
                 return mocksRepository.findAllByEntityStatus(entityStatus, pageable);
             }
         }
@@ -140,6 +140,7 @@ public class MockManagementServiceImpl implements MockManagementService {
 
             Mock mock = Mock.builder()
                     .id(mockId)
+                    .mockName(request.getName())
                     .route(request.getRoute())
                     .httpMethod(httpMethod)
                     .responseContentType(responseContentType)
@@ -195,6 +196,7 @@ public class MockManagementServiceImpl implements MockManagementService {
 
                 Mock updatedMock = Mock.builder()
                         .id(mock.getId())
+                        .mockName(request.getName())
                         .route(request.getRoute())
                         .httpMethod(httpMethod)
                         .responseContentType(responseContentType)
@@ -266,14 +268,14 @@ public class MockManagementServiceImpl implements MockManagementService {
     }
 
     private EntityStatus getDefaultMockEntityStatus() {
-       return findByEntityStatus(Status.NONE.name());
+        return findByEntityStatus(Status.NONE.name());
     }
 
     private EntityStatus getDeletedMockEntityStatus() {
         return findByEntityStatus(Status.DELETED.name());
     }
 
-    private EntityStatus findByEntityStatus(String status){
+    private EntityStatus findByEntityStatus(String status) {
         return entityStatusRepository.findByStatus(status);
     }
 

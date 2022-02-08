@@ -47,6 +47,7 @@ public class MocksGenerator {
     public static Mock generateMock() {
         return Mock.builder()
                 .id(generateRandomUUID())
+                .mockName(generateUniqueMockName())
                 .route(generateRandomAlphanumericString())
                 .httpMethod(generateHttpMethod())
                 .responseContentType(generateResponseContentType())
@@ -62,6 +63,7 @@ public class MocksGenerator {
     public static Mock generateMock(MockRequest request) {
         return Mock.builder()
                 .id(generateRandomUUID())
+                .mockName(generateUniqueMockName())
                 .route(request.getRoute())
                 .httpMethod(generateHttpMethod(request.getHttpMethod()))
                 .responseContentType(generateResponseContentType(request.getResponseContentType()))
@@ -162,6 +164,7 @@ public class MocksGenerator {
 
     public static MockRequest createMockRequest() {
         return MockRequest.builder()
+                .name(generateUniqueMockName())
                 .route(generateRandomAlphanumericString())
                 .httpMethod(getValidHttpMethod())
                 .responseContentType(getValidResponseContentType())

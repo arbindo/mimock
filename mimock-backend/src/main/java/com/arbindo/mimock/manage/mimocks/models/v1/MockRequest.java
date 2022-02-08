@@ -34,6 +34,11 @@ public class MockRequest {
     @Schema(example = "name=John&age=10", description = "Associated query params of the mock")
     private String queryParams;
 
+    @NotBlank
+    @Size(min = 5, max = 255, message = "Name should be at least 5 characters long")
+    @Schema(example = "Weather api mock", description = "Uniquely identifiable name for the mimock")
+    private String name;
+
     @Size(min = 1, max = 255, message = "Description should be at least 1-250 characters")
     @Schema(example = "This is my new mock!!!", description = "Custom Description of the Mock")
     private String description;

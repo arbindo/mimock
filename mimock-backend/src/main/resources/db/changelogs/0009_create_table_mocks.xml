@@ -8,6 +8,7 @@
             CREATE TABLE mocks
             (
                 mock_id                  UUID          NOT NULL,
+                mock_name                VARCHAR(255)  NOT NULL,
                 route                    VARCHAR(2048) NOT NULL,
                 method_id                INT           NOT NULL,
                 response_content_type_id INT           NOT NULL,
@@ -21,6 +22,7 @@
                 deleted_at               TIMESTAMP,
                 entity_status_id         INT           NOT NULL,
                 PRIMARY KEY (mock_id),
+                CONSTRAINT unique_mock_name UNIQUE (mock_name),
                 CONSTRAINT http_method_fk FOREIGN KEY (method_id) REFERENCES http_methods (id),
                 CONSTRAINT response_content_type_fk FOREIGN KEY (response_content_type_id) REFERENCES response_content_types (id),
                 CONSTRAINT textual_response_fk FOREIGN KEY (textual_response_id) REFERENCES textual_responses (id),

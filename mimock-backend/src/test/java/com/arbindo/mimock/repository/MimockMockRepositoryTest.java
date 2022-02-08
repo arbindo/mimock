@@ -76,6 +76,7 @@ class MimockMockRepositoryTest {
 
         Mock testMock1 = Mock.builder()
                 .id(expectedMockId)
+                .mockName("test mock 1")
                 .route(expectedRoute)
                 .httpMethod(expectedHttpMethod)
                 .queryParams(expectedQueryParams)
@@ -87,6 +88,7 @@ class MimockMockRepositoryTest {
 
         Mock testMock2 = Mock.builder()
                 .id(mockId)
+                .mockName("test mock 2")
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
@@ -144,6 +146,7 @@ class MimockMockRepositoryTest {
 
         Mock testMock1 = Mock.builder()
                 .id(expectedMockId)
+                .mockName("test mock 1")
                 .route(expectedRoute)
                 .httpMethod(expectedHttpMethod)
                 .queryParams(expectedQueryParams)
@@ -155,6 +158,7 @@ class MimockMockRepositoryTest {
 
         Mock testMock2 = Mock.builder()
                 .id(mockId)
+                .mockName("test mock 2")
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
@@ -206,6 +210,7 @@ class MimockMockRepositoryTest {
 
         Mock testMock1 = Mock.builder()
                 .id(expectedMockId)
+                .mockName("test mock 1")
                 .route(expectedRoute)
                 .httpMethod(expectedHttpMethod)
                 .queryParams(expectedQueryParams)
@@ -216,6 +221,7 @@ class MimockMockRepositoryTest {
 
         Mock testMock2 = Mock.builder()
                 .id(mockId)
+                .mockName("test mock 2")
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
@@ -269,6 +275,7 @@ class MimockMockRepositoryTest {
 
         Mock testMock1 = Mock.builder()
                 .id(expectedMockId)
+                .mockName("test mock 1")
                 .route(expectedRoute)
                 .httpMethod(expectedHttpMethod)
                 .queryParams(expectedQueryParams)
@@ -279,6 +286,7 @@ class MimockMockRepositoryTest {
 
         Mock testMock2 = Mock.builder()
                 .id(mockId)
+                .mockName("test mock 2")
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)

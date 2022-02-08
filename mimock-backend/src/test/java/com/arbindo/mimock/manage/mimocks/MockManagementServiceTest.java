@@ -82,6 +82,7 @@ class MockManagementServiceTest {
         List<Mock> result = mockManagementService.getAllMocks();
 
         // Assert
+        verify(mockRepository, times(1)).findAll();
         assertIterableEquals(mockList, result);
         assertEquals(mockList.size(), result.size());
     }
@@ -96,6 +97,7 @@ class MockManagementServiceTest {
         List<Mock> result = mockManagementService.getAllMocks();
 
         // Assert
+        verify(mockRepository, times(1)).findAll();
         assertIterableEquals(mockList, result);
         assertEquals(mockList.size(), result.size());
     }
@@ -109,6 +111,7 @@ class MockManagementServiceTest {
         List<Mock> result = mockManagementService.getAllMocks();
 
         // Assert
+        verify(mockRepository, times(1)).findAll();
         assertNull(result);
     }
 
@@ -189,7 +192,6 @@ class MockManagementServiceTest {
     void shouldReturnNull_WhenMockIdIsInvalidFormat(String mockId) {
         // Arrange
         Optional<Mock> mock = generateOptionalMock();
-        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
 
         // Act
         Mock result = mockManagementService.getMockById(mockId);
@@ -209,6 +211,7 @@ class MockManagementServiceTest {
         Mock result = mockManagementService.getMockById(mock.get().getId().toString());
 
         // Assert
+        verify(mockRepository, times(1)).findById(any(UUID.class));
         assertEquals(mock.get(), result);
     }
 
@@ -224,6 +227,7 @@ class MockManagementServiceTest {
         Mock result = mockManagementService.getMockById(mock.get().getId().toString());
 
         // Assert
+        verify(mockRepository, times(1)).findById(any(UUID.class));
         assertNull(result);
     }
 
@@ -274,7 +278,7 @@ class MockManagementServiceTest {
         assertTrue(result);
         verify(mockRepository, times(0)).delete(mock.get());
         verify(mockEntityStatusRepository, times(1)).findByStatus(anyString());
-        verify(mockRepository, times(1)).save(any(Mock.class));
+        verify(mockRepository, times(1)).save(mock.get());
     }
 
     @Test
@@ -292,7 +296,7 @@ class MockManagementServiceTest {
         assertFalse(result);
         verify(mockRepository, times(0)).delete(mock.get());
         verify(mockEntityStatusRepository, times(0)).findByStatus(anyString());
-        verify(mockRepository, times(0)).save(any(Mock.class));
+        verify(mockRepository, times(0)).save(mock.get());
     }
 
     @ParameterizedTest
