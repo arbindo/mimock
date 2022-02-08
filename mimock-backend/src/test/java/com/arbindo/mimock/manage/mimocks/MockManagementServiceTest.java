@@ -403,7 +403,7 @@ class MockManagementServiceTest {
 
         lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
         lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
-        lenient().when(mockResponseContentTypesRepository.findByResponseType(anyString())).thenReturn(responseContentType);
+        lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
 
         // Act
@@ -453,7 +453,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
         lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
         lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
-        lenient().when(mockResponseContentTypesRepository.findByResponseType(anyString())).thenReturn(responseContentType);
+        lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
 
         // Act
@@ -464,7 +464,7 @@ class MockManagementServiceTest {
         assertEquals(expectedMock.getId(), result.getId());
         assertEquals(expectedMock.getRoute(), result.getRoute());
         assertEquals(expectedMock.getHttpMethod().getMethod(), result.getHttpMethod().getMethod());
-        assertEquals(expectedMock.getResponseContentType().getResponseType(), result.getResponseContentType().getResponseType());
+        assertEquals(expectedMock.getResponseContentType().getContentType(), result.getResponseContentType().getContentType());
         assertEquals(expectedMock.getStatusCode(), result.getStatusCode());
         assertEquals(expectedMock.getQueryParams(), result.getQueryParams());
         assertEquals(expectedMock.getTextualResponse(), result.getTextualResponse());

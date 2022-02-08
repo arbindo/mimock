@@ -64,7 +64,7 @@ class MimockMockRepositoryTest {
                 .build();
         textualResponse = textualResponseDBHelper.save(textualResponse);
 
-        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("application/json");
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
 
         EntityStatus entityStatus = entityStatusDBHelper.findByStatus(Status.NONE.name());
 
@@ -132,7 +132,7 @@ class MimockMockRepositoryTest {
         deleteTestFile();
         binaryResponse = binaryResponseDBHelper.save(binaryResponse);
 
-        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("text/plain");
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("text/plain");
 
         EntityStatus entityStatus = entityStatusDBHelper.findByStatus(Status.NONE.name());
 
@@ -194,7 +194,7 @@ class MimockMockRepositoryTest {
                 .id(httpMethodsDBHelper.getHttpMethodByMethod("POST").getId())
                 .build();
 
-        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("application/json");
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
 
         EntityStatus entityStatus = entityStatusDBHelper.findByStatus(Status.NONE.name());
 
@@ -246,7 +246,7 @@ class MimockMockRepositoryTest {
     @Transactional
     @ParameterizedTest
     @ValueSource(strings = {"NONE", "ARCHIVED", "DELETED"})
-    void shouldFindAllMocksByEntityStatus(String expectedEntityStatus){
+    void shouldFindAllMocksByEntityStatus(String expectedEntityStatus) {
         HttpMethod expectedHttpMethod = HttpMethod.builder()
                 .method("GET")
                 .id(httpMethodsDBHelper.getHttpMethodByMethod("GET").getId())
@@ -256,7 +256,7 @@ class MimockMockRepositoryTest {
                 .id(httpMethodsDBHelper.getHttpMethodByMethod("POST").getId())
                 .build();
 
-        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("application/json");
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
 
         EntityStatus entityStatus = entityStatusDBHelper.findByStatus(expectedEntityStatus);
         EntityStatus deletedEntityStatus = entityStatusDBHelper.findByStatus(Status.DELETED.name());

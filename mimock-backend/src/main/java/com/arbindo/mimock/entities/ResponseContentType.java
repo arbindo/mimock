@@ -24,9 +24,9 @@ public class ResponseContentType {
     @Schema(example = "1", description = "Response Content Type Id")
     private Long id;
 
-    @Column(name = "response_type", nullable = false)
+    @Column(name = "content_type", nullable = false)
     @Schema(example = "application/json", description = "Name of the Response Content Type")
-    private String responseType;
+    private String contentType;
 
     @Column(name = "description", nullable = false)
     @Schema(example = "Json response type", description = "Custom Description of the Response Content type")
@@ -48,10 +48,10 @@ public class ResponseContentType {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "response_type_id", nullable = false)
-    private ResponseType type;
+    private ResponseType responseType;
 
     @Override
     public String toString() {
-        return responseType;
+        return contentType;
     }
 }

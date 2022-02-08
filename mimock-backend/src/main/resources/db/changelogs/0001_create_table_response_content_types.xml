@@ -7,14 +7,14 @@
         <sql>
             CREATE TABLE response_content_types
             (
-                id            BIGSERIAL    NOT NULL,
-                response_type VARCHAR(255) NOT NULL,
-                description   VARCHAR(255) NOT NULL,
-                created_at    TIMESTAMP    NOT NULL,
-                updated_at    TIMESTAMP,
-                deleted_at    TIMESTAMP,
+                id           BIGSERIAL    NOT NULL,
+                content_type VARCHAR(255) NOT NULL,
+                description  VARCHAR(255) NOT NULL,
+                created_at   TIMESTAMP    NOT NULL,
+                updated_at   TIMESTAMP,
+                deleted_at   TIMESTAMP,
                 PRIMARY KEY (id),
-                CONSTRAINT unique_response_type UNIQUE (response_type)
+                CONSTRAINT unique_content_type UNIQUE (content_type)
             );
         </sql>
         <rollback>

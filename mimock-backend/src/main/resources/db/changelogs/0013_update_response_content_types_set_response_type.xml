@@ -7,7 +7,7 @@
         <sql>
             UPDATE response_content_types
             SET response_type_id = (SELECT id FROM response_types WHERE name = 'BINARY_RESPONSE')
-            WHERE response_type in
+            WHERE content_type in
                   (
                    'audio/aac',
                    'application/x-abiword',
@@ -78,7 +78,7 @@
         <sql>
             UPDATE response_content_types
             SET response_type_id = (SELECT id FROM response_types WHERE name = 'TEXTUAL_RESPONSE')
-            WHERE response_type in
+            WHERE content_type in
                   (
                    'text/css',
                    'text/csv',

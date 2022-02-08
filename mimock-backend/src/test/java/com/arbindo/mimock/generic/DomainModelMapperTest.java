@@ -24,7 +24,7 @@ class DomainModelMapperTest {
     @Test
     void shouldReturnModelWithTextResponseFactory() {
         ResponseContentType responseContentType = ResponseContentType.builder()
-                .responseType("application/json")
+                .contentType("application/json")
                 .build();
 
         TextualResponse textualResponse = TextualResponse.builder()
@@ -49,7 +49,7 @@ class DomainModelMapperTest {
     @Test
     void shouldReturnModelWithBinaryResponseFactory() {
         ResponseContentType responseContentType = ResponseContentType.builder()
-                .responseType("application/json")
+                .contentType("application/json")
                 .build();
 
         byte[] bytes = "Test string".getBytes(StandardCharsets.UTF_8);

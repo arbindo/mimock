@@ -18,33 +18,33 @@ import static com.arbindo.mimock.helpers.general.RandomDataGenerator.*;
 
 public class MocksGenerator {
 
-    public static List<Mock> generateListOfMocks(){
+    public static List<Mock> generateListOfMocks() {
         return generateListOfMocks(10);
     }
 
-    public static Page<Mock> generateMocksPageable(){
+    public static Page<Mock> generateMocksPageable() {
         return new PageImpl<>(generateListOfMocks(10));
     }
 
-    public static List<Mock> generateListOfMocks(int count){
+    public static List<Mock> generateListOfMocks(int count) {
         List<Mock> mockList = new ArrayList<>();
-        for (int i=0; i<count; i++) {
+        for (int i = 0; i < count; i++) {
             mockList.add(generateMock());
         }
         return mockList;
     }
 
-    public static Optional<Mock> generateOptionalMock(){
+    public static Optional<Mock> generateOptionalMock() {
         Mock mock = generateMock();
         return Optional.of(mock);
     }
 
-    public static Optional<Mock> generateOptionalMock(MockRequest request){
+    public static Optional<Mock> generateOptionalMock(MockRequest request) {
         Mock mock = generateMock(request);
         return Optional.of(mock);
     }
 
-    public static Mock generateMock(){
+    public static Mock generateMock() {
         return Mock.builder()
                 .id(generateRandomUUID())
                 .route(generateRandomAlphanumericString())
@@ -59,7 +59,7 @@ public class MocksGenerator {
                 .build();
     }
 
-    public static Mock generateMock(MockRequest request){
+    public static Mock generateMock(MockRequest request) {
         return Mock.builder()
                 .id(generateRandomUUID())
                 .route(request.getRoute())
@@ -75,14 +75,14 @@ public class MocksGenerator {
                 .build();
     }
 
-    public static EntityStatus generateDefaultEntityStatus(){
+    public static EntityStatus generateDefaultEntityStatus() {
         return EntityStatus.builder()
                 .status(Status.NONE.name())
                 .createdAt(ZonedDateTime.now())
                 .build();
     }
 
-    private static TextualResponse generateTextualResponse(){
+    private static TextualResponse generateTextualResponse() {
         return TextualResponse.builder()
                 .id(1L)
                 .responseBody(generateRandomAlphabeticString())
@@ -90,7 +90,7 @@ public class MocksGenerator {
                 .build();
     }
 
-    private static TextualResponse generateTextualResponse(String responseBody){
+    private static TextualResponse generateTextualResponse(String responseBody) {
         return TextualResponse.builder()
                 .id(1L)
                 .responseBody(responseBody)
@@ -98,7 +98,7 @@ public class MocksGenerator {
                 .build();
     }
 
-    private static BinaryResponse generateBinaryResponse(){
+    private static BinaryResponse generateBinaryResponse() {
         try {
             return BinaryResponse.builder()
                     .id(1L)
@@ -112,26 +112,26 @@ public class MocksGenerator {
     }
 
     private static BinaryResponse generateBinaryResponse(MultipartFile file) {
-       if(file != null){
-           byte[] fileData = null;
-           try{
-               fileData = file.getBytes();
-               return BinaryResponse.builder()
-                       .id(1L)
-                       .responseFile(fileData)
-                       .createdAt(ZonedDateTime.now())
-                       .build();
-           }catch(IOException e){
-               e.printStackTrace();
-           }
-       }
+        if (file != null) {
+            byte[] fileData = null;
+            try {
+                fileData = file.getBytes();
+                return BinaryResponse.builder()
+                        .id(1L)
+                        .responseFile(fileData)
+                        .createdAt(ZonedDateTime.now())
+                        .build();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
     private static ResponseContentType generateResponseContentType(String responseContentType) {
         return ResponseContentType.builder()
                 .id(1L)
-                .responseType(responseContentType)
+                .contentType(responseContentType)
                 .createdAt(ZonedDateTime.now())
                 .build();
     }
@@ -144,7 +144,7 @@ public class MocksGenerator {
                 .build();
     }
 
-    public static HttpMethod generateHttpMethod(){
+    public static HttpMethod generateHttpMethod() {
         return HttpMethod.builder()
                 .id(1L)
                 .method("GET")
@@ -152,15 +152,15 @@ public class MocksGenerator {
                 .build();
     }
 
-    public static ResponseContentType generateResponseContentType(){
+    public static ResponseContentType generateResponseContentType() {
         return ResponseContentType.builder()
                 .id(1L)
-                .responseType("application/json")
+                .contentType("application/json")
                 .createdAt(ZonedDateTime.now())
                 .build();
     }
 
-    public static MockRequest createMockRequest(){
+    public static MockRequest createMockRequest() {
         return MockRequest.builder()
                 .route(generateRandomAlphanumericString())
                 .httpMethod(getValidHttpMethod())
@@ -173,23 +173,23 @@ public class MocksGenerator {
                 .build();
     }
 
-    public static MockRequest createMockRequestWithFile(MultipartFile file){
+    public static MockRequest createMockRequestWithFile(MultipartFile file) {
         MockRequest mockRequest = createMockRequest();
         mockRequest.setBinaryFile(file);
         return mockRequest;
     }
 
-    public static MockMultipartFile getMockMultipartFile(){
+    public static MockMultipartFile getMockMultipartFile() {
         return new MockMultipartFile("binaryFile", "testFile.txt", "text/plain", "Awesome File Content Here!!!!".getBytes());
     }
 
-    public static String getValidHttpMethod(){
+    public static String getValidHttpMethod() {
         String[] methods = {"GET", "POST", "HEAD", "OPTIONS", "DELETE"};
         int index = generateRandomNumber(methods.length - 1);
         return methods[index];
     }
 
-    public static String getValidResponseContentType(){
+    public static String getValidResponseContentType() {
         String[] responseContentTypes = {"application/json", "application/pdf", "application/xml", "application/zip", "image/png"};
         int index = generateRandomNumber(responseContentTypes.length - 1);
         return responseContentTypes[index];

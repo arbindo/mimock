@@ -86,7 +86,7 @@ class ExportImportServiceTest {
             assertTrue(result.contains(mock.getId().toString()));
             assertTrue(result.contains(mock.getRoute()));
             assertTrue(result.contains(mock.getHttpMethod().getMethod()));
-            assertTrue(result.contains(mock.getResponseContentType().getResponseType()));
+            assertTrue(result.contains(mock.getResponseContentType().getContentType()));
             assertTrue(result.contains(mock.getDescription()));
             assertTrue(result.contains(mock.getQueryParams()));
             assertTrue(result.contains(mock.getStatusCode().toString()));

@@ -83,7 +83,7 @@ class GenericMockRequestServiceTest {
                 .id(httpMethodsDBHelper.getHttpMethodByMethod(method).getId())
                 .build();
 
-        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("application/json");
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
 
         Mock expectedMock = Mock.builder()
                 .route(genericRequestModel.getRoute())
@@ -108,7 +108,7 @@ class GenericMockRequestServiceTest {
 
         assertEquals(expectedRoute, actualMock.getRoute());
         assertEquals(200, actualMock.getStatusCode());
-        assertEquals(responseContentType.getResponseType(), actualMock.getResponseContentType());
+        assertEquals(responseContentType.getContentType(), actualMock.getResponseContentType());
     }
 
     @Test
@@ -128,7 +128,7 @@ class GenericMockRequestServiceTest {
                 .id(httpMethodsDBHelper.getHttpMethodByMethod(method).getId())
                 .build();
 
-        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByResponseType("application/json");
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
 
         lenient().when(mockHttpMethodsRepository.findByMethod(method)).thenReturn(httpMethod);
         lenient().when(mockRepository.findOneByRouteAndHttpMethodAndQueryParams(

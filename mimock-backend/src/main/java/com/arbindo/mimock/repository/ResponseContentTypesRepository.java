@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ResponseContentTypesRepository extends JpaRepository<ResponseContentType, Long> {
 
-    ResponseContentType findByResponseType(String responseType);
+    ResponseContentType findByContentType(String responseType);
 
 }

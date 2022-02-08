@@ -22,10 +22,10 @@ class ResponseContentTypesRepositoryTest {
             "application/x-shockwave-flash", "application/json", "application/xml", "application/zip"})
     void shouldReturnResponseContentTypeForValidApplicationType(String applicationResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(applicationResponseType);
         // Assert
         assertNotNull(responseType);
-        assertEquals(applicationResponseType, responseType.getResponseType());
+        assertEquals(applicationResponseType, responseType.getContentType());
     }
 
     @ParameterizedTest
@@ -33,7 +33,7 @@ class ResponseContentTypesRepositoryTest {
             "application/l,json", "application/excel", "application/x-www-form-urlencoded"})
     void shouldReturnNullForInvalidApplicationType(String applicationResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(applicationResponseType);
         // Assert
         assertNull(responseType);
     }
@@ -42,17 +42,17 @@ class ResponseContentTypesRepositoryTest {
     @ValueSource(strings = {"audio/mpeg", "audio/ogg", "audio/opus", "audio/wav", "audio/webm"})
     void shouldReturnResponseContentTypeForValidAudioType(String audioResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(audioResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(audioResponseType);
         // Assert
         assertNotNull(responseType);
-        assertEquals(audioResponseType, responseType.getResponseType());
+        assertEquals(audioResponseType, responseType.getContentType());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"audio/x-ms-wma", "audio/vnd.rn-realaudio", "audio/x-wav"})
     void shouldReturnNullForInvalidAudioType(String audioResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(audioResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(audioResponseType);
         // Assert
         assertNull(responseType);
     }
@@ -61,17 +61,17 @@ class ResponseContentTypesRepositoryTest {
     @ValueSource(strings = {"image/gif", "image/jpeg", "image/png", "image/svg+xml"})
     void shouldReturnResponseContentTypeForValidImageType(String imageResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(imageResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(imageResponseType);
         // Assert
         assertNotNull(responseType);
-        assertEquals(imageResponseType, responseType.getResponseType());
+        assertEquals(imageResponseType, responseType.getContentType());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"image/vnd.microsoft.icon ", "image/x-icon", "image/vnd.djvu"})
     void shouldReturnNullForInvalidImageType(String imageResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(imageResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(imageResponseType);
         // Assert
         assertNull(responseType);
     }
@@ -80,17 +80,17 @@ class ResponseContentTypesRepositoryTest {
     @ValueSource(strings = {"video/mpeg", "video/mp4", "video/x-msvideo", "video/webm"})
     void shouldReturnResponseContentTypeForValidVideoType(String videoResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(videoResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(videoResponseType);
         // Assert
         assertNotNull(responseType);
-        assertEquals(videoResponseType, responseType.getResponseType());
+        assertEquals(videoResponseType, responseType.getContentType());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"video/quicktime", "video/x-ms-wmv", "video/x-flv"})
     void shouldReturnNullForInvalidVideoType(String videoResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(videoResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(videoResponseType);
         // Assert
         assertNull(responseType);
     }
@@ -99,17 +99,17 @@ class ResponseContentTypesRepositoryTest {
     @ValueSource(strings = {"text/css", "text/csv", "text/html", "text/javascript", "text/plain"})
     void shouldReturnResponseContentTypeForValidTextType(String textResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(textResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(textResponseType);
         // Assert
         assertNotNull(responseType);
-        assertEquals(textResponseType, responseType.getResponseType());
+        assertEquals(textResponseType, responseType.getContentType());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"text/xml"})
     void shouldReturnNullForInvalidTextType(String textResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(textResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(textResponseType);
         // Assert
         assertNull(responseType);
     }
@@ -118,7 +118,7 @@ class ResponseContentTypesRepositoryTest {
     @ValueSource(strings = {"multipart/mixed", "multipart/alternative", "multipart/related", "multipart/form-data"})
     void shouldReturnNullForInvalidMultipartType(String multiPartResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(multiPartResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(multiPartResponseType);
         // Assert
         assertNull(responseType);
     }
@@ -128,7 +128,7 @@ class ResponseContentTypesRepositoryTest {
     @NullSource
     void shouldReturnNullForInvalidApplicationTypeWhenEmptyOrNull(String applicationResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(applicationResponseType);
         // Assert
         assertNull(responseType);
     }
@@ -137,7 +137,7 @@ class ResponseContentTypesRepositoryTest {
     @ValueSource(strings = {"application/json OR 1=1", "text/css; DROP TABLE mocks;"})
     void shouldReturnNullForCaseSensitiveResponseTypeStrings(String applicationResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(applicationResponseType);
         // Assert
         assertNull(responseType);
     }
@@ -146,7 +146,7 @@ class ResponseContentTypesRepositoryTest {
     @ValueSource(strings = {"application/json OR 1=1", "text/css; DROP TABLE mocks;"})
     void shouldReturnNullForSqlInjectionStrings(String applicationResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(applicationResponseType);
         // Assert
         assertNull(responseType);
     }
@@ -167,11 +167,11 @@ class ResponseContentTypesRepositoryTest {
     })
     void shouldReturnResponseContentTypeForTextualResponseContentTypes(String applicationResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(applicationResponseType);
         // Assert
         assertNotNull(responseType);
-        assertEquals(applicationResponseType, responseType.getResponseType());
-        assertEquals(TypeOfResponse.TEXTUAL_RESPONSE, responseType.getType().getName());
+        assertEquals(applicationResponseType, responseType.getContentType());
+        assertEquals(TypeOfResponse.TEXTUAL_RESPONSE, responseType.getResponseType().getName());
     }
 
     @ParameterizedTest
@@ -242,10 +242,10 @@ class ResponseContentTypesRepositoryTest {
     })
     void shouldReturnResponseContentTypeForBinaryResponseContentTypes(String applicationResponseType) {
         // Act
-        ResponseContentType responseType = responseContentTypesRepository.findByResponseType(applicationResponseType);
+        ResponseContentType responseType = responseContentTypesRepository.findByContentType(applicationResponseType);
         // Assert
         assertNotNull(responseType);
-        assertEquals(applicationResponseType, responseType.getResponseType());
-        assertEquals(TypeOfResponse.BINARY_RESPONSE, responseType.getType().getName());
+        assertEquals(applicationResponseType, responseType.getContentType());
+        assertEquals(TypeOfResponse.BINARY_RESPONSE, responseType.getResponseType().getName());
     }
 }

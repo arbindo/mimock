@@ -259,7 +259,7 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     private ResponseContentType getResponseContentType(String responseContentTypeString) throws Exception {
         if (ValidationUtil.isNotNullOrEmpty(responseContentTypeString)) {
-            return responseContentTypesRepository.findByResponseType(responseContentTypeString);
+            return responseContentTypesRepository.findByContentType(responseContentTypeString);
         }
         throw new Exception(String.format("Unable to extract Response Content Type!! Invalid responseContentType: %s",
                 responseContentTypeString));
