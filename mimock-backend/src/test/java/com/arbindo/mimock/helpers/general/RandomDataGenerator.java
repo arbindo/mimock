@@ -39,7 +39,6 @@ public class RandomDataGenerator {
     }
 
     public static String generateUniqueMockName() {
-        long l = Instant.now().toEpochMilli();
-        return "Mock name - " + l;
+        return "MockName" + "-" + generateRandomAlphanumericString(5) + "-" + Instant.now().toEpochMilli();
     }
 }

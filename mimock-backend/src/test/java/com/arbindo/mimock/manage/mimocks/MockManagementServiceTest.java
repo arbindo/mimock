@@ -397,6 +397,21 @@ class MockManagementServiceTest {
     }
 
     @Test
+    void shouldReturnNull_ForCreateMock_WhenMockNameAlreadyExists() {
+        // Arrange
+        MockRequest request = createMockRequest();
+        Optional<Mock> existingMock = generateOptionalMock(request);
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(existingMock);
+
+        // Act
+        Mock result = mockManagementService.createMock(request);
+
+        // Assert
+        assertNull(result);
+        verify(mockRepository, times(0)).save(any(Mock.class));
+    }
+
+    @Test
     void shouldReturnMock_ForCreateMock_WhenMockRequestIsValid() {
         // Arrange
         MockRequest request = createMockRequest();
@@ -405,6 +420,8 @@ class MockManagementServiceTest {
         ResponseContentType responseContentType = generateResponseContentType();
         EntityStatus entityStatus = generateDefaultEntityStatus();
 
+        Optional<Mock> emptyMock = Optional.empty();
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
         lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
         lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
         lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
@@ -444,6 +461,22 @@ class MockManagementServiceTest {
     }
 
     @Test
+    void shouldReturnNull_ForUpdateMock_WhenMockNameAlreadyExists() {
+        // Arrange
+        MockRequest request = createMockRequest();
+        Optional<Mock> existingMock = generateOptionalMock(request);
+        assertTrue(existingMock.isPresent());
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(existingMock);
+
+        // Act
+        Mock result = mockManagementService.updateMock(existingMock.get().getId().toString(), request);
+
+        // Assert
+        assertNull(result);
+        verify(mockRepository, times(0)).save(any(Mock.class));
+    }
+
+    @Test
     void shouldReturnMock_ForUpdateMock_WhenMockRequestIsValid() {
         // Arrange
         MockRequest request = createMockRequest();
@@ -454,6 +487,8 @@ class MockManagementServiceTest {
         ResponseContentType responseContentType = optionalMock.get().getResponseContentType();
         EntityStatus entityStatus = generateDefaultEntityStatus();
 
+        Optional<Mock> emptyMock = Optional.empty();
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
         lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
         lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
