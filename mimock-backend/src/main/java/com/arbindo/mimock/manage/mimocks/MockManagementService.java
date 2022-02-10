@@ -18,4 +18,6 @@ public interface MockManagementService {
     boolean deleteAllMocks();
     Mock createMock(MockRequest request);
     Mock updateMock(String mockId, MockRequest request);
+    Mock archiveMock(String mockId);
+    Mock unarchiveMock(String mockId);
 }

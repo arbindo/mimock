@@ -93,6 +93,7 @@ public class MockManagementServiceImpl implements MockManagementService {
         return false;
     }
 
+    @Transactional
     @Override
     public boolean softDeleteMockById(String mockId) {
         if (ValidationUtil.isNotNullOrEmpty(mockId)) {
@@ -252,6 +253,56 @@ public class MockManagementServiceImpl implements MockManagementService {
         return null;
     }
 
+    @Transactional
+    @Override
+    public Mock archiveMock(String mockId) {
+        if (ValidationUtil.isNotNullOrEmpty(mockId)) {
+            try {
+                Mock mock = getMockById(mockId);
+                if (mock != null) {
+                    if(mock.isArchived()){
+                        return mock;
+                    } else {
+                        // Archive the mock i.e. Mark EntityStatus as ARCHIVED
+                        if(mock.canModifyEntityStatus()){
+                            EntityStatus entityStatus = getArchivedMockEntityStatus();
+                            mock.setEntityStatus(entityStatus);
+                            mock.setUpdatedAt(ZonedDateTime.now());
+                            return mocksRepository.save(mock);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                log.log(Level.DEBUG, e.getMessage());
+            }
+        }
+        log.log(Level.DEBUG, "Invalid Mock Id!");
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Mock unarchiveMock(String mockId) {
+        if (ValidationUtil.isNotNullOrEmpty(mockId)) {
+            try {
+                Mock mock = getMockById(mockId);
+                if (mock != null) {
+                    // Idempotent behaviour - Unarchive the mock i.e. Mark EntityStatus as NONE
+                    if(mock.canModifyEntityStatus()){
+                        EntityStatus entityStatus = getDefaultMockEntityStatus();
+                        mock.setEntityStatus(entityStatus);
+                        mock.setUpdatedAt(ZonedDateTime.now());
+                        return mocksRepository.save(mock);
+                    }
+                }
+            } catch (Exception e) {
+                log.log(Level.DEBUG, e.getMessage());
+            }
+        }
+        log.log(Level.DEBUG, "Invalid Mock Id!");
+        return null;
+    }
+
     private HttpMethod getHttpMethod(String httpMethodString) throws Exception {
         if (ValidationUtil.isNotNullOrEmpty(httpMethodString)) {
             return httpMethodsRepository.findByMethod(httpMethodString);
@@ -273,6 +324,10 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     private EntityStatus getDeletedMockEntityStatus() {
         return findByEntityStatus(Status.DELETED.name());
+    }
+
+    private EntityStatus getArchivedMockEntityStatus(){
+        return findByEntityStatus(Status.ARCHIVED.name());
     }
 
     private EntityStatus findByEntityStatus(String status) {

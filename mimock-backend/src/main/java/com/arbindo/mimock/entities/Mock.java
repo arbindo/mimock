@@ -1,5 +1,6 @@
 package com.arbindo.mimock.entities;
 
+import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -84,4 +85,17 @@ public class Mock {
     @JoinColumn(name = "entity_status_id", nullable = false)
     @Schema(description = "Indicates the entity status")
     private EntityStatus entityStatus;
+
+    public boolean isDeleted(){
+        return Status.valueOf(getEntityStatus().getStatus()) == Status.DELETED;
+    }
+
+    public boolean isArchived(){
+        return Status.valueOf(getEntityStatus().getStatus()) == Status.ARCHIVED;
+    }
+
+    public boolean canModifyEntityStatus(){
+        return Status.valueOf(getEntityStatus().getStatus()) != Status.DELETED;
+    }
+
 }

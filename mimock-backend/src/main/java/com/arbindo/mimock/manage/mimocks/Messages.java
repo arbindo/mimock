@@ -26,5 +26,13 @@ public class Messages {
 
     public static final String UPDATE_RESOURCE_FAILED = "The resource update has failed!";
 
+    public static final String ARCHIVED_RESOURCE_SUCCESS = "Resource archived successfully!";
+
+    public static final String ARCHIVE_RESOURCE_FAILED = "Unable to archive the resource!";
+
+    public static final String UNARCHIVED_RESOURCE_SUCCESS = "Resource unarchived successfully!";
+
+    public static final String UNARCHIVE_RESOURCE_FAILED = "Unable to unarchive the resource!";
+
 
 }

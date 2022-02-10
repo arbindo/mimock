@@ -172,6 +172,36 @@ public class MockManagementController {
         }
     }
 
+    @Operation(summary = "Archive Mock", description = "Archives a mock based on the given mockId.",
+            tags = { "Mock Management" })
+    @PostMapping("{mockId}" + UrlConfig.ARCHIVE_ACTION)
+    public ResponseEntity<GenericResponseWrapper<Mock>> archiveMockById(@PathVariable String mockId) {
+        Mock mock = mockManagementService.archiveMock(mockId);
+        if (mock != null) {
+            GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,
+                    Messages.ARCHIVED_RESOURCE_SUCCESS, mock);
+            return ResponseEntity.ok(genericResponseWrapper);
+        }
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
+                Messages.ARCHIVE_RESOURCE_FAILED, null);
+        return ResponseEntity.badRequest().body(genericResponseWrapper);
+    }
+
+    @Operation(summary = "Unarchive Mock", description = "Unarchive a mock based on the given mockId.",
+            tags = { "Mock Management" })
+    @PostMapping("{mockId}" + UrlConfig.UNARCHIVE_ACTION)
+    public ResponseEntity<GenericResponseWrapper<Mock>> unarchiveMockById(@PathVariable String mockId) {
+        Mock mock = mockManagementService.unarchiveMock(mockId);
+        if (mock != null) {
+            GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,
+                    Messages.UNARCHIVED_RESOURCE_SUCCESS, mock);
+            return ResponseEntity.ok(genericResponseWrapper);
+        }
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
+                Messages.UNARCHIVE_RESOURCE_FAILED, null);
+        return ResponseEntity.badRequest().body(genericResponseWrapper);
+    }
+
 
     private GenericResponseWrapper<Mock> getGenericResponseWrapper(HttpStatus httpStatus, String responseMessage, Mock mock) {
         return GenericResponseWrapper.<Mock>builder()

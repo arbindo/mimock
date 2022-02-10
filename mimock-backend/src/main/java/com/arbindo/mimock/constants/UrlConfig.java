@@ -12,6 +12,8 @@ public class UrlConfig {
     public static final String SWAGGER_UI_PATH = "/swagger-ui";
     public static final String SWAGGER_UI_HTML_PATH = "/swagger-ui.html";
     public static final String FORCE_DELETE_ACTION = ":forceDelete";
+    public static final String ARCHIVE_ACTION = ":archive";
+    public static final String UNARCHIVE_ACTION = ":unarchive";
 
     // region RESOURCES
     public static final String MANAGE = "/manage";
