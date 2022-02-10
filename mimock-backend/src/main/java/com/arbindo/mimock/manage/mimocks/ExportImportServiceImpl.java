@@ -94,20 +94,21 @@ public class ExportImportServiceImpl implements ExportImportService {
     }
 
     protected static String[] getCsvTemplateHeaders() {
-        return new String[]{"Route", "Description", "Http Method", "Status Code", "Response Content Type", "Query Params"};
+        return new String[]{"Mock Name", "Route", "Description", "Http Method", "Status Code", "Response Content Type", "Query Params"};
     }
 
     protected static String[] getCsvHeaders() {
-        return new String[]{"Mock Id", "Route", "Description", "Http Method", "Status Code", "Response Content Type", "Query Params"};
+        return new String[]{"Mock Id", "Mock Name", "Route", "Description", "Http Method", "Status Code", "Response Content Type", "Query Params"};
     }
 
-    private String[] getNameMappings(){
-        return new String[]{"id", "route", "description", "httpMethod", "statusCode", "responseContentType", "queryParams"};
+    private String[] getNameMappings() {
+        return new String[]{"id", "mockName", "route", "description", "httpMethod", "statusCode", "responseContentType", "queryParams"};
     }
 
     private static CellProcessor[] getExportCellProcessors(){
         return new CellProcessor[]{
                 new NotNull(), // id
+                new NotNull(), // name
                 new NotNull(), // route
                 new Optional(), // description
                 new NotNull(), // httpMethod
