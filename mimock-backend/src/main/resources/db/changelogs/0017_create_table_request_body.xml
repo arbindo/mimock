@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0017_create_table_request_body">
+        <sql>
+            CREATE TABLE request_bodies_for_mock
+            (
+                id           BIGSERIAL NOT NULL,
+                request_body JSONB     NOT NULL,
+                created_at   TIMESTAMP NOT NULL DEFAULT current_timestamp,
+                updated_at   TIMESTAMP,
+                deleted_at   TIMESTAMP,
+                PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                DROP TABLE request_bodies_for_mock;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

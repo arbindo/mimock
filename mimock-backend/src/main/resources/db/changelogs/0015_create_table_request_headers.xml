@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0015_create_table_request_headers">
+        <sql>
+            CREATE TABLE request_headers
+            (
+                id             BIGSERIAL NOT NULL,
+                request_header JSONB     NOT NULL,
+                match_exact    BOOLEAN   NOT NULL DEFAULT false,
+                created_at     TIMESTAMP NOT NULL DEFAULT current_timestamp,
+                updated_at     TIMESTAMP,
+                deleted_at     TIMESTAMP,
+                PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                DROP TABLE request_headers;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
