@@ -84,6 +84,20 @@ public class MocksGenerator {
                 .build();
     }
 
+    public static EntityStatus generateArchivedEntityStatus() {
+        return EntityStatus.builder()
+                .status(Status.ARCHIVED.name())
+                .createdAt(ZonedDateTime.now())
+                .build();
+    }
+
+    public static EntityStatus generateDeletedEntityStatus() {
+        return EntityStatus.builder()
+                .status(Status.DELETED.name())
+                .createdAt(ZonedDateTime.now())
+                .build();
+    }
+
     private static TextualResponse generateTextualResponse() {
         return TextualResponse.builder()
                 .id(1L)
@@ -196,5 +210,23 @@ public class MocksGenerator {
         String[] responseContentTypes = {"application/json", "application/pdf", "application/xml", "application/zip", "image/png"};
         int index = generateRandomNumber(responseContentTypes.length - 1);
         return responseContentTypes[index];
+    }
+
+    public static Mock archiveMock(Mock mock){
+        mock.setEntityStatus(generateArchivedEntityStatus());
+        mock.setUpdatedAt(ZonedDateTime.now());
+        return mock;
+    }
+
+    public static Mock unarchiveMock(Mock mock){
+        mock.setEntityStatus(generateDefaultEntityStatus());
+        mock.setUpdatedAt(ZonedDateTime.now());
+        return mock;
+    }
+
+    public static Mock deleteMock(Mock mock){
+        mock.setEntityStatus(generateDeletedEntityStatus());
+        mock.setUpdatedAt(ZonedDateTime.now());
+        return mock;
     }
 }
