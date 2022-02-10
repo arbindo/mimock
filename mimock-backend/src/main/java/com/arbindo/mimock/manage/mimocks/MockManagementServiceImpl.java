@@ -134,7 +134,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             log.log(Level.DEBUG, "CreateMockRequest is null!");
             return null;
         }
-        if(IsMockNameAlreadyExists(request)) {
+        if(isMockNameAlreadyExists(request)) {
             log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
             return null;
         }
@@ -193,7 +193,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             log.log(Level.DEBUG, "UpdateMockRequest is null!");
             return null;
         }
-        if(IsMockNameAlreadyExists(request)) {
+        if(isMockNameAlreadyExists(request)) {
             log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
             return null;
         }
@@ -311,7 +311,7 @@ public class MockManagementServiceImpl implements MockManagementService {
         return null;
     }
 
-    private boolean IsMockNameAlreadyExists(MockRequest request){
+    private boolean isMockNameAlreadyExists(MockRequest request){
         Optional<Mock> mock = mocksRepository.findOneByMockName(request.getName());
         return mock.isPresent();
     }
