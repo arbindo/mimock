@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <include file="changelogs/0001_create_table_response_content_types.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0002_insert_response_content_types.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0003_create_table_textual_responses.xml" relativeToChangelogFile="true"/>
@@ -18,4 +17,8 @@
     <include file="changelogs/0013_update_response_content_types_set_response_type.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0014_alter_response_content_types_add_constraint_for_response_type_id.xml"
              relativeToChangelogFile="true"/>
+    <include file="changelogs/0015_create_table_request_headers.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0016_create_table_response_headers.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0017_create_table_request_body.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0018_alter_mocks_add_columns_for_request_body_and_headers.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

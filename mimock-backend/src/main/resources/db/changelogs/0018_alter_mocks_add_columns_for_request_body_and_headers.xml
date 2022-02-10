@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0018_alter_mocks_add_columns_for_request_body_and_headers">
+        <sql>
+            ALTER TABLE mocks
+                ADD COLUMN request_header_id INT REFERENCES request_headers (id),
+                ADD COLUMN response_header_id INT REFERENCES response_headers (id),
+                ADD COLUMN request_body_id INT REFERENCES request_bodies_for_mock (id);
+        </sql>
+        <rollback>
+            <sql>
+                ALTER TABLE mocks
+                DROP COLUMN request_header_id,
+                DROP COLUMN response_header_id,
+                DROP COLUMN request_body_id;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
