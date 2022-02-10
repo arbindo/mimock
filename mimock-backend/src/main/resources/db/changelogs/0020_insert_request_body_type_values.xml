@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0011_insert_response_type_values">
+        <sql>
+            INSERT INTO request_body_types (request_body_type)
+            VALUES ('application/json'),
+                   ('application/x-www-form-urlencoded'),
+                   ('multipart/form-data'),
+                   ('application/xml'),
+                   ('text/plain')
+            ;
+        </sql>
+        <rollback>
+            <sql>
+                TRUNCATE TABLE request_body_type;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

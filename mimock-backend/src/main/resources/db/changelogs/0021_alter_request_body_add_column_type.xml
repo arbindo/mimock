@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0018_alter_mocks_add_columns_for_request_body_and_headers">
+        <sql>
+            CREATE
+            OR REPLACE FUNCTION get_type_id() RETURNS int LANGUAGE SQL AS
+            'SELECT id
+            FROM request_body_types
+            WHERE request_body_type = ''application/json'';'
+        </sql>
+        <sql>
+            ALTER TABLE request_bodies_for_mock
+                ADD COLUMN request_body_type_id INT NOT NULL DEFAULT get_type_id()
+                    REFERENCES request_body_types (id);
+        </sql>
+        <rollback>
+            <sql>
+                ALTER TABLE request_body_types
+                DROP COLUMN request_body_type_id;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

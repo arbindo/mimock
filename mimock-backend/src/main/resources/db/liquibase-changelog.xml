@@ -20,5 +20,9 @@
     <include file="changelogs/0015_create_table_request_headers.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0016_create_table_response_headers.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0017_create_table_request_body.xml" relativeToChangelogFile="true"/>
-    <include file="changelogs/0018_alter_mocks_add_columns_for_request_body_and_headers.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0018_alter_mocks_add_columns_for_request_body_and_headers.xml"
+             relativeToChangelogFile="true"/>
+    <include file="changelogs/0019_create_table_request_body_types.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0020_insert_request_body_type_values.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0021_alter_request_body_add_column_type.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
