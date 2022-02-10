@@ -15,4 +15,5 @@ import java.util.UUID;
 public interface MocksRepository extends JpaRepository<Mock, UUID> {
     Optional<Mock> findOneByRouteAndHttpMethodAndQueryParams(String route, HttpMethod httpMethod, String queryParams);
     Page<Mock> findAllByEntityStatus(EntityStatus entityStatus, Pageable pageable);
+    Optional<Mock> findOneByMockName(String mockName);
 }

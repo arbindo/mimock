@@ -134,6 +134,10 @@ public class MockManagementServiceImpl implements MockManagementService {
             log.log(Level.DEBUG, "CreateMockRequest is null!");
             return null;
         }
+        if(IsMockNameAlreadyExists(request)) {
+            log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
+            return null;
+        }
         try {
             UUID mockId = UUID.randomUUID();
             HttpMethod httpMethod = getHttpMethod(request.getHttpMethod());
@@ -187,6 +191,10 @@ public class MockManagementServiceImpl implements MockManagementService {
         }
         if (ValidationUtil.isArgNull(request)) {
             log.log(Level.DEBUG, "UpdateMockRequest is null!");
+            return null;
+        }
+        if(IsMockNameAlreadyExists(request)) {
+            log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
             return null;
         }
         try {
@@ -301,6 +309,11 @@ public class MockManagementServiceImpl implements MockManagementService {
         }
         log.log(Level.DEBUG, "Invalid Mock Id!");
         return null;
+    }
+
+    private boolean IsMockNameAlreadyExists(MockRequest request){
+        Optional<Mock> mock = mocksRepository.findOneByMockName(request.getName());
+        return mock.isPresent();
     }
 
     private HttpMethod getHttpMethod(String httpMethodString) throws Exception {

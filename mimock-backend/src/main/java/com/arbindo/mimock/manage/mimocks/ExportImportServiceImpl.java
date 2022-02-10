@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Level;
 import org.springframework.stereotype.Service;
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.constraint.NotNull;
+import org.supercsv.cellprocessor.constraint.Unique;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
@@ -108,7 +109,7 @@ public class ExportImportServiceImpl implements ExportImportService {
     private static CellProcessor[] getExportCellProcessors(){
         return new CellProcessor[]{
                 new NotNull(), // id
-                new NotNull(), // name
+                new Unique(), // name
                 new NotNull(), // route
                 new Optional(), // description
                 new NotNull(), // httpMethod
