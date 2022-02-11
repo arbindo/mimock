@@ -19,6 +19,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         default_schema: mimock_schema_test
+        types:
+          print:
+            banner: false
 
   liquibase:
     change-log: classpath:/db/liquibase-changelog.xml
