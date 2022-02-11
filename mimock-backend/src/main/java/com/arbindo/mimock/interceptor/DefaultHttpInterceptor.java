@@ -40,7 +40,7 @@ public class DefaultHttpInterceptor implements HandlerInterceptor {
         return checkAndHandleAsMockRequest(request, response, path);
     }
 
-    private boolean checkAndHandleAsMockRequest(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
+    private boolean checkAndHandleAsMockRequest(HttpServletRequest request, HttpServletResponse response, String path) {
         log.log(Level.INFO, "Routing intercepted request to mock controller");
         Optional<DomainModelForMock> domainModelForMock = genericMockRequestController.serveRequest(
                 formattedPath(path),
