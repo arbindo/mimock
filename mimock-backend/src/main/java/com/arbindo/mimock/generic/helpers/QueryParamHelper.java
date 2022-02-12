@@ -13,7 +13,7 @@ import java.util.List;
 @Log4j2
 @Service
 public class QueryParamHelper {
-    public StringBuilder extractQueryParams(HttpServletRequest request) {
+    public static StringBuilder extractQueryParams(HttpServletRequest request) {
         StringBuilder queryParamAndValue = new StringBuilder();
         List<String> queryParamsList = getQueryParamsList(request);
 
@@ -41,7 +41,7 @@ public class QueryParamHelper {
         return queryParamAndValue;
     }
 
-    private List<String> getQueryParamsList(HttpServletRequest request) {
+    private static List<String> getQueryParamsList(HttpServletRequest request) {
         Enumeration<String> queryParams = request.getParameterNames();
         List<String> queryParamsList = new ArrayList<>();
         while (queryParams.hasMoreElements()) {

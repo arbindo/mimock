@@ -17,6 +17,11 @@ public class RequestHeaderComparator {
     private final Map<String, Object> headersFromRequest;
 
     public Boolean doesMockHaveMatchingHeaders(boolean shouldMatchExact) {
+        log.log(Level.INFO, "Comparing request headers");
+        log.log(Level.DEBUG, String.format("Headers from DB : %s\nHeaders from request : %s",
+                headersFromMock.toString(),
+                headersFromRequest.toString()));
+
         if (shouldMatchExact) {
             return doHeadersMatch();
         }

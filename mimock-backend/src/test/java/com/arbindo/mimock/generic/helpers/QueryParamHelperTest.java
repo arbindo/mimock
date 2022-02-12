@@ -1,7 +1,6 @@
 package com.arbindo.mimock.generic.helpers;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
 
@@ -10,16 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(classes = QueryParamHelper.class)
 class QueryParamHelperTest {
 
-    @Autowired
-    QueryParamHelper queryParamHelper;
-
     @Test
     void shouldReturnOneQueryParamAndValue() {
         MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
         mockHttpServletRequest.setRequestURI("/api/testmock/testroute");
         mockHttpServletRequest.setParameter("version", "1.0");
 
-        StringBuilder queryParams = queryParamHelper.extractQueryParams(mockHttpServletRequest);
+        StringBuilder queryParams = QueryParamHelper.extractQueryParams(mockHttpServletRequest);
 
         assertEquals("version=1.0", queryParams.toString());
     }
@@ -31,7 +27,7 @@ class QueryParamHelperTest {
         mockHttpServletRequest.setParameter("version", "1.0");
         mockHttpServletRequest.setParameter("active", "true");
 
-        StringBuilder queryParams = queryParamHelper.extractQueryParams(mockHttpServletRequest);
+        StringBuilder queryParams = QueryParamHelper.extractQueryParams(mockHttpServletRequest);
 
         assertEquals("version=1.0&active=true", queryParams.toString());
     }
@@ -41,7 +37,7 @@ class QueryParamHelperTest {
         MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
         mockHttpServletRequest.setRequestURI("/api/testmock/testroute");
 
-        StringBuilder queryParams = queryParamHelper.extractQueryParams(mockHttpServletRequest);
+        StringBuilder queryParams = QueryParamHelper.extractQueryParams(mockHttpServletRequest);
 
         assertEquals("", queryParams.toString());
     }

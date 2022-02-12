@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -13,4 +15,6 @@ public class GenericRequestModel {
     private String route;
     private String httpMethod;
     private String queryParam;
+    private Map<String, Object> requestHeaders;
+    private String requestBody;
 }

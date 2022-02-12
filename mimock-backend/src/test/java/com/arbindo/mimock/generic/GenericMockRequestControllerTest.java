@@ -41,7 +41,6 @@ class GenericMockRequestControllerTest {
                 .responseBody(expectedResponseBody)
                 .build();
 
-        lenient().when(genericMockRequestService.extractQueryParams(mockHttpServletRequest)).thenReturn(new StringBuilder());
         lenient().when(genericMockRequestService.serveMockRequest(any())).thenReturn(expectedMock);
 
         Optional<DomainModelForMock> response = genericMockRequestController.serveRequest(
@@ -72,7 +71,6 @@ class GenericMockRequestControllerTest {
                 .responseBody(expectedResponseBody)
                 .build();
 
-        lenient().when(genericMockRequestService.extractQueryParams(mockHttpServletRequest)).thenReturn(new StringBuilder("version=2.0&active=true"));
         lenient().when(genericMockRequestService.serveMockRequest(any())).thenReturn(expectedMock);
 
         Optional<DomainModelForMock> response = genericMockRequestController.serveRequest(
@@ -103,7 +101,6 @@ class GenericMockRequestControllerTest {
                 .responseBody(expectedResponseBody)
                 .build();
 
-        lenient().when(genericMockRequestService.extractQueryParams(any())).thenReturn(new StringBuilder("version=2.0&active=true"));
         lenient().when(genericMockRequestService.serveMockRequest(any())).thenReturn(expectedMock);
 
         Optional<DomainModelForMock> response = genericMockRequestController.serveRequest(
@@ -124,7 +121,6 @@ class GenericMockRequestControllerTest {
         String route = "/api/testmock/testroute?version=2.0&active=true";
         MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
 
-        lenient().when(genericMockRequestService.extractQueryParams(any())).thenReturn(new StringBuilder("version=2.0&active=true"));
         lenient().when(genericMockRequestService.serveMockRequest(any())).thenThrow(MatchingMockNotFoundException.class);
 
         Optional<DomainModelForMock> response = genericMockRequestController.serveRequest(

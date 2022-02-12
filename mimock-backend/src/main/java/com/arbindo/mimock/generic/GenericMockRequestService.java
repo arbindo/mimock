@@ -2,17 +2,20 @@ package com.arbindo.mimock.generic;
 
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.Mock;
+import com.arbindo.mimock.entities.RequestHeader;
 import com.arbindo.mimock.generic.helpers.QueryParamHelper;
+import com.arbindo.mimock.generic.helpers.RequestHeaderComparator;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
 import com.arbindo.mimock.repository.HttpMethodsRepository;
 import com.arbindo.mimock.repository.MocksRepository;
+import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -38,13 +41,7 @@ public class GenericMockRequestService {
         this.httpMethodsRepository = httpMethodsRepository;
     }
 
-
-    public StringBuilder extractQueryParams(HttpServletRequest request) {
-        log.log(Level.INFO, "Extracting query params from request path");
-        return queryParamHelper.extractQueryParams(request);
-    }
-
-    public DomainModelForMock serveMockRequest(GenericRequestModel request) throws MatchingMockNotFoundException {
+    public DomainModelForMock serveMockRequest(GenericRequestModel request) throws MatchingMockNotFoundException, IOException {
         log.log(Level.INFO, "Fetching matching mock from the DB");
 
         String route = request.getRoute();
@@ -65,11 +62,66 @@ public class GenericMockRequestService {
 
         log.log(Level.INFO, "Returning matching mock");
         Mock matchingMock = resultFromDB.get();
+
+        if (shouldValidateRequestHeaders(matchingMock, request)) {
+            validateRequestHeaders(request, matchingMock);
+        }
+
+        if (shouldValidateRequestBody(matchingMock, request)) {
+            validateRequestBody(
+                    matchingMock.getRequestBodiesForMock().getRequestBody(),
+                    request.getRequestBody()
+            );
+        }
+
         return domainModelMapper.mappedModel(matchingMock);
     }
 
     private HttpMethod httpMethod(String method) {
         log.log(Level.INFO, "Fetching HTTP method from the DB");
         return httpMethodsRepository.findByMethod(method);
+    }
+
+    private boolean shouldValidateRequestHeaders(Mock matchingMock, GenericRequestModel request) {
+        log.log(Level.INFO, "Checking if request headers need to be validated");
+        return ValidationUtil.isArgNotNull(matchingMock.getRequestHeaders()) &&
+                !matchingMock.getRequestHeaders().getRequestHeader().isEmpty() &&
+                ValidationUtil.isArgNotNull(request.getRequestHeaders()) &&
+                !request.getRequestHeaders().isEmpty();
+    }
+
+    private boolean shouldValidateRequestBody(Mock matchingMock, GenericRequestModel request) {
+        log.log(Level.INFO, "Checking if request body need to be validated");
+        return ValidationUtil.isArgNotNull(matchingMock.getRequestBodiesForMock()) &&
+                !matchingMock.getRequestBodiesForMock().getRequestBody().isBlank() &&
+                !request.getRequestBody().isBlank();
+    }
+
+    private void validateRequestHeaders(GenericRequestModel request, Mock matchingMock) {
+        log.log(Level.INFO, "Checking if the request headers match the headers setup for the mock");
+        RequestHeader headersFromMatchingMock = matchingMock.getRequestHeaders();
+
+        Boolean doesMockHaveMatchingHeaders = RequestHeaderComparator
+                .builder()
+                .headersFromRequest(request.getRequestHeaders())
+                .headersFromMock(headersFromMatchingMock.getRequestHeader())
+                .build()
+                .doesMockHaveMatchingHeaders(headersFromMatchingMock.getMatchExact());
+
+        if (!doesMockHaveMatchingHeaders) {
+            log.log(Level.ERROR, "Headers stored for the mock does not match");
+            String errorMessage = "Headers does not match";
+            throw new MatchingMockNotFoundException(errorMessage);
+        }
+    }
+
+    private void validateRequestBody(String requestBodyForMatchingMock, String requestBody) throws IOException {
+        log.log(Level.INFO, "Checking if request bodies match");
+
+        if (!requestBodyForMatchingMock.equals(requestBody)) {
+            log.log(Level.ERROR, "Request body for the mock and the actual request body does not match");
+            String errorMessage = "The request body does not match";
+            throw new MatchingMockNotFoundException(errorMessage);
+        }
     }
 }
