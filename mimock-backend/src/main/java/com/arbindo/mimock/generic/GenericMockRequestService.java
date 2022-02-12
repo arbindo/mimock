@@ -3,7 +3,6 @@ package com.arbindo.mimock.generic;
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.entities.RequestHeader;
-import com.arbindo.mimock.generic.helpers.QueryParamHelper;
 import com.arbindo.mimock.generic.helpers.RequestHeaderComparator;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
 import com.arbindo.mimock.repository.HttpMethodsRepository;
@@ -22,8 +21,6 @@ import java.util.Optional;
 @Log4j2
 @Builder
 public class GenericMockRequestService {
-    private QueryParamHelper queryParamHelper;
-
     private DomainModelMapper domainModelMapper;
 
     private MocksRepository repository;
@@ -31,11 +28,9 @@ public class GenericMockRequestService {
     private final HttpMethodsRepository httpMethodsRepository;
 
     @Autowired
-    public GenericMockRequestService(QueryParamHelper queryParamHelper,
-                                     DomainModelMapper domainModelMapper,
+    public GenericMockRequestService(DomainModelMapper domainModelMapper,
                                      MocksRepository repository,
                                      HttpMethodsRepository httpMethodsRepository) {
-        this.queryParamHelper = queryParamHelper;
         this.domainModelMapper = domainModelMapper;
         this.repository = repository;
         this.httpMethodsRepository = httpMethodsRepository;

@@ -32,9 +32,6 @@ class GenericMockRequestServiceTest {
     ResponseContentTypeDBHelper responseContentTypeDBHelper;
 
     @Autowired
-    QueryParamHelper queryParamHelper;
-
-    @Autowired
     DomainModelMapper domainModelMapper;
 
     @org.mockito.Mock
@@ -50,7 +47,6 @@ class GenericMockRequestServiceTest {
         this.genericMockRequestService = GenericMockRequestService.builder()
                 .httpMethodsRepository(mockHttpMethodsRepository)
                 .repository(mockRepository)
-                .queryParamHelper(queryParamHelper)
                 .domainModelMapper(domainModelMapper)
                 .build();
     }
