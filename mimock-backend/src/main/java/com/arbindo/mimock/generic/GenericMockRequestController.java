@@ -35,7 +35,7 @@ public class GenericMockRequestController {
 
         try {
             log.log(Level.INFO, "Returning matching mock to the interceptor");
-            String requestBody = RequestBodyParser.getRequestBody(request);
+            Map<String, Object> requestBody = RequestBodyParser.getRequestBody(request);
             Map<String, Object> headerMap = RequestHeaderParser.getHeaderMap(request);
 
             GenericRequestModel mockRequest = generateMockRequest(basePath,
@@ -47,7 +47,7 @@ public class GenericMockRequestController {
             log.log(Level.INFO, "Invoking service to fetch matching mock from DB");
             return Optional.of(genericMockRequestService.serveMockRequest(mockRequest));
         } catch (Exception e) {
-            log.log(Level.ERROR, e.getMessage());
+            log.log(Level.ERROR, "Error occurred while fetching matching mock : " + e.getMessage());
             log.log(Level.INFO, "Returning empty response to the interceptor. Will be considered as a 404 not found error");
             return Optional.empty();
         }
@@ -57,7 +57,7 @@ public class GenericMockRequestController {
                                                     StringBuilder queryParamAndValue,
                                                     String requestMethod,
                                                     Map<String, Object> headerMap,
-                                                    String requestBody) {
+                                                    Map<String, Object> requestBody) {
         return GenericRequestModel.builder()
                 .httpMethod(requestMethod)
                 .queryParam(queryParamAndValue.toString())

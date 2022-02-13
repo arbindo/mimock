@@ -5,6 +5,7 @@ import com.arbindo.mimock.generic.helpers.QueryParamHelper;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
 import com.arbindo.mimock.helpers.db.HttpMethodDBHelper;
 import com.arbindo.mimock.helpers.db.ResponseContentTypeDBHelper;
+import com.arbindo.mimock.helpers.general.JsonMapper;
 import com.arbindo.mimock.helpers.general.RandomDataGenerator;
 import com.arbindo.mimock.repository.HttpMethodsRepository;
 import com.arbindo.mimock.repository.MocksRepository;
@@ -63,7 +64,7 @@ class GenericMockRequestServiceTest {
                 .queryParam("version=1.0.0&auto=true")
                 .route(expectedRoute)
                 .requestHeaders(requestHeaders)
-                .requestBody(requestBody)
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
                 .build();
 
         HttpMethod httpMethod = HttpMethod.builder()
@@ -77,7 +78,7 @@ class GenericMockRequestServiceTest {
                 .matchExact(true)
                 .build();
         RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
-                .requestBody(requestBody)
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
                 .build();
 
         Mock expectedMock = Mock.builder()
@@ -212,7 +213,7 @@ class GenericMockRequestServiceTest {
                 .queryParam("version=1.0.0&auto=true")
                 .route(expectedRoute)
                 .requestHeaders(RandomDataGenerator.getRequestHeaders())
-                .requestBody(requestBody1)
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody1))
                 .build();
 
         HttpMethod httpMethod = HttpMethod.builder()
@@ -228,7 +229,7 @@ class GenericMockRequestServiceTest {
                 .build();
 
         RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
-                .requestBody(requestBody2)
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody2))
                 .build();
 
         Mock expectedMock = Mock.builder()

@@ -16,5 +16,5 @@ public class GenericRequestModel {
     private String httpMethod;
     private String queryParam;
     private Map<String, Object> requestHeaders;
-    private String requestBody;
+    private Map<String, Object> requestBody;
 }

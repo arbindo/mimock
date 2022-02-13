@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -88,8 +89,9 @@ public class GenericMockRequestService {
     private boolean shouldValidateRequestBody(Mock matchingMock, GenericRequestModel request) {
         log.log(Level.INFO, "Checking if request body need to be validated");
         return ValidationUtil.isArgNotNull(matchingMock.getRequestBodiesForMock()) &&
-                !matchingMock.getRequestBodiesForMock().getRequestBody().isBlank() &&
-                !request.getRequestBody().isBlank();
+                !matchingMock.getRequestBodiesForMock().getRequestBody().isEmpty() &&
+                ValidationUtil.isArgNotNull(request.getRequestBody()) &&
+                !request.getRequestBody().isEmpty();
     }
 
     private void validateRequestHeaders(GenericRequestModel request, Mock matchingMock) {
@@ -105,18 +107,31 @@ public class GenericMockRequestService {
 
         if (!doesMockHaveMatchingHeaders) {
             log.log(Level.ERROR, "Headers stored for the mock does not match");
+            log.log(Level.ERROR, String.format("\nHeaders from request : %s\nHeaders from DB : %s",
+                    request.getRequestHeaders(),
+                    matchingMock.getRequestHeaders().getRequestHeader()));
+
             String errorMessage = "Headers does not match";
             throw new MatchingMockNotFoundException(errorMessage);
         }
     }
 
-    private void validateRequestBody(String requestBodyForMatchingMock, String requestBody) throws IOException {
+    private void validateRequestBody(Map<String, Object> requestBodyForMatchingMock, Map<String, Object> requestBody) throws IOException {
         log.log(Level.INFO, "Checking if request bodies match");
 
-        if (!requestBodyForMatchingMock.equals(requestBody)) {
-            log.log(Level.ERROR, "Request body for the mock and the actual request body does not match");
-            String errorMessage = "The request body does not match";
-            throw new MatchingMockNotFoundException(errorMessage);
+        for (Map.Entry<String, Object> item : requestBodyForMatchingMock.entrySet()) {
+            String key = item.getKey();
+            if (!requestBodyForMatchingMock.get(key).equals(requestBody.get(key))) {
+                log.log(Level.ERROR, "Request body for the mock and the actual request body does not match");
+                log.log(Level.ERROR, String.format("Request body from DB : {%s} : {%s}", key, requestBodyForMatchingMock.get(key)));
+                log.log(Level.ERROR, String.format("Request body : {%s} : {%s}", key, requestBody.get(key)));
+                log.log(Level.ERROR, String.format("\nRequest body received : %s\nRequest body from DB : %s",
+                        requestBody,
+                        requestBodyForMatchingMock));
+
+                String errorMessage = "The request body does not match";
+                throw new MatchingMockNotFoundException(errorMessage);
+            }
         }
     }
 }
