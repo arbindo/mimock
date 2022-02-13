@@ -16,7 +16,7 @@ public class JSONUtils {
     public static Map<String, Object> convertJSONStringToMap(String jsonString) {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        if (jsonString.isBlank()) {
+        if (jsonString == null || jsonString.isBlank()) {
             log.log(Level.ERROR, "JSON string is blank");
             return null;
         }
@@ -48,10 +48,16 @@ public class JSONUtils {
     }
 
     public static Map<String, Object> convertJSONStringToMapWithLowerCaseKeys(String jsonString) {
+        if (jsonString == null || jsonString.isBlank()) {
+            log.log(Level.ERROR, "JSON string is blank");
+            return null;
+        }
+
         return changeKeyCaseToLower(Objects.requireNonNull(convertJSONStringToMap(jsonString)));
     }
 
     private static Map<String, Object> changeKeyCaseToLower(Map<String, Object> jsonMap) {
+        log.log(Level.INFO, "Converting map keys to lower case");
         Map<String, Object> mapWithChangedCase = new HashMap<>();
         for (Map.Entry<String, Object> header : jsonMap.entrySet()) {
             mapWithChangedCase.put(header.getKey().toLowerCase(), header.getValue());
