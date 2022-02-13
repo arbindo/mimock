@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -14,5 +16,6 @@ public class DomainModelForMock {
     private String responseContentType;
     private Integer statusCode;
     private Object responseBody;
+    private Map<String, Object> responseHeaders;
     private TypeOfResponse typeOfResponse;
 }
