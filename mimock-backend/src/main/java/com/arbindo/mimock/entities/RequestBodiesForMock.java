@@ -6,10 +6,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -24,8 +26,9 @@ public class RequestBodiesForMock {
     private Long id;
 
     @Column(name = "request_body", nullable = false)
+    @Type(type = "json")
     @Schema(description = "Request body of the mock. Allowed typed json, xml, plaintext, url-encoded data and form-data")
-    private String requestBody;
+    private Map<String, Object> requestBody;
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp

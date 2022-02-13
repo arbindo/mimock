@@ -7,7 +7,7 @@
             CREATE TABLE request_body_types
             (
                 id                BIGSERIAL    NOT NULL,
-                request_body_type VARCHAR(255) NOT NULL,
+                request_body_type VARCHAR(50) NOT NULL,
                 created_at        TIMESTAMP    NOT NULL DEFAULT current_timestamp,
                 updated_at        TIMESTAMP,
                 deleted_at        TIMESTAMP,

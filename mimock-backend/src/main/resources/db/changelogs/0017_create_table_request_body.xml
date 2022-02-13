@@ -7,7 +7,7 @@
             CREATE TABLE request_bodies_for_mock
             (
                 id           BIGSERIAL NOT NULL,
-                request_body TEXT      NOT NULL,
+                request_body JSONB     NOT NULL,
                 created_at   TIMESTAMP NOT NULL DEFAULT current_timestamp,
                 updated_at   TIMESTAMP,
                 deleted_at   TIMESTAMP,

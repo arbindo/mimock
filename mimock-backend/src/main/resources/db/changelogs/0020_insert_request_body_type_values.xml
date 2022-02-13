@@ -7,10 +7,7 @@
             INSERT INTO request_body_types (request_body_type)
             VALUES ('application/json'),
                    ('application/x-www-form-urlencoded'),
-                   ('multipart/form-data'),
-                   ('application/xml'),
-                   ('text/plain')
-            ;
+                   ('multipart/form-data');
         </sql>
         <rollback>
             <sql>
