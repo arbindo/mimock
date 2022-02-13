@@ -291,7 +291,7 @@ class MimockMockRepositoryTest {
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
         ResponseHeader expectedResponseHeaders = ResponseHeader.builder()
-                .responseHeader(RandomDataGenerator.getResponseHeaders())
+                .responseHeader(RandomDataGenerator.generateResponseHeaders())
                 .build();
         responseHeadersDBHelper.save(expectedResponseHeaders);
 
@@ -370,7 +370,7 @@ class MimockMockRepositoryTest {
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
         ResponseHeader expectedResponseHeaders = ResponseHeader.builder()
-                .responseHeader(RandomDataGenerator.getResponseHeaders())
+                .responseHeader(RandomDataGenerator.generateResponseHeaders())
                 .build();
         responseHeadersDBHelper.save(expectedResponseHeaders);
 
@@ -382,7 +382,7 @@ class MimockMockRepositoryTest {
 
         RequestBodyType requestBodyType = requestBodyTypeDBHelper.findOneByRequestBodyType("application/json");
         RequestBodiesForMock expectedRequestBody = RequestBodiesForMock.builder()
-                .requestBody("{'name': 'test-user'}")
+                .requestBody(RandomDataGenerator.generateRequestBody())
                 .requestBodyType(requestBodyType)
                 .build();
         requestBodiesForMockDBHelper.save(expectedRequestBody);

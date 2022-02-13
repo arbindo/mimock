@@ -1,7 +1,7 @@
 package com.arbindo.mimock.manage.mimocks;
 
-import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.Status;
@@ -38,10 +38,10 @@ public class MockManagementController {
     private ExportImportService exportImportService;
 
     @Operation(summary = "Create Mock", description = "Creates a mock as per the given data in multi-part form.",
-            tags = { "Mock Management" })
+            tags = {"Mock Management"})
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@Valid MockRequest request) {
-        Mock mock = mockManagementService.createMock(request);
+        Mock mock = mockManagementService.createMock(RequestModelMapper.map(request));
         if (mock != null) {
             final URI location = ServletUriComponentsBuilder
                     .fromCurrentServletMapping().path(UrlConfig.MOCKS_PATH + "/{mockId}").build()
@@ -55,14 +55,14 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
-    @Operation(summary = "List Mocks", description = "List all mocks.", tags = { "Mock Management" })
+    @Operation(summary = "List Mocks", description = "List all mocks.", tags = {"Mock Management"})
     @GetMapping
     public ResponseEntity<List<Mock>> getAllMocks() {
         return ResponseEntity.ok(mockManagementService.getAllMocks());
     }
 
     @Operation(summary = "Filter Mocks By Status", description = "List all mocks based on the status filter (NONE, ARCHIVED, DELETED)",
-            tags = { "Mock Management" })
+            tags = {"Mock Management"})
     @GetMapping(UrlConfig.MOCKS_FILTER)
     public ResponseEntity<Page<Mock>> getAllMocksWithFilter(@SortDefault(sort = "createdAt",
             direction = Sort.Direction.DESC) Pageable pageable, @RequestParam Status status) {
@@ -70,7 +70,7 @@ public class MockManagementController {
         return ResponseEntity.ok(mockPageable);
     }
 
-    @Operation(summary = "Get Mock", description = "Get mock based on the given mockId.", tags = { "Mock Management" })
+    @Operation(summary = "Get Mock", description = "Get mock based on the given mockId.", tags = {"Mock Management"})
     @GetMapping("{mockId}")
     public ResponseEntity<GenericResponseWrapper<Mock>> getMockById(@PathVariable String mockId) {
         Mock mock = mockManagementService.getMockById(mockId);
@@ -82,7 +82,7 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
-    @Operation(summary = "Delete Mock", description = "Performs soft delete on mock based on the given mockId.", tags = { "Mock Management" })
+    @Operation(summary = "Delete Mock", description = "Performs soft delete on mock based on the given mockId.", tags = {"Mock Management"})
     @DeleteMapping("{mockId}")
     public ResponseEntity<GenericResponseWrapper<Mock>> softDeleteMockById(@PathVariable String mockId) {
         boolean isMockDeleted = mockManagementService.softDeleteMockById(mockId);
@@ -98,7 +98,7 @@ public class MockManagementController {
     }
 
     @Operation(summary = "Force Delete Mock", description = "Performs hard delete on mock based on the given mockId.",
-            tags = { "Mock Management" })
+            tags = {"Mock Management"})
     @DeleteMapping("{mockId}" + UrlConfig.FORCE_DELETE_ACTION)
     public ResponseEntity<GenericResponseWrapper<Mock>> hardDeleteMockById(@PathVariable String mockId) {
         boolean isMockDeleted = mockManagementService.hardDeleteMockById(mockId);
@@ -113,7 +113,7 @@ public class MockManagementController {
         return ResponseEntity.badRequest().body(genericResponseWrapper);
     }
 
-    @Operation(summary = "Delete Mocks", description = "Deletes all mocks.", tags = { "Mock Management" })
+    @Operation(summary = "Delete Mocks", description = "Deletes all mocks.", tags = {"Mock Management"})
     @DeleteMapping
     public ResponseEntity<GenericResponseWrapper<Boolean>> deleteAllMocks() {
         boolean allMocksDeleted = mockManagementService.deleteAllMocks();
@@ -126,10 +126,10 @@ public class MockManagementController {
     }
 
     @Operation(summary = "Update Mock", description = "Updates mock for the given mockId using the data in multi-part form.",
-            tags = { "Mock Management" })
+            tags = {"Mock Management"})
     @PutMapping(value = "{mockId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @Valid MockRequest request) {
-        Mock updatedMock = mockManagementService.updateMock(mockId, request);
+        Mock updatedMock = mockManagementService.updateMock(mockId, RequestModelMapper.map(request));
         if (updatedMock != null) {
             GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,
                     Messages.UPDATE_RESOURCE_SUCCESS, updatedMock);
@@ -141,7 +141,7 @@ public class MockManagementController {
     }
 
     @Operation(summary = "Export Mock CSV Template", description = "Exports the mock template CSV file which can used" +
-            " while import operation.", tags = { "Mock Management" })
+            " while import operation.", tags = {"Mock Management"})
     @GetMapping(UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT)
     public void exportTemplateCsv(HttpServletResponse response) {
         String headerKey = "Content-Disposition";
@@ -150,13 +150,13 @@ public class MockManagementController {
             response.setContentType("text/csv");
             response.setHeader(headerKey, headerValue);
             exportImportService.exportMockTemplateCsv(response.getWriter());
-        } catch (Exception e){
+        } catch (Exception e) {
             log.log(Level.DEBUG, e.getMessage());
             response.setStatus(500);
         }
     }
 
-    @Operation(summary = "Export Mocks", description = "Exports the mocks in CSV file format.", tags = { "Mock Management" })
+    @Operation(summary = "Export Mocks", description = "Exports the mocks in CSV file format.", tags = {"Mock Management"})
     @GetMapping(UrlConfig.MOCKS_CSV_EXPORT)
     public void exportAllMocksInCsvFormat(HttpServletResponse response) {
         String headerKey = "Content-Disposition";
@@ -166,14 +166,14 @@ public class MockManagementController {
             response.setContentType("text/csv");
             response.setHeader(headerKey, headerValue);
             exportImportService.exportMockListToCsv(response.getWriter(), mockList);
-        } catch (Exception e){
+        } catch (Exception e) {
             log.log(Level.DEBUG, e.getMessage());
             response.setStatus(500);
         }
     }
 
     @Operation(summary = "Archive Mock", description = "Archives a mock based on the given mockId.",
-            tags = { "Mock Management" })
+            tags = {"Mock Management"})
     @PostMapping("{mockId}" + UrlConfig.ARCHIVE_ACTION)
     public ResponseEntity<GenericResponseWrapper<Mock>> archiveMockById(@PathVariable String mockId) {
         Mock mock = mockManagementService.archiveMock(mockId);
@@ -188,7 +188,7 @@ public class MockManagementController {
     }
 
     @Operation(summary = "Unarchive Mock", description = "Unarchive a mock based on the given mockId.",
-            tags = { "Mock Management" })
+            tags = {"Mock Management"})
     @PostMapping("{mockId}" + UrlConfig.UNARCHIVE_ACTION)
     public ResponseEntity<GenericResponseWrapper<Mock>> unarchiveMockById(@PathVariable String mockId) {
         Mock mock = mockManagementService.unarchiveMock(mockId);

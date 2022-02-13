@@ -5,6 +5,7 @@ import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -366,7 +367,7 @@ class MockManagementControllerTest {
         Mock createdMock = generateMock(mockRequest);
         String route = UrlConfig.MOCKS_PATH;
 
-        lenient().when(mockManagementService.createMock(any(MockRequest.class))).thenReturn(createdMock);
+        lenient().when(mockManagementService.createMock(any(ProcessedMockRequest.class))).thenReturn(createdMock);
 
         final String location = "http://localhost" + route + "/" + createdMock.getId();
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.CREATED,
@@ -399,7 +400,7 @@ class MockManagementControllerTest {
         MockRequest mockRequest = createMockRequestWithFile(file);
         String route = UrlConfig.MOCKS_PATH;
 
-        lenient().when(mockManagementService.createMock(any(MockRequest.class))).thenReturn(null);
+        lenient().when(mockManagementService.createMock(any(ProcessedMockRequest.class))).thenReturn(null);
 
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
                 Messages.CREATE_RESOURCE_FAILED, null);
@@ -587,7 +588,7 @@ class MockManagementControllerTest {
         Mock mock = generateMock(mockRequest);
         String route = UrlConfig.MOCKS_PATH + "/" + mock.getId();
 
-        lenient().when(mockManagementService.updateMock(anyString(), any(MockRequest.class))).thenReturn(mock);
+        lenient().when(mockManagementService.updateMock(anyString(), any(ProcessedMockRequest.class))).thenReturn(mock);
 
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,
                 Messages.UPDATE_RESOURCE_SUCCESS, mock);
@@ -606,6 +607,10 @@ class MockManagementControllerTest {
                         .param("name", mockRequest.getName())
                         .param("route", mockRequest.getRoute())
                         .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("requestHeader", "{\"x-auth-token\": \"123e4567-e89b-12d3-a456-426614174000\"}")
+                        .param("shouldDoExactHeaderMatching", "false")
+                        .param("requestBody", "{\"name\": \"blog\", \"auto_init\": true, \"private\": true, \"gitignore_template\": \"nanoc\"}")
+                        .param("responseHeaders", "{\"Content-Type\": \"application/json\"}")
                         .param("responseContentType", mockRequest.getResponseContentType())
                         .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
                         .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
@@ -626,7 +631,7 @@ class MockManagementControllerTest {
         Mock mock = generateMock(mockRequest);
         String route = UrlConfig.MOCKS_PATH + "/" + mock.getId();
 
-        lenient().when(mockManagementService.updateMock(anyString(), any(MockRequest.class))).thenReturn(null);
+        lenient().when(mockManagementService.updateMock(anyString(), any(ProcessedMockRequest.class))).thenReturn(null);
 
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
                 Messages.UPDATE_RESOURCE_FAILED, null);

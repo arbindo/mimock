@@ -14,9 +14,9 @@ class RequestModelMapperTest {
     @Test
     void shouldMapRequestModelToProcessedRequestModal() {
         MockRequest request = MocksGenerator.createMockRequest();
-        String requestHeadersAsString = RandomDataGenerator.getRequestHeadersAsString();
-        String responseHeadersAsString = RandomDataGenerator.getResponseHeadersAsString();
-        String requestBodyAsString = RandomDataGenerator.getRequestBodyAsString();
+        String requestHeadersAsString = RandomDataGenerator.generateRequestHeadersAsString();
+        String responseHeadersAsString = RandomDataGenerator.generateResponseHeadersAsString();
+        String requestBodyAsString = RandomDataGenerator.generateRequestBodyAsString();
 
         MockRequest requestToBeMapped = MockRequest.builder()
                 .name(request.getName())

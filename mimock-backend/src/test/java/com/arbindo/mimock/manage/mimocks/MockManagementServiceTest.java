@@ -3,7 +3,7 @@ package com.arbindo.mimock.manage.mimocks;
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.db.HttpMethodDBHelper;
 import com.arbindo.mimock.helpers.db.ResponseContentTypeDBHelper;
-import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import com.arbindo.mimock.repository.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,6 +58,19 @@ class MockManagementServiceTest {
     @org.mockito.Mock
     EntityStatusRepository mockEntityStatusRepository;
 
+    @org.mockito.Mock
+    RequestHeadersRepository mockRequestHeadersRepository;
+
+    @org.mockito.Mock
+    ResponseHeadersRepository mockResponseHeadersRepository;
+
+    @org.mockito.Mock
+    RequestBodyTypeRepository mockRequestBodyTypeRepository;
+
+    @org.mockito.Mock
+    RequestBodiesForMockRepository mockRequestBodiesForMockRepository;
+
+
     MockManagementService mockManagementService;
 
     @BeforeEach
@@ -69,6 +82,9 @@ class MockManagementServiceTest {
                 .textualResponseRepository(mockTextualResponseRepository)
                 .binaryResponseRepository(mockBinaryResponseRepository)
                 .entityStatusRepository(mockEntityStatusRepository)
+                .requestHeadersRepository(mockRequestHeadersRepository)
+                .requestBodyTypeRepository(mockRequestBodyTypeRepository)
+                .requestBodiesForMockRepository(mockRequestBodiesForMockRepository)
                 .build();
     }
 
@@ -387,7 +403,7 @@ class MockManagementServiceTest {
 
     @ParameterizedTest
     @NullSource
-    void shouldReturnNull_ForCreateMock_WhenMockRequestIsNull(MockRequest request) {
+    void shouldReturnNull_ForCreateMock_WhenMockRequestIsNull(ProcessedMockRequest request) {
         // Act
         Mock result = mockManagementService.createMock(request);
 
@@ -399,7 +415,7 @@ class MockManagementServiceTest {
     @Test
     void shouldReturnNull_ForCreateMock_WhenMockNameAlreadyExists() {
         // Arrange
-        MockRequest request = createMockRequest();
+        ProcessedMockRequest request = createProcessedMockRequest();
         Optional<Mock> existingMock = generateOptionalMock(request);
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(existingMock);
 
@@ -414,7 +430,7 @@ class MockManagementServiceTest {
     @Test
     void shouldReturnMock_ForCreateMock_WhenMockRequestIsValid() {
         // Arrange
-        MockRequest request = createMockRequest();
+        ProcessedMockRequest request = createMockRequestWithNullRequestValues();
         Mock expectedMock = generateMock(request);
         HttpMethod httpMethod = generateHttpMethod();
         ResponseContentType responseContentType = generateResponseContentType();
@@ -437,9 +453,45 @@ class MockManagementServiceTest {
         verify(mockRepository, times(1)).save(any(Mock.class));
     }
 
+    @Test
+    void shouldReturnMock_ForCreateMock_WhenMockRequestIsValidWithRequestHeadersAndBody() {
+        // Arrange
+        ProcessedMockRequest request = createProcessedMockRequestWithHeadersAndBody();
+        Mock expectedMock = generateMockWithHeadersAndBody(request);
+
+        RequestHeader expectedRequestHeader = generateRequestHeader();
+        ResponseHeader expectedResponseHeader = generateResponseHeader();
+        RequestBodyType expectedRequestType = generateRequestBodyType();
+        RequestBodiesForMock expectedRequestBody = generateRequestBodiesForMock();
+
+        HttpMethod httpMethod = generateHttpMethod();
+        ResponseContentType responseContentType = generateResponseContentType();
+        EntityStatus entityStatus = generateDefaultEntityStatus();
+
+        Optional<Mock> emptyMock = Optional.empty();
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
+        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
+        lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
+        lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
+        lenient().when(mockRequestHeadersRepository.save(any(RequestHeader.class))).thenReturn(expectedRequestHeader);
+        lenient().when(mockRequestBodyTypeRepository.findOneByRequestBodyType(any(String.class))).thenReturn(expectedRequestType);
+        lenient().when(mockRequestBodiesForMockRepository.save(any(RequestBodiesForMock.class))).thenReturn(expectedRequestBody);
+        lenient().when(mockResponseHeadersRepository.save(any(ResponseHeader.class))).thenReturn(expectedResponseHeader);
+        lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
+
+        // Act
+        Mock result = mockManagementService.createMock(request);
+
+        // Assert
+        assertEquals(expectedMock, result);
+        verify(mockTextualResponseRepository, times(1)).save(any(TextualResponse.class));
+        verify(mockBinaryResponseRepository, times(1)).save(any(BinaryResponse.class));
+        verify(mockRepository, times(1)).save(any(Mock.class));
+    }
+
     @ParameterizedTest
     @NullSource
-    void shouldReturnNull_ForUpdateMock_WhenMockRequestIsNull(MockRequest request) {
+    void shouldReturnNull_ForUpdateMock_WhenMockRequestIsNull(ProcessedMockRequest request) {
         // Act
         Mock result = mockManagementService.updateMock("mockId", request);
 
@@ -463,7 +515,7 @@ class MockManagementServiceTest {
     @Test
     void shouldReturnNull_ForUpdateMock_WhenMockNameAlreadyExists() {
         // Arrange
-        MockRequest request = createMockRequest();
+        ProcessedMockRequest request = createProcessedMockRequest();
         Optional<Mock> existingMock = generateOptionalMock(request);
         assertTrue(existingMock.isPresent());
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(existingMock);
@@ -479,7 +531,7 @@ class MockManagementServiceTest {
     @Test
     void shouldReturnMock_ForUpdateMock_WhenMockRequestIsValid() {
         // Arrange
-        MockRequest request = createMockRequest();
+        ProcessedMockRequest request = createProcessedMockRequest();
         Optional<Mock> optionalMock = generateOptionalMock(request);
         assertTrue(optionalMock.isPresent());
         Mock expectedMock = optionalMock.get();

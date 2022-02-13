@@ -43,6 +43,30 @@ public class MockRequest {
     @Schema(example = "This is my new mock!!!", description = "Custom Description of the Mock")
     private String description;
 
+    // Value should be obtained as strigified JSON
+    @Schema(example = "{'Content-Type': 'application/json'}", description = "Request headers for the mock")
+    private String requestHeader;
+
+    @Schema(example = "true", description = "Decides whether request headers need to be matched strictly or loosely")
+    private Boolean shouldDoExactHeaderMatching;
+
+    public Boolean isHeaderMatchingSetToStrict() {
+        return this.shouldDoExactHeaderMatching;
+    }
+
+    @Schema(example = "{'id': 1,'purpose': 'Just for testing'}", description = "Request body for the mock")
+    private String requestBody;
+
+    @Schema(example = "application/json", description = "Request body type")
+    private String requestBodyType;
+
+    // Optional - Value should be obtained as strigified JSON
+    @Schema(
+            example = "{'x-auth-token': 'SOME_TOKEN'}",
+            description = "Response headers to be sent after invoking the mock endpoint"
+    )
+    private String responseHeaders;
+
     // Optional - Validated in Logic
     @Schema(description = "Represents the expected textual response")
     private String expectedTextResponse;

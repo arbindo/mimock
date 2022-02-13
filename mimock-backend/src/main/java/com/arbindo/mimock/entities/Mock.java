@@ -86,27 +86,27 @@ public class Mock {
     @Schema(description = "Indicates the entity status")
     private EntityStatus entityStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "request_header_id")
     private RequestHeader requestHeaders;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "response_header_id")
     private ResponseHeader responseHeaders;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "request_body_id")
     private RequestBodiesForMock requestBodiesForMock;
 
-    public boolean isDeleted(){
+    public boolean isDeleted() {
         return Status.valueOf(getEntityStatus().getStatus()) == Status.DELETED;
     }
 
-    public boolean isArchived(){
+    public boolean isArchived() {
         return Status.valueOf(getEntityStatus().getStatus()) == Status.ARCHIVED;
     }
 
-    public boolean canModifyEntityStatus(){
+    public boolean canModifyEntityStatus() {
         return Status.valueOf(getEntityStatus().getStatus()) != Status.DELETED;
     }
 

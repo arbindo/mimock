@@ -1,7 +1,7 @@
 package com.arbindo.mimock.manage.mimocks;
 
 import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import com.arbindo.mimock.repository.*;
 import com.arbindo.mimock.utils.ValidationUtil;
@@ -45,6 +45,18 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Autowired
     private EntityStatusRepository entityStatusRepository;
+
+    @Autowired
+    private RequestHeadersRepository requestHeadersRepository;
+
+    @Autowired
+    private ResponseHeadersRepository responseHeadersRepository;
+
+    @Autowired
+    private RequestBodyTypeRepository requestBodyTypeRepository;
+
+    @Autowired
+    private RequestBodiesForMockRepository requestBodiesForMockRepository;
 
     @Override
     public List<Mock> getAllMocks() {
@@ -129,12 +141,12 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Transactional
     @Override
-    public Mock createMock(MockRequest request) {
+    public Mock createMock(ProcessedMockRequest request) {
         if (ValidationUtil.isArgNull(request)) {
             log.log(Level.DEBUG, "CreateMockRequest is null!");
             return null;
         }
-        if(isMockNameAlreadyExists(request)) {
+        if (isMockNameAlreadyExists(request)) {
             log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
             return null;
         }
@@ -154,6 +166,9 @@ public class MockManagementServiceImpl implements MockManagementService {
                     .description(request.getDescription())
                     .createdAt(ZonedDateTime.now())
                     .entityStatus(getDefaultMockEntityStatus())
+                    .requestHeaders(getRequestHeaders(request))
+                    .requestBodiesForMock(getRequestBody(request))
+                    .responseHeaders(getResponseHeaders(request))
                     .build();
 
             if (request.getExpectedTextResponse() != null) {
@@ -178,13 +193,67 @@ public class MockManagementServiceImpl implements MockManagementService {
             return mocksRepository.save(mock);
         } catch (Exception e) {
             log.log(Level.DEBUG, e.getMessage());
+            return null;
+        }
+    }
+
+    private RequestHeader getRequestHeaders(ProcessedMockRequest request) {
+        if (request.getRequestHeader() != null && !request.getRequestHeader().isEmpty()) {
+            RequestHeader requestHeader = RequestHeader.builder()
+                    .requestHeader(request.getRequestHeader())
+                    .matchExact(request.getShouldDoExactHeaderMatching())
+                    .build();
+
+            try {
+                log.log(Level.INFO, "Saving request headers to Database");
+                return requestHeadersRepository.save(requestHeader);
+            } catch (Exception e) {
+                log.log(Level.ERROR, "Failed to store request headers : " + e.getMessage());
+                return null;
+            }
+        }
+        return null;
+    }
+
+    private ResponseHeader getResponseHeaders(ProcessedMockRequest request) {
+        if (request.getResponseHeaders() != null && !request.getResponseHeaders().isEmpty()) {
+            ResponseHeader responseHeader = ResponseHeader.builder()
+                    .responseHeader(request.getResponseHeaders())
+                    .build();
+
+            try {
+                log.log(Level.INFO, "Saving request headers to Database");
+                return responseHeadersRepository.save(responseHeader);
+            } catch (Exception e) {
+                log.log(Level.ERROR, "Failed to store request headers : " + e.getMessage());
+                return null;
+            }
+        }
+        return null;
+    }
+
+    private RequestBodiesForMock getRequestBody(ProcessedMockRequest request) {
+        if (request.getRequestBody() != null && !request.getRequestBody().isEmpty()) {
+            RequestBodyType requestBodyType = requestBodyTypeRepository.findOneByRequestBodyType(request.getRequestBodyType());
+            RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
+                    .requestBodyType(requestBodyType)
+                    .requestBody(request.getRequestBody())
+                    .build();
+
+            try {
+                log.log(Level.INFO, "Storing request body to Database");
+                return requestBodiesForMockRepository.save(requestBodiesForMock);
+            } catch (Exception e) {
+                log.log(Level.ERROR, "Failed to store request body : " + e.getMessage());
+                return null;
+            }
         }
         return null;
     }
 
     @Transactional
     @Override
-    public Mock updateMock(String mockId, MockRequest request) {
+    public Mock updateMock(String mockId, ProcessedMockRequest request) {
         if (ValidationUtil.isNullOrEmpty(mockId)) {
             log.log(Level.DEBUG, "Invalid MockId!");
             return null;
@@ -193,7 +262,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             log.log(Level.DEBUG, "UpdateMockRequest is null!");
             return null;
         }
-        if(isMockNameAlreadyExists(request)) {
+        if (isMockNameAlreadyExists(request)) {
             log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
             return null;
         }
@@ -268,11 +337,11 @@ public class MockManagementServiceImpl implements MockManagementService {
             try {
                 Mock mock = getMockById(mockId);
                 if (mock != null) {
-                    if(mock.isArchived()){
+                    if (mock.isArchived()) {
                         return mock;
                     } else {
                         // Archive the mock i.e. Mark EntityStatus as ARCHIVED
-                        if(mock.canModifyEntityStatus()){
+                        if (mock.canModifyEntityStatus()) {
                             EntityStatus entityStatus = getArchivedMockEntityStatus();
                             mock.setEntityStatus(entityStatus);
                             mock.setUpdatedAt(ZonedDateTime.now());
@@ -296,7 +365,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                 Mock mock = getMockById(mockId);
                 if (mock != null) {
                     // Idempotent behaviour - Unarchive the mock i.e. Mark EntityStatus as NONE
-                    if(mock.canModifyEntityStatus()){
+                    if (mock.canModifyEntityStatus()) {
                         EntityStatus entityStatus = getDefaultMockEntityStatus();
                         mock.setEntityStatus(entityStatus);
                         mock.setUpdatedAt(ZonedDateTime.now());
@@ -311,7 +380,7 @@ public class MockManagementServiceImpl implements MockManagementService {
         return null;
     }
 
-    private boolean isMockNameAlreadyExists(MockRequest request){
+    private boolean isMockNameAlreadyExists(ProcessedMockRequest request) {
         Optional<Mock> mock = mocksRepository.findOneByMockName(request.getName());
         return mock.isPresent();
     }
@@ -339,7 +408,7 @@ public class MockManagementServiceImpl implements MockManagementService {
         return findByEntityStatus(Status.DELETED.name());
     }
 
-    private EntityStatus getArchivedMockEntityStatus(){
+    private EntityStatus getArchivedMockEntityStatus() {
         return findByEntityStatus(Status.ARCHIVED.name());
     }
 

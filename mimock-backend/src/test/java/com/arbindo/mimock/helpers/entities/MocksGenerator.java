@@ -1,8 +1,10 @@
 package com.arbindo.mimock.helpers.entities;
 
 import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.manage.mimocks.models.v1.Status;
+import com.arbindo.mimock.helpers.general.RandomDataGenerator;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.mock.web.MockMultipartFile;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.arbindo.mimock.helpers.general.RandomDataGenerator.*;
@@ -44,6 +47,11 @@ public class MocksGenerator {
         return Optional.of(mock);
     }
 
+    public static Optional<Mock> generateOptionalMock(ProcessedMockRequest request) {
+        Mock mock = generateMock(request);
+        return Optional.of(mock);
+    }
+
     public static Mock generateMock() {
         return Mock.builder()
                 .id(generateRandomUUID())
@@ -70,6 +78,43 @@ public class MocksGenerator {
                 .queryParams(request.getQueryParams())
                 .description(request.getDescription())
                 .statusCode(request.getStatusCode())
+                .textualResponse(generateTextualResponse(request.getExpectedTextResponse()))
+                .binaryResponse(generateBinaryResponse(request.getBinaryFile()))
+                .createdAt(ZonedDateTime.now())
+                .entityStatus(generateDefaultEntityStatus())
+                .build();
+    }
+
+    public static Mock generateMock(ProcessedMockRequest request) {
+        return Mock.builder()
+                .id(generateRandomUUID())
+                .mockName(generateUniqueMockName())
+                .route(request.getRoute())
+                .httpMethod(generateHttpMethod(request.getHttpMethod()))
+                .responseContentType(generateResponseContentType(request.getResponseContentType()))
+                .queryParams(request.getQueryParams())
+                .description(request.getDescription())
+                .statusCode(request.getStatusCode())
+                .textualResponse(generateTextualResponse(request.getExpectedTextResponse()))
+                .binaryResponse(generateBinaryResponse(request.getBinaryFile()))
+                .createdAt(ZonedDateTime.now())
+                .entityStatus(generateDefaultEntityStatus())
+                .build();
+    }
+
+    public static Mock generateMockWithHeadersAndBody(ProcessedMockRequest request) {
+        return Mock.builder()
+                .id(generateRandomUUID())
+                .mockName(generateUniqueMockName())
+                .route(request.getRoute())
+                .httpMethod(generateHttpMethod(request.getHttpMethod()))
+                .responseContentType(generateResponseContentType(request.getResponseContentType()))
+                .queryParams(request.getQueryParams())
+                .description(request.getDescription())
+                .statusCode(request.getStatusCode())
+                .requestHeaders(generateRequestHeader(request.getRequestHeader()))
+                .responseHeaders(generateResponseHeader(request.getResponseHeaders()))
+                .requestBodiesForMock(generateRequestBodiesForMock(request.getRequestBody()))
                 .textualResponse(generateTextualResponse(request.getExpectedTextResponse()))
                 .binaryResponse(generateBinaryResponse(request.getBinaryFile()))
                 .createdAt(ZonedDateTime.now())
@@ -152,6 +197,14 @@ public class MocksGenerator {
                 .build();
     }
 
+    public static RequestBodyType generateRequestBodyType() {
+        return RequestBodyType.builder()
+                .id(1L)
+                .requestBodyType(getValidRequestType())
+                .createdAt(ZonedDateTime.now())
+                .build();
+    }
+
     private static HttpMethod generateHttpMethod(String httpMethod) {
         return HttpMethod.builder()
                 .id(1L)
@@ -176,8 +229,112 @@ public class MocksGenerator {
                 .build();
     }
 
+    public static RequestHeader generateRequestHeader() {
+        return RequestHeader.builder()
+                .id(1L)
+                .matchExact(false)
+                .requestHeader(RandomDataGenerator.getRequestHeaders())
+                .createdAt(ZonedDateTime.now())
+                .build();
+    }
+
+    public static RequestHeader generateRequestHeader(Map<String, Object> header) {
+        return RequestHeader.builder()
+                .id(1L)
+                .matchExact(false)
+                .requestHeader(header)
+                .createdAt(ZonedDateTime.now())
+                .build();
+    }
+
+    public static ResponseHeader generateResponseHeader() {
+        return ResponseHeader.builder()
+                .id(1L)
+                .responseHeader(RandomDataGenerator.generateResponseHeaders())
+                .createdAt(ZonedDateTime.now())
+                .build();
+    }
+
+    public static ResponseHeader generateResponseHeader(Map<String, Object> header) {
+        return ResponseHeader.builder()
+                .id(1L)
+                .responseHeader(header)
+                .createdAt(ZonedDateTime.now())
+                .build();
+    }
+
+    public static RequestBodiesForMock generateRequestBodiesForMock() {
+        return RequestBodiesForMock.builder()
+                .id(1L)
+                .requestBody(RandomDataGenerator.generateRequestBody())
+                .requestBodyType(generateRequestBodyType())
+                .createdAt(ZonedDateTime.now())
+                .build();
+    }
+
+    public static RequestBodiesForMock generateRequestBodiesForMock(Map<String, Object> requestBody) {
+        return RequestBodiesForMock.builder()
+                .id(1L)
+                .requestBody(requestBody)
+                .requestBodyType(generateRequestBodyType())
+                .createdAt(ZonedDateTime.now())
+                .build();
+    }
+
     public static MockRequest createMockRequest() {
         return MockRequest.builder()
+                .name(generateUniqueMockName())
+                .route(generateRandomAlphanumericString())
+                .httpMethod(getValidHttpMethod())
+                .responseContentType(getValidResponseContentType())
+                .queryParams(generateRandomAlphanumericString())
+                .statusCode(generateRandomNumber())
+                .expectedTextResponse(generateRandomAlphanumericString())
+                .binaryFile(getMockMultipartFile())
+                .description(generateRandomAlphanumericString())
+                .requestHeader(RandomDataGenerator.generateRequestHeadersAsString())
+                .requestBody(RandomDataGenerator.generateRequestBodyAsString())
+                .build();
+    }
+
+    public static ProcessedMockRequest createProcessedMockRequest() {
+        return ProcessedMockRequest.builder()
+                .name(generateUniqueMockName())
+                .route(generateRandomAlphanumericString())
+                .httpMethod(getValidHttpMethod())
+                .responseContentType(getValidResponseContentType())
+                .queryParams(generateRandomAlphanumericString())
+                .statusCode(generateRandomNumber())
+                .expectedTextResponse(generateRandomAlphanumericString())
+                .binaryFile(getMockMultipartFile())
+                .description(generateRandomAlphanumericString())
+                .requestHeader(RandomDataGenerator.getRequestHeaders())
+                .requestBody(RandomDataGenerator.generateRequestBody())
+                .build();
+    }
+
+    public static ProcessedMockRequest createProcessedMockRequestWithHeadersAndBody() {
+        return ProcessedMockRequest.builder()
+                .name(generateUniqueMockName())
+                .route(generateRandomAlphanumericString())
+                .httpMethod(getValidHttpMethod())
+                .responseContentType(getValidResponseContentType())
+                .queryParams(generateRandomAlphanumericString())
+                .statusCode(generateRandomNumber())
+                .requestHeader(RandomDataGenerator.getRequestHeaders())
+                .responseHeaders(RandomDataGenerator.generateResponseHeaders())
+                .requestBody(RandomDataGenerator.generateRequestBody())
+                .requestBodyType(generateRequestBodyType().getRequestBodyType())
+                .expectedTextResponse(generateRandomAlphanumericString())
+                .binaryFile(getMockMultipartFile())
+                .description(generateRandomAlphanumericString())
+                .requestHeader(RandomDataGenerator.getRequestHeaders())
+                .requestBody(RandomDataGenerator.generateRequestBody())
+                .build();
+    }
+
+    public static ProcessedMockRequest createMockRequestWithNullRequestValues() {
+        return ProcessedMockRequest.builder()
                 .name(generateUniqueMockName())
                 .route(generateRandomAlphanumericString())
                 .httpMethod(getValidHttpMethod())
@@ -212,19 +369,25 @@ public class MocksGenerator {
         return responseContentTypes[index];
     }
 
-    public static Mock archiveMock(Mock mock){
+    public static String getValidRequestType() {
+        String[] requestTypes = {"application/json", "application/xml", "text/plain"};
+        int index = generateRandomNumber(requestTypes.length - 1);
+        return requestTypes[index];
+    }
+
+    public static Mock archiveMock(Mock mock) {
         mock.setEntityStatus(generateArchivedEntityStatus());
         mock.setUpdatedAt(ZonedDateTime.now());
         return mock;
     }
 
-    public static Mock unarchiveMock(Mock mock){
+    public static Mock unarchiveMock(Mock mock) {
         mock.setEntityStatus(generateDefaultEntityStatus());
         mock.setUpdatedAt(ZonedDateTime.now());
         return mock;
     }
 
-    public static Mock deleteMock(Mock mock){
+    public static Mock deleteMock(Mock mock) {
         mock.setEntityStatus(generateDeletedEntityStatus());
         mock.setUpdatedAt(ZonedDateTime.now());
         return mock;
