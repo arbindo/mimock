@@ -77,4 +77,29 @@ class JSONUtilsTest {
         assertNull(actualJSONString);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "{ \"id\": 1, \"purpose\": \"Just for testing\", \"enable_auto\": true }",
+            "{ \"Id\": 1, \"purpose\": \"Just for testing\", \"Enable_auto\": true, \"BIG_ARRAY\": [1, 2, 4], \"another_obj\": { \"key\": 12} }",
+            "{ \"id\": 1}",
+            "{\"Content-Type\": \"application/json\", \"Accept\": \"application/json\", \"Content-Disposition\": 0}",
+            "{}"
+    })
+    void shouldConvertJSONStringToMapWithLowerCaseKeys_WhenValidJSONStringValuesArePassed(String jsonString) {
+        Map<String, Object> jsonMap = JSONUtils.convertJSONStringToMapWithLowerCaseKeys(jsonString);
+
+        assertNotNull(jsonMap);
+    }
+
+    @Test
+    void shouldConvertJSONStringToMapWithLowerCaseKeys_WhenValidJSONStringIsPassed() {
+        String jsonString = "{\"Content-Type\": \"application/json\", \"Accept\": \"application/json\", \"Content-Disposition\": 0}";
+        Map<String, Object> jsonMap = JSONUtils.convertJSONStringToMapWithLowerCaseKeys(jsonString);
+
+        assertNotNull(jsonMap);
+
+        assertEquals("application/json", jsonMap.get("content-type"));
+        assertEquals("application/json", jsonMap.get("accept"));
+        assertEquals(0, jsonMap.get("content-disposition"));
+    }
 }

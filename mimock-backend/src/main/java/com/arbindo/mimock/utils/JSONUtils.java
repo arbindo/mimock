@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @SuppressWarnings("unchecked")
 @Log4j2
@@ -45,4 +47,16 @@ public class JSONUtils {
         }
     }
 
+    public static Map<String, Object> convertJSONStringToMapWithLowerCaseKeys(String jsonString) {
+        return changeKeyCaseToLower(Objects.requireNonNull(convertJSONStringToMap(jsonString)));
+    }
+
+    private static Map<String, Object> changeKeyCaseToLower(Map<String, Object> jsonMap) {
+        Map<String, Object> mapWithChangedCase = new HashMap<>();
+        for (Map.Entry<String, Object> header : jsonMap.entrySet()) {
+            mapWithChangedCase.put(header.getKey().toLowerCase(), header.getValue());
+        }
+
+        return mapWithChangedCase;
+    }
 }
