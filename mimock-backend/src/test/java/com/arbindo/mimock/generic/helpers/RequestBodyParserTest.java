@@ -1,5 +1,6 @@
 package com.arbindo.mimock.generic.helpers;
 
+import com.arbindo.mimock.helpers.general.JsonMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
@@ -13,13 +14,13 @@ class RequestBodyParserTest {
 
     @Test
     void shouldReturnRequestBodyString_WhenServletRequestHasRequestBody() throws IOException {
-        String expectedBodyString = "{'message': 'Hello world!', 'code': 101, 'success': false}";
+        String expectedBodyString = "{\"message\":\"Hello world!\",\"code\":101,\"success\":false}";
         byte[] bytes = expectedBodyString.getBytes(StandardCharsets.UTF_8);
 
         MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
         mockHttpServletRequest.setContent(bytes);
 
-        String requestBody = RequestBodyParser.getRequestBody(mockHttpServletRequest);
+        String requestBody = JsonMapper.convertMapToJsonString(RequestBodyParser.getRequestBody(mockHttpServletRequest));
 
         assertEquals(expectedBodyString, requestBody);
     }
@@ -30,7 +31,7 @@ class RequestBodyParserTest {
 
         mockHttpServletRequest.getInputStream().close();
 
-        String requestBody = RequestBodyParser.getRequestBody(mockHttpServletRequest);
+        String requestBody = JsonMapper.convertMapToJsonString(RequestBodyParser.getRequestBody(mockHttpServletRequest));
 
         assertNull(requestBody);
     }
