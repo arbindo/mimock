@@ -14,6 +14,7 @@ import org.springframework.web.servlet.HandlerMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -55,9 +56,20 @@ public class DefaultHttpInterceptor implements HandlerInterceptor {
 
         DomainModelForMock matchingMock = domainModelForMock.get();
         setStatusAndContentType(response, matchingMock);
+        setResponseHeaders(response, matchingMock);
         writeResponse(response, matchingMock);
 
         return false;
+    }
+
+    private void setResponseHeaders(HttpServletResponse response, DomainModelForMock matchingMock) {
+        log.log(Level.INFO, "Writing response headers");
+        if (matchingMock.getResponseHeaders() != null && !matchingMock.getResponseHeaders().isEmpty()) {
+            for (Map.Entry<String, Object> item : matchingMock.getResponseHeaders().entrySet()) {
+                String key = item.getKey();
+                response.setHeader(key, item.getValue().toString());
+            }
+        }
     }
 
     private void writeResponse(HttpServletResponse response, DomainModelForMock matchingMock) {

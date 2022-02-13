@@ -3,6 +3,7 @@ package com.arbindo.mimock.interceptor;
 import com.arbindo.mimock.generic.GenericMockRequestController;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
 import com.arbindo.mimock.generic.model.TypeOfResponse;
+import com.arbindo.mimock.helpers.general.RandomDataGenerator;
 import com.arbindo.mimock.interceptor.responsehandler.TextualResponseWriter;
 import com.arbindo.mimock.interceptor.responsehandler.WriterCollection;
 import org.junit.jupiter.api.Test;
@@ -56,6 +57,7 @@ class DefaultHttpInterceptorTest {
                 .statusCode(expectedStatus)
                 .responseBody(expectedResponseBody)
                 .typeOfResponse(TypeOfResponse.TEXTUAL_RESPONSE)
+                .responseHeaders(RandomDataGenerator.generateResponseHeaders())
                 .build();
 
         lenient().when(genericMockRequestController.serveRequest(expectedURI, mockHttpServletRequest)).thenReturn(Optional.of(expectedMock));
