@@ -25,4 +25,7 @@
     <include file="changelogs/0019_create_table_request_body_types.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0020_insert_request_body_type_values.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0021_alter_request_body_add_column_type.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0022_create_table_user_roles.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0023_insert_roles_into_table_user_roles.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0024_create_table_users.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

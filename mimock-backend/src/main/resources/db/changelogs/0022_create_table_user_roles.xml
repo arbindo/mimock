@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0022_create_table_user_roles">
+        <sql>
+            CREATE TABLE user_roles
+            (
+                id               BIGSERIAL    NOT NULL,
+                role_name        VARCHAR(20)  NOT NULL,
+                role_description VARCHAR(255) NOT NULL,
+                created_at       TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at       TIMESTAMP,
+                deleted_at       TIMESTAMP,
+                PRIMARY KEY (id),
+                CONSTRAINT unique_role_name UNIQUE (role_name)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                DROP TABLE user_roles;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

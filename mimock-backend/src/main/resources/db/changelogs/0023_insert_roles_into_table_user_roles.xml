@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0023_insert_roles_into_table_user_roles">
+        <sql>
+            INSERT INTO user_roles (role_name, role_description)
+            VALUES ('ADMIN', 'Administrator can create and manage mocks, and also has user management privileges'),
+                   ('MANAGER', 'Manager can create and manage mocks, but cannot manage users'),
+                   ('VIEWER', 'Viewer can only view mocks');
+        </sql>
+        <rollback>
+            <sql>
+                DELETE FROM user_roles WHERE role_name = 'ADMIN';
+                DELETE FROM user_roles WHERE role_name = 'MANAGER';
+                DELETE FROM user_roles WHERE role_name = 'VIEWER';
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

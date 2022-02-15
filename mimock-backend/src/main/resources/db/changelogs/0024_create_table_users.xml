@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0024_create_table_users">
+        <sql>
+            CREATE TABLE users
+            (
+                user_id             UUID                           NOT NULL,
+                name                VARCHAR(255)                   NOT NULL,
+                user_name           VARCHAR(128)                   NOT NULL,
+                password            VARCHAR(255)                   NOT NULL,
+                password_salt       VARCHAR(255)                   NOT NULL,
+                is_user_active      BOOLEAN                        NOT NULL DEFAULT FALSE,
+                is_user_blocked     BOOLEAN                        NOT NULL DEFAULT FALSE,
+                is_session_active   BOOLEAN                        NOT NULL DEFAULT FALSE,
+                last_login_at       TIMESTAMP WITH TIME ZONE,
+                password_updated_at TIMESTAMP WITH TIME ZONE,
+                role_id             INT REFERENCES user_roles (id) NOT NULL,
+                created_at          TIMESTAMP                      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at          TIMESTAMP,
+                deleted_at          TIMESTAMP,
+                PRIMARY KEY (user_id),
+                CONSTRAINT unique_user_name UNIQUE (user_name)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                DROP TABLE users;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
