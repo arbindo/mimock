@@ -9,7 +9,8 @@
 			"assets/*": ["src/assets/*"],
 			"components/*": ["src/components/*"],
 			"config/*": ["src/config/*"],
-			"common/*": ["src/common/*"]
+			"common/*": ["src/common/*"],
+            "styles": ["/src/styles/components/*"]
 		}
 	}
 }

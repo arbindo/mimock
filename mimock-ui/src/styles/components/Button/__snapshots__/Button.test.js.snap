@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render Button 1`] = `
+<div>
+  <button
+    bgcolor="bg-black-100"
+    class="text-grey-200 bg-blue-200 p-4 mx-auto my-auto shadow-md rounded-md hover:bg-blue-600 cursor-pointer w-1/4 my-4 text-lg font-semibold button text-white bg-black-100 Button"
+    color="text-white"
+    data-testid="button"
+  >
+    Button
+  </button>
+</div>
+`;
+
+exports[`Button should render Button without style props 1`] = `
+<div>
+  <button
+    class="text-grey-200 bg-blue-200 p-4 mx-auto my-auto shadow-md rounded-md hover:bg-blue-600 cursor-pointer w-1/4 my-4 text-lg font-semibold button Button"
+    data-testid="button"
+  >
+    Button
+  </button>
+</div>
+`;

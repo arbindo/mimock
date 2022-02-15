@@ -1,0 +1,18 @@
+{
+	"presets": ["@babel/preset-react", "@babel/preset-env"],
+	"plugins": [
+		["@babel/transform-runtime"],
+		["jsx-control-statements"],
+		[
+			"module-resolver",
+			{
+				"root": ["./src"],
+				"alias": {
+					"styles": "./src/styles/components",
+					"test": "./test",
+					"underscore": "lodash"
+				}
+			}
+		]
+	]
+}
