@@ -1,6 +1,6 @@
 {
   "name": "mimock-ui",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
@@ -9,10 +9,10 @@
     "start:live": "webpack serve --open --mode development --live-reload --hot",
     "test": "jest"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "author": {
-    "name": "Jack Herrington",
-    "email": "jherr@pobox.com"
+    "name": "mimock-dev",
+    "email": "contact@mimock.io"
   },
   "devDependencies": {
     "@babel/core": "^7.17.4",
@@ -35,7 +35,7 @@
     "html-webpack-plugin": "^5.3.2",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.4",
-    "postcss": "^8.2.1",
+    "postcss": "^8.2.13",
     "postcss-loader": "^6.2.1",
     "style-loader": "^3.3.0",
     "tailwind-styled-components": "^2.1.4",
