@@ -24,6 +24,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          working-directory: mimock-ui
           cache: 'yarn'
 
       - name: Install Dependencies
@@ -53,6 +54,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          working-directory: mimock-ui
           cache: 'yarn'
 
       - name: Install Dependencies
@@ -67,6 +69,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: jest-coverage-report
+          working-directory: mimock-ui
           path: ./mimock-ui/src/coverage
 
   build:
@@ -84,6 +87,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          working-directory: mimock-ui
           cache: 'yarn'
 
       - name: Install Dependencies
@@ -98,6 +102,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: mimock-bundle
+          working-directory: mimock-ui
           path: ./mimock-ui/dist
 
 
