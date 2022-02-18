@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'mimock-ui/**'
-      - '.github/workflows/**'
+      - '.github/workflows/*.-ui.yml'
     branches: [ main ]
   
   pull_request:
@@ -24,8 +24,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          working-directory: mimock-ui
-          cache: 'yarn'
 
       - name: Install Dependencies
         working-directory: mimock-ui
@@ -54,8 +52,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          working-directory: mimock-ui
-          cache: 'yarn'
 
       - name: Install Dependencies
         working-directory: mimock-ui
@@ -69,8 +65,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: jest-coverage-report
-          working-directory: mimock-ui
-          path: ./mimock-ui/src/coverage
+          path: mimock-ui/src/coverage
 
   build:
     needs:
@@ -87,8 +82,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          working-directory: mimock-ui
-          cache: 'yarn'
 
       - name: Install Dependencies
         working-directory: mimock-ui
@@ -101,9 +94,8 @@ jobs:
       - name: Upload test coverage report to artifact
         uses: actions/upload-artifact@v2
         with:
-          name: mimock-bundle
-          working-directory: mimock-ui
-          path: ./mimock-ui/dist
+          name: mimock-react-bundle
+          path: mimock-ui/dist
 
 
 
