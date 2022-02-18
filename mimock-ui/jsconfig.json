@@ -10,7 +10,7 @@
 			"components/*": ["src/components/*"],
 			"config/*": ["src/config/*"],
 			"common/*": ["src/common/*"],
-            "styles": ["/src/styles/components/*"]
+			"styles": ["/src/styles/components/*"]
 		}
 	}
 }

@@ -1,0 +1,111 @@
+name: Mimock UI Pipeline
+
+on:
+  push:
+    paths:
+      - 'mimock-ui/**'
+      - '.github/workflows/**'
+    branches: [ main ]
+  
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    name: Mimock formatting check
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          node-version: [14.x, 16.x]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Using Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        working-directory: mimock-ui
+        run: yarn
+
+      - name: Check Formatting
+        working-directory: mimock-ui
+        run: yarn format:check
+
+      - name: Run ESLint
+        working-directory: mimock-ui
+        run: yarn lint:all
+
+  test:
+    needs:
+      - lint
+    name: Mimock UI test
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          node-version: [14.x, 16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        working-directory: mimock-ui
+        run: yarn
+
+      - name: Run test with coverage
+        working-directory: mimock-ui
+        run: yarn test --maxWorkers=4
+      
+      - name: Upload test coverage report to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: jest-coverage-report
+          path: ./mimock-ui/src/coverage
+
+  build:
+    needs:
+      - test
+    name: Mimock UI build
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+          node-version: [14.x, 16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        working-directory: mimock-ui
+        run: yarn
+
+      - name: Build react app
+        working-directory: mimock-ui
+        run: yarn build
+
+      - name: Upload test coverage report to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: mimock-bundle
+          path: ./mimock-ui/dist
+
+
+
+      
+      
+
+
+
+  
+

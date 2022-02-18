@@ -15,7 +15,14 @@ module.exports = {
 	testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
 	testPathIgnorePatterns: ['/node_modules/'],
 	timers: 'fake',
-	// coverageThreshold: undefined,
+	coverageThreshold: {
+		global: {
+			branches: 95,
+			functions: 95,
+			lines: 90,
+			statements: 95,
+		},
+	},
 	// watchman: true,
 	// testURL: "http://localhost",
 	// maxWorkers: "50%",
