@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'mimock-backend/**'
-      - '.github/workflows/**'
+      - '.github/workflows/*-backend.yml'
     branches: [ main ]
 
 jobs:
