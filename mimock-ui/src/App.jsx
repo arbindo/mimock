@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { Button } from 'styles';
 import './index.css';
 
-const num = 1;
-
 const App = () => (
 	<div className='mt-10 text-3xl mx-auto max-w-6xl'>
 		<div>Name: mimock-ui</div>
@@ -14,7 +12,7 @@ const App = () => (
 		<If condition={false}>
 			<span>IfBlock</span>
 		</If>
-		<Button label={"Click me!"}></Button>
+		<Button label={'Click me!'}></Button>
 	</div>
 );
 
