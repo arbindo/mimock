@@ -1,25 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button should render Button 1`] = `
+exports[`Button should render blue Button 1`] = `
 <div>
   <button
-    bgcolor="bg-black-100"
-    class="text-grey-200 bg-blue-200 p-4 mx-auto my-auto shadow-md rounded-md hover:bg-blue-600 cursor-pointer w-1/4 my-4 text-lg font-semibold button text-white bg-black-100 Button"
-    color="text-white"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-blue-600 text-white"
     data-testid="button"
+    variantprops="[object Object]"
   >
-    Button
+    Primary
   </button>
 </div>
 `;
 
-exports[`Button should render Button without style props 1`] = `
+exports[`Button should render default button when variant is null 1`] = `
 <div>
   <button
-    class="text-grey-200 bg-blue-200 p-4 mx-auto my-auto shadow-md rounded-md hover:bg-blue-600 cursor-pointer w-1/4 my-4 text-lg font-semibold button Button"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-white text-black"
     data-testid="button"
+    variantprops="[object Object]"
   >
-    Button
+    Primary
+  </button>
+</div>
+`;
+
+exports[`Button should render green Button 1`] = `
+<div>
+  <button
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-green-300 text-lime-700"
+    data-testid="button"
+    variantprops="[object Object]"
+  >
+    Success
+  </button>
+</div>
+`;
+
+exports[`Button should render red Button 1`] = `
+<div>
+  <button
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-red-300 text-red-800"
+    data-testid="button"
+    variantprops="[object Object]"
+  >
+    Cancel
   </button>
 </div>
 `;

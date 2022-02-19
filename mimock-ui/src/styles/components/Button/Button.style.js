@@ -1,18 +1,18 @@
 import tw from 'tailwind-styled-components';
 
 export const ButtonContainer = tw.button`
-  text-grey-200
-  bg-blue-200
-  p-4
-  mx-auto
-  my-auto
+  px-9
+  py-3
+  m-auto
   shadow-md
   rounded-md
-  hover:bg-blue-600
-  cursor-pointer
-  w-1/4
-  my-4
-  text-lg
+  transition-all
+  text-center
+  w-fit
+  text-base
   font-semibold
-  ${(props) => Object.values(props)}
+  cursor-pointer
+  hover:translate-y-0.5
+  hover:brightness-110
+	${(props) => Object.values(props.variantprops)}
 `;

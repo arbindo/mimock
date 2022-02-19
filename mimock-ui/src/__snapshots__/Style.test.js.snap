@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render style for button and pill 1`] = `
+<div>
+  <div
+    class="mt-10 text-3xl mx-auto w-screen"
+    data-testid="style"
+  >
+    <div
+      class="w-full mb-20"
+    >
+      <div
+        class="font-sans font-bold text-lg mb-20 ml-6"
+      >
+        Button
+      </div>
+      <div
+        class="w-full flex justify-evenly flex-wrap"
+      >
+        <button
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-red-300 text-red-800"
+          data-testid="button"
+          variantprops="[object Object]"
+        >
+          Cancel
+        </button>
+        <button
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-green-300 text-lime-700"
+          data-testid="button"
+          variantprops="[object Object]"
+        >
+          Success
+        </button>
+        <button
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-blue-600 text-white"
+          data-testid="button"
+          variantprops="[object Object]"
+        >
+          Primary
+        </button>
+        <button
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-white text-black"
+          data-testid="button"
+          variantprops="[object Object]"
+        >
+          Default
+        </button>
+      </div>
+    </div>
+    <div
+      class="w-full mb-20"
+    >
+      <div
+        class="font-sans font-bold text-lg mb-20 ml-6"
+      >
+        Pills
+      </div>
+      <div
+        class="w-full flex flex-wrap justify-evenly"
+      >
+        <div
+          class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-red-100 text-red-500 border-red-500"
+          data-testid="pill"
+          variantprops="[object Object]"
+        >
+          CANCEL
+        </div>
+        <div
+          class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-green-100 text-green-500 border-green-500"
+          data-testid="pill"
+          variantprops="[object Object]"
+        >
+          SUCCESS
+        </div>
+        <div
+          class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-yellow-100 text-yellow-500 border-yellow-500"
+          data-testid="pill"
+          variantprops="[object Object]"
+        >
+          WARNING
+        </div>
+        <div
+          class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-white text-gray-500 border-gray-500"
+          data-testid="pill"
+          variantprops="[object Object]"
+        >
+          DEFAULT
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
