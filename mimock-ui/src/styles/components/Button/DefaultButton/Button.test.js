@@ -61,6 +61,17 @@ describe('Button', () => {
 		expect(container).toMatchSnapshot();
 	});
 
+	it('should render teal Button', async () => {
+		tree = await render(
+			<Button variant={ButtonVariants.TealButton} label='Login' />
+		);
+
+		const { getByTestId, container } = tree;
+
+		expect(getByTestId('button')).toBeInTheDocument();
+		expect(container).toMatchSnapshot();
+	});
+
 	it('should render default button when variant is null', async () => {
 		tree = await render(<Button label='Primary' />);
 

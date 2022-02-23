@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonContainer } from './Button.style';
-import ButtonData from '../ButtonData';
+import { ButtonData } from '../ButtonData';
 
 function Button({ variant, label }) {
 	return (
