@@ -1,9 +1,9 @@
 package com.arbindo.mimock.staticrecords;
 
+import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.entities.EntityStatus;
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.ResponseContentType;
-import com.arbindo.mimock.constants.UrlConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
@@ -25,21 +25,21 @@ public class GetStaticRecordsController {
     GetStaticRecordsService getStaticRecordsService;
 
     @Operation(summary = "List Http Methods", description = "List all supported HTTP Methods in Mimock Platform.",
-            tags = { "Static Records" })
+            tags = {"Static Records"})
     @GetMapping(value = UrlConfig.HTTP_METHODS_STATIC_RECORDS)
     public ResponseEntity<List<HttpMethod>> listAllSupportedHttpMethods() {
         return ResponseEntity.ok(getStaticRecordsService.listAllSupportedHttpMethods());
     }
 
     @Operation(summary = "List Response Content Types", description = "List all supported Response Content Types " +
-            "in Mimock Platform.", tags = { "Static Records" })
+            "in Mimock Platform.", tags = {"Static Records"})
     @GetMapping(value = UrlConfig.RESPONSE_CONTENT_TYPE_STATIC_RECORDS)
     public ResponseEntity<List<ResponseContentType>> listAllSupportedResponseContentTypes() {
         return ResponseEntity.ok(getStaticRecordsService.listAllSupportedResponseContentTypes());
     }
 
     @Operation(summary = "List Entity Status", description = "List all supported Entity Status in Mimock Platform.",
-            tags = { "Static Records" })
+            tags = {"Static Records"})
     @GetMapping(value = UrlConfig.ENTITY_STATUS_STATIC_RECORDS)
     public ResponseEntity<List<EntityStatus>> listAllSupportedEntityStatus() {
         return ResponseEntity.ok(getStaticRecordsService.listAllSupportedEntityStatus());

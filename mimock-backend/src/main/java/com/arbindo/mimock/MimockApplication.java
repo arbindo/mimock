@@ -17,6 +17,8 @@ import javax.sql.DataSource;
 import java.util.stream.Stream;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+// TODO: Enable this once security setup is complete
+//@EnableJpaRepositories(basePackageClasses = UserRepository.class)
 public class MimockApplication {
     public static void main(String[] args) {
         SpringApplication.run(MimockApplication.class, args);

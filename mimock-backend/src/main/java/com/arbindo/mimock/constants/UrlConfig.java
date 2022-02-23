@@ -11,6 +11,11 @@ public class UrlConfig {
     public static final String VERSION = "/v1";
     // endregion
 
+    // role based prefix
+    public static final String ADMIN = "/admin";
+    public static final String MANAGE = "/manage";
+    // end role based routes
+
     // region SWAGGER
     public static final String SWAGGER_API_PATH = "/v3/api-docs";
     public static final String SWAGGER_UI_PATH = "/swagger-ui";
