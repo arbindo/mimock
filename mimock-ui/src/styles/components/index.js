@@ -1,4 +1,4 @@
-import Button from './Button';
+import { Button, CustomButton } from './Button';
 import Pill from './Pill';
 
-export { Button, Pill };
+export { Button, CustomButton, Pill };

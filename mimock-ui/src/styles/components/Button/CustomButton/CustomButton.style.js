@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
 
-export const ButtonContainer = tw.button`
+export const CustomButtonContainer = tw.button`
   px-9
   py-3
   m-auto
@@ -14,5 +14,8 @@ export const ButtonContainer = tw.button`
   cursor-pointer
   hover:translate-y-0.5
   hover:brightness-110
-	${(props) => Object.values(props.variantprops)}
+  bg-white
+  text-black
+  ${(props) => props.color}
+  ${(props) => props.bgcolor}
 `;

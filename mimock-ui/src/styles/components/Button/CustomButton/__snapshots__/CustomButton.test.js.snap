@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render custom button with color and bgcolor 1`] = `
+<div>
+  <button
+    bgcolor="bg-color-300"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-white text-black text-yellow-700 bg-color-300"
+    color="text-yellow-700"
+    data-testid="custom-button"
+  >
+    Custom button
+  </button>
+</div>
+`;
+
+exports[`Button should render custom button without any props 1`] = `
+<div>
+  <button
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-white text-black"
+    data-testid="custom-button"
+  >
+    Hello
+  </button>
+</div>
+`;

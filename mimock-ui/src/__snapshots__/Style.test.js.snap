@@ -18,32 +18,54 @@ exports[`Button should render style for button and pill 1`] = `
         class="w-full flex justify-evenly flex-wrap"
       >
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-red-300 text-red-800"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-300 text-red-800"
           data-testid="button"
           variantprops="[object Object]"
         >
           Cancel
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-green-300 text-lime-700"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-green-300 text-lime-700"
           data-testid="button"
           variantprops="[object Object]"
         >
           Success
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-blue-600 text-white"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-600 text-white"
+          data-testid="button"
+          variantprops="[object Object]"
+        >
+          Cancel
+        </button>
+        <button
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-green-500 text-white"
+          data-testid="button"
+          variantprops="[object Object]"
+        >
+          Success
+        </button>
+        <button
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-blue-600 text-white"
           data-testid="button"
           variantprops="[object Object]"
         >
           Primary
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-white text-black"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-white text-black"
           data-testid="button"
           variantprops="[object Object]"
         >
           Default
+        </button>
+        <button
+          bgcolor="bg-indigo-200"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-white text-black text-indigo-500 bg-indigo-200"
+          color="text-indigo-500"
+          data-testid="custom-button"
+        >
+          Custom Button
         </button>
       </div>
     </div>

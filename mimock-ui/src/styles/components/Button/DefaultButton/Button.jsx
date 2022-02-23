@@ -1,25 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonContainer } from './Button.style';
-
-const ButtonData = {
-	RED_BUTTON: {
-		background: 'bg-red-300',
-		color: 'text-red-800',
-	},
-	GREEN_BUTTON: {
-		background: 'bg-green-300',
-		color: 'text-lime-700',
-	},
-	INDIGO_BUTTON: {
-		background: 'bg-blue-600',
-		color: 'text-white',
-	},
-	DEFAULT_BUTTON: {
-		background: 'bg-white',
-		color: 'text-black',
-	},
-};
+import ButtonData from '../ButtonData';
 
 function Button({ variant, label }) {
 	return (
