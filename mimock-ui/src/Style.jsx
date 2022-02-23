@@ -1,10 +1,13 @@
 import React from 'react';
-import { Button, Pill, CustomButton, IconButtonWithLabel } from 'styles';
-import { PillVariants } from './styles/components/Pill';
 import {
-	ButtonVariants,
-	IconButtonWithLabelVariants,
-} from './styles/components/Button';
+	Button,
+	Pill,
+	CustomButton,
+	IconButtonWithLabel,
+	IconButtonWithoutLabel,
+} from 'styles';
+import { PillVariants } from './styles/components/Pill';
+import { ButtonVariants, IconButtonVariants } from './styles/components/Button';
 
 function Style() {
 	return (
@@ -42,21 +45,35 @@ function Style() {
 
 					<IconButtonWithLabel
 						label='Add'
-						variant={IconButtonWithLabelVariants.AddButton}
+						variant={IconButtonVariants.AddButton}
 					></IconButtonWithLabel>
 					<IconButtonWithLabel
 						label='Close'
-						variant={IconButtonWithLabelVariants.ClearButton}
+						variant={IconButtonVariants.ClearButton}
 					></IconButtonWithLabel>
 					<IconButtonWithLabel
 						label='Delete'
-						variant={IconButtonWithLabelVariants.DeleteButton}
+						variant={IconButtonVariants.DeleteButton}
 					></IconButtonWithLabel>
 					<IconButtonWithLabel
 						label='Copy'
-						variant={IconButtonWithLabelVariants.CopyButton}
+						variant={IconButtonVariants.CopyButton}
 					></IconButtonWithLabel>
 					<IconButtonWithLabel label='Default'></IconButtonWithLabel>
+
+					<IconButtonWithoutLabel
+						variant={IconButtonVariants.AddButton}
+					></IconButtonWithoutLabel>
+					<IconButtonWithoutLabel
+						variant={IconButtonVariants.ClearButton}
+					></IconButtonWithoutLabel>
+					<IconButtonWithoutLabel
+						variant={IconButtonVariants.DeleteButton}
+					></IconButtonWithoutLabel>
+					<IconButtonWithoutLabel
+						variant={IconButtonVariants.CopyButton}
+					></IconButtonWithoutLabel>
+					<IconButtonWithoutLabel></IconButtonWithoutLabel>
 				</div>
 			</div>
 

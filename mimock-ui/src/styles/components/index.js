@@ -1,4 +1,15 @@
-import { Button, CustomButton, IconButtonWithLabel } from './Button';
+import {
+	Button,
+	CustomButton,
+	IconButtonWithLabel,
+	IconButtonWithoutLabel,
+} from './Button';
 import Pill from './Pill';
 
-export { Button, CustomButton, IconButtonWithLabel, Pill };
+export {
+	Button,
+	CustomButton,
+	IconButtonWithLabel,
+	IconButtonWithoutLabel,
+	Pill,
+};

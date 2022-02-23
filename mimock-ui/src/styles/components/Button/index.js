@@ -1,6 +1,9 @@
 import Button from './DefaultButton/Button.jsx';
 import CustomButton from './CustomButton/CustomButton.jsx';
-import { IconButtonWithLabel } from './IconButton/index';
+import {
+	IconButtonWithLabel,
+	IconButtonWithoutLabel,
+} from './IconButton/index';
 
 export const ButtonVariants = {
 	RedButton: 'RED_BUTTON',
@@ -12,7 +15,7 @@ export const ButtonVariants = {
 	DefaultButton: 'DEFAULT_BUTTON',
 };
 
-export const IconButtonWithLabelVariants = {
+export const IconButtonVariants = {
 	ClearButton: 'CLEAR_BUTTON',
 	DeleteButton: 'DELETE_BUTTON',
 	AddButton: 'ADD_BUTTON',
@@ -20,4 +23,4 @@ export const IconButtonWithLabelVariants = {
 	DefaultButton: 'DEFAULT_BUTTON',
 };
 
-export { Button, CustomButton, IconButtonWithLabel };
+export { Button, CustomButton, IconButtonWithLabel, IconButtonWithoutLabel };

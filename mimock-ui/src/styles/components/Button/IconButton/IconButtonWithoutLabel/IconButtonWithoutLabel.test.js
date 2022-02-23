@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import IconButtonWithLabel from './IconButtonWithLabel';
+import IconButtonWithoutLabel from './IconButtonWithoutLabel';
 import { IconButtonVariants } from '../../index';
 
 describe('Button', () => {
@@ -8,63 +8,54 @@ describe('Button', () => {
 
 	it('should render add Button', async () => {
 		tree = await render(
-			<IconButtonWithLabel variant={IconButtonVariants.AddButton} label='Add' />
+			<IconButtonWithoutLabel variant={IconButtonVariants.AddButton} />
 		);
 
 		const { getByTestId, container } = tree;
 
-		expect(getByTestId('icon-button-with-label')).toBeInTheDocument();
+		expect(getByTestId('icon-button-without-label')).toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 
 	it('should render clear Button', async () => {
 		tree = await render(
-			<IconButtonWithLabel
-				variant={IconButtonVariants.ClearButton}
-				label='Clear'
-			/>
+			<IconButtonWithoutLabel variant={IconButtonVariants.ClearButton} />
 		);
 
 		const { getByTestId, container } = tree;
 
-		expect(getByTestId('icon-button-with-label')).toBeInTheDocument();
+		expect(getByTestId('icon-button-without-label')).toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 
 	it('should render delete Button', async () => {
 		tree = await render(
-			<IconButtonWithLabel
-				variant={IconButtonVariants.DeleteButton}
-				label='Delete'
-			/>
+			<IconButtonWithoutLabel variant={IconButtonVariants.DeleteButton} />
 		);
 
 		const { getByTestId, container } = tree;
 
-		expect(getByTestId('icon-button-with-label')).toBeInTheDocument();
+		expect(getByTestId('icon-button-without-label')).toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 
 	it('should render copy Button', async () => {
 		tree = await render(
-			<IconButtonWithLabel
-				variant={IconButtonVariants.CopyButton}
-				label='Copy'
-			/>
+			<IconButtonWithoutLabel variant={IconButtonVariants.CopyButton} />
 		);
 
 		const { getByTestId, container } = tree;
 
-		expect(getByTestId('icon-button-with-label')).toBeInTheDocument();
+		expect(getByTestId('icon-button-without-label')).toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 
 	it('should render default Button when variant is null', async () => {
-		tree = await render(<IconButtonWithLabel label='Default' />);
+		tree = await render(<IconButtonWithoutLabel />);
 
 		const { getByTestId, container } = tree;
 
-		expect(getByTestId('icon-button-with-label')).toBeInTheDocument();
+		expect(getByTestId('icon-button-without-label')).toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 });
