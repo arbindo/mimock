@@ -8,6 +8,7 @@ import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -153,8 +154,9 @@ public class MockManagementServiceImpl implements MockManagementService {
         try {
             UUID mockId = UUID.randomUUID();
             HttpMethod httpMethod = getHttpMethod(request.getHttpMethod());
-            ResponseContentType responseContentType = getResponseContentType(request.getResponseContentType());
-
+            String responseContentTypeString = request.getResponseContentType() != null
+                    ? request.getResponseContentType() : "application/json";
+            ResponseContentType responseContentType = getResponseContentType(responseContentTypeString);
             Mock mock = Mock.builder()
                     .id(mockId)
                     .mockName(request.getName())
@@ -262,16 +264,13 @@ public class MockManagementServiceImpl implements MockManagementService {
             log.log(Level.DEBUG, "UpdateMockRequest is null!");
             return null;
         }
-        if (isMockNameAlreadyExists(request)) {
-            log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
-            return null;
-        }
         try {
             Mock mock = getMockById(mockId);
             if (mock != null) {
                 HttpMethod httpMethod = getHttpMethod(request.getHttpMethod());
-                ResponseContentType responseContentType = getResponseContentType(request.getResponseContentType());
-
+                String responseContentTypeString = request.getResponseContentType() != null
+                        ? request.getResponseContentType() : mock.getResponseContentType().getContentType();
+                ResponseContentType responseContentType = getResponseContentType(responseContentTypeString);
                 Mock updatedMock = Mock.builder()
                         .id(mock.getId())
                         .mockName(request.getName())
@@ -285,6 +284,15 @@ public class MockManagementServiceImpl implements MockManagementService {
                         .updatedAt(ZonedDateTime.now())
                         .entityStatus(getDefaultMockEntityStatus())
                         .build();
+
+                // Update Mock Name Only if it is different from existing name
+                if(!StringUtils.equals(mock.getMockName(), request.getName())){
+                    if(isMockNameAlreadyExists(request)) {
+                        log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
+                        return null;
+                    }
+                    updatedMock.setMockName(request.getName());
+                }
 
                 if (request.getExpectedTextResponse() != null) {
                     TextualResponse existingTextualResponse = mock.getTextualResponse();
