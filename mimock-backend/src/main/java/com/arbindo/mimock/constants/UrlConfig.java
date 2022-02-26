@@ -11,6 +11,10 @@ public class UrlConfig {
     public static final String VERSION = "/v1";
     // endregion
 
+    // common api prefix
+    public static final String API_PREFIX = API_PATH + VERSION;
+    // end of prefix
+
     // role based prefix
     public static final String ADMIN = "/admin";
     public static final String MANAGE = "/manage";
@@ -47,4 +51,7 @@ public class UrlConfig {
     public static final String MOCKS_PATH = API_PATH + VERSION + MOCKS;
     // endregion
 
+    // admin routes
+    public static final String USER_PATH = API_PREFIX + ADMIN + "/users";
+    // end of admin routes
 }

@@ -1,28 +1,32 @@
-package com.arbindo.mimock.security.user.mapper;
+package com.arbindo.mimock.security.user.service;
 
 import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.entities.UserRole;
+import com.arbindo.mimock.repository.UserRepository;
 import com.arbindo.mimock.security.user.models.UserInfo;
 import com.arbindo.mimock.security.user.models.Users;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.lenient;
 
 @SpringBootTest
-class UserResponseMapperTest {
-
+class GetUserServiceTest {
     @Autowired
-    UserResponseMapper userResponseMapper;
+    GetUserService userService;
+
+    @MockBean
+    UserRepository userRepository;
 
     @Test
-    void shouldReturnMappedUsers() {
+    void shouldReturnAllUsers_WhenUsersExistInDB() {
         UserRole userRole = UserRole.builder()
                 .roleName("ADMIN")
                 .build();
@@ -42,12 +46,14 @@ class UserResponseMapperTest {
                 .userRoles(userRole)
                 .isUserBlocked(false)
                 .isUserActive(true)
-                .deletedAt(ZonedDateTime.now())
+                .deletedAt(null)
                 .build();
 
         List<User> userList = new ArrayList<>();
         userList.add(user1);
         userList.add(user2);
+
+        lenient().when(userRepository.findAllByDeletedAtIsNull()).thenReturn(userList);
 
         UserInfo userInfo1 = UserInfo.builder()
                 .userId(user1.getId().toString())
@@ -69,15 +75,15 @@ class UserResponseMapperTest {
                 .isUserCurrentlyLoggedIn(user2.getIsSessionActive())
                 .userRole("ADMIN")
                 .userCreatedAt(user2.getCreatedAt())
-                .isUserDeleted(true)
+                .isUserDeleted(false)
                 .build();
 
         Users expectedUsers = new Users();
         expectedUsers.add(userInfo1);
         expectedUsers.add(userInfo2);
 
-        Users actualUsers = userResponseMapper.mappedUserResponse(userList);
+        Users allUsers = userService.getAllUsers();
 
-        assertEquals(expectedUsers, actualUsers);
+        assertEquals(expectedUsers, allUsers);
     }
 }
