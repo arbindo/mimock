@@ -11,6 +11,21 @@
 				{
 					"name": "Create Mock",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -443,6 +458,49 @@
 		{
 			"name": "Admin",
 			"item": [
+				{
+					"name": "User Management",
+					"item": [
+						{
+							"name": "Get All Users",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "password",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "test",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/mimock/v1/admin/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"mimock",
+										"v1",
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "List All Supported HTTP Methods",
 					"request": {
