@@ -17,7 +17,7 @@ function CustomButton({ label, color, background }) {
 CustomButton.propTypes = {
 	label: PropTypes.string.isRequired,
 	color: PropTypes.string,
-	bgcolor: PropTypes.string,
+	background: PropTypes.string,
 };
 
 export default CustomButton;
