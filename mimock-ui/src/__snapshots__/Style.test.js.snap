@@ -58,8 +58,8 @@ exports[`Button should render style for button and pill 1`] = `
           Primary
         </button>
         <button
-          background="bg-white dark:bg-slate-400"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+          background="bg-white dark:bg-slate-300"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
           color="text-black"
           data-testid="button"
         >
@@ -175,8 +175,8 @@ exports[`Button should render style for button and pill 1`] = `
           Copy
         </button>
         <button
-          background="bg-white dark:bg-slate-400"
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+          background="bg-white dark:bg-slate-300"
+          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
           color="text-black"
           data-testid="icon-button-with-label"
         >
@@ -277,8 +277,8 @@ exports[`Button should render style for button and pill 1`] = `
           </svg>
         </button>
         <button
-          background="bg-white dark:bg-slate-400"
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+          background="bg-white dark:bg-slate-300"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
           color="text-black"
           data-testid="icon-button-without-label"
         >

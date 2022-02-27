@@ -24,7 +24,7 @@ const ButtonData = {
 		color: 'text-white',
 	},
 	DEFAULT_BUTTON: {
-		background: 'bg-white dark:bg-slate-400',
+		background: 'bg-white dark:bg-slate-300',
 		color: 'text-black',
 	},
 };
@@ -47,7 +47,7 @@ const IconButtonData = {
 		color: 'text-white',
 	},
 	DEFAULT_BUTTON: {
-		background: 'bg-white dark:bg-slate-400',
+		background: 'bg-white dark:bg-slate-300',
 		color: 'text-black',
 	},
 };

@@ -3,8 +3,8 @@
 exports[`Button should render blue Button 1`] = `
 <div>
   <button
-    background="bg-white dark:bg-slate-400"
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    background="bg-white dark:bg-slate-300"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
     color="text-black"
     data-testid="button"
   >
@@ -16,8 +16,8 @@ exports[`Button should render blue Button 1`] = `
 exports[`Button should render dark green Button 1`] = `
 <div>
   <button
-    background="bg-white dark:bg-slate-400"
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    background="bg-white dark:bg-slate-300"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
     color="text-black"
     data-testid="button"
   >
@@ -29,8 +29,8 @@ exports[`Button should render dark green Button 1`] = `
 exports[`Button should render dark red Button 1`] = `
 <div>
   <button
-    background="bg-white dark:bg-slate-400"
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    background="bg-white dark:bg-slate-300"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
     color="text-black"
     data-testid="button"
   >
@@ -42,8 +42,8 @@ exports[`Button should render dark red Button 1`] = `
 exports[`Button should render default button when variant is null 1`] = `
 <div>
   <button
-    background="bg-white dark:bg-slate-400"
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    background="bg-white dark:bg-slate-300"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
     color="text-black"
     data-testid="button"
   >
@@ -55,8 +55,8 @@ exports[`Button should render default button when variant is null 1`] = `
 exports[`Button should render green Button 1`] = `
 <div>
   <button
-    background="bg-white dark:bg-slate-400"
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    background="bg-white dark:bg-slate-300"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
     color="text-black"
     data-testid="button"
   >
@@ -68,8 +68,8 @@ exports[`Button should render green Button 1`] = `
 exports[`Button should render red Button 1`] = `
 <div>
   <button
-    background="bg-white dark:bg-slate-400"
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    background="bg-white dark:bg-slate-300"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
     color="text-black"
     data-testid="button"
   >
@@ -81,8 +81,8 @@ exports[`Button should render red Button 1`] = `
 exports[`Button should render teal Button 1`] = `
 <div>
   <button
-    background="bg-white dark:bg-slate-400"
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    background="bg-white dark:bg-slate-300"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
     color="text-black"
     data-testid="button"
   >
