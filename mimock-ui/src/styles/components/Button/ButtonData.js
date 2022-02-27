@@ -1,15 +1,15 @@
 const ButtonData = {
 	RED_BUTTON: {
-		background: 'bg-red-300',
-		color: 'text-red-800',
+		background: 'bg-red-300 dark:bg-red-500',
+		color: 'text-red-800 dark:text-white',
 	},
 	DARK_RED_BUTTON: {
 		background: 'bg-red-600',
 		color: 'text-white',
 	},
 	GREEN_BUTTON: {
-		background: 'bg-green-300',
-		color: 'text-lime-700',
+		background: 'bg-green-300 dark:bg-green-400',
+		color: 'text-lime-700 dark:text-white',
 	},
 	DARK_GREEN_BUTTON: {
 		background: 'bg-green-500',
@@ -24,30 +24,30 @@ const ButtonData = {
 		color: 'text-white',
 	},
 	DEFAULT_BUTTON: {
-		background: 'bg-white',
+		background: 'bg-white dark:bg-slate-400',
 		color: 'text-black',
 	},
 };
 
 const IconButtonData = {
 	ADD_BUTTON: {
-		background: 'bg-green-300',
-		color: 'text-lime-700',
+		background: 'bg-green-300 dark:bg-green-400',
+		color: 'text-lime-700 dark:text-white',
 	},
 	DELETE_BUTTON: {
 		background: 'bg-red-600',
 		color: 'text-white',
 	},
 	CLEAR_BUTTON: {
-		background: 'bg-red-300',
-		color: 'text-red-800',
+		background: 'bg-red-300 dark:bg-red-500',
+		color: 'text-red-800 dark:text-white',
 	},
 	COPY_BUTTON: {
 		background: 'bg-blue-600',
 		color: 'text-white',
 	},
 	DEFAULT_BUTTON: {
-		background: 'bg-white',
+		background: 'bg-white dark:bg-slate-400',
 		color: 'text-black',
 	},
 };

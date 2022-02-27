@@ -16,5 +16,6 @@ export const IconButtonWithoutLabelContainer = tw.button`
   cursor-pointer
   hover:translate-y-0.5
   hover:brightness-105
-	${(props) => Object.values(props.variant)}
+  ${(props) => props.color}
+	${(props) => props.background}
 `;

@@ -10,7 +10,7 @@ exports[`Button should render style for button and pill 1`] = `
       class="w-full mb-20"
     >
       <div
-        class="font-sans font-bold text-lg mb-10 ml-6"
+        class="font-sans font-bold text-lg mb-10 ml-6 dark:text-gray-100"
       >
         Button
       </div>
@@ -18,74 +18,82 @@ exports[`Button should render style for button and pill 1`] = `
         class="w-full grid grid-cols-4 gap-4 gap-y-8"
       >
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-300 text-red-800"
+          background="bg-red-300 dark:bg-red-500"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
+          color="text-red-800 dark:text-white"
           data-testid="button"
-          variantprops="[object Object]"
         >
           Cancel
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-green-300 text-lime-700"
+          background="bg-green-300 dark:bg-green-400"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
+          color="text-lime-700 dark:text-white"
           data-testid="button"
-          variantprops="[object Object]"
         >
           Success
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-600 text-white"
+          background="bg-red-600"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-red-600"
+          color="text-white"
           data-testid="button"
-          variantprops="[object Object]"
         >
           Cancel
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-green-500 text-white"
+          background="bg-green-500"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-green-500"
+          color="text-white"
           data-testid="button"
-          variantprops="[object Object]"
         >
           Success
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-blue-600 text-white"
+          background="bg-blue-600"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-blue-600"
+          color="text-white"
           data-testid="button"
-          variantprops="[object Object]"
         >
           Primary
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-white text-black"
+          background="bg-white dark:bg-slate-400"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+          color="text-black"
           data-testid="button"
-          variantprops="[object Object]"
         >
           Default
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-teal-400 text-white"
+          background="bg-teal-400"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-teal-400"
+          color="text-white"
           data-testid="button"
-          variantprops="[object Object]"
         >
           LOGIN
         </button>
         <button
-          bgcolor="bg-orange-400"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-white text-white bg-orange-400"
+          background="bg-orange-400"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 text-white bg-orange-400"
           color="text-white"
           data-testid="custom-button"
         >
           Custom1
         </button>
         <button
-          bgcolor="bg-indigo-300"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 bg-white text-white bg-indigo-300"
+          background="bg-indigo-300"
+          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 text-white bg-indigo-300"
           color="text-white"
           data-testid="custom-button"
         >
           Custom2
         </button>
         <button
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-green-300 text-lime-700"
+          background="bg-green-300 dark:bg-green-400"
+          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
+          color="text-lime-700 dark:text-white"
           data-testid="icon-button-with-label"
-          variant="[object Object]"
         >
           <svg
             fill="currentColor"
@@ -103,29 +111,29 @@ exports[`Button should render style for button and pill 1`] = `
           Add
         </button>
         <button
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-300 text-red-800"
+          background="bg-red-300 dark:bg-red-500"
+          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
+          color="text-red-800 dark:text-white"
           data-testid="icon-button-with-label"
-          variant="[object Object]"
         >
           <svg
-            fill="currentColor"
-            height="1em"
-            stroke="currentColor"
-            stroke-width="0"
-            viewBox="0 0 1024 1024"
-            width="1em"
+            class="fill-red-800 dark:fill-white"
+            height="22"
+            viewBox="0 0 320 512"
+            width="22"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"
+              d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
             />
           </svg>
           Close
         </button>
         <button
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-600 text-white"
+          background="bg-red-600"
+          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-red-600"
+          color="text-white"
           data-testid="icon-button-with-label"
-          variant="[object Object]"
         >
           <svg
             fill="currentColor"
@@ -146,9 +154,10 @@ exports[`Button should render style for button and pill 1`] = `
           Delete
         </button>
         <button
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-blue-600 text-white"
+          background="bg-blue-600"
+          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-blue-600"
+          color="text-white"
           data-testid="icon-button-with-label"
-          variant="[object Object]"
         >
           <svg
             fill="currentColor"
@@ -166,9 +175,10 @@ exports[`Button should render style for button and pill 1`] = `
           Copy
         </button>
         <button
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-white text-black"
+          background="bg-white dark:bg-slate-400"
+          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+          color="text-black"
           data-testid="icon-button-with-label"
-          variant="[object Object]"
         >
           <svg
             fill="currentColor"
@@ -186,9 +196,10 @@ exports[`Button should render style for button and pill 1`] = `
           Default
         </button>
         <button
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-green-300 text-lime-700"
+          background="bg-green-300 dark:bg-green-400"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
+          color="text-lime-700 dark:text-white"
           data-testid="icon-button-without-label"
-          variant="[object Object]"
         >
           <svg
             fill="currentColor"
@@ -205,28 +216,28 @@ exports[`Button should render style for button and pill 1`] = `
           </svg>
         </button>
         <button
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-300 text-red-800"
+          background="bg-red-300 dark:bg-red-500"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
+          color="text-red-800 dark:text-white"
           data-testid="icon-button-without-label"
-          variant="[object Object]"
         >
           <svg
-            fill="currentColor"
-            height="1em"
-            stroke="currentColor"
-            stroke-width="0"
-            viewBox="0 0 1024 1024"
-            width="1em"
+            class="fill-red-800 dark:fill-white"
+            height="22"
+            viewBox="0 0 320 512"
+            width="22"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"
+              d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
             />
           </svg>
         </button>
         <button
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-600 text-white"
+          background="bg-red-600"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-red-600"
+          color="text-white"
           data-testid="icon-button-without-label"
-          variant="[object Object]"
         >
           <svg
             fill="currentColor"
@@ -246,9 +257,10 @@ exports[`Button should render style for button and pill 1`] = `
           </svg>
         </button>
         <button
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-blue-600 text-white"
+          background="bg-blue-600"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-blue-600"
+          color="text-white"
           data-testid="icon-button-without-label"
-          variant="[object Object]"
         >
           <svg
             fill="currentColor"
@@ -265,9 +277,10 @@ exports[`Button should render style for button and pill 1`] = `
           </svg>
         </button>
         <button
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-white text-black"
+          background="bg-white dark:bg-slate-400"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+          color="text-black"
           data-testid="icon-button-without-label"
-          variant="[object Object]"
         >
           <svg
             fill="currentColor"
@@ -289,38 +302,46 @@ exports[`Button should render style for button and pill 1`] = `
       class="w-full mb-20"
     >
       <div
-        class="font-sans font-bold text-lg mb-20 ml-6"
+        class="font-sans font-bold text-lg mb-20 ml-6 dark:text-gray-100"
       >
         Pills
       </div>
       <div
-        class="w-full flex flex-wrap justify-evenly"
+        class="w-full grid grid-cols-4 gap-4 gap-y-8"
       >
         <div
-          class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-red-100 text-red-500 border-red-500"
+          background="bg-red-100 dark:bg-red-200"
+          border="border-red-500"
+          class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-red-500 dark:text-red-700 bg-red-100 dark:bg-red-200 border-red-500"
+          color="text-red-500 dark:text-red-700"
           data-testid="pill"
-          variantprops="[object Object]"
         >
           CANCEL
         </div>
         <div
-          class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-green-100 text-green-500 border-green-500"
+          background="bg-green-100 dark:bg-green-200"
+          border="border-green-500"
+          class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-green-500 dark:text-green-700 bg-green-100 dark:bg-green-200 border-green-500"
+          color="text-green-500 dark:text-green-700"
           data-testid="pill"
-          variantprops="[object Object]"
         >
           SUCCESS
         </div>
         <div
-          class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-yellow-100 text-yellow-500 border-yellow-500"
+          background="bg-yellow-100 dark:bg-yellow-200"
+          border="border-yellow-500"
+          class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-yellow-500 dark:text-yellow-700 bg-yellow-100 dark:bg-yellow-200 border-yellow-500"
+          color="text-yellow-500 dark:text-yellow-700"
           data-testid="pill"
-          variantprops="[object Object]"
         >
           WARNING
         </div>
         <div
-          class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-white text-gray-500 border-gray-500"
+          background="bg-white dark:bg-slate-300"
+          border="border-gray-500"
+          class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
+          color="text-gray-500"
           data-testid="pill"
-          variantprops="[object Object]"
         >
           DEFAULT
         </div>

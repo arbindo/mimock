@@ -14,7 +14,6 @@ export const CustomButtonContainer = tw.button`
   cursor-pointer
   hover:translate-y-0.5
   hover:brightness-110
-  bg-white
   ${(props) => props.color}
-  ${(props) => props.bgcolor}
+  ${(props) => props.background}
 `;

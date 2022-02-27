@@ -3,9 +3,10 @@
 exports[`Button should render blue Button 1`] = `
 <div>
   <button
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-blue-600 text-white"
+    background="bg-white dark:bg-slate-400"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    color="text-black"
     data-testid="button"
-    variantprops="[object Object]"
   >
     Primary
   </button>
@@ -15,9 +16,10 @@ exports[`Button should render blue Button 1`] = `
 exports[`Button should render dark green Button 1`] = `
 <div>
   <button
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-green-500 text-white"
+    background="bg-white dark:bg-slate-400"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    color="text-black"
     data-testid="button"
-    variantprops="[object Object]"
   >
     Success
   </button>
@@ -27,9 +29,10 @@ exports[`Button should render dark green Button 1`] = `
 exports[`Button should render dark red Button 1`] = `
 <div>
   <button
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-600 text-white"
+    background="bg-white dark:bg-slate-400"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    color="text-black"
     data-testid="button"
-    variantprops="[object Object]"
   >
     Cancel
   </button>
@@ -39,9 +42,10 @@ exports[`Button should render dark red Button 1`] = `
 exports[`Button should render default button when variant is null 1`] = `
 <div>
   <button
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-white text-black"
+    background="bg-white dark:bg-slate-400"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    color="text-black"
     data-testid="button"
-    variantprops="[object Object]"
   >
     Primary
   </button>
@@ -51,9 +55,10 @@ exports[`Button should render default button when variant is null 1`] = `
 exports[`Button should render green Button 1`] = `
 <div>
   <button
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-green-300 text-lime-700"
+    background="bg-white dark:bg-slate-400"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    color="text-black"
     data-testid="button"
-    variantprops="[object Object]"
   >
     Success
   </button>
@@ -63,9 +68,10 @@ exports[`Button should render green Button 1`] = `
 exports[`Button should render red Button 1`] = `
 <div>
   <button
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-red-300 text-red-800"
+    background="bg-white dark:bg-slate-400"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    color="text-black"
     data-testid="button"
-    variantprops="[object Object]"
   >
     Cancel
   </button>
@@ -75,9 +81,10 @@ exports[`Button should render red Button 1`] = `
 exports[`Button should render teal Button 1`] = `
 <div>
   <button
-    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 bg-teal-400 text-white"
+    background="bg-white dark:bg-slate-400"
+    class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-400"
+    color="text-black"
     data-testid="button"
-    variantprops="[object Object]"
   >
     Login
   </button>

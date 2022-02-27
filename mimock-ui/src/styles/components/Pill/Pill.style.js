@@ -6,10 +6,13 @@ export const PillWrapper = tw.div`
 	m-auto
 	shadow-md
 	rounded-full
-	text-sm
+	text-base
 	text-center
 	w-fit
 	border-2
+	font-bold
 	cursor-pointer
-	${(props) => Object.values(props.variantprops)}
+	${(props) => props.color}
+	${(props) => props.background}
+	${(props) => props.border}
 `;

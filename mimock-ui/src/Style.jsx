@@ -13,7 +13,9 @@ function Style() {
 	return (
 		<div data-testid='style' className='mt-10 text-3xl mx-auto w-screen'>
 			<div className='w-full mb-20'>
-				<div className='font-sans font-bold text-lg mb-10 ml-6'>Button</div>
+				<div className='font-sans font-bold text-lg mb-10 ml-6 dark:text-gray-100'>
+					Button
+				</div>
 				<div className='w-full grid grid-cols-4 gap-4 gap-y-8'>
 					<Button variant={ButtonVariants.RedButton} label='Cancel'></Button>
 					<Button variant={ButtonVariants.GreenButton} label='Success'></Button>
@@ -35,12 +37,12 @@ function Style() {
 					<CustomButton
 						label='Custom1'
 						color='text-white'
-						bgcolor='bg-orange-400'
+						background='bg-orange-400'
 					></CustomButton>
 					<CustomButton
 						label='Custom2'
 						color='text-white'
-						bgcolor='bg-indigo-300'
+						background='bg-indigo-300'
 					></CustomButton>
 
 					<IconButtonWithLabel
@@ -78,8 +80,10 @@ function Style() {
 			</div>
 
 			<div className='w-full mb-20'>
-				<div className='font-sans font-bold text-lg mb-20 ml-6'>Pills</div>
-				<div className='w-full flex flex-wrap justify-evenly'>
+				<div className='font-sans font-bold text-lg mb-20 ml-6 dark:text-gray-100'>
+					Pills
+				</div>
+				<div className='w-full grid grid-cols-4 gap-4 gap-y-8'>
 					<Pill variant={PillVariants.RedPill} label='CANCEL'></Pill>
 					<Pill variant={PillVariants.GreenPill} label='SUCCESS'></Pill>
 					<Pill variant={PillVariants.YellowPill} label='WARNING'></Pill>

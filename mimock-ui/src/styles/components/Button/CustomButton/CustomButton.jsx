@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CustomButtonContainer } from './CustomButton.style';
 
-function CustomButton({ label, color, bgcolor }) {
+function CustomButton({ label, color, background }) {
 	return (
 		<CustomButtonContainer
 			data-testid='custom-button'
 			color={color}
-			bgcolor={bgcolor}
+			background={background}
 		>
 			{label}
 		</CustomButtonContainer>

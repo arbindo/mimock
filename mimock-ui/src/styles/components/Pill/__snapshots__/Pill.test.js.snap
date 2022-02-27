@@ -3,9 +3,11 @@
 exports[`Button should render default pill without variant 1`] = `
 <div>
   <div
-    class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-white text-gray-500 border-gray-500"
+    background="bg-white dark:bg-slate-300"
+    border="border-gray-500"
+    class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
+    color="text-gray-500"
     data-testid="pill"
-    variantprops="[object Object]"
   >
     Default
   </div>
@@ -15,9 +17,11 @@ exports[`Button should render default pill without variant 1`] = `
 exports[`Button should render green pill 1`] = `
 <div>
   <div
-    class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-green-100 text-green-500 border-green-500"
+    background="bg-white dark:bg-slate-300"
+    border="border-gray-500"
+    class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
+    color="text-gray-500"
     data-testid="pill"
-    variantprops="[object Object]"
   >
     Success
   </div>
@@ -27,9 +31,11 @@ exports[`Button should render green pill 1`] = `
 exports[`Button should render red pill 1`] = `
 <div>
   <div
-    class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-red-100 text-red-500 border-red-500"
+    background="bg-white dark:bg-slate-300"
+    border="border-gray-500"
+    class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
+    color="text-gray-500"
     data-testid="pill"
-    variantprops="[object Object]"
   >
     Cancel
   </div>
@@ -39,9 +45,11 @@ exports[`Button should render red pill 1`] = `
 exports[`Button should render yellow pill 1`] = `
 <div>
   <div
-    class="px-6 py-3 m-auto shadow-md rounded-full text-sm text-center w-fit border-2 cursor-pointer bg-yellow-100 text-yellow-500 border-yellow-500"
+    background="bg-white dark:bg-slate-300"
+    border="border-gray-500"
+    class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
+    color="text-gray-500"
     data-testid="pill"
-    variantprops="[object Object]"
   >
     Warning
   </div>

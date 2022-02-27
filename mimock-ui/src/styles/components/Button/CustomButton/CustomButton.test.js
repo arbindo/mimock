@@ -9,7 +9,7 @@ describe('Button', () => {
 		tree = await render(
 			<CustomButton
 				color='text-yellow-700'
-				bgcolor='bg-color-300'
+				background='bg-yellow-300'
 				label='Custom button'
 			/>
 		);

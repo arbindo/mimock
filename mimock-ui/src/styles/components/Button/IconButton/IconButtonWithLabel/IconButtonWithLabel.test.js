@@ -1,14 +1,17 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import IconButtonWithLabel from './IconButtonWithLabel';
-import { IconButtonVariants } from '../../index';
 
 describe('Button', () => {
 	let tree;
 
 	it('should render add Button', async () => {
 		tree = await render(
-			<IconButtonWithLabel variant={IconButtonVariants.AddButton} label='Add' />
+			<IconButtonWithLabel
+				background={'bg-green-300'}
+				color={'text-lime-700'}
+				label='Add'
+			/>
 		);
 
 		const { getByTestId, container } = tree;
@@ -20,7 +23,8 @@ describe('Button', () => {
 	it('should render clear Button', async () => {
 		tree = await render(
 			<IconButtonWithLabel
-				variant={IconButtonVariants.ClearButton}
+				background={'bg-red-300'}
+				color={'text-red-800'}
 				label='Clear'
 			/>
 		);
@@ -34,7 +38,8 @@ describe('Button', () => {
 	it('should render delete Button', async () => {
 		tree = await render(
 			<IconButtonWithLabel
-				variant={IconButtonVariants.DeleteButton}
+				background={'bg-red-600'}
+				color={'text-white'}
 				label='Delete'
 			/>
 		);
@@ -48,7 +53,8 @@ describe('Button', () => {
 	it('should render copy Button', async () => {
 		tree = await render(
 			<IconButtonWithLabel
-				variant={IconButtonVariants.CopyButton}
+				background={'bg-blue-600'}
+				color={'text-white'}
 				label='Copy'
 			/>
 		);
