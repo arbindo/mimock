@@ -4,6 +4,8 @@ import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.entities.UserRole;
 import com.arbindo.mimock.repository.UserRepository;
 import com.arbindo.mimock.repository.UserRoleRepository;
+import com.arbindo.mimock.security.exceptions.AddNewUserFailedException;
+import com.arbindo.mimock.security.exceptions.UserAlreadyExistsException;
 import com.arbindo.mimock.security.user.models.AddUserRequest;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;

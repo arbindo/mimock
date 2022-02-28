@@ -5,6 +5,8 @@ import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.entities.UserRole;
 import com.arbindo.mimock.repository.UserRepository;
 import com.arbindo.mimock.repository.UserRoleRepository;
+import com.arbindo.mimock.security.exceptions.AddNewUserFailedException;
+import com.arbindo.mimock.security.exceptions.UserAlreadyExistsException;
 import com.arbindo.mimock.security.user.models.AddUserRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
