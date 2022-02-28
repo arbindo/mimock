@@ -29,4 +29,5 @@
     <include file="changelogs/0023_insert_roles_into_table_user_roles.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0024_create_table_users.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0025_delete_password_salt_from_users.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0026_insert_default_admin_user.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

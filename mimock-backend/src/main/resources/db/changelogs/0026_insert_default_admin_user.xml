@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0026_insert_default_admin_user">
+        <sql>
+            INSERT INTO users
+            (user_id, name, user_name, password, role_id, is_user_active, created_at)
+            VALUES ('00000000-0000-0000-0000-000000000000',
+                    'Mimock Admin',
+                    'mimock_admin',
+                    '$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau',
+                    (select id from user_roles where role_name = 'ADMIN'),
+                    true,
+                    current_timestamp);
+        </sql>
+        <rollback>
+            <sql>
+                DELETE FROM users
+                WHERE user_name = 'mimock_admin';
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
