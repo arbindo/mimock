@@ -468,19 +468,80 @@
 									"type": "basic",
 									"basic": [
 										{
-											"key": "password",
-											"value": "password",
+											"key": "username",
+											"value": "mimock_admin",
 											"type": "string"
 										},
 										{
-											"key": "username",
-											"value": "test",
+											"key": "password",
+											"value": "password",
 											"type": "string"
 										}
 									]
 								},
 								"method": "GET",
 								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/mimock/v1/admin/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"mimock",
+										"v1",
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new user",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "mimock_admin",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-Token",
+										"value": "FETCH",
+										"type": "default"
+									},
+									{
+										"key": "Cookie",
+										"value": "CSRF=F11FBBDBD9F5777B42248CA298DC990D",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Frodo Baggins\",\r\n    \"userName\": \"frodo\",\r\n    \"password\": \"$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau\",\r\n    \"userRole\": \"MANAGER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "http://localhost:8080/api/mimock/v1/admin/users",
 									"protocol": "http",
