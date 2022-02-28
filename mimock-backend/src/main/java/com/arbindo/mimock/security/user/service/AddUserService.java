@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,6 +25,12 @@ public class AddUserService {
     UserRoleRepository userRoleRepository;
 
     public User addNewUser(AddUserRequest request) {
+        Optional<User> existingUser = userRepository.findByUserName(request.getUserName());
+        if (existingUser.isPresent()) {
+            log.log(Level.INFO, "User already exists");
+            throw new UserAlreadyExistsException("User already exists in the Database");
+        }
+
         UserRole userRole = userRoleRepository.findByRoleName(request.getUserRole().toString());
 
         User user = User.builder()
@@ -39,11 +46,11 @@ public class AddUserService {
                 .build();
 
         try {
-            log.log(Level.INFO, "Saving new user to Database");
+            log.log(Level.INFO, "Saving new e to Database");
             return userRepository.save(user);
         } catch (Exception e) {
-            log.log(Level.ERROR, "Saving new user failed with due to error : " + e.getMessage());
-            throw new AddNewUserFailedException("Saving new user failed");
+            log.log(Level.ERROR, "Saving new e failed with due to error : " + e.getMessage());
+            throw new AddNewUserFailedException("Saving new e failed");
         }
     }
 }

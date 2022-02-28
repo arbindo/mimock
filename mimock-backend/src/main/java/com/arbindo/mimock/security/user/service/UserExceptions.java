@@ -5,3 +5,9 @@ class AddNewUserFailedException extends RuntimeException {
         super(message);
     }
 }
+
+class UserAlreadyExistsException extends RuntimeException {
+    UserAlreadyExistsException(String message) {
+        super(message);
+    }
+}

@@ -40,7 +40,9 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                         Roles.MANAGER.toString(),
                         Roles.VIEWER.toString()
                 )
-                .antMatchers("/").permitAll().and().httpBasic();
+                .antMatchers("/").permitAll()
+                .and().httpBasic()
+                .and().csrf().disable();
     }
 
     @Bean
