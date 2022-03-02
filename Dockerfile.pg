@@ -1,0 +1,9 @@
+FROM postgres:13.5-alpine
+
+WORKDIR /home/mimock
+
+ENV POSTGRES_USER=mimock
+ENV POSTGRES_PASSWORD=ironclaw
+ENV POSTGRES_DB=mimock_db
+
+EXPOSE 5432

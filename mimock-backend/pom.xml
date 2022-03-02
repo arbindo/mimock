@@ -257,11 +257,22 @@
                                 <inherited>false</inherited>
                                 <configuration>
                                     <target>
-                                        <exec executable="docker-compose">
+                                        <exec executable="docker">
+                                            <arg value="build"/>
+                                            <arg value="-t"/>
+                                            <arg value="mimock-pg-database"/>
+                                            <arg value="../"/>
                                             <arg value="-f"/>
-                                            <arg value="../docker-compose.db.yml"/>
-                                            <arg value="up"/>
+                                            <arg value="Dockerfile.pg"/>
+                                        </exec>
+                                        <exec executable="docker">
+                                            <arg value="run"/>
                                             <arg value="-d"/>
+                                            <arg value="--name"/>
+                                            <arg value="mimock-db"/>
+                                            <arg value="-p"/>
+                                            <arg value="5427:5432"/>
+                                            <arg value="mimock-pg-database"/>
                                         </exec>
                                     </target>
                                 </configuration>
