@@ -263,7 +263,7 @@
                                             <arg value="mimock-pg-database"/>
                                             <arg value="../"/>
                                             <arg value="-f"/>
-                                            <arg value="Dockerfile.pg"/>
+                                            <arg value="../Dockerfile.pg"/>
                                         </exec>
                                         <exec executable="docker">
                                             <arg value="run"/>
