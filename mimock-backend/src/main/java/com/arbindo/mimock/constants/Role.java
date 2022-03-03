@@ -1,8 +1,6 @@
 package com.arbindo.mimock.constants;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
-public enum Roles {
+public enum Role {
     ADMIN,
     MANAGER,
     VIEWER;
@@ -12,9 +10,8 @@ public enum Roles {
         return this.name();
     }
 
-    @JsonCreator
-    public static Roles enumFromText(String text) {
-        for (Roles r : Roles.values()) {
+    public static Role enumFromText(String text) {
+        for (Role r : Role.values()) {
             if (r.toString().equals(text)) {
                 return r;
             }

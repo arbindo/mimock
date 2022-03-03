@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @Log4j2
 @RequestMapping(UrlConfig.USER_PATH)
@@ -27,7 +29,7 @@ public class AddUserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Add new user", description = "Adds a new user to mimock",
             tags = {"User Management"})
-    public ResponseEntity<Object> addNewUser(@RequestBody AddUserRequest request) {
+    public ResponseEntity<Object> addNewUser(@Valid @RequestBody AddUserRequest request) {
         try {
             log.log(Level.INFO, "Invoking service to save new user");
             service.addNewUser(request);

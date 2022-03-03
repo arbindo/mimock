@@ -1,6 +1,6 @@
 package com.arbindo.mimock.security;
 
-import com.arbindo.mimock.constants.Roles;
+import com.arbindo.mimock.constants.Role;
 import com.arbindo.mimock.constants.UrlConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,15 +30,15 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
         String wildCardPath = "/**";
 
         http.authorizeRequests()
-                .antMatchers(adminPath + wildCardPath).hasRole(Roles.ADMIN.toString())
+                .antMatchers(adminPath + wildCardPath).hasRole(Role.ADMIN.toString())
                 .antMatchers(managePath + wildCardPath).hasAnyRole(
-                        Roles.ADMIN.toString(),
-                        Roles.MANAGER.toString()
+                        Role.ADMIN.toString(),
+                        Role.MANAGER.toString()
                 )
                 .antMatchers(apiPath + wildCardPath).hasAnyRole(
-                        Roles.ADMIN.toString(),
-                        Roles.MANAGER.toString(),
-                        Roles.VIEWER.toString()
+                        Role.ADMIN.toString(),
+                        Role.MANAGER.toString(),
+                        Role.VIEWER.toString()
                 )
                 .and().httpBasic().and().authorizeRequests()
                 .antMatchers("/").permitAll()

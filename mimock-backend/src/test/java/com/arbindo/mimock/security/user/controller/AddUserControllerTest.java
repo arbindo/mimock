@@ -1,6 +1,6 @@
 package com.arbindo.mimock.security.user.controller;
 
-import com.arbindo.mimock.constants.Roles;
+import com.arbindo.mimock.constants.Role;
 import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.helpers.general.JsonMapper;
@@ -69,9 +69,9 @@ class AddUserControllerTest {
 
         AddUserRequest request = AddUserRequest.builder()
                 .name("admin")
-                .userName("admin")
+                .userName("admin_new")
                 .password("$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau")
-                .userRole(Roles.enumFromText(role))
+                .userRole(role)
                 .build();
 
         User user = User.builder()
@@ -99,9 +99,9 @@ class AddUserControllerTest {
         String route = UrlConfig.USER_PATH;
         AddUserRequest request = AddUserRequest.builder()
                 .name("admin")
-                .userName("admin")
+                .userName("admin_new")
                 .password("$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau")
-                .userRole(Roles.ADMIN)
+                .userRole(Role.ADMIN.toString())
                 .build();
 
         lenient().when(mockUserService.addNewUser(any())).thenThrow(new UserAlreadyExistsException("User already exists"));
@@ -119,5 +119,43 @@ class AddUserControllerTest {
         String actualErrorMessage = JsonMapper.convertJSONStringToMap(result.getResponse().getContentAsString()).get("message").toString();
 
         assertEquals(expectedErrorMessage, actualErrorMessage);
+    }
+
+    @Test
+    void shouldReturnBadRequestError_WhenPasswordIsNotEncoded() throws Exception {
+        String route = UrlConfig.USER_PATH;
+        AddUserRequest request = AddUserRequest.builder()
+                .name("admin_new")
+                .userName("admin")
+                .password("password")
+                .userRole(Role.ADMIN.toString())
+                .build();
+
+        mockMvc.perform(
+                        post(route)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .content(Objects.requireNonNull(JsonMapper.convertObjectToJsonString(request)))
+                )
+                .andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    void shouldReturnBadRequestError_WhenRoleIsInvalid() throws Exception {
+        String route = UrlConfig.USER_PATH;
+        AddUserRequest request = AddUserRequest.builder()
+                .name("admin")
+                .userName("admin_new")
+                .password("$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau")
+                .userRole("OWNER")
+                .build();
+
+        mockMvc.perform(
+                        post(route)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .content(Objects.requireNonNull(JsonMapper.convertObjectToJsonString(request)))
+                )
+                .andExpect(status().isBadRequest())
+                .andReturn();
     }
 }

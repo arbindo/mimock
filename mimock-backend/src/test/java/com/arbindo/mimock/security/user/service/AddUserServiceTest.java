@@ -1,6 +1,6 @@
 package com.arbindo.mimock.security.user.service;
 
-import com.arbindo.mimock.constants.Roles;
+import com.arbindo.mimock.constants.Role;
 import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.entities.UserRole;
 import com.arbindo.mimock.repository.UserRepository;
@@ -52,7 +52,7 @@ class AddUserServiceTest {
                 .name(user.getName())
                 .userName(user.getUserName())
                 .password(user.getPassword())
-                .userRole(Roles.ADMIN)
+                .userRole(Role.ADMIN.toString())
                 .build();
 
         lenient().when(mockUserRoleRepository.findByRoleName("ADMIN")).thenReturn(userRole);
@@ -89,7 +89,7 @@ class AddUserServiceTest {
                 .name(user.getName())
                 .userName(user.getUserName())
                 .password(user.getPassword())
-                .userRole(Roles.ADMIN)
+                .userRole(Role.ADMIN.toString())
                 .build();
 
         lenient().when(mockUserRoleRepository.findByRoleName("ADMIN")).thenReturn(userRole);
@@ -119,7 +119,7 @@ class AddUserServiceTest {
                 .name(user.getName())
                 .userName(user.getUserName())
                 .password(user.getPassword())
-                .userRole(Roles.ADMIN)
+                .userRole(Role.ADMIN.toString())
                 .build();
 
         lenient().when(mockUserRoleRepository.findByRoleName("ADMIN")).thenReturn(userRole);

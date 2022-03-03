@@ -1,7 +1,7 @@
 package com.arbindo.mimock.security.user.models;
 
-import com.arbindo.mimock.constants.Roles;
 import com.arbindo.mimock.constraints.ValidPassword;
+import com.arbindo.mimock.constraints.ValidRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +21,8 @@ public class AddUserRequest {
 
     @NotBlank(message = "Username cannot be empty")
     @Schema(example = "mithrandir_69", description = "Unique user name for the user")
-    @Size(min = 6, max = 128)
+    @Size(min = 6, message = "User name must be at least 6 characters long")
+    @Size(max = 128, message = "User name cannot be more than 128 characters")
     private String userName;
 
     @NotBlank(message = "Password cannot be empty")
@@ -32,7 +33,7 @@ public class AddUserRequest {
     @ValidPassword
     private String password;
 
-    @NotBlank(message = "User role cannot be empty")
+    @ValidRole
     @Schema(example = "ADMIN", description = "Role of the user")
-    private Roles userRole;
+    private String userRole;
 }

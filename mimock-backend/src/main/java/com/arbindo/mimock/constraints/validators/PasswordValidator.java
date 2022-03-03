@@ -19,8 +19,9 @@ public class PasswordValidator implements ConstraintValidator<ValidPassword, Str
         // $==$==$======================-------------------------------
         // E.g:
         // $2a$12$aZCF2UaVXv3g26gere3Qfu4csPBgqopXRcEmorhSkbWY3szsyfGiO
+        if (value == null) return false;
 
-        Pattern bcryptPatter = Pattern.compile("\\$2a\\$\\d\\d\\$[\\s\\S]{53}\\b");
-        return bcryptPatter.matcher(value).matches();
+        Pattern bcryptPattern = Pattern.compile("\\$2a\\$\\d\\d\\$[\\s\\S]{53}\\b");
+        return bcryptPattern.matcher(value).matches();
     }
 }
