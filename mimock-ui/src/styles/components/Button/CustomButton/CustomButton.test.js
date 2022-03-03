@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import CustomButton from './CustomButton';
 
-describe('Button', () => {
+describe('Custom Button', () => {
 	let tree;
 
 	it('should render custom button with color and bgcolor', async () => {
@@ -10,6 +10,7 @@ describe('Button', () => {
 			<CustomButton
 				color='text-yellow-700'
 				background='bg-yellow-300'
+				width='w-5/6'
 				label='Custom button'
 			/>
 		);

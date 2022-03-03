@@ -4,7 +4,7 @@ import { IconButtonData } from '../../ButtonData';
 import { IconButtonWithoutLabelContainer } from './IconButtonWithoutLabel.style';
 import { AiFillCopy, AiOutlineCheck } from 'react-icons/ai';
 import { BiTrash, BiPlusMedical } from 'react-icons/bi';
-import CloseIcon from '../CloseIcon';
+import CloseIcon from '../CloseIcon.jsx';
 
 function IconButtonWithoutLabel({ variant }) {
 	const { color, background } = getVariant(variant);

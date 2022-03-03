@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Pill from './Pill';
 
-describe('Button', () => {
+describe('Pill', () => {
 	let tree;
 
 	it('should render red pill', async () => {

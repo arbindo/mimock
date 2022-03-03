@@ -1,3 +1,4 @@
+import { BasicTextField, PasswordField } from './TextField';
 import {
 	Button,
 	CustomButton,
@@ -12,4 +13,6 @@ export {
 	IconButtonWithLabel,
 	IconButtonWithoutLabel,
 	Pill,
+	BasicTextField,
+	PasswordField,
 };

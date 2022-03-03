@@ -8,13 +8,11 @@ export const IconButtonWithoutLabelContainer = tw.button`
   m-auto
   shadow-md
   rounded-full
-  transition-all
   text-center
   w-fit
   text-lg
   font-semibold
   cursor-pointer
-  hover:translate-y-0.5
   hover:brightness-105
   ${(props) => props.color}
 	${(props) => props.background}

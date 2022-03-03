@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import IconButtonWithoutLabel from './IconButtonWithoutLabel';
 
-describe('Button', () => {
+describe('Icon Button Without Label', () => {
 	let tree;
 
 	it('should render add Button', async () => {

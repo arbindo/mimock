@@ -19,23 +19,25 @@ exports[`Button should render style for button and pill 1`] = `
       >
         <button
           background="bg-red-300 dark:bg-red-500"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
+          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-5/6 bg-red-300 dark:bg-red-500"
           color="text-red-800 dark:text-white"
           data-testid="button"
+          width="w-5/6"
         >
           Cancel
         </button>
         <button
           background="bg-green-300 dark:bg-green-400"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
+          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/2 bg-green-300 dark:bg-green-400"
           color="text-lime-700 dark:text-white"
           data-testid="button"
+          width="w-1/2"
         >
           Success
         </button>
         <button
           background="bg-red-600"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-red-600"
+          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
           color="text-white"
           data-testid="button"
         >
@@ -43,15 +45,16 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-green-500"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-green-500"
+          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-green-500"
           color="text-white"
           data-testid="button"
+          width="w-1/2"
         >
           Success
         </button>
         <button
           background="bg-blue-600"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-blue-600"
+          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-blue-600"
           color="text-white"
           data-testid="button"
         >
@@ -59,15 +62,16 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-white dark:bg-slate-300"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
+          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-3/4 bg-white dark:bg-slate-300"
           color="text-black"
           data-testid="button"
+          width="w-3/4"
         >
           Default
         </button>
         <button
           background="bg-teal-400"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-teal-400"
+          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-teal-400"
           color="text-white"
           data-testid="button"
         >
@@ -75,7 +79,7 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-orange-400"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 text-white bg-orange-400"
+          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-orange-400"
           color="text-white"
           data-testid="custom-button"
         >
@@ -83,7 +87,7 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-indigo-300"
-          class="px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-base font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-110 text-white bg-indigo-300"
+          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-indigo-300"
           color="text-white"
           data-testid="custom-button"
         >
@@ -91,9 +95,10 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-green-300 dark:bg-green-400"
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
+          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/3 bg-green-300 dark:bg-green-400"
           color="text-lime-700 dark:text-white"
           data-testid="icon-button-with-label"
+          width="w-1/3"
         >
           <svg
             fill="currentColor"
@@ -112,12 +117,14 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-red-300 dark:bg-red-500"
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
+          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-1/2 bg-red-300 dark:bg-red-500"
           color="text-red-800 dark:text-white"
           data-testid="icon-button-with-label"
+          width="w-1/2"
         >
           <svg
             class="fill-red-800 dark:fill-white"
+            data-testid="close-icon-button"
             height="22"
             viewBox="0 0 320 512"
             width="22"
@@ -131,7 +138,7 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-red-600"
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-red-600"
+          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
           color="text-white"
           data-testid="icon-button-with-label"
         >
@@ -155,9 +162,10 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-blue-600"
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-blue-600"
+          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-blue-600"
           color="text-white"
           data-testid="icon-button-with-label"
+          width="w-1/2"
         >
           <svg
             fill="currentColor"
@@ -176,7 +184,7 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-white dark:bg-slate-300"
-          class="flex items-center gap-3 px-9 py-3 m-auto shadow-md rounded-md transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
+          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
           color="text-black"
           data-testid="icon-button-with-label"
         >
@@ -197,7 +205,7 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-green-300 dark:bg-green-400"
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
           color="text-lime-700 dark:text-white"
           data-testid="icon-button-without-label"
         >
@@ -217,12 +225,13 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-red-300 dark:bg-red-500"
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
           color="text-red-800 dark:text-white"
           data-testid="icon-button-without-label"
         >
           <svg
             class="fill-red-800 dark:fill-white"
+            data-testid="close-icon-button"
             height="22"
             viewBox="0 0 320 512"
             width="22"
@@ -235,7 +244,7 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-red-600"
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-red-600"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-red-600"
           color="text-white"
           data-testid="icon-button-without-label"
         >
@@ -258,7 +267,7 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-blue-600"
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-white bg-blue-600"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-blue-600"
           color="text-white"
           data-testid="icon-button-without-label"
         >
@@ -278,7 +287,7 @@ exports[`Button should render style for button and pill 1`] = `
         </button>
         <button
           background="bg-white dark:bg-slate-300"
-          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full transition-all text-center w-fit text-lg font-semibold cursor-pointer hover:translate-y-0.5 hover:brightness-105 text-black bg-white dark:bg-slate-300"
+          class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
           color="text-black"
           data-testid="icon-button-without-label"
         >
@@ -344,6 +353,118 @@ exports[`Button should render style for button and pill 1`] = `
           data-testid="pill"
         >
           DEFAULT
+        </div>
+      </div>
+    </div>
+    <div
+      class="w-full mb-20"
+    >
+      <div
+        class="font-sans font-bold text-lg mb-20 ml-6 dark:text-gray-100"
+      >
+        Text Field
+      </div>
+      <div
+        class="w-full grid grid-cols-4 gap-4 gap-y-8 ml-20"
+      >
+        <div
+          class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+          data-testid="text-field"
+        >
+          <label
+            class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
+            data-shrink="false"
+            for="component-outlined"
+          >
+            Username
+          </label>
+          <div
+            class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+            data-testid="change-text-field"
+          >
+            <input
+              aria-invalid="false"
+              class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+              id="component-outlined"
+              type="text"
+              value=""
+            />
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-173wfxe"
+              >
+                <span>
+                  Username
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+          data-testid="password-textfield"
+          style="width: 80%;"
+        >
+          <label
+            class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
+            data-shrink="false"
+            for="outlined-adornment-password"
+          >
+            Password
+          </label>
+          <div
+            class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root"
+            data-testid="outlined-password-input"
+          >
+            <input
+              aria-invalid="false"
+              class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd css-nxo287-MuiInputBase-input-MuiOutlinedInput-input"
+              id="outlined-adornment-password"
+              type="password"
+              value=""
+            />
+            <div
+              class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+            >
+              <button
+                aria-label="toggle password visibility"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root"
+                data-testid="show-password-icon"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                  data-testid="VisibilityIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-173wfxe"
+              >
+                <span>
+                  Password
+                </span>
+              </legend>
+            </fieldset>
+          </div>
         </div>
       </div>
     </div>

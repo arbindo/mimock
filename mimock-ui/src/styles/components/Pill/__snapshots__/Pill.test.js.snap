@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button should render default pill without variant 1`] = `
+exports[`Pill should render default pill without variant 1`] = `
 <div>
   <div
     background="bg-white dark:bg-slate-300"
@@ -14,7 +14,7 @@ exports[`Button should render default pill without variant 1`] = `
 </div>
 `;
 
-exports[`Button should render green pill 1`] = `
+exports[`Pill should render green pill 1`] = `
 <div>
   <div
     background="bg-white dark:bg-slate-300"
@@ -28,7 +28,7 @@ exports[`Button should render green pill 1`] = `
 </div>
 `;
 
-exports[`Button should render red pill 1`] = `
+exports[`Pill should render red pill 1`] = `
 <div>
   <div
     background="bg-white dark:bg-slate-300"
@@ -42,7 +42,7 @@ exports[`Button should render red pill 1`] = `
 </div>
 `;
 
-exports[`Button should render yellow pill 1`] = `
+exports[`Pill should render yellow pill 1`] = `
 <div>
   <div
     background="bg-white dark:bg-slate-300"

@@ -2,12 +2,17 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Button from './Button';
 
-describe('Button', () => {
+describe('Default Button', () => {
 	let tree;
 
 	it('should render red Button', async () => {
 		tree = await render(
-			<Button color={'text-red-800'} background={'bg-red-300'} label='Cancel' />
+			<Button
+				color={'text-red-800'}
+				width='w-5/6'
+				background={'bg-red-300'}
+				label='Cancel'
+			/>
 		);
 
 		const { getByTestId, container } = tree;
@@ -32,6 +37,7 @@ describe('Button', () => {
 			<Button
 				color={'text-lime-700'}
 				background={'bg-green-300'}
+				width='w-5/6'
 				label='Success'
 			/>
 		);
@@ -59,7 +65,12 @@ describe('Button', () => {
 
 	it('should render blue Button', async () => {
 		tree = await render(
-			<Button color={'text-white'} background={'bg-blue-600'} label='Primary' />
+			<Button
+				color={'text-white'}
+				background={'bg-blue-600'}
+				width='w-5/6'
+				label='Primary'
+			/>
 		);
 
 		const { getByTestId, container } = tree;
@@ -70,7 +81,12 @@ describe('Button', () => {
 
 	it('should render teal Button', async () => {
 		tree = await render(
-			<Button color={'text-white'} background={'bg-teal-400'} label='Login' />
+			<Button
+				color={'text-white'}
+				background={'bg-teal-400'}
+				width='w-5/6'
+				label='Login'
+			/>
 		);
 
 		const { getByTestId, container } = tree;

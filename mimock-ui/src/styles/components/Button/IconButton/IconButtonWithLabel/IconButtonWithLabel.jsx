@@ -4,15 +4,16 @@ import { IconButtonData } from '../../ButtonData';
 import { IconButtonWithLabelContainer } from './IconButtonWithLabel.style';
 import { AiFillCopy, AiOutlineCheck } from 'react-icons/ai';
 import { BiTrash, BiPlusMedical } from 'react-icons/bi';
-import CloseIcon from '../CloseIcon';
+import CloseIcon from '../CloseIcon.jsx';
 
-function IconButtonWithLabel({ label, variant }) {
+function IconButtonWithLabel({ label, width, variant }) {
 	const { color, background } = getVariant(variant);
 
 	return (
 		<IconButtonWithLabelContainer
 			data-testid='icon-button-with-label'
 			color={color}
+			width={width}
 			background={background}
 		>
 			{getIcon(variant)}
@@ -43,6 +44,7 @@ function getIcon(variant) {
 IconButtonWithLabel.propTypes = {
 	label: PropTypes.string.isRequired,
 	variant: PropTypes.string,
+	width: PropTypes.string,
 };
 
 export default IconButtonWithLabel;

@@ -6,14 +6,12 @@ export const CustomButtonContainer = tw.button`
   m-auto
   shadow-md
   rounded-md
-  transition-all
   text-center
-  w-fit
   text-base
   font-semibold
   cursor-pointer
-  hover:translate-y-0.5
   hover:brightness-110
   ${(props) => props.color}
+  ${(props) => (props.width ? props.width : 'w-fit')}
   ${(props) => props.background}
 `;
