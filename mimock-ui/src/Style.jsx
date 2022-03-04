@@ -30,7 +30,6 @@ function Style() {
 					></Button>
 					<Button
 						dataTestid='default-button-test-2'
-						ˇ
 						variant={ButtonVariants.GreenButton}
 						width='w-1/2'
 						label='Success'
