@@ -6,15 +6,22 @@ import { AiFillCopy, AiOutlineCheck } from 'react-icons/ai';
 import { BiTrash, BiPlusMedical } from 'react-icons/bi';
 import CloseIcon from '../CloseIcon.jsx';
 
-function IconButtonWithLabel({ label, width, variant }) {
+function IconButtonWithLabel({
+	label,
+	width,
+	variant,
+	onclickHandler,
+	dataTestid,
+}) {
 	const { color, background } = getVariant(variant);
 
 	return (
 		<IconButtonWithLabelContainer
-			data-testid='icon-button-with-label'
+			data-testid={dataTestid}
 			color={color}
 			width={width}
 			background={background}
+			onClick={onclickHandler}
 		>
 			{getIcon(variant)}
 			{label}
@@ -43,6 +50,8 @@ function getIcon(variant) {
 
 IconButtonWithLabel.propTypes = {
 	label: PropTypes.string.isRequired,
+	onclickHandler: PropTypes.func.isRequired,
+	dataTestid: PropTypes.string,
 	variant: PropTypes.string,
 	width: PropTypes.string,
 };

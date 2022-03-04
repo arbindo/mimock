@@ -25,15 +25,16 @@ const pillData = {
 	},
 };
 
-function Pill({ variant, label }) {
+function Pill({ variant, label, onclickHandler, dataTestid }) {
 	const { color, background, border } = getVariant(variant);
 
 	return (
 		<PillWrapper
-			data-testid='pill'
+			data-testid={dataTestid}
 			color={color}
 			background={background}
 			border={border}
+			onClick={onclickHandler}
 		>
 			{label}
 		</PillWrapper>
@@ -46,6 +47,8 @@ function getVariant(variant) {
 
 Pill.propTypes = {
 	label: PropTypes.string.isRequired,
+	onclickHandler: PropTypes.func.isRequired,
+	dataTestid: PropTypes.string,
 	variant: PropTypes.string,
 };
 

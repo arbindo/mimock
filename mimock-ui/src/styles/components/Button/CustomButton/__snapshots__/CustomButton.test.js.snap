@@ -6,7 +6,7 @@ exports[`Custom Button should render custom button with color and bgcolor 1`] = 
     background="bg-yellow-300"
     class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-yellow-700 w-5/6 bg-yellow-300"
     color="text-yellow-700"
-    data-testid="custom-button"
+    data-testid="custom-button-test-1"
     width="w-5/6"
   >
     Custom button
@@ -18,7 +18,7 @@ exports[`Custom Button should render custom button without any props 1`] = `
 <div>
   <button
     class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 w-fit"
-    data-testid="custom-button"
+    data-testid="custom-button-test-2"
   >
     Hello
   </button>

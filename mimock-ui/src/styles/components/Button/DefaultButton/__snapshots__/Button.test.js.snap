@@ -6,7 +6,7 @@ exports[`Default Button should render blue Button 1`] = `
     background="bg-white dark:bg-slate-300"
     class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-5/6 bg-white dark:bg-slate-300"
     color="text-black"
-    data-testid="button"
+    data-testid="default-button-test-5"
     width="w-5/6"
   >
     Primary
@@ -20,7 +20,7 @@ exports[`Default Button should render dark green Button 1`] = `
     background="bg-white dark:bg-slate-300"
     class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
     color="text-black"
-    data-testid="button"
+    data-testid="default-button-test-4"
   >
     Success
   </button>
@@ -33,7 +33,7 @@ exports[`Default Button should render dark red Button 1`] = `
     background="bg-white dark:bg-slate-300"
     class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
     color="text-black"
-    data-testid="button"
+    data-testid="default-button-test-2"
   >
     Cancel
   </button>
@@ -46,7 +46,7 @@ exports[`Default Button should render default button when variant is null 1`] = 
     background="bg-white dark:bg-slate-300"
     class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
     color="text-black"
-    data-testid="button"
+    data-testid="default-button-test-7"
   >
     Primary
   </button>
@@ -59,7 +59,7 @@ exports[`Default Button should render green Button 1`] = `
     background="bg-white dark:bg-slate-300"
     class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-5/6 bg-white dark:bg-slate-300"
     color="text-black"
-    data-testid="button"
+    data-testid="default-button-test-3"
     width="w-5/6"
   >
     Success
@@ -73,7 +73,7 @@ exports[`Default Button should render red Button 1`] = `
     background="bg-white dark:bg-slate-300"
     class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-5/6 bg-white dark:bg-slate-300"
     color="text-black"
-    data-testid="button"
+    data-testid="default-button-test-1"
     width="w-5/6"
   >
     Cancel
@@ -87,7 +87,7 @@ exports[`Default Button should render teal Button 1`] = `
     background="bg-white dark:bg-slate-300"
     class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-5/6 bg-white dark:bg-slate-300"
     color="text-black"
-    data-testid="button"
+    data-testid="default-button-test-6"
     width="w-5/6"
   >
     Login

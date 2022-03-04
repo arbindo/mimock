@@ -20,77 +20,163 @@ function Style() {
 				</div>
 				<div className='w-full grid grid-cols-4 gap-4 gap-y-8'>
 					<Button
+						dataTestid='default-button-test-1'
 						variant={ButtonVariants.RedButton}
 						width='w-5/6'
 						label='Cancel'
+						onclickHandler={() => {
+							console.log('Clicked cancel button');
+						}}
 					></Button>
 					<Button
+						dataTestid='default-button-test-2'
+						ˇ
 						variant={ButtonVariants.GreenButton}
 						width='w-1/2'
 						label='Success'
+						onclickHandler={() => {
+							console.log('Clicked success button');
+						}}
 					></Button>
 					<Button
+						dataTestid='default-button-test-3'
 						variant={ButtonVariants.DarkRedButton}
 						label='Cancel'
+						onclickHandler={() => {
+							console.log('Clicked cancel button');
+						}}
 					></Button>
 					<Button
+						dataTestid='default-button-test-4'
 						variant={ButtonVariants.DarkGreenButton}
 						width='w-1/2'
 						label='Success'
+						onclickHandler={() => {
+							console.log('Clicked success button');
+						}}
 					></Button>
-					<Button variant={ButtonVariants.BlueButton} label='Primary'></Button>
 					<Button
+						dataTestid='default-button-test-5'
+						variant={ButtonVariants.BlueButton}
+						label='Primary'
+						onclickHandler={() => {
+							console.log('Clicked primary button');
+						}}
+					></Button>
+					<Button
+						dataTestid='default-button-test-6'
 						variant={ButtonVariants.DefaultButton}
 						width='w-3/4'
 						label='Default'
+						onclickHandler={() => {
+							console.log('Clicked default button');
+						}}
 					></Button>
-					<Button variant={ButtonVariants.TealButton} label='LOGIN'></Button>
+					<Button
+						dataTestid='default-button-test-7'
+						variant={ButtonVariants.TealButton}
+						label='LOGIN'
+						onclickHandler={() => {
+							console.log('Clicked login button');
+						}}
+					></Button>
 
 					<CustomButton
+						dataTestid='custom-button-test-1'
 						label='Custom1'
 						color='text-white'
 						background='bg-orange-400'
+						onclickHandler={() => {
+							console.log('Clicked custom button');
+						}}
 					></CustomButton>
 					<CustomButton
+						dataTestid='custom-button-test-2'
 						label='Custom2'
 						color='text-white'
 						background='bg-indigo-300'
+						onclickHandler={() => {
+							console.log('Clicked custom button');
+						}}
 					></CustomButton>
 
 					<IconButtonWithLabel
+						dataTestid='icon-with-label-button-test-1'
 						label='Add'
 						width='w-1/3'
 						variant={IconButtonVariants.AddButton}
+						onclickHandler={() => {
+							console.log('Clicked add icon button');
+						}}
 					></IconButtonWithLabel>
 					<IconButtonWithLabel
+						dataTestid='icon-with-label-button-test-2'
 						label='Close'
 						width='w-1/2'
 						variant={IconButtonVariants.ClearButton}
+						onclickHandler={() => {
+							console.log('Clicked clear icon button');
+						}}
 					></IconButtonWithLabel>
 					<IconButtonWithLabel
+						dataTestid='icon-with-label-button-test-3'
 						label='Delete'
 						variant={IconButtonVariants.DeleteButton}
+						onclickHandler={() => {
+							console.log('Clicked delete icon button');
+						}}
 					></IconButtonWithLabel>
 					<IconButtonWithLabel
+						dataTestid='icon-with-label-button-test-4'
 						label='Copy'
 						width='w-1/2'
 						variant={IconButtonVariants.CopyButton}
+						onclickHandler={() => {
+							console.log('Clicked copy icon button');
+						}}
 					></IconButtonWithLabel>
-					<IconButtonWithLabel label='Default'></IconButtonWithLabel>
+					<IconButtonWithLabel
+						dataTestid='icon-with-label-button-test-5'
+						label='Default'
+						onclickHandler={() => {
+							console.log('Clicked default icon button');
+						}}
+					></IconButtonWithLabel>
 
 					<IconButtonWithoutLabel
+						dataTestid='icon-without-label-button-test-1'
 						variant={IconButtonVariants.AddButton}
+						onclickHandler={() => {
+							console.log('Clicked add icon button');
+						}}
 					></IconButtonWithoutLabel>
 					<IconButtonWithoutLabel
+						dataTestid='icon-without-label-button-test-2'
 						variant={IconButtonVariants.ClearButton}
+						onclickHandler={() => {
+							console.log('Clicked clear icon button');
+						}}
 					></IconButtonWithoutLabel>
 					<IconButtonWithoutLabel
+						dataTestid='icon-without-label-button-test-3'
 						variant={IconButtonVariants.DeleteButton}
+						onclickHandler={() => {
+							console.log('Clicked delete icon button');
+						}}
 					></IconButtonWithoutLabel>
 					<IconButtonWithoutLabel
+						dataTestid='icon-without-label-button-test-4'
 						variant={IconButtonVariants.CopyButton}
+						onclickHandler={() => {
+							console.log('Clicked copy icon button');
+						}}
 					></IconButtonWithoutLabel>
-					<IconButtonWithoutLabel></IconButtonWithoutLabel>
+					<IconButtonWithoutLabel
+						dataTestid='icon-without-label-button-test-5'
+						onclickHandler={() => {
+							console.log('Clicked default icon button');
+						}}
+					></IconButtonWithoutLabel>
 				</div>
 			</div>
 
@@ -99,10 +185,38 @@ function Style() {
 					Pills
 				</div>
 				<div className='w-full grid grid-cols-4 gap-4 gap-y-8'>
-					<Pill variant={PillVariants.RedPill} label='CANCEL'></Pill>
-					<Pill variant={PillVariants.GreenPill} label='SUCCESS'></Pill>
-					<Pill variant={PillVariants.YellowPill} label='WARNING'></Pill>
-					<Pill variant={PillVariants.DefaultPill} label='DEFAULT'></Pill>
+					<Pill
+						dataTestid='pill-test-1'
+						variant={PillVariants.RedPill}
+						label='CANCEL'
+						onclickHandler={() => {
+							console.log('Clicked cancel pill');
+						}}
+					></Pill>
+					<Pill
+						dataTestid='pill-test-2'
+						variant={PillVariants.GreenPill}
+						label='SUCCESS'
+						onclickHandler={() => {
+							console.log('Clicked success pill');
+						}}
+					></Pill>
+					<Pill
+						dataTestid='pill-test-3'
+						variant={PillVariants.YellowPill}
+						label='WARNING'
+						onclickHandler={() => {
+							console.log('Clicked warning pill');
+						}}
+					></Pill>
+					<Pill
+						dataTestid='pill-test-4'
+						variant={PillVariants.DefaultPill}
+						label='DEFAULT'
+						onclickHandler={() => {
+							console.log('Clicked default pill');
+						}}
+					></Pill>
 				</div>
 			</div>
 

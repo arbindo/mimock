@@ -1,6 +1,399 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button should render style for button and pill 1`] = `
+exports[`Button should render custom button 1 1`] = `
+<button
+  background="bg-orange-400"
+  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-orange-400"
+  color="text-white"
+  data-testid="custom-button-test-1"
+>
+  Custom1
+</button>
+`;
+
+exports[`Button should render custom button 2 1`] = `
+<button
+  background="bg-indigo-300"
+  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-indigo-300"
+  color="text-white"
+  data-testid="custom-button-test-2"
+>
+  Custom2
+</button>
+`;
+
+exports[`Button should render default button 1 1`] = `
+<button
+  background="bg-red-300 dark:bg-red-500"
+  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-5/6 bg-red-300 dark:bg-red-500"
+  color="text-red-800 dark:text-white"
+  data-testid="default-button-test-1"
+  width="w-5/6"
+>
+  Cancel
+</button>
+`;
+
+exports[`Button should render default button 2 1`] = `
+<button
+  background="bg-green-300 dark:bg-green-400"
+  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/2 bg-green-300 dark:bg-green-400"
+  color="text-lime-700 dark:text-white"
+  data-testid="default-button-test-2"
+  width="w-1/2"
+>
+  Success
+</button>
+`;
+
+exports[`Button should render default button 3 1`] = `
+<button
+  background="bg-red-600"
+  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
+  color="text-white"
+  data-testid="default-button-test-3"
+>
+  Cancel
+</button>
+`;
+
+exports[`Button should render default button 4 1`] = `
+<button
+  background="bg-green-500"
+  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-green-500"
+  color="text-white"
+  data-testid="default-button-test-4"
+  width="w-1/2"
+>
+  Success
+</button>
+`;
+
+exports[`Button should render default button 5 1`] = `
+<button
+  background="bg-blue-600"
+  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-blue-600"
+  color="text-white"
+  data-testid="default-button-test-5"
+>
+  Primary
+</button>
+`;
+
+exports[`Button should render default button 6 1`] = `
+<button
+  background="bg-white dark:bg-slate-300"
+  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-3/4 bg-white dark:bg-slate-300"
+  color="text-black"
+  data-testid="default-button-test-6"
+  width="w-3/4"
+>
+  Default
+</button>
+`;
+
+exports[`Button should render default button 7 1`] = `
+<button
+  background="bg-teal-400"
+  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-teal-400"
+  color="text-white"
+  data-testid="default-button-test-7"
+>
+  LOGIN
+</button>
+`;
+
+exports[`Button should render icon button with label 1 1`] = `
+<button
+  background="bg-green-300 dark:bg-green-400"
+  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/3 bg-green-300 dark:bg-green-400"
+  color="text-lime-700 dark:text-white"
+  data-testid="icon-with-label-button-test-1"
+  width="w-1/3"
+>
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 24 24"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M15 2.013H9V9H2v6h7v6.987h6V15h7V9h-7z"
+    />
+  </svg>
+  Add
+</button>
+`;
+
+exports[`Button should render icon button with label 2 1`] = `
+<button
+  background="bg-red-300 dark:bg-red-500"
+  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-1/2 bg-red-300 dark:bg-red-500"
+  color="text-red-800 dark:text-white"
+  data-testid="icon-with-label-button-test-2"
+  width="w-1/2"
+>
+  <svg
+    class="fill-red-800 dark:fill-white"
+    data-testid="close-icon-button"
+    height="22"
+    viewBox="0 0 320 512"
+    width="22"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
+    />
+  </svg>
+  Close
+</button>
+`;
+
+exports[`Button should render icon button with label 3 1`] = `
+<button
+  background="bg-red-600"
+  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
+  color="text-white"
+  data-testid="icon-with-label-button-test-3"
+>
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 24 24"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"
+    />
+    <path
+      d="M9 10h2v8H9zm4 0h2v8h-2z"
+    />
+  </svg>
+  Delete
+</button>
+`;
+
+exports[`Button should render icon button with label 4 1`] = `
+<button
+  background="bg-blue-600"
+  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-blue-600"
+  color="text-white"
+  data-testid="icon-with-label-button-test-4"
+  width="w-1/2"
+>
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 1024 1024"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM382 896h-.2L232 746.2v-.2h150v150z"
+    />
+  </svg>
+  Copy
+</button>
+`;
+
+exports[`Button should render icon button with label 5 1`] = `
+<button
+  background="bg-white dark:bg-slate-300"
+  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
+  color="text-black"
+  data-testid="icon-with-label-button-test-5"
+>
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 1024 1024"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"
+    />
+  </svg>
+  Default
+</button>
+`;
+
+exports[`Button should render icon button without label 1 1`] = `
+<button
+  background="bg-green-300 dark:bg-green-400"
+  class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
+  color="text-lime-700 dark:text-white"
+  data-testid="icon-without-label-button-test-1"
+>
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 24 24"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M15 2.013H9V9H2v6h7v6.987h6V15h7V9h-7z"
+    />
+  </svg>
+</button>
+`;
+
+exports[`Button should render icon button without label 2 1`] = `
+<button
+  background="bg-red-300 dark:bg-red-500"
+  class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
+  color="text-red-800 dark:text-white"
+  data-testid="icon-without-label-button-test-2"
+>
+  <svg
+    class="fill-red-800 dark:fill-white"
+    data-testid="close-icon-button"
+    height="22"
+    viewBox="0 0 320 512"
+    width="22"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
+    />
+  </svg>
+</button>
+`;
+
+exports[`Button should render icon button without label 3 1`] = `
+<button
+  background="bg-red-600"
+  class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-red-600"
+  color="text-white"
+  data-testid="icon-without-label-button-test-3"
+>
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 24 24"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"
+    />
+    <path
+      d="M9 10h2v8H9zm4 0h2v8h-2z"
+    />
+  </svg>
+</button>
+`;
+
+exports[`Button should render icon button without label 4 1`] = `
+<button
+  background="bg-blue-600"
+  class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-blue-600"
+  color="text-white"
+  data-testid="icon-without-label-button-test-4"
+>
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 1024 1024"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM382 896h-.2L232 746.2v-.2h150v150z"
+    />
+  </svg>
+</button>
+`;
+
+exports[`Button should render icon button without label 5 1`] = `
+<button
+  background="bg-white dark:bg-slate-300"
+  class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
+  color="text-black"
+  data-testid="icon-without-label-button-test-5"
+>
+  <svg
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 1024 1024"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"
+    />
+  </svg>
+</button>
+`;
+
+exports[`Button should render pill 1 1`] = `
+<div
+  background="bg-red-100 dark:bg-red-200"
+  border="border-red-500"
+  class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-red-500 dark:text-red-700 bg-red-100 dark:bg-red-200 border-red-500"
+  color="text-red-500 dark:text-red-700"
+  data-testid="pill-test-1"
+>
+  CANCEL
+</div>
+`;
+
+exports[`Button should render pill 2 1`] = `
+<div
+  background="bg-green-100 dark:bg-green-200"
+  border="border-green-500"
+  class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-green-500 dark:text-green-700 bg-green-100 dark:bg-green-200 border-green-500"
+  color="text-green-500 dark:text-green-700"
+  data-testid="pill-test-2"
+>
+  SUCCESS
+</div>
+`;
+
+exports[`Button should render pill 3 1`] = `
+<div
+  background="bg-yellow-100 dark:bg-yellow-200"
+  border="border-yellow-500"
+  class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-yellow-500 dark:text-yellow-700 bg-yellow-100 dark:bg-yellow-200 border-yellow-500"
+  color="text-yellow-500 dark:text-yellow-700"
+  data-testid="pill-test-3"
+>
+  WARNING
+</div>
+`;
+
+exports[`Button should render pill 4 1`] = `
+<div
+  background="bg-white dark:bg-slate-300"
+  border="border-gray-500"
+  class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
+  color="text-gray-500"
+  data-testid="pill-test-4"
+>
+  DEFAULT
+</div>
+`;
+
+exports[`Button should render style for button, pill and text field 1`] = `
 <div>
   <div
     class="mt-10 text-3xl mx-auto w-screen"
@@ -21,7 +414,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-red-300 dark:bg-red-500"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-5/6 bg-red-300 dark:bg-red-500"
           color="text-red-800 dark:text-white"
-          data-testid="button"
+          data-testid="default-button-test-1"
           width="w-5/6"
         >
           Cancel
@@ -30,7 +423,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-green-300 dark:bg-green-400"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/2 bg-green-300 dark:bg-green-400"
           color="text-lime-700 dark:text-white"
-          data-testid="button"
+          data-testid="default-button-test-2"
           width="w-1/2"
         >
           Success
@@ -39,7 +432,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-red-600"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
           color="text-white"
-          data-testid="button"
+          data-testid="default-button-test-3"
         >
           Cancel
         </button>
@@ -47,7 +440,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-green-500"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-green-500"
           color="text-white"
-          data-testid="button"
+          data-testid="default-button-test-4"
           width="w-1/2"
         >
           Success
@@ -56,7 +449,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-blue-600"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-blue-600"
           color="text-white"
-          data-testid="button"
+          data-testid="default-button-test-5"
         >
           Primary
         </button>
@@ -64,7 +457,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-white dark:bg-slate-300"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-3/4 bg-white dark:bg-slate-300"
           color="text-black"
-          data-testid="button"
+          data-testid="default-button-test-6"
           width="w-3/4"
         >
           Default
@@ -73,7 +466,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-teal-400"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-teal-400"
           color="text-white"
-          data-testid="button"
+          data-testid="default-button-test-7"
         >
           LOGIN
         </button>
@@ -81,7 +474,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-orange-400"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-orange-400"
           color="text-white"
-          data-testid="custom-button"
+          data-testid="custom-button-test-1"
         >
           Custom1
         </button>
@@ -89,7 +482,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-indigo-300"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-indigo-300"
           color="text-white"
-          data-testid="custom-button"
+          data-testid="custom-button-test-2"
         >
           Custom2
         </button>
@@ -97,7 +490,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-green-300 dark:bg-green-400"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/3 bg-green-300 dark:bg-green-400"
           color="text-lime-700 dark:text-white"
-          data-testid="icon-button-with-label"
+          data-testid="icon-with-label-button-test-1"
           width="w-1/3"
         >
           <svg
@@ -119,7 +512,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-red-300 dark:bg-red-500"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-1/2 bg-red-300 dark:bg-red-500"
           color="text-red-800 dark:text-white"
-          data-testid="icon-button-with-label"
+          data-testid="icon-with-label-button-test-2"
           width="w-1/2"
         >
           <svg
@@ -140,7 +533,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-red-600"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
           color="text-white"
-          data-testid="icon-button-with-label"
+          data-testid="icon-with-label-button-test-3"
         >
           <svg
             fill="currentColor"
@@ -164,7 +557,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-blue-600"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-blue-600"
           color="text-white"
-          data-testid="icon-button-with-label"
+          data-testid="icon-with-label-button-test-4"
           width="w-1/2"
         >
           <svg
@@ -186,7 +579,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-white dark:bg-slate-300"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
           color="text-black"
-          data-testid="icon-button-with-label"
+          data-testid="icon-with-label-button-test-5"
         >
           <svg
             fill="currentColor"
@@ -207,7 +600,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-green-300 dark:bg-green-400"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
           color="text-lime-700 dark:text-white"
-          data-testid="icon-button-without-label"
+          data-testid="icon-without-label-button-test-1"
         >
           <svg
             fill="currentColor"
@@ -227,7 +620,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-red-300 dark:bg-red-500"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
           color="text-red-800 dark:text-white"
-          data-testid="icon-button-without-label"
+          data-testid="icon-without-label-button-test-2"
         >
           <svg
             class="fill-red-800 dark:fill-white"
@@ -246,7 +639,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-red-600"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-red-600"
           color="text-white"
-          data-testid="icon-button-without-label"
+          data-testid="icon-without-label-button-test-3"
         >
           <svg
             fill="currentColor"
@@ -269,7 +662,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-blue-600"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-blue-600"
           color="text-white"
-          data-testid="icon-button-without-label"
+          data-testid="icon-without-label-button-test-4"
         >
           <svg
             fill="currentColor"
@@ -289,7 +682,7 @@ exports[`Button should render style for button and pill 1`] = `
           background="bg-white dark:bg-slate-300"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
           color="text-black"
-          data-testid="icon-button-without-label"
+          data-testid="icon-without-label-button-test-5"
         >
           <svg
             fill="currentColor"
@@ -323,7 +716,7 @@ exports[`Button should render style for button and pill 1`] = `
           border="border-red-500"
           class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-red-500 dark:text-red-700 bg-red-100 dark:bg-red-200 border-red-500"
           color="text-red-500 dark:text-red-700"
-          data-testid="pill"
+          data-testid="pill-test-1"
         >
           CANCEL
         </div>
@@ -332,7 +725,7 @@ exports[`Button should render style for button and pill 1`] = `
           border="border-green-500"
           class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-green-500 dark:text-green-700 bg-green-100 dark:bg-green-200 border-green-500"
           color="text-green-500 dark:text-green-700"
-          data-testid="pill"
+          data-testid="pill-test-2"
         >
           SUCCESS
         </div>
@@ -341,7 +734,7 @@ exports[`Button should render style for button and pill 1`] = `
           border="border-yellow-500"
           class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-yellow-500 dark:text-yellow-700 bg-yellow-100 dark:bg-yellow-200 border-yellow-500"
           color="text-yellow-500 dark:text-yellow-700"
-          data-testid="pill"
+          data-testid="pill-test-3"
         >
           WARNING
         </div>
@@ -350,7 +743,7 @@ exports[`Button should render style for button and pill 1`] = `
           border="border-gray-500"
           class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
           color="text-gray-500"
-          data-testid="pill"
+          data-testid="pill-test-4"
         >
           DEFAULT
         </div>

@@ -6,14 +6,15 @@ import { AiFillCopy, AiOutlineCheck } from 'react-icons/ai';
 import { BiTrash, BiPlusMedical } from 'react-icons/bi';
 import CloseIcon from '../CloseIcon.jsx';
 
-function IconButtonWithoutLabel({ variant }) {
+function IconButtonWithoutLabel({ variant, onclickHandler, dataTestid }) {
 	const { color, background } = getVariant(variant);
 
 	return (
 		<IconButtonWithoutLabelContainer
-			data-testid='icon-button-without-label'
+			data-testid={dataTestid}
 			color={color}
 			background={background}
+			onClick={onclickHandler}
 		>
 			{getIcon(variant)}
 		</IconButtonWithoutLabelContainer>
@@ -41,6 +42,8 @@ function getIcon(variant) {
 
 IconButtonWithoutLabel.propTypes = {
 	variant: PropTypes.string,
+	dataTestid: PropTypes.string,
+	onclickHandler: PropTypes.func.isRequired,
 };
 
 export default IconButtonWithoutLabel;
