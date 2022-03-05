@@ -44,7 +44,7 @@ public class RequestBodiesForMock {
     @Schema(description = "Delete Timestamp")
     private ZonedDateTime deletedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "request_body_type_id")
     private RequestBodyType requestBodyType;
 }

@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import {
+	getAllMocks,
 	createMock,
 	deleteMockById,
+	forceDeleteMockById,
 	getMockById,
 	updateMock,
+	listMocks,
+	listArchivedMocks,
+	listDeletedMocks,
+	archiveMock,
+	unarchiveMock,
+	exportMocks,
+	exportMocksCsvTemplate,
 } from './api/MocksApi';
-import { Button, CustomButton } from 'styles';
-import { ButtonVariants } from './styles/components/Button';
+import { CustomButton } from 'styles';
 import { Buffer } from 'buffer';
 
 const PlatformApi = () => {
@@ -29,7 +37,15 @@ const PlatformApi = () => {
 
 	const logout = async () => {
 		setToken('');
+		setMockId('');
+		setResponse('');
 		setLoggedIn(false);
+	};
+
+	const getAllMocksOperation = async () => {
+		const allMocksResponse = await getAllMocks(token);
+		setMockId('');
+		setResponse(JSON.stringify(allMocksResponse, null, 2));
 	};
 
 	const createMockOperation = async () => {
@@ -39,7 +55,6 @@ const PlatformApi = () => {
 		formData.append('httpMethod', 'GET');
 		formData.append('statusCode', 200);
 		const createdMockResponse = await createMock(formData, token);
-		console.log(createdMockResponse);
 		setResponse(JSON.stringify(createdMockResponse, null, 2));
 		const mockId = createdMockResponse.data.data.id;
 		setMockId(mockId);
@@ -47,7 +62,6 @@ const PlatformApi = () => {
 
 	const getMockOperation = async () => {
 		const getMockResponse = await getMockById(mockId, token);
-		console.log(getMockResponse);
 		setResponse(JSON.stringify(getMockResponse, null, 2));
 	};
 
@@ -65,14 +79,56 @@ const PlatformApi = () => {
 			updatedFormData,
 			token
 		);
-		console.log(updatedMockResponse);
 		setResponse(JSON.stringify(updatedMockResponse, null, 2));
 	};
 
 	const deleteMockOperation = async () => {
 		const deletedMockResponse = await deleteMockById(mockId, token);
-		console.log(deletedMockResponse);
 		setResponse(JSON.stringify(deletedMockResponse, null, 2));
+	};
+
+	const forceDeleteMockOperation = async () => {
+		const deletedMockResponse = await forceDeleteMockById(mockId, token);
+		setMockId('');
+		setResponse(JSON.stringify(deletedMockResponse, null, 2));
+	};
+
+	const renderListViewOperation = async () => {
+		const listMocksResponse = await listMocks(token);
+		setMockId('');
+		setResponse(JSON.stringify(listMocksResponse, null, 2));
+	};
+
+	const renderArchivedViewOperation = async () => {
+		const archivedMocksResponse = await listArchivedMocks(token);
+		setMockId('');
+		setResponse(JSON.stringify(archivedMocksResponse, null, 2));
+	};
+
+	const renderRecycleBinViewOperation = async () => {
+		const deletedMocksResponse = await listDeletedMocks(token);
+		setMockId('');
+		setResponse(JSON.stringify(deletedMocksResponse, null, 2));
+	};
+
+	const archiveMockOperation = async () => {
+		const archivedMockResponse = await archiveMock(mockId, token);
+		setResponse(JSON.stringify(archivedMockResponse, null, 2));
+	};
+
+	const unarchiveMockOperation = async () => {
+		const unarchivedMockResponse = await unarchiveMock(mockId, token);
+		setResponse(JSON.stringify(unarchivedMockResponse, null, 2));
+	};
+
+	const exportMocksOperation = async () => {
+		const exportMocksResponse = await exportMocks(token);
+		setResponse(JSON.stringify(exportMocksResponse, null, 2));
+	};
+
+	const exportMocksCsvTemplateOperation = async () => {
+		const exportMocksCsvTemplateResponse = await exportMocksCsvTemplate(token);
+		setResponse(JSON.stringify(exportMocksCsvTemplateResponse, null, 2));
 	};
 
 	return (
@@ -124,13 +180,14 @@ const PlatformApi = () => {
 								/>
 							</div>
 							<div className='flex items-center justify-between'>
-								<Button
-									variant={ButtonVariants.TealButton}
+								<CustomButton
+									background='bg-gray-800'
+									color='text-white'
 									label='LOGIN'
 									onclickHandler={() => {
 										login();
 									}}
-								></Button>
+								></CustomButton>
 							</div>
 						</form>
 					</div>
@@ -168,6 +225,78 @@ const PlatformApi = () => {
 								label='Delete Mock'
 								onclickHandler={() => {
 									deleteMockOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Force Delete Mock'
+								onclickHandler={() => {
+									forceDeleteMockOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Get All Mocks'
+								onclickHandler={() => {
+									getAllMocksOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Render List'
+								onclickHandler={() => {
+									renderListViewOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Render Archived'
+								onclickHandler={() => {
+									renderArchivedViewOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Render RecycleBin'
+								onclickHandler={() => {
+									renderRecycleBinViewOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Archive Mock'
+								onclickHandler={() => {
+									archiveMockOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Unarchive Mock'
+								onclickHandler={() => {
+									unarchiveMockOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Export Mocks'
+								onclickHandler={() => {
+									exportMocksOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Export Template'
+								onclickHandler={() => {
+									exportMocksCsvTemplateOperation();
 								}}
 							></CustomButton>
 						</div>

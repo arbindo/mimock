@@ -1,6 +1,6 @@
 import { get, post, put, remove } from './AxiosClient';
 
-const getMocks = async (token) => {
+const getAllMocks = async (token) => {
 	return await get('/mocks', token);
 };
 
@@ -30,4 +30,50 @@ const deleteMockById = async (id, token) => {
 	return await remove(`/mocks/${id}`, token);
 };
 
-export { getMocks, getMockById, createMock, updateMock, deleteMockById };
+const forceDeleteMockById = async (id, token) => {
+	return await remove(`/mocks/${id}:forceDelete`, token);
+};
+
+const listMocks = async (token) => {
+	return await get('/mocks/filter?status=NONE', token);
+};
+
+const listArchivedMocks = async (token) => {
+	return await get('/mocks/filter?status=ARCHIVED', token);
+};
+
+const listDeletedMocks = async (token) => {
+	return await get('/mocks/filter?status=DELETED', token);
+};
+
+const archiveMock = async (id, token) => {
+	return await post(`/mocks/${id}:archive`, null, token);
+};
+
+const unarchiveMock = async (id, token) => {
+	return await post(`/mocks/${id}:unarchive`, null, token);
+};
+
+const exportMocks = async (token) => {
+	return await get('/mocks/csv/export', token);
+};
+
+const exportMocksCsvTemplate = async (token) => {
+	return await get('/mocks/csv/template/export', token);
+};
+
+export {
+	getAllMocks,
+	getMockById,
+	createMock,
+	updateMock,
+	deleteMockById,
+	forceDeleteMockById,
+	listMocks,
+	listArchivedMocks,
+	listDeletedMocks,
+	archiveMock,
+	unarchiveMock,
+	exportMocks,
+	exportMocksCsvTemplate,
+};
