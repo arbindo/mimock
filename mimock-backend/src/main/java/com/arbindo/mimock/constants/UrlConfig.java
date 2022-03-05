@@ -47,11 +47,12 @@ public class UrlConfig {
     // endregion
 
     // region PATH
-    public static final String MANAGE_PATH = API_PATH + VERSION + STATIC_RECORDS;
-    public static final String MOCKS_PATH = API_PATH + VERSION + MOCKS;
+    public static final String MANAGE_PATH = API_PREFIX + STATIC_RECORDS;
+    public static final String MOCKS_PATH = API_PREFIX + MOCKS;
     // endregion
 
-    // admin routes
-    public static final String USER_PATH = API_PREFIX + ADMIN + "/users";
-    // end of admin routes
+    // region ADMIN PATH
+    public static final String USERS = "/users";
+    public static final String USER_PATH = API_PREFIX + ADMIN + USERS;
+    // endregion
 }

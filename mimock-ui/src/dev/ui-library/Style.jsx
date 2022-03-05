@@ -8,8 +8,11 @@ import {
 	BasicTextField,
 	PasswordField,
 } from 'styles';
-import { PillVariants } from './styles/components/Pill';
-import { ButtonVariants, IconButtonVariants } from './styles/components/Button';
+import { PillVariants } from '../../styles/components/Pill';
+import {
+	ButtonVariants,
+	IconButtonVariants,
+} from '../../styles/components/Button';
 
 function Style() {
 	return (

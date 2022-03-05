@@ -51,4 +51,5 @@ spring:
     password: ironclaw
 
 app:
+  origin: http://localhost:3000
   url_prefix: /api/mimock

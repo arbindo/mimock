@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
-import PlatformApi from './PlatformApi.jsx';
-import Style from './Style.jsx';
+import PlatformApi from './dev/platform-api/PlatformApi.jsx';
+import Style from './dev/ui-library/Style.jsx';
 
 function AppRoutes() {
 	return (
