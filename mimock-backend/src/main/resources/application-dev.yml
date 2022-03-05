@@ -54,7 +54,8 @@ spring:
 
 app:
   origin: http://localhost:3000
-  url_prefix: /api/mimock
   security:
     jwt-expiry-in-seconds: 1800
     jwt-secret-key: B4982E53863B4DA7FDA4E1236C4BAF8A # Only for development. Do not use this in production.
+    cors-config:
+      allowed-origins: http://localhost:3000,http://localhost:3001
