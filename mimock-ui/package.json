@@ -2,7 +2,7 @@
     "name": "mimock-ui",
     "version": "0.0.1",
     "scripts": {
-        "format:check": "prettier --check src/**/*.js src/**/*.jsx",
+        "format:check": "prettier --check --config=.prettierrc src/**/*.js src/**/*.jsx",
         "format:fix": "prettier --write --config=.prettierrc .",
         "lint:file": "eslint ",
         "lint:all": "eslint --config=.eslintrc.js src/**/*.js src/**/*.jsx",
@@ -11,7 +11,8 @@
         "build:start": "cd dist && PORT=3000 npx serve",
         "start": "webpack serve --open --mode development",
         "start:live": "webpack serve --open --mode development --live-reload --hot",
-        "test": "jest"
+        "test": "jest --silent=true",
+        "pre-commit:check": "yarn format:check && yarn lint:all"
     },
     "license": "Apache-2.0",
     "author": {
