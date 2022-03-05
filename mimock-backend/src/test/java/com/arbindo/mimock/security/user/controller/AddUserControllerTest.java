@@ -6,7 +6,7 @@ import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.helpers.general.JsonMapper;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.security.exceptions.UserAlreadyExistsException;
-import com.arbindo.mimock.security.user.models.AddUserRequest;
+import com.arbindo.mimock.security.user.models.request.AddUserRequest;
 import com.arbindo.mimock.security.user.service.AddUserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

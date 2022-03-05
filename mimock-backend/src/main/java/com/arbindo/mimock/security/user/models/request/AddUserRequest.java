@@ -1,4 +1,4 @@
-package com.arbindo.mimock.security.user.models;
+package com.arbindo.mimock.security.user.models.request;
 
 import com.arbindo.mimock.constraints.ValidPassword;
 import com.arbindo.mimock.constraints.ValidRole;

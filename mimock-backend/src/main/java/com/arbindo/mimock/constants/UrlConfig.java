@@ -55,4 +55,6 @@ public class UrlConfig {
     public static final String USERS = "/users";
     public static final String USER_PATH = API_PREFIX + ADMIN + USERS;
     // endregion
+
+    public static final String AUTHENTICATE = API_PREFIX + "/user/authenticate";
 }
