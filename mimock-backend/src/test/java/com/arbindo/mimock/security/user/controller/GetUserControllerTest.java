@@ -2,6 +2,7 @@ package com.arbindo.mimock.security.user.controller;
 
 import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
+import com.arbindo.mimock.security.JwtRequestFilter;
 import com.arbindo.mimock.security.user.models.UserInfo;
 import com.arbindo.mimock.security.user.models.Users;
 import com.arbindo.mimock.security.user.service.GetUserService;
@@ -56,6 +57,9 @@ class GetUserControllerTest {
 
     @MockBean
     GetUserService mockUserService;
+
+    @MockBean
+    JwtRequestFilter jwtRequestFilter;
 
     @Test
     void shouldReturnUsersWithStatusOK_WhenUsersExist() throws Exception {

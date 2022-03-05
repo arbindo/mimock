@@ -7,6 +7,7 @@ import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.Status;
+import com.arbindo.mimock.security.JwtRequestFilter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -78,6 +79,9 @@ class MockManagementControllerTest {
     @MockBean
     UserDetailsService userDetailsService;
 
+    @MockBean
+    JwtRequestFilter jwtRequestFilter;
+    
     @Test
     void shouldReturnHttpOk_ListMocksApi_ReturnsEmpty() throws Exception {
         // Arrange

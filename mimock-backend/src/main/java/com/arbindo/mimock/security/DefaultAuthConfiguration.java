@@ -10,9 +10,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -23,6 +25,9 @@ import java.util.Set;
 public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
+
+    @Autowired
+    JwtRequestFilter jwtRequestFilter;
 
     @Value("#{'${app.security.cors-config.allowed-origins}'.split(',')}")
     private Set<String> corsAllowedOrigins;
@@ -51,10 +56,12 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                         Role.MANAGER.toString(),
                         Role.VIEWER.toString()
                 )
-                .and().httpBasic().and().authorizeRequests()
                 .antMatchers("/").permitAll()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable()
                 .cors().configurationSource(corsConfigurationSource());
+
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     CorsConfigurationSource corsConfigurationSource() {
