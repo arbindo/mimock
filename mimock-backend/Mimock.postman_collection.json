@@ -11,21 +11,6 @@
 				{
 					"name": "Create Mock",
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "test",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -453,6 +438,36 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -464,21 +479,6 @@
 						{
 							"name": "Get All Users",
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "mimock_admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -505,21 +505,6 @@
 								"disabledSystemHeaders": {}
 							},
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "mimock_admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -535,7 +520,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Frodo Baggins\",\r\n    \"userName\": \"frodo\",\r\n    \"password\": \"$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau\",\r\n    \"userRole\": \"MANAGER\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Frodo Baggins\",\r\n    \"userName\": \"frodo1\",\r\n    \"password\": \"$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau\",\r\n    \"userRole\": \"MANAGER\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -555,6 +540,41 @@
 										"v1",
 										"admin",
 										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authenticate",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\": \"mimock_admin\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/mimock/v1/user/authenticate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"mimock",
+										"v1",
+										"user",
+										"authenticate"
 									]
 								}
 							},
@@ -630,6 +650,36 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -714,6 +764,11 @@
 			"key": "mockId",
 			"value": "f3bd4cb2-2af5-49b2-af39-9ec7addd571f",
 			"type": "string"
+		},
+		{
+			"key": "authToken",
+			"value": "eyJpYXQiOiJTYXQgTWFyIDA1IDIzOjQwOjI4IElTVCAyMDIyIiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyTmFtZSI6Im1pbW9ja19hZG1pbiIsInVzZXJSb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1pbW9ja19hZG1pbiIsImV4cCI6MTY0NjUwNTYyOH0.pcOt5NVFyRhx2E5slmq1gRmwP6n8KXhVWqtIc-KlXEM",
+			"type": "default"
 		}
 	]
 }
