@@ -106,7 +106,7 @@ public class Mock {
         return Status.valueOf(getEntityStatus().getStatus()) == Status.ARCHIVED;
     }
 
-    public boolean canModifyEntityStatus() {
+    public boolean canEditMock() {
         return Status.valueOf(getEntityStatus().getStatus()) != Status.DELETED;
     }
 

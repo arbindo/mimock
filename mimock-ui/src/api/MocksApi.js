@@ -1,4 +1,4 @@
-import { get, post, put, remove } from '../AxiosClient';
+import { get, post, put, remove } from './AxiosClient';
 
 const getMocks = async (token) => {
 	return await get('/mocks', token);

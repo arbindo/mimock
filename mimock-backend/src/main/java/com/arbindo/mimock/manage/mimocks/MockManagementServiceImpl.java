@@ -266,7 +266,7 @@ public class MockManagementServiceImpl implements MockManagementService {
         }
         try {
             Mock mock = getMockById(mockId);
-            if (mock != null) {
+            if (mock != null && mock.canEditMock()) {
                 HttpMethod httpMethod = getHttpMethod(request.getHttpMethod());
                 String responseContentTypeString = request.getResponseContentType() != null
                         ? request.getResponseContentType() : mock.getResponseContentType().getContentType();
@@ -349,7 +349,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                         return mock;
                     } else {
                         // Archive the mock i.e. Mark EntityStatus as ARCHIVED
-                        if (mock.canModifyEntityStatus()) {
+                        if (mock.canEditMock()) {
                             EntityStatus entityStatus = getArchivedMockEntityStatus();
                             mock.setEntityStatus(entityStatus);
                             mock.setUpdatedAt(ZonedDateTime.now());
@@ -373,7 +373,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                 Mock mock = getMockById(mockId);
                 if (mock != null) {
                     // Idempotent behaviour - Unarchive the mock i.e. Mark EntityStatus as NONE
-                    if (mock.canModifyEntityStatus()) {
+                    if (mock.canEditMock()) {
                         EntityStatus entityStatus = getDefaultMockEntityStatus();
                         mock.setEntityStatus(entityStatus);
                         mock.setUpdatedAt(ZonedDateTime.now());

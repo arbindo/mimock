@@ -4,13 +4,16 @@ import {
 	deleteMockById,
 	getMockById,
 	updateMock,
-} from './api/mocks/MocksApi';
+} from './api/MocksApi';
+import { Button, CustomButton } from 'styles';
+import { ButtonVariants } from './styles/components/Button';
 import { Buffer } from 'buffer';
 
 const PlatformApi = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [token, setToken] = useState('');
+	const [loggedIn, setLoggedIn] = useState(false);
 	const [mockId, setMockId] = useState('');
 	const [response, setResponse] = useState('');
 
@@ -19,6 +22,14 @@ const PlatformApi = () => {
 			'base64'
 		);
 		setToken(token);
+		setLoggedIn(true);
+		setUsername('');
+		setPassword('');
+	};
+
+	const logout = async () => {
+		setToken('');
+		setLoggedIn(false);
 	};
 
 	const createMockOperation = async () => {
@@ -29,7 +40,7 @@ const PlatformApi = () => {
 		formData.append('statusCode', 200);
 		const createdMockResponse = await createMock(formData, token);
 		console.log(createdMockResponse);
-		setResponse(JSON.stringify(createdMockResponse));
+		setResponse(JSON.stringify(createdMockResponse, null, 2));
 		const mockId = createdMockResponse.data.data.id;
 		setMockId(mockId);
 	};
@@ -37,7 +48,7 @@ const PlatformApi = () => {
 	const getMockOperation = async () => {
 		const getMockResponse = await getMockById(mockId, token);
 		console.log(getMockResponse);
-		setResponse(JSON.stringify(getMockResponse));
+		setResponse(JSON.stringify(getMockResponse, null, 2));
 	};
 
 	const updateMockOperation = async () => {
@@ -55,23 +66,32 @@ const PlatformApi = () => {
 			token
 		);
 		console.log(updatedMockResponse);
-		setResponse(JSON.stringify(updatedMockResponse));
+		setResponse(JSON.stringify(updatedMockResponse, null, 2));
 	};
 
 	const deleteMockOperation = async () => {
 		const deletedMockResponse = await deleteMockById(mockId, token);
 		console.log(deletedMockResponse);
-		setResponse(JSON.stringify(deletedMockResponse));
+		setResponse(JSON.stringify(deletedMockResponse, null, 2));
 	};
 
 	return (
 		<div data-testid='platform-api' className='mt-10 text-3xl mx-auto w-screen'>
 			<div className='w-full mb-20'>
-				<div className='font-sans font-bold text-lg mb-10 ml-6 dark:text-gray-100'>
-					Mimock Platform APIs
+				<div className='flex justify-center'>
+					<div className='font-sans font-bold mb-10 ml-6 dark:text-gray-100'>
+						Mimock Platform APIs
+					</div>
 				</div>
-				<If condition={token == ''}>
-					<div className='overflow-hidden border-t border-l border-r border-gray-400 px-3 py-10 bg-white-200 flex justify-center'>
+				<If condition={loggedIn}>
+					<div className='font-sans text-lg mb-2 mt-2 p-2 dark:text-gray-100'>
+						<span className='underline cursor-pointer' onClick={() => logout()}>
+							Logout
+						</span>
+					</div>
+				</If>
+				<If condition={!loggedIn}>
+					<div className='overflow-hidden px-3 py-10 bg-white-200 flex justify-center'>
 						<form className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
 							<div className='mb-4'>
 								<label
@@ -104,57 +124,66 @@ const PlatformApi = () => {
 								/>
 							</div>
 							<div className='flex items-center justify-between'>
-								<button
-									className='bg-blue-500 hover:bg-blue-700 text-base text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-									type='button'
-									onClick={() => login()}
-								>
-									Sign In
-								</button>
+								<Button
+									variant={ButtonVariants.TealButton}
+									label='LOGIN'
+									onclickHandler={() => {
+										login();
+									}}
+								></Button>
 							</div>
 						</form>
 					</div>
 				</If>
-				<If condition={token != ''}>
-					<div className='overflow-hidden border-t border-l border-r border-gray-400 px-3 py-10 bg-white-200 flex justify-center'>
-						<div
-							className='px-2 py-1 mx-2 my-1 bg-yellow-400 text-black rounded shadow cursor-pointer'
-							onClick={() => createMockOperation()}
-						>
-							Create Mock
-						</div>
-						<div
-							className='px-2 py-1 mx-2 my-1 bg-yellow-400 text-black rounded shadow cursor-pointer'
-							onClick={() => getMockOperation()}
-						>
-							Get Mock
-						</div>
-						<div
-							className='px-2 py-1 mx-2 my-1 bg-yellow-400 text-black rounded shadow cursor-pointer'
-							onClick={() => updateMockOperation()}
-						>
-							Update Mock
-						</div>
-						<div
-							className='px-2 py-1 mx-2 my-1 bg-yellow-400 text-black rounded shadow cursor-pointer'
-							onClick={() => deleteMockOperation()}
-						>
-							Delete Mock
+				<If condition={loggedIn}>
+					<div className='flex mt-10 mb-4'>
+						<div className='w-full grid grid-cols-4 gap-2 gap-y-8'>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Create Mock'
+								onclickHandler={() => {
+									createMockOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Get Mock'
+								onclickHandler={() => {
+									getMockOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Update Mock'
+								onclickHandler={() => {
+									updateMockOperation();
+								}}
+							></CustomButton>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								label='Delete Mock'
+								onclickHandler={() => {
+									deleteMockOperation();
+								}}
+							></CustomButton>
 						</div>
 					</div>
-				</If>
-				<If condition={mockId != ''}>
-					<div className='flex my-2 py-2'>
-						<div className='rounded-lg text-white bg-gray-800 text-sm p-2 m-2'>
-							Mock Id: {mockId}
-						</div>
-					</div>
-				</If>
-				<If condition={response != ''}>
-					<div className='flex my-2 py-2'>
-						<div className='rounded-lg text-white bg-gray-800 text-sm p-2 m-2'>
-							{response}
-						</div>
+
+					<div className='flex flex-col p-4 mx-4 overflow-hidden'>
+						<If condition={mockId != ''}>
+							<div className='rounded-lg text-white bg-gray-800 text-sm p-4 mt-8 mb-4'>
+								Mock Id: {mockId}
+							</div>
+						</If>
+						<If condition={response != ''}>
+							<pre className='rounded-lg text-white bg-gray-800 text-sm p-4 mt-4 mb-2'>
+								{response}
+							</pre>
+						</If>
 					</div>
 				</If>
 			</div>
