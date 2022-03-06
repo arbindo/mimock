@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -58,8 +59,13 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                 )
                 .antMatchers("/").permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().csrf().disable()
-                .cors().configurationSource(corsConfigurationSource());
+                .and().cors().configurationSource(corsConfigurationSource());
+
+        http.csrf((csrfInstance) -> {
+            csrfInstance
+                    .ignoringAntMatchers(UrlConfig.AUTHENTICATE)
+                    .csrfTokenRepository(new CookieCsrfTokenRepository());
+        });
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
