@@ -12,7 +12,13 @@
 					"name": "Create Mock",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "default"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -111,7 +117,13 @@
 					"name": "Update Mock",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "default"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -279,7 +291,13 @@
 					"name": "Delete Mock By Id",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/api/mimock/v1/mocks/{{mockId}}",
 							"protocol": "http",
@@ -302,7 +320,13 @@
 					"name": "Force Delete Mock By Id",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/api/mimock/v1/mocks/{{mockId}}:forceDelete",
 							"protocol": "http",
@@ -325,7 +349,13 @@
 					"name": "Delete All Mocks",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/api/mimock/v1/mocks",
 							"protocol": "http",
@@ -396,7 +426,13 @@
 					"name": "Archive Mock",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/api/mimock/v1/mocks/{{mockId}}:archive",
 							"protocol": "http",
@@ -419,7 +455,13 @@
 					"name": "Unarchive Mock",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/api/mimock/v1/mocks/{{mockId}}:unarchive",
 							"protocol": "http",
@@ -501,6 +543,17 @@
 						},
 						{
 							"name": "Add new user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"protocolProfileBehavior": {
 								"disabledSystemHeaders": {}
 							},
@@ -508,13 +561,8 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "X-CSRF-Token",
-										"value": "FETCH",
-										"type": "default"
-									},
-									{
-										"key": "Cookie",
-										"value": "CSRF=F11FBBDBD9F5777B42248CA298DC990D",
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrfToken}}",
 										"type": "default"
 									}
 								],
@@ -668,7 +716,12 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							""
+							"pm.sendRequest(pm.variables.get(\"origin\") + \"/authenticate\", function (err, response) {",
+							"    if (response.token) {",
+							"        pm.collectionVariables.set(\"authToken\", response.token)",
+							"        pm.variables.set(\"authToken\", response.token)",
+							"    }",
+							"});"
 						]
 					}
 				},
@@ -694,6 +747,11 @@
 							{
 								"key": "Authorization",
 								"value": "nDFGdgfd_jhgjhZHHTdyhgfdghjdgjh",
+								"type": "default"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
 								"type": "default"
 							}
 						],
@@ -745,6 +803,38 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
+					"const jar = pm.cookies.jar()",
+					"jar.get(pm.variables.get(\"domain\"), 'XSRF-TOKEN', (err, cookie) => {",
+					"    console.info(\"Cookie : \", cookie)",
+					"    pm.collectionVariables.set(\"csrfToken\", cookie)",
+					"})",
+					"",
+					"setTimeout(() => {}, 500); ",
+					"",
+					"var options = {",
+					"    url: pm.variables.get(\"origin\") + \"/api/mimock/v1/user/authenticate\",",
+					"    method: 'POST',",
+					"    header: {",
+					"        'Content-type': 'application/json'",
+					"    },",
+					"    body: JSON.stringify({",
+					"        \"userName\": \"mimock_admin\",",
+					"        \"password\": \"password\"",
+					"    })",
+					"}",
+					"",
+					"pm.sendRequest(options, function (err, response) {",
+					"    if (err) {",
+					"        console.error(err)",
+					"    }",
+					"",
+					"    const res = response.json()",
+					"    console.log(res)",
+					"    if (res.token) {",
+					"        pm.collectionVariables.set(\"authToken\", res.token)",
+					"        console.log(pm.collectionVariables.get(\"authToken\"))",
+					"    }",
+					"});",
 					""
 				]
 			}
@@ -767,7 +857,27 @@
 		},
 		{
 			"key": "authToken",
-			"value": "eyJpYXQiOiJTYXQgTWFyIDA1IDIzOjQwOjI4IElTVCAyMDIyIiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyTmFtZSI6Im1pbW9ja19hZG1pbiIsInVzZXJSb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6Im1pbW9ja19hZG1pbiIsImV4cCI6MTY0NjUwNTYyOH0.pcOt5NVFyRhx2E5slmq1gRmwP6n8KXhVWqtIc-KlXEM",
+			"value": "{will be filled by pre-request script}",
+			"type": "default"
+		},
+		{
+			"key": "origin",
+			"value": "http://localhost:8080",
+			"type": "default"
+		},
+		{
+			"key": "securedOrigin",
+			"value": "https://localhost:8080",
+			"type": "default"
+		},
+		{
+			"key": "domain",
+			"value": "localhost",
+			"type": "default"
+		},
+		{
+			"key": "csrfToken",
+			"value": "{will be filled by pre-request script}",
 			"type": "default"
 		}
 	]
