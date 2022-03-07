@@ -10,6 +10,7 @@
 				"alias": {
 					"styles": "./src/styles/components",
 					"test": "./test",
+					"api": "./src/api",
 					"underscore": "lodash"
 				}
 			}

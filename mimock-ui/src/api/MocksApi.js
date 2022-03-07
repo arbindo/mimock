@@ -1,4 +1,4 @@
-import { get, post, put, remove } from './AxiosClient';
+import { get, post, put, remove, authenticate } from './AxiosClient';
 
 const getAllMocks = async (token) => {
 	return await get('/mocks', token);
@@ -6,6 +6,13 @@ const getAllMocks = async (token) => {
 
 const getMockById = async (id, token) => {
 	return await get(`/mocks/${id}`, token);
+};
+
+const getToken = async (userName, password) => {
+	return await authenticate(`/user/authenticate`, {
+		userName,
+		password,
+	});
 };
 
 const createMock = async (requestData, token) => {
@@ -76,4 +83,5 @@ export {
 	unarchiveMock,
 	exportMocks,
 	exportMocksCsvTemplate,
+	getToken,
 };

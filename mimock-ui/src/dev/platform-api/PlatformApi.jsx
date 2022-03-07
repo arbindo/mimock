@@ -1,6 +1,6 @@
+import { getToken } from 'api/MocksApi';
 import React, { useState } from 'react';
 import { CustomButton } from 'styles';
-import { Buffer } from 'buffer';
 import PlatformApiOperations from './PlatformApiOperations.jsx';
 
 const PlatformApi = () => {
@@ -14,13 +14,19 @@ const PlatformApi = () => {
 			alert('Username and password required');
 			return;
 		}
-		const token = Buffer.from(`${username}:${password}`, 'utf8').toString(
-			'base64'
-		);
-		setToken(token);
-		setLoggedIn(true);
-		setUsername('');
-		setPassword('');
+
+		await getToken(username, password)
+			.then((response) => {
+				setToken(response.data.token);
+				setLoggedIn(true);
+				setUsername('');
+				setPassword('');
+			})
+			.catch((err) => {
+				console.error(err);
+				setUsername('');
+				setPassword('');
+			});
 	};
 
 	const logout = async () => {
@@ -45,7 +51,10 @@ const PlatformApi = () => {
 				</If>
 				<If condition={!loggedIn}>
 					<div className='overflow-hidden px-3 py-10 bg-white-200 flex justify-center'>
-						<form className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+						<form
+							className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+							onSubmit={(e) => e.preventDefault()}
+						>
 							<div className='mb-4'>
 								<label
 									className='block text-gray-700 text-sm font-bold mb-2'

@@ -14,7 +14,7 @@ import {
 	unarchiveMock,
 	exportMocks,
 	exportMocksCsvTemplate,
-} from '../../api/MocksApi';
+} from 'api/MocksApi';
 import {
 	listEntityStatus,
 	listHttpMethods,
@@ -140,139 +140,120 @@ const PlatformApiOperations = ({ loggedIn, token }) => {
 		setResponse(JSON.stringify(response, null, 2));
 	};
 
+	const actions = [
+		{
+			label: 'Create Mock',
+			clickHandler: () => {
+				createMockOperation();
+			},
+		},
+		{
+			label: 'Get Mock',
+			clickHandler: () => {
+				getMockOperation();
+			},
+		},
+		{
+			label: 'Update Mock',
+			clickHandler: () => {
+				updateMockOperation();
+			},
+		},
+		{
+			label: 'Delete Mock',
+			clickHandler: () => {
+				deleteMockOperation();
+			},
+		},
+		{
+			label: 'Force Delete Mock',
+			clickHandler: () => {
+				forceDeleteMockOperation();
+			},
+		},
+		{
+			label: 'Get All Mocks',
+			clickHandler: () => {
+				getAllMocksOperation();
+			},
+		},
+		{
+			label: 'Render List',
+			clickHandler: () => {
+				renderListViewOperation();
+			},
+		},
+		{
+			label: 'Render Archived',
+			clickHandler: () => {
+				renderArchivedViewOperation();
+			},
+		},
+		{
+			label: 'Render RecycleBin',
+			clickHandler: () => {
+				renderRecycleBinViewOperation();
+			},
+		},
+		{
+			label: 'Archive Mock',
+			clickHandler: () => {
+				archiveMockOperation();
+			},
+		},
+		{
+			label: 'Unarchive Mock',
+			clickHandler: () => {
+				unarchiveMockOperation();
+			},
+		},
+		{
+			label: 'Export Mocks',
+			clickHandler: () => {
+				exportMocksOperation();
+			},
+		},
+		{
+			label: 'Export Template',
+			clickHandler: () => {
+				exportMocksCsvTemplateOperation();
+			},
+		},
+		{
+			label: 'HTTP Methods',
+			clickHandler: () => {
+				listHttpMethodsOperation();
+			},
+		},
+		{
+			label: 'ResponseContentTypes',
+			clickHandler: () => {
+				listResponseContentTypesOperation();
+			},
+		},
+		{
+			label: 'EntityStatus',
+			clickHandler: () => {
+				listEntityStatusOperation();
+			},
+		},
+	];
+
 	return (
 		<>
 			<If condition={loggedIn}>
 				<div className='flex mt-10 mb-4'>
-					<div className='w-full grid grid-cols-4 gap-2 gap-y-8'>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Create Mock'
-							onclickHandler={() => {
-								createMockOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Get Mock'
-							onclickHandler={() => {
-								getMockOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Update Mock'
-							onclickHandler={() => {
-								updateMockOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Delete Mock'
-							onclickHandler={() => {
-								deleteMockOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Force Delete Mock'
-							onclickHandler={() => {
-								forceDeleteMockOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Get All Mocks'
-							onclickHandler={() => {
-								getAllMocksOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Render List'
-							onclickHandler={() => {
-								renderListViewOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Render Archived'
-							onclickHandler={() => {
-								renderArchivedViewOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Render RecycleBin'
-							onclickHandler={() => {
-								renderRecycleBinViewOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Archive Mock'
-							onclickHandler={() => {
-								archiveMockOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Unarchive Mock'
-							onclickHandler={() => {
-								unarchiveMockOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Export Mocks'
-							onclickHandler={() => {
-								exportMocksOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='Export Template'
-							onclickHandler={() => {
-								exportMocksCsvTemplateOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='HTTP Methods'
-							onclickHandler={() => {
-								listHttpMethodsOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='ResponseContentTypes'
-							onclickHandler={() => {
-								listResponseContentTypesOperation();
-							}}
-						></CustomButton>
-						<CustomButton
-							background='bg-yellow-400'
-							color='text-black'
-							label='EntityStatus'
-							onclickHandler={() => {
-								listEntityStatusOperation();
-							}}
-						></CustomButton>
+					<div className='w-full mx-auto grid grid-cols-4 gap-2 gap-y-8'>
+						<For each='action' of={actions}>
+							<CustomButton
+								background='bg-yellow-400'
+								color='text-black'
+								width='w-3/4'
+								label={action.label}
+								onclickHandler={action.clickHandler}
+								key={action.label}
+							></CustomButton>
+						</For>
 					</div>
 				</div>
 
