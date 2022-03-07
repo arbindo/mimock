@@ -24,8 +24,6 @@ const PlatformApi = () => {
 			})
 			.catch((err) => {
 				console.error(err);
-				setUsername('');
-				setPassword('');
 			});
 	};
 

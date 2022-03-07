@@ -4,6 +4,7 @@ import { Log, LogError } from '../logger/Logger';
 const client = axios.create({
 	//TODO: Replace origin with value fetched from config file
 	baseURL: 'http://localhost:8080/api/mimock/v1',
+	withCredentials: true,
 });
 
 const get = async (url, token) => {

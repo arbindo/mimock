@@ -246,8 +246,8 @@ const PlatformApiOperations = ({ loggedIn, token }) => {
 					<div className='w-full mx-auto grid grid-cols-4 gap-2 gap-y-8'>
 						<For each='action' of={actions}>
 							<CustomButton
-								background='bg-yellow-400'
-								color='text-black'
+								background='bg-yellow-400 dark:bg-yellow-600'
+								color='text-black dark:text-gray-900'
 								width='w-3/4'
 								label={action.label}
 								onclickHandler={action.clickHandler}
@@ -264,7 +264,7 @@ const PlatformApiOperations = ({ loggedIn, token }) => {
 						</div>
 					</If>
 					<If condition={response != ''}>
-						<pre className='rounded-lg text-white bg-gray-800 text-sm p-4 mt-4 mb-2'>
+						<pre className='rounded-lg text-white bg-gray-800 dark:bg-gray-600 text-sm p-4 mt-4 mb-2'>
 							{response}
 						</pre>
 					</If>
