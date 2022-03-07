@@ -18,9 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Set;
+import java.util.List;
 
 @EnableWebSecurity
 public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
@@ -31,7 +30,7 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
     JwtRequestFilter jwtRequestFilter;
 
     @Value("#{'${app.security.cors-config.allowed-origins}'.split(',')}")
-    private Set<String> corsAllowedOrigins;
+    private List<String> corsAllowedOrigins;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -58,8 +57,7 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                         Role.VIEWER.toString()
                 )
                 .antMatchers("/").permitAll()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().cors().configurationSource(corsConfigurationSource());
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.csrf((csrfInstance) -> {
             csrfInstance
@@ -67,21 +65,19 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                     .csrfTokenRepository(new CookieCsrfTokenRepository());
         });
 
+        http.cors(cors -> {
+            CorsConfigurationSource cs = resources -> {
+                CorsConfiguration corsConfiguration = new CorsConfiguration();
+                corsConfiguration.setAllowedOrigins(corsAllowedOrigins);
+                corsConfiguration.setAllowedMethods(List.of("*"));
+                corsConfiguration.setAllowedHeaders(List.of("*"));
+                return corsConfiguration;
+            };
+
+            cors.configurationSource(cs);
+        });
+
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
-
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-
-        for (String allowedOrigin : corsAllowedOrigins) {
-            corsConfiguration.addAllowedOrigin(allowedOrigin);
-        }
-        corsConfiguration.addAllowedHeader("Content-type");
-        corsConfiguration.addAllowedHeader("Authorization");
-        source.registerCorsConfiguration(UrlConfig.API_PREFIX + "/**", corsConfiguration);
-
-        return source;
     }
 
     @Override
