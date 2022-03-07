@@ -62,7 +62,7 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf((csrfInstance) -> {
             csrfInstance
                     .ignoringAntMatchers(UrlConfig.AUTHENTICATE)
-                    .csrfTokenRepository(new CookieCsrfTokenRepository());
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         });
 
         http.cors(cors -> {
@@ -73,7 +73,8 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                 corsConfiguration.setAllowedHeaders(List.of("Authorization",
                         "Content-Type",
                         "X-Requested-With",
-                        "Accept"));
+                        "Accept",
+                        "X-XSRF-TOKEN"));
                 corsConfiguration.setAllowCredentials(true);
                 return corsConfiguration;
             };
