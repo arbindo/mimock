@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ba360b76-8c82-4b69-aacb-3a4e2663c8f7",
+		"_postman_id": "8d3b7456-b382-4249-9d79-8226db2fc051",
 		"name": "Mimock",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -716,12 +716,7 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"pm.sendRequest(pm.variables.get(\"origin\") + \"/authenticate\", function (err, response) {",
-							"    if (response.token) {",
-							"        pm.collectionVariables.set(\"authToken\", response.token)",
-							"        pm.variables.set(\"authToken\", response.token)",
-							"    }",
-							"});"
+							""
 						]
 					}
 				},
