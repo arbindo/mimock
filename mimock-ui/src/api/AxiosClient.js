@@ -1,10 +1,17 @@
 import axios from 'axios';
 import { Log, LogError } from '../logger/Logger';
+import { Cookies } from 'react-cookie';
+
+const cookies = new Cookies();
+const csrfToken = cookies.get('XSRF-TOKEN');
 
 const client = axios.create({
 	//TODO: Replace origin with value fetched from config file
 	baseURL: 'http://localhost:8080/api/mimock/v1',
 	withCredentials: true,
+	headers: {
+		'X-XSRF-TOKEN': csrfToken,
+	},
 });
 
 const get = async (url, token) => {
