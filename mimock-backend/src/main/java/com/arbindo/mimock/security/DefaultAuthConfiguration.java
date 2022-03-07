@@ -69,8 +69,12 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
             CorsConfigurationSource cs = resources -> {
                 CorsConfiguration corsConfiguration = new CorsConfiguration();
                 corsConfiguration.setAllowedOrigins(corsAllowedOrigins);
-                corsConfiguration.setAllowedMethods(List.of("*"));
-                corsConfiguration.setAllowedHeaders(List.of("*"));
+                corsConfiguration.setAllowedMethods(List.of("POST", "GET", "PUT", "DELETE", "OPTIONS"));
+                corsConfiguration.setAllowedHeaders(List.of("Authorization",
+                        "Content-Type",
+                        "X-Requested-With",
+                        "Accept"));
+                corsConfiguration.setAllowCredentials(true);
                 return corsConfiguration;
             };
 
