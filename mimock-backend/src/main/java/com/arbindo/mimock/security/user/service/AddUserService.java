@@ -6,7 +6,7 @@ import com.arbindo.mimock.repository.UserRepository;
 import com.arbindo.mimock.repository.UserRoleRepository;
 import com.arbindo.mimock.security.exceptions.AddNewUserFailedException;
 import com.arbindo.mimock.security.exceptions.UserAlreadyExistsException;
-import com.arbindo.mimock.security.user.models.request.AddUserRequest;
+import com.arbindo.mimock.security.user.models.request.UserRequest;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +26,14 @@ public class AddUserService {
     @Autowired
     UserRoleRepository userRoleRepository;
 
-    public User addNewUser(AddUserRequest request) {
+    public User addNewUser(UserRequest request) {
         Optional<User> existingUser = userRepository.findByUserName(request.getUserName());
         if (existingUser.isPresent()) {
             log.log(Level.INFO, "User already exists");
             throw new UserAlreadyExistsException("User already exists in the Database");
         }
 
-        UserRole userRole = userRoleRepository.findByRoleName(request.getUserRole().toString());
+        UserRole userRole = userRoleRepository.findByRoleName(request.getUserRole());
 
         User user = User.builder()
                 .id(UUID.randomUUID())

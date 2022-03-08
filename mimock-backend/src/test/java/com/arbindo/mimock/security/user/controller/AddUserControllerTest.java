@@ -7,7 +7,7 @@ import com.arbindo.mimock.helpers.general.JsonMapper;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.security.JwtRequestFilter;
 import com.arbindo.mimock.security.exceptions.UserAlreadyExistsException;
-import com.arbindo.mimock.security.user.models.request.AddUserRequest;
+import com.arbindo.mimock.security.user.models.request.UserRequest;
 import com.arbindo.mimock.security.user.service.AddUserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -71,7 +71,7 @@ class AddUserControllerTest {
     void shouldReturnStatusOK_OnSavingNewUserSuccessfully(String role) throws Exception {
         String route = UrlConfig.USER_PATH;
 
-        AddUserRequest request = AddUserRequest.builder()
+        UserRequest request = UserRequest.builder()
                 .name("admin")
                 .userName("admin_new")
                 .password("$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau")
@@ -101,7 +101,7 @@ class AddUserControllerTest {
     @Test
     void shouldReturnInternalServerError_WhenServiceThrowsException() throws Exception {
         String route = UrlConfig.USER_PATH;
-        AddUserRequest request = AddUserRequest.builder()
+        UserRequest request = UserRequest.builder()
                 .name("admin")
                 .userName("admin_new")
                 .password("$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau")
@@ -128,7 +128,7 @@ class AddUserControllerTest {
     @Test
     void shouldReturnBadRequestError_WhenPasswordIsNotEncoded() throws Exception {
         String route = UrlConfig.USER_PATH;
-        AddUserRequest request = AddUserRequest.builder()
+        UserRequest request = UserRequest.builder()
                 .name("admin_new")
                 .userName("admin")
                 .password("password")
@@ -147,7 +147,7 @@ class AddUserControllerTest {
     @Test
     void shouldReturnBadRequestError_WhenRoleIsInvalid() throws Exception {
         String route = UrlConfig.USER_PATH;
-        AddUserRequest request = AddUserRequest.builder()
+        UserRequest request = UserRequest.builder()
                 .name("admin")
                 .userName("admin_new")
                 .password("$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau")

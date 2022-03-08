@@ -1,7 +1,7 @@
 package com.arbindo.mimock.security.user.controller;
 
 import com.arbindo.mimock.constants.UrlConfig;
-import com.arbindo.mimock.security.user.models.request.AddUserRequest;
+import com.arbindo.mimock.security.user.models.request.UserRequest;
 import com.arbindo.mimock.security.user.service.AddUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +29,7 @@ public class AddUserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Add new user", description = "Adds a new user to mimock",
             tags = {"User Management"})
-    public ResponseEntity<Object> addNewUser(@Valid @RequestBody AddUserRequest request) {
+    public ResponseEntity<Object> addNewUser(@Valid @RequestBody UserRequest request) {
         try {
             log.log(Level.INFO, "Invoking service to save new user");
             service.addNewUser(request);
