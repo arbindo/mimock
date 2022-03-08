@@ -7,6 +7,8 @@ import com.arbindo.mimock.security.user.models.response.AuthenticationErrorRespo
 import com.arbindo.mimock.security.user.models.response.AuthenticationResponse;
 import com.arbindo.mimock.security.user.models.response.AuthenticationTokenResponse;
 import com.arbindo.mimock.security.utils.JWTUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(UrlConfig.AUTHENTICATE)
 @Log4j2
+@Tag(name = "User Management", description = "Handles operations related to user management.")
 public class UserAuthenticateController {
     @Autowired
     MimockUserDetailsService userDetailsService;
@@ -40,6 +43,11 @@ public class UserAuthenticateController {
     JWTUtils jwtUtils;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(
+            summary = "Authenticate user",
+            description = "Authenticates the user and returns the auth token",
+            tags = {"User Management"}
+    )
     public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticateUserRequest authenticateUserRequest) {
         try {
             log.log(Level.INFO, "Autheitcating user with the credentials supplied in the request");
