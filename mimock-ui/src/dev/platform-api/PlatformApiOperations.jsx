@@ -246,7 +246,7 @@ const PlatformApiOperations = ({ loggedIn, token }) => {
 					<div className='w-full mx-auto grid grid-cols-4 gap-2 gap-y-8'>
 						<For each='action' of={actions}>
 							<CustomButton
-								background='bg-yellow-400 dark:bg-yellow-600'
+								background='bg-yellow-400 dark:bg-white'
 								color='text-black dark:text-gray-900'
 								width='w-3/4'
 								label={action.label}
@@ -259,7 +259,7 @@ const PlatformApiOperations = ({ loggedIn, token }) => {
 
 				<div className='flex flex-col p-4 mx-4 overflow-hidden'>
 					<If condition={mockId != ''}>
-						<div className='rounded-lg text-white bg-gray-800 text-sm p-4 mt-8 mb-4'>
+						<div className='rounded-lg text-white bg-gray-800 dark:bg-gray-600 text-sm p-4 mt-8 mb-4'>
 							Mock Id: {mockId}
 						</div>
 					</If>

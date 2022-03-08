@@ -50,7 +50,7 @@ public class UserAuthenticateController {
     )
     public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticateUserRequest authenticateUserRequest) {
         try {
-            log.log(Level.INFO, "Autheitcating user with the credentials supplied in the request");
+            log.log(Level.INFO, "Authenticating user with the credentials supplied in the request");
             log.log(Level.DEBUG, String.format("{userName: %s}", authenticateUserRequest.getUserName()));
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticateUserRequest.getUserName(), authenticateUserRequest.getPassword())

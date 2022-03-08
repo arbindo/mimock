@@ -13,14 +13,14 @@ import javax.validation.constraints.Size;
 @Getter
 public class AuthenticateUserRequest {
     @NotBlank(message = "Username cannot be empty")
-    @Schema(example = "mithrandir_69", description = "Unique user name for the user")
+    @Schema(example = "bruce_wayne", description = "Unique user name for the user")
     @Size(min = 6, message = "User name must be at least 6 characters long")
     @Size(max = 128, message = "User name cannot be more than 128 characters")
     private String userName;
 
     @NotBlank(message = "Password cannot be empty")
     @Schema(
-            example = "admin@123",
+            example = "batman@123",
             description = "Password entered by the user"
     )
     private String password;
