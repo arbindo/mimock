@@ -6,8 +6,18 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import FormHelperText from '@mui/material/FormHelperText';
+import PropTypes from 'prop-types';
 
-function PasswordField() {
+function PasswordField({
+	errorLabel,
+	dataTestid,
+	isError,
+	value,
+	onChangeHandler,
+	onBlurHandler,
+	onFocusHandler,
+}) {
 	const [values, setValues] = useState({
 		amount: '',
 		password: '',
@@ -15,10 +25,6 @@ function PasswordField() {
 		weightRange: '',
 		showPassword: false,
 	});
-
-	const handleChange = (prop) => (event) => {
-		setValues({ ...values, [prop]: event.target.value });
-	};
 
 	const handleClickShowPassword = () => {
 		setValues({
@@ -29,17 +35,20 @@ function PasswordField() {
 
 	return (
 		<FormControl
-			data-testid='password-textfield'
+			data-testid={dataTestid}
 			style={{ width: '80%' }}
 			variant='outlined'
+			error={isError}
 		>
 			<InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
 			<OutlinedInput
 				data-testid='outlined-password-input'
 				id='outlined-adornment-password'
 				type={values.showPassword ? 'text' : 'password'}
-				value={values.password}
-				onChange={handleChange('password')}
+				value={value}
+				onChange={onChangeHandler}
+				onBlur={onBlurHandler}
+				onFocus={onFocusHandler}
 				endAdornment={
 					<InputAdornment position='end'>
 						<IconButton
@@ -61,8 +70,21 @@ function PasswordField() {
 				}
 				label='Password'
 			/>
+			<If condition={isError}>
+				<FormHelperText id='component-error-text'>{errorLabel}</FormHelperText>
+			</If>
 		</FormControl>
 	);
 }
+
+PasswordField.propTypes = {
+	value: PropTypes.string.isRequired,
+	dataTestid: PropTypes.string.isRequired,
+	onBlurHandler: PropTypes.func.isRequired,
+	onChangeHandler: PropTypes.func.isRequired,
+	onFocusHandler: PropTypes.func.isRequired,
+	errorLabel: PropTypes.string,
+	isError: PropTypes.bool,
+};
 
 export default PasswordField;

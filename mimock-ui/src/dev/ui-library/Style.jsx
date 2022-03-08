@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	Button,
 	Pill,
@@ -15,6 +15,9 @@ import {
 } from '../../styles/components/Button';
 
 function Style() {
+	const [inputValue, setInputValue] = useState('');
+	const [passwordValue, setPasswordValue] = useState('');
+
 	return (
 		<div data-testid='style' className='mt-10 text-3xl mx-auto w-screen'>
 			<div className='w-full mb-20'>
@@ -231,8 +234,33 @@ function Style() {
 						label='Username'
 						errorLabel='username is required'
 						isError={false}
+						inputValue={inputValue}
+						dataTestid='text-field'
+						onChangeHandler={(event) => {
+							setInputValue(event.target.value);
+						}}
+						onBlurHandler={() => {
+							console.log('Blur handler');
+						}}
+						onFocusHandler={() => {
+							console.log('Focus handler');
+						}}
 					></BasicTextField>
-					<PasswordField></PasswordField>
+					<PasswordField
+						dataTestid='password-textfield'
+						errorLabel='Password is required'
+						isError={false}
+						value={passwordValue}
+						onChangeHandler={(event) => {
+							setPasswordValue(event.target.value);
+						}}
+						onBlurHandler={() => {
+							console.log('Blur handler');
+						}}
+						onFocusHandler={() => {
+							console.log('Focus handler');
+						}}
+					></PasswordField>
 				</div>
 			</div>
 		</div>

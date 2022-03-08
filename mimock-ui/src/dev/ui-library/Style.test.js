@@ -2,7 +2,7 @@ import React from 'react';
 import { render, act, fireEvent } from '@testing-library/react';
 import Style from './Style.jsx';
 
-describe('Button', () => {
+describe('Style', () => {
 	let tree;
 
 	it('should render style for button, pill and text field', async () => {
@@ -334,5 +334,56 @@ describe('Button', () => {
 		});
 
 		expect(pill).toMatchSnapshot();
+	});
+
+	it('should render text field', async () => {
+		tree = await render(<Style />);
+
+		const { getByTestId } = tree;
+		const textField = getByTestId('text-field').querySelector('input');
+		expect(textField).toBeInTheDocument();
+
+		act(() => {
+			fireEvent.change(textField, {
+				target: { value: 'username' },
+			});
+		});
+
+		act(() => {
+			fireEvent.blur(textField);
+		});
+
+		act(() => {
+			fireEvent.focus(textField);
+		});
+
+		expect(textField.value).toStrictEqual('username');
+		expect(textField).toMatchSnapshot();
+	});
+
+	it('should render password field', async () => {
+		tree = await render(<Style />);
+
+		const { getByTestId } = tree;
+		const passwordField =
+			getByTestId('password-textfield').querySelector('input');
+		expect(passwordField).toBeInTheDocument();
+
+		act(() => {
+			fireEvent.change(passwordField, {
+				target: { value: 'password' },
+			});
+		});
+
+		act(() => {
+			fireEvent.blur(passwordField);
+		});
+
+		act(() => {
+			fireEvent.focus(passwordField);
+		});
+
+		expect(passwordField.value).toStrictEqual('password');
+		expect(passwordField).toMatchSnapshot();
 	});
 });

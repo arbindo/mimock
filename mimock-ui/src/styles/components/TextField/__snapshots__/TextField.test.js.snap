@@ -1,32 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Text Field should enter text 1`] = `
-<div
-  class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
-  data-testid="change-text-field"
->
-  <input
-    aria-invalid="false"
-    class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-    id="component-outlined"
-    type="text"
-    value="username"
-  />
-  <fieldset
-    aria-hidden="true"
-    class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-  >
-    <legend
-      class="css-1z7n62"
-    >
-      <span>
-        username
-      </span>
-    </legend>
-  </fieldset>
-</div>
-`;
-
 exports[`Text Field should render basic text field 1`] = `
 <div>
   <div
@@ -34,8 +7,8 @@ exports[`Text Field should render basic text field 1`] = `
     data-testid="text-field"
   >
     <label
-      class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
-      data-shrink="false"
+      class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
       for="component-outlined"
     >
       username
@@ -49,14 +22,14 @@ exports[`Text Field should render basic text field 1`] = `
         class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
         id="component-outlined"
         type="text"
-        value=""
+        value="Username"
       />
       <fieldset
         aria-hidden="true"
         class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
       >
         <legend
-          class="css-173wfxe"
+          class="css-1z7n62"
         >
           <span>
             username
