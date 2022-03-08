@@ -7,7 +7,7 @@ import com.arbindo.mimock.repository.UserRepository;
 import com.arbindo.mimock.repository.UserRoleRepository;
 import com.arbindo.mimock.security.exceptions.AddNewUserFailedException;
 import com.arbindo.mimock.security.exceptions.UserAlreadyExistsException;
-import com.arbindo.mimock.security.user.models.request.UserRequest;
+import com.arbindo.mimock.security.user.models.request.AddUserRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,7 +48,7 @@ class AddUserServiceTest {
                 .isUserBlocked(false)
                 .build();
 
-        UserRequest userRequest = UserRequest.builder()
+        AddUserRequest addUserRequest = AddUserRequest.builder()
                 .name(user.getName())
                 .userName(user.getUserName())
                 .password(user.getPassword())
@@ -59,7 +59,7 @@ class AddUserServiceTest {
         lenient().when(mockUserRepository.findByUserName(any())).thenReturn(Optional.empty());
         lenient().when(mockUserRepository.save(any())).thenReturn(user);
 
-        User savedUser = userService.addNewUser(userRequest);
+        User savedUser = userService.addNewUser(addUserRequest);
 
         assertNotNull(savedUser);
 
@@ -85,7 +85,7 @@ class AddUserServiceTest {
                 .isUserBlocked(false)
                 .build();
 
-        UserRequest userRequest = UserRequest.builder()
+        AddUserRequest addUserRequest = AddUserRequest.builder()
                 .name(user.getName())
                 .userName(user.getUserName())
                 .password(user.getPassword())
@@ -96,7 +96,7 @@ class AddUserServiceTest {
         lenient().when(mockUserRepository.findByUserName(any())).thenReturn(Optional.of(user));
         lenient().when(mockUserRepository.save(any())).thenThrow(new IllegalArgumentException());
 
-        assertThrows(UserAlreadyExistsException.class, () -> userService.addNewUser(userRequest));
+        assertThrows(UserAlreadyExistsException.class, () -> userService.addNewUser(addUserRequest));
     }
 
     @Test
@@ -115,7 +115,7 @@ class AddUserServiceTest {
                 .isUserBlocked(false)
                 .build();
 
-        UserRequest userRequest = UserRequest.builder()
+        AddUserRequest addUserRequest = AddUserRequest.builder()
                 .name(user.getName())
                 .userName(user.getUserName())
                 .password(user.getPassword())
@@ -126,6 +126,6 @@ class AddUserServiceTest {
         lenient().when(mockUserRepository.findByUserName(any())).thenReturn(Optional.empty());
         lenient().when(mockUserRepository.save(any())).thenThrow(new IllegalArgumentException());
 
-        assertThrows(AddNewUserFailedException.class, () -> userService.addNewUser(userRequest));
+        assertThrows(AddNewUserFailedException.class, () -> userService.addNewUser(addUserRequest));
     }
 }

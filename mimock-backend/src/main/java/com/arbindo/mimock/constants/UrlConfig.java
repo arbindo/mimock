@@ -56,9 +56,10 @@ public class UrlConfig {
     public static final String USER_PATH = API_PREFIX + ADMIN + USERS;
     // endregion
 
-    // user routes
-    public static final String USER_ACTIVATION = USER_PATH + "/update-user-activation";
-    // end of user rputes
-
     public static final String AUTHENTICATE = API_PREFIX + "/user/authenticate";
+
+    // user routes
+    public static final String USER_ACTIVATION = USER_PATH + "/update-activation";
+    public static final String UPDATE_PASSWORD = USER_PATH + "/update-password";
+    // end of user routes
 }

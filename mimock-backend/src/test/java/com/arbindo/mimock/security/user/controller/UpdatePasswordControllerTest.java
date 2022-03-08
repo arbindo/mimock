@@ -5,8 +5,8 @@ import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.helpers.general.JsonMapper;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.security.JwtRequestFilter;
-import com.arbindo.mimock.security.user.models.request.UserActivationRequest;
-import com.arbindo.mimock.security.user.service.UserActivationService;
+import com.arbindo.mimock.security.user.models.request.UpdatePasswordRequest;
+import com.arbindo.mimock.security.user.service.UpdatePasswordService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -22,20 +22,17 @@ import org.springframework.jdbc.support.DatabaseStartupValidator;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import javax.sql.DataSource;
-import java.util.Map;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(
-        value = UserActivationController.class,
+        value = UpdatePasswordController.class,
         excludeAutoConfiguration = {
                 SecurityAutoConfiguration.class,
                 UserDetailsServiceAutoConfiguration.class,
@@ -43,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 )
 @AutoConfigureMockMvc(addFilters = false)
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class})
-class UserActivationControllerTest {
+class UpdatePasswordControllerTest {
     @Autowired
     MockMvc mockMvc;
 
@@ -60,65 +57,56 @@ class UserActivationControllerTest {
     UserDetailsService userDetailsService;
 
     @MockBean
-    UserActivationService mockUserActivationService;
+    UpdatePasswordService mockUpdatePasswordService;
 
     @MockBean
     JwtRequestFilter jwtRequestFilter;
 
-    private final String route = UrlConfig.USER_ACTIVATION;
+    private final String route = UrlConfig.UPDATE_PASSWORD;
 
     @Test
-    void shouldReturnStatusOK_WhenUserActivationIsUpdated() throws Exception {
-        UserActivationRequest request = UserActivationRequest.builder()
+    void shouldRespondWithStatusOK_WhenUserPasswordIsUpdatedSuccessfully() throws Exception {
+        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
                 .userName("mimock_admin")
-                .isUserActive(Boolean.TRUE)
+                .password("$2a$12$AnCFHRMd8.UlVlKUZxVpXeuBRaBd1G3LGJ1GTbQxBxTulzm0NpVmq")
                 .build();
 
         User user = User.builder()
                 .userName(request.getUserName())
-                .isUserActive(Boolean.TRUE)
+                .password(request.getPassword())
                 .build();
 
-        lenient().when(mockUserActivationService.updateUserActivationStatus(any())).thenReturn(user);
+        lenient().when(mockUpdatePasswordService.updatePassword(any())).thenReturn(user);
 
-        MvcResult result = mockMvc.perform(
+        mockMvc.perform(
                         put(route)
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                                 .content(Objects.requireNonNull(JsonMapper.convertObjectToJsonString(request)))
                 )
                 .andExpect(status().isOk())
                 .andReturn();
-
-        Map<String, Object> responseMap = JsonMapper.convertJSONStringToMap(result.getResponse().getContentAsString());
-        assertNotNull(responseMap);
-        assertFalse(responseMap.isEmpty());
-        assertNotNull(responseMap.get("updatedActivationStatus"));
-        assertTrue((Boolean) responseMap.get("updatedActivationStatus"));
     }
 
     @Test
-    void shouldReturnStatusInternalServerError_WhenUserActivationStatusUpdateFails() throws Exception {
-        UserActivationRequest request = UserActivationRequest.builder()
+    void shouldRespondWithStatusInternalServerError_WhenUserPasswordUpdateFails() throws Exception {
+        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
                 .userName("mimock_admin")
-                .isUserActive(Boolean.TRUE)
+                .password("$2a$12$AnCFHRMd8.UlVlKUZxVpXeuBRaBd1G3LGJ1GTbQxBxTulzm0NpVmq")
                 .build();
 
-        lenient()
-                .when(mockUserActivationService.updateUserActivationStatus(any()))
-                .thenThrow(new UsernameNotFoundException("User is not present in the Database"));
+        User user = User.builder()
+                .userName(request.getUserName())
+                .password(request.getPassword())
+                .build();
 
-        MvcResult result = mockMvc.perform(
+        lenient().when(mockUpdatePasswordService.updatePassword(any())).thenThrow(UsernameNotFoundException.class);
+
+        mockMvc.perform(
                         put(route)
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                                 .content(Objects.requireNonNull(JsonMapper.convertObjectToJsonString(request)))
                 )
                 .andExpect(status().isInternalServerError())
                 .andReturn();
-
-        Map<String, Object> errorResponseMap = JsonMapper.convertJSONStringToMap(result.getResponse().getContentAsString());
-        assertNotNull(errorResponseMap);
-        assertFalse(errorResponseMap.isEmpty());
-        assertNotNull(errorResponseMap.get("message"));
-        assertEquals("User is not present in the Database", errorResponseMap.get("message").toString());
     }
 }

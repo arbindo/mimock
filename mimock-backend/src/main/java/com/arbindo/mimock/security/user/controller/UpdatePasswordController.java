@@ -2,9 +2,8 @@ package com.arbindo.mimock.security.user.controller;
 
 import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.entities.User;
-import com.arbindo.mimock.security.user.models.request.UserActivationRequest;
-import com.arbindo.mimock.security.user.models.response.UserActivationResponse;
-import com.arbindo.mimock.security.user.service.UserActivationService;
+import com.arbindo.mimock.security.user.models.request.UpdatePasswordRequest;
+import com.arbindo.mimock.security.user.service.UpdatePasswordService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
@@ -13,6 +12,7 @@ import org.springdoc.api.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,28 +21,26 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(UrlConfig.USER_ACTIVATION)
+@RequestMapping(UrlConfig.UPDATE_PASSWORD)
 @Log4j2
 @Tag(name = "User Management", description = "Handles operations related to user management.")
-public class UserActivationController {
+public class UpdatePasswordController {
     @Autowired
-    UserActivationService userActivationService;
+    UpdatePasswordService updatePasswordService;
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Update user activation status", description = "To enable or disable a user account")
-    public ResponseEntity<?> updateUserActivationStatus(@Valid @RequestBody UserActivationRequest request) {
+    @Operation(summary = "Update user password")
+    public ResponseEntity<?> updatePassword(@Valid @RequestBody UpdatePasswordRequest request) {
         User updatedUser;
-
         try {
-            log.log(Level.INFO, "Invoking service to update user activation status");
-            updatedUser = userActivationService.updateUserActivationStatus(request);
-        } catch (Exception e) {
-            log.log(Level.ERROR, "Failed while updating user activation status : " + e.getMessage());
+            log.log(Level.INFO, "Invoking service to update user password");
+            updatedUser = updatePasswordService.updatePassword(request);
+        } catch (UsernameNotFoundException e) {
+            log.log(Level.ERROR, e.getMessage());
             return ResponseEntity.internalServerError().body(new ErrorMessage(e.getMessage()));
         }
 
-        return ResponseEntity
-                .ok()
-                .body(new UserActivationResponse(updatedUser.getUserName(), updatedUser.getIsUserActive()));
+        log.log(Level.INFO, "Password for {} updated successfully", updatedUser.getUserName());
+        return ResponseEntity.ok().build();
     }
 }
