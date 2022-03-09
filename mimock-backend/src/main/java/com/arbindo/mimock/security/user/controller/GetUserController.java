@@ -4,6 +4,7 @@ import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.security.user.models.Users;
 import com.arbindo.mimock.security.user.service.GetUserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(UrlConfig.USER_PATH)
 @Log4j2
+@SecurityRequirement(name = UrlConfig.SWAGGER_BEARER_AUTH_KEY)
 @Tag(name = "User Management", description = "Handles operations related to user management.")
 public class GetUserController {
 

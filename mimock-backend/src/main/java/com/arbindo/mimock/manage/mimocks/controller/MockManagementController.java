@@ -9,6 +9,7 @@ import com.arbindo.mimock.manage.mimocks.models.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import java.util.List;
 @RestController
 @Log4j2
 @RequestMapping(UrlConfig.MOCKS_PATH)
+@SecurityRequirement(name = UrlConfig.SWAGGER_BEARER_AUTH_KEY)
 @Tag(name = "Mock Management", description = "Handles operations related to mock resource.")
 public class MockManagementController {
 

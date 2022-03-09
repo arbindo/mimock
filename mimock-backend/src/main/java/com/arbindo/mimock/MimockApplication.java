@@ -1,9 +1,12 @@
 package com.arbindo.mimock;
 
+import com.arbindo.mimock.common.constants.UrlConfig;
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import liquibase.Liquibase;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.boot.SpringApplication;
@@ -48,11 +51,26 @@ public class MimockApplication {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI().info(new Info()
+        return new OpenAPI()
+                .info(getApiInfo())
+                .components(getApiComponents());
+    }
+
+    private Components getApiComponents() {
+        return new Components()
+                .addSecuritySchemes(UrlConfig.SWAGGER_BEARER_AUTH_KEY, getBearerJwtSecurityScheme());
+    }
+
+    private SecurityScheme getBearerJwtSecurityScheme() {
+        return new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT");
+    }
+
+    private Info getApiInfo() {
+        return new Info()
                 .title("Mimock")
                 .description("Utility to set up mock rest api endpoints to mimic actual endpoints")
                 .contact(new Contact().name("Mimock").url("http://www.mimock.io/"))
                 .license(new License().name("Apache License 2.0").url("https://github.com/neel1996/mimock/blob/main/LICENSE"))
-                .version("v0.1"));
+                .version("v0.1");
     }
 }

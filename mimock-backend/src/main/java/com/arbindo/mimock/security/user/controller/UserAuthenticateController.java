@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(UrlConfig.AUTHENTICATE)
 @Log4j2
-@Tag(name = "User Management", description = "Handles operations related to user management.")
+@Tag(name = "User Authentication", description = "Handles operations related to user authentication.")
 public class UserAuthenticateController {
     @Autowired
     MimockUserDetailsService userDetailsService;
@@ -46,7 +46,7 @@ public class UserAuthenticateController {
     @Operation(
             summary = "Authenticate user",
             description = "Authenticates the user and returns the auth token",
-            tags = {"User Management"}
+            tags = {"User Authentication"}
     )
     public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticateUserRequest authenticateUserRequest) {
         try {

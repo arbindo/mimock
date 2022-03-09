@@ -6,6 +6,7 @@ import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.ResponseContentType;
 import com.arbindo.mimock.staticrecords.service.GetStaticRecordsService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @Log4j2
 @RequestMapping(UrlConfig.MANAGE_PATH)
+@SecurityRequirement(name = UrlConfig.SWAGGER_BEARER_AUTH_KEY)
 @Tag(name = "Static Records", description = "Handles static records such as http-methods and response-content-types.")
 public class GetStaticRecordsController {
 

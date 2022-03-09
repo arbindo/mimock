@@ -5,6 +5,7 @@ import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.security.user.models.request.UpdatePasswordRequest;
 import com.arbindo.mimock.security.user.service.UpdatePasswordService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(UrlConfig.UPDATE_PASSWORD)
 @Log4j2
+@SecurityRequirement(name = UrlConfig.SWAGGER_BEARER_AUTH_KEY)
 @Tag(name = "User Management", description = "Handles operations related to user management.")
 public class UpdatePasswordController {
     @Autowired
