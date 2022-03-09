@@ -65,22 +65,9 @@ class UpdatePasswordServiceTest {
 
     @Test
     void shouldThrowUsernameNotFoundExceptionException_WhenUserDoesNotExists() {
-        UserRole userRole = UserRole.builder()
-                .roleName("ADMIN")
-                .build();
-
         UpdatePasswordRequest request = UpdatePasswordRequest.builder()
                 .userName("test_admin")
                 .password("$2a$12$AnCFHRMd8.UlVlKUZxVpXeuBRaBd1G3LGJ1GTbQxBxTulzm0NpVmq")
-                .build();
-
-        User userBeforeUpdating = User.builder()
-                .id(UUID.randomUUID())
-                .userName("test_admin")
-                .password("$2a$12$xQ6KO0MicjoJcBGBQfE62e7JuoyAB2JOOE578suh0QXLzx091K3Ca")
-                .userRoles(userRole)
-                .isUserBlocked(false)
-                .isUserActive(true)
                 .build();
 
         lenient().when(mockUserRepository.findByUserName(request.getUserName())).thenReturn(Optional.empty());
