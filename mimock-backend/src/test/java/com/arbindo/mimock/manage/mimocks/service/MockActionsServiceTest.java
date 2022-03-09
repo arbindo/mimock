@@ -1,9 +1,7 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
+import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.manage.mimocks.service.MockActionsService;
-import com.arbindo.mimock.manage.mimocks.service.MockActionsServiceImpl;
-import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
 import com.arbindo.mimock.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +18,6 @@ import static com.arbindo.mimock.helpers.entities.MocksGenerator.*;
 import static com.arbindo.mimock.helpers.entities.MocksGenerator.deleteMock;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
@@ -35,7 +32,7 @@ public class MockActionsServiceTest {
     MocksRepository mockRepository;
 
     @org.mockito.Mock
-    EntityStatusRepository mockEntityStatusRepository;
+    EntityStatusService mockEntityStatusService;
 
     MockActionsService mockActionsService;
 
@@ -44,7 +41,7 @@ public class MockActionsServiceTest {
         this.mockActionsService = MockActionsServiceImpl.builder()
                 .mockManagementService(mockManagementService)
                 .mocksRepository(mockRepository)
-                .entityStatusRepository(mockEntityStatusRepository)
+                .entityStatusService(mockEntityStatusService)
                 .build();
     }
 
@@ -71,7 +68,7 @@ public class MockActionsServiceTest {
         Optional<Mock> mock = generateOptionalMock();
         assertTrue(mock.isPresent());
         lenient().when(mockManagementService.getMockById(any(String.class))).thenReturn(mock.get());
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(generateArchivedEntityStatus());
+        lenient().when(mockEntityStatusService.getArchivedMockEntityStatus()).thenReturn(generateArchivedEntityStatus());
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(mock.get());
 
         // Act
@@ -88,7 +85,7 @@ public class MockActionsServiceTest {
         Optional<Mock> mock = generateOptionalMock();
         assertTrue(mock.isPresent());
         lenient().when(mockManagementService.getMockById(any(String.class))).thenReturn(mock.get());
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(generateArchivedEntityStatus());
+        lenient().when(mockEntityStatusService.getArchivedMockEntityStatus()).thenReturn(generateArchivedEntityStatus());
         Mock archivedMock = archiveMock(mock.get());
 
         // Act
@@ -122,7 +119,7 @@ public class MockActionsServiceTest {
         Optional<Mock> mock = generateOptionalMock();
         assertTrue(mock.isPresent());
         lenient().when(mockManagementService.getMockById(any(String.class))).thenReturn(mock.get());
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(generateArchivedEntityStatus());
+        lenient().when(mockEntityStatusService.getArchivedMockEntityStatus()).thenReturn(generateArchivedEntityStatus());
         Mock deletedMock = deleteMock(mock.get());
 
         // Act
@@ -156,7 +153,7 @@ public class MockActionsServiceTest {
         Optional<Mock> mock = generateOptionalMock();
         assertTrue(mock.isPresent());
         lenient().when(mockManagementService.getMockById(any(String.class))).thenReturn(mock.get());
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(generateDefaultEntityStatus());
+        lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(generateDefaultEntityStatus());
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(mock.get());
 
         // Act
@@ -173,7 +170,7 @@ public class MockActionsServiceTest {
         Optional<Mock> mock = generateOptionalMock();
         assertTrue(mock.isPresent());
         lenient().when(mockManagementService.getMockById(any(String.class))).thenReturn(mock.get());
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(generateDefaultEntityStatus());
+        lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(generateDefaultEntityStatus());
         Mock unarchivedMock = unarchiveMock(mock.get());
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(unarchivedMock);
 
@@ -208,7 +205,7 @@ public class MockActionsServiceTest {
         Optional<Mock> mock = generateOptionalMock();
         assertTrue(mock.isPresent());
         lenient().when(mockManagementService.getMockById(any(String.class))).thenReturn(mock.get());
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(generateDefaultEntityStatus());
+        lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(generateDefaultEntityStatus());
         assertTrue(mock.isPresent());
         Mock deletedMock = deleteMock(mock.get());
 

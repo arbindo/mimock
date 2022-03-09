@@ -1,6 +1,6 @@
 package com.arbindo.mimock.security.user.controller;
 
-import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.security.user.models.request.UpdatePasswordRequest;
 import com.arbindo.mimock.security.user.service.UpdatePasswordService;

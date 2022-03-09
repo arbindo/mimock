@@ -6,7 +6,7 @@
 
 <module name="Checker">
     <module name="FileLength">
-        <property name="max" value="450"/>
+        <property name="max" value="400"/>
         <property name="fileExtensions" value="java"/>
     </module>
     <module name="LineLength">

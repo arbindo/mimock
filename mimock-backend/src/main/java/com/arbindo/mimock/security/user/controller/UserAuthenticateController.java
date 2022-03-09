@@ -1,6 +1,6 @@
 package com.arbindo.mimock.security.user.controller;
 
-import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.security.user.MimockUserDetailsService;
 import com.arbindo.mimock.security.user.models.request.AuthenticateUserRequest;
 import com.arbindo.mimock.security.user.models.response.AuthenticationErrorResponse;

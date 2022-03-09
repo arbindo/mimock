@@ -1,6 +1,6 @@
 package com.arbindo.mimock.manage.mimocks.utils;
 
-import com.arbindo.mimock.constants.ExceptionMessages;
+import com.arbindo.mimock.common.constants.ExceptionMessages;
 
 public class Messages {
 

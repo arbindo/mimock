@@ -1,8 +1,9 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
+import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
-import com.arbindo.mimock.manage.mimocks.models.v1.Status;
+import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.repository.*;
 import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.AllArgsConstructor;
@@ -45,9 +46,6 @@ public class MockManagementServiceImpl implements MockManagementService {
     private BinaryResponseRepository binaryResponseRepository;
 
     @Autowired
-    private EntityStatusRepository entityStatusRepository;
-
-    @Autowired
     private RequestHeadersRepository requestHeadersRepository;
 
     @Autowired
@@ -59,6 +57,9 @@ public class MockManagementServiceImpl implements MockManagementService {
     @Autowired
     private RequestBodiesForMockRepository requestBodiesForMockRepository;
 
+    @Autowired
+    private EntityStatusService entityStatusService;
+
     @Override
     public List<Mock> getAllMocks() {
         return mocksRepository.findAll();
@@ -67,7 +68,7 @@ public class MockManagementServiceImpl implements MockManagementService {
     @Override
     public Page<Mock> getAllActiveMocks(Pageable pageable, Status status) {
         if (ValidationUtil.isArgNotNull(status)) {
-            EntityStatus entityStatus = findByEntityStatus(status.name());
+            EntityStatus entityStatus = entityStatusService.findByEntityStatus(status.name());
             if (ValidationUtil.isArgNotNull(entityStatus)) {
                 return mocksRepository.findAllByEntityStatus(entityStatus, pageable);
             }
@@ -114,7 +115,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                 Mock mock = getMockById(mockId);
                 if (mock != null) {
                     // Perform only soft delete i.e. Mark EntityStatus as DELETED
-                    EntityStatus entityStatus = getDeletedMockEntityStatus();
+                    EntityStatus entityStatus = entityStatusService.getDeletedMockEntityStatus();
                     mock.setEntityStatus(entityStatus);
                     mock.setDeletedAt(ZonedDateTime.now());
                     mocksRepository.save(mock);
@@ -167,7 +168,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                     .queryParams(request.getQueryParams())
                     .description(request.getDescription())
                     .createdAt(ZonedDateTime.now())
-                    .entityStatus(getDefaultMockEntityStatus())
+                    .entityStatus(entityStatusService.getDefaultMockEntityStatus())
                     .requestHeaders(getRequestHeaders(request))
                     .requestBodiesForMock(getRequestBody(request))
                     .responseHeaders(getResponseHeaders(request))
@@ -282,7 +283,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                         .description(request.getDescription())
                         .createdAt(mock.getCreatedAt())
                         .updatedAt(ZonedDateTime.now())
-                        .entityStatus(getDefaultMockEntityStatus())
+                        .entityStatus(entityStatusService.getDefaultMockEntityStatus())
                         .build();
 
                 // Update Mock Name Only if it is different from existing name
@@ -356,22 +357,6 @@ public class MockManagementServiceImpl implements MockManagementService {
         }
         throw new Exception(String.format("Unable to extract Response Content Type!! Invalid responseContentType: %s",
                 responseContentTypeString));
-    }
-
-    private EntityStatus getDefaultMockEntityStatus() {
-        return findByEntityStatus(Status.NONE.name());
-    }
-
-    private EntityStatus getDeletedMockEntityStatus() {
-        return findByEntityStatus(Status.DELETED.name());
-    }
-
-    private EntityStatus getArchivedMockEntityStatus() {
-        return findByEntityStatus(Status.ARCHIVED.name());
-    }
-
-    private EntityStatus findByEntityStatus(String status) {
-        return entityStatusRepository.findByStatus(status);
     }
 
 }

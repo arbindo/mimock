@@ -1,10 +1,9 @@
 package com.arbindo.mimock.manage.mimocks.controller;
 
-import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
-import com.arbindo.mimock.manage.mimocks.controller.MockActionsController;
-import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
+import com.arbindo.mimock.manage.mimocks.models.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.service.MockActionsService;
 import com.arbindo.mimock.manage.mimocks.utils.Messages;
 import com.arbindo.mimock.security.JwtRequestFilter;

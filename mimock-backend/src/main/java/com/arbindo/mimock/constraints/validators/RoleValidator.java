@@ -1,6 +1,6 @@
 package com.arbindo.mimock.constraints.validators;
 
-import com.arbindo.mimock.constants.Role;
+import com.arbindo.mimock.common.constants.Role;
 import com.arbindo.mimock.constraints.ValidRole;
 
 import javax.validation.ConstraintValidator;

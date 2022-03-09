@@ -2,10 +2,10 @@ package com.arbindo.mimock.helpers.entities;
 
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.general.RandomDataGenerator;
-import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
-import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
-import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
-import com.arbindo.mimock.manage.mimocks.models.v1.Status;
+import com.arbindo.mimock.manage.mimocks.models.GenericResponseWrapper;
+import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.enums.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;

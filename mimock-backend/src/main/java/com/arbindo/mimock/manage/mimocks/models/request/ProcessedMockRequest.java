@@ -1,4 +1,4 @@
-package com.arbindo.mimock.manage.mimocks.models.v1;
+package com.arbindo.mimock.manage.mimocks.models.request;
 
 import lombok.Builder;
 import lombok.Getter;

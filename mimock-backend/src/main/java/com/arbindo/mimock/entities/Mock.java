@@ -1,6 +1,6 @@
 package com.arbindo.mimock.entities;
 
-import com.arbindo.mimock.manage.mimocks.models.v1.Status;
+import com.arbindo.mimock.manage.mimocks.enums.Status;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

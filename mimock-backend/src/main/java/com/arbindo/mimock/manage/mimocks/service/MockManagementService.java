@@ -2,8 +2,8 @@ package com.arbindo.mimock.manage.mimocks.service;
 
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
-import com.arbindo.mimock.manage.mimocks.models.v1.Status;
+import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.enums.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

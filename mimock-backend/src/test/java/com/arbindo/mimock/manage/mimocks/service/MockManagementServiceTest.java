@@ -1,12 +1,9 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
+import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.helpers.db.HttpMethodDBHelper;
-import com.arbindo.mimock.helpers.db.ResponseContentTypeDBHelper;
-import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
-import com.arbindo.mimock.manage.mimocks.models.v1.Status;
-import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
-import com.arbindo.mimock.manage.mimocks.service.MockManagementServiceImpl;
+import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +13,6 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,12 +32,6 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class MockManagementServiceTest {
 
-    @Autowired
-    HttpMethodDBHelper httpMethodsDBHelper;
-
-    @Autowired
-    ResponseContentTypeDBHelper responseContentTypeDBHelper;
-
     @org.mockito.Mock
     MocksRepository mockRepository;
 
@@ -58,9 +48,6 @@ class MockManagementServiceTest {
     BinaryResponseRepository mockBinaryResponseRepository;
 
     @org.mockito.Mock
-    EntityStatusRepository mockEntityStatusRepository;
-
-    @org.mockito.Mock
     RequestHeadersRepository mockRequestHeadersRepository;
 
     @org.mockito.Mock
@@ -72,6 +59,9 @@ class MockManagementServiceTest {
     @org.mockito.Mock
     RequestBodiesForMockRepository mockRequestBodiesForMockRepository;
 
+    @org.mockito.Mock
+    EntityStatusService mockEntityStatusService;
+
     MockManagementService mockManagementService;
 
     @BeforeEach
@@ -82,10 +72,10 @@ class MockManagementServiceTest {
                 .responseContentTypesRepository(mockResponseContentTypesRepository)
                 .textualResponseRepository(mockTextualResponseRepository)
                 .binaryResponseRepository(mockBinaryResponseRepository)
-                .entityStatusRepository(mockEntityStatusRepository)
                 .requestHeadersRepository(mockRequestHeadersRepository)
                 .requestBodyTypeRepository(mockRequestBodyTypeRepository)
                 .requestBodiesForMockRepository(mockRequestBodiesForMockRepository)
+                .entityStatusService(mockEntityStatusService)
                 .build();
     }
 
@@ -140,7 +130,7 @@ class MockManagementServiceTest {
 
         lenient().when(mockRepository.findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class)))
                 .thenReturn(pageable);
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
+        lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
 
         // Act
         Page<Mock> result = mockManagementService.getAllActiveMocks(Pageable.unpaged(), Status.NONE);
@@ -149,7 +139,7 @@ class MockManagementServiceTest {
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
 
         verify(mockRepository, times(1)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
-        verify(mockEntityStatusRepository, times(1)).findByStatus(anyString());
+        verify(mockEntityStatusService, times(1)).findByEntityStatus(anyString());
     }
 
     @Test
@@ -158,7 +148,7 @@ class MockManagementServiceTest {
         Page<Mock> pageable = generateMocksPageable();
 
         lenient().when(mockRepository.findAll(any(Pageable.class))).thenReturn(pageable);
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(null);
+        lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(null);
 
         // Act
         Page<Mock> result = mockManagementService.getAllActiveMocks(Pageable.unpaged(), Status.NONE);
@@ -168,7 +158,7 @@ class MockManagementServiceTest {
 
         verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
         verify(mockRepository, times(1)).findAll(any(Pageable.class));
-        verify(mockEntityStatusRepository, times(1)).findByStatus(anyString());
+        verify(mockEntityStatusService, times(1)).findByEntityStatus(anyString());
     }
 
     @Test
@@ -186,7 +176,7 @@ class MockManagementServiceTest {
 
         verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
         verify(mockRepository, times(1)).findAll(any(Pageable.class));
-        verify(mockEntityStatusRepository, times(0)).findByStatus(anyString());
+        verify(mockEntityStatusService, times(0)).findByEntityStatus(anyString());
     }
 
     @ParameterizedTest
@@ -294,7 +284,7 @@ class MockManagementServiceTest {
         // Assert
         assertTrue(result);
         verify(mockRepository, times(0)).delete(mock.get());
-        verify(mockEntityStatusRepository, times(1)).findByStatus(anyString());
+        verify(mockEntityStatusService, times(1)).getDeletedMockEntityStatus();
         verify(mockRepository, times(1)).save(mock.get());
     }
 
@@ -312,7 +302,7 @@ class MockManagementServiceTest {
         // Assert
         assertFalse(result);
         verify(mockRepository, times(0)).delete(mock.get());
-        verify(mockEntityStatusRepository, times(0)).findByStatus(anyString());
+        verify(mockEntityStatusService, times(0)).findByEntityStatus(anyString());
         verify(mockRepository, times(0)).save(mock.get());
     }
 
@@ -439,7 +429,7 @@ class MockManagementServiceTest {
 
         Optional<Mock> emptyMock = Optional.empty();
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
+        lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
         lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
         lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
@@ -471,7 +461,7 @@ class MockManagementServiceTest {
 
         Optional<Mock> emptyMock = Optional.empty();
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
+        lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
         lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
         lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
         lenient().when(mockRequestHeadersRepository.save(any(RequestHeader.class))).thenReturn(expectedRequestHeader);
@@ -543,7 +533,7 @@ class MockManagementServiceTest {
         Optional<Mock> emptyMock = Optional.empty();
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
-        lenient().when(mockEntityStatusRepository.findByStatus(anyString())).thenReturn(entityStatus);
+        lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(entityStatus);
         lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
         lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);

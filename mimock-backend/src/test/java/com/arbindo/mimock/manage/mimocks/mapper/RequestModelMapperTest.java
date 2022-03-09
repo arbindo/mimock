@@ -3,8 +3,8 @@ package com.arbindo.mimock.manage.mimocks.mapper;
 import com.arbindo.mimock.helpers.entities.MocksGenerator;
 import com.arbindo.mimock.helpers.general.JsonMapper;
 import com.arbindo.mimock.helpers.general.RandomDataGenerator;
-import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
-import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

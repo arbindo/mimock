@@ -1,6 +1,6 @@
 package com.arbindo.mimock.security.user.service;
 
-import com.arbindo.mimock.constants.Role;
+import com.arbindo.mimock.common.constants.Role;
 import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.entities.UserRole;
 import com.arbindo.mimock.repository.UserRepository;

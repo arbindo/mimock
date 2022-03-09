@@ -1,6 +1,6 @@
 package com.arbindo.mimock.interceptor;
 
-import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.common.constants.UrlConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

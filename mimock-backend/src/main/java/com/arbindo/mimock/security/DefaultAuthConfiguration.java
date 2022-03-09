@@ -1,7 +1,7 @@
 package com.arbindo.mimock.security;
 
-import com.arbindo.mimock.constants.Role;
-import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.common.constants.Role;
+import com.arbindo.mimock.common.constants.UrlConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

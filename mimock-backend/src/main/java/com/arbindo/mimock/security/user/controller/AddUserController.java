@@ -1,6 +1,6 @@
 package com.arbindo.mimock.security.user.controller;
 
-import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.security.user.models.request.AddUserRequest;
 import com.arbindo.mimock.security.user.service.AddUserService;
 import io.swagger.v3.oas.annotations.Operation;

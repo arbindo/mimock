@@ -1,8 +1,8 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
+import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.EntityStatus;
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import com.arbindo.mimock.repository.*;
 import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.AllArgsConstructor;
@@ -28,7 +28,7 @@ public class MockActionsServiceImpl implements MockActionsService {
     private MocksRepository mocksRepository;
 
     @Autowired
-    private EntityStatusRepository entityStatusRepository;
+    private EntityStatusService entityStatusService;
 
 
     @Transactional
@@ -43,7 +43,7 @@ public class MockActionsServiceImpl implements MockActionsService {
                     } else {
                         // Archive the mock i.e. Mark EntityStatus as ARCHIVED
                         if (mock.canEditMock()) {
-                            EntityStatus entityStatus = getArchivedMockEntityStatus();
+                            EntityStatus entityStatus = entityStatusService.getArchivedMockEntityStatus();
                             mock.setEntityStatus(entityStatus);
                             mock.setUpdatedAt(ZonedDateTime.now());
                             return mocksRepository.save(mock);
@@ -67,7 +67,7 @@ public class MockActionsServiceImpl implements MockActionsService {
                 if (mock != null) {
                     // Idempotent behaviour - Unarchive the mock i.e. Mark EntityStatus as NONE
                     if (mock.canEditMock()) {
-                        EntityStatus entityStatus = getDefaultMockEntityStatus();
+                        EntityStatus entityStatus = entityStatusService.getDefaultMockEntityStatus();
                         mock.setEntityStatus(entityStatus);
                         mock.setUpdatedAt(ZonedDateTime.now());
                         return mocksRepository.save(mock);
@@ -81,19 +81,4 @@ public class MockActionsServiceImpl implements MockActionsService {
         return null;
     }
 
-    private EntityStatus getDefaultMockEntityStatus() {
-        return findByEntityStatus(Status.NONE.name());
-    }
-
-    private EntityStatus getDeletedMockEntityStatus() {
-        return findByEntityStatus(Status.DELETED.name());
-    }
-
-    private EntityStatus getArchivedMockEntityStatus() {
-        return findByEntityStatus(Status.ARCHIVED.name());
-    }
-
-    private EntityStatus findByEntityStatus(String status) {
-        return entityStatusRepository.findByStatus(status);
-    }
 }

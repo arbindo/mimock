@@ -1,6 +1,6 @@
 package com.arbindo.mimock.security.user.controller;
 
-import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.security.JwtRequestFilter;
 import com.arbindo.mimock.security.user.models.UserInfo;

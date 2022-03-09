@@ -3,7 +3,7 @@ package com.arbindo.mimock.repository;
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.db.*;
 import com.arbindo.mimock.helpers.general.RandomDataGenerator;
-import com.arbindo.mimock.manage.mimocks.models.v1.Status;
+import com.arbindo.mimock.manage.mimocks.enums.Status;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

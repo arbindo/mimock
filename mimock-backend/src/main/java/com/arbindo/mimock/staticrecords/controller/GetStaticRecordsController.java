@@ -1,6 +1,6 @@
 package com.arbindo.mimock.staticrecords.controller;
 
-import com.arbindo.mimock.constants.UrlConfig;
+import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.entities.EntityStatus;
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.ResponseContentType;

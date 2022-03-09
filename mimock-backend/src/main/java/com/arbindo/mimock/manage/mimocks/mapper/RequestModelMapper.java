@@ -1,7 +1,7 @@
 package com.arbindo.mimock.manage.mimocks.mapper;
 
-import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
-import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.utils.JSONUtils;
 
 import java.util.Map;

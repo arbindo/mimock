@@ -1,4 +1,4 @@
-package com.arbindo.mimock.constants;
+package com.arbindo.mimock.common.constants;
 
 public class UrlConfig {
 
