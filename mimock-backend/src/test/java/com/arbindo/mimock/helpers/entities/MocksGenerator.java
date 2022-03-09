@@ -2,11 +2,13 @@ package com.arbindo.mimock.helpers.entities;
 
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.general.RandomDataGenerator;
+import com.arbindo.mimock.manage.mimocks.models.v1.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -391,5 +393,14 @@ public class MocksGenerator {
         mock.setEntityStatus(generateDeletedEntityStatus());
         mock.setUpdatedAt(ZonedDateTime.now());
         return mock;
+    }
+
+    public static GenericResponseWrapper<Mock> getGenericResponseWrapper(
+            HttpStatus httpStatus, String responseMessage, Mock mock) {
+        return GenericResponseWrapper.<Mock>builder()
+                .code(httpStatus.toString())
+                .message(responseMessage)
+                .data(mock)
+                .build();
     }
 }

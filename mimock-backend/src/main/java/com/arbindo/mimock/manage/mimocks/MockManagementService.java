@@ -25,8 +25,4 @@ public interface MockManagementService {
     Mock createMock(ProcessedMockRequest request);
 
     Mock updateMock(String mockId, ProcessedMockRequest request);
-
-    Mock archiveMock(String mockId);
-
-    Mock unarchiveMock(String mockId);
 }
