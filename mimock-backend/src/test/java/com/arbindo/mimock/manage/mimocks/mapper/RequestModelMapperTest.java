@@ -1,4 +1,4 @@
-package com.arbindo.mimock.manage.mimocks;
+package com.arbindo.mimock.manage.mimocks.mapper;
 
 import com.arbindo.mimock.helpers.entities.MocksGenerator;
 import com.arbindo.mimock.helpers.general.JsonMapper;

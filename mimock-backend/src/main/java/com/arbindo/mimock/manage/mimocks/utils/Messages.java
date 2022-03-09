@@ -1,4 +1,4 @@
-package com.arbindo.mimock.manage.mimocks;
+package com.arbindo.mimock.manage.mimocks.utils;
 
 import com.arbindo.mimock.constants.ExceptionMessages;
 

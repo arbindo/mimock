@@ -1,10 +1,12 @@
-package com.arbindo.mimock.manage.mimocks;
+package com.arbindo.mimock.manage.mimocks.service;
 
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.db.HttpMethodDBHelper;
 import com.arbindo.mimock.helpers.db.ResponseContentTypeDBHelper;
 import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.Status;
+import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
+import com.arbindo.mimock.manage.mimocks.service.MockManagementServiceImpl;
 import com.arbindo.mimock.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

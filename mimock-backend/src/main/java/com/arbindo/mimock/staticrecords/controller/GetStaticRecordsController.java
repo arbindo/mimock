@@ -1,9 +1,10 @@
-package com.arbindo.mimock.staticrecords;
+package com.arbindo.mimock.staticrecords.controller;
 
 import com.arbindo.mimock.constants.UrlConfig;
 import com.arbindo.mimock.entities.EntityStatus;
 import com.arbindo.mimock.entities.HttpMethod;
 import com.arbindo.mimock.entities.ResponseContentType;
+import com.arbindo.mimock.staticrecords.service.GetStaticRecordsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;

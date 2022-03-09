@@ -1,4 +1,4 @@
-package com.arbindo.mimock.staticrecords;
+package com.arbindo.mimock.staticrecords.service;
 
 import com.arbindo.mimock.entities.EntityStatus;
 import com.arbindo.mimock.entities.HttpMethod;

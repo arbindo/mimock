@@ -1,4 +1,4 @@
-package com.arbindo.mimock.manage.mimocks;
+package com.arbindo.mimock.manage.mimocks.mapper;
 
 import com.arbindo.mimock.manage.mimocks.models.v1.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.v1.ProcessedMockRequest;
