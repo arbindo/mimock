@@ -41,5 +41,9 @@
             <property name="maxTotal" value="30"/>
         </module>
         <module name="UnusedImports"/>
+        <module name="UnusedLocalVariable"/>
+        <module name="TodoComment">
+            <property name="severity" value="warning"/>
+        </module>
     </module>
 </module>

@@ -62,5 +62,6 @@ public class UrlConfig {
     // user routes
     public static final String USER_ACTIVATION = USER_PATH + "/update-activation";
     public static final String UPDATE_PASSWORD = USER_PATH + "/update-password";
+    public static final String UPDATE_ROLE = USER_PATH + "/update-role";
     // end of user routes
 }

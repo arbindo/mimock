@@ -2,11 +2,15 @@ package com.arbindo.mimock.security.user.controller;
 
 import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.entities.User;
+import com.arbindo.mimock.entities.UserRole;
 import com.arbindo.mimock.helpers.general.JsonMapper;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.security.JwtRequestFilter;
 import com.arbindo.mimock.security.user.models.request.UpdatePasswordRequest;
+import com.arbindo.mimock.security.user.models.request.UpdateUserRoleRequest;
 import com.arbindo.mimock.security.user.service.UpdatePasswordService;
+import com.arbindo.mimock.security.user.service.UpdateUserRoleService;
+import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -22,17 +26,21 @@ import org.springframework.jdbc.support.DatabaseStartupValidator;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import javax.sql.DataSource;
+
+import java.util.Map;
 import java.util.Objects;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(
-        value = UpdatePasswordController.class,
+        value = UpdateUserRoleController.class,
         excludeAutoConfiguration = {
                 SecurityAutoConfiguration.class,
                 UserDetailsServiceAutoConfiguration.class,
@@ -40,7 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 )
 @AutoConfigureMockMvc(addFilters = false)
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class})
-class UpdatePasswordControllerTest {
+class UpdateUserRoleControllerTest {
     @Autowired
     MockMvc mockMvc;
 
@@ -57,51 +65,71 @@ class UpdatePasswordControllerTest {
     UserDetailsService userDetailsService;
 
     @MockBean
-    UpdatePasswordService mockUpdatePasswordService;
+    UpdateUserRoleService mockUpdateUserRoleService;
 
     @MockBean
     JwtRequestFilter jwtRequestFilter;
 
-    private final String route = UrlConfig.UPDATE_PASSWORD;
+    private final String route = UrlConfig.UPDATE_ROLE;
 
     @Test
-    void shouldRespondWithStatusOK_WhenUserPasswordIsUpdatedSuccessfully() throws Exception {
-        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
+    void shouldRespondWithStatusOK_WhenUserRoleIsUpdatedSuccessfully() throws Exception {
+        UpdateUserRoleRequest request = UpdateUserRoleRequest.builder()
                 .userName("mimock_admin")
-                .password("$2a$12$AnCFHRMd8.UlVlKUZxVpXeuBRaBd1G3LGJ1GTbQxBxTulzm0NpVmq")
+                .userRole("MANAGER")
+                .build();
+
+        UserRole userRole = UserRole.builder()
+                .roleName("MANAGER")
                 .build();
 
         User user = User.builder()
                 .userName(request.getUserName())
-                .password(request.getPassword())
+                .userRoles(userRole)
                 .build();
 
-        lenient().when(mockUpdatePasswordService.updatePassword(any())).thenReturn(user);
+        lenient().when(mockUpdateUserRoleService.updateUserRole(any())).thenReturn(user);
 
-        mockMvc.perform(
+        MvcResult result = mockMvc.perform(
                         put(route)
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                                 .content(Objects.requireNonNull(JsonMapper.convertObjectToJsonString(request)))
                 )
                 .andExpect(status().isOk())
                 .andReturn();
+
+        Map<String, Object> responseMap = JsonMapper.convertJSONStringToMap(result.getResponse().getContentAsString());
+        assertNotNull(responseMap);
+        assertNotNull(responseMap.get("userName"));
+        assertNotNull(responseMap.get("updatedUserRole"));
+
+        assertEquals(request.getUserName(), responseMap.get("userName"));
+        assertEquals(request.getUserRole(), responseMap.get("updatedUserRole"));
     }
 
     @Test
-    void shouldRespondWithStatusInternalServerError_WhenUserPasswordUpdateFails() throws Exception {
-        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
+    void shouldRespondWithStatusInternalServerError_WhenUserRoleUpdateFails() throws Exception {
+        UpdateUserRoleRequest request = UpdateUserRoleRequest.builder()
                 .userName("mimock_admin")
-                .password("$2a$12$AnCFHRMd8.UlVlKUZxVpXeuBRaBd1G3LGJ1GTbQxBxTulzm0NpVmq")
+                .userRole("MANAGER")
                 .build();
 
-        lenient().when(mockUpdatePasswordService.updatePassword(any())).thenThrow(UsernameNotFoundException.class);
+        String errorMessage = "User name no found";
+        lenient().when(mockUpdateUserRoleService.updateUserRole(any()))
+                .thenThrow(new UsernameNotFoundException(errorMessage));
 
-        mockMvc.perform(
+        MvcResult result = mockMvc.perform(
                         put(route)
                                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                                 .content(Objects.requireNonNull(JsonMapper.convertObjectToJsonString(request)))
                 )
                 .andExpect(status().isInternalServerError())
                 .andReturn();
+
+        Map<String, Object> responseMap = JsonMapper.convertJSONStringToMap(result.getResponse().getContentAsString());
+        assertNotNull(responseMap);
+        assertNotNull(responseMap.get("message"));
+
+        assertEquals(errorMessage, responseMap.get("message"));
     }
 }

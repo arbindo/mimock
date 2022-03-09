@@ -1,5 +1,6 @@
 package com.arbindo.mimock.security.user.service;
 
+import com.arbindo.mimock.common.constants.Errors;
 import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.repository.UserRepository;
 import com.arbindo.mimock.security.user.models.request.UserActivationRequest;
@@ -20,9 +21,8 @@ public class UserActivationService {
     public User updateUserActivationStatus(UserActivationRequest userActivationRequest) {
         Optional<User> userFromDB = userRepository.findByUserName(userActivationRequest.getUserName());
         if (userFromDB.isEmpty()) {
-            String message = "User is not present in the Database";
-            log.log(Level.ERROR, message);
-            throw new UsernameNotFoundException(message);
+            log.log(Level.ERROR, Errors.USERNAME_NOT_FOUND_ERROR);
+            throw new UsernameNotFoundException(Errors.USERNAME_NOT_FOUND_ERROR);
         }
 
         User user = userFromDB.get();

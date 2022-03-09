@@ -1,5 +1,6 @@
 package com.arbindo.mimock.security.user.service;
 
+import com.arbindo.mimock.common.constants.Errors;
 import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.entities.UserRole;
 import com.arbindo.mimock.repository.UserRepository;
@@ -29,8 +30,8 @@ public class AddUserService {
     public User addNewUser(AddUserRequest request) {
         Optional<User> existingUser = userRepository.findByUserName(request.getUserName());
         if (existingUser.isPresent()) {
-            log.log(Level.INFO, "User already exists");
-            throw new UserAlreadyExistsException("User already exists in the Database");
+            log.log(Level.INFO, Errors.USERNAME_ALREADY_EXISTS);
+            throw new UserAlreadyExistsException(Errors.USERNAME_ALREADY_EXISTS);
         }
 
         UserRole userRole = userRoleRepository.findByRoleName(request.getUserRole());
