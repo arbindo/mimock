@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8d3b7456-b382-4249-9d79-8226db2fc051",
+		"_postman_id": "3a8fe7af-2718-4209-8403-37603af8cb8b",
 		"name": "Mimock",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -594,16 +594,33 @@
 							"response": []
 						},
 						{
-							"name": "Authenticate",
+							"name": "Activate User",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
 							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [],
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrfToken}}",
+										"type": "default"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"userName\": \"mimock_admin\",\r\n    \"password\": \"password\"\r\n}",
+									"raw": "{\r\n    \"isUserActive\": true,\r\n    \"userName\": \"frodo1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -611,7 +628,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/mimock/v1/user/authenticate",
+									"raw": "http://localhost:8080/api/mimock/v1/admin/users/update-activation",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -621,8 +638,165 @@
 										"api",
 										"mimock",
 										"v1",
-										"user",
-										"authenticate"
+										"admin",
+										"users",
+										"update-activation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Password",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrfToken}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\": \"mimock_admin\",\r\n    \"password\": \"$2a$12$AnCFHRMd8.UlVlKUZxVpXeuBRaBd1G3LGJ1GTbQxBxTulzm0NpVmq\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/mimock/v1/admin/users/update-password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"mimock",
+										"v1",
+										"admin",
+										"users",
+										"update-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Role",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrfToken}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\": \"frodo1\",\r\n    \"userRole\": \"ADMIN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/mimock/v1/admin/users/update-role",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"mimock",
+										"v1",
+										"admin",
+										"users",
+										"update-role"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrfToken}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/mimock/v1/admin/users/delete-user?userName=frodo1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"mimock",
+										"v1",
+										"admin",
+										"users",
+										"delete-user"
+									],
+									"query": [
+										{
+											"key": "userName",
+											"value": "frodo1"
+										}
 									]
 								}
 							},
@@ -790,6 +964,41 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"mimock_admin\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/mimock/v1/user/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mimock",
+						"v1",
+						"user",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
