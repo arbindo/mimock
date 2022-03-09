@@ -65,9 +65,6 @@ class MockManagementControllerTest {
     MockManagementService mockManagementService;
 
     @MockBean
-    ExportImportService exportImportService;
-
-    @MockBean
     DataSource mockDataSource;
 
     @MockBean
@@ -678,86 +675,6 @@ class MockManagementControllerTest {
 
         // Assert
         assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
-    }
-
-    @Test
-    void shouldReturnHttpOk_ExportTemplateCsv_ReturnCsvTemplateFile() throws Exception {
-        // Arrange
-        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT;
-        String expectedContentType = "text/csv";
-
-        String fileName = "mocks_template.csv";
-        lenient().when(exportImportService.generateTemplateFileName()).thenReturn(fileName);
-
-        // Act
-        mockMvc.perform(get(route))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(expectedContentType))
-                .andExpect(header().exists("Content-Disposition"))
-                .andExpect(header().string("Content-Disposition", "attachment; filename=" + fileName))
-                .andReturn();
-
-        // Assert
-        verify(exportImportService, times(1)).exportMockTemplateCsv(any(PrintWriter.class));
-    }
-
-    @Test
-    void shouldReturnHttpInternalServerError_WhenExportTemplateCsv_ThrowsException() throws Exception {
-        // Arrange
-        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT;
-
-        String fileName = "mocks_template.csv";
-        lenient().when(exportImportService.generateTemplateFileName()).thenReturn(fileName);
-        doThrow(IOException.class).when(exportImportService).exportMockTemplateCsv(any(PrintWriter.class));
-
-        // Act
-        mockMvc.perform(get(route))
-                .andExpect(status().isInternalServerError())
-                .andReturn();
-    }
-
-    @Test
-    void shouldReturnHttpOk_ExportMocksCsv_ReturnCsvFile() throws Exception {
-        // Arrange
-        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_EXPORT;
-        String expectedContentType = "text/csv";
-        String fileName = "mocks_2022-02-04_19-31-05.csv";
-
-        List<Mock> expectedMocks = generateListOfMocks();
-
-        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
-        lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
-
-        // Act
-        mockMvc.perform(get(route))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(expectedContentType))
-                .andExpect(header().exists("Content-Disposition"))
-                .andExpect(header().string("Content-Disposition", "attachment; filename=" + fileName))
-                .andReturn();
-
-        // Assert
-        verify(exportImportService, times(1)).exportMockListToCsv(any(PrintWriter.class), anyList());
-    }
-
-    @Test
-    void shouldReturnHttpInternalServerError_WhenExportMocksCsv_ThrowsException() throws Exception {
-        // Arrange
-        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_EXPORT;
-        String expectedContentType = "text/csv";
-        String fileName = "mocks_2022-02-04_19-31-05.csv";
-
-        List<Mock> expectedMocks = generateListOfMocks();
-
-        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
-        lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
-
-        doThrow(IOException.class).when(exportImportService).exportMockListToCsv(any(PrintWriter.class), anyList());
-
-        // Act
-        mockMvc.perform(get(route))
-                .andExpect(status().isInternalServerError())
-                .andReturn();
     }
 
     @Test
