@@ -30,4 +30,6 @@
     <include file="changelogs/0024_create_table_users.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0025_delete_password_salt_from_users.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0026_insert_default_admin_user.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0027_create_table_platform_settings.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0028_insert_platform_settings.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

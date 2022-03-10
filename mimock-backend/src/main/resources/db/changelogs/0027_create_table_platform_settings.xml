@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="aravind" id="0027_create_table_platform_settings">
+        <sql>
+            CREATE TABLE platform_settings
+            (
+                id  BIGSERIAL  NOT NULL,
+                is_category_execution_enabled  BOOLEAN NOT NULL DEFAULT FALSE,
+                is_steps_execution_enabled  BOOLEAN NOT NULL DEFAULT FALSE,
+                is_export_import_enabled  BOOLEAN NOT NULL DEFAULT TRUE,
+                is_flush_bin_cron_enabled  BOOLEAN NOT NULL DEFAULT TRUE,
+                created_at TIMESTAMP   NOT NULL,
+                updated_at TIMESTAMP,
+                deleted_at TIMESTAMP,
+                PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                DROP TABLE platform_settings;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

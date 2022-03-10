@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="aravind" id="0028_insert_platform_settings">
+        <sql>
+            INSERT INTO platform_settings(is_category_execution_enabled, is_steps_execution_enabled,
+            is_export_import_enabled, is_flush_bin_cron_enabled, created_at)
+            VALUES (false, false, true, true, current_timestamp)
+            ;
+        </sql>
+        <rollback>
+            <sql>
+                TRUNCATE TABLE platform_settings;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
