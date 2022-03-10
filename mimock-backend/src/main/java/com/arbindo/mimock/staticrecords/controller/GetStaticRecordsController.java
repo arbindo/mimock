@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @Log4j2
-@RequestMapping(UrlConfig.MANAGE_PATH)
+@RequestMapping(UrlConfig.STATIC_RECORDS_PATH)
 @SecurityRequirement(name = UrlConfig.SWAGGER_BEARER_AUTH_KEY)
 @Tag(name = "Static Records", description = "Handles static records such as http-methods and response-content-types.")
 public class GetStaticRecordsController {

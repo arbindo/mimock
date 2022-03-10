@@ -47,9 +47,13 @@ public class UrlConfig {
     public static final String MOCKS_CSV_TEMPLATE_EXPORT = "/csv/template/export";
     // endregion
 
-    // region PATH
-    public static final String MANAGE_PATH = API_PREFIX + STATIC_RECORDS;
+    // region PLATFORM_SETTINGS
+    public static final String PLATFORM_SETTINGS = "/platform-settings";
+    // endregion
+
+    public static final String STATIC_RECORDS_PATH = API_PREFIX + STATIC_RECORDS;
     public static final String MOCKS_PATH = API_PREFIX + MOCKS;
+    public static final String PLATFORM_SETTINGS_PATH = API_PREFIX + PLATFORM_SETTINGS;
     // endregion
 
     // region ADMIN PATH
