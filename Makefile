@@ -13,7 +13,8 @@ generate-mvnw: cd_backend
 	mvn -N io.takari:maven:wrapper; cd ..
 
 start-database:
-	docker-compose -f docker-compose.db.yml up
+	docker build -t mimock-pg-database . -f Dockerfile.pg && \
+	docker run --name mimock-db -p 5427:5432 -d localhost/mimock-pg-database
 
 start-app-local: start-database
 	./mimock-backend/mvnw clean spring-boot:run -Dspring.config.location=$(APP_CONFIG_FILE) -Dspring.datasource.url=$(APP_DB_URL)
@@ -29,3 +30,7 @@ test-local: start-database
 
 test-ci:
 	docker-compose -f docker-compose.test.yml up --abort-on-container-exit --exit-code-from mimock-test
+
+bundle-app:
+	cd ./mimock-ui && yarn && yarn build && mv ./dist/* ../mimock-backend/src/main/resources/static/ && cd ..
+	cd ./mimock-backend && ./mvnw clean package && cd ..

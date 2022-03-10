@@ -32,3 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/resources/keystore/*
+
+/src/main/resources/static/**/*
+!/src/main/resources/static/.gitkeep
