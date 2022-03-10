@@ -43,7 +43,7 @@ public class MockRequest {
     @Schema(example = "This is my new mock!!!", description = "Custom Description of the Mock")
     private String description;
 
-    // Value should be obtained as strigified JSON
+    // Value should be obtained as stringify JSON
     @Schema(example = "{'Content-Type': 'application/json'}", description = "Request headers for the mock")
     private String requestHeader;
 

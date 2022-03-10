@@ -2,7 +2,7 @@ package com.arbindo.mimock.helpers.entities;
 
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.general.RandomDataGenerator;
-import com.arbindo.mimock.manage.mimocks.models.GenericResponseWrapper;
+import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.enums.Status;

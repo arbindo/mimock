@@ -21,6 +21,10 @@ import {
 	listResponseContentTypes,
 } from '../../api/StaticRecordsApi';
 import { CustomButton } from 'styles';
+import {
+	listPlatformSettings,
+	updatePlatformSettings,
+} from 'api/PlatformSettingsApi';
 
 const PlatformApiOperations = ({ loggedIn, token }) => {
 	const [mockId, setMockId] = useState('');
@@ -140,6 +144,22 @@ const PlatformApiOperations = ({ loggedIn, token }) => {
 		setResponse(JSON.stringify(response, null, 2));
 	};
 
+	const listPlatformSettingsOperation = async () => {
+		setMockId('');
+		const response = await listPlatformSettings(token);
+		setResponse(JSON.stringify(response, null, 2));
+	};
+
+	const updatePlatformSettingsOperation = async () => {
+		setMockId('');
+		var requestData = {
+			isExportImportEnabled: false,
+			isFlushBinCronEnabled: false,
+		};
+		const response = await updatePlatformSettings(requestData, token);
+		setResponse(JSON.stringify(response, null, 2));
+	};
+
 	const actions = [
 		{
 			label: 'Create Mock',
@@ -235,6 +255,18 @@ const PlatformApiOperations = ({ loggedIn, token }) => {
 			label: 'EntityStatus',
 			clickHandler: () => {
 				listEntityStatusOperation();
+			},
+		},
+		{
+			label: 'PlatformSettings',
+			clickHandler: () => {
+				listPlatformSettingsOperation();
+			},
+		},
+		{
+			label: 'Update PlatformSettings',
+			clickHandler: () => {
+				updatePlatformSettingsOperation();
 			},
 		},
 	];

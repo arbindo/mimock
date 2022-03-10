@@ -1,4 +1,4 @@
-package com.arbindo.mimock.manage.mimocks.models;
+package com.arbindo.mimock.common.wrapper;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;

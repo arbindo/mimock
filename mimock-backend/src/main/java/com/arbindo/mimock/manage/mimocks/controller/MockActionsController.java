@@ -2,9 +2,9 @@ package com.arbindo.mimock.manage.mimocks.controller;
 
 import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.manage.mimocks.utils.Messages;
+import com.arbindo.mimock.common.constants.Messages;
 import com.arbindo.mimock.manage.mimocks.service.MockActionsService;
-import com.arbindo.mimock.manage.mimocks.models.GenericResponseWrapper;
+import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

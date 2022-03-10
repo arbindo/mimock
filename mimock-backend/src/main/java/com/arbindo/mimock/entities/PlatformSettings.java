@@ -1,10 +1,7 @@
 package com.arbindo.mimock.entities;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,6 +12,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 @Entity
 @Table(name = "platform_settings")
 public class PlatformSettings {
@@ -34,7 +32,7 @@ public class PlatformSettings {
     private Boolean isStepsExecutionEnabled = false;
 
     @Column(name = "is_export_import_enabled", nullable = false)
-    @Schema(example = "true", description = "Export/Import Feature Enabled/Disabled")
+    @Schema(example = "true", description = "Export and Import Feature Enabled/Disabled")
     private Boolean isExportImportEnabled = true;
 
     @Column(name = "is_flush_bin_cron_enabled", nullable = false)
