@@ -62,6 +62,7 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf((csrfInstance) -> {
             csrfInstance
                     .ignoringAntMatchers(UrlConfig.AUTHENTICATE)
+                    .ignoringAntMatchers("/mimock-ui/**")
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         });
 
@@ -82,6 +83,7 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
             cors.configurationSource(cs);
         });
 
+        http.headers().frameOptions().sameOrigin();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

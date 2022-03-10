@@ -6,7 +6,7 @@ import Style from './dev/ui-library/Style.jsx';
 
 function AppRoutes() {
 	return (
-		<Router>
+		<Router basename='/mimock-ui/v1/'>
 			<Routes>
 				<Route path='/' element={<></>} />
 				<If condition={process.env.NODE_ENV === 'development'}>

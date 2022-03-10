@@ -24,6 +24,7 @@ public class DefaultInterceptorConfig implements WebMvcConfigurer {
                 .excludePathPatterns(UrlConfig.SWAGGER_UI_HTML_PATH)
                 .excludePathPatterns(UrlConfig.API_PATH + UrlConfig.VERSION + "/**")
                 .excludePathPatterns("/")
+                .excludePathPatterns("/mimock-ui/**")
                 .excludePathPatterns("index.html")
                 .excludePathPatterns("/index.html")
                 .excludePathPatterns("favicon.ico")
