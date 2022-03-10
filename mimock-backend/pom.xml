@@ -238,7 +238,7 @@
                         </property>
                         <property>
                             <name>spring.config.location</name>
-                            <value>classpath:/application-test.yml</value>
+                            <value>classpath:/application.yml</value>
                         </property>
                     </systemProperties>
                 </configuration>
