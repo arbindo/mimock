@@ -44,11 +44,7 @@ public class GenericMockRequestService {
         HttpMethod httpMethod = httpMethod(request.getHttpMethod());
         String queryParam = request.getQueryParam();
 
-        Optional<Mock> resultFromDB = repository.findOneByRouteAndHttpMethodAndQueryParams(
-                route,
-                httpMethod,
-                queryParam
-        );
+        Optional<Mock> resultFromDB = getResultFromDB(route, httpMethod, queryParam);
 
         if (resultFromDB.isEmpty()) {
             log.log(Level.ERROR, "No matching rows returned from DB");
@@ -71,6 +67,23 @@ public class GenericMockRequestService {
         }
 
         return domainModelMapper.mappedModel(matchingMock);
+    }
+
+    private Optional<Mock> getResultFromDB(String route, HttpMethod httpMethod, String queryParam) {
+        if (queryParam.isBlank()) {
+            log.log(Level.INFO, "Query param is blank. Performing lookup only based on HTTP method and route");
+            return repository.findOneByRouteAndHttpMethod(
+                    route,
+                    httpMethod
+            );
+        }
+
+        log.log(Level.INFO, "Performing lookup only based on HTTP method, Query param and route");
+        return repository.findOneByRouteAndHttpMethodAndQueryParams(
+                route,
+                httpMethod,
+                queryParam
+        );
     }
 
     private HttpMethod httpMethod(String method) {
