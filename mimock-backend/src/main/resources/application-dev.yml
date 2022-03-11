@@ -16,6 +16,10 @@ server:
     enabled-protocols: TLSv1.3
 
 spring:
+  web:
+    resources:
+      static-locations: classpath:/static/mimock-ui/
+
   devtools:
     restart:
       enabled: true

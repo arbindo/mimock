@@ -262,7 +262,6 @@
 
     </build>
 
-    <!--    plugin to start pg database container-->
     <profiles>
         <profile>
             <id>productionBundle</id>
@@ -280,7 +279,7 @@
                                     <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${basedir}/src/main/resources/static</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/resources/static/mimock-ui/</outputDirectory>
                                     <resources>
                                         <resource>
                                             <directory>../mimock-ui/dist</directory>
