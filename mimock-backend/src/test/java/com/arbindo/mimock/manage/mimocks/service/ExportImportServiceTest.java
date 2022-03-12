@@ -3,6 +3,7 @@ package com.arbindo.mimock.manage.mimocks.service;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.manage.mimocks.service.ExportImportService;
 import com.arbindo.mimock.manage.mimocks.service.ExportImportServiceImpl;
+import com.arbindo.mimock.utils.JSONUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -86,12 +87,13 @@ class ExportImportServiceTest {
         assertTrue(result.contains(expectedResultHeaders));
         for (Mock mock : mockList) {
             assertTrue(result.contains(mock.getId().toString()));
+            assertTrue(result.contains(mock.getMockName()));
+            assertTrue(result.contains(mock.getDescription()));
             assertTrue(result.contains(mock.getRoute()));
             assertTrue(result.contains(mock.getHttpMethod().getMethod()));
-            assertTrue(result.contains(mock.getResponseContentType().getContentType()));
-            assertTrue(result.contains(mock.getDescription()));
-            assertTrue(result.contains(mock.getQueryParams()));
             assertTrue(result.contains(mock.getStatusCode().toString()));
+            assertTrue(result.contains(mock.getResponseContentType().getContentType()));
+            assertTrue(result.contains(mock.getQueryParams()));
         }
     }
 

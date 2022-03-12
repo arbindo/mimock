@@ -15,6 +15,15 @@ import javax.validation.constraints.Size;
 @Builder
 public class MockRequest {
 
+    @NotBlank
+    @Size(min = 5, max = 255, message = "Name should be at least 5 characters long")
+    @Schema(example = "Weather api mock", description = "Uniquely identifiable name for the mimock")
+    private String name;
+
+    @Size(min = 1, max = 255, message = "Description should be at least 1-250 characters")
+    @Schema(example = "This is my new mock!!!", description = "Custom Description of the Mock")
+    private String description;
+
     @NotBlank(message = "Route is required")
     @Schema(example = "/github/v3/pull", description = "Route of the mock")
     private String route;
@@ -34,15 +43,6 @@ public class MockRequest {
     @Schema(example = "name=John&age=10", description = "Associated query params of the mock")
     private String queryParams;
 
-    @NotBlank
-    @Size(min = 5, max = 255, message = "Name should be at least 5 characters long")
-    @Schema(example = "Weather api mock", description = "Uniquely identifiable name for the mimock")
-    private String name;
-
-    @Size(min = 1, max = 255, message = "Description should be at least 1-250 characters")
-    @Schema(example = "This is my new mock!!!", description = "Custom Description of the Mock")
-    private String description;
-
     // Value should be obtained as stringify JSON
     @Schema(example = "{'Content-Type': 'application/json'}", description = "Request headers for the mock")
     private String requestHeader;
@@ -54,18 +54,18 @@ public class MockRequest {
         return this.shouldDoExactHeaderMatching;
     }
 
-    @Schema(example = "{'id': 1,'purpose': 'Just for testing'}", description = "Request body for the mock")
-    private String requestBody;
-
-    @Schema(example = "application/json", description = "Request body type")
-    private String requestBodyType;
-
-    // Optional - Value should be obtained as strigified JSON
+    // Optional - Value should be obtained as stringify JSON
     @Schema(
             example = "{'x-auth-token': 'SOME_TOKEN'}",
             description = "Response headers to be sent after invoking the mock endpoint"
     )
     private String responseHeaders;
+
+    @Schema(example = "{'id': 1,'purpose': 'Just for testing'}", description = "Request body for the mock")
+    private String requestBody;
+
+    @Schema(example = "application/json", description = "Request body type")
+    private String requestBodyType;
 
     // Optional - Validated in Logic
     @Schema(description = "Represents the expected textual response")

@@ -96,27 +96,35 @@ public class ExportImportServiceImpl implements ExportImportService {
     }
 
     protected static String[] getCsvTemplateHeaders() {
-        return new String[]{"Mock Name", "Route", "Description", "Http Method", "Status Code", "Response Content Type", "Query Params"};
+        return new String[]{"Mock Name", "Description", "Route", "Http Method", "Status Code", "Response Content Type",
+                "Query Params", "Request Headers", "Response Headers", "Request Body", "Expected Text Response"};
     }
 
     protected static String[] getCsvHeaders() {
-        return new String[]{"Mock Id", "Mock Name", "Route", "Description", "Http Method", "Status Code", "Response Content Type", "Query Params"};
+        return new String[]{"Mock Id", "Mock Name", "Description", "Route", "Http Method", "Status Code", "Response Content Type",
+                "Query Params", "Request Headers", "Response Headers", "Request Body", "Expected Text Response"};
     }
 
     private String[] getNameMappings() {
-        return new String[]{"id", "mockName", "route", "description", "httpMethod", "statusCode", "responseContentType", "queryParams"};
+        return new String[]{"id", "mockName", "description", "route", "httpMethod", "statusCode", "responseContentType",
+                "queryParams", "requestHeaders", "responseHeaders", "requestBodiesForMock", "textualResponse"};
     }
 
     private static CellProcessor[] getExportCellProcessors(){
         return new CellProcessor[]{
                 new NotNull(), // id
                 new Unique(), // name
-                new NotNull(), // route
                 new Optional(), // description
+                new NotNull(), // route
                 new NotNull(), // httpMethod
                 new NotNull(), // statusCode
                 new Optional(), // responseContentType
-                new Optional() // queryParams
+                new Optional(), // queryParams
+                new Optional(), // requestHeaders
+                new Optional(), // responseHeaders
+                new Optional(), // requestBodiesForMock
+                new Optional(), // textualResponse
+
         };
     }
 }

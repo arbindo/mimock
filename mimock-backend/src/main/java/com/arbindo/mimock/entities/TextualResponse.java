@@ -40,4 +40,9 @@ public class TextualResponse {
     @Column(name = "deleted_at")
     @Schema(description = "Delete Timestamp")
     private ZonedDateTime deletedAt;
+
+    @Override
+    public String toString() {
+        return responseBody;
+    }
 }

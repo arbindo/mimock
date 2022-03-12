@@ -11,18 +11,18 @@ import java.util.Map;
 @Setter
 @Builder
 public class ProcessedMockRequest {
+    private String name;
+    private String description;
     private String route;
     private String httpMethod;
     private int statusCode;
     private String responseContentType;
     private String queryParams;
-    private String name;
-    private String description;
     private Map<String, Object> requestHeader;
     private Boolean shouldDoExactHeaderMatching;
+    private Map<String, Object> responseHeaders;
     private Map<String, Object> requestBody;
     private String requestBodyType;
-    private Map<String, Object> responseHeaders;
     private String expectedTextResponse;
     private MultipartFile binaryFile;
 }

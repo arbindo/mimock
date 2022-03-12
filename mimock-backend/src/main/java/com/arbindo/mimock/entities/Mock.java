@@ -26,10 +26,13 @@ public class Mock {
     @Schema(description = "Mock Id")
     private UUID id;
 
-
     @Column(name = "mock_name", nullable = false)
     @Schema(example = "Weather api mock", description = "Field to set an unique searchable field for mocks")
     private String mockName;
+
+    @Column(name = "description")
+    @Schema(example = "This is my new mock!!!", description = "Custom Description of the Mock")
+    private String description;
 
     @Column(name = "route", nullable = false, length = 2048)
     @Schema(example = "/github/v3/pull", description = "Route of the mock")
@@ -40,18 +43,30 @@ public class Mock {
     @Schema(description = "Represents the HTTP method")
     private HttpMethod httpMethod;
 
+    @Column(name = "status_code", nullable = false)
+    @Schema(example = "200", description = "Expected status code of the mock")
+    private Integer statusCode;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "response_content_type_id", nullable = false)
     @Schema(description = "Represents the response content type")
     private ResponseContentType responseContentType;
 
-    @Column(name = "status_code", nullable = false)
-    @Schema(example = "200", description = "Expected status code of the mock")
-    private Integer statusCode;
-
     @Column(name = "query_params", length = 1024)
     @Schema(example = "name=John&age=10", description = "Associated query params of the mock")
     private String queryParams;
+
+    @ManyToOne
+    @JoinColumn(name = "request_header_id")
+    private RequestHeader requestHeaders;
+
+    @ManyToOne
+    @JoinColumn(name = "response_header_id")
+    private ResponseHeader responseHeaders;
+
+    @ManyToOne
+    @JoinColumn(name = "request_body_id")
+    private RequestBodiesForMock requestBodiesForMock;
 
     @ManyToOne
     @JoinColumn(name = "textual_response_id")
@@ -62,10 +77,6 @@ public class Mock {
     @JoinColumn(name = "binary_response_id")
     @Schema(description = "Represents the expected binary response")
     private BinaryResponse binaryResponse;
-
-    @Column(name = "description")
-    @Schema(example = "This is my new mock!!!", description = "Custom Description of the Mock")
-    private String description;
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
@@ -85,18 +96,6 @@ public class Mock {
     @JoinColumn(name = "entity_status_id", nullable = false)
     @Schema(description = "Indicates the entity status")
     private EntityStatus entityStatus;
-
-    @ManyToOne
-    @JoinColumn(name = "request_header_id")
-    private RequestHeader requestHeaders;
-
-    @ManyToOne
-    @JoinColumn(name = "response_header_id")
-    private ResponseHeader responseHeaders;
-
-    @ManyToOne
-    @JoinColumn(name = "request_body_id")
-    private RequestBodiesForMock requestBodiesForMock;
 
     public boolean isDeleted() {
         return Status.valueOf(getEntityStatus().getStatus()) == Status.DELETED;

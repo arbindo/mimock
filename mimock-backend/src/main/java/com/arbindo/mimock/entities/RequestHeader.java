@@ -1,5 +1,6 @@
 package com.arbindo.mimock.entities;
 
+import com.arbindo.mimock.utils.JSONUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,4 +48,9 @@ public class RequestHeader {
     @Column(name = "deleted_at")
     @Schema(description = "Delete Timestamp")
     private ZonedDateTime deletedAt;
+
+    @Override
+    public String toString() {
+        return JSONUtils.convertMapToJSONString(requestHeader);
+    }
 }
