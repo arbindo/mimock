@@ -2,8 +2,7 @@ package com.arbindo.mimock.common.constants;
 
 public class Messages {
 
-    private Messages() throws IllegalAccessException {
-        throw new IllegalAccessException(ExceptionMessages.ILLEGAL_INSTANTIATION_EXCEPTION_MSG);
+    private Messages() {
     }
 
     public static String createResourceSuccess(String id) {

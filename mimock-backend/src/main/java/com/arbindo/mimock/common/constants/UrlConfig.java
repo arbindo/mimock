@@ -2,8 +2,7 @@ package com.arbindo.mimock.common.constants;
 
 public class UrlConfig {
 
-    private UrlConfig() throws IllegalAccessException {
-        throw new IllegalAccessException(ExceptionMessages.ILLEGAL_INSTANTIATION_EXCEPTION_MSG);
+    private UrlConfig() {
     }
 
     // region BASE

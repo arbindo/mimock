@@ -4,7 +4,10 @@ import com.arbindo.mimock.manage.platformsettings.models.request.PlatformSetting
 import com.arbindo.mimock.manage.platformsettings.models.request.ProcessedPlatformSettingsRequest;
 
 public class RequestModelMapper {
-    public static ProcessedPlatformSettingsRequest map(PlatformSettingsRequest request){
+    private RequestModelMapper() {
+    }
+    
+    public static ProcessedPlatformSettingsRequest map(PlatformSettingsRequest request) {
         return ProcessedPlatformSettingsRequest.builder()
                 .isExportImportEnabled(request.getIsExportImportEnabled())
                 .isFlushBinCronEnabled(request.getIsFlushBinCronEnabled())

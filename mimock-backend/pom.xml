@@ -291,7 +291,8 @@
                                 </goals>
                                 <configuration>
                                     <excludes>
-                                        <exclude>com/arbindo/mimock/common/constants/**</exclude>
+                                        <exclude>**/*com/arbindo/mimock/common/constants/**</exclude>
+                                        <exclude>**/*com/arbindo/mimock/MimockApplication.*</exclude>
                                     </excludes>
                                     <rules>
                                         <rule>
