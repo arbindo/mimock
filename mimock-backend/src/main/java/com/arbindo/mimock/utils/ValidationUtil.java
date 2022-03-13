@@ -1,11 +1,7 @@
 package com.arbindo.mimock.utils;
 
-import com.arbindo.mimock.common.constants.ExceptionMessages;
-
 public class ValidationUtil {
-
-    private ValidationUtil() throws IllegalAccessException {
-        throw new IllegalAccessException(ExceptionMessages.ILLEGAL_INSTANTIATION_EXCEPTION_MSG);
+    private ValidationUtil() {
     }
 
     public static boolean isNotNullOrEmpty(String str) {

@@ -12,6 +12,8 @@ import java.util.Objects;
 @SuppressWarnings("unchecked")
 @Log4j2
 public class JSONUtils {
+    private JSONUtils() {
+    }
 
     public static Map<String, Object> convertJSONStringToMap(String jsonString) {
         ObjectMapper objectMapper = new ObjectMapper();

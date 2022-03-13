@@ -7,6 +7,9 @@ import com.arbindo.mimock.utils.JSONUtils;
 import java.util.Map;
 
 public class RequestModelMapper {
+    private RequestModelMapper() {
+    }
+
     public static ProcessedMockRequest map(MockRequest request) {
         return ProcessedMockRequest.builder()
                 .name(request.getName())

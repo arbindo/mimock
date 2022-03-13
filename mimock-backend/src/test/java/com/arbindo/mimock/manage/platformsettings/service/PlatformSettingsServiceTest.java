@@ -1,7 +1,6 @@
 package com.arbindo.mimock.manage.platformsettings.service;
 
 import com.arbindo.mimock.entities.PlatformSettings;
-import com.arbindo.mimock.manage.platformsettings.models.request.PlatformSettingsRequest;
 import com.arbindo.mimock.manage.platformsettings.models.request.ProcessedPlatformSettingsRequest;
 import com.arbindo.mimock.repository.PlatformSettingsRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.arbindo.mimock.helpers.entities.PlatformSettingsGenerator.*;
+import static com.arbindo.mimock.helpers.entities.PlatformSettingsGenerator.createProcessedPlatformSettingsRequest;
+import static com.arbindo.mimock.helpers.entities.PlatformSettingsGenerator.generateListOfPlatformSettings;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -90,7 +90,21 @@ public class PlatformSettingsServiceTest {
     }
 
     @Test
-    void shouldReturnPlatformSettings_ForUpdatePlatformSettings_WhenPlatformSettingsRequestIsValid(){
+    void shouldReturnNull_ForUpdatePlatformSettings_WhenDBReturnsNoExistingRecords() {
+        // Arrange
+        ProcessedPlatformSettingsRequest request = createProcessedPlatformSettingsRequest();
+        lenient().when(platformSettingsRepository.findAll()).thenReturn(null);
+
+        // Act
+        PlatformSettings result = platformSettingsService.updatePlatformSettings(request);
+
+        // Assert
+        assertNull(result);
+        verify(platformSettingsRepository, times(0)).save(any(PlatformSettings.class));
+    }
+
+    @Test
+    void shouldReturnPlatformSettings_ForUpdatePlatformSettings_WhenPlatformSettingsRequestIsValid() {
         // Arrange
         List<PlatformSettings> platformSettingsList = generateListOfPlatformSettings();
         ProcessedPlatformSettingsRequest request = createProcessedPlatformSettingsRequest();

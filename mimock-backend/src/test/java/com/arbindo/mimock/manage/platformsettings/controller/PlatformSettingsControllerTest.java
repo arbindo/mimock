@@ -27,7 +27,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import javax.sql.DataSource;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,13 +158,13 @@ public class PlatformSettingsControllerTest {
     void shouldReturnHttpBadRequest_UpdatePlatformSettingsApi_ReturnsNullPlatformSettingsData() throws Exception {
         // Arrange
         PlatformSettingsRequest request = createPlatformSettingsRequest();
-        PlatformSettings platformSettings = generatePlatformSettings(request);
         String route = UrlConfig.PLATFORM_SETTINGS_PATH;
 
-        lenient().when(platformSettingsService.updatePlatformSettings(any(ProcessedPlatformSettingsRequest.class))).thenReturn(platformSettings);
+        lenient().when(platformSettingsService.updatePlatformSettings(any(ProcessedPlatformSettingsRequest.class)))
+                .thenReturn(null);
 
-        GenericResponseWrapper<PlatformSettings> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,
-                Messages.UPDATE_RESOURCE_SUCCESS, platformSettings);
+        GenericResponseWrapper<PlatformSettings> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
+                Messages.UPDATE_RESOURCE_FAILED, null);
         String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
         String expectedContentType = "application/json";
         String requestJson = convertObjectToJsonString(request);
@@ -175,7 +174,7 @@ public class PlatformSettingsControllerTest {
         MvcResult result = mockMvc.perform(put(route)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))
-                .andExpect(status().isOk())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(expectedContentType))
                 .andReturn();
 

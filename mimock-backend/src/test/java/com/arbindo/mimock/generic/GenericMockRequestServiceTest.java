@@ -1,7 +1,6 @@
 package com.arbindo.mimock.generic;
 
 import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.generic.helpers.QueryParamHelper;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
 import com.arbindo.mimock.helpers.db.HttpMethodDBHelper;
 import com.arbindo.mimock.helpers.db.ResponseContentTypeDBHelper;
@@ -103,6 +102,60 @@ class GenericMockRequestServiceTest {
         verify(mockRepository, times(1)).findOneByRouteAndHttpMethodAndQueryParams(genericRequestModel.getRoute(),
                 httpMethod,
                 genericRequestModel.getQueryParam());
+
+        assertEquals(expectedRoute, actualMock.getRoute());
+        assertEquals(200, actualMock.getStatusCode());
+        assertEquals(responseContentType.getContentType(), actualMock.getResponseContentType());
+    }
+
+    @Test
+    void shouldReturnMockData_WhenMatchingMockExistsWithoutQueryParams() throws Exception {
+        String method = "GET";
+        String expectedRoute = "/api/testmock/testroute";
+        Map<String, Object> requestHeaders = RandomDataGenerator.getRequestHeaders();
+        String requestBody = "{\"name\": \"blog\", \"auto_init\": true, \"private\": true, \"gitignore_template\": \"nanoc\"}";
+
+        GenericRequestModel genericRequestModel = GenericRequestModel.builder()
+                .httpMethod(method)
+                .route(expectedRoute)
+                .requestHeaders(requestHeaders)
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
+                .build();
+
+        HttpMethod httpMethod = HttpMethod.builder()
+                .method(method)
+                .id(httpMethodsDBHelper.getHttpMethodByMethod(method).getId())
+                .build();
+
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
+        RequestHeader requestHeader = RequestHeader.builder()
+                .requestHeader(requestHeaders)
+                .matchExact(true)
+                .build();
+        RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
+                .build();
+
+        Mock expectedMock = Mock.builder()
+                .route(genericRequestModel.getRoute())
+                .httpMethod(httpMethod)
+                .responseContentType(responseContentType)
+                .requestHeaders(requestHeader)
+                .requestBodiesForMock(requestBodiesForMock)
+                .statusCode(200)
+                .build();
+
+        lenient().when(mockHttpMethodsRepository.findByMethod(method)).thenReturn(httpMethod);
+        lenient().when(mockRepository.findOneByRouteAndHttpMethod(
+                genericRequestModel.getRoute(),
+                httpMethod)
+        ).thenReturn(Optional.of(expectedMock));
+
+        DomainModelForMock actualMock = genericMockRequestService.serveMockRequest(genericRequestModel);
+
+        verify(mockHttpMethodsRepository, times(1)).findByMethod(method);
+        verify(mockRepository, times(1)).findOneByRouteAndHttpMethod(genericRequestModel.getRoute(),
+                httpMethod);
 
         assertEquals(expectedRoute, actualMock.getRoute());
         assertEquals(200, actualMock.getStatusCode());

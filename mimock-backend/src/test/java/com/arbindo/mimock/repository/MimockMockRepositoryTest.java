@@ -312,6 +312,7 @@ class MimockMockRepositoryTest {
                 .entityStatus(entityStatus)
                 .responseHeaders(expectedResponseHeaders)
                 .requestHeaders(expectedRequestHeaders)
+                .deletedAt(null)
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -323,6 +324,7 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .deletedAt(null)
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -339,12 +341,13 @@ class MimockMockRepositoryTest {
         assertEquals(expectedMockId, actualMockFromDB.getId());
         assertEquals(expectedRoute, actualMockFromDB.getRoute());
         assertEquals(expectedHttpMethod.getMethod(), actualMockFromDB.getHttpMethod().getMethod());
-        assertEquals(expectedResponseHeaders, actualMockFromDB.getResponseHeaders());
-        assertEquals(expectedRequestHeaders, actualMockFromDB.getRequestHeaders());
+        assertEquals(expectedResponseHeaders.toString(), actualMockFromDB.getResponseHeaders().toString());
+        assertEquals(expectedRequestHeaders.toString(), actualMockFromDB.getRequestHeaders().toString());
         assertNull(actualMockFromDB.getTextualResponse());
         assertNull(actualMockFromDB.getBinaryResponse());
         assertNull(actualMockFromDB.getRequestBodiesForMock());
         assertNotNull(actualMockFromDB.getCreatedAt().toString());
+        assertNotEquals("", actualMockFromDB.toString());
     }
 
     @Transactional
@@ -384,6 +387,8 @@ class MimockMockRepositoryTest {
         RequestBodiesForMock expectedRequestBody = RequestBodiesForMock.builder()
                 .requestBody(RandomDataGenerator.generateRequestBody())
                 .requestBodyType(requestBodyType)
+                .updatedAt(null)
+                .deletedAt(null)
                 .build();
         requestBodiesForMockDBHelper.save(expectedRequestBody);
 
@@ -428,7 +433,7 @@ class MimockMockRepositoryTest {
         assertEquals(expectedHttpMethod.getMethod(), actualMockFromDB.getHttpMethod().getMethod());
         assertEquals(expectedResponseHeaders, actualMockFromDB.getResponseHeaders());
         assertEquals(expectedRequestHeaders, actualMockFromDB.getRequestHeaders());
-        assertEquals(expectedRequestBody, actualMockFromDB.getRequestBodiesForMock());
+        assertEquals(expectedRequestBody.toString(), actualMockFromDB.getRequestBodiesForMock().toString());
         assertNull(actualMockFromDB.getTextualResponse());
         assertNull(actualMockFromDB.getBinaryResponse());
         assertNotNull(actualMockFromDB.getCreatedAt().toString());

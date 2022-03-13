@@ -97,10 +97,6 @@ public class Mock {
     @Schema(description = "Indicates the entity status")
     private EntityStatus entityStatus;
 
-    public boolean isDeleted() {
-        return Status.valueOf(getEntityStatus().getStatus()) == Status.DELETED;
-    }
-
     public boolean isArchived() {
         return Status.valueOf(getEntityStatus().getStatus()) == Status.ARCHIVED;
     }

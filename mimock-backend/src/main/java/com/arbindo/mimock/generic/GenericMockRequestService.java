@@ -70,7 +70,7 @@ public class GenericMockRequestService {
     }
 
     private Optional<Mock> getResultFromDB(String route, HttpMethod httpMethod, String queryParam) {
-        if (queryParam.isBlank()) {
+        if (queryParam == null || queryParam.isBlank()) {
             log.log(Level.INFO, "Query param is blank. Performing lookup only based on HTTP method and route");
             return repository.findOneByRouteAndHttpMethod(
                     route,

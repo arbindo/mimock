@@ -1,9 +1,13 @@
 package com.arbindo.mimock.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Mockito;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -69,8 +73,21 @@ class JSONUtilsTest {
             "",
             "{}"
     })
-    void shouldReturnNull_onConvertMapToJSONString_WhenInValidJSONMapsArePassed(String jsonString) {
+    void shouldReturnNull_onConvertMapToJSONString_WhenInEmptyJSONMapsArePassed(String jsonString) {
         Map<String, Object> jsonMap = JSONUtils.convertJSONStringToMap(jsonString);
+
+        String actualJSONString = JSONUtils.convertMapToJSONString(jsonMap);
+
+        assertNull(actualJSONString);
+    }
+
+    @Test
+    void shouldReturnNull_onConvertMapToJSONString_WhenWriterThrowsException() throws JsonProcessingException {
+        Map<String, Object> jsonMap = new HashMap<>();
+        jsonMap.put("name", "admin");
+        jsonMap.put(null, "test");
+
+        Mockito.doThrow(JsonProcessingException.class).when(Mockito.mock(ObjectMapper.class)).writeValueAsString(jsonMap);
 
         String actualJSONString = JSONUtils.convertMapToJSONString(jsonMap);
 
@@ -101,5 +118,11 @@ class JSONUtilsTest {
         assertEquals("application/json", jsonMap.get("content-type"));
         assertEquals("application/json", jsonMap.get("accept"));
         assertEquals(0, jsonMap.get("content-disposition"));
+    }
+
+    @Test
+    void shouldReturnNull_OnConvertJSONStringToMapWithLowerCaseKeys_WhenStringIsInvalid() {
+        assertNull(JSONUtils.convertJSONStringToMapWithLowerCaseKeys(null));
+        assertNull(JSONUtils.convertJSONStringToMapWithLowerCaseKeys(""));
     }
 }
