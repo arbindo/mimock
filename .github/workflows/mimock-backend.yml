@@ -12,6 +12,13 @@ jobs:
     name: Mimock Linter
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Java
+        uses: actions/setup-java@v3.0.0
+        with:
+          java-version: 11
+          distribution: 'adopt'
+          cache: 'maven'
+        
       - name: Check out code
         uses: actions/checkout@v2
 
@@ -38,6 +45,13 @@ jobs:
     name: Test Mimock
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Java
+        uses: actions/setup-java@v3.0.0
+        with:
+          java-version: 11
+          distribution: 'adopt'
+          cache: 'maven'
+          
       - name: Check out code
         uses: actions/checkout@v2
 
@@ -49,6 +63,7 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          commit_parent: ${{ github.sha }}
 
       - name: Publish coverage report
         uses: actions/upload-artifact@v2
@@ -63,6 +78,13 @@ jobs:
     name: Package Mimock
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Java
+        uses: actions/setup-java@v3.0.0
+        with:
+          java-version: 11
+          distribution: 'adopt'
+          cache: 'maven'
+          
       - name: Check out code
         uses: actions/checkout@v2
 
