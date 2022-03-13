@@ -11,16 +11,16 @@ jobs:
   lint:
     name: Mimock Linter
     runs-on: ubuntu-latest
-    steps:
+    steps:  
+      - name: Check out code
+        uses: actions/checkout@v2
+
       - name: Setup Java
         uses: actions/setup-java@v3.0.0
         with:
           java-version: 11
           distribution: 'adopt'
           cache: 'maven'
-        
-      - name: Check out code
-        uses: actions/checkout@v2
 
       - name: Check format using checkstyle
         working-directory: mimock-backend
@@ -45,15 +45,15 @@ jobs:
     name: Test Mimock
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
       - name: Setup Java
         uses: actions/setup-java@v3.0.0
         with:
           java-version: 11
           distribution: 'adopt'
           cache: 'maven'
-          
-      - name: Check out code
-        uses: actions/checkout@v2
 
       - name: Run mimock tests in CI mode
         working-directory: mimock-backend
@@ -78,15 +78,15 @@ jobs:
     name: Package Mimock
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
       - name: Setup Java
         uses: actions/setup-java@v3.0.0
         with:
           java-version: 11
           distribution: 'adopt'
           cache: 'maven'
-          
-      - name: Check out code
-        uses: actions/checkout@v2
 
       - name: Build Mimock JAR
         working-directory: mimock-backend
