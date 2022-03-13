@@ -45,6 +45,9 @@ jobs:
         working-directory: mimock-backend
         run: ./mvnw clean initialize verify -P startDatabase -P coverage -Dspring.config.location=classpath:/application.yml
 
+      - name: Publish coverage report codecov
+        uses: codecov/codecov-action@v2
+
       - name: Publish coverage report
         uses: actions/upload-artifact@v2
         with:
