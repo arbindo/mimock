@@ -60,7 +60,10 @@ public class UrlConfig {
     public static final String USER_PATH = API_PREFIX + ADMIN + USERS;
     // endregion
 
+    // Authentication paths
     public static final String AUTHENTICATE = API_PREFIX + "/user/authenticate";
+    public static final String VALIDATE_TOKEN = API_PREFIX + "/auth-token/validate";
+    // end of Authentication paths
 
     // user routes
     public static final String USER_ACTIVATION = USER_PATH + "/update-activation";
