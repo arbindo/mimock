@@ -39,11 +39,11 @@ jobs:
       - name: Build mimock docker image
         run: |
           docker build -t mimock:${{ github.sha }} . -f ./Dockerfile.min
-          docker save -o mimock.zip mimock:${{ github.sha }}
+          docker save -o mimock-${{ github.sha }}.tar.gz mimock:${{ github.sha }}
 
       - name: Publish docker image archive
         uses: actions/upload-artifact@v2
         with:
           name: mimock-docker-image
           path: |
-            mimock.zip
+            mimock-${{ github.sha }}.tar.gz
