@@ -8,4 +8,4 @@ RUN apk add openjdk11-jre
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","./target/mimock-0.0.1.jar"]
+ENTRYPOINT ["java","-jar","mimock-0.0.1.jar"]
