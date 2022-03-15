@@ -41,15 +41,12 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         String apiPath = UrlConfig.API_PATH + UrlConfig.VERSION;
         String adminPath = UrlConfig.API_PATH + UrlConfig.VERSION + UrlConfig.ADMIN;
-        String managePath = UrlConfig.API_PATH + UrlConfig.VERSION + UrlConfig.MANAGE;
         String wildCardPath = "/**";
+
+        CustomHttpAuthorization.authorizeBasedOnHttpMethodAndUserRole(http);
 
         http.authorizeRequests()
                 .antMatchers(adminPath + wildCardPath).hasRole(Role.ADMIN.toString())
-                .antMatchers(managePath + wildCardPath).hasAnyRole(
-                        Role.ADMIN.toString(),
-                        Role.MANAGER.toString()
-                )
                 .antMatchers(UrlConfig.AUTHENTICATE).permitAll().and().authorizeRequests()
                 .antMatchers(apiPath + wildCardPath).hasAnyRole(
                         Role.ADMIN.toString(),
@@ -59,13 +56,23 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+        setupCSRF(http);
+        setupCorsConfig(http);
+
+        http.headers().frameOptions().sameOrigin();
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    private void setupCSRF(HttpSecurity http) throws Exception {
         http.csrf((csrfInstance) -> {
             csrfInstance
                     .ignoringAntMatchers(UrlConfig.AUTHENTICATE)
                     .ignoringAntMatchers("/mimock-ui/**")
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         });
+    }
 
+    private void setupCorsConfig(HttpSecurity http) throws Exception {
         http.cors(cors -> {
             CorsConfigurationSource cs = resources -> {
                 CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -82,9 +89,6 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
 
             cors.configurationSource(cs);
         });
-
-        http.headers().frameOptions().sameOrigin();
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
