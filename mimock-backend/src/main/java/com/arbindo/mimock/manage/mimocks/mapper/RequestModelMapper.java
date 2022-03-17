@@ -4,6 +4,7 @@ import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.utils.JSONUtils;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class RequestModelMapper {
@@ -30,10 +31,16 @@ public class RequestModelMapper {
     }
 
     private static Map<String, Object> getRequestBodyMap(String requestBody) {
+        if (requestBody.isBlank()) {
+            return new HashMap<>();
+        }
         return JSONUtils.convertJSONStringToMap(requestBody);
     }
 
     private static Map<String, Object> getHeadersMap(String requestHeaders) {
+        if (requestHeaders.isBlank()) {
+            return new HashMap<>();
+        }
         return JSONUtils.convertJSONStringToMapWithLowerCaseKeys(requestHeaders);
     }
 }
