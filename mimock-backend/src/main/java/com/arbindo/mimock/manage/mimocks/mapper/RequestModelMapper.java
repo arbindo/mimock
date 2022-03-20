@@ -31,14 +31,14 @@ public class RequestModelMapper {
     }
 
     private static Map<String, Object> getRequestBodyMap(String requestBody) {
-        if (requestBody.isBlank()) {
+        if (requestBody == null || requestBody.isBlank()) {
             return new HashMap<>();
         }
         return JSONUtils.convertJSONStringToMap(requestBody);
     }
 
     private static Map<String, Object> getHeadersMap(String requestHeaders) {
-        if (requestHeaders.isBlank()) {
+        if (requestHeaders == null || requestHeaders.isBlank()) {
             return new HashMap<>();
         }
         return JSONUtils.convertJSONStringToMapWithLowerCaseKeys(requestHeaders);
