@@ -1,8 +1,6 @@
 package com.arbindo.mimock.repository;
 
-import com.arbindo.mimock.entities.EntityStatus;
-import com.arbindo.mimock.entities.HttpMethod;
-import com.arbindo.mimock.entities.Mock;
+import com.arbindo.mimock.entities.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +18,10 @@ public interface MocksRepository extends JpaRepository<Mock, UUID> {
     Page<Mock> findAllByEntityStatus(EntityStatus entityStatus, Pageable pageable);
 
     Optional<Mock> findOneByMockName(String mockName);
+
+    Optional<Mock> findOneByRouteAndHttpMethodAndQueryParamsAndRequestBodiesForMockAndRequestHeaders(String route,
+                                                                                                     HttpMethod httpMethod,
+                                                                                                     String queryParams,
+                                                                                                     RequestBodiesForMock requestBodiesForMock,
+                                                                                                     RequestHeader requestHeaders);
 }

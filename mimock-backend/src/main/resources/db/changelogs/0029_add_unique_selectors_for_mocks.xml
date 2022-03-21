@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="neel" id="0029_add_unique_selectors_for_mocks">
+        <sql>
+            ALTER TABLE mocks
+                ADD CONSTRAINT MOCK_UNIQUE UNIQUE (
+                                                   method_id,
+                                                   route,
+                                                   query_params,
+                                                   request_body_id,
+                                                   request_header_id
+                    );
+        </sql>
+        <rollback>
+            <sql>
+                ALTER TABLE mocks
+                DROP CONSTRAINT MOCK_UNIQUE;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

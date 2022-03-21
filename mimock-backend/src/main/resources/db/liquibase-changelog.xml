@@ -32,4 +32,5 @@
     <include file="changelogs/0026_insert_default_admin_user.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0027_create_table_platform_settings.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0028_insert_platform_settings.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0029_add_unique_selectors_for_mocks.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
