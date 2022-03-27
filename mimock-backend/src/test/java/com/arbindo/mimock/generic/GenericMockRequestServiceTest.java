@@ -8,13 +8,17 @@ import com.arbindo.mimock.helpers.general.JsonMapper;
 import com.arbindo.mimock.helpers.general.RandomDataGenerator;
 import com.arbindo.mimock.repository.HttpMethodsRepository;
 import com.arbindo.mimock.repository.MocksRepository;
+import com.arbindo.mimock.repository.RequestBodiesForMockRepository;
+import com.arbindo.mimock.repository.RequestHeadersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -34,10 +38,16 @@ class GenericMockRequestServiceTest {
     @Autowired
     DomainModelMapper domainModelMapper;
 
-    @org.mockito.Mock
+    @MockBean
+    RequestBodiesForMockRepository requestBodiesForMockRepository;
+
+    @MockBean
+    RequestHeadersRepository requestHeadersRepository;
+
+    @MockBean
     MocksRepository mockRepository;
 
-    @org.mockito.Mock
+    @MockBean
     HttpMethodsRepository mockHttpMethodsRepository;
 
     GenericMockRequestService genericMockRequestService;
@@ -48,21 +58,24 @@ class GenericMockRequestServiceTest {
                 .httpMethodsRepository(mockHttpMethodsRepository)
                 .repository(mockRepository)
                 .domainModelMapper(domainModelMapper)
+                .requestBodiesForMockRepository(requestBodiesForMockRepository)
+                .requestHeadersRepository(requestHeadersRepository)
                 .build();
     }
 
     @Test
-    void shouldReturnMockData_WhenMatchingMockExists() throws Exception {
+    void shouldReturnMockData_WhenMatchingMockExists() {
         String method = "GET";
         String expectedRoute = "/api/testmock/testroute";
-        Map<String, Object> requestHeaders = RandomDataGenerator.getRequestHeaders();
+        Map<String, Object> requestHeaderMap1 = RandomDataGenerator.getRequestHeaders();
+        Map<String, Object> requestHeaderMap2 = RandomDataGenerator.getRequestHeaders();
         String requestBody = "{\"name\": \"blog\", \"auto_init\": true, \"private\": true, \"gitignore_template\": \"nanoc\"}";
 
         GenericRequestModel genericRequestModel = GenericRequestModel.builder()
                 .httpMethod(method)
                 .queryParam("version=1.0.0&auto=true")
                 .route(expectedRoute)
-                .requestHeaders(requestHeaders)
+                .requestHeaders(requestHeaderMap1)
                 .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
                 .build();
 
@@ -72,10 +85,15 @@ class GenericMockRequestServiceTest {
                 .build();
 
         ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
-        RequestHeader requestHeader = RequestHeader.builder()
-                .requestHeader(requestHeaders)
+        RequestHeader requestHeader1 = RequestHeader.builder()
+                .requestHeader(requestHeaderMap1)
                 .matchExact(true)
                 .build();
+        RequestHeader requestHeader2 = RequestHeader.builder()
+                .requestHeader(requestHeaderMap2)
+                .matchExact(true)
+                .build();
+
         RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
                 .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
                 .build();
@@ -84,24 +102,40 @@ class GenericMockRequestServiceTest {
                 .route(genericRequestModel.getRoute())
                 .httpMethod(httpMethod)
                 .responseContentType(responseContentType)
-                .requestHeaders(requestHeader)
+                .requestHeaders(requestHeader1)
                 .requestBodiesForMock(requestBodiesForMock)
                 .statusCode(200)
                 .build();
 
+        Mock altMock = Mock.builder()
+                .route(genericRequestModel.getRoute())
+                .httpMethod(httpMethod)
+                .responseContentType(responseContentType)
+                .requestHeaders(requestHeader2)
+                .requestBodiesForMock(requestBodiesForMock)
+                .statusCode(200)
+                .build();
+
+        lenient().when(requestBodiesForMockRepository.findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(anyMap()))
+                .thenReturn(Optional.of(requestBodiesForMock));
         lenient().when(mockHttpMethodsRepository.findByMethod(method)).thenReturn(httpMethod);
-        lenient().when(mockRepository.findOneByRouteAndHttpMethodAndQueryParams(
+        lenient().when(mockRepository.findUniqueMock(
                 genericRequestModel.getRoute(),
                 httpMethod,
-                genericRequestModel.getQueryParam())
-        ).thenReturn(Optional.of(expectedMock));
+                genericRequestModel.getQueryParam(),
+                requestBodiesForMock)
+        ).thenReturn(List.of(expectedMock, altMock));
 
         DomainModelForMock actualMock = genericMockRequestService.serveMockRequest(genericRequestModel);
 
+        verify(requestBodiesForMockRepository, times(1))
+                .findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(anyMap());
         verify(mockHttpMethodsRepository, times(1)).findByMethod(method);
-        verify(mockRepository, times(1)).findOneByRouteAndHttpMethodAndQueryParams(genericRequestModel.getRoute(),
+        verify(mockRepository, times(1)).findUniqueMock(genericRequestModel.getRoute(),
                 httpMethod,
-                genericRequestModel.getQueryParam());
+                genericRequestModel.getQueryParam(),
+                requestBodiesForMock
+        );
 
         assertEquals(expectedRoute, actualMock.getRoute());
         assertEquals(200, actualMock.getStatusCode());
@@ -109,7 +143,68 @@ class GenericMockRequestServiceTest {
     }
 
     @Test
-    void shouldReturnMockData_WhenMatchingMockExistsWithoutQueryParams() throws Exception {
+    void shouldReturnMockData_WhenMatchingMockExistsWithNoRequestHeaders() {
+        String method = "GET";
+        String expectedRoute = "/api/testmock/testroute";
+        Map<String, Object> requestHeaderMap = RandomDataGenerator.getRequestHeaders();
+        String requestBody = "{\"name\": \"blog\", \"auto_init\": true, \"private\": true, \"gitignore_template\": \"nanoc\"}";
+
+        GenericRequestModel genericRequestModel = GenericRequestModel.builder()
+                .httpMethod(method)
+                .queryParam("version=1.0.0&auto=true")
+                .route(expectedRoute)
+                .requestHeaders(requestHeaderMap)
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
+                .build();
+
+        HttpMethod httpMethod = HttpMethod.builder()
+                .method(method)
+                .id(httpMethodsDBHelper.getHttpMethodByMethod(method).getId())
+                .build();
+
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
+
+        RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
+                .build();
+
+        Mock expectedMock = Mock.builder()
+                .route(genericRequestModel.getRoute())
+                .httpMethod(httpMethod)
+                .responseContentType(responseContentType)
+                .requestHeaders(null)
+                .requestBodiesForMock(requestBodiesForMock)
+                .statusCode(200)
+                .build();
+
+        lenient().when(requestBodiesForMockRepository.findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(anyMap()))
+                .thenReturn(Optional.of(requestBodiesForMock));
+        lenient().when(mockHttpMethodsRepository.findByMethod(method)).thenReturn(httpMethod);
+        lenient().when(mockRepository.findUniqueMock(
+                genericRequestModel.getRoute(),
+                httpMethod,
+                genericRequestModel.getQueryParam(),
+                requestBodiesForMock)
+        ).thenReturn(List.of(expectedMock));
+
+        DomainModelForMock actualMock = genericMockRequestService.serveMockRequest(genericRequestModel);
+
+        verify(requestBodiesForMockRepository, times(1))
+                .findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(anyMap());
+        verify(mockHttpMethodsRepository, times(1)).findByMethod(method);
+        verify(mockRepository, times(1)).findUniqueMock(genericRequestModel.getRoute(),
+                httpMethod,
+                genericRequestModel.getQueryParam(),
+                requestBodiesForMock
+        );
+
+        assertEquals(expectedRoute, actualMock.getRoute());
+        assertEquals(200, actualMock.getStatusCode());
+        assertEquals(responseContentType.getContentType(), actualMock.getResponseContentType());
+    }
+
+    @Test
+    void shouldReturnMockData_WhenMatchingMockExistsWithoutQueryParams() {
         String method = "GET";
         String expectedRoute = "/api/testmock/testroute";
         Map<String, Object> requestHeaders = RandomDataGenerator.getRequestHeaders();
@@ -145,17 +240,21 @@ class GenericMockRequestServiceTest {
                 .statusCode(200)
                 .build();
 
+        lenient().when(requestBodiesForMockRepository.findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(anyMap()))
+                .thenReturn(Optional.of(requestBodiesForMock));
         lenient().when(mockHttpMethodsRepository.findByMethod(method)).thenReturn(httpMethod);
-        lenient().when(mockRepository.findOneByRouteAndHttpMethod(
+        lenient().when(mockRepository.findUniqueMock(
                 genericRequestModel.getRoute(),
-                httpMethod)
-        ).thenReturn(Optional.of(expectedMock));
+                httpMethod,
+                requestBodiesForMock)
+        ).thenReturn(List.of(expectedMock));
 
         DomainModelForMock actualMock = genericMockRequestService.serveMockRequest(genericRequestModel);
 
         verify(mockHttpMethodsRepository, times(1)).findByMethod(method);
-        verify(mockRepository, times(1)).findOneByRouteAndHttpMethod(genericRequestModel.getRoute(),
-                httpMethod);
+        verify(mockRepository, times(1)).findUniqueMock(genericRequestModel.getRoute(),
+                httpMethod,
+                requestBodiesForMock);
 
         assertEquals(expectedRoute, actualMock.getRoute());
         assertEquals(200, actualMock.getStatusCode());
@@ -163,7 +262,7 @@ class GenericMockRequestServiceTest {
     }
 
     @Test
-    void shouldThrowMatchingMockNotFoundException_WhenNoMatchingMockExists() throws Exception {
+    void shouldThrowMatchingMockNotFoundException_WhenNoMatchingMockExists() {
         String method = "GET";
         String route = "/api/testmock/testroute";
         String expectedExceptionMessage = "Matching mock does not exist";
@@ -179,22 +278,26 @@ class GenericMockRequestServiceTest {
                 .id(httpMethodsDBHelper.getHttpMethodByMethod(method).getId())
                 .build();
 
+        lenient().when(requestBodiesForMockRepository.findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(anyMap()))
+                .thenReturn(Optional.empty());
         lenient().when(mockHttpMethodsRepository.findByMethod(method)).thenReturn(httpMethod);
-        lenient().when(mockRepository.findOneByRouteAndHttpMethodAndQueryParams(
+        lenient().when(mockRepository.findUniqueMock(
                 genericRequestModel.getRoute(),
                 httpMethod,
-                genericRequestModel.getQueryParam())
-        ).thenReturn(Optional.empty());
+                genericRequestModel.getQueryParam(),
+                null)
+        ).thenReturn(List.of());
 
-        MatchingMockNotFoundException matchingMockNotFoundException = assertThrows(MatchingMockNotFoundException.class, () -> {
-            genericMockRequestService.serveMockRequest(genericRequestModel);
-        });
+        MatchingMockNotFoundException matchingMockNotFoundException = assertThrows(
+                MatchingMockNotFoundException.class,
+                () -> genericMockRequestService.serveMockRequest(genericRequestModel)
+        );
 
         verify(mockHttpMethodsRepository, times(1)).findByMethod(method);
-        verify(mockRepository, times(1)).findOneByRouteAndHttpMethodAndQueryParams(genericRequestModel.getRoute(),
+        verify(mockRepository, times(1)).findUniqueMock(genericRequestModel.getRoute(),
                 httpMethod,
-                genericRequestModel.getQueryParam());
-
+                genericRequestModel.getQueryParam(),
+                null);
 
         assertNotNull(matchingMockNotFoundException);
         assertEquals(expectedExceptionMessage, matchingMockNotFoundException.getMessage());
@@ -204,7 +307,7 @@ class GenericMockRequestServiceTest {
     void shouldThrowMatchingMockNotFoundException_WhenRequestHeadersDoNotMatch() {
         String method = "GET";
         String expectedRoute = "/api/testmock/testroute";
-        String expectedExceptionMessage = "Headers does not match";
+        String expectedExceptionMessage = "Mocks returned from the DB does not have same headers";
 
         GenericRequestModel genericRequestModel = GenericRequestModel.builder()
                 .httpMethod(method)
@@ -234,81 +337,23 @@ class GenericMockRequestServiceTest {
                 .build();
 
         lenient().when(mockHttpMethodsRepository.findByMethod(method)).thenReturn(httpMethod);
-        lenient().when(mockRepository.findOneByRouteAndHttpMethodAndQueryParams(
+        lenient().when(mockRepository.findUniqueMock(
                 genericRequestModel.getRoute(),
                 httpMethod,
-                genericRequestModel.getQueryParam())
-        ).thenReturn(Optional.of(expectedMock));
+                genericRequestModel.getQueryParam(),
+                null)
+        ).thenReturn(List.of(expectedMock));
 
-        MatchingMockNotFoundException matchingMockNotFoundException = assertThrows(MatchingMockNotFoundException.class, () -> {
-            genericMockRequestService.serveMockRequest(genericRequestModel);
-        });
-
-        verify(mockHttpMethodsRepository, times(1)).findByMethod(method);
-        verify(mockRepository, times(1)).findOneByRouteAndHttpMethodAndQueryParams(genericRequestModel.getRoute(),
-                httpMethod,
-                genericRequestModel.getQueryParam());
-
-        assertNotNull(matchingMockNotFoundException);
-        assertEquals(expectedExceptionMessage, matchingMockNotFoundException.getMessage());
-    }
-
-    @Test
-    void shouldThrowMatchingMockNotFoundException_WhenRequestBodiesDoNotMatch() {
-        String method = "GET";
-        String requestBody1 = "{\"name\": \"blog\", \"auto_init\": true, \"private\": true, \"gitignore_template\": \"nanoc\"}";
-        String requestBody2 = "{\"name\": \"blog\", \"auto_init\": false, \"private\": true, \"gitignore_template\": \"nanoc\"}";
-        String expectedRoute = "/api/testmock/testroute";
-        String expectedExceptionMessage = "The request body does not match";
-
-        GenericRequestModel genericRequestModel = GenericRequestModel.builder()
-                .httpMethod(method)
-                .queryParam("version=1.0.0&auto=true")
-                .route(expectedRoute)
-                .requestHeaders(RandomDataGenerator.getRequestHeaders())
-                .requestBody(JsonMapper.convertJSONStringToMap(requestBody1))
-                .build();
-
-        HttpMethod httpMethod = HttpMethod.builder()
-                .method(method)
-                .id(httpMethodsDBHelper.getHttpMethodByMethod(method).getId())
-                .build();
-
-        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
-
-        RequestHeader requestHeader = RequestHeader.builder()
-                .requestHeader(RandomDataGenerator.getRequestHeaders())
-                .matchExact(false)
-                .build();
-
-        RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
-                .requestBody(JsonMapper.convertJSONStringToMap(requestBody2))
-                .build();
-
-        Mock expectedMock = Mock.builder()
-                .route(genericRequestModel.getRoute())
-                .httpMethod(httpMethod)
-                .responseContentType(responseContentType)
-                .requestHeaders(requestHeader)
-                .requestBodiesForMock(requestBodiesForMock)
-                .statusCode(200)
-                .build();
-
-        lenient().when(mockHttpMethodsRepository.findByMethod(method)).thenReturn(httpMethod);
-        lenient().when(mockRepository.findOneByRouteAndHttpMethodAndQueryParams(
-                genericRequestModel.getRoute(),
-                httpMethod,
-                genericRequestModel.getQueryParam())
-        ).thenReturn(Optional.of(expectedMock));
-
-        MatchingMockNotFoundException matchingMockNotFoundException = assertThrows(MatchingMockNotFoundException.class, () -> {
-            genericMockRequestService.serveMockRequest(genericRequestModel);
-        });
+        MatchingMockNotFoundException matchingMockNotFoundException = assertThrows(
+                MatchingMockNotFoundException.class,
+                () -> genericMockRequestService.serveMockRequest(genericRequestModel)
+        );
 
         verify(mockHttpMethodsRepository, times(1)).findByMethod(method);
-        verify(mockRepository, times(1)).findOneByRouteAndHttpMethodAndQueryParams(genericRequestModel.getRoute(),
+        verify(mockRepository, times(1)).findUniqueMock(genericRequestModel.getRoute(),
                 httpMethod,
-                genericRequestModel.getQueryParam());
+                genericRequestModel.getQueryParam(),
+                null);
 
         assertNotNull(matchingMockNotFoundException);
         assertEquals(expectedExceptionMessage, matchingMockNotFoundException.getMessage());

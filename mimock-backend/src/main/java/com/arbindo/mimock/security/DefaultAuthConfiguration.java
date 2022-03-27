@@ -56,20 +56,18 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        setupCSRF(http);
+        setupCSRF(http, apiPath + wildCardPath);
         setupCorsConfig(http);
 
         http.headers().frameOptions().sameOrigin();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-    private void setupCSRF(HttpSecurity http) throws Exception {
-        http.csrf((csrfInstance) -> {
-            csrfInstance
-                    .ignoringAntMatchers(UrlConfig.AUTHENTICATE)
-                    .ignoringAntMatchers("/mimock-ui/**")
-                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-        });
+    private void setupCSRF(HttpSecurity http, String apiPath) throws Exception {
+        http.antMatcher(apiPath).csrf((csrfInstance) -> csrfInstance
+                .ignoringAntMatchers(UrlConfig.AUTHENTICATE)
+                .ignoringAntMatchers("/mimock-ui/**")
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
     }
 
     private void setupCorsConfig(HttpSecurity http) throws Exception {

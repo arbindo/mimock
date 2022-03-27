@@ -38,7 +38,7 @@ class RequestHeaderParserTest {
 
         Map<String, Object> headerMap = RequestHeaderParser.getHeaderMap(mockHttpServletRequest);
 
-        assertNull(headerMap);
+        assertTrue(headerMap.isEmpty());
     }
 
 }

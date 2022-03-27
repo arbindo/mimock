@@ -4,14 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
 @Log4j2
 @Builder
 @AllArgsConstructor
-@Service
 public class RequestHeaderComparator {
     private final Map<String, Object> headersFromMock;
     private final Map<String, Object> headersFromRequest;

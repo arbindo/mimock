@@ -10,6 +10,8 @@ spring:
     driver-class-name: org.postgresql.Driver
     hikari:
       schema: mimock_schema_test
+      maximum-pool-size: 5
+      connection-timeout: 30000
 
   jpa:
     hibernate:

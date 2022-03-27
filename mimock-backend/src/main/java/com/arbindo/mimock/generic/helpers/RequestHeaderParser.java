@@ -20,7 +20,7 @@ public class RequestHeaderParser {
 
         if (headerNames == null || !headerNames.hasMoreElements()) {
             log.log(Level.INFO, "Request has no headers");
-            return null;
+            return headerMap;
         }
 
         log.log(Level.INFO, "Request has headers. Mapping headers to new map");
