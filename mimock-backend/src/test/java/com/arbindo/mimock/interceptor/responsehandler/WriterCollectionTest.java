@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = WriterCollection.class)
 class WriterCollectionTest {
@@ -28,14 +28,14 @@ class WriterCollectionTest {
     }
 
     @Test
-    void shouldReturnEmptyResponseWriter_WhenResponseTypeIsNull() {
+    void shouldReturnEmptyResponseWriter_WhenResponseTypeIsEmpty() {
         ResponseWriter responseWriter = writerCollection.getWriterFor(TypeOfResponse.EMPTY_RESPONSE);
 
         assertEquals(EmptyResponseWriter.class, responseWriter.getClass());
     }
 
     @Test
-    void shouldReturnEmptyResponseWriter_WhenResponseTypeIsInvalid() {
+    void shouldReturnEmptyResponseWriter_WhenResponseTypeIsNull() {
         ResponseWriter responseWriter = writerCollection.getWriterFor(null);
 
         assertEquals(EmptyResponseWriter.class, responseWriter.getClass());

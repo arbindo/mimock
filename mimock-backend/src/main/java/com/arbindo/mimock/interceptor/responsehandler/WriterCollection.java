@@ -30,13 +30,7 @@ public class WriterCollection {
 
         ResponseWriter writer = this.writers.get(type);
 
-        log.log(Level.INFO, "Fetching response writer for {}", type.toString());
-        if (writer == null) {
-            log.log(Level.WARN, "Type {} does not have a matching response writer. Sending back default writer", type.toString());
-            return this.writers.get(TypeOfResponse.EMPTY_RESPONSE);
-        }
-
-        log.log(Level.INFO, "Sending back matching response writer");
+        log.log(Level.INFO, "Sending back matching response writer  for {}", type.toString());
         return writer;
     }
 
