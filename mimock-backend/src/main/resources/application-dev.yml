@@ -16,6 +16,11 @@ server:
     enabled-protocols: TLSv1.3
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      resolve-lazily: true
+
   web:
     resources:
       static-locations: classpath:/static/mimock-ui/

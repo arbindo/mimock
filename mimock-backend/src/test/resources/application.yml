@@ -3,6 +3,11 @@ logging:
     root: ERROR
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      resolve-lazily: true
+
   datasource:
     url: jdbc:postgresql://localhost:5427/mimock_db
     username: mimock
