@@ -1,14 +1,15 @@
 package com.arbindo.mimock.manage.mimocks.controller;
 
+import com.arbindo.mimock.common.constants.Messages;
 import com.arbindo.mimock.common.constants.UrlConfig;
+import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
-import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
+import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
-import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
-import com.arbindo.mimock.common.constants.Messages;
+import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
 import com.arbindo.mimock.security.JwtRequestFilter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -46,9 +47,10 @@ import static com.arbindo.mimock.helpers.general.RandomDataGenerator.generateRan
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.lenient;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(value = MockManagementController.class, excludeAutoConfiguration = {
         SecurityAutoConfiguration.class,
@@ -78,13 +80,13 @@ class MockManagementControllerTest {
 
     @MockBean
     JwtRequestFilter jwtRequestFilter;
-    
+
     @Test
     void shouldReturnHttpOk_ListMocksApi_ReturnsEmpty() throws Exception {
         // Arrange
         String route = UrlConfig.MOCKS_PATH;
         String expectedContentType = "application/json";
-        List<Mock> expectedMocks = new ArrayList<Mock>();
+        List<Mock> expectedMocks = new ArrayList<>();
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
         lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
@@ -409,16 +411,17 @@ class MockManagementControllerTest {
     }
 
     @Test
-    void shouldReturnHttpBadRequest_CreateMockApi_ReturnsNullMockData() throws Exception {
+    void shouldReturnHttpBadRequest_CreateMockApi_WhenMockAlreadyExists() throws Exception {
         // Arrange
         MockMultipartFile file = getMockMultipartFile();
         MockRequest mockRequest = createMockRequestWithFile(file);
         String route = UrlConfig.MOCKS_PATH;
 
-        lenient().when(mockManagementService.createMock(any(ProcessedMockRequest.class))).thenReturn(null);
+        lenient().when(mockManagementService.createMock(any(ProcessedMockRequest.class)))
+                .thenThrow(new MockAlreadyExistsException("Mock already exists"));
 
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
-                Messages.CREATE_RESOURCE_FAILED, null);
+                "Mock already exists", null);
         String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
         String expectedContentType = "application/json";
 
@@ -433,6 +436,39 @@ class MockManagementControllerTest {
                         .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
                         .param("description", mockRequest.getDescription()))
                 .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        // Assert
+        assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpInternalServerError_CreateMockApi_WhenServiceThrowsException() throws Exception {
+        // Arrange
+        MockMultipartFile file = getMockMultipartFile();
+        MockRequest mockRequest = createMockRequestWithFile(file);
+        String route = UrlConfig.MOCKS_PATH;
+
+        lenient().when(mockManagementService.createMock(any(ProcessedMockRequest.class)))
+                .thenThrow(new RuntimeException("Something went wrong"));
+
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.INTERNAL_SERVER_ERROR,
+                "Something went wrong", null);
+        String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
+        String expectedContentType = "application/json";
+
+        // Act
+        MvcResult result = mockMvc.perform(multipart(route)
+                        .file(file)
+                        .param("name", mockRequest.getName())
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("description", mockRequest.getDescription()))
+                .andExpect(status().isInternalServerError())
                 .andExpect(content().contentType(expectedContentType))
                 .andReturn();
 
@@ -639,17 +675,18 @@ class MockManagementControllerTest {
     }
 
     @Test
-    void shouldReturnHttpBadRequest_UpdateMockByIdApi_ReturnsNullMockData() throws Exception {
+    void shouldReturnHttpBadRequest_UpdateMockByIdApi_WhenUpdatedMockIsDuplicate() throws Exception {
         // Arrange
         MockMultipartFile file = getMockMultipartFile();
         MockRequest mockRequest = createMockRequestWithFile(file);
         Mock mock = generateMock(mockRequest);
         String route = UrlConfig.MOCKS_PATH + "/" + mock.getId();
 
-        lenient().when(mockManagementService.updateMock(anyString(), any(ProcessedMockRequest.class))).thenReturn(null);
+        lenient().when(mockManagementService.updateMock(anyString(), any(ProcessedMockRequest.class)))
+                .thenThrow(new MockAlreadyExistsException("Mock already exists"));
 
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
-                Messages.UPDATE_RESOURCE_FAILED, null);
+                "Mock already exists", null);
         String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
         String expectedContentType = "application/json";
 
@@ -670,6 +707,46 @@ class MockManagementControllerTest {
                         .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
                         .param("description", mockRequest.getDescription()))
                 .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        // Assert
+        assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnHttpInternalServerError_UpdateMockByIdApi_WhenMockUpdateServiceThrowsException() throws Exception {
+        // Arrange
+        MockMultipartFile file = getMockMultipartFile();
+        MockRequest mockRequest = createMockRequestWithFile(file);
+        Mock mock = generateMock(mockRequest);
+        String route = UrlConfig.MOCKS_PATH + "/" + mock.getId();
+
+        lenient().when(mockManagementService.updateMock(anyString(), any(ProcessedMockRequest.class)))
+                .thenThrow(new RuntimeException("Something went wrong"));
+
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.INTERNAL_SERVER_ERROR,
+                "Something went wrong", null);
+        String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
+        String expectedContentType = "application/json";
+
+        // Act
+        MockMultipartHttpServletRequestBuilder builder = MockMvcRequestBuilders.multipart(route);
+        builder.with(request -> {
+            request.setMethod("PUT");
+            return request;
+        });
+
+        MvcResult result = mockMvc.perform(builder
+                        .file(file)
+                        .param("name", mockRequest.getName())
+                        .param("route", mockRequest.getRoute())
+                        .param("httpMethod", mockRequest.getHttpMethod())
+                        .param("responseContentType", mockRequest.getResponseContentType())
+                        .param("statusCode", String.valueOf(mockRequest.getStatusCode()))
+                        .param("expectedTextResponse", mockRequest.getExpectedTextResponse())
+                        .param("description", mockRequest.getDescription()))
+                .andExpect(status().isInternalServerError())
                 .andExpect(content().contentType(expectedContentType))
                 .andReturn();
 

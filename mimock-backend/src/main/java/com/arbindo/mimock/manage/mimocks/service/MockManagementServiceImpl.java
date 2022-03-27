@@ -1,10 +1,17 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
 import com.arbindo.mimock.common.services.EntityStatusService;
-import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
+import com.arbindo.mimock.entities.BinaryResponse;
+import com.arbindo.mimock.entities.EntityStatus;
+import com.arbindo.mimock.entities.Mock;
+import com.arbindo.mimock.entities.TextualResponse;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
-import com.arbindo.mimock.repository.*;
+import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
+import com.arbindo.mimock.manage.mimocks.service.helpers.MockParamBuilder;
+import com.arbindo.mimock.repository.BinaryResponseRepository;
+import com.arbindo.mimock.repository.MocksRepository;
+import com.arbindo.mimock.repository.TextualResponseRepository;
 import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -34,31 +42,16 @@ public class MockManagementServiceImpl implements MockManagementService {
     private MocksRepository mocksRepository;
 
     @Autowired
-    private HttpMethodsRepository httpMethodsRepository;
-
-    @Autowired
-    private ResponseContentTypesRepository responseContentTypesRepository;
-
-    @Autowired
     private TextualResponseRepository textualResponseRepository;
 
     @Autowired
     private BinaryResponseRepository binaryResponseRepository;
 
     @Autowired
-    private RequestHeadersRepository requestHeadersRepository;
-
-    @Autowired
-    private ResponseHeadersRepository responseHeadersRepository;
-
-    @Autowired
-    private RequestBodyTypeRepository requestBodyTypeRepository;
-
-    @Autowired
-    private RequestBodiesForMockRepository requestBodiesForMockRepository;
-
-    @Autowired
     private EntityStatusService entityStatusService;
+
+    @Autowired
+    private MockParamBuilder mockParamBuilder;
 
     @Override
     public List<Mock> getAllMocks() {
@@ -101,6 +94,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                 }
             } catch (Exception e) {
                 log.log(Level.DEBUG, e.getMessage());
+                return false;
             }
         }
         log.log(Level.DEBUG, "Invalid Mock Id!");
@@ -123,6 +117,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                 }
             } catch (Exception e) {
                 log.log(Level.DEBUG, e.getMessage());
+                return false;
             }
         }
         log.log(Level.DEBUG, "Invalid Mock Id!");
@@ -141,222 +136,224 @@ public class MockManagementServiceImpl implements MockManagementService {
         return false;
     }
 
-    @Transactional
+    @Transactional(rollbackOn = {Exception.class, RuntimeException.class, MockAlreadyExistsException.class})
     @Override
     public Mock createMock(ProcessedMockRequest request) {
-        if (ValidationUtil.isArgNull(request)) {
-            log.log(Level.DEBUG, "CreateMockRequest is null!");
-            return null;
-        }
         if (isMockNameAlreadyExists(request)) {
-            log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
-            return null;
+            String err = String.format("Mock with %s name already exists!", request.getName());
+            log.log(Level.ERROR, err);
+            throw new MockAlreadyExistsException(err);
         }
-        try {
-            UUID mockId = UUID.randomUUID();
-            HttpMethod httpMethod = getHttpMethod(request.getHttpMethod());
-            String responseContentTypeString = request.getResponseContentType() != null
-                    ? request.getResponseContentType() : "application/json";
-            ResponseContentType responseContentType = getResponseContentType(responseContentTypeString);
-            Mock mock = Mock.builder()
-                    .id(mockId)
-                    .mockName(request.getName())
-                    .route(request.getRoute())
-                    .httpMethod(httpMethod)
-                    .responseContentType(responseContentType)
-                    .statusCode(request.getStatusCode())
-                    .queryParams(request.getQueryParams())
-                    .description(request.getDescription())
-                    .createdAt(ZonedDateTime.now())
-                    .entityStatus(entityStatusService.getDefaultMockEntityStatus())
-                    .requestHeaders(getRequestHeaders(request))
-                    .requestBodiesForMock(getRequestBody(request))
-                    .responseHeaders(getResponseHeaders(request))
-                    .build();
 
-            if (request.getExpectedTextResponse() != null) {
+        try {
+            mockParamBuilder.setRequest(request);
+
+            log.log(Level.INFO, "Initiating new mock creation");
+            Optional<Mock> matchingMock = mocksRepository.findUniqueMock(
+                    request.getRoute(),
+                    mockParamBuilder.httpMethod(),
+                    request.getQueryParams(),
+                    mockParamBuilder.requestBody(),
+                    mockParamBuilder.requestHeaders()
+            );
+
+            if (matchingMock.isPresent()) {
+                String err = "Mock with matching unique selectors already exist";
+                log.log(Level.ERROR, err);
+                throw new MockAlreadyExistsException(err);
+            }
+
+            Mock mock = buildNewMockWith(request, mockParamBuilder);
+            setResponseForNewMock(request, mock);
+
+            log.log(Level.INFO, "Saving new mock to repository");
+            return mocksRepository.save(mock);
+        } catch (MockAlreadyExistsException e) {
+            log.log(Level.DEBUG, e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.log(Level.DEBUG, e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    private void setResponseForNewMock(ProcessedMockRequest request, Mock mock) throws IOException {
+        if (request.getExpectedTextResponse() == null && request.getBinaryFile() == null) {
+            log.log(Level.INFO, "Mock has no response. Skipping response setup");
+            return;
+        }
+
+        if (request.getExpectedTextResponse() != null) {
+            log.log(Level.INFO, "Adding textual response to new mock");
+
+            TextualResponse textualResponse = TextualResponse.builder()
+                    .responseBody(request.getExpectedTextResponse())
+                    .createdAt(ZonedDateTime.now())
+                    .build();
+            textualResponseRepository.save(textualResponse);
+            mock.setTextualResponse(textualResponse);
+        }
+
+        if (request.getBinaryFile() != null) {
+            log.log(Level.INFO, "Adding binary file response to new mock");
+
+            MultipartFile file = request.getBinaryFile();
+            BinaryResponse binaryResponse = BinaryResponse.builder()
+                    .responseFile(file.getBytes())
+                    .createdAt(ZonedDateTime.now())
+                    .build();
+            binaryResponseRepository.save(binaryResponse);
+            mock.setBinaryResponse(binaryResponse);
+        }
+    }
+
+    private Mock buildNewMockWith(ProcessedMockRequest request, MockParamBuilder mockParamBuilder) throws Exception {
+        log.log(Level.INFO, "Building new mock with request values");
+        UUID mockId = UUID.randomUUID();
+
+        String responseContentTypeString = request.getResponseContentType() != null
+                ? request.getResponseContentType() : "application/json";
+
+        return Mock.builder()
+                .id(mockId)
+                .mockName(request.getName())
+                .route(request.getRoute())
+                .httpMethod(mockParamBuilder.httpMethod())
+                .responseContentType(mockParamBuilder.responseContentType(responseContentTypeString))
+                .statusCode(request.getStatusCode())
+                .queryParams(request.getQueryParams())
+                .description(request.getDescription())
+                .createdAt(ZonedDateTime.now())
+                .entityStatus(entityStatusService.getDefaultMockEntityStatus())
+                .requestHeaders(mockParamBuilder.requestHeaders())
+                .requestBodiesForMock(mockParamBuilder.requestBody())
+                .responseHeaders(mockParamBuilder.responseHeaders())
+                .build();
+    }
+
+    @Transactional(rollbackOn = {Exception.class, RuntimeException.class, MockAlreadyExistsException.class})
+    @Override
+    public Mock updateMock(String mockId, ProcessedMockRequest request) {
+        try {
+            Mock mock = getMockById(mockId);
+            validateMockToBeUpdated(mockId, mock);
+
+            mockParamBuilder.setRequest(request);
+
+            String responseContentTypeString = request.getResponseContentType() != null
+                    ? request.getResponseContentType() : mock.getResponseContentType().getContentType();
+            Mock updatedMock = buildMockToBeUpdated(request, mock, responseContentTypeString);
+
+            // Update Mock Name Only if it is different from existing name
+            if (!StringUtils.equals(mock.getMockName(), request.getName())) {
+                if (isMockNameAlreadyExists(request)) {
+                    String errorMessage = String.format("Mock with %s name already exists!", request.getName());
+                    log.log(Level.DEBUG, errorMessage);
+                    throw new MockAlreadyExistsException(errorMessage);
+                }
+                updatedMock.setMockName(request.getName());
+            }
+
+            Optional<Mock> matchingMock = mocksRepository.findUniqueMock(
+                    request.getRoute(),
+                    mockParamBuilder.httpMethod(),
+                    request.getQueryParams(),
+                    mockParamBuilder.requestBody(),
+                    mockParamBuilder.requestHeaders()
+            );
+
+            if (matchingMock.isPresent() && !matchingMock.get().getId().toString().equals(mockId)) {
+                String errorMessage = "Mock with matching unique selectors already exist";
+                log.log(Level.ERROR, errorMessage);
+                throw new MockAlreadyExistsException(errorMessage);
+            }
+
+            setResponseForMockToBeUpdated(request, mock, updatedMock);
+
+            mocksRepository.save(updatedMock);
+            return updatedMock;
+        } catch (MockAlreadyExistsException e) {
+            log.log(Level.DEBUG, e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.log(Level.DEBUG, e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    private void validateMockToBeUpdated(String mockId, Mock mock) {
+        String errorMessage;
+        if (mock == null) {
+            errorMessage = String.format("Mock with ID : %s does not exist", mockId);
+            log.log(Level.ERROR, errorMessage);
+            throw new RuntimeException(errorMessage);
+        }
+
+        if (!mock.canEditMock()) {
+            errorMessage = String.format("Mock with ID : %s cannot be edited", mockId);
+            log.log(Level.ERROR, errorMessage);
+            throw new RuntimeException(errorMessage);
+        }
+    }
+
+    private Mock buildMockToBeUpdated(ProcessedMockRequest request, Mock mock, String responseContentTypeString) throws Exception {
+        return Mock.builder()
+                .id(mock.getId())
+                .mockName(request.getName())
+                .route(request.getRoute())
+                .httpMethod(mockParamBuilder.httpMethod())
+                .responseContentType(mockParamBuilder.responseContentType(responseContentTypeString))
+                .statusCode(request.getStatusCode())
+                .queryParams(request.getQueryParams())
+                .description(request.getDescription())
+                .createdAt(mock.getCreatedAt())
+                .updatedAt(ZonedDateTime.now())
+                .entityStatus(entityStatusService.getDefaultMockEntityStatus())
+                .build();
+    }
+
+    private void setResponseForMockToBeUpdated(ProcessedMockRequest request, Mock mock, Mock updatedMock) throws IOException {
+        if (request.getExpectedTextResponse() != null) {
+            TextualResponse existingTextualResponse = mock.getTextualResponse();
+            if (existingTextualResponse != null) {
+                existingTextualResponse.setResponseBody(request.getExpectedTextResponse());
+                existingTextualResponse.setUpdatedAt(ZonedDateTime.now());
+                textualResponseRepository.save(existingTextualResponse);
+                updatedMock.setTextualResponse(existingTextualResponse);
+            } else {
                 TextualResponse textualResponse = TextualResponse.builder()
                         .responseBody(request.getExpectedTextResponse())
                         .createdAt(ZonedDateTime.now())
                         .build();
                 textualResponseRepository.save(textualResponse);
-                mock.setTextualResponse(textualResponse);
+                updatedMock.setTextualResponse(textualResponse);
             }
+            return;
+        }
 
-            if (request.getBinaryFile() != null) {
-                MultipartFile file = request.getBinaryFile();
+        if (request.getBinaryFile() != null) {
+            MultipartFile file = request.getBinaryFile();
+            BinaryResponse existingBinaryResponse = mock.getBinaryResponse();
+            if (existingBinaryResponse != null) {
+                existingBinaryResponse.setResponseFile(file.getBytes());
+                existingBinaryResponse.setUpdatedAt(ZonedDateTime.now());
+                binaryResponseRepository.save(existingBinaryResponse);
+                updatedMock.setBinaryResponse(existingBinaryResponse);
+            } else {
                 BinaryResponse binaryResponse = BinaryResponse.builder()
                         .responseFile(file.getBytes())
                         .createdAt(ZonedDateTime.now())
                         .build();
                 binaryResponseRepository.save(binaryResponse);
-                mock.setBinaryResponse(binaryResponse);
-            }
-
-            return mocksRepository.save(mock);
-        } catch (Exception e) {
-            log.log(Level.DEBUG, e.getMessage());
-            return null;
-        }
-    }
-
-    private RequestHeader getRequestHeaders(ProcessedMockRequest request) {
-        if (request.getRequestHeader() != null && !request.getRequestHeader().isEmpty()) {
-            RequestHeader requestHeader = RequestHeader.builder()
-                    .requestHeader(request.getRequestHeader())
-                    .matchExact(request.getShouldDoExactHeaderMatching())
-                    .build();
-
-            try {
-                log.log(Level.INFO, "Saving request headers to Database");
-                return requestHeadersRepository.save(requestHeader);
-            } catch (Exception e) {
-                log.log(Level.ERROR, "Failed to store request headers : " + e.getMessage());
-                return null;
+                updatedMock.setBinaryResponse(binaryResponse);
             }
         }
-        return null;
-    }
-
-    private ResponseHeader getResponseHeaders(ProcessedMockRequest request) {
-        if (request.getResponseHeaders() != null && !request.getResponseHeaders().isEmpty()) {
-            ResponseHeader responseHeader = ResponseHeader.builder()
-                    .responseHeader(request.getResponseHeaders())
-                    .build();
-
-            try {
-                log.log(Level.INFO, "Saving request headers to Database");
-                return responseHeadersRepository.save(responseHeader);
-            } catch (Exception e) {
-                log.log(Level.ERROR, "Failed to store request headers : " + e.getMessage());
-                return null;
-            }
-        }
-        return null;
-    }
-
-    private RequestBodiesForMock getRequestBody(ProcessedMockRequest request) {
-        if (request.getRequestBody() != null && !request.getRequestBody().isEmpty()) {
-            RequestBodyType requestBodyType = requestBodyTypeRepository.findOneByRequestBodyType(request.getRequestBodyType());
-            RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
-                    .requestBodyType(requestBodyType)
-                    .requestBody(request.getRequestBody())
-                    .build();
-
-            try {
-                log.log(Level.INFO, "Storing request body to Database");
-                return requestBodiesForMockRepository.save(requestBodiesForMock);
-            } catch (Exception e) {
-                log.log(Level.ERROR, "Failed to store request body : " + e.getMessage());
-                return null;
-            }
-        }
-        return null;
-    }
-
-    @Transactional
-    @Override
-    public Mock updateMock(String mockId, ProcessedMockRequest request) {
-        if (ValidationUtil.isNullOrEmpty(mockId)) {
-            log.log(Level.DEBUG, "Invalid MockId!");
-            return null;
-        }
-        if (ValidationUtil.isArgNull(request)) {
-            log.log(Level.DEBUG, "UpdateMockRequest is null!");
-            return null;
-        }
-        try {
-            Mock mock = getMockById(mockId);
-            if (mock != null && mock.canEditMock()) {
-                HttpMethod httpMethod = getHttpMethod(request.getHttpMethod());
-                String responseContentTypeString = request.getResponseContentType() != null
-                        ? request.getResponseContentType() : mock.getResponseContentType().getContentType();
-                ResponseContentType responseContentType = getResponseContentType(responseContentTypeString);
-                Mock updatedMock = Mock.builder()
-                        .id(mock.getId())
-                        .mockName(request.getName())
-                        .route(request.getRoute())
-                        .httpMethod(httpMethod)
-                        .responseContentType(responseContentType)
-                        .statusCode(request.getStatusCode())
-                        .queryParams(request.getQueryParams())
-                        .description(request.getDescription())
-                        .createdAt(mock.getCreatedAt())
-                        .updatedAt(ZonedDateTime.now())
-                        .entityStatus(entityStatusService.getDefaultMockEntityStatus())
-                        .build();
-
-                // Update Mock Name Only if it is different from existing name
-                if(!StringUtils.equals(mock.getMockName(), request.getName())){
-                    if(isMockNameAlreadyExists(request)) {
-                        log.log(Level.DEBUG, String.format("Mock with %s name already exists!", request.getName()));
-                        return null;
-                    }
-                    updatedMock.setMockName(request.getName());
-                }
-
-                if (request.getExpectedTextResponse() != null) {
-                    TextualResponse existingTextualResponse = mock.getTextualResponse();
-                    if (existingTextualResponse != null) {
-                        existingTextualResponse.setResponseBody(request.getExpectedTextResponse());
-                        existingTextualResponse.setUpdatedAt(ZonedDateTime.now());
-                        textualResponseRepository.save(existingTextualResponse);
-                        updatedMock.setTextualResponse(existingTextualResponse);
-                    } else {
-                        TextualResponse textualResponse = TextualResponse.builder()
-                                .responseBody(request.getExpectedTextResponse())
-                                .createdAt(ZonedDateTime.now())
-                                .build();
-                        textualResponseRepository.save(textualResponse);
-                        updatedMock.setTextualResponse(textualResponse);
-                    }
-                }
-
-                if (request.getBinaryFile() != null) {
-                    MultipartFile file = request.getBinaryFile();
-                    BinaryResponse existingBinaryResponse = mock.getBinaryResponse();
-                    if (existingBinaryResponse != null) {
-                        existingBinaryResponse.setResponseFile(file.getBytes());
-                        existingBinaryResponse.setUpdatedAt(ZonedDateTime.now());
-                        binaryResponseRepository.save(existingBinaryResponse);
-                        updatedMock.setBinaryResponse(existingBinaryResponse);
-                    } else {
-                        BinaryResponse binaryResponse = BinaryResponse.builder()
-                                .responseFile(file.getBytes())
-                                .createdAt(ZonedDateTime.now())
-                                .build();
-                        binaryResponseRepository.save(binaryResponse);
-                        updatedMock.setBinaryResponse(binaryResponse);
-                    }
-                }
-
-                mocksRepository.save(updatedMock);
-                return updatedMock;
-            }
-        } catch (Exception e) {
-            log.log(Level.DEBUG, e.getMessage());
-        }
-        return null;
     }
 
     private boolean isMockNameAlreadyExists(ProcessedMockRequest request) {
         Optional<Mock> mock = mocksRepository.findOneByMockName(request.getName());
         return mock.isPresent();
-    }
-
-    private HttpMethod getHttpMethod(String httpMethodString) throws Exception {
-        if (ValidationUtil.isNotNullOrEmpty(httpMethodString)) {
-            return httpMethodsRepository.findByMethod(httpMethodString);
-        }
-        throw new Exception(String.format("Unable to extract HTTP Method!! Invalid method: %s", httpMethodString));
-    }
-
-    private ResponseContentType getResponseContentType(String responseContentTypeString) throws Exception {
-        if (ValidationUtil.isNotNullOrEmpty(responseContentTypeString)) {
-            return responseContentTypesRepository.findByContentType(responseContentTypeString);
-        }
-        throw new Exception(String.format("Unable to extract Response Content Type!! Invalid responseContentType: %s",
-                responseContentTypeString));
     }
 
 }

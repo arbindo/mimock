@@ -2,9 +2,13 @@ package com.arbindo.mimock.manage.mimocks.service;
 
 import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
-import com.arbindo.mimock.repository.*;
+import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
+import com.arbindo.mimock.manage.mimocks.service.helpers.MockParamBuilder;
+import com.arbindo.mimock.repository.BinaryResponseRepository;
+import com.arbindo.mimock.repository.MocksRepository;
+import com.arbindo.mimock.repository.TextualResponseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,31 +40,16 @@ class MockManagementServiceTest {
     MocksRepository mockRepository;
 
     @org.mockito.Mock
-    HttpMethodsRepository mockHttpMethodsRepository;
-
-    @org.mockito.Mock
-    ResponseContentTypesRepository mockResponseContentTypesRepository;
-
-    @org.mockito.Mock
     TextualResponseRepository mockTextualResponseRepository;
 
     @org.mockito.Mock
     BinaryResponseRepository mockBinaryResponseRepository;
 
     @org.mockito.Mock
-    RequestHeadersRepository mockRequestHeadersRepository;
-
-    @org.mockito.Mock
-    ResponseHeadersRepository mockResponseHeadersRepository;
-
-    @org.mockito.Mock
-    RequestBodyTypeRepository mockRequestBodyTypeRepository;
-
-    @org.mockito.Mock
-    RequestBodiesForMockRepository mockRequestBodiesForMockRepository;
-
-    @org.mockito.Mock
     EntityStatusService mockEntityStatusService;
+
+    @org.mockito.Mock
+    MockParamBuilder mockParamBuilder;
 
     MockManagementService mockManagementService;
 
@@ -68,13 +57,9 @@ class MockManagementServiceTest {
     void setupMock() {
         this.mockManagementService = MockManagementServiceImpl.builder()
                 .mocksRepository(mockRepository)
-                .httpMethodsRepository(mockHttpMethodsRepository)
-                .responseContentTypesRepository(mockResponseContentTypesRepository)
+                .mockParamBuilder(mockParamBuilder)
                 .textualResponseRepository(mockTextualResponseRepository)
                 .binaryResponseRepository(mockBinaryResponseRepository)
-                .requestHeadersRepository(mockRequestHeadersRepository)
-                .requestBodyTypeRepository(mockRequestBodyTypeRepository)
-                .requestBodiesForMockRepository(mockRequestBodiesForMockRepository)
                 .entityStatusService(mockEntityStatusService)
                 .build();
     }
@@ -197,9 +182,6 @@ class MockManagementServiceTest {
     @ParameterizedTest
     @ValueSource(strings = {"Test", "UUID", "RandomString"})
     void shouldReturnNull_WhenMockIdIsInvalidFormat(String mockId) {
-        // Arrange
-        Optional<Mock> mock = generateOptionalMock();
-
         // Act
         Mock result = mockManagementService.getMockById(mockId);
 
@@ -306,6 +288,24 @@ class MockManagementServiceTest {
         verify(mockRepository, times(0)).save(mock.get());
     }
 
+    @Test
+    void shouldReturnFalse_ForDeleteMockById_WhenMockDeletionThrowsException() {
+        // Arrange
+        Optional<Mock> mock = generateOptionalMock();
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
+        lenient().when(mockRepository.save(any(Mock.class))).thenThrow(IllegalArgumentException.class);
+
+        // Act
+        assertTrue(mock.isPresent());
+        boolean result = mockManagementService.softDeleteMockById(mock.get().getId().toString());
+
+        // Assert
+        assertFalse(result);
+        verify(mockRepository, times(0)).delete(mock.get());
+        verify(mockEntityStatusService, times(0)).findByEntityStatus(anyString());
+        verify(mockRepository, times(1)).save(mock.get());
+    }
+
     @ParameterizedTest
     @EmptySource
     @NullSource
@@ -321,6 +321,18 @@ class MockManagementServiceTest {
         // Assert
         assertFalse(result);
         verify(mockRepository, times(0)).delete(mock.get());
+    }
+
+    @Test
+    void shouldReturnFalse_ForForceDeleteMockById_WhenDeletionFailsWithException() {
+        String mockId = UUID.randomUUID().toString();
+        // Arrange
+        Optional<Mock> mock = generateOptionalMock();
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(mock);
+        doThrow(IllegalArgumentException.class).when(mockRepository).delete(any(Mock.class));
+
+        // Assert
+        assertFalse(mockManagementService.hardDeleteMockById(mockId));
     }
 
     @ParameterizedTest
@@ -392,17 +404,6 @@ class MockManagementServiceTest {
         assertFalse(result);
     }
 
-    @ParameterizedTest
-    @NullSource
-    void shouldReturnNull_ForCreateMock_WhenMockRequestIsNull(ProcessedMockRequest request) {
-        // Act
-        Mock result = mockManagementService.createMock(request);
-
-        // Assert
-        assertNull(result);
-        verify(mockRepository, times(0)).save(any(Mock.class));
-    }
-
     @Test
     void shouldReturnNull_ForCreateMock_WhenMockNameAlreadyExists() {
         // Arrange
@@ -411,11 +412,10 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(existingMock);
 
         // Act
-        Mock result = mockManagementService.createMock(request);
+        verify(mockRepository, times(0)).save(any(Mock.class));
 
         // Assert
-        assertNull(result);
-        verify(mockRepository, times(0)).save(any(Mock.class));
+        assertThrows(MockAlreadyExistsException.class, () -> mockManagementService.createMock(request));
     }
 
     @Test
@@ -423,15 +423,11 @@ class MockManagementServiceTest {
         // Arrange
         ProcessedMockRequest request = createMockRequestWithNullRequestValues();
         Mock expectedMock = generateMock(request);
-        HttpMethod httpMethod = generateHttpMethod();
-        ResponseContentType responseContentType = generateResponseContentType();
         EntityStatus entityStatus = generateDefaultEntityStatus();
 
         Optional<Mock> emptyMock = Optional.empty();
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
-        lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
-        lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
 
         // Act
@@ -450,24 +446,11 @@ class MockManagementServiceTest {
         ProcessedMockRequest request = createProcessedMockRequestWithHeadersAndBody();
         Mock expectedMock = generateMockWithHeadersAndBody(request);
 
-        RequestHeader expectedRequestHeader = generateRequestHeader();
-        ResponseHeader expectedResponseHeader = generateResponseHeader();
-        RequestBodyType expectedRequestType = generateRequestBodyType();
-        RequestBodiesForMock expectedRequestBody = generateRequestBodiesForMock();
-
-        HttpMethod httpMethod = generateHttpMethod();
-        ResponseContentType responseContentType = generateResponseContentType();
         EntityStatus entityStatus = generateDefaultEntityStatus();
 
         Optional<Mock> emptyMock = Optional.empty();
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
-        lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
-        lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
-        lenient().when(mockRequestHeadersRepository.save(any(RequestHeader.class))).thenReturn(expectedRequestHeader);
-        lenient().when(mockRequestBodyTypeRepository.findOneByRequestBodyType(any(String.class))).thenReturn(expectedRequestType);
-        lenient().when(mockRequestBodiesForMockRepository.save(any(RequestBodiesForMock.class))).thenReturn(expectedRequestBody);
-        lenient().when(mockResponseHeadersRepository.save(any(ResponseHeader.class))).thenReturn(expectedResponseHeader);
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
 
         // Act
@@ -480,62 +463,74 @@ class MockManagementServiceTest {
         verify(mockRepository, times(1)).save(any(Mock.class));
     }
 
-    @ParameterizedTest
-    @NullSource
-    void shouldReturnNull_ForUpdateMock_WhenMockRequestIsNull(ProcessedMockRequest request) {
-        // Act
-        Mock result = mockManagementService.updateMock("mockId", request);
-
-        // Assert
-        assertNull(result);
-        verify(mockRepository, times(0)).save(any(Mock.class));
-    }
-
-    @ParameterizedTest
-    @NullSource
-    @EmptySource
-    void shouldReturnNull_ForUpdateMock_WhenMockIdIsNullOrEmpty(String mockId) {
-        // Act
-        Mock result = mockManagementService.updateMock(mockId, null);
-
-        // Assert
-        assertNull(result);
-        verify(mockRepository, times(0)).save(any(Mock.class));
-    }
-
     @Test
-    void shouldReturnNull_ForUpdateMock_WhenMockNameAlreadyExists() {
-        // Arrange
-        ProcessedMockRequest request = createProcessedMockRequest();
-        Optional<Mock> existingMock = generateOptionalMock(request);
-        assertTrue(existingMock.isPresent());
-        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(existingMock);
-
-        // Act
-        Mock result = mockManagementService.updateMock(existingMock.get().getId().toString(), request);
-
-        // Assert
-        assertNull(result);
-        verify(mockRepository, times(0)).save(any(Mock.class));
-    }
-
-    @Test
-    void shouldReturnMock_ForUpdateMock_WhenMockRequestIsValid() {
+    void shouldThrowMockAlreadyExistsException_ForCreateMock_WhenMockAlreadyExists() throws Exception {
         // Arrange
         ProcessedMockRequest request = createProcessedMockRequest();
         Optional<Mock> optionalMock = generateOptionalMock(request);
         assertTrue(optionalMock.isPresent());
-        Mock expectedMock = optionalMock.get();
-        HttpMethod httpMethod = optionalMock.get().getHttpMethod();
-        ResponseContentType responseContentType = optionalMock.get().getResponseContentType();
+
+        doNothing().when(mockParamBuilder).setRequest(request);
+        lenient().when(mockParamBuilder.httpMethod())
+                .thenReturn(HttpMethod.builder().method(request.getHttpMethod()).build());
+        lenient().when(mockParamBuilder.responseContentType(request.getResponseContentType()))
+                .thenReturn(ResponseContentType.builder().contentType(request.getResponseContentType()).build());
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(Optional.empty());
+        lenient().when(mockRepository.findUniqueMock(
+                any(),
+                any(),
+                any(),
+                any(),
+                any()
+        )).thenReturn(optionalMock);
+
+        assertThrows(MockAlreadyExistsException.class, () -> mockManagementService.createMock(request));
+    }
+
+    @Test
+    void shouldThrowRuntimeException_ForCreateMock_WhenExecutionFails() {
+        // Arrange
+        ProcessedMockRequest request = createProcessedMockRequestWithHeadersAndBody();
+
         EntityStatus entityStatus = generateDefaultEntityStatus();
 
         Optional<Mock> emptyMock = Optional.empty();
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
+        lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
+        lenient().when(mockRepository.save(any(Mock.class))).thenThrow(IllegalArgumentException.class);
+
+        // Assert
+        assertThrows(RuntimeException.class, () -> mockManagementService.createMock(request));
+    }
+
+    @Test
+    void shouldReturnMock_ForUpdateMock_WhenMockRequestIsValidWithTextualResponse() throws Exception {
+        // Arrange
+        ProcessedMockRequest request = createProcessedMockRequest();
+        request.setBinaryFile(null);
+
+        Optional<Mock> optionalMock = generateOptionalMock(request);
+        assertTrue(optionalMock.isPresent());
+        Mock expectedMock = optionalMock.get();
+        EntityStatus entityStatus = generateDefaultEntityStatus();
+
+        Optional<Mock> emptyMock = Optional.empty();
+
+        doNothing().when(mockParamBuilder).setRequest(request);
+        lenient().when(mockParamBuilder.httpMethod())
+                .thenReturn(HttpMethod.builder().method(request.getHttpMethod()).build());
+        lenient().when(mockParamBuilder.responseContentType(request.getResponseContentType()))
+                .thenReturn(ResponseContentType.builder().contentType(request.getResponseContentType()).build());
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
+        lenient().when(mockRepository.findUniqueMock(
+                request.getRoute(),
+                HttpMethod.builder().method(request.getHttpMethod()).build(),
+                request.getQueryParams(),
+                RequestBodiesForMock.builder().requestBody(request.getRequestBody()).build(),
+                RequestHeader.builder().requestHeader(request.getRequestHeader()).build()
+        )).thenReturn(emptyMock);
         lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
         lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(entityStatus);
-        lenient().when(mockHttpMethodsRepository.findByMethod(anyString())).thenReturn(httpMethod);
-        lenient().when(mockResponseContentTypesRepository.findByContentType(anyString())).thenReturn(responseContentType);
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
 
         // Act
@@ -550,13 +545,271 @@ class MockManagementServiceTest {
         assertEquals(expectedMock.getStatusCode(), result.getStatusCode());
         assertEquals(expectedMock.getQueryParams(), result.getQueryParams());
         assertEquals(expectedMock.getTextualResponse(), result.getTextualResponse());
-        assertEquals(expectedMock.getBinaryResponse(), result.getBinaryResponse());
+        assertNull(result.getBinaryResponse());
         assertEquals(expectedMock.getEntityStatus().getStatus(), result.getEntityStatus().getStatus());
         assertEquals(expectedMock.getCreatedAt(), result.getCreatedAt());
         assertNotEquals(expectedMock.getUpdatedAt(), result.getUpdatedAt());
         verify(mockTextualResponseRepository, times(1)).save(any(TextualResponse.class));
+        verify(mockBinaryResponseRepository, times(0)).save(any(BinaryResponse.class));
+        verify(mockRepository, times(1)).save(any(Mock.class));
+    }
+
+    @Test
+    void shouldReturnMock_ForUpdateMock_WhenExistingMockHasNoTextualResponse() throws Exception {
+        // Arrange
+        ProcessedMockRequest request = createProcessedMockRequest();
+        request.setBinaryFile(null);
+
+        Optional<Mock> optionalMock = generateOptionalMock(request);
+        assertTrue(optionalMock.isPresent());
+
+        Mock expectedMock = optionalMock.get();
+        expectedMock.setTextualResponse(null);
+
+        EntityStatus entityStatus = generateDefaultEntityStatus();
+
+        Optional<Mock> emptyMock = Optional.empty();
+
+        doNothing().when(mockParamBuilder).setRequest(request);
+        lenient().when(mockParamBuilder.httpMethod())
+                .thenReturn(HttpMethod.builder().method(request.getHttpMethod()).build());
+        lenient().when(mockParamBuilder.responseContentType(request.getResponseContentType()))
+                .thenReturn(ResponseContentType.builder().contentType(request.getResponseContentType()).build());
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
+        lenient().when(mockRepository.findUniqueMock(
+                request.getRoute(),
+                HttpMethod.builder().method(request.getHttpMethod()).build(),
+                request.getQueryParams(),
+                RequestBodiesForMock.builder().requestBody(request.getRequestBody()).build(),
+                RequestHeader.builder().requestHeader(request.getRequestHeader()).build()
+        )).thenReturn(emptyMock);
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
+        lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(entityStatus);
+        lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
+
+        // Act
+        Mock result = mockManagementService.updateMock(expectedMock.getId().toString(), request);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(expectedMock.getId(), result.getId());
+        assertEquals(expectedMock.getRoute(), result.getRoute());
+        assertEquals(expectedMock.getHttpMethod().getMethod(), result.getHttpMethod().getMethod());
+        assertEquals(expectedMock.getResponseContentType().getContentType(), result.getResponseContentType().getContentType());
+        assertEquals(expectedMock.getStatusCode(), result.getStatusCode());
+        assertEquals(expectedMock.getQueryParams(), result.getQueryParams());
+        assertNotNull(result.getTextualResponse());
+        assertNull(result.getBinaryResponse());
+        assertEquals(expectedMock.getEntityStatus().getStatus(), result.getEntityStatus().getStatus());
+        assertEquals(expectedMock.getCreatedAt(), result.getCreatedAt());
+        assertNotEquals(expectedMock.getUpdatedAt(), result.getUpdatedAt());
+        verify(mockTextualResponseRepository, times(1)).save(any(TextualResponse.class));
+        verify(mockBinaryResponseRepository, times(0)).save(any(BinaryResponse.class));
+        verify(mockRepository, times(1)).save(any(Mock.class));
+    }
+
+    @Test
+    void shouldReturnMock_ForUpdateMock_WhenMockRequestIsValidWithBinaryResponse() throws Exception {
+        // Arrange
+        ProcessedMockRequest request = createProcessedMockRequest();
+        request.setExpectedTextResponse(null);
+
+        Optional<Mock> optionalMock = generateOptionalMock(request);
+        assertTrue(optionalMock.isPresent());
+        Mock expectedMock = optionalMock.get();
+        EntityStatus entityStatus = generateDefaultEntityStatus();
+
+        Optional<Mock> emptyMock = Optional.empty();
+
+        doNothing().when(mockParamBuilder).setRequest(request);
+        lenient().when(mockParamBuilder.httpMethod())
+                .thenReturn(HttpMethod.builder().method(request.getHttpMethod()).build());
+        lenient().when(mockParamBuilder.responseContentType(request.getResponseContentType()))
+                .thenReturn(ResponseContentType.builder().contentType(request.getResponseContentType()).build());
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
+        lenient().when(mockRepository.findUniqueMock(
+                request.getRoute(),
+                HttpMethod.builder().method(request.getHttpMethod()).build(),
+                request.getQueryParams(),
+                RequestBodiesForMock.builder().requestBody(request.getRequestBody()).build(),
+                RequestHeader.builder().requestHeader(request.getRequestHeader()).build()
+        )).thenReturn(emptyMock);
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
+        lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(entityStatus);
+        lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
+
+        // Act
+        Mock result = mockManagementService.updateMock(expectedMock.getId().toString(), request);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(expectedMock.getId(), result.getId());
+        assertEquals(expectedMock.getRoute(), result.getRoute());
+        assertEquals(expectedMock.getHttpMethod().getMethod(), result.getHttpMethod().getMethod());
+        assertEquals(expectedMock.getResponseContentType().getContentType(), result.getResponseContentType().getContentType());
+        assertEquals(expectedMock.getStatusCode(), result.getStatusCode());
+        assertEquals(expectedMock.getQueryParams(), result.getQueryParams());
+        assertNull(result.getTextualResponse());
+        assertEquals(expectedMock.getBinaryResponse(), result.getBinaryResponse());
+        assertEquals(expectedMock.getEntityStatus().getStatus(), result.getEntityStatus().getStatus());
+        assertEquals(expectedMock.getCreatedAt(), result.getCreatedAt());
+        assertNotEquals(expectedMock.getUpdatedAt(), result.getUpdatedAt());
+        verify(mockTextualResponseRepository, times(0)).save(any(TextualResponse.class));
         verify(mockBinaryResponseRepository, times(1)).save(any(BinaryResponse.class));
         verify(mockRepository, times(1)).save(any(Mock.class));
+    }
+
+    @Test
+    void shouldReturnMock_ForUpdateMock_WhenExistingMockHasNoBinaryResponse() throws Exception {
+        // Arrange
+        ProcessedMockRequest request = createProcessedMockRequest();
+        request.setExpectedTextResponse(null);
+
+        Optional<Mock> optionalMock = generateOptionalMock(request);
+        assertTrue(optionalMock.isPresent());
+
+        Mock expectedMock = optionalMock.get();
+        expectedMock.setBinaryResponse(null);
+
+        EntityStatus entityStatus = generateDefaultEntityStatus();
+
+        Optional<Mock> emptyMock = Optional.empty();
+
+        doNothing().when(mockParamBuilder).setRequest(request);
+        lenient().when(mockParamBuilder.httpMethod())
+                .thenReturn(HttpMethod.builder().method(request.getHttpMethod()).build());
+        lenient().when(mockParamBuilder.responseContentType(request.getResponseContentType()))
+                .thenReturn(ResponseContentType.builder().contentType(request.getResponseContentType()).build());
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
+        lenient().when(mockRepository.findUniqueMock(
+                request.getRoute(),
+                HttpMethod.builder().method(request.getHttpMethod()).build(),
+                request.getQueryParams(),
+                RequestBodiesForMock.builder().requestBody(request.getRequestBody()).build(),
+                RequestHeader.builder().requestHeader(request.getRequestHeader()).build()
+        )).thenReturn(emptyMock);
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
+        lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(entityStatus);
+        lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
+
+        // Act
+        Mock result = mockManagementService.updateMock(expectedMock.getId().toString(), request);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(expectedMock.getId(), result.getId());
+        assertEquals(expectedMock.getRoute(), result.getRoute());
+        assertEquals(expectedMock.getHttpMethod().getMethod(), result.getHttpMethod().getMethod());
+        assertEquals(expectedMock.getResponseContentType().getContentType(), result.getResponseContentType().getContentType());
+        assertEquals(expectedMock.getStatusCode(), result.getStatusCode());
+        assertEquals(expectedMock.getQueryParams(), result.getQueryParams());
+        assertNull(result.getTextualResponse());
+        assertNotNull(result.getBinaryResponse());
+        assertEquals(expectedMock.getEntityStatus().getStatus(), result.getEntityStatus().getStatus());
+        assertEquals(expectedMock.getCreatedAt(), result.getCreatedAt());
+        assertNotEquals(expectedMock.getUpdatedAt(), result.getUpdatedAt());
+        verify(mockTextualResponseRepository, times(0)).save(any(TextualResponse.class));
+        verify(mockBinaryResponseRepository, times(1)).save(any(BinaryResponse.class));
+        verify(mockRepository, times(1)).save(any(Mock.class));
+    }
+
+    @Test
+    void shouldThrowRuntimeException_ForUpdateMock_WhenMockValidationFails() {
+        // Assert when mock from DB is Null
+        ProcessedMockRequest request = createProcessedMockRequest();
+        Optional<Mock> optionalMock = generateOptionalMock(request);
+        assertTrue(optionalMock.isPresent());
+
+        Mock expectedMock = optionalMock.get();
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(null);
+
+        // Assert when mock is not in editable state
+        String mockId = expectedMock.getId().toString();
+        assertThrows(RuntimeException.class, () -> mockManagementService.updateMock(mockId, request));
+
+        optionalMock.get().setEntityStatus(EntityStatus.builder().status("DELETED").build());
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
+        assertThrows(RuntimeException.class, () -> mockManagementService.updateMock(mockId, request));
+    }
+
+    @Test
+    void shouldThrowMockAlreadyExistsExceptionException_ForUpdateMock_WhenMockNameAlreadyExists() {
+        // Arrange
+        ProcessedMockRequest request = createProcessedMockRequest();
+        Optional<Mock> optionalMock = generateOptionalMock(request);
+        assertTrue(optionalMock.isPresent());
+
+        Mock expectedMock = optionalMock.get();
+
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(optionalMock);
+
+        // Assert
+        String mockId = expectedMock.getId().toString();
+        assertThrows(MockAlreadyExistsException.class, () -> mockManagementService.updateMock(mockId, request));
+    }
+
+    @Test
+    void shouldThrowMockAlreadyExistsExceptionException_ForUpdateMock_WhenMockAlreadyExists() throws Exception {
+        // Arrange
+        ProcessedMockRequest request = createProcessedMockRequest();
+        Optional<Mock> optionalMock = generateOptionalMock(request);
+        assertTrue(optionalMock.isPresent());
+        EntityStatus entityStatus = generateDefaultEntityStatus();
+
+        Optional<Mock> emptyMock = Optional.empty();
+
+        doNothing().when(mockParamBuilder).setRequest(request);
+        lenient().when(mockParamBuilder.httpMethod())
+                .thenReturn(HttpMethod.builder().method(request.getHttpMethod()).build());
+        lenient().when(mockParamBuilder.responseContentType(request.getResponseContentType()))
+                .thenReturn(ResponseContentType.builder().contentType(request.getResponseContentType()).build());
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
+        lenient().when(mockRepository.findUniqueMock(
+                any(),
+                any(),
+                any(),
+                any(),
+                any()
+        )).thenReturn(optionalMock);
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
+        lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(entityStatus);
+
+        // Assert
+        assertThrows(MockAlreadyExistsException.class,
+                () -> mockManagementService.updateMock(UUID.randomUUID().toString(), request));
+    }
+
+    @Test
+    void shouldThrowRuntimeException_ForUpdateMock_WhenExecutionFails() throws Exception {
+        // Arrange
+        ProcessedMockRequest request = createProcessedMockRequest();
+        Optional<Mock> optionalMock = generateOptionalMock(request);
+        assertTrue(optionalMock.isPresent());
+        EntityStatus entityStatus = generateDefaultEntityStatus();
+
+        Optional<Mock> emptyMock = Optional.empty();
+
+        doNothing().when(mockParamBuilder).setRequest(request);
+        lenient().when(mockParamBuilder.httpMethod())
+                .thenReturn(HttpMethod.builder().method(request.getHttpMethod()).build());
+        lenient().when(mockParamBuilder.responseContentType(request.getResponseContentType()))
+                .thenReturn(ResponseContentType.builder().contentType(request.getResponseContentType()).build());
+        lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
+        lenient().when(mockRepository.findUniqueMock(
+                any(),
+                any(),
+                any(),
+                any(),
+                any()
+        )).thenReturn(emptyMock);
+        lenient().when(mockRepository.findById(any(UUID.class))).thenReturn(optionalMock);
+        lenient().when(mockEntityStatusService.getDefaultMockEntityStatus()).thenReturn(entityStatus);
+        lenient().when(mockRepository.save(any(Mock.class))).thenThrow(IllegalArgumentException.class);
+
+        // Assert
+        String mockId = optionalMock.get().getId().toString();
+        assertThrows(RuntimeException.class, () -> mockManagementService.updateMock(mockId, request));
     }
 
 }

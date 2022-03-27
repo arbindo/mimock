@@ -1,17 +1,19 @@
 package com.arbindo.mimock.manage.mimocks.controller;
 
-import com.arbindo.mimock.common.constants.UrlConfig;
-import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.common.constants.Messages;
-import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
-import com.arbindo.mimock.manage.mimocks.mapper.RequestModelMapper;
+import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
-import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
+import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
+import com.arbindo.mimock.manage.mimocks.mapper.RequestModelMapper;
+import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
+import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
+import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 
@@ -41,18 +45,27 @@ public class MockManagementController {
             tags = {"Mock Management"})
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<GenericResponseWrapper<Mock>> createMock(@Valid MockRequest request) {
-        Mock mock = mockManagementService.createMock(RequestModelMapper.map(request));
-        if (mock != null) {
-            final URI location = ServletUriComponentsBuilder
-                    .fromCurrentServletMapping().path(UrlConfig.MOCKS_PATH + "/{mockId}").build()
-                    .expand(mock.getId()).toUri();
-            GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.CREATED,
-                    Messages.createResourceSuccess(location.toString()), mock);
-            return ResponseEntity.created(location).body(genericResponseWrapper);
+        Mock mock;
+
+        try {
+            mock = mockManagementService.createMock(RequestModelMapper.map(request));
+        } catch (MockAlreadyExistsException e) {
+            log.log(Level.ERROR, e.getMessage());
+
+            return ResponseEntity.badRequest().body(
+                    getGenericResponseWrapper(HttpStatus.BAD_REQUEST, e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(
+                    getGenericResponseWrapper(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), null)
+            );
         }
-        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
-                Messages.CREATE_RESOURCE_FAILED, null);
-        return ResponseEntity.badRequest().body(genericResponseWrapper);
+
+        final URI location = ServletUriComponentsBuilder
+                .fromCurrentServletMapping().path(UrlConfig.MOCKS_PATH + "/{mockId}").build()
+                .expand(mock.getId()).toUri();
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.CREATED,
+                Messages.createResourceSuccess(location.toString()), mock);
+        return ResponseEntity.created(location).body(genericResponseWrapper);
     }
 
     @Operation(summary = "List Mocks", description = "List all mocks.", tags = {"Mock Management"})
@@ -128,16 +141,25 @@ public class MockManagementController {
     @Operation(summary = "Update Mock", description = "Updates mock for the given mockId using the data in multi-part form.",
             tags = {"Mock Management"})
     @PutMapping(value = "{mockId}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable String mockId, @Valid MockRequest request) {
-        Mock updatedMock = mockManagementService.updateMock(mockId, RequestModelMapper.map(request));
-        if (updatedMock != null) {
-            GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,
-                    Messages.UPDATE_RESOURCE_SUCCESS, updatedMock);
-            return ResponseEntity.ok(genericResponseWrapper);
+    public ResponseEntity<GenericResponseWrapper<Mock>> updateMockById(@PathVariable @NotBlank String mockId, @NotNull @Valid MockRequest request) {
+        Mock updatedMock;
+
+        try {
+            updatedMock = mockManagementService.updateMock(mockId, RequestModelMapper.map(request));
+        } catch (MockAlreadyExistsException e) {
+            log.log(Level.ERROR, e.getMessage());
+
+            return ResponseEntity.badRequest().body(
+                    getGenericResponseWrapper(HttpStatus.BAD_REQUEST, e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(
+                    getGenericResponseWrapper(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), null)
+            );
         }
-        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST,
-                Messages.UPDATE_RESOURCE_FAILED, null);
-        return ResponseEntity.badRequest().body(genericResponseWrapper);
+
+        GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.OK,
+                Messages.UPDATE_RESOURCE_SUCCESS, updatedMock);
+        return ResponseEntity.ok(genericResponseWrapper);
     }
 
     private GenericResponseWrapper<Mock> getGenericResponseWrapper(HttpStatus httpStatus, String responseMessage, Mock mock) {
