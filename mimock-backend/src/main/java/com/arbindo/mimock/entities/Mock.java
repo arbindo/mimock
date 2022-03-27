@@ -56,24 +56,24 @@ public class Mock {
     @Schema(example = "name=John&age=10", description = "Associated query params of the mock")
     private String queryParams;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_header_id")
     private RequestHeader requestHeaders;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "response_header_id")
     private ResponseHeader responseHeaders;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_body_id")
     private RequestBodiesForMock requestBodiesForMock;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "textual_response_id")
     @Schema(description = "Represents the expected textual response")
     private TextualResponse textualResponse;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "binary_response_id")
     @Schema(description = "Represents the expected binary response")
     private BinaryResponse binaryResponse;
