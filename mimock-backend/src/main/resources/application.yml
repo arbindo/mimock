@@ -12,6 +12,10 @@ spring:
       max-file-size: 10MB
       resolve-lazily: true
 
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
   devtools:
     restart:
       enabled: 'true'

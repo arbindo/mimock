@@ -1,6 +1,7 @@
 package com.arbindo.mimock.entities;
 
 import com.arbindo.mimock.manage.mimocks.enums.Status;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -56,24 +57,29 @@ public class Mock {
     @Schema(example = "name=John&age=10", description = "Associated query params of the mock")
     private String queryParams;
 
-    @ManyToOne
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_header_id")
     private RequestHeader requestHeaders;
 
-    @ManyToOne
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "response_header_id")
     private ResponseHeader responseHeaders;
 
-    @ManyToOne
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_body_id")
     private RequestBodiesForMock requestBodiesForMock;
 
-    @ManyToOne
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "textual_response_id")
     @Schema(description = "Represents the expected textual response")
     private TextualResponse textualResponse;
 
-    @ManyToOne
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "binary_response_id")
     @Schema(description = "Represents the expected binary response")
     private BinaryResponse binaryResponse;

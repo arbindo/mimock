@@ -8,6 +8,10 @@ spring:
       max-file-size: 10MB
       resolve-lazily: true
 
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
   datasource:
     url: jdbc:postgresql://localhost:5427/mimock_db
     username: mimock
