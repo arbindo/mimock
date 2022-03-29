@@ -16,6 +16,7 @@ import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -58,6 +59,41 @@ class DefaultHttpInterceptorTest {
                 .responseBody(expectedResponseBody)
                 .typeOfResponse(TypeOfResponse.TEXTUAL_RESPONSE)
                 .responseHeaders(RandomDataGenerator.generateResponseHeaders())
+                .build();
+
+        lenient().when(genericMockRequestController.serveRequest(expectedURI, mockHttpServletRequest)).thenReturn(Optional.of(expectedMock));
+        lenient().when(mockWriterCollection.getWriterFor(TypeOfResponse.TEXTUAL_RESPONSE)).thenReturn(mockTextualResponseWriter);
+
+        boolean interceptorStatus = defaultHttpInterceptor.preHandle(mockHttpServletRequest, mockHttpServletResponse, new Object());
+
+        verify(genericMockRequestController, times(1)).serveRequest(expectedURI, mockHttpServletRequest);
+        verify(mockHttpServletResponse, times(1)).setStatus(expectedStatus);
+        verify(mockHttpServletResponse, times(1)).setHeader("content-type", expectedContentType);
+        verify(mockWriterCollection, times(1)).getWriterFor(TypeOfResponse.TEXTUAL_RESPONSE);
+        verify(mockTextualResponseWriter, times(1)).write(expectedMock, mockHttpServletResponse);
+
+        assertFalse(interceptorStatus);
+    }
+
+    @Test
+    void shouldRespondWithProperResponseAndNoResponseHeaders_WhenMockValidMockIsReturnedByTheController() throws Exception {
+        MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
+        String requestURI = "/api/test/v1";
+        String expectedURI = "/api/test/v1";
+        String expectedContentType = "application/json";
+        String expectedResponseBody = "{'message': 'Hello World!'}";
+        int expectedStatus = 200;
+
+        mockHttpServletRequest.setRequestURI(requestURI);
+        mockHttpServletRequest.setQueryString("active=true&type=test");
+        mockHttpServletRequest.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, requestURI);
+
+        DomainModelForMock expectedMock = DomainModelForMock.builder()
+                .responseContentType(expectedContentType)
+                .statusCode(expectedStatus)
+                .responseBody(expectedResponseBody)
+                .responseHeaders(new HashMap<>())
+                .typeOfResponse(TypeOfResponse.TEXTUAL_RESPONSE)
                 .build();
 
         lenient().when(genericMockRequestController.serveRequest(expectedURI, mockHttpServletRequest)).thenReturn(Optional.of(expectedMock));

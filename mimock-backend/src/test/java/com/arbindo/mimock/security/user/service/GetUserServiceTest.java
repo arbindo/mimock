@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.lenient;
 
 @SpringBootTest
@@ -85,5 +86,14 @@ class GetUserServiceTest {
         Users allUsers = userService.getAllUsers();
 
         assertEquals(expectedUsers, allUsers);
+    }
+
+    @Test
+    void shouldReturnNull_WhenNoUsersExistInDB() {
+        lenient().when(userRepository.findAllByDeletedAtIsNull()).thenReturn(null);
+
+        Users allUsers = userService.getAllUsers();
+
+        assertNull(allUsers);
     }
 }

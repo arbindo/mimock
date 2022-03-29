@@ -1,26 +1,10 @@
 package com.arbindo.mimock.security.user.models;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Users extends ArrayList<UserInfo> {
-    @Override
-    public boolean addAll(Collection<? extends UserInfo> c) {
-        return super.addAll(c);
-    }
-
-    @Override
-    public boolean add(UserInfo userInfo) {
-        return super.add(userInfo);
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return super.isEmpty();
-    }
-
     @Override
     public boolean equals(Object o) {
         Users u = (Users) o;

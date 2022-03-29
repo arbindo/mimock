@@ -12,9 +12,11 @@ import com.arbindo.mimock.repository.RequestBodiesForMockRepository;
 import com.arbindo.mimock.repository.RequestHeadersRepository;
 import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +57,7 @@ public class GenericMockRequestService {
                 .findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(request.getRequestBody());
 
         List<Mock> resultFromDB;
-        if (queryParam == null || queryParam.isBlank()) {
+        if (StringUtils.isBlank(queryParam)) {
             resultFromDB = repository.findUniqueMock(
                     route,
                     httpMethod,
@@ -70,7 +72,7 @@ public class GenericMockRequestService {
             );
         }
 
-        if (resultFromDB == null || resultFromDB.isEmpty()) {
+        if (CollectionUtils.isEmpty(resultFromDB)) {
             log.log(Level.ERROR, "No matching rows returned from DB");
             String errorMessage = "Matching mock does not exist";
             throw new MatchingMockNotFoundException(errorMessage);
@@ -79,7 +81,7 @@ public class GenericMockRequestService {
         log.log(Level.INFO, "Returning matching mock");
 
         List<Mock> matchingMock = resultFromDB.stream().filter(mock -> {
-            if (mock.getRequestHeaders() == null || mock.getRequestHeaders().getRequestHeader() == null) {
+            if (mock.getRequestHeaders() == null) {
                 log.log(Level.INFO, "Matching mock from DB has no headers. Skipping header validation");
                 return true;
             }

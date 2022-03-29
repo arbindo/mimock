@@ -276,7 +276,6 @@ public class MockManagementServiceImpl implements MockManagementService {
             log.log(Level.DEBUG, e.getMessage());
             throw e;
         } catch (Exception e) {
-            e.printStackTrace();
             log.log(Level.DEBUG, e.getMessage());
             throw new RuntimeException(e.getMessage());
         }

@@ -2,6 +2,7 @@ package com.arbindo.mimock.constraints.validators;
 
 import com.arbindo.mimock.constraints.ValidPassword;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,15 @@ public class PasswordValidatorTest {
     })
     void shouldFailInValidation_WhenPasswordIsNotValidBcryptHash(String hash) {
         ValidatorStub stub = new ValidatorStub(hash);
+        Set<ConstraintViolation<ValidatorStub>> constraintViolations =
+                validator.validate(stub);
+
+        assertEquals(1, constraintViolations.size());
+    }
+
+    @Test
+    void shouldFailInValidation_WhenPasswordIsNull() {
+        ValidatorStub stub = new ValidatorStub(null);
         Set<ConstraintViolation<ValidatorStub>> constraintViolations =
                 validator.validate(stub);
 

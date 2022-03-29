@@ -63,7 +63,8 @@ class GenericMockRequestControllerTest {
         String expectedResponseBody = "{'message': 'Hello World!'}";
 
         MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
-        mockHttpServletRequest.setQueryString("version=2.0&active=true");
+        mockHttpServletRequest.setParameter("version", "2.0");
+        mockHttpServletRequest.setParameter("active", "true");
 
         DomainModelForMock expectedMock = DomainModelForMock.builder()
                 .responseContentType(expectedContentType)

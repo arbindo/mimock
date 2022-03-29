@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class GetUserService {
         log.log(Level.INFO, "Fetching all users from Database");
         List<User> allUsers = userRepository.findAllByDeletedAtIsNull();
 
-        if (allUsers.isEmpty()) {
+        if (CollectionUtils.isEmpty(allUsers)) {
             log.log(Level.INFO, "No users currently exist in the Database");
             return null;
         }
