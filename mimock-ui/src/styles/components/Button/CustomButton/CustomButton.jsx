@@ -9,6 +9,7 @@ function CustomButton({
 	background,
 	onclickHandler,
 	dataTestid,
+	additionalStyles,
 }) {
 	return (
 		<CustomButtonContainer
@@ -17,6 +18,7 @@ function CustomButton({
 			width={width}
 			background={background}
 			onClick={onclickHandler}
+			additionalStyles={additionalStyles}
 		>
 			{label}
 		</CustomButtonContainer>
@@ -30,6 +32,7 @@ CustomButton.propTypes = {
 	color: PropTypes.string,
 	width: PropTypes.string,
 	background: PropTypes.string,
+	additionalStyles: PropTypes.string,
 };
 
 export default CustomButton;

@@ -9,9 +9,9 @@
 				"root": ["./src"],
 				"alias": {
 					"styles": "./src/styles/components",
-					"test": "./test",
 					"api": "./src/api",
-					"underscore": "lodash"
+					"assets": "./src/assets",
+					"components": "./src/components"
 				}
 			}
 		]

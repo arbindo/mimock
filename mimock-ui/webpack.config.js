@@ -30,6 +30,20 @@ module.exports = {
 					loader: 'babel-loader',
 				},
 			},
+			{
+				test: /\.(js|jsx)$/,
+				resolve: {
+					extensions: ['.js', '.jsx'],
+				},
+			},
+			{
+				test: /\.(png|svg|jpe?g|gif)$/i,
+				use: [
+					{
+						loader: 'file-loader',
+					},
+				],
+			},
 		],
 	},
 
