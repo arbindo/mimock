@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,7 +17,7 @@ public interface MocksRepository extends JpaRepository<Mock, UUID> {
 
     Page<Mock> findAllByEntityStatus(EntityStatus entityStatus, Pageable pageable);
 
-    List<Mock> findAllByEntityStatus(EntityStatus entityStatus);
+    List<Mock> findAllByEntityStatusAndDeletedAt(EntityStatus entityStatus, ZonedDateTime deletedAt);
 
     Optional<Mock> findOneByMockName(String mockName);
 

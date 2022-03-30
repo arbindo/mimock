@@ -140,7 +140,8 @@ public class MockManagementServiceImpl implements MockManagementService {
     public void flushDeletedMocks() {
         try {
             EntityStatus entityStatus = entityStatusService.getDeletedMockEntityStatus();
-            List<Mock> deletedMocks = mocksRepository.findAllByEntityStatus(entityStatus);
+            ZonedDateTime thirtyDaysAgo = ZonedDateTime.now().minusDays(30);
+            List<Mock> deletedMocks = mocksRepository.findAllByEntityStatusAndDeletedAt(entityStatus, thirtyDaysAgo);
             mocksRepository.deleteAll(deletedMocks);
             log.log(Level.INFO, "Flushed " + deletedMocks.size() + " mock(s)!");
             return;

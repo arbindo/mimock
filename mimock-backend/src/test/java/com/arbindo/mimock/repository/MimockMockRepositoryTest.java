@@ -17,6 +17,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -545,14 +546,19 @@ class MimockMockRepositoryTest {
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
         String queryParams = "version=1.0.0&auto=false";
-        UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
-        UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
+        UUID mockId1 = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
+        UUID mockId2 = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
+        UUID mockId3 = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14cccc");
 
         EntityStatus deletedEntityStatus = entityStatusDBHelper.findByStatus(Status.DELETED.name());
         EntityStatus entityStatus = entityStatusDBHelper.findByStatus(Status.NONE.name());
 
+        ZonedDateTime creationTimestamp = ZonedDateTime.now().minusDays(50);
+        ZonedDateTime thirtyDaysAgo = ZonedDateTime.now().minusDays(30);
+        ZonedDateTime tenDaysAgo = ZonedDateTime.now().minusDays(10);
+
         Mock testMock1 = Mock.builder()
-                .id(expectedMockId)
+                .id(mockId1)
                 .mockName("test mock 1")
                 .route(expectedRoute)
                 .httpMethod(expectedHttpMethod)
@@ -560,10 +566,11 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdAt(creationTimestamp)
                 .build();
 
         Mock testMock2 = Mock.builder()
-                .id(mockId)
+                .id(mockId2)
                 .mockName("test mock 2")
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
@@ -571,6 +578,19 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(deletedEntityStatus)
+                .createdAt(creationTimestamp)
+                .build();
+
+        Mock testMock3 = Mock.builder()
+                .id(mockId3)
+                .mockName("test mock 3")
+                .route(expectedRoute)
+                .httpMethod(httpMethod)
+                .queryParams(queryParams)
+                .responseContentType(responseContentType)
+                .statusCode(400)
+                .entityStatus(deletedEntityStatus)
+                .createdAt(creationTimestamp)
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -579,13 +599,24 @@ class MimockMockRepositoryTest {
         Mock mock2 = mocksDBHelper.save(testMock2);
         assertNotNull(mock2);
 
-        List<Mock> mockList = new ArrayList<>();
-        mockList.add(mock2); // mock2 is only deleted mock
-        long expectedCount = mockList.size();
+        mock2.setDeletedAt(thirtyDaysAgo);
+        Mock deletedMock2 = mocksDBHelper.save(mock2);
+        assertNotNull(deletedMock2);
 
-        List<Mock> mocks = repository.findAllByEntityStatus(deletedEntityStatus);
+        Mock mock3 = mocksDBHelper.save(testMock3);
+        assertNotNull(mock3);
+
+        mock3.setDeletedAt(tenDaysAgo);
+        Mock deletedMock3 = mocksDBHelper.save(mock3);
+        assertNotNull(deletedMock3);
+
+        List<Mock> expectedDeletedMockList = new ArrayList<>();
+        expectedDeletedMockList.add(deletedMock2); // mock2 is only deleted mock 30 days ago
+        long expectedCount = expectedDeletedMockList.size();
+
+        List<Mock> mocks = repository.findAllByEntityStatusAndDeletedAt(deletedEntityStatus, thirtyDaysAgo);
         assertNotNull(mocks);
-        assertEquals(mockList, mocks);
+        assertEquals(expectedDeletedMockList, mocks);
         assertEquals(expectedCount, mocks.size());
     }
 

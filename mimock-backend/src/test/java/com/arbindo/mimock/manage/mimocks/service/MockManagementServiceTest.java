@@ -21,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -410,7 +411,8 @@ class MockManagementServiceTest {
         EntityStatus entityStatus = generateDeletedEntityStatus();
         lenient().when(mockEntityStatusService.getDeletedMockEntityStatus()).thenReturn(entityStatus);
         List<Mock> mocks = generateListOfMocks();
-        lenient().when(mockRepository.findAllByEntityStatus(any(EntityStatus.class))).thenReturn(mocks);
+        lenient().when(mockRepository.findAllByEntityStatusAndDeletedAt(any(EntityStatus.class),
+                any(ZonedDateTime.class))).thenReturn(mocks);
         // Act
         mockManagementService.flushDeletedMocks();
         // Assert
@@ -423,7 +425,8 @@ class MockManagementServiceTest {
         EntityStatus entityStatus = generateDeletedEntityStatus();
         lenient().when(mockEntityStatusService.getDeletedMockEntityStatus()).thenReturn(entityStatus);
         List<Mock> mocks = generateListOfMocks();
-        doThrow(new RuntimeException()).when(mockRepository).findAllByEntityStatus(any(EntityStatus.class));
+        doThrow(new RuntimeException()).when(mockRepository)
+                .findAllByEntityStatusAndDeletedAt(any(EntityStatus.class), any(ZonedDateTime.class));
         // Act
         mockManagementService.flushDeletedMocks();
         // Assert
