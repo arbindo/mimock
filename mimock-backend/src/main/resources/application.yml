@@ -62,3 +62,5 @@ springdoc:
     csrf:
       enabled: true
       header-name: X-XSRF-TOKEN
+
+flush-bin-cron-expression: "* */30 * * * *"

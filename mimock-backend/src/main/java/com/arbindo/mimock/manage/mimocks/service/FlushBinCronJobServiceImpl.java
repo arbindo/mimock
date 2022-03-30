@@ -19,8 +19,8 @@ public class FlushBinCronJobServiceImpl implements FlushBinCronJobService {
     MockManagementService mockManagementService;
 
     @Override
-    @Scheduled(cron = "*/30 * * * *")
-    public void FlushBin() {
+    @Scheduled(cron = "${flush-bin-cron-expression}")
+    public void flushBin() {
         PlatformSettings platformSettings = platformSettingsService.getDefaultPlatformSettings();
         if(!platformSettings.getIsFlushBinCronEnabled()){
             log.log(Level.INFO, "Flush Bin Cron Is Disabled. Skipping CRON scheduler job.");

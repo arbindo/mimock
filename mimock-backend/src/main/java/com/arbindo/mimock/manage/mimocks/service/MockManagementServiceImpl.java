@@ -143,6 +143,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             List<Mock> deletedMocks = mocksRepository.findAllByEntityStatus(entityStatus);
             mocksRepository.deleteAll(deletedMocks);
             log.log(Level.INFO, "Flushed " + deletedMocks.size() + " mock(s)!");
+            return;
         } catch (Exception e){
             log.log(Level.DEBUG, e.getMessage());
         }

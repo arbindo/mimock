@@ -528,6 +528,67 @@ class MimockMockRepositoryTest {
         assertFalse(resultFromDB.isPresent());
     }
 
+    @Transactional
+    @Test
+    void shouldReturnListOfMocksByEntityStatus(){
+        HttpMethod expectedHttpMethod = HttpMethod.builder()
+                .method("GET")
+                .id(httpMethodsDBHelper.getHttpMethodByMethod("GET").getId())
+                .build();
+        HttpMethod httpMethod = HttpMethod.builder()
+                .method("POST")
+                .id(httpMethodsDBHelper.getHttpMethodByMethod("POST").getId())
+                .build();
+
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
+
+        String expectedRoute = "/api/mock/test";
+        String expectedQueryParams = "version=1.0.0&auto=true";
+        String queryParams = "version=1.0.0&auto=false";
+        UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
+        UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
+
+        EntityStatus deletedEntityStatus = entityStatusDBHelper.findByStatus(Status.DELETED.name());
+        EntityStatus entityStatus = entityStatusDBHelper.findByStatus(Status.NONE.name());
+
+        Mock testMock1 = Mock.builder()
+                .id(expectedMockId)
+                .mockName("test mock 1")
+                .route(expectedRoute)
+                .httpMethod(expectedHttpMethod)
+                .queryParams(expectedQueryParams)
+                .responseContentType(responseContentType)
+                .statusCode(200)
+                .entityStatus(entityStatus)
+                .build();
+
+        Mock testMock2 = Mock.builder()
+                .id(mockId)
+                .mockName("test mock 2")
+                .route(expectedRoute)
+                .httpMethod(httpMethod)
+                .queryParams(queryParams)
+                .responseContentType(responseContentType)
+                .statusCode(400)
+                .entityStatus(deletedEntityStatus)
+                .build();
+
+        Mock mock1 = mocksDBHelper.save(testMock1);
+        assertNotNull(mock1);
+
+        Mock mock2 = mocksDBHelper.save(testMock2);
+        assertNotNull(mock2);
+
+        List<Mock> mockList = new ArrayList<>();
+        mockList.add(mock2); // mock2 is only deleted mock
+        long expectedCount = mockList.size();
+
+        List<Mock> mocks = repository.findAllByEntityStatus(deletedEntityStatus);
+        assertNotNull(mocks);
+        assertEquals(mockList, mocks);
+        assertEquals(expectedCount, mocks.size());
+    }
+
     byte[] generateFile() throws Exception {
         String fileName = "test.txt";
         File testFile = new File(fileName);

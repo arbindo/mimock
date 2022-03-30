@@ -405,6 +405,32 @@ class MockManagementServiceTest {
     }
 
     @Test
+    void shouldFlushDeletedMocks(){
+        // Arrange
+        EntityStatus entityStatus = generateDeletedEntityStatus();
+        lenient().when(mockEntityStatusService.getDeletedMockEntityStatus()).thenReturn(entityStatus);
+        List<Mock> mocks = generateListOfMocks();
+        lenient().when(mockRepository.findAllByEntityStatus(any(EntityStatus.class))).thenReturn(mocks);
+        // Act
+        mockManagementService.flushDeletedMocks();
+        // Assert
+        verify(mockRepository, times(1)).deleteAll(mocks);
+    }
+
+    @Test
+    void shouldFlushDeletedMocks_ThrowsException(){
+        // Arrange
+        EntityStatus entityStatus = generateDeletedEntityStatus();
+        lenient().when(mockEntityStatusService.getDeletedMockEntityStatus()).thenReturn(entityStatus);
+        List<Mock> mocks = generateListOfMocks();
+        doThrow(new RuntimeException()).when(mockRepository).findAllByEntityStatus(any(EntityStatus.class));
+        // Act
+        mockManagementService.flushDeletedMocks();
+        // Assert
+        verify(mockRepository, times(0)).deleteAll(mocks);
+    }
+
+    @Test
     void shouldReturnNull_ForCreateMock_WhenMockNameAlreadyExists() {
         // Arrange
         ProcessedMockRequest request = createProcessedMockRequest();
