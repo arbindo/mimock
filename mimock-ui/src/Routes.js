@@ -3,14 +3,13 @@ import { Route, Routes } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PlatformApi from './dev/platform-api/PlatformApi.jsx';
 import Style from './dev/ui-library/Style.jsx';
+import Login from 'components/login';
 
 function AppRoutes() {
-	console.log(process.env.NODE_ENV);
-
 	return (
 		<Router basename='/mimock-ui/'>
 			<Routes>
-				<Route path='/' element={<></>} />
+				<Route path='/' element={<Login />} />
 				<Route path='/style' element={<Style />} />
 				<Route path='/platform-api' element={<PlatformApi />} />
 			</Routes>

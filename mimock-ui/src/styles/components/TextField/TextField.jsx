@@ -14,6 +14,7 @@ function BasicTextField({
 	onChangeHandler,
 	onBlurHandler,
 	onFocusHandler,
+	style,
 }) {
 	return (
 		<FormControl data-testid={dataTestid} error={isError}>
@@ -26,6 +27,7 @@ function BasicTextField({
 				onBlur={onBlurHandler}
 				onFocus={onFocusHandler}
 				label={label}
+				style={style}
 			/>
 
 			<If condition={isError}>
@@ -39,11 +41,12 @@ BasicTextField.propTypes = {
 	label: PropTypes.string.isRequired,
 	dataTestid: PropTypes.string.isRequired,
 	inputValue: PropTypes.string.isRequired,
-	onBlurHandler: PropTypes.func.isRequired,
-	onChangeHandler: PropTypes.func.isRequired,
-	onFocusHandler: PropTypes.func.isRequired,
+	onBlurHandler: PropTypes.func,
+	onChangeHandler: PropTypes.func,
+	onFocusHandler: PropTypes.func,
 	errorLabel: PropTypes.string,
 	isError: PropTypes.bool,
+	style: PropTypes.object,
 };
 
 export default BasicTextField;

@@ -17,6 +17,7 @@ function PasswordField({
 	onChangeHandler,
 	onBlurHandler,
 	onFocusHandler,
+	style,
 }) {
 	const [values, setValues] = useState({
 		amount: '',
@@ -49,6 +50,7 @@ function PasswordField({
 				onChange={onChangeHandler}
 				onBlur={onBlurHandler}
 				onFocus={onFocusHandler}
+				style={style}
 				endAdornment={
 					<InputAdornment position='end'>
 						<IconButton
@@ -85,6 +87,7 @@ PasswordField.propTypes = {
 	onFocusHandler: PropTypes.func.isRequired,
 	errorLabel: PropTypes.string,
 	isError: PropTypes.bool,
+	style: PropTypes.object,
 };
 
 export default PasswordField;
