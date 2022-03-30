@@ -14,12 +14,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.support.DatabaseStartupValidator;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.stream.Stream;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@EnableScheduling
 public class MimockApplication {
     public static void main(String[] args) {
         SpringApplication.run(MimockApplication.class, args);

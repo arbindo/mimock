@@ -10,4 +10,6 @@ public interface PlatformSettingsService {
     List<PlatformSettings> listAllSupportedPlatformSettings();
 
     PlatformSettings updatePlatformSettings(ProcessedPlatformSettingsRequest request);
+
+    PlatformSettings getDefaultPlatformSettings();
 }

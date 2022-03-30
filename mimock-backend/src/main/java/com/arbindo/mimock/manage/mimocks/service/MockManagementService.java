@@ -22,6 +22,8 @@ public interface MockManagementService {
 
     boolean deleteAllMocks();
 
+    void flushDeletedMocks();
+
     Mock createMock(ProcessedMockRequest request);
 
     Mock updateMock(String mockId, ProcessedMockRequest request);

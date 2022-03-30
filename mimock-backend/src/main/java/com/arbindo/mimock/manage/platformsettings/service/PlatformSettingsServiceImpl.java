@@ -37,7 +37,7 @@ public class PlatformSettingsServiceImpl implements PlatformSettingsService {
             return null;
         }
         // Now we update single default entry. In the future, this service will be extensible for each user
-        try{
+        try {
             PlatformSettings defaultPlatformSettings = platformSettingsRepository.findAll().get(0);
             defaultPlatformSettings.setIsExportImportEnabled(request.getIsExportImportEnabled());
             defaultPlatformSettings.setIsFlushBinCronEnabled(request.getIsFlushBinCronEnabled());
@@ -49,4 +49,10 @@ public class PlatformSettingsServiceImpl implements PlatformSettingsService {
         }
         return null;
     }
+
+    @Override
+    public PlatformSettings getDefaultPlatformSettings() {
+        return platformSettingsRepository.findAll().get(0);
+    }
+
 }

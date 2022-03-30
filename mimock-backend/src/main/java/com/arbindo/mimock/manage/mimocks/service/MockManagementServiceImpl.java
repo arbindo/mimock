@@ -136,6 +136,19 @@ public class MockManagementServiceImpl implements MockManagementService {
         return false;
     }
 
+    @Override
+    public void flushDeletedMocks() {
+        try {
+            EntityStatus entityStatus = entityStatusService.getDeletedMockEntityStatus();
+            List<Mock> deletedMocks = mocksRepository.findAllByEntityStatus(entityStatus);
+            mocksRepository.deleteAll(deletedMocks);
+            log.log(Level.INFO, "Flushed " + deletedMocks.size() + " mock(s)!");
+        } catch (Exception e){
+            log.log(Level.DEBUG, e.getMessage());
+        }
+        log.log(Level.DEBUG, "Unable to flush deleted mocks!");
+    }
+
     @Transactional(rollbackOn = {Exception.class, RuntimeException.class, MockAlreadyExistsException.class})
     @Override
     public Mock createMock(ProcessedMockRequest request) {
