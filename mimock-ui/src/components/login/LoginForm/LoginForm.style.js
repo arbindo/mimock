@@ -54,3 +54,15 @@ export const UserNameField = tw.input`
 export const PasswordField = styled(UserNameField)``;
 
 export const SubmitButton = tw(CustomButton)``;
+
+export const ErrorLabel = tw.div`
+    font-sans
+    rounded-md
+    my-2
+    mx-auto
+    text-center
+    p-3
+    shadow-sm
+    bg-red-100
+    text-red-700
+`;

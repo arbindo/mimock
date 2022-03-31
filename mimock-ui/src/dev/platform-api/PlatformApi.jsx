@@ -1,4 +1,4 @@
-import { getToken } from 'api/MocksApi';
+import { getToken } from 'api/MimockApi';
 import React, { useState } from 'react';
 import { CustomButton } from 'styles';
 import PlatformApiOperations from './PlatformApiOperations.jsx';

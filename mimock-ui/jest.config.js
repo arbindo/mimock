@@ -23,6 +23,9 @@ module.exports = {
 			statements: 95,
 		},
 	},
+	moduleNameMapper: {
+		'\\.(css|jpg|png|svg)$': '<rootDir>/__mocks__/assetMock.js',
+	},
 	// watchman: true,
 	// testURL: "http://localhost",
 	// maxWorkers: "50%",

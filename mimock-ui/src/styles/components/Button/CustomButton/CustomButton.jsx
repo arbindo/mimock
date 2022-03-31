@@ -14,11 +14,11 @@ function CustomButton({
 	return (
 		<CustomButtonContainer
 			data-testid={dataTestid}
-			color={color}
-			width={width}
-			background={background}
+			$color={color}
+			$width={width}
+			$background={background}
 			onClick={onclickHandler}
-			additionalStyles={additionalStyles}
+			$additionalStyles={additionalStyles}
 		>
 			{label}
 		</CustomButtonContainer>
@@ -27,7 +27,7 @@ function CustomButton({
 
 CustomButton.propTypes = {
 	label: PropTypes.string.isRequired,
-	onclickHandler: PropTypes.func.isRequired,
+	onclickHandler: PropTypes.func,
 	dataTestid: PropTypes.string,
 	color: PropTypes.string,
 	width: PropTypes.string,
