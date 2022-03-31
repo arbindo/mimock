@@ -2,6 +2,25 @@ import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import Logo from 'assets/logo.svg';
 
+export const SocialWrapperContainer = tw.div`
+    block
+    w-1/2
+    h-full
+    justify-center
+    mx-auto
+    rounded-tl-md
+    rounded-bl-md
+    border-r-2
+    bg-white
+    dark:bg-slate-600
+`;
+
+export const TopWrapper = tw.div`
+    block
+    w-full
+    h-11/12
+`;
+
 const _TWLogoWrapper = tw.div`
     flex
     items-center
@@ -19,20 +38,6 @@ export const LogoWrapper = styled(_TWLogoWrapper)`
 	height: 200px;
 `;
 
-export const SocialWrapperContainer = tw.div`
-    block
-    w-1/2
-    h-full
-    justify-center
-    mx-auto
-`;
-
-export const TopWrapper = tw.div`
-    block
-    w-full
-    h-11/12
-`;
-
 export const SocialIconsWrapper = tw.div`
     flex
     justify-around
@@ -43,6 +48,7 @@ export const SocialIconsWrapper = tw.div`
     my-14
     text-4xl
     text-slate-800
+    dark:text-gray-300
     hover:cursor-pointer
 `;
 
@@ -54,6 +60,7 @@ export const Title = tw.h1`
     text-2xl
     font-sans
     text-gray-700
+    dark:text-gray-300
 `;
 
 export const Description = tw.h1`
@@ -62,14 +69,17 @@ export const Description = tw.h1`
     font-light
     font-sans
     text-gray-700
+    dark:text-gray-300
 `;
 
 export const LicenseFooter = tw.h1`
     text-right
     font-sans
-    text-sm
+    text-xs
     text-gray-400
     mr-1
     my-2
     h-1/12
 `;
+
+export const Link = tw.a``;

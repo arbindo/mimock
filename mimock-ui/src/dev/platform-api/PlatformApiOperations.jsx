@@ -14,7 +14,7 @@ import {
 	unarchiveMock,
 	exportMocks,
 	exportMocksCsvTemplate,
-} from 'api/MocksApi';
+} from 'api/MimockApi';
 import {
 	listEntityStatus,
 	listHttpMethods,
