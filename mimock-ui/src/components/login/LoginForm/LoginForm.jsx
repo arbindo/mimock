@@ -58,7 +58,7 @@ export default function LoginForm() {
 	};
 
 	return (
-		<LoginFormContainer>
+		<LoginFormContainer data-testid='login-form'>
 			<Title>Login to mimock</Title>
 			<Underline />
 
