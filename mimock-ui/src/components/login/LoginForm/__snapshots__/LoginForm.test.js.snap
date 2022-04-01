@@ -4,6 +4,7 @@ exports[`LoginForm should enter credentials to login 1`] = `
 <div>
   <div
     class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+    data-testid="login-form"
   >
     <div
       class="font-sans text-xl font-bold text-gray-700"
@@ -60,6 +61,7 @@ exports[`LoginForm should render login form 1`] = `
 <div>
   <div
     class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+    data-testid="login-form"
   >
     <div
       class="font-sans text-xl font-bold text-gray-700"
@@ -116,6 +118,7 @@ exports[`LoginForm should show error message credentials are empty 1`] = `
 <div>
   <div
     class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+    data-testid="login-form"
   >
     <div
       class="font-sans text-xl font-bold text-gray-700"
@@ -178,6 +181,7 @@ exports[`LoginForm should show error message when getToken api call fails 1`] = 
 <div>
   <div
     class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+    data-testid="login-form"
   >
     <div
       class="font-sans text-xl font-bold text-gray-700"
@@ -240,6 +244,7 @@ exports[`LoginForm should show error message when password is empty 1`] = `
 <div>
   <div
     class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+    data-testid="login-form"
   >
     <div
       class="font-sans text-xl font-bold text-gray-700"
@@ -302,6 +307,7 @@ exports[`LoginForm should show error message when user name is empty 1`] = `
 <div>
   <div
     class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+    data-testid="login-form"
   >
     <div
       class="font-sans text-xl font-bold text-gray-700"
