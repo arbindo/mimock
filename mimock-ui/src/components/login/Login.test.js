@@ -16,6 +16,11 @@ jest.mock('react-cookie', () => ({
 	})),
 }));
 
+jest.mock('recoil', () => ({
+	atom: jest.fn(),
+	useRecoilState: jest.fn(() => []),
+}));
+
 describe('Login', () => {
 	it('should enter login component', async () => {
 		const tree = await render(<Login />);

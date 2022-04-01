@@ -17,6 +17,11 @@ jest.mock('react-cookie', () => ({
 	})),
 }));
 
+jest.mock('recoil', () => ({
+	atom: jest.fn(),
+	useRecoilState: jest.fn(() => []),
+}));
+
 describe('LoginForm', () => {
 	let mockedGetToken;
 

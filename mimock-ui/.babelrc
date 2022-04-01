@@ -1,6 +1,7 @@
 {
 	"presets": ["@babel/preset-react", "@babel/preset-env"],
 	"plugins": [
+		["@emotion"],
 		["@babel/transform-runtime"],
 		["jsx-control-statements"],
 		[
@@ -11,7 +12,9 @@
 					"styles": "./src/styles/components",
 					"api": "./src/api",
 					"assets": "./src/assets",
-					"components": "./src/components"
+					"components": "./src/components",
+					"hooks": "./src/hooks",
+					"atoms": "./src/atoms"
 				}
 			}
 		]

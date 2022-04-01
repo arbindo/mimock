@@ -12,7 +12,9 @@
 			"config/*": ["src/config/*"],
 			"common/*": ["src/common/*"],
 			"styles": ["/src/styles/components/*"],
-			"assets": ["/src/assets/*"]
+			"assets": ["/src/assets/*"],
+			"hooks": ["/src/hooks/*"],
+			"atoms": ["/src/atoms/*"]
 		}
 	}
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from 'api/MimockApi';
+import { FullPageLoader } from 'styles/Loaders';
 import {
 	LoginFormContainer,
 	Title,
@@ -59,6 +60,8 @@ export default function LoginForm() {
 
 	return (
 		<LoginFormContainer data-testid='login-form'>
+			<FullPageLoader />
+
 			<Title>Login to mimock</Title>
 			<Underline />
 
