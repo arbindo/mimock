@@ -1,5 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`LoginForm should enter credentials to login 1`] = `
+<div>
+  <div
+    class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+  >
+    <div
+      class="font-sans text-xl font-bold text-gray-700"
+    >
+      Login to mimock
+    </div>
+    <div
+      class="bg-teal-500 w-36 h-1.5"
+    />
+    <form
+      class="w-11/12 my-5 mx-auto flex flex-col justify-center"
+    >
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-username-label"
+      >
+        USER NAME
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300"
+        data-testid="login-username-input"
+        placeholder="Enter username"
+        required=""
+        value="mimock_user"
+      />
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-password-label"
+      >
+        PASSWORD
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300 sc-bdvvtL"
+        data-testid="login-password-input"
+        placeholder="Enter password"
+        required=""
+        type="password"
+        value="test@123"
+      />
+      <button
+        class="px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        data-testid="login-submit"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
 exports[`LoginForm should render login form 1`] = `
 <div>
   <div
@@ -52,6 +108,254 @@ exports[`LoginForm should render login form 1`] = `
         Login
       </button>
     </form>
+  </div>
+</div>
+`;
+
+exports[`LoginForm should show error message credentials are empty 1`] = `
+<div>
+  <div
+    class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+  >
+    <div
+      class="font-sans text-xl font-bold text-gray-700"
+    >
+      Login to mimock
+    </div>
+    <div
+      class="bg-teal-500 w-36 h-1.5"
+    />
+    <form
+      class="w-11/12 my-5 mx-auto flex flex-col justify-center"
+    >
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-username-label"
+      >
+        USER NAME
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300"
+        data-testid="login-username-input"
+        placeholder="Enter username"
+        required=""
+        value=""
+      />
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-password-label"
+      >
+        PASSWORD
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300 sc-bdvvtL"
+        data-testid="login-password-input"
+        placeholder="Enter password"
+        required=""
+        type="password"
+        value=""
+      />
+      <button
+        class="px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        data-testid="login-submit"
+      >
+        Login
+      </button>
+    </form>
+    <div
+      class="font-sans rounded-md my-2 mx-auto text-center p-3 shadow-sm bg-red-100 text-red-700"
+      data-testid="login-error-label"
+    >
+      Username cannot be empty
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoginForm should show error message when getToken api call fails 1`] = `
+<div>
+  <div
+    class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+  >
+    <div
+      class="font-sans text-xl font-bold text-gray-700"
+    >
+      Login to mimock
+    </div>
+    <div
+      class="bg-teal-500 w-36 h-1.5"
+    />
+    <form
+      class="w-11/12 my-5 mx-auto flex flex-col justify-center"
+    >
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-username-label"
+      >
+        USER NAME
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300"
+        data-testid="login-username-input"
+        placeholder="Enter username"
+        required=""
+        value="mimock_user"
+      />
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-password-label"
+      >
+        PASSWORD
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300 sc-bdvvtL"
+        data-testid="login-password-input"
+        placeholder="Enter password"
+        required=""
+        type="password"
+        value="test@123"
+      />
+      <button
+        class="px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        data-testid="login-submit"
+      >
+        Login
+      </button>
+    </form>
+    <div
+      class="font-sans rounded-md my-2 mx-auto text-center p-3 shadow-sm bg-red-100 text-red-700"
+      data-testid="login-error-label"
+    >
+      User login failed. Please try again.
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoginForm should show error message when password is empty 1`] = `
+<div>
+  <div
+    class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+  >
+    <div
+      class="font-sans text-xl font-bold text-gray-700"
+    >
+      Login to mimock
+    </div>
+    <div
+      class="bg-teal-500 w-36 h-1.5"
+    />
+    <form
+      class="w-11/12 my-5 mx-auto flex flex-col justify-center"
+    >
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-username-label"
+      >
+        USER NAME
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300"
+        data-testid="login-username-input"
+        placeholder="Enter username"
+        required=""
+        value="mimock_user"
+      />
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-password-label"
+      >
+        PASSWORD
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300 sc-bdvvtL"
+        data-testid="login-password-input"
+        placeholder="Enter password"
+        required=""
+        type="password"
+        value=""
+      />
+      <button
+        class="px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        data-testid="login-submit"
+      >
+        Login
+      </button>
+    </form>
+    <div
+      class="font-sans rounded-md my-2 mx-auto text-center p-3 shadow-sm bg-red-100 text-red-700"
+      data-testid="login-error-label"
+    >
+      Password cannot be empty
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoginForm should show error message when user name is empty 1`] = `
+<div>
+  <div
+    class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+  >
+    <div
+      class="font-sans text-xl font-bold text-gray-700"
+    >
+      Login to mimock
+    </div>
+    <div
+      class="bg-teal-500 w-36 h-1.5"
+    />
+    <form
+      class="w-11/12 my-5 mx-auto flex flex-col justify-center"
+    >
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-username-label"
+      >
+        USER NAME
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300"
+        data-testid="login-username-input"
+        placeholder="Enter username"
+        required=""
+        value=""
+      />
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-password-label"
+      >
+        PASSWORD
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300 sc-bdvvtL"
+        data-testid="login-password-input"
+        placeholder="Enter password"
+        required=""
+        type="password"
+        value="test@123"
+      />
+      <button
+        class="px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        data-testid="login-submit"
+      >
+        Login
+      </button>
+    </form>
+    <div
+      class="font-sans rounded-md my-2 mx-auto text-center p-3 shadow-sm bg-red-100 text-red-700"
+      data-testid="login-error-label"
+    >
+      Username cannot be empty
+    </div>
   </div>
 </div>
 `;
