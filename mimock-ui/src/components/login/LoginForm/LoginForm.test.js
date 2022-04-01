@@ -93,7 +93,9 @@ describe('LoginForm', () => {
 			expect(mockedCookieSet).toHaveBeenCalledWith('__authToken', 'token');
 
 			expect(mockedNavigation).toBeCalledTimes(1);
-			expect(mockedNavigation).toHaveBeenCalledWith('/mocks');
+			expect(mockedNavigation).toHaveBeenCalledWith('/mocks', {
+				replace: true,
+			});
 		});
 
 		expect(queryByTestId('login-error-label')).not.toBeInTheDocument();

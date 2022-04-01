@@ -50,7 +50,7 @@ export default function LoginForm() {
 			.then((res) => {
 				const { token } = res.data;
 				cookies.set('__authToken', token);
-				navigate('/mocks');
+				navigate('/mocks', { replace: true });
 			})
 			.catch(() => {
 				setErrorMessage(constants.errors.loginFailed);
