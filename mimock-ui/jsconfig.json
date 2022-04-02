@@ -7,6 +7,7 @@
 		"paths": {
 			"src/*": ["src/*"],
 			"api/*": ["src/api/*"],
+			"services/*": ["src/api/services/*"],
 			"assets/*": ["src/assets/*"],
 			"components/*": ["src/components/*"],
 			"config/*": ["src/config/*"],

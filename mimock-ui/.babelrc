@@ -11,6 +11,7 @@
 				"alias": {
 					"styles": "./src/styles/components",
 					"api": "./src/api",
+					"services": "./src/api/services",
 					"assets": "./src/assets",
 					"components": "./src/components",
 					"hooks": "./src/hooks",

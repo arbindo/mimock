@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Cookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { getToken } from 'api/MimockApi';
+import { getToken } from 'services/authentication/authentication.service';
 import { FullPageLoader } from 'styles/Loaders';
 import {
 	LoginFormContainer,

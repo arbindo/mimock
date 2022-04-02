@@ -12,9 +12,11 @@ import {
 	listDeletedMocks,
 	archiveMock,
 	unarchiveMock,
+} from 'services/mockManagement/mockManagement.service';
+import {
 	exportMocks,
 	exportMocksCsvTemplate,
-} from 'api/MimockApi';
+} from 'services/mockManagement/exportMock.service';
 import {
 	listEntityStatus,
 	listHttpMethods,

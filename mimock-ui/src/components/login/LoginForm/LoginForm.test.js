@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm from './LoginForm';
-import * as Api from 'api/MimockApi';
+import * as Api from 'services/authentication/authentication.service';
 import { render, fireEvent, act } from '@testing-library/react';
 
 const mockedNavigation = jest.fn(() => {});

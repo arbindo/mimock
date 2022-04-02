@@ -1,4 +1,4 @@
-import { getToken } from 'api/MimockApi';
+import { getToken } from 'services/authentication/authentication.service';
 import React, { useState } from 'react';
 import { CustomButton } from 'styles';
 import PlatformApiOperations from './PlatformApiOperations.jsx';
