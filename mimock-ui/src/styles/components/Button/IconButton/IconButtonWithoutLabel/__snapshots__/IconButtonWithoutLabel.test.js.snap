@@ -3,7 +3,9 @@
 exports[`Icon Button Without Label should render add Button 1`] = `
 <div>
   <button
+    background="bg-white dark:bg-slate-300"
     class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
+    color="text-black"
     data-testid="icon-without-label-button-test-1"
   >
     <svg
@@ -26,7 +28,9 @@ exports[`Icon Button Without Label should render add Button 1`] = `
 exports[`Icon Button Without Label should render clear Button 1`] = `
 <div>
   <button
+    background="bg-white dark:bg-slate-300"
     class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
+    color="text-black"
     data-testid="icon-without-label-button-test-2"
   >
     <svg
@@ -49,7 +53,9 @@ exports[`Icon Button Without Label should render clear Button 1`] = `
 exports[`Icon Button Without Label should render copy Button 1`] = `
 <div>
   <button
+    background="bg-white dark:bg-slate-300"
     class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
+    color="text-black"
     data-testid="icon-without-label-button-test-4"
   >
     <svg
@@ -72,7 +78,9 @@ exports[`Icon Button Without Label should render copy Button 1`] = `
 exports[`Icon Button Without Label should render default Button when variant is null 1`] = `
 <div>
   <button
+    background="bg-white dark:bg-slate-300"
     class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
+    color="text-black"
     data-testid="icon-without-label-button-test-5"
   >
     <svg
@@ -95,7 +103,9 @@ exports[`Icon Button Without Label should render default Button when variant is 
 exports[`Icon Button Without Label should render delete Button 1`] = `
 <div>
   <button
+    background="bg-white dark:bg-slate-300"
     class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
+    color="text-black"
     data-testid="icon-without-label-button-test-3"
   >
     <svg

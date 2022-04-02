@@ -12,8 +12,8 @@ function IconButtonWithoutLabel({ variant, onclickHandler, dataTestid }) {
 	return (
 		<IconButtonWithoutLabelContainer
 			data-testid={dataTestid}
-			$color={color}
-			$background={background}
+			color={color}
+			background={background}
 			onClick={onclickHandler}
 		>
 			{getIcon(variant)}

@@ -9,9 +9,9 @@ describe('Icon Button With Label', () => {
 		tree = await render(
 			<IconButtonWithLabel
 				dataTestid='icon-with-label-button-test-1'
-				$background={'bg-green-300'}
-				$color={'text-lime-700'}
-				$width='w-5/6'
+				background={'bg-green-300'}
+				color={'text-lime-700'}
+				width='w-5/6'
 				label='Add'
 				onclickHandler={() => {
 					console.log('Clicked add icon button');
@@ -29,9 +29,9 @@ describe('Icon Button With Label', () => {
 		tree = await render(
 			<IconButtonWithLabel
 				dataTestid='icon-with-label-button-test-2'
-				$background={'bg-red-300'}
-				$color={'text-red-800'}
-				$width='w-5/6'
+				background={'bg-red-300'}
+				color={'text-red-800'}
+				width='w-5/6'
 				label='Clear'
 				onclickHandler={() => {
 					console.log('Clicked clear icon button');
@@ -49,9 +49,9 @@ describe('Icon Button With Label', () => {
 		tree = await render(
 			<IconButtonWithLabel
 				dataTestid='icon-with-label-button-test-3'
-				$background={'bg-red-600'}
-				$color={'text-white'}
-				$width='w-5/6'
+				background={'bg-red-600'}
+				color={'text-white'}
+				width='w-5/6'
 				label='Delete'
 				onclickHandler={() => {
 					console.log('Clicked delete icon button');
@@ -69,9 +69,9 @@ describe('Icon Button With Label', () => {
 		tree = await render(
 			<IconButtonWithLabel
 				dataTestid='icon-with-label-button-test-4'
-				$background={'bg-blue-600'}
-				$color={'text-white'}
-				$width='w-5/6'
+				background={'bg-blue-600'}
+				color={'text-white'}
+				width='w-5/6'
 				label='Copy'
 				onclickHandler={() => {
 					console.log('Clicked copy icon button');

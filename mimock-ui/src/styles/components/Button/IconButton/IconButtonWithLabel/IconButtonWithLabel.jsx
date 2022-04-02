@@ -18,9 +18,9 @@ function IconButtonWithLabel({
 	return (
 		<IconButtonWithLabelContainer
 			data-testid={dataTestid}
-			$color={color}
-			$width={width}
-			$background={background}
+			color={color}
+			width={width}
+			background={background}
 			onClick={onclickHandler}
 		>
 			{getIcon(variant)}

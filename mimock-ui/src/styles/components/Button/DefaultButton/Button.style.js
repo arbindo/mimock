@@ -11,7 +11,7 @@ export const ButtonContainer = tw.button`
   font-semibold
   cursor-pointer
   hover:brightness-105
-	${(props) => props.$color}
-  ${(props) => (props.$width ? props.$width : 'w-fit')}
-	${(props) => props.$background}
+	${(props) => props.color}
+  ${(props) => (props.width ? props.width : 'w-fit')}
+	${(props) => props.background}
 `;

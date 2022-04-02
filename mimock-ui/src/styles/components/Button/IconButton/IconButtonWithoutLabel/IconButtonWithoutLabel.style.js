@@ -14,6 +14,6 @@ export const IconButtonWithoutLabelContainer = tw.button`
   font-semibold
   cursor-pointer
   hover:brightness-105
-  ${(props) => props.$color}
-	${(props) => props.$background}
+  ${(props) => props.color}
+	${(props) => props.background}
 `;
