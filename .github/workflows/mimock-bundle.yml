@@ -28,7 +28,7 @@ jobs:
       - name: Build Mimock app
         run: |
           cd mimock-backend && rm -rf target/
-          ./mvnw clean package -P productionBundle -P startDatabase
+          ./mvnw -ntp clean package -P productionBundle -P startDatabase
 
       - name: Publish JAR
         uses: actions/upload-artifact@v2
