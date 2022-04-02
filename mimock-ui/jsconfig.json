@@ -15,7 +15,8 @@
 			"styles": ["/src/styles/components/*"],
 			"assets": ["/src/assets/*"],
 			"hooks": ["/src/hooks/*"],
-			"atoms": ["/src/atoms/*"]
+			"atoms": ["/src/atoms/*"],
+			"constants": ["/src/constants/*"]
 		}
 	}
 }

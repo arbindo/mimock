@@ -5,24 +5,26 @@ import { client } from '../AxiosClient';
 export default function useAxiosInterceptor() {
 	const [, setLoading] = useRecoilState(showFullPageLoader);
 
-	client.interceptors.request.use(
-		(config) => {
+	const onRequestFulfilled = (config) => {
+		const { showFullPageLoader } = config;
+		if (showFullPageLoader) {
 			setLoading(true);
-			return config;
-		},
-		(err) => {
-			return Promise.reject(err);
 		}
-	);
+		return config;
+	};
 
-	client.interceptors.response.use(
-		(response) => {
-			setLoading(false);
-			return response;
-		},
-		(err) => {
-			setLoading(false);
-			return Promise.reject(err);
-		}
-	);
+	const onRequestFailed = (err) => Promise.reject(err);
+
+	const onResponseFulfilled = (response) => {
+		setLoading(false);
+		return response;
+	};
+
+	const onResponseCalled = (err) => {
+		setLoading(false);
+		return Promise.reject(err);
+	};
+
+	client.interceptors.request.use(onRequestFulfilled, onRequestFailed);
+	client.interceptors.response.use(onResponseFulfilled, onResponseCalled);
 }

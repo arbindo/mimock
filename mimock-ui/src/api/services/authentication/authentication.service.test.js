@@ -23,6 +23,13 @@ describe('Authentication service', () => {
 
 		const response = await getToken('admin', 'admin');
 
+		expect(authenticate).toHaveBeenCalledTimes(1);
+		expect(authenticate).toHaveBeenCalledWith(
+			'/user/authenticate',
+			{ password: 'admin', userName: 'admin' },
+			{ showFullPageLoader: true }
+		);
+
 		expect(response).toBeTruthy();
 		expect(response.data.token).toBe('token');
 	});
@@ -33,6 +40,12 @@ describe('Authentication service', () => {
 		);
 
 		getToken('admin', 'admin').catch((err) => {
+			expect(authenticate).toHaveBeenCalledTimes(1);
+			expect(authenticate).toHaveBeenCalledWith(
+				'/user/authenticate',
+				{ password: 'admin', userName: 'admin' },
+				{ showFullPageLoader: true }
+			);
 			expect(err).toBeTruthy();
 			expect(err).toBeInstanceOf(Error);
 			expect(err).toHaveProperty('message', 'Authentication failed!');

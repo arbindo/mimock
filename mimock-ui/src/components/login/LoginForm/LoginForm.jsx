@@ -3,6 +3,7 @@ import { Cookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from 'services/authentication/authentication.service';
 import { FullPageLoader } from 'styles/Loaders';
+import { globalConstants } from 'constants/globalConstants';
 import {
 	LoginFormContainer,
 	Title,
@@ -50,7 +51,7 @@ export default function LoginForm() {
 		await getToken(userName, password)
 			.then((res) => {
 				const { token } = res.data;
-				cookies.set('__authToken', token);
+				cookies.set(globalConstants.authCookieName, token);
 				navigate('/mocks', { replace: true });
 			})
 			.catch(() => {

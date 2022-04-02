@@ -15,7 +15,8 @@
 					"assets": "./src/assets",
 					"components": "./src/components",
 					"hooks": "./src/hooks",
-					"atoms": "./src/atoms"
+					"atoms": "./src/atoms",
+					"constants": "./src/constants"
 				}
 			}
 		]

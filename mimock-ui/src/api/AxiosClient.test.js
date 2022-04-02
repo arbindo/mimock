@@ -1,6 +1,13 @@
 import { get, post, put, remove, options, authenticate } from './AxiosClient';
 import mockAxios from 'jest-mock-axios';
 
+jest.mock('react-cookie', () => ({
+	Cookies: jest.fn().mockImplementation(() => ({
+		...jest.requireActual('react-cookie'),
+		get: () => 'eyJpYXQiOiJTYXQg',
+	})),
+}));
+
 describe('AxiosClient', () => {
 	beforeEach(() => {
 		jest.useFakeTimers();
@@ -19,11 +26,11 @@ describe('AxiosClient', () => {
 		it('should call axios.get with the correct url and headers', async () => {
 			mockAxios.get.mockResolvedValue({ data: { mock: { id: 1 } } });
 
-			const response = await get('/test', 'token');
+			const response = await get('/test');
 
 			expect(mockAxios.get).toHaveBeenCalledWith('/test', {
 				headers: {
-					Authorization: 'Bearer token',
+					Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 				},
 			});
 
@@ -34,11 +41,11 @@ describe('AxiosClient', () => {
 		it('should fail in axios.get call', async () => {
 			mockAxios.get.mockRejectedValue(new Error('error'));
 
-			const err = await get('/test', 'token');
+			const err = await get('/test');
 
 			expect(mockAxios.get).toHaveBeenCalledWith('/test', {
 				headers: {
-					Authorization: 'Bearer token',
+					Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 				},
 			});
 			expect(err).toBeTruthy();
@@ -54,7 +61,6 @@ describe('AxiosClient', () => {
 			const response = await post(
 				'/test',
 				{ mock: { id: 1 } },
-				'token',
 				'application/json'
 			);
 
@@ -63,7 +69,7 @@ describe('AxiosClient', () => {
 				{ mock: { id: 1 } },
 				{
 					headers: {
-						Authorization: 'Bearer token',
+						Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 						'Content-Type': 'application/json',
 					},
 				}
@@ -76,19 +82,14 @@ describe('AxiosClient', () => {
 		it('should fail in axios.post call', async () => {
 			mockAxios.post.mockRejectedValue(new Error('error'));
 
-			const err = await post(
-				'/test',
-				{ mock: { id: 1 } },
-				'token',
-				'application/json'
-			);
+			const err = await post('/test', { mock: { id: 1 } }, 'application/json');
 
 			expect(mockAxios.post).toHaveBeenCalledWith(
 				'/test',
 				{ mock: { id: 1 } },
 				{
 					headers: {
-						Authorization: 'Bearer token',
+						Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 						'Content-Type': 'application/json',
 					},
 				}
@@ -157,7 +158,6 @@ describe('AxiosClient', () => {
 			const response = await put(
 				'/test',
 				{ mock: { id: 1 } },
-				'token',
 				'application/json'
 			);
 
@@ -166,7 +166,7 @@ describe('AxiosClient', () => {
 				{ mock: { id: 1 } },
 				{
 					headers: {
-						Authorization: 'Bearer token',
+						Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 						'Content-Type': 'application/json',
 					},
 				}
@@ -178,19 +178,14 @@ describe('AxiosClient', () => {
 		it('should fail in axios.put call', async () => {
 			mockAxios.put.mockRejectedValue(new Error('error'));
 
-			const err = await put(
-				'/test',
-				{ mock: { id: 1 } },
-				'token',
-				'application/json'
-			);
+			const err = await put('/test', { mock: { id: 1 } }, 'application/json');
 
 			expect(mockAxios.put).toHaveBeenCalledWith(
 				'/test',
 				{ mock: { id: 1 } },
 				{
 					headers: {
-						Authorization: 'Bearer token',
+						Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 						'Content-Type': 'application/json',
 					},
 				}
@@ -205,11 +200,11 @@ describe('AxiosClient', () => {
 		it('should call axios.delete with the correct url and headers', async () => {
 			mockAxios.delete.mockResolvedValue({ data: { message: 'Mock deleted' } });
 
-			const response = await remove('/test', 'token', 'application/json');
+			const response = await remove('/test');
 
 			expect(mockAxios.delete).toHaveBeenCalledWith('/test', {
 				headers: {
-					Authorization: 'Bearer token',
+					Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 				},
 			});
 			expect(response).toBeTruthy();
@@ -219,11 +214,11 @@ describe('AxiosClient', () => {
 		it('should fail in axios.delete call', async () => {
 			mockAxios.delete.mockRejectedValue(new Error('error'));
 
-			const err = await remove('/test', 'token', 'application/json');
+			const err = await remove('/test');
 
 			expect(mockAxios.delete).toHaveBeenCalledWith('/test', {
 				headers: {
-					Authorization: 'Bearer token',
+					Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 				},
 			});
 			expect(err).toBeTruthy();
@@ -238,11 +233,11 @@ describe('AxiosClient', () => {
 				data: { message: 'Mock options' },
 			});
 
-			const response = await options('/test', 'token', 'application/json');
+			const response = await options('/test');
 
 			expect(mockAxios.options).toHaveBeenCalledWith('/test', {
 				headers: {
-					Authorization: 'Bearer token',
+					Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 				},
 			});
 			expect(response).toBeTruthy();
@@ -252,11 +247,11 @@ describe('AxiosClient', () => {
 		it('should fail in axios.options call', async () => {
 			mockAxios.options.mockRejectedValue(new Error('error'));
 
-			const err = await options('/test', 'token', 'application/json');
+			const err = await options('/test');
 
 			expect(mockAxios.options).toHaveBeenCalledWith('/test', {
 				headers: {
-					Authorization: 'Bearer token',
+					Authorization: 'Bearer eyJpYXQiOiJTYXQg',
 				},
 			});
 			expect(err).toBeTruthy();
