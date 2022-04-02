@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Log, LogError } from '../logger/Logger';
 import { Cookies } from 'react-cookie';
+import { LogError } from './logger/Logger';
 
 const cookies = new Cookies();
 const csrfToken = cookies.get('XSRF-TOKEN');
@@ -18,95 +18,83 @@ export const client = axios.create({
 });
 
 const get = async (url, token) => {
-	try {
-		const response = await client.get(url, {
+	return await client
+		.get(url, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
+		})
+		.catch((err) => {
+			LogError(err);
+			return err;
 		});
-		Log(url, response);
-		return response;
-	} catch (err) {
-		LogError(err);
-	}
-	return null;
 };
 
 const post = async (url, requestData, token, contentType) => {
-	try {
-		const response = await client.post(url, requestData, {
+	return await client
+		.post(url, requestData, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 				'Content-Type': contentType,
 			},
+		})
+		.catch((err) => {
+			LogError(err);
+			return err;
 		});
-		Log(url, response);
-		return response;
-	} catch (err) {
-		LogError(err);
-	}
-	return null;
 };
 
 const authenticate = async (url, requestData) => {
-	try {
-		const response = await client.post(url, requestData, {
+	return await client
+		.post(url, requestData, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
+		})
+		.catch((err) => {
+			LogError(err);
+			return err;
 		});
-		Log(url, response);
-		return response;
-	} catch (err) {
-		LogError(err);
-	}
-	return null;
 };
 
 const put = async (url, data, token, contentType) => {
-	try {
-		const response = await client.put(url, data, {
+	return await client
+		.put(url, data, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 				'Content-Type': contentType,
 			},
+		})
+		.catch((err) => {
+			LogError(err);
+			return err;
 		});
-		Log(url, response);
-		return response;
-	} catch (err) {
-		LogError(err);
-	}
-	return null;
 };
 
 const remove = async (url, token) => {
-	try {
-		const response = await client.delete(url, {
+	return await client
+		.delete(url, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
+		})
+		.catch((err) => {
+			LogError(err);
+			return err;
 		});
-		Log(url, response);
-		return response;
-	} catch (err) {
-		LogError(err);
-	}
-	return null;
 };
 
 const options = async (url, token) => {
-	try {
-		const response = await client.options(url, {
+	return await client
+		.options(url, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
+		})
+		.catch((err) => {
+			LogError(err);
+			return err;
 		});
-		Log(url, response);
-		return response;
-	} catch (err) {
-		LogError(err);
-	}
-	return null;
 };
 
 export { get, post, put, remove, options, authenticate };
