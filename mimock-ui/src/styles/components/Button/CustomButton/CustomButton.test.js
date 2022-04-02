@@ -9,9 +9,9 @@ describe('Custom Button', () => {
 		tree = await render(
 			<CustomButton
 				dataTestid='custom-button-test-1'
-				color='text-yellow-700'
-				background='bg-yellow-300'
-				width='w-5/6'
+				$color='text-yellow-700'
+				$background='bg-yellow-300'
+				$width='w-5/6'
 				label='Custom button'
 				onclickHandler={() => {
 					console.log('Clicked custom button');

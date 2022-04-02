@@ -9,8 +9,8 @@ describe('Icon Button Without Label', () => {
 		tree = await render(
 			<IconButtonWithoutLabel
 				dataTestid='icon-without-label-button-test-1'
-				background={'bg-green-300'}
-				color={'text-lime-700'}
+				$background={'bg-green-300'}
+				$color={'text-lime-700'}
 				onclickHandler={() => {
 					console.log('Clicked add icon button');
 				}}
@@ -27,8 +27,8 @@ describe('Icon Button Without Label', () => {
 		tree = await render(
 			<IconButtonWithoutLabel
 				dataTestid='icon-without-label-button-test-2'
-				background={'bg-red-300'}
-				color={'text-red-800'}
+				$background={'bg-red-300'}
+				$color={'text-red-800'}
 				onclickHandler={() => {
 					console.log('Clicked clear icon button');
 				}}
@@ -45,8 +45,8 @@ describe('Icon Button Without Label', () => {
 		tree = await render(
 			<IconButtonWithoutLabel
 				dataTestid='icon-without-label-button-test-3'
-				background={'bg-red-600'}
-				color={'text-white'}
+				$background={'bg-red-600'}
+				$color={'text-white'}
 				onclickHandler={() => {
 					console.log('Clicked delete icon button');
 				}}
@@ -63,8 +63,8 @@ describe('Icon Button Without Label', () => {
 		tree = await render(
 			<IconButtonWithoutLabel
 				dataTestid='icon-without-label-button-test-4'
-				background={'bg-blue-600'}
-				color={'text-white'}
+				$background={'bg-blue-600'}
+				$color={'text-white'}
 				onclickHandler={() => {
 					console.log('Clicked copy icon button');
 				}}

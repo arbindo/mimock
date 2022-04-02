@@ -31,9 +31,9 @@ function Pill({ variant, label, onclickHandler, dataTestid }) {
 	return (
 		<PillWrapper
 			data-testid={dataTestid}
-			color={color}
-			background={background}
-			border={border}
+			$color={color}
+			$background={background}
+			$border={border}
 			onClick={onclickHandler}
 		>
 			{label}

@@ -12,7 +12,7 @@ export const PillWrapper = tw.div`
 	border-2
 	font-bold
 	cursor-pointer
-	${(props) => props.color}
-	${(props) => props.background}
-	${(props) => props.border}
+	${(props) => props.$color}
+	${(props) => props.$background}
+	${(props) => props.$border}
 `;

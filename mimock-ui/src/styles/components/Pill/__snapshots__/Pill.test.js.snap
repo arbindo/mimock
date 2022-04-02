@@ -3,10 +3,7 @@
 exports[`Pill should render default pill without variant 1`] = `
 <div>
   <div
-    background="bg-white dark:bg-slate-300"
-    border="border-gray-500"
     class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
-    color="text-gray-500"
     data-testid="pill-test-4"
   >
     Default
@@ -17,10 +14,7 @@ exports[`Pill should render default pill without variant 1`] = `
 exports[`Pill should render green pill 1`] = `
 <div>
   <div
-    background="bg-white dark:bg-slate-300"
-    border="border-gray-500"
     class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
-    color="text-gray-500"
     data-testid="pill-test-2"
   >
     Success
@@ -31,10 +25,7 @@ exports[`Pill should render green pill 1`] = `
 exports[`Pill should render red pill 1`] = `
 <div>
   <div
-    background="bg-white dark:bg-slate-300"
-    border="border-gray-500"
     class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
-    color="text-gray-500"
     data-testid="pill-test-1"
   >
     Cancel
@@ -45,10 +36,7 @@ exports[`Pill should render red pill 1`] = `
 exports[`Pill should render yellow pill 1`] = `
 <div>
   <div
-    background="bg-white dark:bg-slate-300"
-    border="border-gray-500"
     class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
-    color="text-gray-500"
     data-testid="pill-test-3"
   >
     Warning
