@@ -25,7 +25,7 @@ function getVariant(variant) {
 
 Button.propTypes = {
 	label: PropTypes.string.isRequired,
-	onclickHandler: PropTypes.func.isRequired,
+	onclickHandler: PropTypes.func,
 	dataTestid: PropTypes.string,
 	variant: PropTypes.string,
 	width: PropTypes.string,

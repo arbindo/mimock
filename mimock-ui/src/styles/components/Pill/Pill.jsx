@@ -47,7 +47,7 @@ function getVariant(variant) {
 
 Pill.propTypes = {
 	label: PropTypes.string.isRequired,
-	onclickHandler: PropTypes.func.isRequired,
+	onclickHandler: PropTypes.func,
 	dataTestid: PropTypes.string,
 	variant: PropTypes.string,
 };

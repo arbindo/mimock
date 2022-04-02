@@ -43,7 +43,7 @@ function getIcon(variant) {
 IconButtonWithoutLabel.propTypes = {
 	variant: PropTypes.string,
 	dataTestid: PropTypes.string,
-	onclickHandler: PropTypes.func.isRequired,
+	onclickHandler: PropTypes.func,
 };
 
 export default IconButtonWithoutLabel;
