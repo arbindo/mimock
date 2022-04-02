@@ -20,11 +20,8 @@ exports[`Style should render custom button 2 1`] = `
 
 exports[`Style should render default button 1 1`] = `
 <button
-  background="bg-red-300 dark:bg-red-500"
   class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-5/6 bg-red-300 dark:bg-red-500"
-  color="text-red-800 dark:text-white"
   data-testid="default-button-test-1"
-  width="w-5/6"
 >
   Cancel
 </button>
@@ -32,11 +29,8 @@ exports[`Style should render default button 1 1`] = `
 
 exports[`Style should render default button 2 1`] = `
 <button
-  background="bg-green-300 dark:bg-green-400"
   class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/2 bg-green-300 dark:bg-green-400"
-  color="text-lime-700 dark:text-white"
   data-testid="default-button-test-2"
-  width="w-1/2"
 >
   Success
 </button>
@@ -44,9 +38,7 @@ exports[`Style should render default button 2 1`] = `
 
 exports[`Style should render default button 3 1`] = `
 <button
-  background="bg-red-600"
   class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
-  color="text-white"
   data-testid="default-button-test-3"
 >
   Cancel
@@ -55,11 +47,8 @@ exports[`Style should render default button 3 1`] = `
 
 exports[`Style should render default button 4 1`] = `
 <button
-  background="bg-green-500"
   class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-green-500"
-  color="text-white"
   data-testid="default-button-test-4"
-  width="w-1/2"
 >
   Success
 </button>
@@ -67,9 +56,7 @@ exports[`Style should render default button 4 1`] = `
 
 exports[`Style should render default button 5 1`] = `
 <button
-  background="bg-blue-600"
   class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-blue-600"
-  color="text-white"
   data-testid="default-button-test-5"
 >
   Primary
@@ -78,11 +65,8 @@ exports[`Style should render default button 5 1`] = `
 
 exports[`Style should render default button 6 1`] = `
 <button
-  background="bg-white dark:bg-slate-300"
   class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-3/4 bg-white dark:bg-slate-300"
-  color="text-black"
   data-testid="default-button-test-6"
-  width="w-3/4"
 >
   Default
 </button>
@@ -90,9 +74,7 @@ exports[`Style should render default button 6 1`] = `
 
 exports[`Style should render default button 7 1`] = `
 <button
-  background="bg-teal-400"
   class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-teal-400"
-  color="text-white"
   data-testid="default-button-test-7"
 >
   LOGIN
@@ -101,11 +83,8 @@ exports[`Style should render default button 7 1`] = `
 
 exports[`Style should render icon button with label 1 1`] = `
 <button
-  background="bg-green-300 dark:bg-green-400"
   class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/3 bg-green-300 dark:bg-green-400"
-  color="text-lime-700 dark:text-white"
   data-testid="icon-with-label-button-test-1"
-  width="w-1/3"
 >
   <svg
     fill="currentColor"
@@ -126,11 +105,8 @@ exports[`Style should render icon button with label 1 1`] = `
 
 exports[`Style should render icon button with label 2 1`] = `
 <button
-  background="bg-red-300 dark:bg-red-500"
   class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-1/2 bg-red-300 dark:bg-red-500"
-  color="text-red-800 dark:text-white"
   data-testid="icon-with-label-button-test-2"
-  width="w-1/2"
 >
   <svg
     class="fill-red-800 dark:fill-white"
@@ -150,9 +126,7 @@ exports[`Style should render icon button with label 2 1`] = `
 
 exports[`Style should render icon button with label 3 1`] = `
 <button
-  background="bg-red-600"
   class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
-  color="text-white"
   data-testid="icon-with-label-button-test-3"
 >
   <svg
@@ -177,11 +151,8 @@ exports[`Style should render icon button with label 3 1`] = `
 
 exports[`Style should render icon button with label 4 1`] = `
 <button
-  background="bg-blue-600"
   class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-blue-600"
-  color="text-white"
   data-testid="icon-with-label-button-test-4"
-  width="w-1/2"
 >
   <svg
     fill="currentColor"
@@ -202,9 +173,7 @@ exports[`Style should render icon button with label 4 1`] = `
 
 exports[`Style should render icon button with label 5 1`] = `
 <button
-  background="bg-white dark:bg-slate-300"
   class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
-  color="text-black"
   data-testid="icon-with-label-button-test-5"
 >
   <svg
@@ -226,9 +195,7 @@ exports[`Style should render icon button with label 5 1`] = `
 
 exports[`Style should render icon button without label 1 1`] = `
 <button
-  background="bg-green-300 dark:bg-green-400"
   class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
-  color="text-lime-700 dark:text-white"
   data-testid="icon-without-label-button-test-1"
 >
   <svg
@@ -249,9 +216,7 @@ exports[`Style should render icon button without label 1 1`] = `
 
 exports[`Style should render icon button without label 2 1`] = `
 <button
-  background="bg-red-300 dark:bg-red-500"
   class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
-  color="text-red-800 dark:text-white"
   data-testid="icon-without-label-button-test-2"
 >
   <svg
@@ -271,9 +236,7 @@ exports[`Style should render icon button without label 2 1`] = `
 
 exports[`Style should render icon button without label 3 1`] = `
 <button
-  background="bg-red-600"
   class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-red-600"
-  color="text-white"
   data-testid="icon-without-label-button-test-3"
 >
   <svg
@@ -297,9 +260,7 @@ exports[`Style should render icon button without label 3 1`] = `
 
 exports[`Style should render icon button without label 4 1`] = `
 <button
-  background="bg-blue-600"
   class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-blue-600"
-  color="text-white"
   data-testid="icon-without-label-button-test-4"
 >
   <svg
@@ -320,9 +281,7 @@ exports[`Style should render icon button without label 4 1`] = `
 
 exports[`Style should render icon button without label 5 1`] = `
 <button
-  background="bg-white dark:bg-slate-300"
   class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
-  color="text-black"
   data-testid="icon-without-label-button-test-5"
 >
   <svg
@@ -353,10 +312,7 @@ exports[`Style should render password field 1`] = `
 
 exports[`Style should render pill 1 1`] = `
 <div
-  background="bg-red-100 dark:bg-red-200"
-  border="border-red-500"
   class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-red-500 dark:text-red-700 bg-red-100 dark:bg-red-200 border-red-500"
-  color="text-red-500 dark:text-red-700"
   data-testid="pill-test-1"
 >
   CANCEL
@@ -365,10 +321,7 @@ exports[`Style should render pill 1 1`] = `
 
 exports[`Style should render pill 2 1`] = `
 <div
-  background="bg-green-100 dark:bg-green-200"
-  border="border-green-500"
   class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-green-500 dark:text-green-700 bg-green-100 dark:bg-green-200 border-green-500"
-  color="text-green-500 dark:text-green-700"
   data-testid="pill-test-2"
 >
   SUCCESS
@@ -377,10 +330,7 @@ exports[`Style should render pill 2 1`] = `
 
 exports[`Style should render pill 3 1`] = `
 <div
-  background="bg-yellow-100 dark:bg-yellow-200"
-  border="border-yellow-500"
   class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-yellow-500 dark:text-yellow-700 bg-yellow-100 dark:bg-yellow-200 border-yellow-500"
-  color="text-yellow-500 dark:text-yellow-700"
   data-testid="pill-test-3"
 >
   WARNING
@@ -389,10 +339,7 @@ exports[`Style should render pill 3 1`] = `
 
 exports[`Style should render pill 4 1`] = `
 <div
-  background="bg-white dark:bg-slate-300"
-  border="border-gray-500"
   class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
-  color="text-gray-500"
   data-testid="pill-test-4"
 >
   DEFAULT
@@ -417,61 +364,43 @@ exports[`Style should render style for button, pill and text field 1`] = `
         class="w-full grid grid-cols-4 gap-4 gap-y-8"
       >
         <button
-          background="bg-red-300 dark:bg-red-500"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-5/6 bg-red-300 dark:bg-red-500"
-          color="text-red-800 dark:text-white"
           data-testid="default-button-test-1"
-          width="w-5/6"
         >
           Cancel
         </button>
         <button
-          background="bg-green-300 dark:bg-green-400"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/2 bg-green-300 dark:bg-green-400"
-          color="text-lime-700 dark:text-white"
           data-testid="default-button-test-2"
-          width="w-1/2"
         >
           Success
         </button>
         <button
-          background="bg-red-600"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
-          color="text-white"
           data-testid="default-button-test-3"
         >
           Cancel
         </button>
         <button
-          background="bg-green-500"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-green-500"
-          color="text-white"
           data-testid="default-button-test-4"
-          width="w-1/2"
         >
           Success
         </button>
         <button
-          background="bg-blue-600"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-blue-600"
-          color="text-white"
           data-testid="default-button-test-5"
         >
           Primary
         </button>
         <button
-          background="bg-white dark:bg-slate-300"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-3/4 bg-white dark:bg-slate-300"
-          color="text-black"
           data-testid="default-button-test-6"
-          width="w-3/4"
         >
           Default
         </button>
         <button
-          background="bg-teal-400"
           class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-teal-400"
-          color="text-white"
           data-testid="default-button-test-7"
         >
           LOGIN
@@ -489,11 +418,8 @@ exports[`Style should render style for button, pill and text field 1`] = `
           Custom2
         </button>
         <button
-          background="bg-green-300 dark:bg-green-400"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/3 bg-green-300 dark:bg-green-400"
-          color="text-lime-700 dark:text-white"
           data-testid="icon-with-label-button-test-1"
-          width="w-1/3"
         >
           <svg
             fill="currentColor"
@@ -511,11 +437,8 @@ exports[`Style should render style for button, pill and text field 1`] = `
           Add
         </button>
         <button
-          background="bg-red-300 dark:bg-red-500"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-1/2 bg-red-300 dark:bg-red-500"
-          color="text-red-800 dark:text-white"
           data-testid="icon-with-label-button-test-2"
-          width="w-1/2"
         >
           <svg
             class="fill-red-800 dark:fill-white"
@@ -532,9 +455,7 @@ exports[`Style should render style for button, pill and text field 1`] = `
           Close
         </button>
         <button
-          background="bg-red-600"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
-          color="text-white"
           data-testid="icon-with-label-button-test-3"
         >
           <svg
@@ -556,11 +477,8 @@ exports[`Style should render style for button, pill and text field 1`] = `
           Delete
         </button>
         <button
-          background="bg-blue-600"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-blue-600"
-          color="text-white"
           data-testid="icon-with-label-button-test-4"
-          width="w-1/2"
         >
           <svg
             fill="currentColor"
@@ -578,9 +496,7 @@ exports[`Style should render style for button, pill and text field 1`] = `
           Copy
         </button>
         <button
-          background="bg-white dark:bg-slate-300"
           class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
-          color="text-black"
           data-testid="icon-with-label-button-test-5"
         >
           <svg
@@ -599,9 +515,7 @@ exports[`Style should render style for button, pill and text field 1`] = `
           Default
         </button>
         <button
-          background="bg-green-300 dark:bg-green-400"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white bg-green-300 dark:bg-green-400"
-          color="text-lime-700 dark:text-white"
           data-testid="icon-without-label-button-test-1"
         >
           <svg
@@ -619,9 +533,7 @@ exports[`Style should render style for button, pill and text field 1`] = `
           </svg>
         </button>
         <button
-          background="bg-red-300 dark:bg-red-500"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white bg-red-300 dark:bg-red-500"
-          color="text-red-800 dark:text-white"
           data-testid="icon-without-label-button-test-2"
         >
           <svg
@@ -638,9 +550,7 @@ exports[`Style should render style for button, pill and text field 1`] = `
           </svg>
         </button>
         <button
-          background="bg-red-600"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-red-600"
-          color="text-white"
           data-testid="icon-without-label-button-test-3"
         >
           <svg
@@ -661,9 +571,7 @@ exports[`Style should render style for button, pill and text field 1`] = `
           </svg>
         </button>
         <button
-          background="bg-blue-600"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-white bg-blue-600"
-          color="text-white"
           data-testid="icon-without-label-button-test-4"
         >
           <svg
@@ -681,9 +589,7 @@ exports[`Style should render style for button, pill and text field 1`] = `
           </svg>
         </button>
         <button
-          background="bg-white dark:bg-slate-300"
           class="flex items-center gap-3 p-4 m-auto shadow-md rounded-full text-center w-fit text-lg font-semibold cursor-pointer hover:brightness-105 text-black bg-white dark:bg-slate-300"
-          color="text-black"
           data-testid="icon-without-label-button-test-5"
         >
           <svg
@@ -714,37 +620,25 @@ exports[`Style should render style for button, pill and text field 1`] = `
         class="w-full grid grid-cols-4 gap-4 gap-y-8"
       >
         <div
-          background="bg-red-100 dark:bg-red-200"
-          border="border-red-500"
           class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-red-500 dark:text-red-700 bg-red-100 dark:bg-red-200 border-red-500"
-          color="text-red-500 dark:text-red-700"
           data-testid="pill-test-1"
         >
           CANCEL
         </div>
         <div
-          background="bg-green-100 dark:bg-green-200"
-          border="border-green-500"
           class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-green-500 dark:text-green-700 bg-green-100 dark:bg-green-200 border-green-500"
-          color="text-green-500 dark:text-green-700"
           data-testid="pill-test-2"
         >
           SUCCESS
         </div>
         <div
-          background="bg-yellow-100 dark:bg-yellow-200"
-          border="border-yellow-500"
           class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-yellow-500 dark:text-yellow-700 bg-yellow-100 dark:bg-yellow-200 border-yellow-500"
-          color="text-yellow-500 dark:text-yellow-700"
           data-testid="pill-test-3"
         >
           WARNING
         </div>
         <div
-          background="bg-white dark:bg-slate-300"
-          border="border-gray-500"
           class="px-6 py-3 m-auto shadow-md rounded-full text-base text-center w-fit border-2 font-bold cursor-pointer text-gray-500 bg-white dark:bg-slate-300 border-gray-500"
-          color="text-gray-500"
           data-testid="pill-test-4"
         >
           DEFAULT
