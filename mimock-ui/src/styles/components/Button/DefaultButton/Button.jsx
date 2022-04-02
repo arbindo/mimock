@@ -9,9 +9,9 @@ function Button({ variant, label, width, onclickHandler, dataTestid }) {
 	return (
 		<ButtonContainer
 			data-testid={dataTestid}
-			color={color}
-			width={width}
-			background={background}
+			$color={color}
+			$width={width}
+			$background={background}
 			onClick={onclickHandler}
 		>
 			{label}

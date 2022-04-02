@@ -9,9 +9,9 @@ describe('Pill', () => {
 		tree = await render(
 			<Pill
 				dataTestid='pill-test-1'
-				color={'text-red-500'}
-				background={'bg-red-100'}
-				border={'border-red-500'}
+				$color={'text-red-500'}
+				$background={'bg-red-100'}
+				$border={'border-red-500'}
 				label='Cancel'
 				onclickHandler={() => {
 					console.log('Clicked cancel pill');
@@ -29,9 +29,9 @@ describe('Pill', () => {
 		tree = await render(
 			<Pill
 				dataTestid='pill-test-2'
-				color={'text-green-500'}
-				background={'bg-green-100'}
-				border={'border-green-500'}
+				$color={'text-green-500'}
+				$background={'bg-green-100'}
+				$border={'border-green-500'}
 				label='Success'
 				onclickHandler={() => {
 					console.log('Clicked success pill');
@@ -49,9 +49,9 @@ describe('Pill', () => {
 		tree = await render(
 			<Pill
 				dataTestid='pill-test-3'
-				color={'text-yellow-500'}
-				background={'bg-yellow-100'}
-				border={'border-yellow-500'}
+				$color={'text-yellow-500'}
+				$background={'bg-yellow-100'}
+				$border={'border-yellow-500'}
 				label='Warning'
 				onclickHandler={() => {
 					console.log('Clicked warning pill');
