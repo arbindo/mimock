@@ -66,6 +66,12 @@ jobs:
         with:
           name: jest-coverage-report
           path: mimock-ui/src/coverage
+          
+      - name: Publish coverage report codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          commit_parent: ${{ github.sha }}
 
   build:
     needs:
