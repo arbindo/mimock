@@ -2,6 +2,7 @@ package com.arbindo.mimock.security.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.function.Function;
 @Service
 public class JWTUtils {
 
+    @Getter
     @Value("${app.security.jwt-expiry-in-seconds}")
     private String jwtExpiryInSeconds;
 

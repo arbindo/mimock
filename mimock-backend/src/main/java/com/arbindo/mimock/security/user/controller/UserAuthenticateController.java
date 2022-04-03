@@ -72,7 +72,8 @@ public class UserAuthenticateController {
         return ResponseEntity.ok(
                 AuthenticationTokenResponse.builder()
                         .token(jwtUtils.generateJWT(userDetails, userClaims))
-                        .expiresAt(jwtUtils.getTokenExpiryTimestamp().toString())
+                        .expiresAt(jwtUtils.getTokenExpiryTimestamp())
+                        .expiresAfterSeconds(Long.parseLong(jwtUtils.getJwtExpiryInSeconds()))
                         .build()
         );
     }

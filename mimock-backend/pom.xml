@@ -388,7 +388,8 @@
                                     <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${basedir}/src/main/resources/static/mimock-ui/</outputDirectory>
+                                    <outputDirectory>${project.basedir}/src/main/resources/static/mimock-ui/
+                                    </outputDirectory>
                                     <resources>
                                         <resource>
                                             <directory>../mimock-ui/dist</directory>

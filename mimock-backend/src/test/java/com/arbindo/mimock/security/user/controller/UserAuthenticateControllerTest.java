@@ -99,6 +99,9 @@ class UserAuthenticateControllerTest {
         Map<String, Object> responseMap = JsonMapper.convertJSONStringToMap(result.getResponse().getContentAsString());
         assertNotNull(responseMap);
 
+        assertNotNull(responseMap.get("expiresAt"));
+        assertEquals(1800, responseMap.get("expiresAfterSeconds"));
+
         SecretKeySpec key = new SecretKeySpec("C4BE6B45CBBD4CBADFE5E22F4BCDBAF8".getBytes(StandardCharsets.UTF_8), "HmacSHA256");
         String subject = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(responseMap.get("token").toString()).getBody().getSubject();
 
