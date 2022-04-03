@@ -41,7 +41,7 @@ jobs:
       - name: Build mimock docker image
         run: |
           docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.min && echo "Docker image build validated"
-          docker system prune && docker image prune --all
+          docker system prune -f && docker image prune --all -f
       
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
