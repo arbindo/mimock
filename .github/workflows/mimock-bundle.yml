@@ -28,6 +28,7 @@ jobs:
       - name: Build Mimock app
         run: |
           cd mimock-backend && rm -rf target/
+          mkdir -p ./src/main/resources/static/mimock-ui
           ./mvnw -ntp clean package -P productionBundle -P startDatabase
 
       - name: Publish JAR
