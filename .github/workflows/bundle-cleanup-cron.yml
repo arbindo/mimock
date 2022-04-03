@@ -1,7 +1,7 @@
 name: 'mimock artifacts cleanup'
 on:
   schedule:
-    - cron: '0 * * * *' # every night at 4 am UTC
+    - cron: '*/5 * * * *' # temp schedule
 
 jobs:
   delete-artifacts:
@@ -10,4 +10,4 @@ jobs:
       - uses: kolpav/purge-artifacts-action@v1
         with:
           token: ${{ secrets.GH_ACTIONS_TOKEN }}
-          expire-in: 0 # Setting this to 0 will delete all artifacts
+          expire-in: 0 # temp 
