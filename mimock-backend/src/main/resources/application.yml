@@ -63,4 +63,4 @@ springdoc:
       enabled: true
       header-name: X-XSRF-TOKEN
 
-flush-bin-cron-expression: "* */30 * * * *"
+flush-bin-cron-expression: "0 0 3 1 * *"
