@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from 'services/authentication/authentication.service';
@@ -25,6 +25,23 @@ export default function LoginForm() {
 	const [userName, setUserName] = useState('');
 	const [password, setPassword] = useState('');
 
+	const clearCsrfCookie = () => {
+		if (cookies.get(globalConstants.XSRF_COOKIE_NAME)) {
+			cookies.remove(globalConstants.XSRF_COOKIE_NAME);
+		}
+	};
+
+	const clearAuthToken = () => {
+		if (cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME)) {
+			cookies.remove(globalConstants.AUTH_TOKEN_COOKIE_NAME);
+		}
+	};
+
+	useEffect(() => {
+		clearCsrfCookie();
+		clearAuthToken();
+	}, []);
+
 	const isCredentialsValid = () => {
 		if (userName === '') {
 			setErrorMessage(constants.errors.userNameEmpty);
@@ -50,11 +67,19 @@ export default function LoginForm() {
 
 		await getToken(userName, password)
 			.then((res) => {
-				const { token } = res.data;
-				cookies.set(globalConstants.authCookieName, token);
+				const { token, expiresAfterSeconds } = res.data;
+
+				document.cookie = `${
+					globalConstants.AUTH_TOKEN_COOKIE_NAME
+				}=${token}; expires=${new Date(
+					Date.now() + parseInt(expiresAfterSeconds) * 1000
+				)}}`;
+
 				navigate('/mocks', { replace: true });
 			})
-			.catch(() => {
+			.catch((err) => {
+				console.error(err);
+				clearCsrfCookie();
 				setErrorMessage(constants.errors.loginFailed);
 			});
 	};

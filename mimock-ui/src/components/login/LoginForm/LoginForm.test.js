@@ -1,20 +1,17 @@
 import React from 'react';
-import LoginForm from './LoginForm';
 import * as Api from 'services/authentication/authentication.service';
+import {
+	mockedCookieSet,
+	mockedCookieRemove,
+	mockGetImplementationForCSRFCookie,
+} from 'mocks/cookieMock';
+import LoginForm from './LoginForm';
 import { render, fireEvent, act } from '@testing-library/react';
 
 const mockedNavigation = jest.fn(() => {});
 jest.mock('react-router-dom', () => ({
 	...jest.requireActual('react-router-dom'),
 	useNavigate: () => mockedNavigation,
-}));
-
-const mockedCookieSet = jest.fn();
-jest.mock('react-cookie', () => ({
-	Cookies: jest.fn().mockImplementation(() => ({
-		set: mockedCookieSet,
-		get: () => jest.fn(),
-	})),
 }));
 
 jest.mock('recoil', () => ({
@@ -28,7 +25,8 @@ describe('LoginForm', () => {
 	beforeEach(() => {
 		mockedGetToken = jest
 			.spyOn(Api, 'getToken')
-			.mockResolvedValue({ data: { token: 'token' } });
+			.mockResolvedValue({ data: { token: 'token', expiresAr: new Date() } });
+		mockGetImplementationForCSRFCookie();
 	});
 
 	afterEach(() => {
@@ -43,6 +41,11 @@ describe('LoginForm', () => {
 		const tree = await render(<LoginForm />);
 
 		const { container, getByTestId, queryByTestId } = tree;
+
+		await act(async () => {
+			expect(mockedCookieRemove).toHaveBeenCalledTimes(1);
+			expect(mockedCookieRemove).toHaveBeenCalledWith('XSRF-TOKEN');
+		});
 
 		expect(getByTestId('login-username-label')).toBeInTheDocument();
 		expect(getByTestId('login-username-label').textContent).toStrictEqual(
@@ -70,6 +73,9 @@ describe('LoginForm', () => {
 		const { container, getByTestId, queryByTestId } = tree;
 
 		await act(async () => {
+			expect(mockedCookieRemove).toHaveBeenCalledTimes(1);
+			expect(mockedCookieRemove).toHaveBeenCalledWith('XSRF-TOKEN');
+
 			const userName = getByTestId('login-username-input');
 			await fireEvent.change(userName, {
 				target: {
@@ -90,12 +96,11 @@ describe('LoginForm', () => {
 		const loginBtn = getByTestId('login-submit');
 		await fireEvent.click(loginBtn);
 
-		await act(() => {
+		await act(async () => {
 			expect(mockedGetToken).toHaveBeenCalledTimes(1);
 			expect(mockedGetToken).toHaveBeenCalledWith('mimock_user', 'test@123');
 
-			expect(mockedCookieSet).toHaveBeenCalledTimes(1);
-			expect(mockedCookieSet).toHaveBeenCalledWith('__authToken', 'token');
+			expect(document.cookie.includes('__authToken')).toBeTruthy();
 
 			expect(mockedNavigation).toBeCalledTimes(1);
 			expect(mockedNavigation).toHaveBeenCalledWith('/mocks', {
@@ -180,7 +185,7 @@ describe('LoginForm', () => {
 		const loginBtn = getByTestId('login-submit');
 		await fireEvent.click(loginBtn);
 
-		await act(() => {
+		await act(async () => {
 			expect(mockedGetToken).toHaveBeenCalledTimes(0);
 			expect(mockedCookieSet).toHaveBeenCalledTimes(0);
 			expect(mockedNavigation).toBeCalledTimes(0);
@@ -200,6 +205,9 @@ describe('LoginForm', () => {
 		const { container, getByTestId } = tree;
 
 		await act(async () => {
+			expect(mockedCookieRemove).toHaveBeenCalledTimes(1);
+			expect(mockedCookieRemove).toHaveBeenCalledWith('XSRF-TOKEN');
+
 			const userName = getByTestId('login-username-input');
 			await fireEvent.change(userName, {
 				target: {
@@ -224,7 +232,10 @@ describe('LoginForm', () => {
 		const loginBtn = getByTestId('login-submit');
 		await fireEvent.click(loginBtn);
 
-		await act(() => {
+		await act(async () => {
+			expect(mockedCookieRemove).toHaveBeenCalledTimes(1);
+			expect(mockedCookieRemove).toHaveBeenCalledWith('XSRF-TOKEN');
+
 			expect(mockedGetToken).toHaveBeenCalledTimes(1);
 			expect(mockedGetToken).toHaveBeenCalledWith('mimock_user', 'test@123');
 
