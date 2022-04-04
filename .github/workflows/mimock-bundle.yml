@@ -24,12 +24,13 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+        
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
 
       - name: Build Mimock app
         run: |
           cd mimock-backend && rm -rf target/
-          mkdir -p ./src/main/resources/static/mimock-ui
-          ./mvnw -ntp clean package -P startDatabase
           ./mvnw -ntp clean package -P productionBundle -P startDatabase
 
       - name: Publish JAR
@@ -43,9 +44,6 @@ jobs:
         run: |
           docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.min && echo "Docker image build validated"
           docker system prune -f && docker image prune --all -f
-      
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
 
       # - name: Build mimock docker image
       #   run: |
