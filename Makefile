@@ -6,6 +6,8 @@ APP_DB_URL := 'jdbc:postgresql://localhost:5427/mimock_db'
 TEST_CONFIG_FILE := 'classpath:/application.test.yml'
 TEST_DB_URL := 'jdbc:postgresql://localhost:5427/mimock_db'
 
+STATIC_DIR := '../mimock-backend/src/main/resources/static/mimock-ui'
+
 cd_backend:
 	cd ./mimock-backend
 
@@ -32,5 +34,7 @@ test-ci:
 	docker-compose -f docker-compose.test.yml up --abort-on-container-exit --exit-code-from mimock-test
 
 bundle-app:
-	cd ./mimock-ui && yarn && yarn build && mv ./dist/* ../mimock-backend/src/main/resources/static/ && cd ..
+	cd ./mimock-ui && yarn && yarn test && yarn build && \
+	mkdir -p $(STATIC_DIR) && \
+	mv ./dist/* ../mimock-backend/src/main/resources/static/mimock-ui/ && cd .. && \
 	cd ./mimock-backend && ./mvnw clean package && cd ..
