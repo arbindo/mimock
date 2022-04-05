@@ -109,15 +109,3 @@ jobs:
         run: |
           docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.min && echo "Docker image build validated"
           docker system prune && docker image prune --all
-
-      # - name: Build mimock docker image
-        # run: |
-        #   docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.min
-        #   docker save -o mimock-backend-${{ github.sha }}.tar.gz mimock-backend:${{ github.sha }}
-
-      # - name: Publish docker image archive
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: mimock-docker-image
-      #     path: |
-      #       mimock-backend-${{ github.sha }}.tar.gz

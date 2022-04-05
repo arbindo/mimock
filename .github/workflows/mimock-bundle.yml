@@ -24,14 +24,13 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
 
       - name: Build Mimock app
+        working-directory: mimock-backend
         run: |
-          cd mimock-backend && rm -rf target/
-          ./mvnw -ntp clean package -P productionBundle -P startDatabase
+          ./mvnw initialize -P startDatabase
+          ./mvnw -ntp clean package -P productionBundle
+          jar -tf ./target/mimock-0.0.1.jar | grep 'mimock-ui'
 
       - name: Publish JAR
         uses: actions/upload-artifact@v2
@@ -44,15 +43,3 @@ jobs:
         run: |
           docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.min && echo "Docker image build validated"
           docker system prune -f && docker image prune --all -f
-
-      # - name: Build mimock docker image
-      #   run: |
-      #     docker build -t mimock:${{ github.sha }} . -f ./Dockerfile.min
-      #     docker save -o mimock-${{ github.sha }}.tar.gz mimock:${{ github.sha }}
-
-      # - name: Publish docker image archive
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: mimock-docker-image
-      #     path: |
-      #       mimock-${{ github.sha }}.tar.gz
