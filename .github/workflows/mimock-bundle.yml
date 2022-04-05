@@ -27,7 +27,7 @@ jobs:
 
       - name: Build Mimock app
         run: |
-          make start-database && make bundle-app
+          make bundle-app
 
       - name: Publish JAR
         uses: actions/upload-artifact@v2
