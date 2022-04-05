@@ -37,4 +37,4 @@ bundle-app: start-database
 	cd ./mimock-ui && yarn && yarn test && yarn build && \
 	mkdir -p $(STATIC_DIR) && \
 	mv ./dist/* ../mimock-backend/src/main/resources/static/mimock-ui/ && cd .. && \
-	cd ./mimock-backend && ./mvnw clean package && cd ..
+	cd ./mimock-backend && ./mvnw -ntp clean package && cd ..
