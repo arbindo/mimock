@@ -28,16 +28,15 @@ jobs:
       - name: Build Mimock app
         working-directory: mimock-backend
         run: |
-          ./mvnw initialize -P startDatabase
+          ./mvnw -ntp initialize -P startDatabase
           ./mvnw -ntp clean package -P productionBundle
-          jar -tf ./target/mimock-0.0.1.jar | grep 'mimock-ui'
 
       - name: Publish JAR
         uses: actions/upload-artifact@v2
         with:
-          name: mimock-jar
+          name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}-jar.zip
           path: |
-            ./mimock-backend/target/mimock-*.jar
+            ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar
 
       - name: Build mimock docker image
         run: |
