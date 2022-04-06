@@ -5,8 +5,8 @@ import { LogError } from './logger/Logger';
 import { config } from '../Config';
 
 const cookies = new Cookies();
-const csrfToken = cookies.get('XSRF-TOKEN');
-const authToken = cookies.get(globalConstants.authCookieName);
+const csrfToken = cookies.get(globalConstants.XSRF_COOKIE_NAME);
+const authToken = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
 
 export const controller = new AbortController();
 
