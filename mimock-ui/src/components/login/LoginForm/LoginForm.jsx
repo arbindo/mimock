@@ -75,7 +75,7 @@ export default function LoginForm() {
 					Date.now() + parseInt(expiresAfterSeconds) * 1000
 				)}}`;
 
-				navigate('/mocks', { replace: true });
+				navigate('/mimock-ui/mocks', { replace: true });
 			})
 			.catch((err) => {
 				console.error(err);

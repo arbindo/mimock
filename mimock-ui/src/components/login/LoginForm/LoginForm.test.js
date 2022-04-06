@@ -103,7 +103,7 @@ describe('LoginForm', () => {
 			expect(document.cookie.includes('__authToken')).toBeTruthy();
 
 			expect(mockedNavigation).toBeCalledTimes(1);
-			expect(mockedNavigation).toHaveBeenCalledWith('/mocks', {
+			expect(mockedNavigation).toHaveBeenCalledWith('/mimock-ui/mocks', {
 				replace: true,
 			});
 		});
