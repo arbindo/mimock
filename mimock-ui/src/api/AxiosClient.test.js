@@ -41,7 +41,7 @@ describe('AxiosClient', () => {
 		it('should fail in axios.get call', async () => {
 			mockAxios.get.mockRejectedValue(new Error('error'));
 
-			const err = await get('/test');
+			const err = await get('/test').catch((e) => e);
 
 			expect(mockAxios.get).toHaveBeenCalledWith('/test', {
 				headers: {
@@ -82,7 +82,11 @@ describe('AxiosClient', () => {
 		it('should fail in axios.post call', async () => {
 			mockAxios.post.mockRejectedValue(new Error('error'));
 
-			const err = await post('/test', { mock: { id: 1 } }, 'application/json');
+			const err = await post(
+				'/test',
+				{ mock: { id: 1 } },
+				'application/json'
+			).catch((e) => e);
 
 			expect(mockAxios.post).toHaveBeenCalledWith(
 				'/test',
@@ -131,7 +135,7 @@ describe('AxiosClient', () => {
 			const err = await authenticate('/test', {
 				userName: 'user',
 				password: 'password',
-			});
+			}).catch((e) => e);
 
 			expect(mockAxios.post).toHaveBeenCalledWith(
 				'/test',
@@ -178,7 +182,11 @@ describe('AxiosClient', () => {
 		it('should fail in axios.put call', async () => {
 			mockAxios.put.mockRejectedValue(new Error('error'));
 
-			const err = await put('/test', { mock: { id: 1 } }, 'application/json');
+			const err = await put(
+				'/test',
+				{ mock: { id: 1 } },
+				'application/json'
+			).catch((e) => e);
 
 			expect(mockAxios.put).toHaveBeenCalledWith(
 				'/test',
@@ -214,7 +222,7 @@ describe('AxiosClient', () => {
 		it('should fail in axios.delete call', async () => {
 			mockAxios.delete.mockRejectedValue(new Error('error'));
 
-			const err = await remove('/test');
+			const err = await remove('/test').catch((e) => e);
 
 			expect(mockAxios.delete).toHaveBeenCalledWith('/test', {
 				headers: {
@@ -247,7 +255,7 @@ describe('AxiosClient', () => {
 		it('should fail in axios.options call', async () => {
 			mockAxios.options.mockRejectedValue(new Error('error'));
 
-			const err = await options('/test');
+			const err = await options('/test').catch((e) => e);
 
 			expect(mockAxios.options).toHaveBeenCalledWith('/test', {
 				headers: {

@@ -29,7 +29,7 @@ const get = async (url, config = {}) => {
 		})
 		.catch((err) => {
 			LogError(err);
-			return err;
+			return Promise.reject(err);
 		});
 };
 
@@ -44,7 +44,7 @@ const post = async (url, requestData, contentType, config = {}) => {
 		})
 		.catch((err) => {
 			LogError(err);
-			return err;
+			return Promise.reject(err);
 		});
 };
 
@@ -58,7 +58,7 @@ const authenticate = async (url, requestData, config = {}) => {
 		})
 		.catch((err) => {
 			LogError(err);
-			return err;
+			return Promise.reject(err);
 		});
 };
 
@@ -73,7 +73,7 @@ const put = async (url, data, contentType, config) => {
 		})
 		.catch((err) => {
 			LogError(err);
-			return err;
+			return Promise.reject(err);
 		});
 };
 
@@ -87,7 +87,7 @@ const remove = async (url, config) => {
 		})
 		.catch((err) => {
 			LogError(err);
-			return err;
+			return Promise.reject(err);
 		});
 };
 
@@ -101,7 +101,7 @@ const options = async (url, config) => {
 		})
 		.catch((err) => {
 			LogError(err);
-			return err;
+			return Promise.reject(err);
 		});
 };
 
