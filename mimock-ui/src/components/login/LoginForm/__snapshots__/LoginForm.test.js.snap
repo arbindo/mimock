@@ -7,6 +7,20 @@ exports[`LoginForm should enter credentials to login 1`] = `
     data-testid="login-form"
   >
     <div
+      data-testid="react-router-navigator"
+    >
+      <div
+        data-testid="navigate-to"
+      >
+        /mimock-ui/mocks
+      </div>
+      <div
+        data-testid="navigate-replace"
+      >
+        true
+      </div>
+    </div>
+    <div
       class="font-sans text-xl font-bold text-gray-700"
     >
       Login to mimock
@@ -57,7 +71,78 @@ exports[`LoginForm should enter credentials to login 1`] = `
 </div>
 `;
 
-exports[`LoginForm should render login form 1`] = `
+exports[`LoginForm should navigate to mocks page when user is already authenticated 1`] = `
+<div>
+  <div
+    class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"
+    data-testid="login-form"
+  >
+    <div
+      data-testid="react-router-navigator"
+    >
+      <div
+        data-testid="navigate-to"
+      >
+        /mimock-ui/mocks
+      </div>
+      <div
+        data-testid="navigate-replace"
+      >
+        true
+      </div>
+    </div>
+    <div
+      class="font-sans text-xl font-bold text-gray-700"
+    >
+      Login to mimock
+    </div>
+    <div
+      class="bg-teal-500 w-36 h-1.5"
+    />
+    <form
+      class="w-11/12 my-5 mx-auto flex flex-col justify-center"
+    >
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-username-label"
+      >
+        USER NAME
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300"
+        data-testid="login-username-input"
+        placeholder="Enter username"
+        required=""
+        value=""
+      />
+      <div
+        class="font-sans text-gray-500 mt-3"
+        data-testid="login-password-label"
+      >
+        PASSWORD
+      </div>
+      <input
+        autocomplete="off"
+        class="w-full my-2 p-2 outline-none rounded-md border-2 border-gray-300 sc-bdvvtL"
+        data-testid="login-password-input"
+        placeholder="Enter password"
+        required=""
+        type="password"
+        value=""
+      />
+      <button
+        class="px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        data-testid="login-submit"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`LoginForm should render login form when user is not already logged in 1`] = `
 <div>
   <div
     class="w-11/12 h-full flex flex-col mx-auto my-auto justify-center align-middle"

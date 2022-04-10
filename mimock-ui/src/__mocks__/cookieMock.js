@@ -10,11 +10,9 @@ jest.mock('react-cookie', () => ({
 	})),
 }));
 
-const mockGetImplementationForCSRFCookie = () => {
+const mockGetImplementation = () => {
 	mockedCookieGet.mockImplementation((key) => {
-		if (key === 'XSRF-TOKEN') {
-			return 'XSRF_COOKIE';
-		}
+		return key;
 	});
 };
 
@@ -22,5 +20,5 @@ export {
 	mockedCookieGet,
 	mockedCookieSet,
 	mockedCookieRemove,
-	mockGetImplementationForCSRFCookie,
+	mockGetImplementation,
 };

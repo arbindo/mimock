@@ -1,4 +1,4 @@
-import { isTokenValid } from './validateToken.service';
+import { isTokenValid, readToken } from './validateToken.service';
 import { get } from 'api/AxiosClient';
 
 jest.mock('api/AxiosClient');
@@ -18,5 +18,14 @@ describe('validateTokenService', () => {
 		const validationStatus = await isTokenValid();
 
 		expect(validationStatus).toBe(false);
+	});
+
+	it('should return token reader', async () => {
+		get.mockResolvedValue(true);
+		await isTokenValid();
+
+		const validationStatus = readToken().read();
+
+		expect(validationStatus).toBe(true);
 	});
 });

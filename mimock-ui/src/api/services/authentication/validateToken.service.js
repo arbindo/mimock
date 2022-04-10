@@ -1,11 +1,25 @@
 import { get } from 'api/AxiosClient';
 
+let result;
+
 const isTokenValid = async () => {
 	return await get('/auth-token/validate')
 		.then(() => {
-			return true;
+			result = true;
+			return result;
 		})
-		.catch(() => false);
+		.catch(() => {
+			result = false;
+			return result;
+		});
 };
 
-export { isTokenValid };
+const readToken = () => {
+	return {
+		read() {
+			return result;
+		},
+	};
+};
+
+export { isTokenValid, readToken };

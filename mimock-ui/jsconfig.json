@@ -17,6 +17,7 @@
 			"hooks": ["/src/hooks/*"],
 			"atoms": ["/src/atoms/*"],
 			"constants": ["/src/constants/*"],
+			"utils": ["/src/utils/*"],
 			"mocks": ["/src/__mocks__/*"]
 		}
 	}
