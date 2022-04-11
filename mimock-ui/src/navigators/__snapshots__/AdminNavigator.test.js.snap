@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminNavigator should render child when auth token is valid 1`] = `
+<div>
+  <div
+    data-testid="child"
+  >
+    Child component
+  </div>
+</div>
+`;
+
+exports[`AdminNavigator should show permission error page when auth token is empty 1`] = `
+<div>
+  <div
+    class="w-full h-full flex flex-col bg-gray-200 opacity-75 z-999 fixed top-0 bottom-0 left-0 right-0 text-8xl text-gray-600 justify-center items-center"
+    data-testid="permission-error-page"
+  >
+    <div
+      class="w-full flex justify-center"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 640 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"
+        />
+      </svg>
+    </div>
+    <span
+      class="text-center text-2xl text-gray-600 w-full"
+      data-testid="permission-error-label"
+    >
+      User not permitted to perform the action
+    </span>
+  </div>
+</div>
+`;
+
+exports[`AdminNavigator should show permission error page when auth token is invalid 1`] = `
+<div>
+  <div
+    class="w-full h-full flex flex-col bg-gray-200 opacity-75 z-999 fixed top-0 bottom-0 left-0 right-0 text-8xl text-gray-600 justify-center items-center"
+    data-testid="permission-error-page"
+  >
+    <div
+      class="w-full flex justify-center"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 640 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"
+        />
+      </svg>
+    </div>
+    <span
+      class="text-center text-2xl text-gray-600 w-full"
+      data-testid="permission-error-label"
+    >
+      User not permitted to perform the action
+    </span>
+  </div>
+</div>
+`;
+
+exports[`AdminNavigator should show permission error page when user is not admin 1`] = `
+<div>
+  <div
+    class="w-full h-full flex flex-col bg-gray-200 opacity-75 z-999 fixed top-0 bottom-0 left-0 right-0 text-8xl text-gray-600 justify-center items-center"
+    data-testid="permission-error-page"
+  >
+    <div
+      class="w-full flex justify-center"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 640 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"
+        />
+      </svg>
+    </div>
+    <span
+      class="text-center text-2xl text-gray-600 w-full"
+      data-testid="permission-error-label"
+    >
+      User not permitted to perform the action
+    </span>
+  </div>
+</div>
+`;
