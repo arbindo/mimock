@@ -36,7 +36,7 @@ function Navigator({ children }) {
 				<Choose>
 					<When condition={!isLoading && isAuthTokenValid}>{children}</When>
 					<Otherwise>
-						<Navigate to='/' />
+						<Navigate to='/' replace={true} />
 					</Otherwise>
 				</Choose>
 			</Otherwise>

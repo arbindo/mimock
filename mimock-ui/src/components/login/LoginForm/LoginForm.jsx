@@ -3,6 +3,7 @@ import { Navigate } from 'react-router';
 import { Cookies } from 'react-cookie';
 import { routes } from 'constants/routes';
 import { getToken } from 'services/authentication/authentication.service';
+import { isTokenValid } from 'services/authentication/validateToken.service';
 import { FullPageLoader } from 'styles/Loaders';
 import { globalConstants } from 'constants/globalConstants';
 import {
@@ -36,23 +37,37 @@ export default function LoginForm() {
 
 	useEffect(() => {
 		if (authCookieRef.current && csrfCookieRef.current) {
-			setAuthCookie(authCookieRef.current);
-			return;
+			isTokenValid()
+				.then((status) => {
+					if (status) {
+						setAuthCookie(authCookieRef.current);
+					} else {
+						throw new Error('Invalid token');
+					}
+				})
+				.catch(() => {
+					clearCsrfCookie();
+					clearAuthToken();
+				});
+		} else {
+			clearCsrfCookie();
+			clearAuthToken();
 		}
-
-		clearCsrfCookie();
-		clearAuthToken();
 	}, [authCookieRef.current, csrfCookieRef.current]);
 
 	const clearCsrfCookie = () => {
 		if (csrfCookieRef.current) {
-			cookies.remove(globalConstants.XSRF_COOKIE_NAME);
+			cookies.remove(globalConstants.XSRF_COOKIE_NAME, {
+				path: '/',
+			});
 		}
 	};
 
 	const clearAuthToken = () => {
 		if (authCookieRef.current) {
-			cookies.remove(globalConstants.AUTH_TOKEN_COOKIE_NAME);
+			cookies.remove(globalConstants.AUTH_TOKEN_COOKIE_NAME, {
+				path: '/',
+			});
 		}
 	};
 
