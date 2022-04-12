@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
-import './index.css';
 import AppRoutes from './Routes';
+import './index.css';
 
 const App = () => {
 	return (

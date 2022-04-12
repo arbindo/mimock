@@ -3,14 +3,20 @@ import { Route, Routes } from 'react-router';
 import { BrowserRouter as Router, Navigate } from 'react-router-dom';
 import Login from 'components/login';
 import useAxiosInterceptor from 'api/useAxiosInterceptor';
+import { routes } from './constants/routes';
 import SecuredNavigator from './navigators/SecuredNavigator';
 import AdminNavigator from './navigators/AdminNavigator';
+import Wrapper from './components/common/Wrapper';
 
 function AppRoutes() {
 	useAxiosInterceptor();
 
 	const secureRoute = (component) => {
-		return <SecuredNavigator>{component}</SecuredNavigator>;
+		return (
+			<Wrapper>
+				<SecuredNavigator>{component}</SecuredNavigator>
+			</Wrapper>
+		);
 	};
 
 	const secureAdminRoutes = (component) => {
@@ -20,16 +26,16 @@ function AppRoutes() {
 	return (
 		<Router basename='/'>
 			<Routes>
-				<Route path='' exact element={<Navigate to='/mimock-ui' />} />
-				<Route path='/mimock-ui'>
+				<Route path='' exact element={<Navigate to={routes.root} />} />
+				<Route path={routes.root}>
 					<Route path='' exact element={<Login />} />
 					<Route
-						path='/mimock-ui/mocks'
+						path={routes.mocks.path}
 						element={secureRoute(<h1>Mocks</h1>)}
 					/>
-					<Route path='/mimock-ui/admin'>
+					<Route path={routes.adminPrefix}>
 						<Route
-							path='/mimock-ui/admin/users'
+							path={routes.adminRoutes.users.path}
 							element={secureAdminRoutes(<h1>Users</h1>)}
 						/>
 					</Route>

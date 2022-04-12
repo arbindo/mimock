@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Wrapper should render wrapper 1`] = `
+<div>
+  <div
+    class="w-full h-20 bg-white flex items-center px-4 py-2 shadow-md justify-space-evenly mx-auto"
+    data-testid="header"
+  >
+    <div
+      class="mx-2 my-10 bg-no-repeat bg-center bg-contain sc-bdvvtL Agkin"
+      data-testid="header-logo"
+    />
+    <div
+      class="flex flex-row items-center justify-between w-full"
+    >
+      <div
+        class="mx-10 flex items-center text-gray-600 gap-10"
+        data-testid="header-menu-items"
+      />
+      <div
+        class="flex flex-row gap-8 items-center justify-center text-2xl text-gray-500"
+        data-testid="header-menu-options"
+      />
+    </div>
+  </div>
+  <div
+    data-testid="wrapped-component"
+  >
+    Wrapped child
+  </div>
+</div>
+`;
