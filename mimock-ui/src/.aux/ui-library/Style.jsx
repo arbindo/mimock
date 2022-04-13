@@ -5,16 +5,13 @@ import {
 	CustomButton,
 	IconButtonWithLabel,
 	IconButtonWithoutLabel,
-	BasicTextField,
+	UserNameField,
 	PasswordField,
 } from 'styles';
 import { PillVariants } from 'styles/Pill';
 import { ButtonVariants, IconButtonVariants } from 'styles/Button';
 
 function Style() {
-	const [inputValue, setInputValue] = useState('');
-	const [passwordValue, setPasswordValue] = useState('');
-
 	return (
 		<div data-testid='style' className='mt-10 text-3xl mx-auto w-screen'>
 			<div className='w-full mb-20'>
@@ -227,14 +224,14 @@ function Style() {
 					Text Field
 				</div>
 				<div className='w-full grid grid-cols-4 gap-4 gap-y-8 ml-20'>
-					<BasicTextField
-						label='Username'
-						errorLabel='username is required'
-						isError={false}
-						inputValue={inputValue}
-						dataTestid='text-field'
-						onChangeHandler={(event) => {
-							setInputValue(event.target.value);
+					<UserNameField
+						dataTestid='login-username-input'
+						placeholder={'username'}
+						required
+						autoComplete='off'
+						value={'username'}
+						onChange={() => {
+							console.log('Change handler');
 						}}
 						onBlurHandler={() => {
 							console.log('Blur handler');
@@ -242,14 +239,15 @@ function Style() {
 						onFocusHandler={() => {
 							console.log('Focus handler');
 						}}
-					></BasicTextField>
+					></UserNameField>
 					<PasswordField
-						dataTestid='password-textfield'
-						errorLabel='Password is required'
-						isError={false}
-						value={passwordValue}
-						onChangeHandler={(event) => {
-							setPasswordValue(event.target.value);
+						dataTestid='login-password-input'
+						placeholder={'password'}
+						required
+						autoComplete='off'
+						value={'password'}
+						onChange={() => {
+							console.log('Change handler');
 						}}
 						onBlurHandler={() => {
 							console.log('Blur handler');

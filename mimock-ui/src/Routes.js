@@ -16,13 +16,13 @@ function AppRoutes() {
 	const secureRoute = (component) => {
 		return (
 			<Wrapper>
-				<SecuredNavigator>{component}</SecuredNavigator>
+				<SecuredNavigator> {component} </SecuredNavigator>
 			</Wrapper>
 		);
 	};
 
 	const secureAdminRoutes = (component) => {
-		return secureRoute(<AdminNavigator>{component}</AdminNavigator>);
+		return secureRoute(<AdminNavigator> {component} </AdminNavigator>);
 	};
 
 	return (
@@ -40,10 +40,11 @@ function AppRoutes() {
 					<Route path={routes.adminPrefix}>
 						<Route
 							path={routes.adminRoutes.users.path}
-							element={secureAdminRoutes(<h1>Users</h1>)}
+							element={secureAdminRoutes(<h1> Users </h1>)}
 						/>
 					</Route>
 				</Route>
+				<Route path='style' element={<Style />} exact />
 			</Routes>
 		</Router>
 	);

@@ -1,4 +1,4 @@
-import PasswordField from './Password.jsx';
-import BasicTextField from './TextField.jsx';
+import PasswordField from './PasswordField/PasswordField.jsx';
+import UserNameField from './UserNameField/UserNameField.jsx';
 
-export { BasicTextField, PasswordField };
+export { UserNameField, PasswordField };

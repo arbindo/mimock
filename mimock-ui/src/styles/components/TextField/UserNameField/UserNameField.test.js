@@ -1,18 +1,18 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import TextField from './TextField';
+import UserNameField from './UserNameField';
 
 describe('Text Field', () => {
 	let tree;
 
 	it('should render basic text field', async () => {
 		tree = await render(
-			<TextField
-				label='username'
-				dataTestid='text-field'
-				errorLabel='Username is required'
-				isError={false}
-				inputValue='Username'
+			<UserNameField
+				dataTestid='login-username-input'
+				placeholder='username'
+				required
+				autoComplete='off'
+				value='username'
 				onChangeHandler={() => {
 					console.log('Change handler');
 				}}
@@ -27,7 +27,7 @@ describe('Text Field', () => {
 
 		const { getByTestId, container } = tree;
 
-		expect(getByTestId('text-field')).toBeInTheDocument();
+		expect(getByTestId('login-username-input')).toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 });
