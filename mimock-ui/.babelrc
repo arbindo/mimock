@@ -9,6 +9,7 @@
 			{
 				"root": ["./src"],
 				"alias": {
+					"src": "./src",
 					"styles": "./src/styles/components",
 					"api": "./src/api",
 					"services": "./src/api/services",
@@ -16,7 +17,9 @@
 					"components": "./src/components",
 					"hooks": "./src/hooks",
 					"atoms": "./src/atoms",
-					"constants": "./src/constants"
+					"constants": "./src/constants",
+					"utils": "./src/utils",
+					"mocks": "./src/__mocks__"
 				}
 			}
 		]

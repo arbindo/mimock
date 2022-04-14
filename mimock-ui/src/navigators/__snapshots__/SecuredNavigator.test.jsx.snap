@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SecuredNavivator should navigate to home page when auth token validation fails 1`] = `
+<div>
+  <div
+    data-testid="navigator"
+  >
+    Navigator
+  </div>
+</div>
+`;
+
+exports[`SecuredNavivator should render child when token validation is successful 1`] = `
+<div>
+  <div
+    data-testid="child"
+  >
+    Child component
+  </div>
+</div>
+`;
+
+exports[`SecuredNavivator should show full page loader when waiting for validation status 1`] = `
+HTMLCollection [
+  <body>
+    <div />
+    <div>
+      <div
+        class="w-screen h-screen flex justify-center items-center bg-gray-200 opacity-75 z-999 fixed top-0 bottom-0 left-0 right-0"
+        data-testid="fullpage-loader"
+      >
+        <span
+          class="css-1njh322-LoaderStyle"
+        >
+          <span
+            class="css-88j6kq"
+          />
+          <span
+            class="css-15xvzy0"
+          />
+          <span
+            class="css-1nqujw"
+          />
+        </span>
+      </div>
+    </div>
+  </body>,
+]
+`;

@@ -3,6 +3,9 @@ logging:
     root: ERROR
 
 spring:
+  main:
+    banner-mode: off
+
   servlet:
     multipart:
       max-file-size: 10MB

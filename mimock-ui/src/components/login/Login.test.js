@@ -8,14 +8,6 @@ jest.mock('react-router-dom', () => ({
 	useNavigate: () => mockedNavigation,
 }));
 
-const mockedCookieSet = jest.fn();
-jest.mock('react-cookie', () => ({
-	Cookies: jest.fn().mockImplementation(() => ({
-		set: mockedCookieSet,
-		get: () => jest.fn(),
-	})),
-}));
-
 jest.mock('recoil', () => ({
 	atom: jest.fn(),
 	useRecoilState: jest.fn(() => []),

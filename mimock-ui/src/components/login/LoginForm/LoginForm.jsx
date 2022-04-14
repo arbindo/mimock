@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Navigate } from 'react-router';
 import { Cookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { routes } from 'constants/routes';
 import { getToken } from 'services/authentication/authentication.service';
+import { isTokenValid } from 'services/authentication/validateToken.service';
 import { FullPageLoader } from 'styles/Loaders';
 import { globalConstants } from 'constants/globalConstants';
 import {
@@ -19,11 +21,55 @@ import { constants } from './constants';
 
 export default function LoginForm() {
 	const cookies = new Cookies();
-	const navigate = useNavigate();
+
+	const authCookieRef = useRef('');
+	const csrfCookieRef = useRef('');
 
 	const [errorMessage, setErrorMessage] = useState('');
 	const [userName, setUserName] = useState('');
 	const [password, setPassword] = useState('');
+	const [authCookie, setAuthCookie] = useState('');
+
+	useEffect(() => {
+		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
+		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
+	}, []);
+
+	useEffect(() => {
+		if (authCookieRef.current && csrfCookieRef.current) {
+			isTokenValid()
+				.then((status) => {
+					if (status) {
+						setAuthCookie(authCookieRef.current);
+					} else {
+						throw new Error('Invalid token');
+					}
+				})
+				.catch(() => {
+					clearCsrfCookie();
+					clearAuthToken();
+				});
+		} else {
+			clearCsrfCookie();
+			clearAuthToken();
+		}
+	}, [authCookieRef.current, csrfCookieRef.current]);
+
+	const clearCsrfCookie = () => {
+		if (csrfCookieRef.current) {
+			cookies.remove(globalConstants.XSRF_COOKIE_NAME, {
+				path: '/',
+			});
+		}
+	};
+
+	const clearAuthToken = () => {
+		if (authCookieRef.current) {
+			cookies.remove(globalConstants.AUTH_TOKEN_COOKIE_NAME, {
+				path: '/',
+			});
+		}
+	};
 
 	const isCredentialsValid = () => {
 		if (userName === '') {
@@ -49,12 +95,11 @@ export default function LoginForm() {
 		}
 
 		await getToken(userName, password)
-			.then((res) => {
-				const { token } = res.data;
-				cookies.set(globalConstants.authCookieName, token);
-				navigate('/mocks', { replace: true });
+			.then((token) => {
+				setAuthCookie(token);
 			})
 			.catch(() => {
+				clearCsrfCookie();
 				setErrorMessage(constants.errors.loginFailed);
 			});
 	};
@@ -62,6 +107,10 @@ export default function LoginForm() {
 	return (
 		<LoginFormContainer data-testid='login-form'>
 			<FullPageLoader />
+
+			<If condition={authCookie}>
+				<Navigate to={routes.mocks.path} replace={true} />
+			</If>
 
 			<Title>Login to mimock</Title>
 			<Underline />

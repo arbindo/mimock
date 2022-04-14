@@ -1,0 +1,13 @@
+name: 'mimock artifacts cleanup'
+on:
+  schedule:
+    - cron: '0 12 * * 1,3,5' # At 12:00 on Monday, Wednesday, and Friday
+
+jobs:
+  delete-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kolpav/purge-artifacts-action@v1
+        with:
+          token: ${{ secrets.GH_ACTIONS_TOKEN }}
+          expire-in: 3days # cleans artifacts older than 3 days

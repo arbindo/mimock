@@ -27,24 +27,16 @@ jobs:
 
       - name: Build Mimock app
         run: |
-          cd mimock-backend && rm -rf target/
-          ./mvnw -ntp clean package -P productionBundle -P startDatabase
+          make bundle-app
 
       - name: Publish JAR
         uses: actions/upload-artifact@v2
         with:
-          name: mimock-jar
+          name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}-jar.zip
           path: |
-            ./mimock-backend/target/mimock-*.jar
+            ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar
 
       - name: Build mimock docker image
         run: |
-          docker build -t mimock:${{ github.sha }} . -f ./Dockerfile.min
-          docker save -o mimock-${{ github.sha }}.tar.gz mimock:${{ github.sha }}
-
-      - name: Publish docker image archive
-        uses: actions/upload-artifact@v2
-        with:
-          name: mimock-docker-image
-          path: |
-            mimock-${{ github.sha }}.tar.gz
+          docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.min && echo "Docker image build validated"
+          docker system prune -f && docker image prune --all -f
