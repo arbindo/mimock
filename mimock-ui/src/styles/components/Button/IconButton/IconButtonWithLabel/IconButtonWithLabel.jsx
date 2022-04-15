@@ -4,6 +4,7 @@ import { IconButtonData } from '../../ButtonData';
 import { IconButtonWithLabelContainer } from './IconButtonWithLabel.style';
 import { AiFillCopy, AiOutlineCheck } from 'react-icons/ai';
 import { BiTrash, BiPlusMedical } from 'react-icons/bi';
+import { FaFilter } from 'react-icons/fa';
 import CloseIcon from '../CloseIcon.jsx';
 
 function IconButtonWithLabel({
@@ -43,6 +44,8 @@ function getIcon(variant) {
 			return <BiPlusMedical />;
 		case 'COPY_BUTTON':
 			return <AiFillCopy />;
+		case 'FILTER_BUTTON':
+			return <FaFilter />;
 		default:
 			return <AiOutlineCheck />;
 	}

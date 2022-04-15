@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List should render list component 1`] = `
+<div>
+  <div
+    data-testid="list-section"
+  >
+    List
+  </div>
+</div>
+`;

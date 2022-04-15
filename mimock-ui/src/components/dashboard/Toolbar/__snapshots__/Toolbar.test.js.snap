@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toolbar should render toolbar component 1`] = `
+<div>
+  <div
+    class="w-11/12 flex flex-row mx-auto mt-4 mb-2 justify-center align-middle"
+    data-testid="toolbar-section"
+  >
+    <button
+      class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-gray-600 w-fit bg-gray-300 dark:bg-slate-300"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 512 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+        />
+      </svg>
+      Filter Mock
+    </button>
+    <button
+      class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-fit bg-green-300 dark:bg-green-400"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M15 2.013H9V9H2v6h7v6.987h6V15h7V9h-7z"
+        />
+      </svg>
+      Add Mock
+    </button>
+  </div>
+  <hr />
+</div>
+`;

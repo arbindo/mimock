@@ -20,6 +20,7 @@ export const IconButtonVariants = {
 	DeleteButton: 'DELETE_BUTTON',
 	AddButton: 'ADD_BUTTON',
 	CopyButton: 'COPY_BUTTON',
+	FilterButton: 'FILTER_BUTTON',
 	DefaultButton: 'DEFAULT_BUTTON',
 };
 

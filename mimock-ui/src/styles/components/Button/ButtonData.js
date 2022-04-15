@@ -46,6 +46,10 @@ const IconButtonData = {
 		background: 'bg-blue-600',
 		color: 'text-white',
 	},
+	FILTER_BUTTON: {
+		background: 'bg-gray-300 dark:bg-slate-300',
+		color: 'text-gray-600',
+	},
 	DEFAULT_BUTTON: {
 		background: 'bg-white dark:bg-slate-300',
 		color: 'text-black',
