@@ -1,9 +1,9 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.manage.mimocks.service.ExportImportService;
-import com.arbindo.mimock.manage.mimocks.service.ExportImportServiceImpl;
-import com.arbindo.mimock.utils.JSONUtils;
+import com.arbindo.mimock.entities.PlatformSettings;
+import com.arbindo.mimock.manage.mimocks.service.exceptions.ExportImportDisabledException;
+import com.arbindo.mimock.manage.platformsettings.service.PlatformSettingsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,16 +18,22 @@ import java.util.List;
 
 import static com.arbindo.mimock.helpers.entities.MocksGenerator.generateListOfMocks;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 class ExportImportServiceTest {
 
+    @org.mockito.Mock
+    PlatformSettingsService mockPlatformSettingsService;
+
     ExportImportService mockExportImportService;
 
     @BeforeEach
     void setupMock(){
-        this.mockExportImportService = ExportImportServiceImpl.builder().build();
+        this.mockExportImportService = ExportImportServiceImpl.builder()
+                .platformSettingsService(mockPlatformSettingsService)
+                .build();
     }
 
     @Test
@@ -95,6 +101,40 @@ class ExportImportServiceTest {
             assertTrue(result.contains(mock.getResponseContentType().getContentType()));
             assertTrue(result.contains(mock.getQueryParams()));
         }
+    }
+
+    @Test
+    public void shouldValidateImportExportMockFeature_Success(){
+        // Arrange
+        PlatformSettings platformSettings = PlatformSettings.builder()
+                .id(1L)
+                .isExportImportEnabled(true)
+                .isFlushBinCronEnabled(true)
+                .build();
+
+        lenient().when(mockPlatformSettingsService.getDefaultPlatformSettings()).thenReturn(platformSettings);
+
+        // Act
+        mockExportImportService.validateExportImportFeature();
+
+        // Assert
+        verify(mockPlatformSettingsService, times(1)).getDefaultPlatformSettings();
+    }
+
+    @Test
+    public void shouldValidateImportExportMockFeature_ThrowsExportImportDisabledException(){
+        // Arrange
+        PlatformSettings platformSettings = PlatformSettings.builder()
+                .id(1L)
+                .isExportImportEnabled(false)
+                .isFlushBinCronEnabled(true)
+                .build();
+
+        lenient().when(mockPlatformSettingsService.getDefaultPlatformSettings()).thenReturn(platformSettings);
+
+        // Act & Assert
+        assertThrows(ExportImportDisabledException.class, () -> mockExportImportService.validateExportImportFeature());
+        verify(mockPlatformSettingsService, times(1)).getDefaultPlatformSettings();
     }
 
 }

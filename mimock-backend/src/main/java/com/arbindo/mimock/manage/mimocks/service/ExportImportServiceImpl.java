@@ -1,12 +1,15 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.manage.mimocks.service.ExportImportService;
+import com.arbindo.mimock.entities.PlatformSettings;
+import com.arbindo.mimock.manage.mimocks.service.exceptions.ExportImportDisabledException;
+import com.arbindo.mimock.manage.platformsettings.service.PlatformSettingsService;
 import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.constraint.NotNull;
@@ -28,6 +31,9 @@ import java.util.List;
 @AllArgsConstructor
 public class ExportImportServiceImpl implements ExportImportService {
 
+    @Autowired
+    PlatformSettingsService platformSettingsService;
+
     @Override
     public String generateTemplateFileName() {
         return "mocks_template.csv";
@@ -38,6 +44,16 @@ public class ExportImportServiceImpl implements ExportImportService {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentDateTime = dateFormat.format(new Date());
         return String.format("mocks_%s.csv", currentDateTime);
+    }
+
+    @Override
+    public void validateExportImportFeature() {
+        PlatformSettings platformSettings = platformSettingsService.getDefaultPlatformSettings();
+        if(!platformSettings.getIsExportImportEnabled()){
+            String errorMessage = "Export-Import Mocks Feature Disabled For The Platform";
+            log.log(Level.ERROR, errorMessage);
+            throw new ExportImportDisabledException(errorMessage);
+        }
     }
 
     @Override

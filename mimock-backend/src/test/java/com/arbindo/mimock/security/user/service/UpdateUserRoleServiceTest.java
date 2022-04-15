@@ -32,7 +32,7 @@ class UpdateUserRoleServiceTest {
     @Test
     void shouldUpdateUserRole_WhenUserExists() {
         UpdateUserRoleRequest request = UpdateUserRoleRequest.builder()
-                .userName("bruce_vengence")
+                .userName("bruce_vengeance")
                 .userRole("MANAGER")
                 .build();
 
@@ -66,7 +66,7 @@ class UpdateUserRoleServiceTest {
     @Test
     void shouldThrowUsernameNotFoundException_WhenUserDoesNotExist() {
         UpdateUserRoleRequest request = UpdateUserRoleRequest.builder()
-                .userName("bruce_vengence")
+                .userName("bruce_vengeance")
                 .userRole("MANAGER")
                 .build();
 
@@ -78,7 +78,7 @@ class UpdateUserRoleServiceTest {
     @Test
     void shouldThrowIllegalArgumentException_WhenUserRoleIsInvalid() {
         UpdateUserRoleRequest request = UpdateUserRoleRequest.builder()
-                .userName("bruce_vengence")
+                .userName("bruce_vengeance")
                 .userRole("MANAGER")
                 .build();
 

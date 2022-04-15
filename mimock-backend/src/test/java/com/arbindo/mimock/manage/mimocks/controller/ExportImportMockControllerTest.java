@@ -5,6 +5,7 @@ import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.manage.mimocks.service.ExportImportService;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
+import com.arbindo.mimock.manage.mimocks.service.exceptions.ExportImportDisabledException;
 import com.arbindo.mimock.security.JwtRequestFilter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,6 +142,39 @@ public class ExportImportMockControllerTest {
         // Act
         mockMvc.perform(get(route))
                 .andExpect(status().isInternalServerError())
+                .andReturn();
+    }
+
+    @Test
+    void shouldReturnHttpBadRequestError_WhenExportTemplateCsv_ExportImportFeatureIsDisabled() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT;
+
+        String fileName = "mocks_template.csv";
+        lenient().when(exportImportService.generateTemplateFileName()).thenReturn(fileName);
+        doThrow(ExportImportDisabledException.class).when(exportImportService).validateExportImportFeature();
+
+        // Act
+        mockMvc.perform(get(route))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    void shouldReturnHttpBadRequestError_WhenExportMocksCsv_ExportImportFeatureIsDisabled() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_EXPORT;
+        String fileName = "mocks_2022-02-04_19-31-05.csv";
+        List<Mock> expectedMocks = generateListOfMocks();
+
+        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
+        lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
+
+        doThrow(ExportImportDisabledException.class).when(exportImportService).validateExportImportFeature();
+
+        // Act
+        mockMvc.perform(get(route))
+                .andExpect(status().isBadRequest())
                 .andReturn();
     }
 }

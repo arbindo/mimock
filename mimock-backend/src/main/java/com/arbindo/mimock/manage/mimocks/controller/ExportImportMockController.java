@@ -4,6 +4,7 @@ import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.manage.mimocks.service.ExportImportService;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
+import com.arbindo.mimock.manage.mimocks.service.exceptions.ExportImportDisabledException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -33,7 +35,8 @@ public class ExportImportMockController {
     @Operation(summary = "Export Mock CSV Template", description = "Exports the mock template CSV file which can used" +
             " while import operation.", tags = {"Mock Management"})
     @GetMapping(UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT)
-    public void exportTemplateCsv(HttpServletResponse response) {
+    public void exportTemplateCsv(HttpServletResponse response) throws IOException {
+        validateExportImportFeatureForPlatform(response);
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=" + exportImportService.generateTemplateFileName();
         try {
@@ -48,7 +51,8 @@ public class ExportImportMockController {
 
     @Operation(summary = "Export Mocks", description = "Exports the mocks in CSV file format.", tags = {"Mock Management"})
     @GetMapping(UrlConfig.MOCKS_CSV_EXPORT)
-    public void exportAllMocksInCsvFormat(HttpServletResponse response) {
+    public void exportAllMocksInCsvFormat(HttpServletResponse response) throws IOException {
+        validateExportImportFeatureForPlatform(response);
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=" + exportImportService.generateFileName();
         try {
@@ -56,6 +60,19 @@ public class ExportImportMockController {
             response.setContentType("text/csv");
             response.setHeader(headerKey, headerValue);
             exportImportService.exportMockListToCsv(response.getWriter(), mockList);
+        } catch (Exception e) {
+            log.log(Level.DEBUG, e.getMessage());
+            response.setStatus(500);
+        }
+    }
+
+    private void validateExportImportFeatureForPlatform(HttpServletResponse response) throws IOException {
+        try {
+            exportImportService.validateExportImportFeature();
+        } catch (ExportImportDisabledException e) {
+            log.log(Level.ERROR, e.getMessage());
+            response.setStatus(400);
+            response.sendError(400, e.getMessage());
         } catch (Exception e) {
             log.log(Level.DEBUG, e.getMessage());
             response.setStatus(500);
