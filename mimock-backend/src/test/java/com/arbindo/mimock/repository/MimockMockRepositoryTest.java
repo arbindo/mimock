@@ -98,6 +98,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -110,6 +112,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -170,6 +174,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -182,6 +188,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -235,6 +243,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -246,6 +256,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -313,6 +325,8 @@ class MimockMockRepositoryTest {
                 .entityStatus(entityStatus)
                 .responseHeaders(expectedResponseHeaders)
                 .requestHeaders(expectedRequestHeaders)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .deletedAt(null)
                 .build();
 
@@ -325,6 +339,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .deletedAt(null)
                 .build();
 
@@ -405,6 +421,8 @@ class MimockMockRepositoryTest {
                 .responseHeaders(expectedResponseHeaders)
                 .requestBodiesForMock(expectedRequestBody)
                 .requestHeaders(expectedRequestHeaders)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -416,6 +434,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -473,6 +493,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -484,6 +506,8 @@ class MimockMockRepositoryTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(deletedEntityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -567,6 +591,8 @@ class MimockMockRepositoryTest {
                 .statusCode(200)
                 .entityStatus(entityStatus)
                 .createdAt(creationTimestamp)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -579,6 +605,8 @@ class MimockMockRepositoryTest {
                 .statusCode(400)
                 .entityStatus(deletedEntityStatus)
                 .createdAt(creationTimestamp)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock3 = Mock.builder()
@@ -591,6 +619,8 @@ class MimockMockRepositoryTest {
                 .statusCode(400)
                 .entityStatus(deletedEntityStatus)
                 .createdAt(creationTimestamp)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);

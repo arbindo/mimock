@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="aravind" id="0030_alter_mocks_add_columns_for_audit">
+        <sql>
+            ALTER TABLE mocks
+                ADD COLUMN created_by VARCHAR(255) NOT NULL,
+                ADD COLUMN modified_by VARCHAR(255) NOT NULL;
+        </sql>
+        <rollback>
+            <sql>
+                ALTER TABLE mocks
+                DROP COLUMN created_by,
+                DROP COLUMN modified_by;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

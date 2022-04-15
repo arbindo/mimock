@@ -1,5 +1,6 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
+import com.arbindo.mimock.audit.AuditorService;
 import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.BinaryResponse;
 import com.arbindo.mimock.entities.EntityStatus;
@@ -52,6 +53,9 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Autowired
     private MockParamBuilder mockParamBuilder;
+
+    @Autowired
+    AuditorService auditorService;
 
     @Override
     public List<Mock> getAllMocks() {
@@ -178,7 +182,8 @@ public class MockManagementServiceImpl implements MockManagementService {
                 throw new MockAlreadyExistsException(err);
             }
 
-            Mock mock = buildNewMockWith(request, mockParamBuilder);
+            String currentAuditor = auditorService.getCurrentAuditor();
+            Mock mock = buildNewMockWith(request, mockParamBuilder, currentAuditor);
             setResponseForNewMock(request, mock);
 
             log.log(Level.INFO, "Saving new mock to repository");
@@ -222,7 +227,8 @@ public class MockManagementServiceImpl implements MockManagementService {
         }
     }
 
-    private Mock buildNewMockWith(ProcessedMockRequest request, MockParamBuilder mockParamBuilder) throws Exception {
+    private Mock buildNewMockWith(ProcessedMockRequest request, MockParamBuilder mockParamBuilder,
+                                  String currentAuditor) throws Exception {
         log.log(Level.INFO, "Building new mock with request values");
         UUID mockId = UUID.randomUUID();
 
@@ -239,6 +245,8 @@ public class MockManagementServiceImpl implements MockManagementService {
                 .queryParams(request.getQueryParams())
                 .description(request.getDescription())
                 .createdAt(ZonedDateTime.now())
+                .createdBy(currentAuditor)
+                .modifiedBy(currentAuditor)
                 .entityStatus(entityStatusService.getDefaultMockEntityStatus())
                 .requestHeaders(mockParamBuilder.requestHeaders())
                 .requestBodiesForMock(mockParamBuilder.requestBody())
@@ -257,7 +265,8 @@ public class MockManagementServiceImpl implements MockManagementService {
 
             String responseContentTypeString = request.getResponseContentType() != null
                     ? request.getResponseContentType() : mock.getResponseContentType().getContentType();
-            Mock updatedMock = buildMockToBeUpdated(request, mock, responseContentTypeString);
+            String currentAuditor = auditorService.getCurrentAuditor();
+            Mock updatedMock = buildMockToBeUpdated(request, mock, responseContentTypeString, currentAuditor);
 
             // Update Mock Name Only if it is different from existing name
             if (!StringUtils.equals(mock.getMockName(), request.getName())) {
@@ -311,7 +320,8 @@ public class MockManagementServiceImpl implements MockManagementService {
         }
     }
 
-    private Mock buildMockToBeUpdated(ProcessedMockRequest request, Mock mock, String responseContentTypeString) throws Exception {
+    private Mock buildMockToBeUpdated(ProcessedMockRequest request, Mock mock, String responseContentTypeString,
+                                      String currentAuditor) throws Exception {
         return Mock.builder()
                 .id(mock.getId())
                 .mockName(request.getName())
@@ -322,7 +332,9 @@ public class MockManagementServiceImpl implements MockManagementService {
                 .queryParams(request.getQueryParams())
                 .description(request.getDescription())
                 .createdAt(mock.getCreatedAt())
+                .createdBy(mock.getCreatedBy())
                 .updatedAt(ZonedDateTime.now())
+                .modifiedBy(currentAuditor)
                 .entityStatus(entityStatusService.getDefaultMockEntityStatus())
                 .build();
     }

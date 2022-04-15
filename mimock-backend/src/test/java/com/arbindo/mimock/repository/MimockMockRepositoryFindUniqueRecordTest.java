@@ -106,6 +106,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -118,6 +120,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -192,6 +196,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -204,6 +210,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -282,6 +290,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -294,6 +304,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -362,6 +374,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -374,6 +388,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -468,6 +484,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -480,6 +498,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -552,6 +572,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -564,6 +586,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);
@@ -647,6 +671,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(200)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock testMock2 = Mock.builder()
@@ -659,6 +685,8 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .responseContentType(responseContentType)
                 .statusCode(400)
                 .entityStatus(entityStatus)
+                .createdBy("TEST_USER")
+                .modifiedBy("TEST_USER")
                 .build();
 
         Mock mock1 = mocksDBHelper.save(testMock1);

@@ -100,6 +100,8 @@ public class MocksGenerator {
                 .textualResponse(generateTextualResponse(request.getExpectedTextResponse()))
                 .binaryResponse(generateBinaryResponse(request.getBinaryFile()))
                 .createdAt(ZonedDateTime.now())
+                .createdBy(getCurrentAuditor())
+                .modifiedBy(getCurrentAuditor())
                 .entityStatus(generateDefaultEntityStatus())
                 .build();
     }
@@ -120,6 +122,8 @@ public class MocksGenerator {
                 .textualResponse(generateTextualResponse(request.getExpectedTextResponse()))
                 .binaryResponse(generateBinaryResponse(request.getBinaryFile()))
                 .createdAt(ZonedDateTime.now())
+                .createdBy(getCurrentAuditor())
+                .modifiedBy(getCurrentAuditor())
                 .entityStatus(generateDefaultEntityStatus())
                 .build();
     }
@@ -402,5 +406,9 @@ public class MocksGenerator {
                 .message(responseMessage)
                 .data(mock)
                 .build();
+    }
+
+    public static String getCurrentAuditor() {
+        return "TEST_AUDITOR";
     }
 }

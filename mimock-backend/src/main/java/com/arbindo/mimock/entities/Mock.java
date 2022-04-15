@@ -7,6 +7,8 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -102,6 +104,16 @@ public class Mock {
     @JoinColumn(name = "entity_status_id", nullable = false)
     @Schema(description = "Indicates the entity status")
     private EntityStatus entityStatus;
+
+    @CreatedBy
+    @Column(name = "created_by", nullable = false)
+    @Schema(description = "Created By")
+    private String createdBy;
+
+    @LastModifiedBy
+    @Column(name = "modified_by", nullable = false)
+    @Schema(description = "Modified By")
+    private String modifiedBy;
 
     public boolean isArchived() {
         return Status.valueOf(getEntityStatus().getStatus()) == Status.ARCHIVED;

@@ -1,5 +1,6 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
+import com.arbindo.mimock.audit.AuditorService;
 import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
@@ -50,6 +51,9 @@ class MockManagementServiceTest {
     EntityStatusService mockEntityStatusService;
 
     @org.mockito.Mock
+    AuditorService mockAuditorService;
+
+    @org.mockito.Mock
     MockParamBuilder mockParamBuilder;
 
     MockManagementService mockManagementService;
@@ -62,6 +66,7 @@ class MockManagementServiceTest {
                 .textualResponseRepository(mockTextualResponseRepository)
                 .binaryResponseRepository(mockBinaryResponseRepository)
                 .entityStatusService(mockEntityStatusService)
+                .auditorService(mockAuditorService)
                 .build();
     }
 
