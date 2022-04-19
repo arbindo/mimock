@@ -18,14 +18,14 @@ exports[`Header should render Header with logo and menu items 1`] = `
         data-testid="header-menu-items"
       >
         <a
-          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          class="sc-gsDKAQ font-sans font-semibold text-gray-700 transition-all transition-duration-100 hover:text-gray-900"
           data-testid="menu-item-mocks"
           href="/mimock-ui/mocks"
         >
           MOCKS
         </a>
         <a
-          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          class="sc-gsDKAQ font-sans font-semibold text-gray-700 transition-all transition-duration-100 hover:text-gray-900"
           data-testid="menu-item-users"
           href="/mimock-ui/admin/users"
         >
@@ -37,7 +37,7 @@ exports[`Header should render Header with logo and menu items 1`] = `
         data-testid="header-menu-options"
       >
         <a
-          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          class="sc-gsDKAQ font-sans font-semibold text-gray-700 transition-all transition-duration-100 hover:text-gray-900"
           data-testid="menu-option-settings"
           href="/mimock-ui/settings"
         >
@@ -56,7 +56,7 @@ exports[`Header should render Header with logo and menu items 1`] = `
           </svg>
         </a>
         <a
-          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          class="sc-gsDKAQ font-sans font-semibold text-gray-700 transition-all transition-duration-100 hover:text-gray-900"
           data-testid="menu-option-logout"
           href="/mimock-ui/logout"
         >
@@ -98,7 +98,7 @@ exports[`Header should render Header without admin menu items if user is not adm
         data-testid="header-menu-items"
       >
         <a
-          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          class="sc-gsDKAQ font-sans font-semibold text-gray-700 transition-all transition-duration-100 hover:text-gray-900"
           data-testid="menu-item-mocks"
           href="/mimock-ui/mocks"
         >
@@ -110,7 +110,7 @@ exports[`Header should render Header without admin menu items if user is not adm
         data-testid="header-menu-options"
       >
         <a
-          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          class="sc-gsDKAQ font-sans font-semibold text-gray-700 transition-all transition-duration-100 hover:text-gray-900"
           data-testid="menu-option-settings"
           href="/mimock-ui/settings"
         >
@@ -129,7 +129,7 @@ exports[`Header should render Header without admin menu items if user is not adm
           </svg>
         </a>
         <a
-          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          class="sc-gsDKAQ font-sans font-semibold text-gray-700 transition-all transition-duration-100 hover:text-gray-900"
           data-testid="menu-option-logout"
           href="/mimock-ui/logout"
         >

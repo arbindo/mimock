@@ -49,8 +49,13 @@ export const MenuItems = tw.div`
 export const _MenuLink = styled(NavLink)``;
 
 export const MenuLink = tw(_MenuLink)`
+    font-sans
+    font-semibold
+    text-gray-700
+    transition-all
+    transition-duration-100
+
     hover:text-gray-900
-    hover:border-b-2
 `;
 
 export const Options = tw.div`
