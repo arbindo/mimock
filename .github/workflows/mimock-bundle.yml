@@ -1,25 +1,10 @@
 name: Mimock Bundle App Pipeline
 
-on:
-  push:
-    branches: [main]
+on: [workflow_dispatch]
 
 jobs:
-  hold-bundling:
-    name: Wait for manual trigger
-    runs-on: ubuntu-latest
-    environment:
-      name: mimockRelease
-
-    steps:
-      - name: Wait for reviewer to initiate the build
-        run: |
-          echo "Awaiting Review!"
-
   bundle-app:
     name: Bundle spring-boot app with UI
-    needs:
-      - hold-bundling
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
