@@ -27,7 +27,7 @@ exports[`Header should render Header with logo and menu items 1`] = `
         <a
           class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
           data-testid="menu-item-users"
-          href="/mimock-ui/undefined/users"
+          href="/mimock-ui/admin/users"
         >
           USERS
         </a>

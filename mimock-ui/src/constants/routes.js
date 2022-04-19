@@ -1,5 +1,5 @@
 const root = '/mimock-ui';
-const adminPrefix = `${root}/${adminPrefix}`;
+const adminPrefix = `${root}/admin`;
 
 export const routes = {
 	root,
