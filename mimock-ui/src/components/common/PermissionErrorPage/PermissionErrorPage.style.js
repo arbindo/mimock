@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+import { Link } from 'react-router-dom';
 
 export const PermissionErrorPageWrapper = tw.div`
 	w-full
@@ -30,4 +31,8 @@ export const ErrorLabel = tw.span`
 	text-2xl
 	text-gray-600
 	w-full
+`;
+
+export const HomeLink = tw(Link)`
+	my-4
 `;
