@@ -35,7 +35,6 @@ function getVariant(variant) {
 }
 
 function getIcon(variant) {
-	console.log({ variant });
 	switch (variant) {
 		case 'CLEAR_BUTTON':
 			return <CloseIcon />;

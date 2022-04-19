@@ -16,6 +16,10 @@ export const routes = {
 		path: `${root}/profile`,
 		secured: true,
 	},
+	logout: {
+		path: `${root}/logout`,
+		secured: true,
+	},
 	adminRoutes: {
 		users: {
 			path: `${adminPrefix}/users`,

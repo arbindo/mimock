@@ -18,7 +18,7 @@ describe('Header', () => {
 
 		expect(getByTestId('header-menu-options')).toBeInTheDocument();
 		expect(getByTestId('menu-option-settings')).toBeInTheDocument();
-		expect(getByTestId('menu-option-profile')).toBeInTheDocument();
+		expect(getByTestId('menu-option-logout')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

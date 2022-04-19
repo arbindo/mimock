@@ -8,6 +8,7 @@ import SecuredNavigator from './navigators/SecuredNavigator';
 import AdminNavigator from './navigators/AdminNavigator';
 import Wrapper from './components/common/Wrapper';
 import Dashboard from './components/dashboard';
+import Logout from './components/common/Logout';
 
 function AppRoutes() {
 	useAxiosInterceptor();
@@ -34,6 +35,8 @@ function AppRoutes() {
 						path={routes.mocks.path}
 						element={secureRoute(<Dashboard />)}
 					/>
+					<Route path={routes.logout.path} element={secureRoute(<Logout />)} />
+					{/* Admin Routes */}
 					<Route path={routes.adminPrefix}>
 						<Route
 							path={routes.adminRoutes.users.path}

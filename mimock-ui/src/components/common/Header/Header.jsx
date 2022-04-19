@@ -1,6 +1,6 @@
 import React from 'react';
 import { routes } from 'constants/routes';
-import { FaUser, FaCog } from 'react-icons/fa';
+import { FaPowerOff, FaCog } from 'react-icons/fa';
 import {
 	HeaderContainer,
 	HeaderLogo as Logo,
@@ -32,9 +32,9 @@ export default function Header() {
 			icon: <FaCog />,
 		},
 		{
-			key: 'profile',
-			path: routes.profile.path,
-			icon: <FaUser />,
+			key: 'logout',
+			path: routes.logout.path,
+			icon: <FaPowerOff />,
 		},
 	];
 
