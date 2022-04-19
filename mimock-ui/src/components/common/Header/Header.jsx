@@ -1,6 +1,7 @@
 import React from 'react';
 import { routes } from 'constants/routes';
 import { FaPowerOff, FaCog } from 'react-icons/fa';
+import { getUserDetails } from 'utils/jwtUtils';
 import {
 	HeaderContainer,
 	HeaderLogo as Logo,
@@ -21,7 +22,14 @@ export default function Header() {
 		{
 			label: 'USERS',
 			path: routes.adminRoutes.users.path,
-			shouldDisplay: true,
+			shouldDisplay: (() => {
+				try {
+					const userDetails = getUserDetails();
+					return userDetails && userDetails.userRole === 'ROLE_ADMIN';
+				} catch (e) {
+					return false;
+				}
+			})(),
 		},
 	];
 

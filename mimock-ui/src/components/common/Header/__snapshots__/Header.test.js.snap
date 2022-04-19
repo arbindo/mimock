@@ -79,3 +79,76 @@ exports[`Header should render Header with logo and menu items 1`] = `
   </div>
 </div>
 `;
+
+exports[`Header should render Header without admin menu items if user is not admin 1`] = `
+<div>
+  <div
+    class="w-full h-20 bg-white flex items-center px-4 py-2 shadow-md justify-space-evenly mx-auto"
+    data-testid="header"
+  >
+    <div
+      class="mx-2 my-10 bg-no-repeat bg-center bg-contain sc-bdvvtL Agkin"
+      data-testid="header-logo"
+    />
+    <div
+      class="flex flex-row items-center justify-between w-full"
+    >
+      <div
+        class="mx-10 flex items-center text-gray-600 gap-10"
+        data-testid="header-menu-items"
+      >
+        <a
+          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          data-testid="menu-item-mocks"
+          href="/mimock-ui/mocks"
+        >
+          MOCKS
+        </a>
+      </div>
+      <div
+        class="flex flex-row gap-8 items-center justify-center text-2xl text-gray-500"
+        data-testid="header-menu-options"
+      >
+        <a
+          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          data-testid="menu-option-settings"
+          href="/mimock-ui/settings"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"
+            />
+          </svg>
+        </a>
+        <a
+          class="sc-gsDKAQ hover:text-gray-900 hover:border-b-2"
+          data-testid="menu-option-logout"
+          href="/mimock-ui/logout"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M400 54.1c63 45 104 118.6 104 201.9 0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4 7.9 173.1 48.9 99.3 111.8 54.2c11.7-8.3 28-4.8 35 7.7L162.6 90c5.9 10.5 3.1 23.8-6.6 31-41.5 30.8-68 79.6-68 134.9-.1 92.3 74.5 168.1 168 168.1 91.6 0 168.6-74.2 168-169.1-.3-51.8-24.7-101.8-68.1-134-9.7-7.2-12.4-20.5-6.5-30.9l15.8-28.1c7-12.4 23.2-16.1 34.8-7.8zM296 264V24c0-13.3-10.7-24-24-24h-32c-13.3 0-24 10.7-24 24v240c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24z"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
