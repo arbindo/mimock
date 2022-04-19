@@ -54,6 +54,10 @@ const IconButtonData = {
 		background: 'bg-white dark:bg-slate-300',
 		color: 'text-black',
 	},
+	HOME_BUTTON: {
+		background: 'bg-indigo-600 dark:bg-indigo-800',
+		color: 'text-white',
+	},
 };
 
 export { ButtonData, IconButtonData };

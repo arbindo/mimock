@@ -85,6 +85,27 @@ describe('Icon Button With Label', () => {
 		expect(container).toMatchSnapshot();
 	});
 
+	it('should render home Button', async () => {
+		tree = await render(
+			<IconButtonWithLabel
+				dataTestid='icon-with-label-home-button'
+				$background={'bg-indigo-600'}
+				$color={'text-white'}
+				$width='w-5/6'
+				label='Go back to Dashboard'
+				variant='HOME_BUTTON'
+				onclickHandler={() => {
+					console.log('Clicked home icon button');
+				}}
+			/>
+		);
+
+		const { getByTestId, container } = tree;
+
+		expect(getByTestId('icon-with-label-home-button')).toBeInTheDocument();
+		expect(container).toMatchSnapshot();
+	});
+
 	it('should render default Button when variant is null', async () => {
 		tree = await render(
 			<IconButtonWithLabel

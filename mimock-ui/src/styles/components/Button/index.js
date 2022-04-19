@@ -22,6 +22,7 @@ export const IconButtonVariants = {
 	CopyButton: 'COPY_BUTTON',
 	FilterButton: 'FILTER_BUTTON',
 	DefaultButton: 'DEFAULT_BUTTON',
+	HomeButton: 'HOME_BUTTON',
 };
 
 export { Button, CustomButton, IconButtonWithLabel, IconButtonWithoutLabel };
