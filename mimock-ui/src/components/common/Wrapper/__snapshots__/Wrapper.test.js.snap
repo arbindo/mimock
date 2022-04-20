@@ -7,10 +7,6 @@ exports[`Wrapper should render wrapper 1`] = `
     data-testid="header"
   >
     <div
-      class="mx-2 my-10 bg-no-repeat bg-center bg-contain sc-bdvvtL Agkin"
-      data-testid="header-logo"
-    />
-    <div
       class="flex flex-row items-center justify-between w-full"
     >
       <div

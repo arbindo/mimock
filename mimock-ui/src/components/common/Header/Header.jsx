@@ -48,7 +48,9 @@ export default function Header() {
 
 	return (
 		<HeaderContainer data-testid='header'>
-			<Logo data-testid='header-logo' />
+			<MenuLink data-testid='header-logo' to={routes.root}>
+				<Logo />
+			</MenuLink>
 			<RightFlexContainer>
 				<MenuItems data-testid='header-menu-items'>
 					<For each='item' of={menuItems}>
