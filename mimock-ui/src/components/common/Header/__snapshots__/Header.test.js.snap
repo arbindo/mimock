@@ -9,7 +9,7 @@ exports[`Header should render Header with logo and menu items 1`] = `
     <a
       class="sc-gsDKAQ font-sans font-semibold text-gray-700 transition-all transition-duration-100 hover:text-gray-900"
       data-testid="header-logo"
-      href="/mimock-ui"
+      href="/mimock-ui/mocks"
     >
       <div
         class="mx-2 my-10 bg-no-repeat bg-center bg-contain sc-bdvvtL Agkin"
@@ -94,7 +94,7 @@ exports[`Header should render Header without admin menu items if user is not adm
     <a
       class="sc-gsDKAQ font-sans font-semibold text-gray-700 transition-all transition-duration-100 hover:text-gray-900"
       data-testid="header-logo"
-      href="/mimock-ui"
+      href="/mimock-ui/mocks"
     >
       <div
         class="mx-2 my-10 bg-no-repeat bg-center bg-contain sc-bdvvtL Agkin"

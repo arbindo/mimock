@@ -48,7 +48,7 @@ export default function Header() {
 
 	return (
 		<HeaderContainer data-testid='header'>
-			<MenuLink data-testid='header-logo' to={routes.root}>
+			<MenuLink data-testid='header-logo' to={routes.mocks.path}>
 				<Logo />
 			</MenuLink>
 			<RightFlexContainer>
