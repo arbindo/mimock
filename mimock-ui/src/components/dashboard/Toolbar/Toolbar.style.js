@@ -12,6 +12,16 @@ export const ToolbarContainer = tw.div`
     align-middle
 `;
 
+export const ToolbarInnerContainer = tw.div`
+    w-5/6
+    flex
+    flex-row
+    mx-auto
+    justify-end
+    align-middle
+    px-2
+`;
+
 export const AddMockButton = tw(CustomButton)``;
 
 export const FilterMockButton = tw(CustomButton)``;

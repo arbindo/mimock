@@ -19,6 +19,7 @@ export const Title = tw.div`
     mx-auto
     my-auto
     select-none
+    w-1/6
 `;
 
 export const TitleSpan = tw.span`
