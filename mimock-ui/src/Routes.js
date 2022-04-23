@@ -44,7 +44,6 @@ function AppRoutes() {
 						/>
 					</Route>
 				</Route>
-				<Route path='style' element={<Style />} exact />
 			</Routes>
 		</Router>
 	);
