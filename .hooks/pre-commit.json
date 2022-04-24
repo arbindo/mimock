@@ -1,0 +1,10 @@
+{
+  "steps": [
+    {
+      "from": "check-ui"
+    },
+    {
+      "from": "check-backend"
+    }
+  ]
+}

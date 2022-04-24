@@ -1,0 +1,10 @@
+{
+  "steps": [
+    {
+      "from": "validate-ui"
+    },
+    {
+      "from": "validate-backend"
+    }
+  ]
+}

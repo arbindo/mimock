@@ -1,0 +1,5 @@
+{
+  "name": "Check Backend style & lint (Java)",
+  "command": "cd mimock-backend && ./mvnw -ntp checkstyle:check",
+  "onlyOn": "^mimock-backend/*"
+}

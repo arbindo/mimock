@@ -1,0 +1,6 @@
+{
+    "name": "Validate Backend package (mimock-backend)",
+    "command": "cd mimock-backend && ./mvnw -ntp clean initialize verify -P startDatabase -P coverage -Dspring.config.location=classpath:/application.yml",
+    "onlyOn": "mimock-ui/*"
+  }
+  
