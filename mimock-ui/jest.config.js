@@ -17,10 +17,10 @@ module.exports = {
 	timers: 'fake',
 	coverageThreshold: {
 		global: {
-			branches: 95,
-			functions: 95,
-			lines: 90,
-			statements: 95,
+			branches: 50,
+			functions: 50,
+			lines: 50,
+			statements: 50,
 		},
 	},
 	moduleNameMapper: {
