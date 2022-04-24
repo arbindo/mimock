@@ -340,7 +340,7 @@ describe('Style', () => {
 		tree = await render(<Style />);
 
 		const { getByTestId } = tree;
-		const textField = getByTestId('login-username-input')
+		const textField = getByTestId('login-username-input');
 		expect(textField).toBeInTheDocument();
 
 		act(() => {
@@ -365,7 +365,7 @@ describe('Style', () => {
 		tree = await render(<Style />);
 
 		const { getByTestId } = tree;
-		const passwordField = getByTestId('login-password-input')
+		const passwordField = getByTestId('login-password-input');
 		expect(passwordField).toBeInTheDocument();
 
 		act(() => {

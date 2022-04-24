@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
 
-export const UserNameFieldContainer = tw.input `
+export const UserNameFieldContainer = tw.input`
     w-full
     my-2
     p-2
