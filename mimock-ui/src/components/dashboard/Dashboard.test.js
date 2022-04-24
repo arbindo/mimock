@@ -10,7 +10,6 @@ describe('Dashboard', () => {
 
 		expect(getByTestId('titlebar-section')).toBeInTheDocument();
 		expect(getByTestId('toolbar-section')).toBeInTheDocument();
-		expect(getByTestId('sidebar-section')).toBeInTheDocument();
 		expect(getByTestId('list-section')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();

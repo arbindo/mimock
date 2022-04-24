@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List should render list component 1`] = `
+<div>
+  <div
+    class="flex flex-col justify-center align-middle w-full"
+    data-testid="list-section"
+  />
+</div>
+`;

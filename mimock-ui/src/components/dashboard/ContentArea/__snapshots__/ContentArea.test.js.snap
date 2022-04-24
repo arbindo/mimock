@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentArea should render content area component 1`] = `
+<div>
+  <div
+    class="w-11/12 flex flex-row mx-auto mt-4 mb-2 justify-center align-middle"
+  >
+    <div
+      class="flex flex-col justify-center align-middle w-full"
+      data-testid="list-section"
+    />
+  </div>
+</div>
+`;

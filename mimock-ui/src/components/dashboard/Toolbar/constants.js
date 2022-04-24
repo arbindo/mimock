@@ -1,7 +1,7 @@
 export const constants = {
 	label: {
 		add: 'Add Mock',
-		filter: 'Filter Mocks',
+		sidebar: 'Tools',
 		sort: 'Sort By:',
 		group: 'Group By:',
 	},

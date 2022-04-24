@@ -24,7 +24,7 @@ export const ToolbarInnerContainer = tw.div`
 
 export const AddMockButton = tw(CustomButton)``;
 
-export const FilterMockButton = tw(CustomButton)``;
+export const MoreToolsMockButton = tw(CustomButton)``;
 
 export const SelectWrapper = tw.div`
     flex

@@ -1,7 +1,12 @@
 import React from 'react';
+import { SideBarContainer } from './Sidebar.style.js';
 
 function Sidebar() {
-	return <div data-testid='sidebar-section'>Sidebar</div>;
+	return (
+		<SideBarContainer data-testid='sidebar-section'>
+			Filter Sidebar
+		</SideBarContainer>
+	);
 }
 
 export default Sidebar;

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar should render sidebar component 1`] = `
+<div>
+  <div
+    class="w-1/6 flex flex-row"
+    data-testid="sidebar-section"
+  >
+    Filter Sidebar
+  </div>
+</div>
+`;
