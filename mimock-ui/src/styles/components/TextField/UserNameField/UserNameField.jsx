@@ -31,7 +31,7 @@ UserNameField.propTypes = {
 	onBlurHandler: PropTypes.func,
 	onFocusHandler: PropTypes.func,
 	placeholder: PropTypes.string,
-	autoComplete: PropTypes.string,
+	autoComplete: PropTypes.bool,
 };
 
 export default UserNameField;

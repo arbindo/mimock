@@ -1,0 +1,18 @@
+{
+  "name": "mimock",
+  "version": "0.0.1",
+  "description": "Platform to setup REST Api mocks",
+  "main": "index.js",
+  "repository": "https://github.com/arbindo/mimock",
+  "author": "neel1996 <47709856+neel1996@users.noreply.github.com>",
+  "license": "Apache-2.0",
+  "private": false,
+  "devDependencies": {
+    "@escape.tech/mookme": "^2.1.1",
+    "husky": "^7.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "backend:pre-push": "cd mimock-backend && ./mvnw -ntp clean initialize verify -P coverage -Dspring.config.location=classpath:/application.yml"
+  }
+}

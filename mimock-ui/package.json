@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "format:check": "prettier --check --config=.prettierrc src/**/*.js src/**/*.jsx",
+        "format:file": "prettier --write --config=.prettierrc ",
         "format:fix": "prettier --write --config=.prettierrc .",
         "lint:file": "eslint ",
         "lint:all": "eslint --config=.eslintrc.js src/**/*.js src/**/*.jsx",
@@ -12,7 +13,7 @@
         "start": "webpack serve --open --mode development",
         "start:live": "webpack serve --open /mimock-ui/ --mode development --live-reload --hot",
         "test": "jest --silent=true",
-        "pre-commit:check": "yarn format:check && yarn lint:all"
+        "pre-push:check": "yarn format:check && yarn lint:all"
     },
     "license": "Apache-2.0",
     "author": {
@@ -42,7 +43,7 @@
         "html-webpack-plugin": "^5.3.2",
         "husky": "^7.0.4",
         "jest-mock-axios": "^4.5.0",
-        "lint-staged": "^12.3.4",
+        "lint-staged": "^12.4.0",
         "postcss": "^8.2.13",
         "postcss-loader": "^6.2.1",
         "style-loader": "^3.3.0",
@@ -95,5 +96,12 @@
     "engines": {
         "npm": "please-use-yarn",
         "yarn": ">= 1.19.1"
+    },
+    "lint-staged": {
+        "*.{js,jsx}": [
+            "yarn format:file",
+            "yarn lint:file",
+            "yarn test --all --passWithNoTests --silent=true --no-coverage -f "
+        ]
     }
 }

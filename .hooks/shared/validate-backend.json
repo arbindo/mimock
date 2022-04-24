@@ -1,0 +1,5 @@
+{
+    "name": "Validate Backend package (mimock-backend)",
+    "command": "yarn backend:pre-push"
+}
+  
