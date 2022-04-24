@@ -1,6 +1,5 @@
 {
     "name": "Validate UI package (mimock-ui)",
-    "command": "cd mimock-ui && yarn pre-push:check",
-    "onlyOn": "mimock-ui/*"
+    "command": "cd mimock-ui && yarn pre-push:check"
   }
   

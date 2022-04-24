@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "format:check": "prettier --check --config=.prettierrc src/**/*.js src/**/*.jsx",
+        "format:file": "prettier --write --config=.prettierrc ",
         "format:fix": "prettier --write --config=.prettierrc .",
         "lint:file": "eslint ",
         "lint:all": "eslint --config=.eslintrc.js src/**/*.js src/**/*.jsx",
@@ -95,5 +96,12 @@
     "engines": {
         "npm": "please-use-yarn",
         "yarn": ">= 1.19.1"
+    },
+    "lint-staged": {
+        "*.{js,jsx}": [
+            "yarn format:file",
+            "yarn lint:file",
+            "yarn test --all --passWithNoTests --silent=true --no-coverage -f "
+        ]
     }
 }

@@ -1,5 +1,4 @@
 {
   "name": "Check UI style & lint (JS | JSX)",
-  "command": "cd mimock-ui && yarn lint-staged",
-  "onlyOn": "^mimock-ui/*"
+  "command": "cd mimock-ui && yarn lint-staged"
 }

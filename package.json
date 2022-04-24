@@ -12,6 +12,7 @@
     "husky": "^7.0.0"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "backend:pre-push": "cd mimock-backed && ./mvnw -ntp clean initialize verify -P coverage -Dspring.config.location=classpath:/application.yml"
   }
 }
