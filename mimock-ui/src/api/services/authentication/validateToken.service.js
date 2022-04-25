@@ -3,7 +3,9 @@ import { get } from 'api/AxiosClient';
 let result;
 
 const isTokenValid = async () => {
-	return await get('/auth-token/validate')
+	return await get('/auth-token/validate', {
+		showFullPageLoader: true,
+	})
 		.then(() => {
 			result = true;
 			return result;
