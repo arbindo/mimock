@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Label should render label 1`] = `
+<div>
+  <div
+    class="font-sans text-gray-500 mt-3"
+    data-testid="label-test"
+  >
+    Username
+  </div>
+</div>
+`;
