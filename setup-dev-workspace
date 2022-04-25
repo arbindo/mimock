@@ -32,7 +32,7 @@ echo -e ":: Setting up git hooks ::\n"
 echo "exec < /dev/tty" >>~/.huskyrc
 yarn
 yarn prepare
-git config advice.ignoredHook false
+cd .husky && chmod +x * && cd ..
 
 echo -e "\n"
 echo -e ":: Installing UI dependencies ::\n"
