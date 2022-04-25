@@ -1,0 +1,6 @@
+tasks:
+  - init: ./setup-dev-workspace
+
+ports:
+  - port: 5427
+    visibility: private
