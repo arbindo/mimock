@@ -1,21 +1,66 @@
 #!/usr/bin/env bash
 
+should_proceed=true
+
+check_program() {
+	if ! command -v "$1" >/dev/null 2>&1; then
+		echo "❌ '$1'"
+		should_proceed=false
+	else
+		echo "✅ '$1'"
+	fi
+}
+
+echo "Checking program status"
+echo "========================"
+check_program "git"
+check_program "yarn"
+check_program "java"
+check_program "docker"
+
+if ! $should_proceed; then
+	echo "⁉️ Required programs are missing or not installed"
+	echo "🔴 Please install the missing programs"
+	exit 1
+fi
+
+echo -e "\n"
 echo "Setting up Dev workspace"
 echo "========================"
-echo "Setting up git hooks"
-echo "exec < /dev/tty" >> ~/.huskyrc
+echo -e "\n"
+echo -e ":: Setting up git hooks ::\n"
+echo "exec < /dev/tty" >>~/.huskyrc
 yarn
 yarn prepare
+git config advice.ignoredHook false
 
-echo "Installing UI dependencies"
+echo -e "\n"
+echo -e ":: Installing UI dependencies ::\n"
 cd mimock-ui && yarn && cd ..
 
-echo "Installing backend dependencies"
-cd mimock-backend && ./mvnw dependency:resolve && cd ..
+echo -e "\n"
+echo -e ":: Installing backend dependencies ::\n"
+cd mimock-backend && ./mvnw -ntp clean install -DskipTests=true && cd ..
 
-echo "Starting dev database"
-docker build -t mimock-pg-database . -f Dockerfile.pg && \
-	docker run --name mimock-db -p 5427:5432 -d mimock-pg-database
+echo -e "\n"
+echo -e ":: Starting dev database ::\n"
+mimock_db=$(docker ps -a --filter name=mimock-db --format "{{.Names}}")
 
+if [ -z "$mimock_db" ]; then
+	echo "🔵 Starting database"
+	docker build -t mimock-pg-database . -f Dockerfile.pg && docker run --name mimock-db -p 5427:5432 -d mimock-pg-database
+else
+	db_status=$(docker container inspect -f '{{.State.Running}}' $mimock_db)
+	if [ "$db_status" == "false" ]; then
+		echo "🔴 Database is not running"
+		echo "🔵 Re-starting database"
+		docker start $mimock_db >/dev/null
+	else
+		echo "🔵 Mimock database is already running"
+	fi
+fi
+
+echo -e "\n"
 echo "========================"
 echo "Dev workspace setup completed!"
+echo -e "\n"
