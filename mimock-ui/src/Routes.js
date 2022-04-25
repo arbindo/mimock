@@ -8,6 +8,7 @@ import SecuredNavigator from './navigators/SecuredNavigator';
 import AdminNavigator from './navigators/AdminNavigator';
 import Wrapper from './components/common/Wrapper';
 import Dashboard from './components/dashboard';
+import Users from './components/users';
 import Logout from './components/common/Logout';
 
 function AppRoutes() {
@@ -40,7 +41,7 @@ function AppRoutes() {
 					<Route path={routes.adminPrefix}>
 						<Route
 							path={routes.adminRoutes.users.path}
-							element={secureAdminRoutes(<h1> Users </h1>)}
+							element={secureAdminRoutes(<Users />)}
 						/>
 					</Route>
 				</Route>

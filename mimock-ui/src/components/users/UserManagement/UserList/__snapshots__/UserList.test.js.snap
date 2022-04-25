@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserList should render Users list 1`] = `
+<div>
+  <div
+    class="w-full h-full"
+  >
+    <h1
+      class="font-sans text-3xl font-semibold text-slate-600 my-10 mx-10"
+      data-testid="user-management-header"
+    >
+      User Management
+    </h1>
+    <div
+      class="w-11/12 flex my-10 mx-auto justify-between gap-4"
+      data-testid="users-list"
+    >
+      <div
+        class="w-1/2 p-10 my-2 flex justify-between shadow-md rounded-md border-2 border-gray-100 gap-4"
+        data-testid="user-1"
+      >
+        <div
+          class="flex justify-center gap-8"
+        >
+          <div
+            class="text-center w-14 h-14 flex justify-center items-center align-middle rounded-full bg-teal-400 text-white font-sans font-bold text-2xl border-2 shadow-sm"
+            data-testid="user-1-icon"
+          >
+            U
+          </div>
+          <div
+            class="block"
+          >
+            <h1
+              class="font-sans text-2xl font-semibold text-gray-700"
+              data-testid="user-1-name"
+            >
+              User 1
+            </h1>
+            <h1
+              class="font-sans text-xl text-gray-500"
+              data-testid="user-1-username"
+            >
+              user1
+            </h1>
+          </div>
+        </div>
+        <div
+          class="first-letter: text-center text-2xl text-gray-600 cursor-pointer flex flex-col justify-center items-center align-middle gap-4"
+        >
+          <svg
+            data-testid="user-edit"
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 576 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+            />
+          </svg>
+          <svg
+            data-testid="user-delete"
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="w-1/2 p-10 my-2 flex justify-between shadow-md rounded-md border-2 border-gray-100 gap-4"
+        data-testid="user-2"
+      >
+        <div
+          class="flex justify-center gap-8"
+        >
+          <div
+            class="text-center w-14 h-14 flex justify-center items-center align-middle rounded-full bg-teal-400 text-white font-sans font-bold text-2xl border-2 shadow-sm"
+            data-testid="user-2-icon"
+          >
+            U
+          </div>
+          <div
+            class="block"
+          >
+            <h1
+              class="font-sans text-2xl font-semibold text-gray-700"
+              data-testid="user-2-name"
+            >
+              User 2
+            </h1>
+            <h1
+              class="font-sans text-xl text-gray-500"
+              data-testid="user-2-username"
+            >
+              user2
+            </h1>
+          </div>
+        </div>
+        <div
+          class="first-letter: text-center text-2xl text-gray-600 cursor-pointer flex flex-col justify-center items-center align-middle gap-4"
+        >
+          <svg
+            data-testid="user-edit"
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 576 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+            />
+          </svg>
+          <svg
+            data-testid="user-delete"
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserList should show no users error when user list is empty 1`] = `
+<div>
+  <div
+    class="w-full h-full"
+  >
+    <h1
+      class="font-sans text-3xl font-semibold text-slate-600 my-10 mx-10"
+      data-testid="user-management-header"
+    >
+      User Management
+    </h1>
+    <div
+      class="p-3 my-10 text-center bg-red-200 border-2 border-red-200 mx-auto text-red-600 font-sans w-3/4 font-semibold rounded-lg text-xl"
+      data-testid="no-users-error"
+    >
+      There are no users to display.
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserList should show user error when getAllUsers api call fails 1`] = `
+<div>
+  <div
+    class="w-full h-full"
+  >
+    <h1
+      class="font-sans text-3xl font-semibold text-slate-600 my-10 mx-10"
+      data-testid="user-management-header"
+    >
+      User Management
+    </h1>
+    <div
+      class="p-3 my-10 text-center bg-red-200 border-2 border-red-200 mx-auto text-red-600 font-sans w-3/4 font-semibold rounded-lg text-xl"
+      data-testid="user-error"
+    >
+      There was an error getting the users. Please try again later.
+    </div>
+  </div>
+</div>
+`;
