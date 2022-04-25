@@ -11,6 +11,8 @@ import {
 	Options,
 	OptionLink,
 } from './Header.style';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function Header() {
 	const menuItems = [
@@ -37,11 +39,13 @@ export default function Header() {
 		{
 			key: 'settings',
 			path: routes.settings.path,
+			title: 'Settings',
 			icon: <FaCog />,
 		},
 		{
 			key: 'logout',
 			path: routes.logout.path,
+			title: 'Logout',
 			icon: <FaPowerOff />,
 		},
 	];
@@ -72,7 +76,9 @@ export default function Header() {
 							key={option.key}
 							to={option.path}
 						>
-							{option.icon}
+							<Tooltip title={option.title}>
+								<IconButton>{option.icon}</IconButton>
+							</Tooltip>
 						</OptionLink>
 					</For>
 				</Options>
