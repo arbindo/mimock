@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+echo "Setting up Dev workspace"
+echo "========================"
+echo "Setting up git hooks"
+echo "exec < /dev/tty" >> ~/.huskyrc
+yarn
+yarn prepare
+
+echo "Installing UI dependencies"
+cd mimock-ui && yarn && cd ..
+
+echo "Installing backend dependencies"
+cd mimock-backend && ./mvnw dependency:resolve && cd ..
+
+echo "Starting dev database"
+docker build -t mimock-pg-database . -f Dockerfile.pg && \
+	docker run --name mimock-db -p 5427:5432 -d mimock-pg-database
+
+echo "========================"
+echo "Dev workspace setup completed!"
