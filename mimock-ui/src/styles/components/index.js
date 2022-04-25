@@ -6,6 +6,7 @@ import {
 	IconButtonWithoutLabel,
 } from './Button';
 import Pill from './Pill';
+import Card from './Card';
 
 export {
 	Button,
@@ -13,6 +14,7 @@ export {
 	IconButtonWithLabel,
 	IconButtonWithoutLabel,
 	Pill,
+	Card,
 	UserNameField,
 	PasswordField,
 };

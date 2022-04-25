@@ -7,6 +7,7 @@ import {
 	IconButtonWithoutLabel,
 	UserNameField,
 	PasswordField,
+	Card,
 } from 'styles';
 import { PillVariants } from 'styles/Pill';
 import { ButtonVariants, IconButtonVariants } from 'styles/Button';
@@ -14,6 +15,18 @@ import { ButtonVariants, IconButtonVariants } from 'styles/Button';
 function Style() {
 	return (
 		<div data-testid='style' className='mt-10 text-3xl mx-auto w-screen'>
+			<div className='w-full mb-20'>
+				<div className='font-sans font-bold text-lg mb-10 ml-6 dark:text-gray-100'>
+					Card
+				</div>
+				<Card
+					dataTestid='card-test'
+					background='bg-green-300'
+					border='border-2 border-solid border-black'
+				>
+					Hello
+				</Card>
+			</div>
 			<div className='w-full mb-20'>
 				<div className='font-sans font-bold text-lg mb-10 ml-6 dark:text-gray-100'>
 					Button

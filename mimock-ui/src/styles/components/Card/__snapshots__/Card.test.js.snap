@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card should render card 1`] = `
+<div>
+  <div
+    class="w-fit rounded-md p-8 shadow-lg m-10"
+    data-testid="card-test"
+  >
+    Hello
+  </div>
+</div>
+`;

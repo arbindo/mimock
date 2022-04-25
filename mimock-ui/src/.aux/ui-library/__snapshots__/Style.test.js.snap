@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Style should render card 1`] = `
+<div
+  class="w-fit rounded-md p-8 shadow-lg m-10 bg-green-300 border-2 border-solid border-black"
+  data-testid="card-test"
+>
+  Hello
+</div>
+`;
+
 exports[`Style should render custom button 1 1`] = `
 <button
   class="px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-orange-400"
@@ -346,12 +355,27 @@ exports[`Style should render pill 4 1`] = `
 </div>
 `;
 
-exports[`Style should render style for button, pill and text field 1`] = `
+exports[`Style should render style for button, pill, card and text field 1`] = `
 <div>
   <div
     class="mt-10 text-3xl mx-auto w-screen"
     data-testid="style"
   >
+    <div
+      class="w-full mb-20"
+    >
+      <div
+        class="font-sans font-bold text-lg mb-10 ml-6 dark:text-gray-100"
+      >
+        Card
+      </div>
+      <div
+        class="w-fit rounded-md p-8 shadow-lg m-10 bg-green-300 border-2 border-solid border-black"
+        data-testid="card-test"
+      >
+        Hello
+      </div>
+    </div>
     <div
       class="w-full mb-20"
     >

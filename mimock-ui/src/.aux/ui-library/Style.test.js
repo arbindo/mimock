@@ -5,7 +5,7 @@ import Style from './Style.jsx';
 describe('Style', () => {
 	let tree;
 
-	it('should render style for button, pill and text field', async () => {
+	it('should render style for button, pill, card and text field', async () => {
 		tree = await render(<Style />);
 
 		const { getByTestId, container } = tree;
@@ -334,6 +334,16 @@ describe('Style', () => {
 		});
 
 		expect(pill).toMatchSnapshot();
+	});
+
+	it('should render card', async () => {
+		tree = await render(<Style />);
+
+		const { getByTestId } = tree;
+		const card = getByTestId('card-test');
+		expect(card).toBeInTheDocument();
+
+		expect(card).toMatchSnapshot();
 	});
 
 	it('should render text field', async () => {
