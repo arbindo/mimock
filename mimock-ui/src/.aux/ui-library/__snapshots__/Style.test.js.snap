@@ -92,7 +92,7 @@ exports[`Style should render default button 7 1`] = `
 
 exports[`Style should render icon button with label 1 1`] = `
 <button
-  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/3 bg-green-300 dark:bg-green-400"
+  class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/3 bg-green-300 dark:bg-green-400"
   data-testid="icon-with-label-button-test-1"
 >
   <svg
@@ -114,7 +114,7 @@ exports[`Style should render icon button with label 1 1`] = `
 
 exports[`Style should render icon button with label 2 1`] = `
 <button
-  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-1/2 bg-red-300 dark:bg-red-500"
+  class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-1/2 bg-red-300 dark:bg-red-500"
   data-testid="icon-with-label-button-test-2"
 >
   <svg
@@ -135,7 +135,7 @@ exports[`Style should render icon button with label 2 1`] = `
 
 exports[`Style should render icon button with label 3 1`] = `
 <button
-  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
+  class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
   data-testid="icon-with-label-button-test-3"
 >
   <svg
@@ -160,7 +160,7 @@ exports[`Style should render icon button with label 3 1`] = `
 
 exports[`Style should render icon button with label 4 1`] = `
 <button
-  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-blue-600"
+  class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-blue-600"
   data-testid="icon-with-label-button-test-4"
 >
   <svg
@@ -182,7 +182,7 @@ exports[`Style should render icon button with label 4 1`] = `
 
 exports[`Style should render icon button with label 5 1`] = `
 <button
-  class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
+  class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
   data-testid="icon-with-label-button-test-5"
 >
   <svg
@@ -442,7 +442,7 @@ exports[`Style should render style for button, pill, card and text field 1`] = `
           Custom2
         </button>
         <button
-          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/3 bg-green-300 dark:bg-green-400"
+          class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/3 bg-green-300 dark:bg-green-400"
           data-testid="icon-with-label-button-test-1"
         >
           <svg
@@ -461,7 +461,7 @@ exports[`Style should render style for button, pill, card and text field 1`] = `
           Add
         </button>
         <button
-          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-1/2 bg-red-300 dark:bg-red-500"
+          class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-1/2 bg-red-300 dark:bg-red-500"
           data-testid="icon-with-label-button-test-2"
         >
           <svg
@@ -479,7 +479,7 @@ exports[`Style should render style for button, pill, card and text field 1`] = `
           Close
         </button>
         <button
-          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
+          class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
           data-testid="icon-with-label-button-test-3"
         >
           <svg
@@ -501,7 +501,7 @@ exports[`Style should render style for button, pill, card and text field 1`] = `
           Delete
         </button>
         <button
-          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-blue-600"
+          class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-blue-600"
           data-testid="icon-with-label-button-test-4"
         >
           <svg
@@ -520,7 +520,7 @@ exports[`Style should render style for button, pill, card and text field 1`] = `
           Copy
         </button>
         <button
-          class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
+          class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
           data-testid="icon-with-label-button-test-5"
         >
           <svg

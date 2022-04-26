@@ -3,7 +3,7 @@
 exports[`Icon Button With Label should render add Button 1`] = `
 <div>
   <button
-    class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
+    class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
     data-testid="icon-with-label-button-test-1"
   >
     <svg
@@ -27,7 +27,7 @@ exports[`Icon Button With Label should render add Button 1`] = `
 exports[`Icon Button With Label should render clear Button 1`] = `
 <div>
   <button
-    class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
+    class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
     data-testid="icon-with-label-button-test-2"
   >
     <svg
@@ -51,7 +51,7 @@ exports[`Icon Button With Label should render clear Button 1`] = `
 exports[`Icon Button With Label should render copy Button 1`] = `
 <div>
   <button
-    class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
+    class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
     data-testid="icon-with-label-button-test-4"
   >
     <svg
@@ -75,7 +75,7 @@ exports[`Icon Button With Label should render copy Button 1`] = `
 exports[`Icon Button With Label should render default Button when variant is null 1`] = `
 <div>
   <button
-    class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
+    class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
     data-testid="icon-with-label-button-test-5"
   >
     <svg
@@ -99,7 +99,7 @@ exports[`Icon Button With Label should render default Button when variant is nul
 exports[`Icon Button With Label should render delete Button 1`] = `
 <div>
   <button
-    class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
+    class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-black w-fit bg-white dark:bg-slate-300"
     data-testid="icon-with-label-button-test-3"
   >
     <svg
@@ -123,7 +123,7 @@ exports[`Icon Button With Label should render delete Button 1`] = `
 exports[`Icon Button With Label should render home Button 1`] = `
 <div>
   <button
-    class="flex items-center justify-center gap-3 px-9 py-3 m-auto shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-indigo-600 dark:bg-indigo-800"
+    class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-indigo-600 dark:bg-indigo-800"
     data-testid="icon-with-label-home-button"
   >
     <svg

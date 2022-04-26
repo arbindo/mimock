@@ -7,7 +7,6 @@ export const IconButtonWithLabelContainer = tw.button`
   gap-3
   px-9
   py-3
-  m-auto
   shadow-md
   rounded-md
   text-center
