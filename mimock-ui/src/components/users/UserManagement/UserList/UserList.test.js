@@ -32,6 +32,7 @@ describe('UserList', () => {
 		const { container, getByTestId, getAllByTestId, queryByTestId } = tree;
 
 		expect(getByTestId('user-management-header')).toBeInTheDocument();
+		expect(getByTestId('add-user-btn')).toBeInTheDocument();
 		expect(getByTestId('users-list')).toBeInTheDocument();
 
 		expect(getByTestId('user-1')).toBeInTheDocument();
@@ -65,6 +66,7 @@ describe('UserList', () => {
 		const { container, getByTestId, queryByTestId } = tree;
 
 		expect(getByTestId('user-management-header')).toBeInTheDocument();
+		expect(getByTestId('add-user-btn')).toBeInTheDocument();
 		expect(queryByTestId('users-list')).not.toBeInTheDocument();
 
 		expect(getByTestId('user-error')).toBeInTheDocument();
@@ -88,6 +90,8 @@ describe('UserList', () => {
 		const { container, getByTestId, queryByTestId } = tree;
 
 		expect(getByTestId('user-management-header')).toBeInTheDocument();
+		expect(getByTestId('add-user-btn')).toBeInTheDocument();
+
 		expect(queryByTestId('users-list')).not.toBeInTheDocument();
 
 		expect(getByTestId('no-users-error')).toBeInTheDocument();

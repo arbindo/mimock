@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUsers } from 'services/users/getUsers.service';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import { IconButtonVariants } from 'styles/Button';
 import {
 	UserListWrapper,
 	List,
@@ -14,12 +16,27 @@ import {
 	Header,
 	Options,
 	UserInfoFlexOne,
+	UserManagementHeader,
+	AddButton,
 } from './UserList.style';
 
 export default function UserList() {
 	const [gettingUsers, setGettingUsers] = useState(true);
 	const [error, setError] = useState(false);
 	const [users, setUsers] = useState([]);
+
+	const options = [
+		{
+			name: 'edit',
+			icon: <FaEdit />,
+			tooltip: 'Edit User',
+		},
+		{
+			name: 'delete',
+			icon: <FaTrash />,
+			tooltip: 'Delete User',
+		},
+	];
 
 	const iconColors = () => {
 		const colors = [
@@ -48,7 +65,14 @@ export default function UserList() {
 
 	return (
 		<UserListWrapper>
-			<Header data-testid='user-management-header'>User Management</Header>
+			<UserManagementHeader>
+				<Header data-testid='user-management-header'>User Management</Header>
+				<AddButton
+					dataTestid='add-user-btn'
+					label='ADD USER'
+					variant={IconButtonVariants.AddButton}
+				/>
+			</UserManagementHeader>
 
 			<Choose>
 				<When condition={error}>
@@ -78,8 +102,17 @@ export default function UserList() {
 								</UserInfoFlexOne>
 
 								<Options>
-									<FaEdit data-testid='user-edit' />
-									<FaTrash data-testid='user-delete' />
+									<For each='option' of={options}>
+										<Tooltip
+											key={option.name}
+											data-testid={`user-${option.name}`}
+											title={option.tooltip}
+											placement='right-end'
+											arrow
+										>
+											<IconButton>{option.icon}</IconButton>
+										</Tooltip>
+									</For>
 								</Options>
 							</User>
 						</For>

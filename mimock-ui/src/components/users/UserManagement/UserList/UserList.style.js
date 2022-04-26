@@ -1,8 +1,22 @@
 import tw from 'tailwind-styled-components';
+import { IconButtonWithLabel } from 'styles/Button';
 
 export const UserListWrapper = tw.div`
     w-full
     h-full
+`;
+
+export const UserManagementHeader = tw.div`
+    flex
+    justify-between
+    items-center
+    align-middle
+    px-4
+    my-10
+    border-b-2
+    border-gray-100
+    w-11/12
+    mx-auto
 `;
 
 export const Header = tw.h1`
@@ -10,9 +24,11 @@ export const Header = tw.h1`
     text-3xl
     font-semibold
     text-slate-600
-    my-10
-    mx-10
+    py-6
+    w-3/4
 `;
+
+export const AddButton = tw(IconButtonWithLabel)``;
 
 export const List = tw.div`
     w-11/12
@@ -45,6 +61,8 @@ export const User = tw.div`
     my-2
     flex
     justify-between
+    align-middle
+    items-center
     shadow-md
     rounded-md
     border-2
