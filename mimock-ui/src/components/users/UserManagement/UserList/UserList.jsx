@@ -4,6 +4,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import { IconButtonVariants } from 'styles/Button';
+import { ConfirmationModal } from 'components/common/Modals';
 import {
 	UserListWrapper,
 	List,
@@ -24,17 +25,30 @@ export default function UserList() {
 	const [gettingUsers, setGettingUsers] = useState(true);
 	const [error, setError] = useState(false);
 	const [users, setUsers] = useState([]);
+	const [selectedUser, setSelectedUser] = useState({
+		name: '',
+		userName: '',
+		userId: '',
+	});
+	const [showDeletionModal, setShowDeletionModal] = useState(false);
+
+	const deletionConfirmationMessage = `Are you sure you want to delete user "${selectedUser.userName}" ?`;
 
 	const options = [
 		{
 			name: 'edit',
 			icon: <FaEdit />,
 			tooltip: 'Edit User',
+			onClick: () => {},
 		},
 		{
 			name: 'delete',
 			icon: <FaTrash />,
 			tooltip: 'Delete User',
+			onClick: (user) => {
+				setShowDeletionModal(true);
+				setSelectedUser(user);
+			},
 		},
 	];
 
@@ -65,6 +79,19 @@ export default function UserList() {
 
 	return (
 		<UserListWrapper>
+			<If condition={showDeletionModal}>
+				<ConfirmationModal
+					message={deletionConfirmationMessage}
+					cancelButtonLabel='Do not delete user'
+					confirmButtonLabel='Delete user'
+					onConfirm={() => {
+						setShowDeletionModal(false);
+					}}
+					onCancel={() => {
+						setShowDeletionModal(false);
+					}}
+				/>
+			</If>
 			<UserManagementHeader>
 				<Header data-testid='user-management-header'>User Management</Header>
 				<AddButton
@@ -105,12 +132,16 @@ export default function UserList() {
 									<For each='option' of={options}>
 										<Tooltip
 											key={option.name}
-											data-testid={`user-${option.name}`}
 											title={option.tooltip}
 											placement='right-end'
 											arrow
 										>
-											<IconButton>{option.icon}</IconButton>
+											<IconButton
+												data-testid={`${option.name}-${user.userId}`}
+												onClick={() => option.onClick(user)}
+											>
+												{option.icon}
+											</IconButton>
 										</Tooltip>
 									</For>
 								</Options>

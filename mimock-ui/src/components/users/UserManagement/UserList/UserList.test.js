@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, act } from '@testing-library/react';
+import { render, act, fireEvent } from '@testing-library/react';
 import { getAllUsers } from 'services/users/getUsers.service';
 import UserList from './UserList';
 
@@ -29,7 +29,7 @@ describe('UserList', () => {
 			tree = await render(<UserList />);
 		});
 
-		const { container, getByTestId, getAllByTestId, queryByTestId } = tree;
+		const { container, getByTestId, queryByTestId } = tree;
 
 		expect(getByTestId('user-management-header')).toBeInTheDocument();
 		expect(getByTestId('add-user-btn')).toBeInTheDocument();
@@ -47,8 +47,10 @@ describe('UserList', () => {
 		expect(getByTestId('user-2-name')).toBeInTheDocument();
 		expect(getByTestId('user-2-username')).toBeInTheDocument();
 
-		expect(getAllByTestId('user-edit')).toHaveLength(2);
-		expect(getAllByTestId('user-delete')).toHaveLength(2);
+		expect(getByTestId('edit-1')).toBeInTheDocument();
+		expect(getByTestId('edit-2')).toBeInTheDocument();
+		expect(getByTestId('delete-1')).toBeInTheDocument();
+		expect(getByTestId('delete-2')).toBeInTheDocument();
 
 		expect(queryByTestId('no-users-error')).not.toBeInTheDocument();
 
@@ -100,5 +102,45 @@ describe('UserList', () => {
 		);
 
 		expect(container).toMatchSnapshot();
+	});
+
+	it('should show confirmation modal on clicking delete user button', async () => {
+		getAllUsers.mockResolvedValue([
+			{
+				userId: 1,
+				userName: 'user1',
+				name: 'User 1',
+			},
+			{
+				userId: 2,
+				userName: 'user2',
+				name: 'User 2',
+			},
+		]);
+
+		let tree;
+		await act(async () => {
+			tree = await render(<UserList />);
+		});
+
+		const { getByTestId, queryByTestId } = tree;
+
+		expect(getByTestId('users-list')).toBeInTheDocument();
+
+		expect(getByTestId('user-1')).toBeInTheDocument();
+		expect(getByTestId('user-2')).toBeInTheDocument();
+
+		const deleteUserBtn = getByTestId('delete-1');
+		fireEvent.click(deleteUserBtn);
+
+		expect(getByTestId('confirmation-modal')).toBeInTheDocument();
+		expect(getByTestId('confirmation-modal-message')).toBeInTheDocument();
+		expect(getByTestId('confirmation-modal-message').textContent).toBe(
+			'Are you sure you want to delete user "user1" ?'
+		);
+
+		expect(queryByTestId('no-users-error')).not.toBeInTheDocument();
+
+		expect(document.body).toMatchSnapshot();
 	});
 });

@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmationModal Should render confirmation modal with default props 1`] = `
+<body>
+  <div />
+  <div>
+    <div
+      class="w-screen h-screen flex justify-center items-center bg-slate-500/[0.8] align-middle fixed left-0 right-0 top-0 bottom-0"
+      data-testid="confirmation-modal"
+    >
+      <div
+        class="w-1/2 rounded-md shadow-lg bg-white p-6"
+      >
+        <div
+          class="text-center font-sans font-semibold text-xl my-4 text-gray-700"
+          data-testid="confirmation-modal-message"
+        >
+          Are you sure you want proceed with this action?
+        </div>
+        <div
+          class="w-1/2 text-center font-sans font-semibold text-lg mx-auto mt-8 cursor-pointer transition-all duration-100 hover:scale-95 text-gray-500 hover:text-gray-900"
+          data-testid="confirmation-modal-cancel-btn"
+        >
+          Cancel
+        </div>
+        <div
+          class="w-1/2 text-center font-sans font-semibold text-lg mx-auto mt-8 cursor-pointer transition-all duration-100 hover:scale-95 bg-teal-500 text-white rounded-full shadow-md p-4 mb-4 hover:bg-teal-600"
+          data-testid="confirmation-modal-confirm-btn"
+        >
+          Confirm
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`ConfirmationModal Should render confirmation modal with passed props 1`] = `
+<body>
+  <div />
+  <div>
+    <div
+      class="w-screen h-screen flex justify-center items-center bg-slate-500/[0.8] align-middle fixed left-0 right-0 top-0 bottom-0"
+      data-testid="confirmation-modal"
+    >
+      <div
+        class="w-1/2 rounded-md shadow-lg bg-white p-6"
+      >
+        <div
+          class="text-center font-sans font-semibold text-xl my-4 text-gray-700"
+          data-testid="confirmation-modal-message"
+        >
+          Are you sure you want to do this?
+        </div>
+        <div
+          class="w-1/2 text-center font-sans font-semibold text-lg mx-auto mt-8 cursor-pointer transition-all duration-100 hover:scale-95 text-gray-500 hover:text-gray-900"
+          data-testid="confirmation-modal-cancel-btn"
+        >
+          No
+        </div>
+        <div
+          class="w-1/2 text-center font-sans font-semibold text-lg mx-auto mt-8 cursor-pointer transition-all duration-100 hover:scale-95 bg-teal-500 text-white rounded-full shadow-md p-4 mb-4 hover:bg-teal-600"
+          data-testid="confirmation-modal-confirm-btn"
+        >
+          Yes
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`ConfirmationModal Should trigger cancel event on clicking cancel button 1`] = `
+<body>
+  <div />
+  <div>
+    <div
+      class="w-screen h-screen flex justify-center items-center bg-slate-500/[0.8] align-middle fixed left-0 right-0 top-0 bottom-0"
+      data-testid="confirmation-modal"
+    >
+      <div
+        class="w-1/2 rounded-md shadow-lg bg-white p-6"
+      >
+        <div
+          class="text-center font-sans font-semibold text-xl my-4 text-gray-700"
+          data-testid="confirmation-modal-message"
+        >
+          Are you sure you want to do this?
+        </div>
+        <div
+          class="w-1/2 text-center font-sans font-semibold text-lg mx-auto mt-8 cursor-pointer transition-all duration-100 hover:scale-95 text-gray-500 hover:text-gray-900"
+          data-testid="confirmation-modal-cancel-btn"
+        >
+          No
+        </div>
+        <div
+          class="w-1/2 text-center font-sans font-semibold text-lg mx-auto mt-8 cursor-pointer transition-all duration-100 hover:scale-95 bg-teal-500 text-white rounded-full shadow-md p-4 mb-4 hover:bg-teal-600"
+          data-testid="confirmation-modal-confirm-btn"
+        >
+          Yes
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`ConfirmationModal Should trigger confirm event on clicking confirm button 1`] = `
+<body>
+  <div />
+  <div>
+    <div
+      class="w-screen h-screen flex justify-center items-center bg-slate-500/[0.8] align-middle fixed left-0 right-0 top-0 bottom-0"
+      data-testid="confirmation-modal"
+    >
+      <div
+        class="w-1/2 rounded-md shadow-lg bg-white p-6"
+      >
+        <div
+          class="text-center font-sans font-semibold text-xl my-4 text-gray-700"
+          data-testid="confirmation-modal-message"
+        >
+          Are you sure you want to do this?
+        </div>
+        <div
+          class="w-1/2 text-center font-sans font-semibold text-lg mx-auto mt-8 cursor-pointer transition-all duration-100 hover:scale-95 text-gray-500 hover:text-gray-900"
+          data-testid="confirmation-modal-cancel-btn"
+        >
+          No
+        </div>
+        <div
+          class="w-1/2 text-center font-sans font-semibold text-lg mx-auto mt-8 cursor-pointer transition-all duration-100 hover:scale-95 bg-teal-500 text-white rounded-full shadow-md p-4 mb-4 hover:bg-teal-600"
+          data-testid="confirmation-modal-confirm-btn"
+        >
+          Yes
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
