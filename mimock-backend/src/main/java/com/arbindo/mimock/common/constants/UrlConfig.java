@@ -58,6 +58,7 @@ public class UrlConfig {
     // region ADMIN PATH
     public static final String USERS = "/users";
     public static final String USER_PATH = API_PREFIX + ADMIN + USERS;
+    public static final String GET_USER_BY_ID = "/get-user";
     // endregion
 
     // Authentication paths

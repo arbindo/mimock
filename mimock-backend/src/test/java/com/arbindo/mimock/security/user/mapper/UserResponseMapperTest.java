@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class UserResponseMapperTest {
@@ -79,5 +79,45 @@ class UserResponseMapperTest {
         Users actualUsers = userResponseMapper.mappedUserResponse(userList);
 
         assertEquals(expectedUsers, actualUsers);
+    }
+
+    @Test
+    void shouldReturnMappedUserInfo() {
+        UserRole userRole = UserRole.builder()
+                .roleName("ADMIN")
+                .build();
+
+        User user = User.builder()
+                .id(UUID.randomUUID())
+                .userName("test_1")
+                .password("$2a$12$xQ6KO0MicjoJcBGBQfE62e7JuoyAB2JOOE578suh0QXLzx091K3Ca")
+                .userRoles(userRole)
+                .isUserBlocked(false)
+                .isUserActive(true)
+                .build();
+
+
+        UserInfo expectedUserInfo = UserInfo.builder()
+                .userId(user.getId().toString())
+                .userName(user.getUserName())
+                .name(user.getName())
+                .isUserActive(user.getIsUserActive())
+                .isUserLocked(user.getIsUserBlocked())
+                .isUserCurrentlyLoggedIn(user.getIsSessionActive())
+                .userRole("ADMIN")
+                .userCreatedAt(user.getCreatedAt())
+                .isUserDeleted(false)
+                .build();
+
+        UserInfo actualUserInfo = userResponseMapper.mappedUserResponse(user);
+
+        assertEquals(expectedUserInfo.getUserId(), actualUserInfo.getUserId());
+        assertEquals(expectedUserInfo.getUserName(), actualUserInfo.getUserName());
+        assertEquals(expectedUserInfo.getName(), actualUserInfo.getName());
+        assertEquals(expectedUserInfo.getIsUserActive(), actualUserInfo.getIsUserActive());
+        assertEquals(expectedUserInfo.getUserRole(), actualUserInfo.getUserRole());
+        assertFalse(actualUserInfo.getIsUserDeleted());
+        assertFalse(actualUserInfo.getIsUserLocked());
+        assertTrue(actualUserInfo.getIsUserActive());
     }
 }

@@ -28,4 +28,17 @@ public class UserResponseMapper {
 
         return users;
     }
+
+    public UserInfo mappedUserResponse(User user) {
+        return UserInfo.builder()
+                .userId(user.getId().toString())
+                .name(user.getName())
+                .userName(user.getUserName())
+                .isUserActive(user.getIsUserActive())
+                .isUserLocked(user.getIsUserBlocked())
+                .isUserDeleted(user.getDeletedAt() != null)
+                .userRole(user.getUserRoles().getRoleName())
+                .isUserCurrentlyLoggedIn(user.getIsSessionActive())
+                .build();
+    }
 }

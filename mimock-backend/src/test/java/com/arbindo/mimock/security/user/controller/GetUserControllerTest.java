@@ -18,15 +18,19 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jdbc.support.DatabaseStartupValidator;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import javax.sql.DataSource;
 import java.time.ZonedDateTime;
+import java.util.Map;
 import java.util.UUID;
 
+import static com.arbindo.mimock.helpers.general.JsonMapper.convertJSONStringToMap;
 import static com.arbindo.mimock.helpers.general.JsonMapper.convertObjectToJsonString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.lenient;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -114,5 +118,54 @@ class GetUserControllerTest {
                 .andReturn();
 
         assertEquals("", result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnUserInfoWithStatusOK_WhenUserIdExists() throws Exception {
+        UUID userId = UUID.randomUUID();
+        String route = UrlConfig.USER_PATH + UrlConfig.GET_USER_BY_ID + "?userId=" + userId;
+        String expectedContentType = "application/json";
+        UserInfo userInfo = UserInfo.builder()
+                .userId(userId.toString())
+                .userName("admin")
+                .name("test")
+                .isUserActive(true)
+                .isUserLocked(false)
+                .isUserCurrentlyLoggedIn(false)
+                .userRole("ADMIN")
+                .userCreatedAt(ZonedDateTime.now())
+                .isUserDeleted(false)
+                .build();
+
+        String expectedResponseBody = convertObjectToJsonString(userInfo);
+
+        lenient().when(mockUserService.getUserById(UUID.fromString(userId.toString()))).thenReturn(userInfo);
+
+        MvcResult result = mockMvc.perform(get(route))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnStatusNotFound_WhenUserIdDoesNotExist() throws Exception {
+        UUID userId = UUID.randomUUID();
+        String route = UrlConfig.USER_PATH + UrlConfig.GET_USER_BY_ID + "?userId=" + userId;
+        String expectedContentType = "application/json";
+
+        String expectedErrorMessage = "user not found";
+
+        lenient().when(mockUserService.getUserById(UUID.fromString(userId.toString()))).thenThrow(new UsernameNotFoundException(expectedErrorMessage));
+
+        MvcResult result = mockMvc.perform(get(route))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        Map<String, Object> responseMap = convertJSONStringToMap(result.getResponse().getContentAsString());
+        assertNotNull(responseMap);
+        assertEquals(expectedErrorMessage, responseMap.get("message"));
     }
 }

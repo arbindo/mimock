@@ -9,13 +9,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 
 @SpringBootTest
@@ -95,5 +97,53 @@ class GetUserServiceTest {
         Users allUsers = userService.getAllUsers();
 
         assertNull(allUsers);
+    }
+
+    @Test
+    void shouldReturnUserInfo_WhenUsersWithTheUserIdExistInDB() {
+        UserRole userRole = UserRole.builder()
+                .roleName("ADMIN")
+                .build();
+
+        User user = User.builder()
+                .id(UUID.randomUUID())
+                .userName("test_1")
+                .password("$2a$12$xQ6KO0MicjoJcBGBQfE62e7JuoyAB2JOOE578suh0QXLzx091K3Ca")
+                .userRoles(userRole)
+                .isUserBlocked(false)
+                .isUserActive(true)
+                .build();
+
+        lenient().when(userRepository.findUserById(user.getId())).thenReturn(Optional.of(user));
+
+        UserInfo expectedUserInfo = UserInfo.builder()
+                .userId(user.getId().toString())
+                .userName(user.getUserName())
+                .name(user.getName())
+                .isUserActive(user.getIsUserActive())
+                .isUserLocked(user.getIsUserBlocked())
+                .isUserCurrentlyLoggedIn(user.getIsSessionActive())
+                .userRole("ADMIN")
+                .userCreatedAt(user.getCreatedAt())
+                .isUserDeleted(false)
+                .build();
+
+        UserInfo actualUserInfo = userService.getUserById(user.getId());
+
+        assertEquals(expectedUserInfo.getUserId(), actualUserInfo.getUserId());
+        assertEquals(expectedUserInfo.getUserName(), actualUserInfo.getUserName());
+        assertEquals(expectedUserInfo.getName(), actualUserInfo.getName());
+        assertEquals(expectedUserInfo.getIsUserActive(), actualUserInfo.getIsUserActive());
+        assertEquals(expectedUserInfo.getUserRole(), actualUserInfo.getUserRole());
+        assertFalse(actualUserInfo.getIsUserDeleted());
+        assertFalse(actualUserInfo.getIsUserLocked());
+        assertTrue(actualUserInfo.getIsUserActive());
+    }
+
+    @Test
+    void shouldThrowUserNameNotFoundException_WhenUsersWithTheUserIdDoesNotExistInDB() {
+        lenient().when(userRepository.findUserById(UUID.randomUUID())).thenReturn(Optional.empty());
+
+        assertThrows(UsernameNotFoundException.class, () -> userService.getUserById(any(UUID.class)));
     }
 }
