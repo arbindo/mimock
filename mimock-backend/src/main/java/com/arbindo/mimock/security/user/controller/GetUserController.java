@@ -5,6 +5,10 @@ import com.arbindo.mimock.security.user.models.UserInfo;
 import com.arbindo.mimock.security.user.models.Users;
 import com.arbindo.mimock.security.user.service.GetUserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
@@ -50,6 +54,13 @@ public class GetUserController {
 
     @Operation(summary = "List user info", description = "Returns the user info for an user",
             tags = {"User Management"})
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = UserInfo.class))
+                    })
+            }
+    )
     @GetMapping(path = UrlConfig.GET_USER_BY_ID, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> getUserById(@RequestParam(name = "userId") String userId) {
         log.log(Level.INFO, "Getting single user with ID : {}", userId);
@@ -60,6 +71,9 @@ public class GetUserController {
         } catch (UsernameNotFoundException e) {
             log.log(Level.ERROR, e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(e.getMessage()));
+        } catch (Exception e) {
+            log.log(Level.ERROR, e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(e.getMessage()));
         }
     }
 }

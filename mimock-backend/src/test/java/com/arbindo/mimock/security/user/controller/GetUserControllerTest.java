@@ -168,4 +168,24 @@ class GetUserControllerTest {
         assertNotNull(responseMap);
         assertEquals(expectedErrorMessage, responseMap.get("message"));
     }
+
+    @Test
+    void shouldReturnStatusInternalServerError_WhenAnExceptionOccurs() throws Exception {
+        UUID userId = UUID.randomUUID();
+        String route = UrlConfig.USER_PATH + UrlConfig.GET_USER_BY_ID + "?userId=" + userId;
+        String expectedContentType = "application/json";
+
+        String expectedErrorMessage = "failed to get user";
+
+        lenient().when(mockUserService.getUserById(UUID.fromString(userId.toString()))).thenThrow(new RuntimeException(expectedErrorMessage));
+
+        MvcResult result = mockMvc.perform(get(route))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        Map<String, Object> responseMap = convertJSONStringToMap(result.getResponse().getContentAsString());
+        assertNotNull(responseMap);
+        assertEquals(expectedErrorMessage, responseMap.get("message"));
+    }
 }

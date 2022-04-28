@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bc2bf602-4b0d-443d-82fa-441875236b97",
+		"_postman_id": "846193f4-4450-4e7e-8fd1-1c63d095cd77",
 		"name": "Mimock",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -900,6 +900,36 @@
 										{
 											"key": "userName",
 											"value": "frodo1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User Info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/mimock/v1/admin/users/user-info?userId=00000000-0000-0000-0000-000000000000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"mimock",
+										"v1",
+										"admin",
+										"users",
+										"user-info"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "00000000-0000-0000-0000-000000000000"
 										}
 									]
 								}
