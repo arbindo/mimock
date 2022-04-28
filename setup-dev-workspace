@@ -80,7 +80,7 @@ mimock_db=$(docker ps -a --filter name=mimock-db --format "{{.Names}}")
 
 if [ -z "$mimock_db" ]; then
 	echo "🔵 Starting database"
-	docker build -t mimock-pg-database . -f Dockerfile.pg && docker run --name mimock-db -p 5427:5432 -d mimock-pg-database
+	docker build -t mimock-pg-database . -f Dockerfile.pg && docker run --name mimock-db -p 5427:5432 --network mimock-network -d mimock-pg-database
 else
 	db_status=$(docker container inspect -f '{{.State.Running}}' $mimock_db)
 	if [ "$db_status" == "false" ]; then

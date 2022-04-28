@@ -1,3 +1,7 @@
+logging:
+  level:
+    root: ${MIMOCK_LOG_LEVEL}
+
 server:
   ssl:
     enabled: '${MIOMCK_KEYSTORE_ENABLE}'
@@ -9,6 +13,10 @@ server:
 spring:
   main:
     banner-mode: off
+
+  web:
+    resources:
+      static-locations: classpath:/static/mimock-ui/
 
   servlet:
     multipart:
@@ -55,8 +63,8 @@ spring:
 
 app:
   security:
-    jwt-expiry-in-seconds: 1800
-    jwt-secret-key: C4BE6B45CBBD4CBADFE5E22F4BCDBAF8 # Only for testing. Do not use this in production.
+    jwt-expiry-in-seconds: ${MIMOCK_JWT_EXPIRY_IN_SECONDS}
+    jwt-secret-key: ${MIMOCK_JWT_SECRET} # Only for testing. Do not use this in production.
     cors-config:
       allowed-origins: http://localhost:3000,http://localhost:3001
 
