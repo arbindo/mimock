@@ -60,28 +60,28 @@ public class Mock {
     private String queryParams;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "request_header_id")
     private RequestHeader requestHeaders;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "response_header_id")
     private ResponseHeader responseHeaders;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "request_body_id")
     private RequestBodiesForMock requestBodiesForMock;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "textual_response_id")
     @Schema(description = "Represents the expected textual response")
     private TextualResponse textualResponse;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "binary_response_id")
     @Schema(description = "Represents the expected binary response")
     private BinaryResponse binaryResponse;
