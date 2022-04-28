@@ -37,6 +37,7 @@ public class UrlConfig {
     public static final String HTTP_METHODS_STATIC_RECORDS = "/http-methods";
     public static final String RESPONSE_CONTENT_TYPE_STATIC_RECORDS = "/response-content-types";
     public static final String ENTITY_STATUS_STATIC_RECORDS = "/entity-status";
+    public static final String USER_ROLES_STATIC_RECORDS = "/user-roles";
     // endregion
 
     // region MOCKS

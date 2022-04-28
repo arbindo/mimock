@@ -583,6 +583,29 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "List All User Roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mimock/v1/static-records/user-roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mimock",
+								"v1",
+								"static-records",
+								"user-roles"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
