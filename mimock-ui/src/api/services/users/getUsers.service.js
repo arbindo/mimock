@@ -14,8 +14,8 @@ export const getAllUsers = async () => {
 		return await get('/admin/users', {
 			showFullPageLoader: true,
 		}).then((res) => {
-			const { data } = res;
-			return data.filter((user) => user.userName !== userDetails.userName);
+			const { users } = res.data;
+			return users.filter((user) => user.userName !== userDetails.userName);
 		});
 	}
 

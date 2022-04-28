@@ -12,20 +12,22 @@ describe('getUsers.service', () => {
 			userRole: 'ROLE_ADMIN',
 		});
 		get.mockResolvedValue({
-			data: [
-				{
-					userName: 'user1',
-					userRole: 'ROLE_ADMIN',
-					userId: 'user1',
-					name: 'User 1',
-				},
-				{
-					userName: 'user_current',
-					userRole: 'ROLE_ADMIN',
-					userId: 'userCurrent',
-					name: 'User Current',
-				},
-			],
+			data: {
+				users: [
+					{
+						userName: 'user1',
+						userRole: 'ROLE_ADMIN',
+						userId: 'user1',
+						name: 'User 1',
+					},
+					{
+						userName: 'user_current',
+						userRole: 'ROLE_ADMIN',
+						userId: 'userCurrent',
+						name: 'User Current',
+					},
+				],
+			},
 		});
 
 		const users = await getAllUsers();
@@ -44,14 +46,16 @@ describe('getUsers.service', () => {
 			userRole: 'ROLE_ADMIN',
 		});
 		get.mockResolvedValue({
-			data: [
-				{
-					userName: 'user_current',
-					userRole: 'ROLE_ADMIN',
-					userId: 'userCurrent',
-					name: 'User Current',
-				},
-			],
+			data: {
+				users: [
+					{
+						userName: 'user_current',
+						userRole: 'ROLE_ADMIN',
+						userId: 'userCurrent',
+						name: 'User Current',
+					},
+				],
+			},
 		});
 
 		const users = await getAllUsers();
@@ -65,14 +69,16 @@ describe('getUsers.service', () => {
 			throw Error('Invalid user session');
 		});
 		get.mockResolvedValue({
-			data: [
-				{
-					userName: 'user_current',
-					userRole: 'ROLE_ADMIN',
-					userId: 'userCurrent',
-					name: 'User Current',
-				},
-			],
+			data: {
+				users: [
+					{
+						userName: 'user_current',
+						userRole: 'ROLE_ADMIN',
+						userId: 'userCurrent',
+						name: 'User Current',
+					},
+				],
+			},
 		});
 
 		await getAllUsers().catch((err) => {
@@ -85,14 +91,16 @@ describe('getUsers.service', () => {
 	it('should throw unauthorised error when user session is invalid', async () => {
 		getUserDetails.mockReturnValue(null);
 		get.mockResolvedValue({
-			data: [
-				{
-					userName: 'user_current',
-					userRole: 'ROLE_ADMIN',
-					userId: 'userCurrent',
-					name: 'User Current',
-				},
-			],
+			data: {
+				users: [
+					{
+						userName: 'user_current',
+						userRole: 'ROLE_ADMIN',
+						userId: 'userCurrent',
+						name: 'User Current',
+					},
+				],
+			},
 		});
 
 		await getAllUsers().catch((err) => {
