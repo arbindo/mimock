@@ -8,6 +8,10 @@ import com.arbindo.mimock.security.user.models.response.AuthenticationResponse;
 import com.arbindo.mimock.security.user.models.response.AuthenticationTokenResponse;
 import com.arbindo.mimock.security.utils.JWTUtils;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
@@ -47,6 +51,16 @@ public class UserAuthenticateController {
             summary = "Authenticate user",
             description = "Authenticates the user and returns the auth token",
             tags = {"User Authentication"}
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = AuthenticationTokenResponse.class))
+                    }),
+                    @ApiResponse(responseCode = "401", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = AuthenticationErrorResponse.class))
+                    })
+            }
     )
     public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticateUserRequest authenticateUserRequest) {
         try {

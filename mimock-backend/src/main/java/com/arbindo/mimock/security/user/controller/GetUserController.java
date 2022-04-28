@@ -58,6 +58,12 @@ public class GetUserController {
             value = {
                     @ApiResponse(responseCode = "200", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = UserInfo.class))
+                    }),
+                    @ApiResponse(responseCode = "404", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
+                    }),
+                    @ApiResponse(responseCode = "500", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
                     })
             }
     )

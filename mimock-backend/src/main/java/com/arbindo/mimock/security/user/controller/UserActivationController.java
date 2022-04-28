@@ -6,6 +6,10 @@ import com.arbindo.mimock.security.user.models.request.UserActivationRequest;
 import com.arbindo.mimock.security.user.models.response.UserActivationResponse;
 import com.arbindo.mimock.security.user.service.UserActivationService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
@@ -32,6 +36,16 @@ public class UserActivationController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Update user activation status", description = "To enable or disable a user account")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = UserActivationResponse.class))
+                    }),
+                    @ApiResponse(responseCode = "500", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
+                    })
+            }
+    )
     public ResponseEntity<?> updateUserActivationStatus(@Valid @RequestBody UserActivationRequest request) {
         User updatedUser;
 

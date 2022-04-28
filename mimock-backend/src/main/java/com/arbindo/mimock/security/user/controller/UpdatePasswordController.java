@@ -5,6 +5,10 @@ import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.security.user.models.request.UpdatePasswordRequest;
 import com.arbindo.mimock.security.user.service.UpdatePasswordService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
@@ -32,6 +36,16 @@ public class UpdatePasswordController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Update user password")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", content = {
+                            @Content(mediaType = "application/json")
+                    }),
+                    @ApiResponse(responseCode = "500", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
+                    })
+            }
+    )
     public ResponseEntity<?> updatePassword(@Valid @RequestBody UpdatePasswordRequest request) {
         User updatedUser;
         try {
