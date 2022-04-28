@@ -3,6 +3,10 @@ package com.arbindo.mimock.security.user.controller;
 import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.security.user.models.UserInfo;
 import com.arbindo.mimock.security.user.models.Users;
+import com.arbindo.mimock.security.user.models.response.getuser.GetAllUsersResponse;
+import com.arbindo.mimock.security.user.models.response.getuser.GetUserErrorResponse;
+import com.arbindo.mimock.security.user.models.response.getuser.GetUserInfoResponse;
+import com.arbindo.mimock.security.user.models.response.getuser.GetUserResponse;
 import com.arbindo.mimock.security.user.service.GetUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -39,17 +43,19 @@ public class GetUserController {
     @Operation(summary = "List all users", description = "Returns all the existing users who are not deleted",
             tags = {"User Management"})
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Users> getAllUsers() {
+    public ResponseEntity<GetUserResponse> getAllUsers() {
         log.log(Level.INFO, "Getting all existing users");
         Users allUsers = userService.getAllUsers();
 
         if (allUsers == null) {
             log.log(Level.ERROR, "No users exist. Returning no content");
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
+                    new GetUserErrorResponse("No users exist in the system")
+            );
         }
 
         log.log(Level.INFO, "Returning all existing users");
-        return ResponseEntity.ok(allUsers);
+        return ResponseEntity.ok(new GetAllUsersResponse(allUsers));
     }
 
     @Operation(summary = "List user info", description = "Returns the user info for an user",
@@ -68,18 +74,22 @@ public class GetUserController {
             }
     )
     @GetMapping(path = UrlConfig.GET_USER_BY_ID, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> getUserById(@RequestParam(name = "userId") String userId) {
+    public ResponseEntity<GetUserResponse> getUserById(@RequestParam(name = "userId") String userId) {
         log.log(Level.INFO, "Getting single user with ID : {}", userId);
 
         try {
             UserInfo user = userService.getUserById(UUID.fromString(userId));
-            return ResponseEntity.ok(user);
+            return ResponseEntity.ok(new GetUserInfoResponse(user));
         } catch (UsernameNotFoundException e) {
             log.log(Level.ERROR, e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(e.getMessage()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new GetUserErrorResponse(e.getMessage())
+            );
         } catch (Exception e) {
             log.log(Level.ERROR, e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new GetUserErrorResponse(e.getMessage())
+            );
         }
     }
 }

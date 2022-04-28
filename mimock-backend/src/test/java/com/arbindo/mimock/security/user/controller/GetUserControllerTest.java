@@ -5,6 +5,8 @@ import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.security.JwtRequestFilter;
 import com.arbindo.mimock.security.user.models.UserInfo;
 import com.arbindo.mimock.security.user.models.Users;
+import com.arbindo.mimock.security.user.models.response.getuser.GetAllUsersResponse;
+import com.arbindo.mimock.security.user.models.response.getuser.GetUserInfoResponse;
 import com.arbindo.mimock.security.user.service.GetUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,7 +97,10 @@ class GetUserControllerTest {
         Users expectedUsers = new Users();
         expectedUsers.add(userInfo1);
         expectedUsers.add(userInfo2);
-        String expectedResponseBody = convertObjectToJsonString(expectedUsers);
+
+        GetAllUsersResponse response = new GetAllUsersResponse(expectedUsers);
+
+        String expectedResponseBody = convertObjectToJsonString(response);
 
         lenient().when(mockUserService.getAllUsers()).thenReturn(expectedUsers);
 
@@ -117,7 +122,12 @@ class GetUserControllerTest {
                 .andExpect(status().isNoContent())
                 .andReturn();
 
-        assertEquals("", result.getResponse().getContentAsString());
+
+        String expectedErrorMessage = "No users exist in the system";
+        Map<String, Object> responseMap = convertJSONStringToMap(result.getResponse().getContentAsString());
+
+        assertNotNull(responseMap);
+        assertEquals(expectedErrorMessage, responseMap.get("message"));
     }
 
     @Test
@@ -136,8 +146,9 @@ class GetUserControllerTest {
                 .userCreatedAt(ZonedDateTime.now())
                 .isUserDeleted(false)
                 .build();
+        GetUserInfoResponse response = new GetUserInfoResponse(userInfo);
 
-        String expectedResponseBody = convertObjectToJsonString(userInfo);
+        String expectedResponseBody = convertObjectToJsonString(response);
 
         lenient().when(mockUserService.getUserById(UUID.fromString(userId.toString()))).thenReturn(userInfo);
 

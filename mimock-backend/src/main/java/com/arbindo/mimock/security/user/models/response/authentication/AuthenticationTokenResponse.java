@@ -1,4 +1,4 @@
-package com.arbindo.mimock.security.user.models.response;
+package com.arbindo.mimock.security.user.models.response.authentication;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
