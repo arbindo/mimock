@@ -36,7 +36,7 @@ function List({ showSidebarSection }) {
 	}, []);
 
 	useEffect(() => {
-		setListSectionWidth(showSidebarSection ? 'w-5/6' : 'w-full');
+		setListSectionWidth(showSidebarSection ? 'w-4/6' : 'w-full');
 	}, [showSidebarSection]);
 
 	return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import {
 	TitlebarContainer,
+	TitlebarInnerContainer,
 	Title,
 	TitleSpan,
 	SearchField,
@@ -12,14 +13,14 @@ function Titlebar() {
 	return (
 		<>
 			<TitlebarContainer data-testid='titlebar-section'>
-				<Title>
-					<TitleSpan>
-						<FaCopy /> {constants.title}
-					</TitleSpan>
-				</Title>
-				<SearchField placeholder={constants.placeholders.search} />
+				<TitleSpan>
+					<FaCopy />
+					<Title>{constants.title}</Title>
+				</TitleSpan>
+				<TitlebarInnerContainer>
+					<SearchField placeholder={constants.placeholders.search} />
+				</TitlebarInnerContainer>
 			</TitlebarContainer>
-			<hr />
 		</>
 	);
 }

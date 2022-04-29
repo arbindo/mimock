@@ -9,8 +9,11 @@ import {
 	CardMetaInner,
 	CardLink,
 	CardLinkSpan,
+	CardActionIconsSpan,
 } from './MockCard.style.js';
-import { FaLink } from 'react-icons/fa';
+import { FaLink, FaTrash, FaArchive } from 'react-icons/fa';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
 
 function MockCard({ mockName, description, httpMethod, route }) {
@@ -22,6 +25,7 @@ function MockCard({ mockName, description, httpMethod, route }) {
 
 	const decideBadgeColor = () => {
 		let color = '';
+		console.log(httpMethod);
 		switch (httpMethod) {
 			case 'GET':
 				color = 'blue-500';
@@ -39,8 +43,21 @@ function MockCard({ mockName, description, httpMethod, route }) {
 				color = 'gray-500';
 				break;
 		}
-		setBadgeColor(`border-${color} text-${color}`);
+		setBadgeColor(`border-2 border-${color} text-${color}`);
 	};
+
+	const options = [
+		{
+			key: 'archive',
+			title: 'Archive Mock',
+			icon: <FaArchive />,
+		},
+		{
+			key: 'delete',
+			title: 'Delete Mock',
+			icon: <FaTrash />,
+		},
+	];
 
 	return (
 		<CardContainer data-testid='card'>
@@ -57,6 +74,16 @@ function MockCard({ mockName, description, httpMethod, route }) {
 						<FaLink /> <CardLink data-testid='card-link'>{route}</CardLink>
 					</CardLinkSpan>
 				</CardMetaInner>
+				<For each='option' of={options}>
+					<CardActionIconsSpan
+						data-testid={`mock-item-${option.key}`}
+						key={option.key}
+					>
+						<Tooltip title={option.title}>
+							<IconButton size='small'>{option.icon}</IconButton>
+						</Tooltip>
+					</CardActionIconsSpan>
+				</For>
 			</CardMetaContainer>
 		</CardContainer>
 	);

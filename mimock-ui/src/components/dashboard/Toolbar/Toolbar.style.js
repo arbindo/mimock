@@ -7,9 +7,10 @@ export const ToolbarContainer = tw.div`
     flex-row
     mx-auto
     mt-4
-    mb-2
+    mb-4
     justify-center
     align-middle
+    px-2
 `;
 
 export const ToolbarInnerContainer = tw.div`
@@ -25,36 +26,3 @@ export const ToolbarInnerContainer = tw.div`
 export const AddMockButton = tw(CustomButton)``;
 
 export const MoreToolsMockButton = tw(CustomButton)``;
-
-export const SelectWrapper = tw.div`
-    flex
-    flex-col
-    mx-2
-    my-2
-    w-1/6
-`;
-
-export const SelectLabel = tw.label`
-    text-gray-400
-    text-xs
-`;
-
-export const SelectComponent = tw.select`
-    w-full
-    justify-center
-    border-2
-    rounded-sm
-    border-gray-200
-    text-teal-500
-    outline-none
-    mx-2
-    my-2
-`;
-
-export const SelectOptionComponent = tw.option`
-    bg-white
-    truncate
-    rounded-sm
-    outline-none
-    text-gray-400
-`;

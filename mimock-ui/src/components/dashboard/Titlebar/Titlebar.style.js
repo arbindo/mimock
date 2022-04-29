@@ -12,12 +12,7 @@ export const TitlebarContainer = tw.div`
 `;
 
 export const Title = tw.div`
-    font-sans
-    text-2xl
-    font-bold
-    text-gray-700
-    mx-auto
-    my-auto
+    mx-1
     select-none
 `;
 
@@ -25,10 +20,26 @@ export const TitleSpan = tw.span`
     inline-flex
     items-center
     justify-center
+    font-sans
+    text-2xl
+    font-bold
+    text-gray-700
+    mx-auto
+    my-auto
+`;
+
+export const TitlebarInnerContainer = tw.div`
+    w-5/6
+    flex
+    flex-row
+    mx-auto
+    justify-end
+    align-middle
+    px-2
 `;
 
 export const SearchField = tw.input`
-    w-5/6
+    w-full
     my-2
     mx-4
     p-2

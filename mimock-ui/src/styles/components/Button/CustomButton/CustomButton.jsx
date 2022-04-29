@@ -5,6 +5,7 @@ import { CustomButtonContainer } from './CustomButton.style';
 function CustomButton({
 	label,
 	color,
+	icon,
 	width,
 	background,
 	onclickHandler,
@@ -20,6 +21,7 @@ function CustomButton({
 			onClick={onclickHandler}
 			$additionalStyles={additionalStyles}
 		>
+			{icon}
 			{label}
 		</CustomButtonContainer>
 	);
@@ -31,6 +33,7 @@ CustomButton.propTypes = {
 	dataTestid: PropTypes.string,
 	color: PropTypes.string,
 	width: PropTypes.string,
+	icon: PropTypes.element,
 	background: PropTypes.string,
 	additionalStyles: PropTypes.string,
 };

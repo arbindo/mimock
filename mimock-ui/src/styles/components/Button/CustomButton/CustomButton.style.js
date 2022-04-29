@@ -1,6 +1,10 @@
 import tw from 'tailwind-styled-components';
 
 export const CustomButtonContainer = tw.button`
+  flex
+  items-center
+  justify-center
+  gap-1
   px-9
   py-2
   mx-auto

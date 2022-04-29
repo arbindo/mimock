@@ -9,8 +9,8 @@ export const CardContainer = tw.div`
     border-gray-100
     shadow-sm
     rounded-sm
-    px-8
-    py-4
+    px-4
+    py-2
     mx-auto
     my-4
     cursor-pointer
@@ -28,7 +28,6 @@ export const CardTitleContainer = tw.div`
 
 export const CardTitle = tw.p`
     text-2xl
-    font-bold
     capitalize
     truncate
     my-2
@@ -52,9 +51,8 @@ export const CardMetaContainer = tw.div`
 
 export const CardBadge = tw.div`
     text-center
-    border-2
-    px-4
-    py-2
+    px-2
+    py-1
     rounded-md
     shadow-sm
     select-none
@@ -84,4 +82,12 @@ export const CardLinkSpan = tw.span`
     items-center
     justify-center
     text-teal-500
+    mx-2
+`;
+
+export const CardActionIconsSpan = tw.span`
+    inline-flex
+    items-center
+    justify-center
+    mx-2
 `;
