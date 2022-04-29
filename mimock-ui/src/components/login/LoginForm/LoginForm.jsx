@@ -4,7 +4,6 @@ import { Cookies } from 'react-cookie';
 import { routes } from 'constants/routes';
 import { getToken } from 'services/authentication/authentication.service';
 import { isTokenValid } from 'services/authentication/validateToken.service';
-import { FullPageLoader } from 'styles/Loaders';
 import { globalConstants } from 'constants/globalConstants';
 import {
 	LoginFormContainer,
@@ -106,8 +105,6 @@ export default function LoginForm() {
 
 	return (
 		<LoginFormContainer data-testid='login-form'>
-			<FullPageLoader />
-
 			<If condition={authCookie}>
 				<Navigate to={routes.mocks.path} replace={true} />
 			</If>

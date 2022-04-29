@@ -85,6 +85,27 @@ describe('Icon Button With Label', () => {
 		expect(container).toMatchSnapshot();
 	});
 
+	it('should render filter Button', async () => {
+		tree = await render(
+			<IconButtonWithLabel
+				dataTestid='icon-with-label-filter-button'
+				$background={'bg-indigo-600'}
+				$color={'text-white'}
+				$width='w-5/6'
+				label='Filter mocks'
+				variant='FILTER_BUTTON'
+				onclickHandler={() => {
+					console.log('Clicked filter icon button');
+				}}
+			/>
+		);
+
+		const { getByTestId, container } = tree;
+
+		expect(getByTestId('icon-with-label-filter-button')).toBeInTheDocument();
+		expect(container).toMatchSnapshot();
+	});
+
 	it('should render home Button', async () => {
 		tree = await render(
 			<IconButtonWithLabel

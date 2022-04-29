@@ -21,12 +21,6 @@ exports[`Logout should navigate to login page after clearing session 1`] = `
 
 exports[`Logout should show full page loader when session cleanup is in progress 1`] = `
 <body>
-  <div>
-    <div
-      data-testid="fullpage-loader"
-    >
-      Loading...
-    </div>
-  </div>
+  <div />
 </body>
 `;
