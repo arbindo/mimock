@@ -7959,6 +7959,11 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.0.0.tgz#026f6c4a27dbe33bf4a35655b9e1327c4e55e3f5"
   integrity sha512-yUcBYdBBbo3QiPsgYDcfQcIkGZHfxOaoE6HLSnr1sPzMhdyxusbfKOSUbSd/ocGi32dxcj366PsTj+5oggeKKw==
 
+react-notifications-component@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-notifications-component/-/react-notifications-component-4.0.0.tgz#f12eac9856b08db25075db65a907b7fa49c5faad"
+  integrity sha512-wh2iETJNcSb8ctujPgUnGjYEj8dR+XrtX1l1C5Z8Zpbq+d9aNVCxrBLqx8FgQYxZj8m2cHJiWerMAnOA7P2ENA==
+
 react-portal@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/react-portal/-/react-portal-4.2.2.tgz#bff1e024147d6041ba8c530ffc99d4c8248f49fa"
