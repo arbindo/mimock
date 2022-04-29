@@ -22,7 +22,7 @@ function ConfirmationModal({
 	loadingMessage,
 }) {
 	return (
-		<Portal node={document && document.getElementById('app')}>
+		<Portal node={document && document.getElementById('modal')}>
 			<ModalWrapper data-testid='confirmation-modal'>
 				<ModalBox>
 					<Choose>
