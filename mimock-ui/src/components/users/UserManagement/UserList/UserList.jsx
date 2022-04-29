@@ -5,6 +5,11 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import { IconButtonVariants } from 'styles/Button';
 import { ConfirmationModal } from 'components/common/Modals';
+import useNotification from 'hooks/useNotification';
+import {
+	notificationTypes,
+	notificationPositions,
+} from 'constants/notificationConstants';
 import {
 	UserListWrapper,
 	List,
@@ -59,10 +64,27 @@ export default function UserList() {
 
 		await deleteUser(selectedUser.userName)
 			.then(() => {
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					title: 'Deletion successful',
+					message: `User - ${selectedUser.userName} deleted`,
+					position: notificationPositions.NOTIFICATION_POSITION_BOTTOM_RIGHT,
+					animationIn: 'animate__slideInRight',
+					animationOut: 'animate__slideOutRight',
+				});
+
 				setDeletingUser(false);
 				setShowDeletionModal(false);
 			})
 			.catch(() => {
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
+					title: `Failed to delete user - ${selectedUser.userName}`,
+					message: 'Please try again',
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
+
 				setDeletingUser(false);
 				setShowDeletionModal(false);
 			});

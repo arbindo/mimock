@@ -3,8 +3,16 @@ import { render, act, fireEvent } from '@testing-library/react';
 import { getAllUsers, deleteUser } from 'services/users';
 import UserList from './UserList';
 
+const actualNotification = jest.requireActual('hooks/useNotification');
 jest.mock('services/users/getUsers.service');
 jest.mock('services/users/deleteUser.service');
+
+jest.mock('react-notifications-component', () => {
+	const Store = {
+		addNotification: jest.fn(),
+	};
+	return { Store };
+});
 
 describe('UserList', () => {
 	beforeEach(() => {
@@ -118,8 +126,10 @@ describe('UserList', () => {
 		expect(getByTestId('user-1')).toBeInTheDocument();
 		expect(getByTestId('user-2')).toBeInTheDocument();
 
-		const deleteUserBtn = getByTestId('delete-1');
-		fireEvent.click(deleteUserBtn);
+		act(() => {
+			const deleteUserBtn = getByTestId('delete-1');
+			fireEvent.click(deleteUserBtn);
+		});
 
 		expect(getByTestId('confirmation-modal')).toBeInTheDocument();
 		expect(getByTestId('confirmation-modal-message')).toBeInTheDocument();
@@ -134,9 +144,10 @@ describe('UserList', () => {
 
 	it('should invoke delete user service confirming user deletion', async () => {
 		deleteUser.mockResolvedValue({
-			id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+			id: '1',
 			message: 'User deleted successfully',
 		});
+		const notificationSpy = jest.spyOn(actualNotification, 'default');
 
 		let tree;
 		await act(async () => {
@@ -150,8 +161,10 @@ describe('UserList', () => {
 		expect(getByTestId('user-1')).toBeInTheDocument();
 		expect(getByTestId('user-2')).toBeInTheDocument();
 
-		const deleteUserBtn = getByTestId('delete-1');
-		fireEvent.click(deleteUserBtn);
+		act(() => {
+			const deleteUserBtn = getByTestId('delete-1');
+			fireEvent.click(deleteUserBtn);
+		});
 
 		expect(getByTestId('confirmation-modal')).toBeInTheDocument();
 		expect(getByTestId('confirmation-modal-message')).toBeInTheDocument();
@@ -159,8 +172,10 @@ describe('UserList', () => {
 			'Are you sure you want to delete user "user1" ?'
 		);
 
-		const confirmDeleteBtn = getByTestId('confirmation-modal-confirm-btn');
-		fireEvent.click(confirmDeleteBtn);
+		act(() => {
+			const confirmDeleteBtn = getByTestId('confirmation-modal-confirm-btn');
+			fireEvent.click(confirmDeleteBtn);
+		});
 
 		expect(deleteUser).toHaveBeenCalledTimes(1);
 		expect(deleteUser).toHaveBeenCalledWith('user1');
@@ -177,12 +192,23 @@ describe('UserList', () => {
 			rerender(<UserList />);
 		});
 
+		expect(notificationSpy).toHaveBeenCalledTimes(1);
+		expect(notificationSpy).toHaveBeenCalledWith({
+			type: 'success',
+			title: 'Deletion successful',
+			message: `User - user1 deleted`,
+			position: 'bottom-right',
+			animationIn: 'animate__slideInRight',
+			animationOut: 'animate__slideOutRight',
+		});
+
 		expect(queryByTestId('user-1')).not.toBeInTheDocument();
 		expect(container).toMatchSnapshot();
 	});
 
 	it('should show error notification when delete service call fails', async () => {
 		deleteUser.mockRejectedValue(new Error('Deletion failed!'));
+		const notificationSpy = jest.spyOn(actualNotification, 'default');
 
 		let tree;
 		await act(async () => {
@@ -196,8 +222,10 @@ describe('UserList', () => {
 		expect(getByTestId('user-1')).toBeInTheDocument();
 		expect(getByTestId('user-2')).toBeInTheDocument();
 
-		const deleteUserBtn = getByTestId('delete-1');
-		fireEvent.click(deleteUserBtn);
+		act(() => {
+			const deleteUserBtn = getByTestId('delete-1');
+			fireEvent.click(deleteUserBtn);
+		});
 
 		expect(getByTestId('confirmation-modal')).toBeInTheDocument();
 		expect(getByTestId('confirmation-modal-message')).toBeInTheDocument();
@@ -205,13 +233,22 @@ describe('UserList', () => {
 			'Are you sure you want to delete user "user1" ?'
 		);
 
-		const confirmDeleteBtn = getByTestId('confirmation-modal-confirm-btn');
-		fireEvent.click(confirmDeleteBtn);
+		await act(async () => {
+			const confirmDeleteBtn = getByTestId('confirmation-modal-confirm-btn');
+			fireEvent.click(confirmDeleteBtn);
+		});
 
 		expect(deleteUser).toHaveBeenCalledTimes(1);
 		expect(deleteUser).toHaveBeenCalledWith('user1');
 
-		// TODO: Add error notification
+		expect(notificationSpy).toHaveBeenCalledTimes(1);
+		expect(notificationSpy).toHaveBeenCalledWith({
+			type: 'danger',
+			title: 'Failed to delete user - user1',
+			message: 'Please try again',
+			animationIn: 'animate__bounceIn',
+			animationOut: 'animate__bounceOut',
+		});
 		expect(container).toMatchSnapshot();
 	});
 
@@ -228,8 +265,10 @@ describe('UserList', () => {
 		expect(getByTestId('user-1')).toBeInTheDocument();
 		expect(getByTestId('user-2')).toBeInTheDocument();
 
-		const deleteUserBtn = getByTestId('delete-1');
-		fireEvent.click(deleteUserBtn);
+		await act(async () => {
+			const deleteUserBtn = getByTestId('delete-1');
+			fireEvent.click(deleteUserBtn);
+		});
 
 		expect(getByTestId('confirmation-modal')).toBeInTheDocument();
 		expect(getByTestId('confirmation-modal-message')).toBeInTheDocument();
@@ -237,8 +276,10 @@ describe('UserList', () => {
 			'Are you sure you want to delete user "user1" ?'
 		);
 
-		const cancelBtn = getByTestId('confirmation-modal-cancel-btn');
-		fireEvent.click(cancelBtn);
+		await act(async () => {
+			const cancelBtn = getByTestId('confirmation-modal-cancel-btn');
+			fireEvent.click(cancelBtn);
+		});
 
 		expect(deleteUser).toHaveBeenCalledTimes(0);
 		expect(queryByTestId('confirmation-modal')).not.toBeInTheDocument();
