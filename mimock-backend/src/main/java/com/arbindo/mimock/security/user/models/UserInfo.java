@@ -1,5 +1,6 @@
 package com.arbindo.mimock.security.user.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,11 @@ public class UserInfo {
     private Boolean isUserLocked;
     private Boolean isUserCurrentlyLoggedIn;
     private String userRole;
-    private ZonedDateTime userCreatedAt;
     private Boolean isUserDeleted;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private ZonedDateTime userCreatedAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private ZonedDateTime userUpdatedAt;
 }
