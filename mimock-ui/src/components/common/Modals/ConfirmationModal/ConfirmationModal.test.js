@@ -69,6 +69,44 @@ describe('ConfirmationModal', () => {
 		expect(document.body).toMatchSnapshot();
 	});
 
+	it('Should show confirmation modal with loader when loading is true', async () => {
+		let tree;
+		await act(async () => {
+			tree = await render(
+				<ConfirmationModal
+					message={title}
+					onConfirm={mockConfirm}
+					onCancel={mockCancel}
+					cancelButtonLabel={'No'}
+					confirmButtonLabel={'Yes'}
+					loading={true}
+					loadingMessage='Loading...'
+				/>
+			);
+		});
+
+		const { getByTestId, queryByTestId } = tree;
+
+		expect(getByTestId('confirmation-modal')).toBeInTheDocument();
+
+		expect(
+			getByTestId('confirmation-modal-loading-message')
+		).toBeInTheDocument();
+		expect(getByTestId('confirmation-modal-loading-message').textContent).toBe(
+			'Loading...'
+		);
+
+		expect(queryByTestId('confirmation-modal-message')).not.toBeInTheDocument();
+		expect(
+			queryByTestId('confirmation-modal-cancel-btn')
+		).not.toBeInTheDocument();
+		expect(
+			queryByTestId('confirmation-modal-confirm-btn')
+		).not.toBeInTheDocument();
+
+		expect(document.body).toMatchSnapshot();
+	});
+
 	it('Should trigger cancel event on clicking cancel button', async () => {
 		let tree;
 		await act(async () => {

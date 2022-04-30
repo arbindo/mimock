@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+import { css } from '@emotion/react';
 
 export const ModalWrapper = tw.div`
     w-screen
@@ -59,4 +60,21 @@ export const ConfirmButton = tw(_ModalButtons)`
     p-4
     mb-4
     hover:bg-teal-600
+`;
+
+export const LoadingMessage = tw.div`
+    text-center
+    font-sans
+    font-light
+    text-xl
+    my-8
+    text-gray-500
+`;
+
+export const LoaderStyle = css`
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
 `;

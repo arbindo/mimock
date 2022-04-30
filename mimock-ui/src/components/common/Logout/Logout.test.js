@@ -2,16 +2,14 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Logout from './Logout';
 
-jest.mock('recoil', () => ({
-	atom: jest.fn(),
-	useRecoilState: jest.fn(() => [null, jest.fn()]),
-}));
-
-jest.mock('styles/Loaders', () => ({
-	FullPageLoader: () => {
-		return <div data-testid='fullpage-loader'>Loading...</div>;
-	},
-}));
+let mockedRecoilFn;
+jest.mock('recoil', () => {
+	mockedRecoilFn = jest.fn();
+	return {
+		atom: jest.fn(),
+		useRecoilState: jest.fn(() => [true, mockedRecoilFn]),
+	};
+});
 
 let mockedUseState;
 jest.mock('react', () => {
@@ -37,9 +35,14 @@ jest.mock('react-router', () => ({
 
 describe('Logout', () => {
 	it('should show full page loader when session cleanup is in progress', async () => {
-		const { getByTestId } = await render(<Logout />);
+		const { queryByTestId } = await render(<Logout />);
 
-		expect(getByTestId('fullpage-loader')).toBeInTheDocument();
+		expect(mockedRecoilFn).toHaveBeenCalledTimes(2);
+		expect(mockedRecoilFn).nthCalledWith(1, true);
+		expect(mockedRecoilFn).nthCalledWith(2, false);
+
+		expect(queryByTestId('navigate-to')).not.toBeInTheDocument();
+
 		expect(document.body).toMatchSnapshot();
 	});
 
@@ -47,6 +50,10 @@ describe('Logout', () => {
 		mockedUseState.mockImplementation(() => [false, jest.fn()]);
 
 		const { container, getByTestId } = await render(<Logout />);
+
+		expect(mockedRecoilFn).toHaveBeenCalledTimes(2);
+		expect(mockedRecoilFn).nthCalledWith(1, true);
+		expect(mockedRecoilFn).nthCalledWith(2, false);
 
 		expect(getByTestId('react-router-navigator')).toBeInTheDocument();
 		expect(getByTestId('navigate-to')).toBeInTheDocument();

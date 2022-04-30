@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { getAllUsers } from 'services/users/getUsers.service';
+import { getAllUsers, deleteUser } from 'services/users';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import { IconButtonVariants } from 'styles/Button';
 import { ConfirmationModal } from 'components/common/Modals';
+import useNotification from 'hooks/useNotification';
+import {
+	notificationTypes,
+	notificationPositions,
+} from 'constants/notificationConstants';
 import {
 	UserListWrapper,
 	List,
@@ -24,6 +29,7 @@ import {
 export default function UserList() {
 	const [gettingUsers, setGettingUsers] = useState(true);
 	const [error, setError] = useState(false);
+	const [deletingUser, setDeletingUser] = useState(false);
 	const [users, setUsers] = useState([]);
 	const [selectedUser, setSelectedUser] = useState({
 		name: '',
@@ -33,6 +39,7 @@ export default function UserList() {
 	const [showDeletionModal, setShowDeletionModal] = useState(false);
 
 	const deletionConfirmationMessage = `Are you sure you want to delete user "${selectedUser.userName}" ?`;
+	const deletingMessage = 'Deleting user. Please wait...';
 
 	const options = [
 		{
@@ -52,6 +59,37 @@ export default function UserList() {
 		},
 	];
 
+	const handleDeleteUser = async () => {
+		setDeletingUser(true);
+
+		await deleteUser(selectedUser.userName)
+			.then(() => {
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					title: 'Deletion successful',
+					message: `User - ${selectedUser.userName} deleted`,
+					position: notificationPositions.NOTIFICATION_POSITION_BOTTOM_RIGHT,
+					animationIn: 'animate__slideInRight',
+					animationOut: 'animate__slideOutRight',
+				});
+
+				setDeletingUser(false);
+				setShowDeletionModal(false);
+			})
+			.catch(() => {
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
+					title: `Failed to delete user - ${selectedUser.userName}`,
+					message: 'Please try again',
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
+
+				setDeletingUser(false);
+				setShowDeletionModal(false);
+			});
+	};
+
 	const iconColors = () => {
 		const colors = [
 			'bg-teal-400',
@@ -65,7 +103,10 @@ export default function UserList() {
 
 		return colors[Math.floor(Math.random() * colors.length)];
 	};
+
 	useEffect(() => {
+		if (showDeletionModal) return;
+
 		getAllUsers()
 			.then((users) => {
 				setGettingUsers(false);
@@ -75,7 +116,7 @@ export default function UserList() {
 				setGettingUsers(false);
 				setError(true);
 			});
-	}, []);
+	}, [showDeletionModal]);
 
 	return (
 		<UserListWrapper>
@@ -84,8 +125,10 @@ export default function UserList() {
 					message={deletionConfirmationMessage}
 					cancelButtonLabel='Do not delete user'
 					confirmButtonLabel='Delete user'
-					onConfirm={() => {
-						setShowDeletionModal(false);
+					loading={deletingUser}
+					loadingMessage={deletingMessage}
+					onConfirm={async () => {
+						await handleDeleteUser();
 					}}
 					onCancel={() => {
 						setShowDeletionModal(false);

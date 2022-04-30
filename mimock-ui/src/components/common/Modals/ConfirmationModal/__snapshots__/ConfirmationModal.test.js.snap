@@ -70,6 +70,51 @@ exports[`ConfirmationModal Should render confirmation modal with passed props 1`
 </body>
 `;
 
+exports[`ConfirmationModal Should show confirmation modal with loader when loading is true 1`] = `
+<body>
+  <div />
+  <div>
+    <div
+      class="w-screen h-screen flex justify-center items-center bg-slate-500/[0.8] align-middle fixed left-0 right-0 top-0 bottom-0"
+      data-testid="confirmation-modal"
+    >
+      <div
+        class="w-1/2 rounded-md shadow-lg bg-white p-6"
+      >
+        <div
+          class="text-center font-sans font-light text-xl my-8 text-gray-500"
+          data-testid="confirmation-modal-loading-message"
+        >
+          Loading...
+        </div>
+        <span
+          class="css-5fsquf-LoaderStyle"
+        >
+          <span
+            class="css-12e3t43"
+          />
+          <span
+            class="css-d6qxb6"
+          />
+          <span
+            class="css-iesdqd"
+          />
+          <span
+            class="css-ig3xja"
+          />
+          <span
+            class="css-3t0wzc"
+          />
+          <span
+            class="css-1cabljy"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
 exports[`ConfirmationModal Should trigger cancel event on clicking cancel button 1`] = `
 <body>
   <div />

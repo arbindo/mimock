@@ -3,14 +3,15 @@ import { render, act, waitFor } from '@testing-library/react';
 import { mockedCookieGet } from 'mocks/cookieMock';
 import AdminNavigator from './AdminNavigator.jsx';
 
-jest.mock('react-router-dom');
-jest.mock('styles/Loaders', () => {
+let mockedRecoilFn;
+jest.mock('recoil', () => {
+	mockedRecoilFn = jest.fn();
 	return {
-		FullPageLoader: () => {
-			return <div data-testid='loader'>Loading...</div>;
-		},
+		atom: jest.fn(),
+		useRecoilState: jest.fn(() => [true, mockedRecoilFn]),
 	};
 });
+jest.mock('react-router-dom');
 
 describe('AdminNavigator', () => {
 	const TestComponent = () => {
@@ -33,8 +34,11 @@ describe('AdminNavigator', () => {
 		const { getByTestId, container, queryByTestId } = tree;
 
 		await waitFor(() => {
+			expect(mockedRecoilFn).toHaveBeenCalledTimes(2);
+			expect(mockedRecoilFn).nthCalledWith(1, true);
+			expect(mockedRecoilFn).nthCalledWith(2, false);
+
 			expect(getByTestId('child')).toBeInTheDocument();
-			expect(queryByTestId('loader')).not.toBeInTheDocument();
 			expect(queryByTestId('navigator')).not.toBeInTheDocument();
 			expect(container).toMatchSnapshot();
 		});
@@ -56,9 +60,12 @@ describe('AdminNavigator', () => {
 		const { getByTestId, container, queryByTestId } = tree;
 
 		await waitFor(() => {
+			expect(mockedRecoilFn).toHaveBeenCalledTimes(2);
+			expect(mockedRecoilFn).nthCalledWith(1, true);
+			expect(mockedRecoilFn).nthCalledWith(2, false);
+
 			expect(getByTestId('permission-error-page')).toBeInTheDocument();
 			expect(queryByTestId('child')).not.toBeInTheDocument();
-			expect(queryByTestId('loader')).not.toBeInTheDocument();
 			expect(container).toMatchSnapshot();
 		});
 	});
@@ -79,9 +86,12 @@ describe('AdminNavigator', () => {
 		const { getByTestId, container, queryByTestId } = tree;
 
 		await waitFor(() => {
+			expect(mockedRecoilFn).toHaveBeenCalledTimes(2);
+			expect(mockedRecoilFn).nthCalledWith(1, true);
+			expect(mockedRecoilFn).nthCalledWith(2, false);
+
 			expect(getByTestId('permission-error-page')).toBeInTheDocument();
 			expect(queryByTestId('child')).not.toBeInTheDocument();
-			expect(queryByTestId('loader')).not.toBeInTheDocument();
 			expect(container).toMatchSnapshot();
 		});
 	});
@@ -102,9 +112,12 @@ describe('AdminNavigator', () => {
 		const { getByTestId, container, queryByTestId } = tree;
 
 		await waitFor(() => {
+			expect(mockedRecoilFn).toHaveBeenCalledTimes(2);
+			expect(mockedRecoilFn).nthCalledWith(1, true);
+			expect(mockedRecoilFn).nthCalledWith(2, false);
+
 			expect(getByTestId('permission-error-page')).toBeInTheDocument();
 			expect(queryByTestId('child')).not.toBeInTheDocument();
-			expect(queryByTestId('loader')).not.toBeInTheDocument();
 			expect(container).toMatchSnapshot();
 		});
 	});

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { isTokenValid } from 'services/authentication/validateToken.service';
-import { FullPageLoader } from 'styles/Loaders';
 import showFullPageLoader from 'atoms/showFullPageLoader';
 
 function Navigator({ children }) {
@@ -28,19 +27,14 @@ function Navigator({ children }) {
 	}, []);
 
 	return (
-		<Choose>
-			<When condition={isLoading}>
-				<FullPageLoader />
-			</When>
-			<Otherwise>
-				<Choose>
-					<When condition={!isLoading && isAuthTokenValid}>{children}</When>
-					<Otherwise>
-						<Navigate to='/' replace={true} />
-					</Otherwise>
-				</Choose>
-			</Otherwise>
-		</Choose>
+		<If condition={!isLoading}>
+			<Choose>
+				<When condition={!isLoading && isAuthTokenValid}>{children}</When>
+				<Otherwise>
+					<Navigate to='/' replace={true} />
+				</Otherwise>
+			</Choose>
+		</If>
 	);
 }
 

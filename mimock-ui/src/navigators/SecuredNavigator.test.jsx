@@ -75,21 +75,4 @@ describe('SecuredNavivator', () => {
 			expect(container).toMatchSnapshot();
 		});
 	});
-
-	it('should show full page loader when waiting for validation status', async () => {
-		isTokenValid.mockResolvedValue(true);
-		jest.advanceTimersByTime(1000);
-
-		const { getByTestId, queryByTestId } = await render(
-			<SecuredNavigator>
-				<TestComponent />
-			</SecuredNavigator>
-		);
-
-		expect(getByTestId('fullpage-loader')).toBeInTheDocument();
-		expect(queryByTestId('navigator')).not.toBeInTheDocument();
-		expect(queryByTestId('child')).not.toBeInTheDocument();
-
-		expect(document.getElementsByTagName('body')).toMatchSnapshot();
-	});
 });

@@ -1,38 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FullPageLoader } from 'styles/Loaders';
 import PermissionErrorPage from 'components/common/PermissionErrorPage';
+import { useRecoilState } from 'recoil';
 import { getUserDetails } from 'utils/jwtUtils';
+import showFullPageLoader from 'atoms/showFullPageLoader';
 
 function Navigator({ children }) {
+	const [, setOpenFullPageLoader] = useRecoilState(showFullPageLoader);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isAdminUser, setIsAdminUser] = useState(false);
 
 	useEffect(() => {
+		setOpenFullPageLoader(true);
+
 		try {
 			const userDetails = getUserDetails();
 			setIsAdminUser(userDetails && userDetails.userRole === 'ROLE_ADMIN');
 		} catch (e) {
 			console.error(e);
 		} finally {
+			setOpenFullPageLoader(false);
 			setIsLoading(false);
 		}
 	}, []);
 
 	return (
-		<Choose>
-			<When condition={isLoading}>
-				<FullPageLoader />
-			</When>
-			<Otherwise>
-				<Choose>
-					<When condition={!isLoading && isAdminUser}>{children}</When>
-					<Otherwise>
-						<PermissionErrorPage />
-					</Otherwise>
-				</Choose>
-			</Otherwise>
-		</Choose>
+		<If condition={!isLoading}>
+			<Choose>
+				<When condition={!isLoading && isAdminUser}>{children}</When>
+				<Otherwise>
+					<PermissionErrorPage />
+				</Otherwise>
+			</Choose>
+		</If>
 	);
 }
 

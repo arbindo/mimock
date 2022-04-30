@@ -10,7 +10,7 @@ function FullPageLoader() {
 
 	return (
 		<If condition={loading}>
-			<Portal node={document && document.getElementById('app')}>
+			<Portal node={document && document.getElementById('modal')}>
 				<LoaderWrapper data-testid='fullpage-loader'>
 					<SyncLoader
 						loading={loading}
