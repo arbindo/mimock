@@ -1,3 +1,3 @@
-import UserList from './UserList';
+import UserManagement from './UserManagement';
 
-export default UserList;
+export default UserManagement;

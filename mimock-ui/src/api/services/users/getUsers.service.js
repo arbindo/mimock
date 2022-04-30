@@ -15,7 +15,9 @@ export const getAllUsers = async () => {
 			showFullPageLoader: true,
 		}).then((res) => {
 			const { users } = res.data;
-			return users.filter((user) => user.userName !== userDetails.userName);
+			return users
+				.filter((user) => user.userName !== userDetails.userName)
+				.sort((a, b) => (a.name < b.name ? -1 : 1));
 		});
 	}
 

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableHeader should render user list table header 1`] = `
+<div>
+  <div
+    class="w-11/12 flex flex-row justify-between p-4 bg-gray-100 border border-gray-300 rounded-md shadow-sm mx-auto items-center align-middle my-1"
+    data-testid="user-mgmt-table-header"
+  >
+    <div
+      class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+      data-testid="header-item-name"
+    >
+      Name
+    </div>
+    <div
+      class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+      data-testid="header-item-userName"
+    >
+      User name
+    </div>
+    <div
+      class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+      data-testid="header-item-role"
+    >
+      Role
+    </div>
+    <div
+      class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+      data-testid="header-item-activationStatus"
+    >
+      Activation status
+    </div>
+    <div
+      class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+      data-testid="header-item-createdOn"
+    >
+      Created on
+    </div>
+    <div
+      class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+      data-testid="header-item-actions"
+    >
+      Actions
+    </div>
+  </div>
+</div>
+`;

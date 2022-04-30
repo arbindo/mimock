@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserManagement should render user management 1`] = `
+<div>
+  <div
+    class="w-full h-full"
+    data-testid="user-management"
+  >
+    <div
+      class="flex justify-between items-center align-middle px-4 my-10 border-b-2 border-gray-100 w-11/12 mx-auto"
+    >
+      <h1
+        class="font-sans text-3xl font-semibold text-slate-600 py-6 w-3/4"
+        data-testid="user-management-header"
+      >
+        User Management
+      </h1>
+      <button
+        class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-fit bg-green-300 dark:bg-green-400"
+        data-testid="add-user-btn"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15 2.013H9V9H2v6h7v6.987h6V15h7V9h-7z"
+          />
+        </svg>
+        ADD USER
+      </button>
+    </div>
+    <div
+      class="w-full my-10 mx-auto"
+      data-testid="user-table"
+    >
+      <div
+        class="w-11/12 flex flex-row justify-between p-4 bg-gray-100 border border-gray-300 rounded-md shadow-sm mx-auto items-center align-middle my-1"
+        data-testid="user-mgmt-table-header"
+      >
+        <div
+          class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+          data-testid="header-item-name"
+        >
+          Name
+        </div>
+        <div
+          class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+          data-testid="header-item-userName"
+        >
+          User name
+        </div>
+        <div
+          class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+          data-testid="header-item-role"
+        >
+          Role
+        </div>
+        <div
+          class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+          data-testid="header-item-activationStatus"
+        >
+          Activation status
+        </div>
+        <div
+          class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+          data-testid="header-item-createdOn"
+        >
+          Created on
+        </div>
+        <div
+          class="font-sans font-bold text-center antialiased text-gray-600 w-1/4"
+          data-testid="header-item-actions"
+        >
+          Actions
+        </div>
+      </div>
+      <div
+        class="w-11/12 flex flex-row justify-between items-center align-middle p-4 bg-white border border-gray-200 rounded-md mx-auto my-1"
+        data-testid="user-record-user1"
+      >
+        <div
+          class="font-sans text-gray-800 text-center w-1/4"
+          data-testid="user-name"
+        >
+          User 1
+        </div>
+        <div
+          class="font-sans text-gray-800 text-center w-1/4"
+          data-testid="user-userName"
+        >
+          user1
+        </div>
+        <div
+          class="w-1/4"
+          data-testid="user-role"
+        >
+          <div
+            class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-teal-400"
+            data-testid="role-pill-ADMIN"
+            role="ADMIN"
+          >
+            ADMIN
+          </div>
+        </div>
+        <div
+          class="w-1/4 flex flex-row justify-between items-center align-middle gap-2"
+        >
+          <div
+            class="flex flex-row justify-between items-center align-middle gap-2 mx-auto"
+            data-testid="user-activation-status"
+          >
+            <div
+              class="w-1"
+              data-testid="status-indicator-true"
+            >
+              <div
+                class="rounded-full mx-auto block p-2 text-center bg-green-500"
+              />
+            </div>
+            <div
+              class="w-24 font-sans font-semibold text-center text-gray-700"
+              data-testid="status-label-true"
+            >
+              Active
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-1/4 font-sans antialiased text-center text-gray-600 text-xs font-semibold"
+          data-testid="user-created-timestamp"
+        >
+          28 Apr 2022
+        </div>
+        <div
+          class="w-1/4"
+          data-testid="user-action-user1"
+        >
+          <div
+            class="text-center text-2xl text-gray-600 cursor-pointer flex justify-center items-center align-middle gap-4 w-full"
+          >
+            <button
+              aria-label="Edit User"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+              data-mui-internal-clone-element="true"
+              data-testid="edit-user1"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 576 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-label="Delete User"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+              data-mui-internal-clone-element="true"
+              data-testid="delete-user1"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 448 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+                />
+              </svg>
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RolePill should render ADMIN role pill 1`] = `
+<div>
+  <div
+    class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-teal-400"
+    data-testid="role-pill-ADMIN"
+    role="ADMIN"
+  >
+    ADMIN
+  </div>
+</div>
+`;
+
+exports[`RolePill should render MANAGER role pill 1`] = `
+<div>
+  <div
+    class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-indigo-400"
+    data-testid="role-pill-MANAGER"
+    role="MANAGER"
+  >
+    MANAGER
+  </div>
+</div>
+`;
+
+exports[`RolePill should render VIEWER role pill 1`] = `
+<div>
+  <div
+    class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-slate-500"
+    data-testid="role-pill-VIEWER"
+    role="VIEWER"
+  >
+    VIEWER
+  </div>
+</div>
+`;

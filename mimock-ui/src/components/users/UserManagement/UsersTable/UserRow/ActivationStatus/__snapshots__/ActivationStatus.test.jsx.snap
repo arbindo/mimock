@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivationStatus should render ActivationStatus when status is false 1`] = `
+<div>
+  <div
+    class="flex flex-row justify-between items-center align-middle gap-2 mx-auto"
+    data-testid="user-activation-status"
+  >
+    <div
+      class="w-1"
+      data-testid="status-indicator-false"
+    >
+      <div
+        class="rounded-full mx-auto block p-2 text-center bg-red-500"
+      />
+    </div>
+    <div
+      class="w-24 font-sans font-semibold text-center text-gray-700"
+      data-testid="status-label-false"
+    >
+      Inactive
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ActivationStatus should render ActivationStatus when status is true 1`] = `
+<div>
+  <div
+    class="flex flex-row justify-between items-center align-middle gap-2 mx-auto"
+    data-testid="user-activation-status"
+  >
+    <div
+      class="w-1"
+      data-testid="status-indicator-true"
+    >
+      <div
+        class="rounded-full mx-auto block p-2 text-center bg-green-500"
+      />
+    </div>
+    <div
+      class="w-24 font-sans font-semibold text-center text-gray-700"
+      data-testid="status-label-true"
+    >
+      Active
+    </div>
+  </div>
+</div>
+`;

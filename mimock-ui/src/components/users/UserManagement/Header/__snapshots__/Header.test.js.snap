@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render user management header 1`] = `
+<div>
+  <div
+    class="flex justify-between items-center align-middle px-4 my-10 border-b-2 border-gray-100 w-11/12 mx-auto"
+  >
+    <h1
+      class="font-sans text-3xl font-semibold text-slate-600 py-6 w-3/4"
+      data-testid="user-management-header"
+    >
+      User Management
+    </h1>
+    <button
+      class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-fit bg-green-300 dark:bg-green-400"
+      data-testid="add-user-btn"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M15 2.013H9V9H2v6h7v6.987h6V15h7V9h-7z"
+        />
+      </svg>
+      ADD USER
+    </button>
+  </div>
+</div>
+`;
