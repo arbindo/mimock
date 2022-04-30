@@ -6,11 +6,18 @@ exports[`ContentArea should render content area component 1`] = `
     class="w-full flex flex-row mx-auto mt-6 mb-2 justify-center align-middle px-9"
   >
     <div
-      class="flex flex-col justify-center align-middle w-full px-9"
+      class="flex flex-col justify-start align-middle w-full px-9 mt-4 mb-2"
       data-testid="list-section"
     >
+      <span
+        class="inline-flex items-center justify-start font-sans text-2xl font-light text-gray-500 my-2"
+      >
+        <div
+          class="mx-1 select-none"
+        />
+      </span>
       <div
-        class="p-3 my-10 text-center bg-white border-2 border-gray-200 mx-auto w-full rounded-sm shadow-sm inline-flex items-center justify-center select-none"
+        class="p-3 my-4 text-center bg-white border-2 border-gray-200 mx-auto w-full rounded-sm shadow-sm inline-flex items-center justify-center select-none"
       >
         <img
           class="w-12 h-12"

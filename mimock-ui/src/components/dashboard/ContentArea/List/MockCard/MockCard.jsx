@@ -22,7 +22,6 @@ function MockCard({ mockName, description, httpMethod, route }) {
 
 	const decideBadgeColor = () => {
 		let color = '';
-		console.log(httpMethod);
 		switch (httpMethod) {
 			case 'GET':
 				color = 'blue-500';
