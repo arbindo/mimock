@@ -46,16 +46,21 @@ export const MenuItems = tw.div`
     gap-10
 `;
 
-export const _MenuLink = styled(NavLink)``;
+export const _MenuLink = styled(NavLink)`
+	&[class*='active'] {
+		color: #5ecdbf;
+		font-weight: bold;
+	}
+`;
 
 export const MenuLink = tw(_MenuLink)`
     font-sans
     font-semibold
     text-gray-700
+    antialiased
     transition-all
-    transition-duration-100
 
-    hover:text-gray-900
+    hover:text-gray-400
 `;
 
 export const Options = tw.div`
