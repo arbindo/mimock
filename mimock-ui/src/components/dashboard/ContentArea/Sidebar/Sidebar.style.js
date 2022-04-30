@@ -1,7 +1,7 @@
 import tw from 'tailwind-styled-components';
 
 export const SideBarContainer = tw.div`
-    w-2/6
+    w-1/4
     flex
     flex-row
     mx-4
@@ -40,6 +40,9 @@ export const SpanText = tw.div`
 export const RowComponentWrapper = tw.div`
     flex
     flex-row
+    flex-wrap
+    justify-start
+    align-items
     mx-2
     mt-2
 `;

@@ -1,7 +1,7 @@
 import tw from 'tailwind-styled-components';
 
 export const ContentAreaContainer = tw.div`
-    w-5/6
+    w-full
     flex
     flex-row
     mx-auto
@@ -9,4 +9,5 @@ export const ContentAreaContainer = tw.div`
     mb-2
     justify-center
     align-middle
+    px-9
 `;

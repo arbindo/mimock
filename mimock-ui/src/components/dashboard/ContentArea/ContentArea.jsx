@@ -10,7 +10,7 @@ function ContentArea({ showSidebarSection }) {
 			<If condition={showSidebarSection}>
 				<Sidebar />
 			</If>
-			<List showSidebarSection={showSidebarSection} />
+			<List />
 		</ContentAreaContainer>
 	);
 }

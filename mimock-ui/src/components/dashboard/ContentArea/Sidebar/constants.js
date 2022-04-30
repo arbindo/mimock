@@ -32,5 +32,25 @@ export const constants = {
 			httpMethod: 'DELETE',
 			badgeColor: 'border-2 border-red-500 text-red-500',
 		},
+		{
+			httpMethod: 'PATCH',
+			badgeColor: 'border-2 border-yellow-900 text-yellow-900',
+		},
+		{
+			httpMethod: 'CONNECT',
+			badgeColor: 'border-2 border-pink-500 text-pink-500',
+		},
+		{
+			httpMethod: 'HEAD',
+			badgeColor: 'border-2 border-indigo-500 text-indigo-500',
+		},
+		{
+			httpMethod: 'TRACE',
+			badgeColor: 'border-2 border-violet-500 text-violet-500',
+		},
+		{
+			httpMethod: 'OPTIONS',
+			badgeColor: 'border-2 border-gray-500 text-gray-500',
+		},
 	],
 };

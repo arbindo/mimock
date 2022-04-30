@@ -1,18 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Cookies } from 'react-cookie';
 import { globalConstants } from 'constants/globalConstants';
-import { ListContainer } from './List.style.js';
+import {
+	ListContainer,
+	ListEmptyStateWrapper,
+	EmptyStateImage,
+	ListEmptyStateMessage,
+} from './List.style.js';
 import { listMocks } from 'services/mockManagement/mockManagement.service';
 import MockCard from './MockCard';
-import PropTypes from 'prop-types';
+import EmptyState from 'assets/empty-state.png';
 
-function List({ showSidebarSection }) {
+function List() {
 	const cookies = new Cookies();
 	const authCookieRef = useRef('');
 	const csrfCookieRef = useRef('');
 	const [mocksList, setMocksList] = useState([]);
 	const [errorMessage, setErrorMessage] = useState('');
-	const [listSectionWidth, setListSectionWidth] = useState('');
 
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
@@ -35,30 +39,32 @@ function List({ showSidebarSection }) {
 			.catch((err) => console.log(err));
 	}, []);
 
-	useEffect(() => {
-		setListSectionWidth(showSidebarSection ? 'w-4/6' : 'w-full');
-	}, [showSidebarSection]);
-
 	return (
-		<ListContainer data-testid='list-section' className={listSectionWidth}>
+		<ListContainer data-testid='list-section'>
 			<If condition={errorMessage == ''}>
-				{mocksList.map((data) => (
-					<MockCard
-						key={data.id}
-						id={data.id}
-						mockName={data.mockName}
-						description={data.description}
-						httpMethod={data.httpMethod.method}
-						route={data.route}
-					/>
-				))}
+				<If condition={mocksList.length > 0}>
+					<For each='mock' of={mocksList}>
+						<MockCard
+							key={mock.id}
+							id={mock.id}
+							mockName={mock.mockName}
+							description={mock.description}
+							httpMethod={mock.httpMethod.method}
+							route={mock.route}
+						/>
+					</For>
+				</If>
+				<If condition={mocksList.length == 0}>
+					<ListEmptyStateWrapper>
+						<EmptyStateImage src={EmptyState} />
+						<ListEmptyStateMessage>
+							No mocks to display!!!
+						</ListEmptyStateMessage>
+					</ListEmptyStateWrapper>
+				</If>
 			</If>
 		</ListContainer>
 	);
 }
-
-List.propTypes = {
-	showSidebarSection: PropTypes.bool.isRequired,
-};
 
 export default List;

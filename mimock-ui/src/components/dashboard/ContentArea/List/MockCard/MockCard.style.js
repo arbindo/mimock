@@ -84,10 +84,3 @@ export const CardLinkSpan = tw.span`
     text-teal-500
     mx-2
 `;
-
-export const CardActionIconsSpan = tw.span`
-    inline-flex
-    items-center
-    justify-center
-    mx-2
-`;

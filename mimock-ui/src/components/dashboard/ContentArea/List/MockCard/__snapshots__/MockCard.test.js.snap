@@ -3,14 +3,14 @@
 exports[`MockCard should render mock card component 1`] = `
 <div>
   <div
-    class="w-full flex flex-row align-middle border-2 border-gray-100 shadow-sm rounded-sm px-8 py-4 mx-auto my-4 cursor-pointer hover:bg-gray-100 hover:translate-x-1"
+    class="w-full flex flex-row align-middle border-2 border-gray-100 shadow-sm rounded-sm px-4 py-2 mx-auto my-4 cursor-pointer hover:bg-gray-100 hover:translate-x-1"
     data-testid="card"
   >
     <div
       class="w-3/6 flex flex-col justify-start align-middle"
     >
       <p
-        class="text-2xl font-bold capitalize truncate my-2"
+        class="text-2xl capitalize truncate my-2"
         data-testid="card-title"
       />
       <p
@@ -25,11 +25,11 @@ exports[`MockCard should render mock card component 1`] = `
         class="w-3/6 flex flex-col justify-center align-middle"
       >
         <div
-          class="text-center border-2 px-4 py-2 rounded-md shadow-sm select-none my-2 mx-auto border-gray-500 text-gray-500"
+          class="text-center px-2 py-1 rounded-md shadow-sm select-none my-2 mx-auto border-2 border-gray-500 text-gray-500"
           data-testid="card-badge"
         />
         <span
-          class="inline-flex items-center justify-center text-teal-500"
+          class="inline-flex items-center justify-center text-teal-500 mx-2"
         >
           <svg
             fill="currentColor"

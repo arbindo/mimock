@@ -6,34 +6,36 @@ exports[`Titlebar should render titlebar component 1`] = `
     class="w-11/12 flex flex-row mx-auto mt-4 mb-2 justify-center align-middle"
     data-testid="titlebar-section"
   >
-    <div
-      class="font-sans text-2xl font-bold text-gray-700 mx-auto my-auto select-none"
+    <span
+      class="inline-flex items-center justify-center font-sans text-2xl font-bold text-gray-700 mx-auto my-auto"
     >
-      <span
-        class="inline-flex items-center justify-center"
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 448 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 448 512"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"
-          />
-        </svg>
-         
+        <path
+          d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"
+        />
+      </svg>
+      <div
+        class="mx-1 select-none"
+      >
         Mocks
-      </span>
+      </div>
+    </span>
+    <div
+      class="w-5/6 flex flex-row mx-auto justify-end align-middle px-2"
+    >
+      <input
+        class="w-full my-2 mx-4 p-2 outline-none rounded-md border-2 border-gray-300 bg-white placeholder:italic placeholder:text-slate-400 sm:text-sm"
+        placeholder="Search"
+      />
     </div>
-    <input
-      class="w-5/6 my-2 mx-4 p-2 outline-none rounded-md border-2 border-gray-300 bg-white placeholder:italic placeholder:text-slate-400 sm:text-sm"
-      placeholder="Search"
-    />
   </div>
-  <hr />
 </div>
 `;
