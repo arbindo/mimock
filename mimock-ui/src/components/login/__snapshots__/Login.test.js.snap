@@ -132,7 +132,7 @@ exports[`Login should enter login component 1`] = `
               value=""
             />
             <button
-              class="px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+              class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
               data-testid="login-submit"
             >
               Login
