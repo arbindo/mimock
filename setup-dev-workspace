@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
+ul="=================================="
+should_start_api=false
 while getopts ":b:h" opt; do
 	case $opt in
 	b)
-		echo -e "\n:: Option selected : Run with backend ::"
-		echo -e "\n== 🚀 Spring boot app will run in the background after DB initialization ==\n"
 		should_start_api=true
 		;;
 	h)
@@ -30,24 +30,30 @@ check_program() {
 	fi
 }
 
-echo "Checking program status"
-echo "========================"
+echo -e "\e[36mChecking program status\e[m"
+echo $ul
 check_program "git"
 check_program "yarn"
 check_program "java"
 check_program "docker"
 
 if ! $should_proceed; then
-	echo "⁉️ Required programs are missing or not installed"
-	echo "🔴 Please install the missing programs"
+	echo -e "\e[31m⁉️ Required programs are missing or not installed\e[m"
+	echo -e "\e[31m🔴 Please install the missing programs\e[m"
 	exit 1
 fi
 
 echo -e "\n"
-echo "Setting up Dev workspace"
-echo "========================"
+echo -e "\e[36mSetting up Dev workspace\e[m"
+echo $ul
+
+if $should_start_api; then
+	echo -e "\n\e[35m>> Option selected : Run with backend <<"
+	echo -e "Spring boot app will run in the background after DB initialization\e[m"
+fi
+
 echo -e "\n"
-echo -e ":: Setting up git hooks ::\n"
+echo -e "\e[33m:: Setting up git hooks ::\n\e[m"
 
 if [ -f ~/.huskyrc ]; then
 	cat ~/.huskyrc | grep "exec < /dev/tty" >/dev/null
@@ -62,20 +68,17 @@ else
 	echo "exec < /dev/tty" >>~/.huskyrc
 fi
 
-yarn
-yarn prepare
+yarn --silent
+yarn --silent prepare
 cd .husky && chmod +x * && cd ..
 
-echo -e "\n"
-echo -e ":: Installing UI dependencies ::\n"
-cd mimock-ui && yarn && cd ..
+echo -e "\e[33m:: Installing UI dependencies ::\n\e[m"
+cd mimock-ui && yarn --silent && cd ..
 
-echo -e "\n"
-echo -e ":: Installing backend dependencies ::\n"
-cd mimock-backend && ./mvnw -ntp clean install -DskipTests=true && cd ..
+echo -e "\e[33m:: Installing backend dependencies ::\n\e[m"
+cd mimock-backend && ./mvnw -q -ntp clean install -DskipTests=true && cd ..
 
-echo -e "\n"
-echo -e ":: Starting dev database ::\n"
+echo -e "\e[33m:: Starting dev database ::\n\e[m"
 mimock_db=$(docker ps -a --filter name=mimock-db --format "{{.Names}}")
 
 if [ -z "$mimock_db" ]; then
@@ -84,29 +87,31 @@ if [ -z "$mimock_db" ]; then
 else
 	db_status=$(docker container inspect -f '{{.State.Running}}' $mimock_db)
 	if [ "$db_status" == "false" ]; then
-		echo "🐋 Database is not running"
-		echo "🐳 Re-starting database"
+		echo -e "\e[36m🐋 Database is not running\e[m"
+		echo -e "\e[33m🐳 Re-starting database\e[m"
 		docker start $mimock_db >/dev/null
 	else
-		echo "🐳 Mimock database is already running"
+		echo -e "\e[32m🐳 Mimock database is already running\e[m"
 	fi
 fi
 
 if $should_start_api; then
 	echo -e "\n"
-	echo -e ":: Starting backend server ::\n"
+	echo -e "\e[33m:: Starting server ::\n\e[m"
 	cd mimock-backend && nohup ./mvnw spring-boot:run -DskipTests=true -Dapp.profiles=dev >/dev/null 2>&1 &
 	pid=$(echo $!)
 	cd ..
-	echo -e "🔵 Backend server is running\n"
-	echo -e "> To stop the server, run 'kill -9 $pid'\n"
+	echo -e "🔵 Server is running\n"
+	echo -e "\e[36m> To stop the server, run 'kill -9 $pid'\n\e[m"
 else
-	echo "⚠️ Spring boot app will not run in the background"
+	echo -e "\n"
+	echo -e "\e[31m> Something to keep in mind <\n\e[m"
+	echo -e "\e[33m⚠️ Spring boot app will not run in the background\e[m"
 	echo "🛸 You can run it manually with 'cd ./micmock-backend && ./mvnw spring-boot:run -DskipTests=true -Dapp.profiles=dev'"
 	echo "🛸 You can also run this script with '-b' option to start the app in the background"
 fi
 
 echo -e "\n"
-echo "========================"
-echo "Dev workspace setup completed!"
+echo $ul
+echo -e "\e[32m🚀 Dev workspace setup completed!\e[m"
 echo -e "\n"
