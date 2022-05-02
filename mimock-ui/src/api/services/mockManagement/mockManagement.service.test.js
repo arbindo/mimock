@@ -257,7 +257,7 @@ describe('Mock management service', () => {
 			const response = await listMocks('token');
 
 			expect(get).toHaveBeenCalledTimes(1);
-			expect(get).toHaveBeenCalledWith('/mocks/filter?status=NONE', 'token');
+			expect(get).toHaveBeenCalledWith('/mocks/filter', 'token');
 
 			expect(response).toBeTruthy();
 			expect(response.data.mocks).toHaveLength(2);
@@ -269,7 +269,7 @@ describe('Mock management service', () => {
 
 			await listMocks('token').catch((err) => {
 				expect(get).toHaveBeenCalledTimes(1);
-				expect(get).toHaveBeenCalledWith('/mocks/filter?status=NONE', 'token');
+				expect(get).toHaveBeenCalledWith('/mocks/filter', 'token');
 
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);
@@ -296,10 +296,7 @@ describe('Mock management service', () => {
 			const response = await listActiveMocks('token');
 
 			expect(get).toHaveBeenCalledTimes(1);
-			expect(get).toHaveBeenCalledWith(
-				'/mocks/filter?status=ACTIVE',
-				'token'
-			);
+			expect(get).toHaveBeenCalledWith('/mocks/filter?status=NONE', 'token');
 
 			expect(response).toBeTruthy();
 			expect(response.data.mocks).toHaveLength(1);
@@ -312,7 +309,7 @@ describe('Mock management service', () => {
 			await listActiveMocks('token').catch((err) => {
 				expect(get).toHaveBeenCalledTimes(1);
 				expect(get).toHaveBeenCalledWith(
-					'/mocks/filter?status=ACTIVE',
+					'/mocks/filter?status=NONE',
 					'token'
 				);
 

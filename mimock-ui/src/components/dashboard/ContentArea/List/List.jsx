@@ -7,22 +7,24 @@ import {
 	ListClearFilter,
 	ListClearFilterText,
 	ListTitleSpan,
-	ListEmptyStateWrapper,
-	EmptyStateImage,
-	ListEmptyStateMessage,
+	MessageWrapper,
+	MessageImageIcon,
+	MessageSpan,
+	LoaderStyle,
 } from './List.style.js';
 import {
 	listArchivedMocks,
 	listDeletedMocks,
 	listMocks,
-	getAllMocks,
 	listActiveMocks,
 } from 'services/mockManagement/mockManagement.service';
 import MockCard from './MockCard';
 import EmptyState from 'assets/empty-state.png';
+import ErrorState from 'assets/server-down-state-2.png';
 import PropTypes from 'prop-types';
 import { FaFilter } from 'react-icons/fa';
 import { MdCancel } from 'react-icons/md';
+import BarLoader from 'react-spinners/BarLoader';
 
 function List({ mocksListView, handleClearFilter }) {
 	const cookies = new Cookies();
@@ -31,7 +33,11 @@ function List({ mocksListView, handleClearFilter }) {
 	const [mocksList, setMocksList] = useState([]);
 	const [listTitle, setListTitle] = useState('');
 	const [isFilter, setIsFilter] = useState(false);
-	const [errorMessage, setErrorMessage] = useState('');
+	const [error, setError] = useState({
+		status: false,
+		message: '',
+	});
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
@@ -39,15 +45,17 @@ function List({ mocksListView, handleClearFilter }) {
 	}, []);
 
 	useEffect(() => {
+		setLoading(true);
 		async function callMockService(mocksListView) {
-			console.log(mocksListView);
 			let mocksListResponse = {
 				data: null,
 				status: 0,
 			};
 			switch (mocksListView) {
 				case 'ACTIVE': {
-					const listActiveMocksApiResponse = await listActiveMocks(authCookieRef);
+					const listActiveMocksApiResponse = await listActiveMocks(
+						authCookieRef
+					);
 					mocksListResponse.data = listActiveMocksApiResponse.data.content;
 					mocksListResponse.status = listActiveMocksApiResponse.status;
 					setListTitle('Active Mocks');
@@ -86,55 +94,81 @@ function List({ mocksListView, handleClearFilter }) {
 			if (mocksListResponse != null && mocksListResponse.status == 200) {
 				return mocksListResponse.data;
 			} else {
-				setErrorMessage('Unable To List Mocks');
+				setError({
+					status: true,
+					message: `Server responded with Status:${mocksListResponse.status}. Unable To List Mocks !!`,
+				});
+				return null;
 			}
 		}
 		callMockService(mocksListView)
 			.then((apiArr) => {
-				console.log(apiArr);
 				setMocksList(apiArr);
+				setLoading(false);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				setError({
+					status: true,
+					message: 'Unable To Reach Server, Contact your system admin!!',
+				});
+				setLoading(false);
+			});
 	}, [mocksListView]);
 
 	return (
 		<ListContainer data-testid='list-section'>
-			<If condition={errorMessage == ''}>
-				<ListTitleSpan>
-					<If condition={isFilter}>
-						<FaFilter />
-					</If>
-					<ListTitle>{listTitle}</ListTitle>
-					<If condition={isFilter}>
-						<ListClearFilter>
-							<MdCancel />
-							<ListClearFilterText onClick={handleClearFilter}>
-								Clear Filter
-							</ListClearFilterText>
-						</ListClearFilter>
-					</If>
-				</ListTitleSpan>
-				<If condition={mocksList.length > 0}>
-					<For each='mock' of={mocksList}>
-						<MockCard
-							key={mock.id}
-							id={mock.id}
-							mockName={mock.mockName}
-							description={mock.description}
-							httpMethod={mock.httpMethod.method}
-							route={mock.route}
-						/>
-					</For>
-				</If>
-				<If condition={mocksList.length == 0}>
-					<ListEmptyStateWrapper>
-						<EmptyStateImage src={EmptyState} />
-						<ListEmptyStateMessage>
-							No mocks to display!!!
-						</ListEmptyStateMessage>
-					</ListEmptyStateWrapper>
-				</If>
-			</If>
+			<BarLoader
+				data-testid='list-mocks-loader'
+				loading={loading}
+				color='teal'
+				size={1000}
+				css={LoaderStyle}
+			/>
+			<Choose>
+				<When condition={error.status}>
+					<MessageWrapper>
+						<MessageImageIcon src={ErrorState} />
+						<MessageSpan>{error.message}</MessageSpan>
+					</MessageWrapper>
+				</When>
+				<When condition={!error.status && !loading}>
+					<ListTitleSpan>
+						<If condition={isFilter}>
+							<FaFilter />
+						</If>
+						<ListTitle>{listTitle}</ListTitle>
+						<If condition={isFilter}>
+							<ListClearFilter>
+								<MdCancel />
+								<ListClearFilterText onClick={handleClearFilter}>
+									Clear Filter
+								</ListClearFilterText>
+							</ListClearFilter>
+						</If>
+					</ListTitleSpan>
+					<Choose>
+						<When condition={mocksList.length > 0}>
+							<For each='mock' of={mocksList}>
+								<MockCard
+									key={mock.id}
+									id={mock.id}
+									mockName={mock.mockName}
+									description={mock.description}
+									httpMethod={mock.httpMethod.method}
+									route={mock.route}
+								/>
+							</For>
+						</When>
+						<When condition={mocksList.length == 0}>
+							<MessageWrapper>
+								<MessageImageIcon src={EmptyState} />
+								<MessageSpan>No mocks to display!!!</MessageSpan>
+							</MessageWrapper>
+						</When>
+					</Choose>
+				</When>
+			</Choose>
 		</ListContainer>
 	);
 }

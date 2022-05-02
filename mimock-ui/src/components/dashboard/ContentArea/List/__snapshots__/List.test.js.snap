@@ -7,25 +7,15 @@ exports[`List should render list component 1`] = `
     data-testid="list-section"
   >
     <span
-      class="inline-flex items-center justify-start font-sans text-2xl font-light text-gray-500 my-2"
+      class="css-srux5c-LoaderStyle"
     >
-      <div
-        class="mx-1 select-none"
-      />
-    </span>
-    <div
-      class="p-3 my-4 text-center bg-white border-2 border-gray-200 mx-auto w-full rounded-sm shadow-sm inline-flex items-center justify-center select-none"
-    >
-      <img
-        class="w-12 h-12"
-        src=""
+      <span
+        class="css-ilyd5x"
       />
       <span
-        class="text-xl text-teal-600 font-sans font-semibold ml-4"
-      >
-        No mocks to display!!!
-      </span>
-    </div>
+        class="css-80tgv6"
+      />
+    </span>
   </div>
 </div>
 `;

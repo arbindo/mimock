@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+import { css } from '@emotion/react';
 
 export const ListContainer = tw.div`
     flex
@@ -46,12 +47,12 @@ export const ListTitleSpan = tw.span`
     my-2
 `;
 
-export const EmptyStateImage = tw.img`
-    w-12
-    h-12
+export const MessageImageIcon = tw.img`
+    w-24
+    h-24
 `;
 
-export const ListEmptyStateWrapper = tw.div`
+export const MessageWrapper = tw.div`
     p-3
     my-4
     text-center
@@ -68,10 +69,19 @@ export const ListEmptyStateWrapper = tw.div`
     select-none
 `;
 
-export const ListEmptyStateMessage = tw.span`
+export const MessageSpan = tw.span`
     text-xl
     text-teal-600
     font-sans
     font-semibold
     ml-4
+`;
+
+export const LoaderStyle = css`
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	width: 1000px;
 `;
