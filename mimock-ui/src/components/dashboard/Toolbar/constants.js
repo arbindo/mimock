@@ -1,3 +1,5 @@
+import { mockManagementConstants } from 'constants/globalConstants';
+
 export const constants = {
 	label: {
 		add: 'Add Mock',
@@ -7,8 +9,8 @@ export const constants = {
 		recycleBinView: 'Bin',
 	},
 	name: {
-		generalView: 'ACTIVE',
-		archivedView: 'ARCHIVED',
-		recycleBinView: 'DELETED',
+		generalView: `${mockManagementConstants.ACTIVE_STATUS}`,
+		archivedView: `${mockManagementConstants.ARCHIVED_STATUS}`,
+		recycleBinView: `${mockManagementConstants.DELETED_STATUS}`,
 	},
 };

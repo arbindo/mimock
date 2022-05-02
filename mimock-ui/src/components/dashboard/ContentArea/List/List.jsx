@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Cookies } from 'react-cookie';
 import { globalConstants } from 'constants/globalConstants';
+import { constants } from './constants';
 import {
 	ListContainer,
 	ListTitle,
@@ -20,7 +21,7 @@ import {
 } from 'services/mockManagement/mockManagement.service';
 import MockCard from './MockCard';
 import EmptyState from 'assets/empty-state.png';
-import ErrorState from 'assets/server-down-state-2.png';
+import ErrorState from 'assets/server-down-state.png';
 import PropTypes from 'prop-types';
 import { FaFilter } from 'react-icons/fa';
 import { MdCancel } from 'react-icons/md';
@@ -39,6 +40,10 @@ function List({ mocksListView, handleClearFilter }) {
 	});
 	const [loading, setLoading] = useState(false);
 
+	const ACTIVE = constants.view.active;
+	const ARCHIVED = constants.view.archived;
+	const DELETED = constants.view.deleted;
+
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
 		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
@@ -52,33 +57,33 @@ function List({ mocksListView, handleClearFilter }) {
 				status: 0,
 			};
 			switch (mocksListView) {
-				case 'ACTIVE': {
+				case ACTIVE: {
 					const listActiveMocksApiResponse = await listActiveMocks(
 						authCookieRef
 					);
 					mocksListResponse.data = listActiveMocksApiResponse.data.content;
 					mocksListResponse.status = listActiveMocksApiResponse.status;
-					setListTitle('Active Mocks');
+					setListTitle(constants.headerTitle.active);
 					setIsFilter(true);
 					break;
 				}
-				case 'ARCHIVED': {
+				case ARCHIVED: {
 					const listArchivedMocksApiResponse = await listArchivedMocks(
 						authCookieRef
 					);
 					mocksListResponse.data = listArchivedMocksApiResponse.data.content;
 					mocksListResponse.status = listArchivedMocksApiResponse.status;
-					setListTitle('Archived Mocks');
+					setListTitle(constants.headerTitle.archived);
 					setIsFilter(true);
 					break;
 				}
-				case 'DELETED': {
+				case DELETED: {
 					const listDeletedMocksApiResponse = await listDeletedMocks(
 						authCookieRef
 					);
 					mocksListResponse.data = listDeletedMocksApiResponse.data.content;
 					mocksListResponse.status = listDeletedMocksApiResponse.status;
-					setListTitle('Deleted Mocks');
+					setListTitle(constants.headerTitle.deleted);
 					setIsFilter(true);
 					break;
 				}
@@ -86,7 +91,7 @@ function List({ mocksListView, handleClearFilter }) {
 					const listAllMocksApiResponse = await listMocks(authCookieRef);
 					mocksListResponse.data = listAllMocksApiResponse.data.content;
 					mocksListResponse.status = listAllMocksApiResponse.status;
-					setListTitle('All Mocks');
+					setListTitle(constants.headerTitle.all);
 					setIsFilter(false);
 					break;
 				}
@@ -94,9 +99,12 @@ function List({ mocksListView, handleClearFilter }) {
 			if (mocksListResponse != null && mocksListResponse.status == 200) {
 				return mocksListResponse.data;
 			} else {
+				console.info(
+					`Server responded with Status:${mocksListResponse.status}. Unable To List Mocks !!`
+				);
 				setError({
 					status: true,
-					message: `Server responded with Status:${mocksListResponse.status}. Unable To List Mocks !!`,
+					message: constants.errors.unexpectedState,
 				});
 				return null;
 			}
@@ -110,7 +118,7 @@ function List({ mocksListView, handleClearFilter }) {
 				console.log(err);
 				setError({
 					status: true,
-					message: 'Unable To Reach Server, Contact your system admin!!',
+					message: constants.errors.serverError,
 				});
 				setLoading(false);
 			});
@@ -142,7 +150,7 @@ function List({ mocksListView, handleClearFilter }) {
 							<ListClearFilter>
 								<MdCancel />
 								<ListClearFilterText onClick={handleClearFilter}>
-									Clear Filter
+									{constants.label.clearFilter}
 								</ListClearFilterText>
 							</ListClearFilter>
 						</If>
@@ -163,7 +171,7 @@ function List({ mocksListView, handleClearFilter }) {
 						<When condition={mocksList.length == 0}>
 							<MessageWrapper>
 								<MessageImageIcon src={EmptyState} />
-								<MessageSpan>No mocks to display!!!</MessageSpan>
+								<MessageSpan>{constants.errors.emptyState}</MessageSpan>
 							</MessageWrapper>
 						</When>
 					</Choose>

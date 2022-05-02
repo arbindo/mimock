@@ -308,10 +308,7 @@ describe('Mock management service', () => {
 
 			await listActiveMocks('token').catch((err) => {
 				expect(get).toHaveBeenCalledTimes(1);
-				expect(get).toHaveBeenCalledWith(
-					'/mocks/filter?status=NONE',
-					'token'
-				);
+				expect(get).toHaveBeenCalledWith('/mocks/filter?status=NONE', 'token');
 
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);
