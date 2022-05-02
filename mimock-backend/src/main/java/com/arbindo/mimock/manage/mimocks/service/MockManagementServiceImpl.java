@@ -63,7 +63,7 @@ public class MockManagementServiceImpl implements MockManagementService {
     }
 
     @Override
-    public Page<Mock> getAllActiveMocks(Pageable pageable, Status status) {
+    public Page<Mock> getMocksAsPageable(Pageable pageable, Status status) {
         if (ValidationUtil.isArgNotNull(status)) {
             EntityStatus entityStatus = entityStatusService.findByEntityStatus(status.name());
             if (ValidationUtil.isArgNotNull(entityStatus)) {

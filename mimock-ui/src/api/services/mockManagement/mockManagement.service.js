@@ -35,6 +35,10 @@ const forceDeleteMockById = async (id, token) => {
 };
 
 const listMocks = async (token) => {
+	return await get('/mocks/filter', token);
+};
+
+const listActiveMocks = async (token) => {
 	return await get('/mocks/filter?status=NONE', token);
 };
 
@@ -62,6 +66,7 @@ export {
 	deleteMockById,
 	forceDeleteMockById,
 	listMocks,
+	listActiveMocks,
 	listArchivedMocks,
 	listDeletedMocks,
 	archiveMock,

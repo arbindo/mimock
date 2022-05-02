@@ -5,6 +5,7 @@ import {
 	forceDeleteMockById,
 	getAllMocks,
 	getMockById,
+	listActiveMocks,
 	listArchivedMocks,
 	listMocks,
 	updateMock,
@@ -273,6 +274,51 @@ describe('Mock management service', () => {
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);
 				expect(err.message).toBe('Failed to list mocks');
+			});
+		});
+	});
+
+	describe('listActiveMocks', () => {
+		it('should list active mocks', async () => {
+			const activeMocks = [
+				{
+					id: 4,
+					name: 'mock-1',
+					description: 'mock-1 description',
+				},
+			];
+			get.mockResolvedValue({
+				data: {
+					mocks: activeMocks,
+				},
+			});
+
+			const response = await listActiveMocks('token');
+
+			expect(get).toHaveBeenCalledTimes(1);
+			expect(get).toHaveBeenCalledWith(
+				'/mocks/filter?status=ACTIVE',
+				'token'
+			);
+
+			expect(response).toBeTruthy();
+			expect(response.data.mocks).toHaveLength(1);
+			expect(response.data.mocks).toBe(activeMocks);
+		});
+
+		it('should return error when listing active mocks fails', async () => {
+			get.mockRejectedValue(new Error('Failed to list active mocks'));
+
+			await listActiveMocks('token').catch((err) => {
+				expect(get).toHaveBeenCalledTimes(1);
+				expect(get).toHaveBeenCalledWith(
+					'/mocks/filter?status=ACTIVE',
+					'token'
+				);
+
+				expect(err).toBeTruthy();
+				expect(err).toBeInstanceOf(Error);
+				expect(err.message).toBe('Failed to list active mocks');
 			});
 		});
 	});

@@ -74,12 +74,13 @@ public class MockManagementController {
         return ResponseEntity.ok(mockManagementService.getAllMocks());
     }
 
-    @Operation(summary = "Filter Mocks By Status", description = "List all mocks based on the status filter (NONE, ARCHIVED, DELETED)",
+    @Operation(summary = "List Mocks As Pageable", description = "List all mocks in pageable format and filter based on " +
+            "the status filter (NONE, ARCHIVED, DELETED), if provided",
             tags = {"Mock Management"})
-    @GetMapping(UrlConfig.MOCKS_FILTER)
-    public ResponseEntity<Page<Mock>> getAllMocksWithFilter(@SortDefault(sort = "createdAt",
-            direction = Sort.Direction.DESC) Pageable pageable, @RequestParam Status status) {
-        Page<Mock> mockPageable = mockManagementService.getAllActiveMocks(pageable, status);
+    @GetMapping(UrlConfig.MOCKS_PAGEABLE)
+    public ResponseEntity<Page<Mock>> getMocksAsPageable(@SortDefault(sort = "createdAt",
+            direction = Sort.Direction.DESC) Pageable pageable, @RequestParam(required = false) Status status) {
+        Page<Mock> mockPageable = mockManagementService.getMocksAsPageable(pageable, status);
         return ResponseEntity.ok(mockPageable);
     }
 

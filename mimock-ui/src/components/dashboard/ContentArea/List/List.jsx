@@ -16,6 +16,7 @@ import {
 	listDeletedMocks,
 	listMocks,
 	getAllMocks,
+	listActiveMocks,
 } from 'services/mockManagement/mockManagement.service';
 import MockCard from './MockCard';
 import EmptyState from 'assets/empty-state.png';
@@ -46,9 +47,9 @@ function List({ mocksListView, handleClearFilter }) {
 			};
 			switch (mocksListView) {
 				case 'ACTIVE': {
-					const listMocksApiResponse = await listMocks(authCookieRef);
-					mocksListResponse.data = listMocksApiResponse.data.content;
-					mocksListResponse.status = listMocksApiResponse.status;
+					const listActiveMocksApiResponse = await listActiveMocks(authCookieRef);
+					mocksListResponse.data = listActiveMocksApiResponse.data.content;
+					mocksListResponse.status = listActiveMocksApiResponse.status;
 					setListTitle('Active Mocks');
 					setIsFilter(true);
 					break;
@@ -74,9 +75,9 @@ function List({ mocksListView, handleClearFilter }) {
 					break;
 				}
 				default: {
-					const getAllMocksApiResponse = await getAllMocks(authCookieRef);
-					mocksListResponse.data = getAllMocksApiResponse.data;
-					mocksListResponse.status = getAllMocksApiResponse.status;
+					const listAllMocksApiResponse = await listMocks(authCookieRef);
+					mocksListResponse.data = listAllMocksApiResponse.data.content;
+					mocksListResponse.status = listAllMocksApiResponse.status;
 					setListTitle('All Mocks');
 					setIsFilter(false);
 					break;

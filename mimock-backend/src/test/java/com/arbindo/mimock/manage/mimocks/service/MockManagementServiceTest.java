@@ -124,7 +124,7 @@ class MockManagementServiceTest {
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
 
         // Act
-        Page<Mock> result = mockManagementService.getAllActiveMocks(Pageable.unpaged(), Status.NONE);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -142,7 +142,7 @@ class MockManagementServiceTest {
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(null);
 
         // Act
-        Page<Mock> result = mockManagementService.getAllActiveMocks(Pageable.unpaged(), Status.NONE);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -160,7 +160,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findAll(any(Pageable.class))).thenReturn(pageable);
 
         // Act
-        Page<Mock> result = mockManagementService.getAllActiveMocks(Pageable.unpaged(), null);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
