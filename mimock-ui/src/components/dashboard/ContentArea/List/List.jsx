@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Cookies } from 'react-cookie';
-import { globalConstants } from 'constants/globalConstants';
+import React, { useRef, useCallback } from 'react';
 import { constants } from './constants';
 import {
 	ListContainer,
@@ -13,12 +11,6 @@ import {
 	MessageSpan,
 	LoaderStyle,
 } from './List.style.js';
-import {
-	listArchivedMocks,
-	listDeletedMocks,
-	listMocks,
-	listActiveMocks,
-} from 'services/mockManagement/mockManagement.service';
 import MockCard from './MockCard';
 import EmptyState from 'assets/empty-state.png';
 import ErrorState from 'assets/server-down-state.png';
@@ -26,103 +18,44 @@ import PropTypes from 'prop-types';
 import { FaFilter } from 'react-icons/fa';
 import { MdCancel } from 'react-icons/md';
 import BarLoader from 'react-spinners/BarLoader';
+import useLazyLoad from 'src/hooks/useLazyLoad';
+import { useRecoilState } from 'recoil';
+import pageNumberAtom from 'atoms/pageNumberAtom';
 
 function List({ mocksListView, handleClearFilter }) {
-	const cookies = new Cookies();
-	const authCookieRef = useRef('');
-	const csrfCookieRef = useRef('');
-	const [mocksList, setMocksList] = useState([]);
-	const [listTitle, setListTitle] = useState('');
-	const [isFilter, setIsFilter] = useState(false);
-	const [error, setError] = useState({
-		status: false,
-		message: '',
-	});
-	const [loading, setLoading] = useState(false);
+	const [pageNumber, setPageNumber] = useRecoilState(pageNumberAtom);
 
-	const ACTIVE = constants.view.active;
-	const ARCHIVED = constants.view.archived;
-	const DELETED = constants.view.deleted;
+	const { mocksList, listTitle, isFilter, loading, error, hasMore } =
+		useLazyLoad(mocksListView, pageNumber);
 
-	useEffect(() => {
-		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
-		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
-	}, []);
-
-	useEffect(() => {
-		setLoading(true);
-		async function callMockService(mocksListView) {
-			let mocksListResponse = {
-				data: null,
-				status: 0,
-			};
-			switch (mocksListView) {
-				case ACTIVE: {
-					const listActiveMocksApiResponse = await listActiveMocks(
-						authCookieRef
-					);
-					mocksListResponse.data = listActiveMocksApiResponse.data.content;
-					mocksListResponse.status = listActiveMocksApiResponse.status;
-					setListTitle(constants.headerTitle.active);
-					setIsFilter(true);
-					break;
-				}
-				case ARCHIVED: {
-					const listArchivedMocksApiResponse = await listArchivedMocks(
-						authCookieRef
-					);
-					mocksListResponse.data = listArchivedMocksApiResponse.data.content;
-					mocksListResponse.status = listArchivedMocksApiResponse.status;
-					setListTitle(constants.headerTitle.archived);
-					setIsFilter(true);
-					break;
-				}
-				case DELETED: {
-					const listDeletedMocksApiResponse = await listDeletedMocks(
-						authCookieRef
-					);
-					mocksListResponse.data = listDeletedMocksApiResponse.data.content;
-					mocksListResponse.status = listDeletedMocksApiResponse.status;
-					setListTitle(constants.headerTitle.deleted);
-					setIsFilter(true);
-					break;
-				}
-				default: {
-					const listAllMocksApiResponse = await listMocks(authCookieRef);
-					mocksListResponse.data = listAllMocksApiResponse.data.content;
-					mocksListResponse.status = listAllMocksApiResponse.status;
-					setListTitle(constants.headerTitle.all);
-					setIsFilter(false);
-					break;
-				}
+	const observer = useRef();
+	const lastItem = useCallback(
+		(node) => {
+			// do NOT modify pageNumber when useLazyLoad hook isLoading data
+			if (loading) {
+				return;
 			}
-			if (mocksListResponse != null && mocksListResponse.status == 200) {
-				return mocksListResponse.data;
-			} else {
-				console.info(
-					`Server responded with Status:${mocksListResponse.status}. Unable To List Mocks !!`
-				);
-				setError({
-					status: true,
-					message: constants.errors.unexpectedState,
-				});
-				return null;
+
+			// disconnect current observer (if current observer is valid)
+			if (observer.current) {
+				observer.current.disconnect();
 			}
-		}
-		callMockService(mocksListView)
-			.then((apiArr) => {
-				setMocksList(apiArr);
-				setLoading(false);
-			})
-			.catch((err) => {
-				console.log(err);
-				setError({
-					status: true,
-					message: constants.errors.serverError,
-				});
-				setLoading(false);
+
+			// assign observer to IntersectionObserver if useLazyLoad hook has more data
+			// and window scroll is intersecting with the last item in the list
+			observer.current = new IntersectionObserver((items) => {
+				if (items[0].isIntersecting && hasMore) {
+					setPageNumber((prevPageNumber) => prevPageNumber + 1);
+				}
 			});
-	}, [mocksListView]);
+
+			// start observing the current node
+			if (node) {
+				observer.current.observe(node);
+			}
+		},
+		[loading, hasMore]
+	);
 
 	return (
 		<ListContainer data-testid='list-section'>
@@ -157,16 +90,32 @@ function List({ mocksListView, handleClearFilter }) {
 					</ListTitleSpan>
 					<Choose>
 						<When condition={mocksList.length > 0}>
-							<For each='mock' of={mocksList}>
-								<MockCard
-									key={mock.id}
-									id={mock.id}
-									mockName={mock.mockName}
-									description={mock.description}
-									httpMethod={mock.httpMethod.method}
-									route={mock.route}
-								/>
-							</For>
+							{mocksList.map((mock, index) => {
+								if (mocksList.length === index + 1) {
+									return (
+										<MockCard
+											innerRef={lastItem}
+											key={mock.id}
+											id={mock.id}
+											mockName={mock.mockName}
+											description={mock.description}
+											httpMethod={mock.httpMethod.method}
+											route={mock.route}
+										/>
+									);
+								} else {
+									return (
+										<MockCard
+											key={mock.id}
+											id={mock.id}
+											mockName={mock.mockName}
+											description={mock.description}
+											httpMethod={mock.httpMethod.method}
+											route={mock.route}
+										/>
+									);
+								}
+							})}
 						</When>
 						<When condition={mocksList.length == 0}>
 							<MessageWrapper>

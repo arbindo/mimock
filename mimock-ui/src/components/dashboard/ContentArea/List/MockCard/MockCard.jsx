@@ -13,7 +13,7 @@ import {
 import { FaLink } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-function MockCard({ mockName, description, httpMethod, route }) {
+function MockCard({ innerRef, mockName, description, httpMethod, route }) {
 	const [badgeColor, setBadgeColor] = useState('');
 
 	useEffect(() => {
@@ -58,7 +58,7 @@ function MockCard({ mockName, description, httpMethod, route }) {
 	};
 
 	return (
-		<CardContainer data-testid='card'>
+		<CardContainer data-testid='card' ref={innerRef}>
 			<CardTitleContainer>
 				<CardTitle data-testid='card-title'>{mockName}</CardTitle>
 				<CardSubtitle data-testid='card-subtitle'>{description}</CardSubtitle>
@@ -78,6 +78,7 @@ function MockCard({ mockName, description, httpMethod, route }) {
 }
 
 MockCard.propTypes = {
+	innerRef: PropTypes.element,
 	id: PropTypes.string.isRequired,
 	mockName: PropTypes.string.isRequired,
 	description: PropTypes.string,

@@ -254,10 +254,10 @@ describe('Mock management service', () => {
 				},
 			});
 
-			const response = await listMocks('token');
+			const response = await listMocks('token', 0);
 
 			expect(get).toHaveBeenCalledTimes(1);
-			expect(get).toHaveBeenCalledWith('/mocks/filter', 'token');
+			expect(get).toHaveBeenCalledWith('/mocks/filter?size=5&page=0', 'token');
 
 			expect(response).toBeTruthy();
 			expect(response.data.mocks).toHaveLength(2);
@@ -267,9 +267,12 @@ describe('Mock management service', () => {
 		it('should return error when listing mocks fails', async () => {
 			get.mockRejectedValue(new Error('Failed to list mocks'));
 
-			await listMocks('token').catch((err) => {
+			await listMocks('token', 0).catch((err) => {
 				expect(get).toHaveBeenCalledTimes(1);
-				expect(get).toHaveBeenCalledWith('/mocks/filter', 'token');
+				expect(get).toHaveBeenCalledWith(
+					'/mocks/filter?size=5&page=0',
+					'token'
+				);
 
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);
@@ -293,10 +296,13 @@ describe('Mock management service', () => {
 				},
 			});
 
-			const response = await listActiveMocks('token');
+			const response = await listActiveMocks('token', 0);
 
 			expect(get).toHaveBeenCalledTimes(1);
-			expect(get).toHaveBeenCalledWith('/mocks/filter?status=NONE', 'token');
+			expect(get).toHaveBeenCalledWith(
+				'/mocks/filter?status=NONE&size=5&page=0',
+				'token'
+			);
 
 			expect(response).toBeTruthy();
 			expect(response.data.mocks).toHaveLength(1);
@@ -306,9 +312,12 @@ describe('Mock management service', () => {
 		it('should return error when listing active mocks fails', async () => {
 			get.mockRejectedValue(new Error('Failed to list active mocks'));
 
-			await listActiveMocks('token').catch((err) => {
+			await listActiveMocks('token', 0).catch((err) => {
 				expect(get).toHaveBeenCalledTimes(1);
-				expect(get).toHaveBeenCalledWith('/mocks/filter?status=NONE', 'token');
+				expect(get).toHaveBeenCalledWith(
+					'/mocks/filter?status=NONE&size=5&page=0',
+					'token'
+				);
 
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);
@@ -332,11 +341,11 @@ describe('Mock management service', () => {
 				},
 			});
 
-			const response = await listArchivedMocks('token');
+			const response = await listArchivedMocks('token', 0);
 
 			expect(get).toHaveBeenCalledTimes(1);
 			expect(get).toHaveBeenCalledWith(
-				'/mocks/filter?status=ARCHIVED',
+				'/mocks/filter?status=ARCHIVED&size=5&page=0',
 				'token'
 			);
 
@@ -348,10 +357,10 @@ describe('Mock management service', () => {
 		it('should return error when listing archived mocks fails', async () => {
 			get.mockRejectedValue(new Error('Failed to list archived mocks'));
 
-			await listArchivedMocks('token').catch((err) => {
+			await listArchivedMocks('token', 0).catch((err) => {
 				expect(get).toHaveBeenCalledTimes(1);
 				expect(get).toHaveBeenCalledWith(
-					'/mocks/filter?status=ARCHIVED',
+					'/mocks/filter?status=ARCHIVED&size=5&page=0',
 					'token'
 				);
 
@@ -377,10 +386,13 @@ describe('Mock management service', () => {
 				},
 			});
 
-			const response = await listDeletedMocks('token');
+			const response = await listDeletedMocks('token', 0);
 
 			expect(get).toHaveBeenCalledTimes(1);
-			expect(get).toHaveBeenCalledWith('/mocks/filter?status=DELETED', 'token');
+			expect(get).toHaveBeenCalledWith(
+				'/mocks/filter?status=DELETED&size=5&page=0',
+				'token'
+			);
 
 			expect(response).toBeTruthy();
 			expect(response.data.mocks).toHaveLength(1);
@@ -390,10 +402,10 @@ describe('Mock management service', () => {
 		it('should return error when listing deleted mocks fails', async () => {
 			get.mockRejectedValue(new Error('Failed to list archived mocks'));
 
-			await listArchivedMocks('token').catch((err) => {
+			await listArchivedMocks('token', 0).catch((err) => {
 				expect(get).toHaveBeenCalledTimes(1);
 				expect(get).toHaveBeenCalledWith(
-					'/mocks/filter?status=ARCHIVED',
+					'/mocks/filter?status=ARCHIVED&size=5&page=0',
 					'token'
 				);
 

@@ -17,6 +17,7 @@ import { constants } from './constants';
 import PropTypes from 'prop-types';
 import { FaCogs, FaPlusSquare } from 'react-icons/fa';
 import { MdDone, MdArchive, MdDelete } from 'react-icons/md';
+import { mockManagementConstants } from 'constants/globalConstants';
 
 function Toolbar({
 	handleSidebarBtnClick,
@@ -33,7 +34,7 @@ function Toolbar({
 	];
 
 	useEffect(() => {
-		if (mocksListView == '') {
+		if (mocksListView == mockManagementConstants.DEFAULT_STATUS) {
 			const activeMockBtn = document.getElementById('active-view-btn');
 			const archivedMockBtn = document.getElementById('archived-view-btn');
 			const deletedMockBtn = document.getElementById('deleted-view-btn');

@@ -1,5 +1,7 @@
 import { get, post, put, remove } from 'api/AxiosClient';
 
+const DEFAULT_LIST_FETCH_SIZE = 5;
+
 const getAllMocks = async (token) => {
 	return await get('/mocks', token);
 };
@@ -34,20 +36,32 @@ const forceDeleteMockById = async (id, token) => {
 	return await remove(`/mocks/${id}:forceDelete`, token);
 };
 
-const listMocks = async (token) => {
-	return await get('/mocks/filter', token);
+const listMocks = async (token, pageNumber) => {
+	return await get(
+		`/mocks/filter?size=${DEFAULT_LIST_FETCH_SIZE}&page=${pageNumber}`,
+		token
+	);
 };
 
-const listActiveMocks = async (token) => {
-	return await get('/mocks/filter?status=NONE', token);
+const listActiveMocks = async (token, pageNumber) => {
+	return await get(
+		`/mocks/filter?status=NONE&size=${DEFAULT_LIST_FETCH_SIZE}&page=${pageNumber}`,
+		token
+	);
 };
 
-const listArchivedMocks = async (token) => {
-	return await get('/mocks/filter?status=ARCHIVED', token);
+const listArchivedMocks = async (token, pageNumber) => {
+	return await get(
+		`/mocks/filter?status=ARCHIVED&size=${DEFAULT_LIST_FETCH_SIZE}&page=${pageNumber}`,
+		token
+	);
 };
 
-const listDeletedMocks = async (token) => {
-	return await get('/mocks/filter?status=DELETED', token);
+const listDeletedMocks = async (token, pageNumber) => {
+	return await get(
+		`/mocks/filter?status=DELETED&size=${DEFAULT_LIST_FETCH_SIZE}&page=${pageNumber}`,
+		token
+	);
 };
 
 const archiveMock = async (id, token) => {

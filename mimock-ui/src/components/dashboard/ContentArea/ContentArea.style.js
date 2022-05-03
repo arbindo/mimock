@@ -10,4 +10,5 @@ export const ContentAreaContainer = tw.div`
     justify-center
     align-middle
     px-9
+    min-h-full
 `;
