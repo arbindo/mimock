@@ -3,7 +3,13 @@ import { useRecoilState } from 'recoil';
 import { getAllUsers } from 'services/users';
 import deletionModalAtom from 'atoms/deletionModalAtom';
 import UserRow from './UserRow';
-import { UserTableWrapper, Error, NoUsers } from './UserTable.style';
+import {
+	UserTableWrapper,
+	Error,
+	NoUsers,
+	NoUsersIcon,
+	NoUserLabel,
+} from './UserTable.style';
 import TableHeader from './TableHeader/TableHeader';
 
 export default function UserTable() {
@@ -37,7 +43,10 @@ export default function UserTable() {
 				</When>
 				<When condition={!gettingUsers && users.length === 0}>
 					<NoUsers data-testid='no-users-error'>
-						{`No users found. Click on "ADD USER" to create a new user`}
+						<NoUsersIcon />
+						<NoUserLabel>
+							{`No users found. Click on "ADD USER" to create a new user`}
+						</NoUserLabel>
 					</NoUsers>
 				</When>
 				<When condition={!gettingUsers && !error}>
