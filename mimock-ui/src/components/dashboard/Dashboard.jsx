@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContentArea from './ContentArea';
 import Titlebar from './Titlebar';
 import Toolbar from './Toolbar';
@@ -11,6 +11,13 @@ export default function Dashboard() {
 	const [showSidebarSection, setShowSidebarSection] = useState(false);
 	const [mocksListView, setMocksListView] = useState(DEFAULT_STATUS);
 	const [, setPageNumber] = useRecoilState(pageNumberAtom);
+
+	useEffect(() => {
+		return () => {
+			// reset page number back to 0 when component unmounts
+			setPageNumber(0);
+		};
+	}, []);
 
 	const handleSidebarBtnClick = () => {
 		// toggle the state for now

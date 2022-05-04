@@ -7,7 +7,7 @@ exports[`Header should render Header with logo and menu items 1`] = `
     data-testid="header"
   >
     <a
-      class="sc-gsDKAQ eUxjMX font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
+      class="sc-gsDKAQ jNFndQ font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
       data-testid="header-logo"
       href="/mimock-ui/mocks"
     >
@@ -23,14 +23,14 @@ exports[`Header should render Header with logo and menu items 1`] = `
         data-testid="header-menu-items"
       >
         <a
-          class="sc-gsDKAQ eUxjMX font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
+          class="sc-gsDKAQ jNFndQ font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
           data-testid="menu-item-mocks"
           href="/mimock-ui/mocks"
         >
           MOCKS
         </a>
         <a
-          class="sc-gsDKAQ eUxjMX font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
+          class="sc-gsDKAQ jNFndQ font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
           data-testid="menu-item-users"
           href="/mimock-ui/admin/users"
         >
@@ -42,7 +42,7 @@ exports[`Header should render Header with logo and menu items 1`] = `
         data-testid="header-menu-options"
       >
         <a
-          class="sc-gsDKAQ eUxjMX font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
+          class="sc-gsDKAQ jNFndQ font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
           data-testid="menu-option-settings"
           href="/mimock-ui/settings"
         >
@@ -72,7 +72,7 @@ exports[`Header should render Header with logo and menu items 1`] = `
           </button>
         </a>
         <a
-          class="sc-gsDKAQ eUxjMX font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
+          class="sc-gsDKAQ jNFndQ font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
           data-testid="menu-option-logout"
           href="/mimock-ui/logout"
         >
@@ -114,7 +114,7 @@ exports[`Header should render Header without admin menu items if user is not adm
     data-testid="header"
   >
     <a
-      class="sc-gsDKAQ eUxjMX font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
+      class="sc-gsDKAQ jNFndQ font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
       data-testid="header-logo"
       href="/mimock-ui/mocks"
     >
@@ -130,7 +130,7 @@ exports[`Header should render Header without admin menu items if user is not adm
         data-testid="header-menu-items"
       >
         <a
-          class="sc-gsDKAQ eUxjMX font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
+          class="sc-gsDKAQ jNFndQ font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
           data-testid="menu-item-mocks"
           href="/mimock-ui/mocks"
         >
@@ -142,7 +142,7 @@ exports[`Header should render Header without admin menu items if user is not adm
         data-testid="header-menu-options"
       >
         <a
-          class="sc-gsDKAQ eUxjMX font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
+          class="sc-gsDKAQ jNFndQ font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
           data-testid="menu-option-settings"
           href="/mimock-ui/settings"
         >
@@ -172,7 +172,7 @@ exports[`Header should render Header without admin menu items if user is not adm
           </button>
         </a>
         <a
-          class="sc-gsDKAQ eUxjMX font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
+          class="sc-gsDKAQ jNFndQ font-sans font-semibold text-gray-700 antialiased transition-all hover:text-gray-400"
           data-testid="menu-option-logout"
           href="/mimock-ui/logout"
         >

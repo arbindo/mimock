@@ -48,7 +48,7 @@ export const MenuItems = tw.div`
 
 export const _MenuLink = styled(NavLink)`
 	&[class*='active'] {
-		color: #5ecdbf;
+		color: #14b8ba;
 		font-weight: bold;
 	}
 `;
@@ -59,7 +59,6 @@ export const MenuLink = tw(_MenuLink)`
     text-gray-700
     antialiased
     transition-all
-
     hover:text-gray-400
 `;
 

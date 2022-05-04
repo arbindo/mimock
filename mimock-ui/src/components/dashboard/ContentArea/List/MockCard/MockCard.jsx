@@ -78,7 +78,7 @@ function MockCard({ innerRef, mockName, description, httpMethod, route }) {
 }
 
 MockCard.propTypes = {
-	innerRef: PropTypes.element,
+	innerRef: PropTypes.func,
 	id: PropTypes.string.isRequired,
 	mockName: PropTypes.string.isRequired,
 	description: PropTypes.string,
