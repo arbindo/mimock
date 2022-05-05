@@ -1,10 +1,17 @@
 export const constants = {
-	title: 'Tools',
+	headerTitle: 'Tools',
+	title: {
+		exportBtn: 'Export Mocks',
+		importBtn: 'Coming Soon!!',
+	},
 	label: {
 		sort: 'Sort By',
 		group: 'Group By',
 		radiogroup: 'Filter By Response Type',
 		badgefilter: 'Filter By HTTP Method',
+		exportImport: 'Export-Import Mocks',
+		exportMocksBtn: 'Export',
+		importMocksBtn: 'Import',
 	},
 	sortItems: [
 		'Mock Name',

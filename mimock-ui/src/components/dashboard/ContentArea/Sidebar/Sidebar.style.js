@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+import styled from 'styled-components';
 
 export const SideBarContainer = tw.div`
     w-1/4
@@ -131,4 +132,41 @@ export const BadgeFilter = tw.div`
     my-1
     mx-2
     cursor-pointer
+`;
+
+export const MiniBtnSpan = tw.span`
+    inline-flex
+    items-center
+    justify-between
+    gap-1
+`;
+
+export const _MiniBtn = tw.div`
+    text-center
+    px-2
+    py-1
+    my-1
+    mx-2
+    cursor-pointer
+    bg-white
+    text-gray-500
+    border-l-4
+    border-t-2
+    border-b-2
+    border-r-2
+    rounded-sm
+    border-gray-400
+    shadow-sm
+    hover:bg-black 
+    hover:bg-opacity-5
+    transition 
+    duration-150 
+    ease-in-out
+`;
+
+export const ExportMocksButton = styled(_MiniBtn)``;
+
+export const ImportMocksButton = styled(_MiniBtn)`
+	cursor: not-allowed;
+	opacity: 0.6;
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
 	SideBarContainer,
 	SidebarBox,
@@ -13,21 +13,92 @@ import {
 	ComponentLabel,
 	ComponentWrapper,
 	RowComponentWrapper,
+	MiniBtnSpan,
+	ExportMocksButton,
+	ImportMocksButton,
 } from './Sidebar.style.js';
 import { constants } from './constants';
-import { FaCogs } from 'react-icons/fa';
+import { FaCogs, FaFileDownload, FaFileUpload } from 'react-icons/fa';
+import { exportMocks } from 'services/mockManagement/exportMock.service';
+import { Cookies } from 'react-cookie';
+import { globalConstants } from 'constants/globalConstants';
+import { notificationTypes } from 'constants/notificationConstants';
+import useNotification from 'hooks/useNotification';
+import fileDownload from 'js-file-download';
 
 function Sidebar() {
+	const cookies = new Cookies();
+	const authCookieRef = useRef('');
+	const csrfCookieRef = useRef('');
+
+	const downloadLinkRef = useRef();
+
+	useEffect(() => {
+		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
+		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
+	}, []);
+
 	const handleOnchange = (e) => {
 		console.log(e);
+	};
+
+	const handleExportMocksBtnClick = () => {
+		exportMocks(authCookieRef)
+			.then((res) => {
+				const fileName =
+					res.headers['content-disposition'].split('; filename=')[1];
+				fileDownload(res.data, fileName);
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					title: 'Export success',
+					message: `Exported mocks successfully. Check the downloaded file ${fileName}.`,
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
+				return res.data;
+			})
+			.catch((err) => {
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
+					title: 'Failed to export mocks',
+					message: err.response.data.message,
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
+			});
 	};
 
 	return (
 		<SideBarContainer data-testid='sidebar-section'>
 			<SidebarBox>
 				<TitleSpan>
-					<FaCogs /> <SpanText>{constants.title}</SpanText>
+					<FaCogs /> <SpanText>{constants.headerTitle}</SpanText>
 				</TitleSpan>
+				<ComponentWrapper>
+					<ComponentLabel>{constants.label.exportImport}</ComponentLabel>
+					<RowComponentWrapper>
+						<ExportMocksButton
+							data-testid='export-mocks-btn'
+							onClick={handleExportMocksBtnClick}
+							title={constants.title.exportBtn}
+						>
+							<MiniBtnSpan>
+								<FaFileDownload /> {constants.label.exportMocksBtn}
+							</MiniBtnSpan>
+						</ExportMocksButton>
+						<ImportMocksButton
+							data-testid='import-mocks-btn'
+							title={constants.title.importBtn}
+						>
+							<MiniBtnSpan>
+								<FaFileUpload /> {constants.label.importMocksBtn}
+							</MiniBtnSpan>
+						</ImportMocksButton>
+					</RowComponentWrapper>
+					<RowComponentWrapper>
+						<a ref={downloadLinkRef} href='' download />
+					</RowComponentWrapper>
+				</ComponentWrapper>
 				<ComponentWrapper>
 					<ComponentLabel>{constants.label.badgefilter}</ComponentLabel>
 					<RowComponentWrapper>
