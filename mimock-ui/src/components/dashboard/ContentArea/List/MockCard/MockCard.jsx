@@ -69,7 +69,8 @@ function MockCard({ innerRef, mockName, description, httpMethod, route }) {
 						{httpMethod}
 					</CardBadge>
 					<CardLinkSpan>
-						<FaLink /> <CardLink data-testid='card-link'>{route}</CardLink>
+						<FaLink className='xl:text-xl md:text-3xl' />{' '}
+						<CardLink data-testid='card-link'>{route}</CardLink>
 					</CardLinkSpan>
 				</CardMetaInner>
 			</CardMetaContainer>

@@ -31,8 +31,6 @@ function Sidebar() {
 	const authCookieRef = useRef('');
 	const csrfCookieRef = useRef('');
 
-	const downloadLinkRef = useRef();
-
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
 		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
@@ -94,9 +92,6 @@ function Sidebar() {
 								<FaFileUpload /> {constants.label.importMocksBtn}
 							</MiniBtnSpan>
 						</ImportMocksButton>
-					</RowComponentWrapper>
-					<RowComponentWrapper>
-						<a ref={downloadLinkRef} href='' download />
 					</RowComponentWrapper>
 				</ComponentWrapper>
 				<ComponentWrapper>

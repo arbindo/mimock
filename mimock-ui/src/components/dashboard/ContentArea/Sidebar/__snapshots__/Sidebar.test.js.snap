@@ -3,7 +3,7 @@
 exports[`Sidebar should render sidebar component 1`] = `
 <div>
   <div
-    class="w-1/4 flex flex-row mx-4 mt-4"
+    class="xl:w-1/4 flex flex-row mx-4 mt-4 md:w-full sm:w-full accordion"
     data-testid="sidebar-section"
   >
     <div
@@ -93,14 +93,6 @@ exports[`Sidebar should render sidebar component 1`] = `
               Import
             </span>
           </div>
-        </div>
-        <div
-          class="flex flex-row flex-wrap justify-start align-items mx-2 mt-2"
-        >
-          <a
-            download=""
-            href=""
-          />
         </div>
       </div>
       <div

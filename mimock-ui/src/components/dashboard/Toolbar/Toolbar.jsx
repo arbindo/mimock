@@ -3,7 +3,9 @@ import {
 	ToolbarContainer,
 	ToolbarInnerContainer,
 	AddMockButton,
+	addMocksButtonAdditionalStyles,
 	MoreToolsMockButton,
+	moreToolsMockButtonAdditonalStyles,
 	ViewMocksWrapper,
 	ViewMocksInnerWrapper,
 	GeneralMocksViewButton,
@@ -86,11 +88,11 @@ function Toolbar({
 			<ToolbarContainer data-testid='toolbar-section'>
 				<MoreToolsMockButton
 					dataTestid='more-tools-btn'
-					background='bg-gray-300'
+					background='bg-white'
 					label={constants.label.sidebar}
 					color='text-gray-500'
 					icon={<FaCogs />}
-					additionalStyles='h-10 mx-4 my-2 rounded-sm text-sm'
+					additionalStyles={moreToolsMockButtonAdditonalStyles}
 					onclickHandler={handleSidebarBtnClick}
 				></MoreToolsMockButton>
 				<ToolbarInnerContainer>
@@ -136,9 +138,8 @@ function Toolbar({
 						background='bg-teal-500'
 						label={constants.label.add}
 						color='text-white'
-						width='w-1/6'
 						icon={<FaPlusSquare />}
-						additionalStyles='h-10 ml-8 mr-2 my-2 px-1 py-1 rounded-sm text-sm'
+						additionalStyles={addMocksButtonAdditionalStyles}
 						onclickHandler={handleAddMockBtnClick}
 					></AddMockButton>
 				</ToolbarInnerContainer>

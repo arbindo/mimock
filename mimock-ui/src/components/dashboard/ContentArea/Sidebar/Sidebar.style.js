@@ -2,11 +2,14 @@ import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 
 export const SideBarContainer = tw.div`
-    w-1/4
+    xl:w-1/4
     flex
     flex-row
     mx-4
     mt-4
+    md:w-full
+    sm:w-full
+    accordion
 `;
 
 export const SidebarBox = tw.div`

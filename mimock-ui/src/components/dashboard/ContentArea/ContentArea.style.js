@@ -3,7 +3,8 @@ import tw from 'tailwind-styled-components';
 export const ContentAreaContainer = tw.div`
     w-full
     flex
-    flex-row
+    xl:flex-row
+    md:flex-col
     mx-auto
     mt-6
     mb-2

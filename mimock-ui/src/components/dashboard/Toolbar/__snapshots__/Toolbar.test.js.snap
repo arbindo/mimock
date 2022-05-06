@@ -3,11 +3,11 @@
 exports[`Toolbar should render toolbar component 1`] = `
 <div>
   <div
-    class="w-11/12 flex flex-row mx-auto mt-4 mb-4 justify-center align-middle px-2"
+    class="w-11/12 flex flex-row mx-auto mt-4 mb-4 justify-center align-middle px-2 md:items-center"
     data-testid="toolbar-section"
   >
     <button
-      class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 mx-4 my-2 rounded-sm text-sm text-gray-500 w-fit bg-gray-300"
+      class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 mx-4 my-2 rounded-sm text-sm border-2 border-gray-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out md:my-2 text-gray-500 w-fit bg-white"
       data-testid="more-tools-btn"
     >
       <svg
@@ -26,10 +26,10 @@ exports[`Toolbar should render toolbar component 1`] = `
       Tools
     </button>
     <div
-      class="w-5/6 flex flex-row mx-auto justify-end align-middle px-2"
+      class="w-5/6 flex xl:flex-row md:flex-col mx-auto justify-end align-middle px-2"
     >
       <div
-        class="flex flex-row items-center justify-center"
+        class="flex flex-row items-center justify-center md:my-2"
       >
         <div
           class="inline-flex"
@@ -116,7 +116,7 @@ exports[`Toolbar should render toolbar component 1`] = `
         </div>
       </div>
       <button
-        class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 ml-8 mr-2 my-2 px-1 py-1 rounded-sm text-sm text-white w-1/6 bg-teal-500"
+        class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 xl:ml-8 xl:mr-2 xl:my-2 px-1 py-1 rounded-sm text-sm focus:outline-none focus:ring-0 transition duration-150 ease-in-out xl:w-1/6 md:w-5/6 md:my-2 md:mx-auto text-white w-fit bg-teal-500"
         data-testid="add-btn"
       >
         <svg

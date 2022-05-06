@@ -32,6 +32,7 @@ exports[`MockCard should render mock card component 1`] = `
           class="inline-flex items-center justify-center text-teal-500 mx-2"
         >
           <svg
+            class="xl:text-xl md:text-3xl"
             fill="currentColor"
             height="1em"
             stroke="currentColor"
