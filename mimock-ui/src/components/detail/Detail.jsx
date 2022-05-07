@@ -4,7 +4,7 @@ import { getMockById } from 'services/mockManagement/mockManagement.service';
 import { Cookies } from 'react-cookie';
 import { globalConstants } from 'constants/globalConstants';
 import { DetailContainer } from './Detail.style';
-import DetailToolbar from './DetailToolbar';
+import DetailToolbar from './detailtoolbar/DetailToolbar';
 
 function Detail() {
 	const [mock, setMock] = useState(null);
