@@ -8,6 +8,10 @@ export const routes = {
 		path: `${root}/mocks`,
 		secured: true,
 	},
+	mocksDetail: {
+		path: `${root}/mocks/detail/*`,
+		secured: true,
+	},
 	settings: {
 		path: `${root}/settings`,
 		secured: true,

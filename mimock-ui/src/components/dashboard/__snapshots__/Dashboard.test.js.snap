@@ -217,7 +217,7 @@ exports[`Dashboard should render all dashboard components 1`] = `
             class="flex flex-row flex-wrap justify-start align-items mx-2 mt-2"
           >
             <div
-              class="text-center px-2 py-1 my-1 mx-2 cursor-pointer bg-white text-gray-500 border-l-4 border-t-2 border-b-2 border-r-2 rounded-sm border-gray-400 shadow-sm hover:bg-black hover:bg-opacity-5 transition duration-150 ease-in-out sc-bdvvtL"
+              class="text-center px-2 py-1 my-1 mx-2 cursor-pointer bg-white text-gray-500 border-l-4 border-t-2 border-b-2 border-r-2 rounded-sm border-gray-400 shadow-sm hover:bg-black hover:bg-opacity-5 transition duration-150 ease-in-out sc-gsDKAQ"
               data-testid="export-mocks-btn"
               title="Export Mocks"
             >
@@ -242,7 +242,7 @@ exports[`Dashboard should render all dashboard components 1`] = `
               </span>
             </div>
             <div
-              class="text-center px-2 py-1 my-1 mx-2 cursor-pointer bg-white text-gray-500 border-l-4 border-t-2 border-b-2 border-r-2 rounded-sm border-gray-400 shadow-sm hover:bg-black hover:bg-opacity-5 transition duration-150 ease-in-out sc-gsDKAQ jZLqzZ"
+              class="text-center px-2 py-1 my-1 mx-2 cursor-pointer bg-white text-gray-500 border-l-4 border-t-2 border-b-2 border-r-2 rounded-sm border-gray-400 shadow-sm hover:bg-black hover:bg-opacity-5 transition duration-150 ease-in-out sc-dkPtRN hgxnDh"
               data-testid="import-mocks-btn"
               title="Coming Soon!!"
             >

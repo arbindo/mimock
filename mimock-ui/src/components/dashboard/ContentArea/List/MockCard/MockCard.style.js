@@ -1,6 +1,10 @@
 import tw from 'tailwind-styled-components';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-export const CardContainer = tw.div`
+export const _CardRouterLink = styled(Link)``;
+
+export const CardContainer = tw(_CardRouterLink)`
     w-full
     flex
     flex-row

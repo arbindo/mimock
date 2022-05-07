@@ -10,6 +10,7 @@ import Wrapper from './components/common/Wrapper';
 import Dashboard from './components/dashboard';
 import Users from './components/users';
 import Logout from './components/common/Logout';
+import Detail from './components/detail';
 
 function AppRoutes() {
 	useAxiosInterceptor();
@@ -35,6 +36,10 @@ function AppRoutes() {
 					<Route
 						path={routes.mocks.path}
 						element={secureRoute(<Dashboard />)}
+					/>
+					<Route
+						path={routes.mocksDetail.path}
+						element={secureRoute(<Detail />)}
 					/>
 					<Route path={routes.logout.path} element={secureRoute(<Logout />)} />
 					{/* Admin Routes */}

@@ -13,7 +13,7 @@ import {
 import { FaLink } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-function MockCard({ innerRef, mockName, description, httpMethod, route }) {
+function MockCard({ innerRef, id, mockName, description, httpMethod, route }) {
 	const [badgeColor, setBadgeColor] = useState('');
 
 	useEffect(() => {
@@ -58,7 +58,11 @@ function MockCard({ innerRef, mockName, description, httpMethod, route }) {
 	};
 
 	return (
-		<CardContainer data-testid='card' ref={innerRef}>
+		<CardContainer
+			data-testid='card'
+			ref={innerRef}
+			to={`/mimock-ui/mocks/detail/${id}`}
+		>
 			<CardTitleContainer>
 				<CardTitle data-testid='card-title'>{mockName}</CardTitle>
 				<CardSubtitle data-testid='card-subtitle'>{description}</CardSubtitle>
