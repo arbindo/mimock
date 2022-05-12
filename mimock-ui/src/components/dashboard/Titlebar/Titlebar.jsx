@@ -1,9 +1,8 @@
 import React from 'react';
+import IconHeader from 'styles/IconHeader';
 import {
 	TitlebarContainer,
 	TitlebarInnerContainer,
-	Title,
-	TitleSpan,
 	SearchField,
 } from './Titlebar.style';
 import { constants } from './constants';
@@ -13,10 +12,11 @@ function Titlebar() {
 	return (
 		<>
 			<TitlebarContainer data-testid='titlebar-section'>
-				<TitleSpan>
-					<FaCopy />
-					<Title>{constants.title}</Title>
-				</TitleSpan>
+				<IconHeader
+					dataTestId='mocks-header'
+					icon={<FaCopy />}
+					title={constants.title}
+				/>
 				<TitlebarInnerContainer>
 					<SearchField placeholder={constants.placeholders.search} />
 				</TitlebarInnerContainer>

@@ -11,23 +11,6 @@ export const TitlebarContainer = tw.div`
     align-middle
 `;
 
-export const Title = tw.div`
-    mx-1
-    select-none
-`;
-
-export const TitleSpan = tw.span`
-    inline-flex
-    items-center
-    justify-center
-    font-sans
-    text-2xl
-    font-bold
-    text-gray-700
-    mx-auto
-    my-auto
-`;
-
 export const TitlebarInnerContainer = tw.div`
     w-5/6
     flex

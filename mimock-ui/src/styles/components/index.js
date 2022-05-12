@@ -8,6 +8,7 @@ import {
 import Pill from './Pill';
 import Card from './Card';
 import Label from './Label';
+import IconHeader from './IconHeader';
 
 export {
 	Button,
@@ -19,4 +20,5 @@ export {
 	Label,
 	UserNameField,
 	PasswordField,
+	IconHeader,
 };

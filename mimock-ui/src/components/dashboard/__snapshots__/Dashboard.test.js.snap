@@ -6,8 +6,9 @@ exports[`Dashboard should render all dashboard components 1`] = `
     class="w-11/12 flex flex-row mx-auto mt-4 mb-2 justify-center align-middle"
     data-testid="titlebar-section"
   >
-    <span
-      class="inline-flex items-center justify-center font-sans text-2xl font-bold text-gray-700 mx-auto my-auto"
+    <div
+      class="flex items-center justify-center align-middle font-sans text-2xl font-bold text-gray-700"
+      data-testid="mocks-header"
     >
       <svg
         fill="currentColor"
@@ -23,11 +24,11 @@ exports[`Dashboard should render all dashboard components 1`] = `
         />
       </svg>
       <div
-        class="mx-1 select-none"
+        class="mx-2 select-none"
       >
         Mocks
       </div>
-    </span>
+    </div>
     <div
       class="w-5/6 flex flex-row mx-auto justify-end align-middle px-2"
     >
