@@ -3,7 +3,7 @@
 exports[`IconHeader should render icon header component 1`] = `
 <div>
   <div
-    class="flex items-center justify-center align-middle font-sans text-2xl font-bold text-gray-700"
+    class="flex items-center align-middle font-sans text-2xl font-bold text-gray-700"
     data-testid="home-header"
   >
     <svg

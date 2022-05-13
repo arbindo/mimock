@@ -10,6 +10,7 @@ jest.mock('recoil', () => {
 		useRecoilState: jest.fn(() => [true, mockedRecoilFn]),
 	};
 });
+jest.mock('react-router-dom');
 
 describe('UserRow', () => {
 	it('should render user info', async () => {

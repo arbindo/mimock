@@ -10,7 +10,7 @@ exports[`UserManagement should render user management 1`] = `
       class="flex justify-between items-center align-middle px-4 py-4 my-10 border-b-2 border-gray-100 w-11/12 mx-auto"
     >
       <div
-        class="flex items-center justify-center align-middle font-sans text-2xl font-bold text-gray-700"
+        class="flex items-center align-middle font-sans text-2xl font-bold text-gray-700"
         data-testid="user-management-header"
       >
         <svg

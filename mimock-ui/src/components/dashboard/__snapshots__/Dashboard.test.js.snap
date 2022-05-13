@@ -7,7 +7,7 @@ exports[`Dashboard should render all dashboard components 1`] = `
     data-testid="titlebar-section"
   >
     <div
-      class="flex items-center justify-center align-middle font-sans text-2xl font-bold text-gray-700"
+      class="flex items-center align-middle font-sans text-2xl font-bold text-gray-700"
       data-testid="mocks-header"
     >
       <svg

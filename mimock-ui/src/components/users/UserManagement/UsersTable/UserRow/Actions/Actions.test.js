@@ -19,13 +19,24 @@ jest.mock('react-notifications-component', () => {
 	};
 	return { Store };
 });
+
+const mockedNavigation = jest.fn(() => {});
+jest.mock('react-router-dom', () => ({
+	...jest.requireActual('react-router-dom'),
+	useNavigate: () => mockedNavigation,
+}));
 jest.mock('services/users/deleteUser.service');
 
 describe('Actions', () => {
 	it('should render user actions', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(<Actions userName='luke1' />);
+			tree = await render(
+				<Actions
+					userName='luke1'
+					userId='d749184e-b60d-4ac0-b459-e3b9cc5710d1'
+				/>
+			);
 		});
 
 		const { container, getByTestId } = tree;
@@ -41,7 +52,12 @@ describe('Actions', () => {
 	it('should show confirmation modal on clicking delete', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(<Actions userName='luke1' />);
+			tree = await render(
+				<Actions
+					userName='luke1'
+					userId='d749184e-b60d-4ac0-b459-e3b9cc5710d1'
+				/>
+			);
 		});
 
 		const { getByTestId } = tree;
@@ -62,11 +78,15 @@ describe('Actions', () => {
 		expect(document.body).toMatchSnapshot();
 	});
 
-	//TODO: should revise test after edit functionality is complete
-	it('should trigger edit user action on clicking edit button', async () => {
+	it('should navigate to edit user page on clicking edit button', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(<Actions userName='luke1' />);
+			tree = await render(
+				<Actions
+					userName='luke1'
+					userId='d749184e-b60d-4ac0-b459-e3b9cc5710d1'
+				/>
+			);
 		});
 
 		const { getByTestId } = tree;
@@ -79,7 +99,10 @@ describe('Actions', () => {
 			await fireEvent.click(getByTestId('edit-luke1'));
 		});
 
-		expect(document.body).toMatchSnapshot();
+		expect(mockedNavigation).toHaveBeenCalledTimes(1);
+		expect(mockedNavigation).toHaveBeenCalledWith(
+			'/mimock-ui/admin/users/edit?userId=d749184e-b60d-4ac0-b459-e3b9cc5710d1'
+		);
 	});
 
 	it('should close confirmation modal on clicking cancel', async () => {
@@ -87,7 +110,12 @@ describe('Actions', () => {
 
 		let tree;
 		await act(async () => {
-			tree = await render(<Actions userName='luke1' />);
+			tree = await render(
+				<Actions
+					userName='luke1'
+					userId='d749184e-b60d-4ac0-b459-e3b9cc5710d1'
+				/>
+			);
 		});
 
 		const { getByTestId, queryByTestId } = tree;
@@ -127,7 +155,12 @@ describe('Actions', () => {
 
 		let tree;
 		await act(async () => {
-			tree = await render(<Actions userName='luke1' />);
+			tree = await render(
+				<Actions
+					userName='luke1'
+					userId='d749184e-b60d-4ac0-b459-e3b9cc5710d1'
+				/>
+			);
 		});
 
 		const { getByTestId } = tree;
@@ -172,7 +205,12 @@ describe('Actions', () => {
 
 		let tree;
 		await act(async () => {
-			tree = await render(<Actions userName='luke1' />);
+			tree = await render(
+				<Actions
+					userName='luke1'
+					userId='d749184e-b60d-4ac0-b459-e3b9cc5710d1'
+				/>
+			);
 		});
 
 		const { getByTestId } = tree;

@@ -29,5 +29,9 @@ export const routes = {
 			path: `${adminPrefix}/users`,
 			secured: true,
 		},
+		editUsers: {
+			path: `${adminPrefix}/users/edit`,
+			secured: true,
+		},
 	},
 };

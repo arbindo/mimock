@@ -9,6 +9,7 @@ import AdminNavigator from './navigators/AdminNavigator';
 import Wrapper from './components/common/Wrapper';
 import Dashboard from './components/dashboard';
 import Users from './components/users';
+import EditUser from './components/users/UserManagement/EditUser';
 import Logout from './components/common/Logout';
 import Detail from './components/detail';
 
@@ -47,6 +48,10 @@ function AppRoutes() {
 						<Route
 							path={routes.adminRoutes.users.path}
 							element={secureAdminRoutes(<Users />)}
+						/>
+						<Route
+							path={routes.adminRoutes.editUsers.path}
+							element={secureAdminRoutes(<EditUser />)}
 						/>
 					</Route>
 				</Route>

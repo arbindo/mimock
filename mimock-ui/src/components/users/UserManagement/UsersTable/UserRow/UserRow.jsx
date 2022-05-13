@@ -13,7 +13,14 @@ import {
 	ActivationStatusWrapper,
 } from './UserRow.style';
 
-function UserRow({ name, userName, role, activationStatus, createdOn }) {
+function UserRow({
+	name,
+	userName,
+	userId,
+	role,
+	activationStatus,
+	createdOn,
+}) {
 	return (
 		<UserRowContainer data-testid={`user-record-${userName}`}>
 			<Text data-testid='user-name'>{name}</Text>
@@ -27,7 +34,7 @@ function UserRow({ name, userName, role, activationStatus, createdOn }) {
 			<Timestamp data-testid='user-created-timestamp'>
 				{format(parseISO(createdOn), 'dd MMM yyyy')}
 			</Timestamp>
-			<Actions userName={userName} />
+			<Actions userName={userName} userId={userId} />
 		</UserRowContainer>
 	);
 }
@@ -35,6 +42,7 @@ function UserRow({ name, userName, role, activationStatus, createdOn }) {
 UserRow.propTypes = {
 	name: PropTypes.string.isRequired,
 	userName: PropTypes.string.isRequired,
+	userId: PropTypes.string.isRequired,
 	role: PropTypes.string.isRequired,
 	activationStatus: PropTypes.bool.isRequired,
 	createdOn: PropTypes.string.isRequired,

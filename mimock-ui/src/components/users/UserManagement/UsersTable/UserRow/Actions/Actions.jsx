@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
+import { routes } from 'constants/routes';
 import { deleteUser } from 'services/users';
 import { ConfirmationModal } from 'components/common/Modals';
 import useNotification from 'hooks/useNotification';
@@ -14,10 +16,11 @@ import {
 } from 'constants/notificationConstants';
 import { ActionsWrapper, Options } from './Actions.style';
 
-function Actions({ userName }) {
+function Actions({ userName, userId }) {
 	const [showDeletionModal, setShowDeletionModal] = useState(false);
 	const [deletingUser, setDeletingUser] = useState(false);
 	const [, setRefreshUserList] = useRecoilState(deletionModalAtom);
+	const navigate = useNavigate();
 
 	const deletionConfirmationMessage = `Are you sure you want to delete user "${userName}" ?`;
 	const deletingMessage = 'Deleting user. Please wait...';
@@ -27,7 +30,9 @@ function Actions({ userName }) {
 			name: 'edit',
 			icon: <FaEdit />,
 			tooltip: 'Edit User',
-			onClick: () => {},
+			onClick: () => {
+				navigate(`${routes.adminRoutes.editUsers.path}?userId=${userId}`);
+			},
 		},
 		{
 			name: 'delete',
@@ -109,6 +114,7 @@ function Actions({ userName }) {
 
 Actions.propTypes = {
 	userName: PropTypes.string.isRequired,
+	userId: PropTypes.string.isRequired,
 };
 
 export default Actions;

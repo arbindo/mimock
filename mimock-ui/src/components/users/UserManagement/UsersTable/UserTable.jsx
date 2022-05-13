@@ -56,6 +56,7 @@ export default function UserTable() {
 							key={user.userId}
 							name={user.name}
 							userName={user.userName}
+							userId={user.userId}
 							role={user.userRole}
 							activationStatus={user.isUserActive}
 							createdOn={user.userCreatedAt}

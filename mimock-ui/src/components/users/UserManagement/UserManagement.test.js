@@ -12,12 +12,13 @@ jest.mock('recoil', () => {
 	};
 });
 jest.mock('services/users');
+jest.mock('react-router-dom');
 
 describe('UserManagement', () => {
 	beforeEach(() => {
 		getAllUsers.mockResolvedValue([
 			{
-				userId: 1,
+				userId: '1',
 				userName: 'user1',
 				name: 'User 1',
 				userRole: 'ADMIN',

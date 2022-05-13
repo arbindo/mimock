@@ -13,6 +13,7 @@ jest.mock('recoil', () => {
 });
 
 jest.mock('services/users');
+jest.mock('react-router-dom');
 
 describe('UserTable', () => {
 	beforeEach(() => {
