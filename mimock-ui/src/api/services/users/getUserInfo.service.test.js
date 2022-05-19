@@ -19,6 +19,10 @@ describe('getUserInfo.service', () => {
 		const userId = 'd749184e-b60d-4ac0-b459-e3b9cc5710d1';
 		const userInfo = await getUserInfo(userId);
 
+		expect(get).toHaveBeenCalledWith(
+			`/admin/users/user-info?userId=d749184e-b60d-4ac0-b459-e3b9cc5710d1`,
+			{ showFullPageLoader: true }
+		);
 		expect(userInfo).toEqual({
 			userName: 'mimock_admin',
 			userId: '00000000-0000-0000-0000-000000000000',
@@ -31,6 +35,11 @@ describe('getUserInfo.service', () => {
 		get.mockRejectedValue(new Error('Failed to get user info'));
 
 		await getUserInfo('d749184e-b60d-4ac0-b459-e3b9cc5710d1').catch((err) => {
+			expect(get).toHaveBeenCalledWith(
+				`/admin/users/user-info?userId=d749184e-b60d-4ac0-b459-e3b9cc5710d1`,
+				{ showFullPageLoader: true }
+			);
+
 			expect(err).toBeDefined();
 			expect(err).toBeInstanceOf(Error);
 			expect(err.message).toBe('Failed to get user info');
