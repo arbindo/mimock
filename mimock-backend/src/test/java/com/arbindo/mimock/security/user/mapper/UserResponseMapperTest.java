@@ -34,6 +34,7 @@ class UserResponseMapperTest {
                 .userRoles(userRole)
                 .isUserBlocked(false)
                 .isUserActive(true)
+                .createdAt(ZonedDateTime.now())
                 .build();
         User user2 = User.builder()
                 .id(UUID.randomUUID())
@@ -42,7 +43,9 @@ class UserResponseMapperTest {
                 .userRoles(userRole)
                 .isUserBlocked(false)
                 .isUserActive(true)
+                .createdAt(ZonedDateTime.now())
                 .deletedAt(ZonedDateTime.now())
+                .passwordUpdatedAt(ZonedDateTime.now())
                 .build();
 
         List<User> userList = new ArrayList<>();
@@ -58,6 +61,7 @@ class UserResponseMapperTest {
                 .isUserCurrentlyLoggedIn(user1.getIsSessionActive())
                 .userRole("ADMIN")
                 .userCreatedAt(user1.getCreatedAt())
+                .passwordUpdatedAt(user1.getPasswordUpdatedAt())
                 .isUserDeleted(false)
                 .build();
         UserInfo userInfo2 = UserInfo.builder()
@@ -69,6 +73,7 @@ class UserResponseMapperTest {
                 .isUserCurrentlyLoggedIn(user2.getIsSessionActive())
                 .userRole("ADMIN")
                 .userCreatedAt(user2.getCreatedAt())
+                .passwordUpdatedAt(user2.getPasswordUpdatedAt())
                 .isUserDeleted(true)
                 .build();
 
@@ -94,6 +99,8 @@ class UserResponseMapperTest {
                 .userRoles(userRole)
                 .isUserBlocked(false)
                 .isUserActive(true)
+                .createdAt(ZonedDateTime.now())
+                .passwordUpdatedAt(ZonedDateTime.now())
                 .build();
 
 
@@ -106,6 +113,7 @@ class UserResponseMapperTest {
                 .isUserCurrentlyLoggedIn(user.getIsSessionActive())
                 .userRole("ADMIN")
                 .userCreatedAt(user.getCreatedAt())
+                .passwordUpdatedAt(user.getPasswordUpdatedAt())
                 .isUserDeleted(false)
                 .build();
 
@@ -116,6 +124,8 @@ class UserResponseMapperTest {
         assertEquals(expectedUserInfo.getName(), actualUserInfo.getName());
         assertEquals(expectedUserInfo.getIsUserActive(), actualUserInfo.getIsUserActive());
         assertEquals(expectedUserInfo.getUserRole(), actualUserInfo.getUserRole());
+        assertEquals(expectedUserInfo.getUserCreatedAt(), actualUserInfo.getUserCreatedAt());
+        assertEquals(expectedUserInfo.getPasswordUpdatedAt(), actualUserInfo.getPasswordUpdatedAt());
         assertFalse(actualUserInfo.getIsUserDeleted());
         assertFalse(actualUserInfo.getIsUserLocked());
         assertTrue(actualUserInfo.getIsUserActive());

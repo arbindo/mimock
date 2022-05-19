@@ -26,5 +26,5 @@ public class UserInfo {
     private ZonedDateTime userCreatedAt;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private ZonedDateTime userUpdatedAt;
+    private ZonedDateTime passwordUpdatedAt;
 }

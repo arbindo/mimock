@@ -21,6 +21,7 @@ public class UserResponseMapper {
                 .userRole(user.getUserRoles().getRoleName())
                 .isUserCurrentlyLoggedIn(user.getIsSessionActive())
                 .userCreatedAt(user.getCreatedAt())
+                .passwordUpdatedAt(user.getPasswordUpdatedAt())
                 .build()
         ).collect(Collectors.toList());
 
@@ -40,6 +41,8 @@ public class UserResponseMapper {
                 .isUserDeleted(user.getDeletedAt() != null)
                 .userRole(user.getUserRoles().getRoleName())
                 .isUserCurrentlyLoggedIn(user.getIsSessionActive())
+                .userCreatedAt(user.getCreatedAt())
+                .passwordUpdatedAt(user.getPasswordUpdatedAt())
                 .build();
     }
 }
