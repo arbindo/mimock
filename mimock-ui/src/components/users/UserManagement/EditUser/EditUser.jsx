@@ -2,6 +2,7 @@ import React from 'react';
 import { IconHeader } from 'src/styles/components';
 import { FaEdit } from 'react-icons/fa';
 import { EditUserWrapper, EditUserHeader } from './EditUser.style';
+import UserDetails from './UserDetails';
 
 export default function EditUser() {
 	return (
@@ -13,6 +14,7 @@ export default function EditUser() {
 					dataTestId='edit-user-header'
 				/>
 			</EditUserHeader>
+			<UserDetails />
 		</EditUserWrapper>
 	);
 }

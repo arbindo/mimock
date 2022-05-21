@@ -33,6 +33,11 @@ exports[`EditUser should render EditUser 1`] = `
         </div>
       </div>
     </div>
+    <div
+      data-testid="edit-user-details"
+    >
+      User Details
+    </div>
   </div>
 </div>
 `;
