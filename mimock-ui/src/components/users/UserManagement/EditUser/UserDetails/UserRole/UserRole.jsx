@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import useNotification from 'hooks/useNotification';
+import { updateUserRole } from 'services/users/updateUserRole.service';
 import { ConfirmationModal } from 'components/common/Modals';
 import { notificationTypes } from 'constants/notificationConstants';
 import { getUserRoles } from 'services/users/getUserRoles.service.js';
@@ -15,7 +16,7 @@ import {
 	RoleHint,
 } from './UserRole.style.js';
 
-function UserRole({ currentUserRole }) {
+function UserRole({ userName, currentUserRole }) {
 	const isFirstRender = useRef(true);
 	const [roles, setRoles] = useState([]);
 	const [selectedRole, setSelectedRole] = useState(currentUserRole);
@@ -53,7 +54,32 @@ function UserRole({ currentUserRole }) {
 					animationOut: 'animate__slideOutRight',
 				});
 			});
-	}, [currentUserRole]);
+	}, [currentUserRole, useNotification]);
+
+	const updateRole = async () => {
+		setUpdatingUserRole(true);
+		updateUserRole(userName, selectedRole)
+			.then(() => {
+				setShowUpdateConfirmationModal(false);
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					title: 'User role updated successfully',
+					message: `User role updated to ${selectedRole}`,
+					animationIn: 'animate__slideInRight',
+					animationOut: 'animate__slideOutRight',
+				});
+			})
+			.catch(() => {
+				setShowUpdateConfirmationModal(false);
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
+					title: 'Failed to update user role',
+					message: 'Please try again',
+					animationIn: 'animate__slideInRight',
+					animationOut: 'animate__slideOutRight',
+				});
+			});
+	};
 
 	return (
 		<If condition={!roleFetchError}>
@@ -64,7 +90,7 @@ function UserRole({ currentUserRole }) {
 					loading={updatingUserRole}
 					loadingMessage={updatingMessage}
 					onConfirm={async () => {
-						setUpdatingUserRole(true);
+						await updateRole();
 					}}
 					onCancel={() => {
 						setShowUpdateConfirmationModal(false);
@@ -120,6 +146,7 @@ function UserRole({ currentUserRole }) {
 }
 
 UserRole.propTypes = {
+	userName: PropTypes.string.isRequired,
 	currentUserRole: PropTypes.string.isRequired,
 };
 

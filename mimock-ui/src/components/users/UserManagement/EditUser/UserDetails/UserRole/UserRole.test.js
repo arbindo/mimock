@@ -1,11 +1,13 @@
 import React from 'react';
 import { act, render, fireEvent } from '@testing-library/react';
 import { getUserRoles } from 'services/users/getUserRoles.service.js';
+import { updateUserRole } from 'services/users/updateUserRole.service';
 import UserRole from './UserRole';
 
 const actualNotification = jest.requireActual('hooks/useNotification');
 
 jest.mock('services/users/getUserRoles.service.js');
+jest.mock('services/users/updateUserRole.service');
 jest.mock('react-notifications-component', () => {
 	const Store = {
 		addNotification: jest.fn(),
@@ -36,7 +38,7 @@ describe('UserRole', () => {
 	it('should render user role', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(<UserRole currentUserRole='' />);
+			tree = await render(<UserRole userName='test1' currentUserRole='' />);
 		});
 
 		const { getByTestId, queryByTestId, container, rerender } = tree;
@@ -58,7 +60,9 @@ describe('UserRole', () => {
 
 		let tree;
 		await act(async () => {
-			tree = await render(<UserRole currentUserRole='MANAGER' />);
+			tree = await render(
+				<UserRole userName='test1' currentUserRole='MANAGER' />
+			);
 		});
 
 		const { queryByTestId, container, rerender } = tree;
@@ -85,7 +89,9 @@ describe('UserRole', () => {
 	it('should show update role button on changing user role', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(<UserRole currentUserRole='MANAGER' />);
+			tree = await render(
+				<UserRole userName='test1' currentUserRole='MANAGER' />
+			);
 		});
 
 		const { getByTestId, queryByTestId, container } = tree;
@@ -108,7 +114,9 @@ describe('UserRole', () => {
 	it('should show update role confirmation modal on clicking update role button', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(<UserRole currentUserRole='MANAGER' />);
+			tree = await render(
+				<UserRole userName='test1' currentUserRole='MANAGER' />
+			);
 		});
 
 		const { getByTestId, queryByTestId } = tree;
@@ -135,7 +143,9 @@ describe('UserRole', () => {
 	it('should close update role confirmation modal on clicking cancel', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(<UserRole currentUserRole='MANAGER' />);
+			tree = await render(
+				<UserRole userName='test1' currentUserRole='MANAGER' />
+			);
 		});
 
 		const { getByTestId, queryByTestId } = tree;
@@ -161,9 +171,17 @@ describe('UserRole', () => {
 	});
 
 	it('should update role on clicking confirm button', async () => {
+		const notificationSpy = jest.spyOn(actualNotification, 'default');
+		updateUserRole.mockResolvedValue({
+			userName: 'frodo1',
+			updatedUserRole: 'MANAGER',
+		});
+
 		let tree;
 		await act(async () => {
-			tree = await render(<UserRole currentUserRole='MANAGER' />);
+			tree = await render(
+				<UserRole userName='test1' currentUserRole='MANAGER' />
+			);
 		});
 
 		const { getByTestId, queryByTestId } = tree;
@@ -182,6 +200,60 @@ describe('UserRole', () => {
 
 		await act(async () => {
 			fireEvent.click(getByTestId('confirmation-modal-confirm-btn'));
+		});
+		expect(updateUserRole).toHaveBeenCalledTimes(1);
+		expect(updateUserRole).toHaveBeenCalledWith('test1', 'ADMIN');
+		expect(queryByTestId('confirmation-modal')).not.toBeInTheDocument();
+		expect(notificationSpy).toHaveBeenCalledTimes(1);
+		expect(notificationSpy).toHaveBeenCalledWith({
+			animationIn: 'animate__slideInRight',
+			animationOut: 'animate__slideOutRight',
+			message: 'User role updated to ADMIN',
+			title: 'User role updated successfully',
+			type: 'success',
+		});
+
+		expect(document.body).toMatchSnapshot();
+	});
+
+	it('should show error notification when role update fails', async () => {
+		const notificationSpy = jest.spyOn(actualNotification, 'default');
+		updateUserRole.mockRejectedValue(new Error('Role update failed'));
+
+		let tree;
+		await act(async () => {
+			tree = await render(
+				<UserRole userName='test1' currentUserRole='MANAGER' />
+			);
+		});
+
+		const { getByTestId, queryByTestId } = tree;
+
+		expect(queryByTestId('confirmation-modal')).not.toBeInTheDocument();
+		expect(getByTestId('edit-user-role')).toBeInTheDocument();
+		expect(getUserRoles).toHaveBeenCalledTimes(1);
+
+		await act(async () => {
+			fireEvent.change(getByTestId('user-role-options'), {
+				target: { value: 'ADMIN' },
+			});
+			fireEvent.click(getByTestId('update-role-btn'));
+		});
+		expect(getByTestId('confirmation-modal')).toBeInTheDocument();
+
+		await act(async () => {
+			fireEvent.click(getByTestId('confirmation-modal-confirm-btn'));
+		});
+		expect(updateUserRole).toHaveBeenCalledTimes(1);
+		expect(updateUserRole).toHaveBeenCalledWith('test1', 'ADMIN');
+		expect(queryByTestId('confirmation-modal')).not.toBeInTheDocument();
+		expect(notificationSpy).toHaveBeenCalledTimes(1);
+		expect(notificationSpy).toHaveBeenCalledWith({
+			animationIn: 'animate__slideInRight',
+			animationOut: 'animate__slideOutRight',
+			message: 'Please try again',
+			title: 'Failed to update user role',
+			type: 'danger',
 		});
 
 		expect(document.body).toMatchSnapshot();

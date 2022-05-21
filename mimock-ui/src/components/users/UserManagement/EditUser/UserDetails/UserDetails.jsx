@@ -65,7 +65,10 @@ export default function UserDetails() {
 				<UserDetailsWrapper data-testid='edit-user-details'>
 					{info('Name', userInfo.name, 'edit-user-name')}
 					{info('User Name', userInfo.userName, 'edit-user-username')}
-					<UserRole currentUserRole={userInfo.userRole} />
+					<UserRole
+						userName={userInfo.userName}
+						currentUserRole={userInfo.userRole}
+					/>
 					<UserActivationStatus isUserActive={userInfo.isUserActive} />
 					{info(
 						'Created on',
