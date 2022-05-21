@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserActivationStatus should render UserActivationStatus when user status is active 1`] = `
+<div>
+  <div
+    class="flex items-center align-middle my-6 justify-between"
+    data-testid="edit-user-activation-status"
+  >
+    <div
+      class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600 mx-20"
+    >
+      Activation status
+    </div>
+    <div
+      class="w-1/2 mx-auto flex items-center align-middle"
+    >
+      <span
+        class="MuiSwitch-root IosSwitch-root-1"
+      >
+        <span
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-7 MuiSwitch-switchBase IosSwitch-switchBase-2 MuiSwitch-colorSecondary PrivateSwitchBase-checked-8 Mui-checked IosSwitch-checked-5"
+          data-testid="activation-switch"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <input
+              checked=""
+              class="PrivateSwitchBase-input-10 MuiSwitch-input"
+              type="checkbox"
+              value=""
+            />
+            <span
+              class="MuiSwitch-thumb IosSwitch-thumb-3"
+            />
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </span>
+        <span
+          class="MuiSwitch-track IosSwitch-track-4"
+        />
+      </span>
+      <div
+        class="font-sans font-semibold text-xl mx-4 text-slate-800"
+        data-testid="activation-status-label"
+      >
+        Active
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserActivationStatus should render UserActivationStatus when user status is inactive 1`] = `
+<div>
+  <div
+    class="flex items-center align-middle my-6 justify-between"
+    data-testid="edit-user-activation-status"
+  >
+    <div
+      class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600 mx-20"
+    >
+      Activation status
+    </div>
+    <div
+      class="w-1/2 mx-auto flex items-center align-middle"
+    >
+      <span
+        class="MuiSwitch-root IosSwitch-root-11"
+      >
+        <span
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-17 MuiSwitch-switchBase IosSwitch-switchBase-12 MuiSwitch-colorSecondary"
+          data-testid="activation-switch"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <input
+              class="PrivateSwitchBase-input-20 MuiSwitch-input"
+              type="checkbox"
+              value=""
+            />
+            <span
+              class="MuiSwitch-thumb IosSwitch-thumb-13"
+            />
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </span>
+        <span
+          class="MuiSwitch-track IosSwitch-track-14"
+        />
+      </span>
+      <div
+        class="font-sans font-semibold text-xl mx-4 text-slate-300"
+        data-testid="activation-status-label"
+      >
+        Inactive
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserActivationStatus should update status on clicking switch 1`] = `
+<div>
+  <div
+    class="flex items-center align-middle my-6 justify-between"
+    data-testid="edit-user-activation-status"
+  >
+    <div
+      class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600 mx-20"
+    >
+      Activation status
+    </div>
+    <div
+      class="w-1/2 mx-auto flex items-center align-middle"
+    >
+      <span
+        class="MuiSwitch-root IosSwitch-root-21"
+      >
+        <span
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-27 MuiSwitch-switchBase IosSwitch-switchBase-22 MuiSwitch-colorSecondary PrivateSwitchBase-checked-28 Mui-checked IosSwitch-checked-25"
+          data-testid="activation-switch"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <input
+              class="PrivateSwitchBase-input-30 MuiSwitch-input"
+              type="checkbox"
+              value=""
+            />
+            <span
+              class="MuiSwitch-thumb IosSwitch-thumb-23"
+            />
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </span>
+        <span
+          class="MuiSwitch-track IosSwitch-track-24"
+        />
+      </span>
+      <div
+        class="font-sans font-semibold text-xl mx-4 text-slate-800"
+        data-testid="activation-status-label"
+      >
+        Active
+      </div>
+    </div>
+  </div>
+</div>
+`;

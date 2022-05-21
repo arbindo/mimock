@@ -16,6 +16,16 @@ jest.mock('./UserRole', () => {
 
 	return () => UserRoleMock;
 });
+jest.mock('./UserActivationStatus', () => {
+	const UserActivationStatusMock = (
+		<div data-testid='edit-user-activation-status'>
+			<input type='checkbox' />
+			<span>Active</span>
+		</div>
+	);
+
+	return () => UserActivationStatusMock;
+});
 jest.mock('services/users/getUserInfo.service');
 jest.mock('react-router-dom', () => ({
 	useSearchParams: () => [
@@ -50,6 +60,8 @@ describe('UserDetails', () => {
 		expect(getByTestId('edit-user-name')).toBeInTheDocument();
 		expect(getByTestId('edit-user-username')).toBeInTheDocument();
 		expect(getByTestId('edit-user-role')).toBeInTheDocument();
+		expect(getByTestId('edit-user-role')).toBeInTheDocument();
+		expect(getByTestId('edit-user-activation-status')).toBeInTheDocument();
 
 		expect(getUserInfo).toHaveBeenCalledTimes(1);
 		expect(getUserInfo).toHaveBeenCalledWith(

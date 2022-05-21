@@ -51,6 +51,16 @@ exports[`UserDetails should render user details 1`] = `
         </option>
       </select>
     </div>
+    <div
+      data-testid="edit-user-activation-status"
+    >
+      <input
+        type="checkbox"
+      />
+      <span>
+        Active
+      </span>
+    </div>
   </div>
 </div>
 `;

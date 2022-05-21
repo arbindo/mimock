@@ -9,6 +9,7 @@ import {
 	UserDetailsFetchError,
 } from './UserDetails.style';
 import UserRole from './UserRole';
+import UserActivationStatus from './UserActivationStatus';
 
 export default function UserDetails() {
 	const [searchParams] = useSearchParams();
@@ -62,6 +63,7 @@ export default function UserDetails() {
 					{info('Name', userInfo.name, 'edit-user-name')}
 					{info('User Name', userInfo.userName, 'edit-user-username')}
 					<UserRole currentUserRole={userInfo.userRole} />
+					<UserActivationStatus isUserActive={userInfo.isUserActive} />
 				</UserDetailsWrapper>
 			</Otherwise>
 		</Choose>
