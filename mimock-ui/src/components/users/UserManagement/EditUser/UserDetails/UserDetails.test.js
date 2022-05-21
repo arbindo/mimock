@@ -26,6 +26,16 @@ jest.mock('./UserActivationStatus', () => {
 
 	return () => UserActivationStatusMock;
 });
+jest.mock('./UserPasswordUpdate', () => {
+	const UserPasswordUpdateMock = (
+		<div data-testid='edit-user-update-password'>
+			<button>Update Password</button>
+			<span>Last updated:</span>
+		</div>
+	);
+
+	return () => UserPasswordUpdateMock;
+});
 jest.mock('services/users/getUserInfo.service');
 jest.mock('react-router-dom', () => ({
 	useSearchParams: () => [
@@ -62,6 +72,8 @@ describe('UserDetails', () => {
 		expect(getByTestId('edit-user-role')).toBeInTheDocument();
 		expect(getByTestId('edit-user-role')).toBeInTheDocument();
 		expect(getByTestId('edit-user-activation-status')).toBeInTheDocument();
+		expect(getByTestId('edit-user-created-at')).toBeInTheDocument();
+		expect(getByTestId('edit-user-update-password')).toBeInTheDocument();
 
 		expect(getUserInfo).toHaveBeenCalledTimes(1);
 		expect(getUserInfo).toHaveBeenCalledWith(

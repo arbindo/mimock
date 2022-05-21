@@ -10,7 +10,7 @@ export const Info = tw.div`
     flex
     items-center
     align-middle
-    my-6
+    my-8
     justify-between
 `;
 
@@ -35,7 +35,7 @@ export const Value = tw.div`
 
 export const DynamicValue = tw.div`
     w-1/2
-    mx-auto
+    mx-20
     flex
     items-center
     align-middle

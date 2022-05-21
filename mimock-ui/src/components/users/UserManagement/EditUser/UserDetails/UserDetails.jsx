@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
 import { getUserInfo } from 'services/users/getUserInfo.service';
 import {
 	UserDetailsWrapper,
@@ -10,6 +12,7 @@ import {
 } from './UserDetails.style';
 import UserRole from './UserRole';
 import UserActivationStatus from './UserActivationStatus';
+import UserPasswordUpdate from './UserPasswordUpdate';
 
 export default function UserDetails() {
 	const [searchParams] = useSearchParams();
@@ -64,6 +67,15 @@ export default function UserDetails() {
 					{info('User Name', userInfo.userName, 'edit-user-username')}
 					<UserRole currentUserRole={userInfo.userRole} />
 					<UserActivationStatus isUserActive={userInfo.isUserActive} />
+					{info(
+						'Created on',
+						format(
+							parseISO(userInfo.userCreatedAt || '1970-01-01 00:01:02'),
+							'dd MMM yyyy'
+						),
+						'edit-user-created-at'
+					)}
+					<UserPasswordUpdate passwordUpdatedOn={userInfo.passwordUpdatedAt} />
 				</UserDetailsWrapper>
 			</Otherwise>
 		</Choose>

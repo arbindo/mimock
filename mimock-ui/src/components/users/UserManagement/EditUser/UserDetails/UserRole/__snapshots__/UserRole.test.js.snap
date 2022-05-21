@@ -4,7 +4,7 @@ exports[`UserRole should close update role confirmation modal on clicking cancel
 <body>
   <div>
     <div
-      class="flex items-center align-middle my-6 justify-between"
+      class="flex items-center align-middle my-8 justify-between"
       data-testid="edit-user-role"
     >
       <div
@@ -13,7 +13,7 @@ exports[`UserRole should close update role confirmation modal on clicking cancel
         Role
       </div>
       <div
-        class="w-1/2 mx-auto flex items-center align-middle"
+        class="w-1/2 mx-20 flex items-center align-middle"
       >
         <select
           class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
@@ -79,7 +79,7 @@ exports[`UserRole should close update role confirmation modal on clicking cancel
 exports[`UserRole should render user role 1`] = `
 <div>
   <div
-    class="flex items-center align-middle my-6 justify-between"
+    class="flex items-center align-middle my-8 justify-between"
     data-testid="edit-user-role"
   >
     <div
@@ -88,7 +88,7 @@ exports[`UserRole should render user role 1`] = `
       Role
     </div>
     <div
-      class="w-1/2 mx-auto flex items-center align-middle"
+      class="w-1/2 mx-20 flex items-center align-middle"
     >
       <select
         class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
@@ -149,7 +149,7 @@ exports[`UserRole should show error banner when get user role call fails 1`] = `
 exports[`UserRole should show update role button on changing user role 1`] = `
 <div>
   <div
-    class="flex items-center align-middle my-6 justify-between"
+    class="flex items-center align-middle my-8 justify-between"
     data-testid="edit-user-role"
   >
     <div
@@ -158,7 +158,7 @@ exports[`UserRole should show update role button on changing user role 1`] = `
       Role
     </div>
     <div
-      class="w-1/2 mx-auto flex items-center align-middle"
+      class="w-1/2 mx-20 flex items-center align-middle"
     >
       <select
         class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
@@ -224,7 +224,7 @@ exports[`UserRole should show update role confirmation modal on clicking update 
 <body>
   <div>
     <div
-      class="flex items-center align-middle my-6 justify-between"
+      class="flex items-center align-middle my-8 justify-between"
       data-testid="edit-user-role"
     >
       <div
@@ -233,7 +233,7 @@ exports[`UserRole should show update role confirmation modal on clicking update 
         Role
       </div>
       <div
-        class="w-1/2 mx-auto flex items-center align-middle"
+        class="w-1/2 mx-20 flex items-center align-middle"
       >
         <select
           class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
@@ -329,7 +329,7 @@ exports[`UserRole should update role on clicking confirm button 1`] = `
 <body>
   <div>
     <div
-      class="flex items-center align-middle my-6 justify-between"
+      class="flex items-center align-middle my-8 justify-between"
       data-testid="edit-user-role"
     >
       <div
@@ -338,7 +338,7 @@ exports[`UserRole should update role on clicking confirm button 1`] = `
         Role
       </div>
       <div
-        class="w-1/2 mx-auto flex items-center align-middle"
+        class="w-1/2 mx-20 flex items-center align-middle"
       >
         <select
           class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"

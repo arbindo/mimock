@@ -7,7 +7,7 @@ exports[`UserDetails should render user details 1`] = `
     data-testid="edit-user-details"
   >
     <div
-      class="flex items-center align-middle my-6 justify-between"
+      class="flex items-center align-middle my-8 justify-between"
       data-testid="edit-user-name"
     >
       <div
@@ -22,7 +22,7 @@ exports[`UserDetails should render user details 1`] = `
       </div>
     </div>
     <div
-      class="flex items-center align-middle my-6 justify-between"
+      class="flex items-center align-middle my-8 justify-between"
       data-testid="edit-user-username"
     >
       <div
@@ -59,6 +59,31 @@ exports[`UserDetails should render user details 1`] = `
       />
       <span>
         Active
+      </span>
+    </div>
+    <div
+      class="flex items-center align-middle my-8 justify-between"
+      data-testid="edit-user-created-at"
+    >
+      <div
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600 mx-20"
+      >
+        Created on
+      </div>
+      <div
+        class="w-1/2 font-sans subpixel-antialiased text-lg text-gray-500 mx-20"
+      >
+        28 Apr 2022
+      </div>
+    </div>
+    <div
+      data-testid="edit-user-update-password"
+    >
+      <button>
+        Update Password
+      </button>
+      <span>
+        Last updated:
       </span>
     </div>
   </div>

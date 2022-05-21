@@ -3,7 +3,7 @@
 exports[`UserActivationStatus should render UserActivationStatus when user status is active 1`] = `
 <div>
   <div
-    class="flex items-center align-middle my-6 justify-between"
+    class="flex items-center align-middle my-8 justify-between"
     data-testid="edit-user-activation-status"
   >
     <div
@@ -12,7 +12,7 @@ exports[`UserActivationStatus should render UserActivationStatus when user statu
       Activation status
     </div>
     <div
-      class="w-1/2 mx-auto flex items-center align-middle"
+      class="w-1/2 mx-20 flex items-center align-middle"
     >
       <span
         class="MuiSwitch-root IosSwitch-root-1"
@@ -57,7 +57,7 @@ exports[`UserActivationStatus should render UserActivationStatus when user statu
 exports[`UserActivationStatus should render UserActivationStatus when user status is inactive 1`] = `
 <div>
   <div
-    class="flex items-center align-middle my-6 justify-between"
+    class="flex items-center align-middle my-8 justify-between"
     data-testid="edit-user-activation-status"
   >
     <div
@@ -66,7 +66,7 @@ exports[`UserActivationStatus should render UserActivationStatus when user statu
       Activation status
     </div>
     <div
-      class="w-1/2 mx-auto flex items-center align-middle"
+      class="w-1/2 mx-20 flex items-center align-middle"
     >
       <span
         class="MuiSwitch-root IosSwitch-root-11"
@@ -110,7 +110,7 @@ exports[`UserActivationStatus should render UserActivationStatus when user statu
 exports[`UserActivationStatus should update status on clicking switch 1`] = `
 <div>
   <div
-    class="flex items-center align-middle my-6 justify-between"
+    class="flex items-center align-middle my-8 justify-between"
     data-testid="edit-user-activation-status"
   >
     <div
@@ -119,7 +119,7 @@ exports[`UserActivationStatus should update status on clicking switch 1`] = `
       Activation status
     </div>
     <div
-      class="w-1/2 mx-auto flex items-center align-middle"
+      class="w-1/2 mx-20 flex items-center align-middle"
     >
       <span
         class="MuiSwitch-root IosSwitch-root-21"
