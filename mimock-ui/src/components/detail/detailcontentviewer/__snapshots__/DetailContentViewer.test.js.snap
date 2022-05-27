@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailContentViewer should render detail content viewer component 1`] = `
+<div>
+  <div
+    class="flex flex-col justify-start align-middle w-full mt-4 mb-2"
+    data-testid="detail-content-viewer-section"
+  >
+    <ul
+      class="nav nav-tabs flex flex-col md:flex-row flex-wrap list-none pl-0 mb-4"
+    >
+      <li
+        class="nav-item flex-auto text-center"
+      >
+        <div
+          class="inline-flex items-center justify-center align-middle gap-2 nav-link w-full block font-medium text-xs leading-tight border-2 border-transparent px-6 py-3 my-2 rounded-sm hover:bg-black hover:bg-opacity-5 hover:text-teal-500 focus:outline-none focus:ring-0 transition duration-150 ease-in-out cursor-pointer bg-teal-500 text-white"
+          id="general-pane"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+            />
+          </svg>
+           General
+        </div>
+      </li>
+      <li
+        class="nav-item flex-auto text-center"
+      >
+        <div
+          class="inline-flex items-center justify-center align-middle gap-2 nav-link w-full block font-medium text-xs leading-tight border-2 border-transparent px-6 py-3 my-2 rounded-sm hover:bg-black hover:bg-opacity-5 hover:text-teal-500 focus:outline-none focus:ring-0 transition duration-150 ease-in-out cursor-pointer bg-white text-gray-400"
+          id="request-pane"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 256C8 119 119 8 256 8s248 111 248 248-111 248-248 248S8 393 8 256zm143.6 28.9l72.4-75.5V392c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24V209.4l72.4 75.5c9.3 9.7 24.8 9.9 34.3.4l10.9-11c9.4-9.4 9.4-24.6 0-33.9L273 107.7c-9.4-9.4-24.6-9.4-33.9 0L106.3 240.4c-9.4 9.4-9.4 24.6 0 33.9l10.9 11c9.6 9.5 25.1 9.3 34.4-.4z"
+            />
+          </svg>
+           Request
+        </div>
+      </li>
+      <li
+        class="nav-item flex-auto text-center"
+      >
+        <div
+          class="inline-flex items-center justify-center align-middle gap-2 nav-link w-full block font-medium text-xs leading-tight border-2 border-transparent px-6 py-3 my-2 rounded-sm hover:bg-black hover:bg-opacity-5 hover:text-teal-500 focus:outline-none focus:ring-0 transition duration-150 ease-in-out cursor-pointer bg-white text-gray-400"
+          id="response-pane"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M504 256c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-143.6-28.9L288 302.6V120c0-13.3-10.7-24-24-24h-16c-13.3 0-24 10.7-24 24v182.6l-72.4-75.5c-9.3-9.7-24.8-9.9-34.3-.4l-10.9 11c-9.4 9.4-9.4 24.6 0 33.9L239 404.3c9.4 9.4 24.6 9.4 33.9 0l132.7-132.7c9.4-9.4 9.4-24.6 0-33.9l-10.9-11c-9.5-9.5-25-9.3-34.3.4z"
+            />
+          </svg>
+          Response
+        </div>
+      </li>
+    </ul>
+    <div
+      class="tab-content font-light shadow-sm rounded-sm mt-2 mb-4 px-4 py-2 border-2 border-gray-100"
+    >
+      <div
+        class="grid grid-cols-2 gap-6 fade px-4 py-2 my-2"
+        data-testid="general-pane-section"
+      >
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Mock Unique Identifier
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="c2237051-fdab-424a-9274-77261d16090a"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Mock Name
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="Awesome Mock 1651589543"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Description
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="This is a long test description 1234567890"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Status
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="NONE"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            HTTP Method
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="HEAD"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Route
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="/api/v2/google/maps/e3f3ac0f-6c21-4cb9-baae-063f76aacf80"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Query Params
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="serviceName=Student&version=1.0&active=true"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Expected Status Code
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="200"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Created By
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="Mimock Admin"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Created At
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="2022-05-03T22:52:22.842685+08:00"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Last Modified By
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="Mimock Admin"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label inline-block mb-2 text-gray-700"
+          >
+            Last Modified At
+          </label>
+          <input
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            disabled=""
+            readonly=""
+            type="text"
+            value="2022-05-03T22:52:22.842685+08:00"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

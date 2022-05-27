@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResponsePane should render response pane component 1`] = `
+<div>
+  <div
+    class="grid grid-cols-1 gap-6 fade px-4 py-2 my-2"
+    data-testid="response-pane-section"
+  >
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Response Header
+      </label>
+      <pre
+        class="language-json"
+        tabindex="0"
+      >
+        <code
+          class="language-json"
+        />
+      </pre>
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Response Content Type
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Expected Response
+      </label>
+      <pre
+        class="language-json"
+        tabindex="0"
+      >
+        <code
+          class="language-json"
+        />
+      </pre>
+    </div>
+  </div>
+</div>
+`;

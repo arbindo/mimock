@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RequestPane should render request pane component 1`] = `
+<div>
+  <div
+    class="grid grid-cols-2 gap-6 fade px-4 py-2 my-2"
+    data-testid="request-pane-section"
+  >
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Request Headers
+      </label>
+      <pre
+        class="bg-white my-0 language-json"
+        tabindex="0"
+      >
+        <code
+          class="language-json"
+        />
+      </pre>
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Request Headers Match Exact
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Request Body
+      </label>
+      <pre
+        class="bg-white my-0 language-json"
+        tabindex="0"
+      >
+        <code
+          class="language-json"
+        />
+      </pre>
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Request Body Type
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;

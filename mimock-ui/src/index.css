@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--highlight-color: #008080;
+	--highlight-text-color: #fff;
+	--pre-bg-color: #f3f4f6;
+}
+
 html,
 body,
 #app {
@@ -9,4 +15,39 @@ body,
 	height: 100%;
 	margin: 0;
 	padding: 0;
+}
+
+pre[class*='language-'] {
+	background-color: var(--pre-bg-color);
+	margin: 0;
+	padding: 0.45rem 0.375rem;
+}
+
+/*** Works on common browsers ***/
+::selection {
+	background-color: var(--highlight-color);
+	color: var(--highlight-text-color);
+}
+
+/*** Mozilla based browsers ***/
+::-moz-selection {
+	background-color: var(--highlight-color);
+	color: var(--highlight-text-color);
+}
+
+/***For Other Browsers ***/
+::-o-selection {
+	background-color: var(--highlight-color);
+	color: var(--highlight-text-color);
+}
+
+::-ms-selection {
+	background-color: var(--highlight-color);
+	color: var(--highlight-text-color);
+}
+
+/*** For Webkit ***/
+::-webkit-selection {
+	background-color: var(--highlight-color);
+	color: var(--highlight-text-color);
 }

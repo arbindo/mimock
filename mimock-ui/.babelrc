@@ -22,6 +22,15 @@
 					"mocks": "./src/__mocks__"
 				}
 			}
+		],
+		[
+			"prismjs",
+			{
+				"languages": ["javascript", "json"],
+				"plugins": ["line-numbers"],
+				"theme": "solarizedlight",
+				"css": true
+			}
 		]
 	]
 }

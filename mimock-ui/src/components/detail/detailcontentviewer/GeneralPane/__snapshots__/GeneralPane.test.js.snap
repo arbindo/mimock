@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeneralPane should render general pane component 1`] = `
+<div>
+  <div
+    class="grid grid-cols-2 gap-6 fade px-4 py-2 my-2"
+    data-testid="general-pane-section"
+  >
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Mock Unique Identifier
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Mock Name
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Description
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Status
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        HTTP Method
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Route
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Query Params
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Expected Status Code
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Created By
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Created At
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Last Modified By
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label inline-block mb-2 text-gray-700"
+      >
+        Last Modified At
+      </label>
+      <input
+        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        disabled=""
+        readonly=""
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;
