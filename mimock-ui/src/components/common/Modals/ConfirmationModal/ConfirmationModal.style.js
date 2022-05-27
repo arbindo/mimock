@@ -20,7 +20,7 @@ export const ModalBox = tw.div`
     xl:w-1/3
     lg:w-1/3
     md:w-1/2
-    rounded-md
+    rounded-sm
     shadow-lg
     bg-white
     p-6
@@ -57,8 +57,8 @@ export const CancelButton = tw(_ModalButtons)`
 export const ConfirmButton = tw(_ModalButtons)`
     bg-teal-500
     text-white
-    rounded-full
-    shadow-md
+    rounded-sm
+    shadow-sm
     p-4
     mb-4
     hover:bg-teal-600

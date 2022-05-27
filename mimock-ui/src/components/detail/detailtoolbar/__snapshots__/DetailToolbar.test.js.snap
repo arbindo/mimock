@@ -3,7 +3,7 @@
 exports[`DetailToolbar should render detail toolbar component 1`] = `
 <div>
   <div
-    class="flex flex-row justify-start align-middle w-full mt-4 mb-2"
+    class="flex flex-row justify-between align-middle w-full mt-4 mb-2"
     data-testid="detail-toolbar-section"
   >
     <a
@@ -31,6 +31,9 @@ exports[`DetailToolbar should render detail toolbar component 1`] = `
         Back
       </span>
     </a>
+    <div
+      class="inline-flex items-center justify-between"
+    />
   </div>
 </div>
 `;

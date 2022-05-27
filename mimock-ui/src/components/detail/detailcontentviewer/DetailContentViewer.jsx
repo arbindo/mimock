@@ -20,6 +20,7 @@ function DetailContentViewer({ mock }) {
 	const [showGeneralPane, setShowGeneralPane] = useState(true);
 	const [showRequestPane, setShowRequestPane] = useState(false);
 	const [showResponsePane, setShowResponsePane] = useState(false);
+
 	const handleTabHeaderClick = (e) => {
 		const currentTarget = e.target.id;
 		switch (currentTarget) {

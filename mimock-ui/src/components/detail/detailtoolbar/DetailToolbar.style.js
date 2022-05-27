@@ -7,7 +7,7 @@ export const _BackRouterLink = styled(Link)``;
 export const DetailToolbarContainer = tw.div`
     flex
     flex-row
-    justify-start
+    justify-between
     align-middle
     w-full
     mt-4
@@ -21,4 +21,16 @@ export const MiniBtnSpan = tw.span`
     items-center
     justify-between
     gap-1
+`;
+
+export const BaseButton = tw.div`
+    cursor-pointer 
+    px-2 
+    mx-1
+`;
+
+export const OperationsContainer = tw.div`
+    inline-flex
+    items-center
+    justify-between
 `;
