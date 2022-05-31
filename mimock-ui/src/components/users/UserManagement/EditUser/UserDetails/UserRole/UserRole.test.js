@@ -1,11 +1,14 @@
 import React from 'react';
 import { act, render, fireEvent } from '@testing-library/react';
+import { useRecoilState } from 'recoil';
 import { getUserRoles } from 'services/users/getUserRoles.service.js';
 import { updateUserRole } from 'services/users/updateUserRole.service';
 import UserRole from './UserRole';
 
 const actualNotification = jest.requireActual('hooks/useNotification');
 
+let mockedRecoilFn = jest.fn();
+jest.mock('recoil');
 jest.mock('services/users/getUserRoles.service.js');
 jest.mock('services/users/updateUserRole.service');
 jest.mock('react-notifications-component', () => {
@@ -17,6 +20,19 @@ jest.mock('react-notifications-component', () => {
 
 describe('UserRole', () => {
 	beforeEach(() => {
+		useRecoilState.mockImplementation(() => {
+			return [
+				{
+					userName: 'test1',
+					name: 'Test User',
+					isUserActive: false,
+					userRole: 'MANAGER',
+					userCreatedAt: '2022-04-30 20:35:35',
+					passwordUpdatedAt: '2022-04-30 20:35:35',
+				},
+				mockedRecoilFn,
+			];
+		});
 		getUserRoles.mockResolvedValue([
 			{
 				roleName: 'ADMIN',
@@ -38,16 +54,20 @@ describe('UserRole', () => {
 	it('should render user role', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(<UserRole userName='test1' currentUserRole='' />);
+			tree = await render(<UserRole />);
 		});
 
 		const { getByTestId, queryByTestId, container, rerender } = tree;
 
-		await rerender(<UserRole currentUserRole='MANAGER' />);
+		await rerender(<UserRole />);
 
 		expect(queryByTestId('confirmation-modal')).not.toBeInTheDocument();
 		expect(queryByTestId('update-role-btn')).not.toBeInTheDocument();
+
+		expect(getByTestId('user-role-options')).toBeInTheDocument();
+		expect(getByTestId('user-role-options')).toHaveTextContent('MANAGER');
 		expect(getByTestId('edit-user-role')).toBeInTheDocument();
+		expect(getByTestId('user-role-tooltip')).toBeInTheDocument();
 
 		expect(getUserRoles).toHaveBeenCalledTimes(1);
 
@@ -60,12 +80,10 @@ describe('UserRole', () => {
 
 		let tree;
 		await act(async () => {
-			tree = await render(
-				<UserRole userName='test1' currentUserRole='MANAGER' />
-			);
+			tree = await render(<UserRole />);
 		});
 
-		const { queryByTestId, container, rerender } = tree;
+		const { queryByTestId, rerender } = tree;
 
 		await rerender(<UserRole currentUserRole='MANAGER' />);
 
@@ -82,16 +100,12 @@ describe('UserRole', () => {
 			title: 'Failed to fetch role for user',
 			type: 'danger',
 		});
-
-		expect(container).toMatchSnapshot();
 	});
 
 	it('should show update role button on changing user role', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(
-				<UserRole userName='test1' currentUserRole='MANAGER' />
-			);
+			tree = await render(<UserRole />);
 		});
 
 		const { getByTestId, queryByTestId, container } = tree;
@@ -114,9 +128,7 @@ describe('UserRole', () => {
 	it('should show update role confirmation modal on clicking update role button', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(
-				<UserRole userName='test1' currentUserRole='MANAGER' />
-			);
+			tree = await render(<UserRole />);
 		});
 
 		const { getByTestId, queryByTestId } = tree;
@@ -143,9 +155,7 @@ describe('UserRole', () => {
 	it('should close update role confirmation modal on clicking cancel', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(
-				<UserRole userName='test1' currentUserRole='MANAGER' />
-			);
+			tree = await render(<UserRole />);
 		});
 
 		const { getByTestId, queryByTestId } = tree;
@@ -179,9 +189,7 @@ describe('UserRole', () => {
 
 		let tree;
 		await act(async () => {
-			tree = await render(
-				<UserRole userName='test1' currentUserRole='MANAGER' />
-			);
+			tree = await render(<UserRole />);
 		});
 
 		const { getByTestId, queryByTestId } = tree;
@@ -204,6 +212,15 @@ describe('UserRole', () => {
 		expect(updateUserRole).toHaveBeenCalledTimes(1);
 		expect(updateUserRole).toHaveBeenCalledWith('test1', 'ADMIN');
 		expect(queryByTestId('confirmation-modal')).not.toBeInTheDocument();
+		expect(mockedRecoilFn).toHaveBeenCalledWith({
+			isUserActive: false,
+			name: 'Test User',
+			passwordUpdatedAt: '2022-04-30 20:35:35',
+			userCreatedAt: '2022-04-30 20:35:35',
+			userName: 'test1',
+			userRole: 'ADMIN',
+		});
+
 		expect(notificationSpy).toHaveBeenCalledTimes(1);
 		expect(notificationSpy).toHaveBeenCalledWith({
 			animationIn: 'animate__slideInRight',
@@ -222,9 +239,7 @@ describe('UserRole', () => {
 
 		let tree;
 		await act(async () => {
-			tree = await render(
-				<UserRole userName='test1' currentUserRole='MANAGER' />
-			);
+			tree = await render(<UserRole />);
 		});
 
 		const { getByTestId, queryByTestId } = tree;

@@ -1,8 +1,11 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
+import { useRecoilState } from 'recoil';
 import { getUserInfo } from 'services/users/getUserInfo.service';
 import UserDetails from './UserDetails';
 
+let mockedRecoilFn = jest.fn();
+jest.mock('recoil');
 jest.mock('./UserRole', () => {
 	const UserRoleMock = (
 		<div data-testid='edit-user-role'>
@@ -55,6 +58,18 @@ describe('UserDetails', () => {
 			userCreatedAt: '2022-04-28 19:42:21',
 			passwordUpdatedAt: null,
 		});
+		useRecoilState.mockImplementation(() => {
+			return [
+				{
+					userName: 'test1',
+					name: 'Tester',
+					isUserActive: false,
+					userRole: 'MANAGER',
+					passwordUpdatedAt: '2022-04-28 20:35:35',
+				},
+				mockedRecoilFn,
+			];
+		});
 	});
 
 	it('should render user details', async () => {
@@ -63,7 +78,7 @@ describe('UserDetails', () => {
 			tree = await render(<UserDetails />);
 		});
 
-		const { getByTestId, queryByTestId, container } = tree;
+		const { getByTestId, queryByTestId, container, rerender } = tree;
 
 		expect(getByTestId('edit-user-details')).toBeInTheDocument();
 
@@ -75,12 +90,39 @@ describe('UserDetails', () => {
 		expect(getByTestId('edit-user-created-at')).toBeInTheDocument();
 		expect(getByTestId('edit-user-update-password')).toBeInTheDocument();
 
+		expect(mockedRecoilFn).toHaveBeenCalledWith({
+			isUserActive: true,
+			name: 'Tester',
+			passwordUpdatedAt: null,
+			userCreatedAt: '2022-04-28 19:42:21',
+			userName: 'test1',
+			userRole: 'ADMIN',
+		});
+
 		expect(getUserInfo).toHaveBeenCalledTimes(1);
 		expect(getUserInfo).toHaveBeenCalledWith(
 			'd749184e-b60d-4ac0-b459-e3b9cc5710d1'
 		);
 
 		expect(queryByTestId('edit-user-details-error')).not.toBeInTheDocument();
+
+		useRecoilState.mockImplementation(() => {
+			return [
+				{
+					userName: 'test1',
+					name: 'Tester',
+					isUserActive: false,
+					userRole: 'MANAGER',
+					userCreatedAt: '2022-04-28 19:42:21',
+					passwordUpdatedAt: '2022-04-28 20:35:35',
+				},
+				mockedRecoilFn,
+			];
+		});
+
+		await act(async () => {
+			rerender(<UserDetails />);
+		});
 
 		expect(container).toMatchSnapshot();
 	});

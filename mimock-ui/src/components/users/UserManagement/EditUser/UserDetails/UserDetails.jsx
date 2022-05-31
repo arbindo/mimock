@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
+import { useRecoilState } from 'recoil';
 import { getUserInfo } from 'services/users/getUserInfo.service';
+import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import {
 	UserDetailsWrapper,
 	Label,
@@ -17,14 +19,7 @@ import UserPasswordUpdate from './UserPasswordUpdate';
 export default function UserDetails() {
 	const [searchParams] = useSearchParams();
 	const [userFetchError, setUserFetchError] = useState(false);
-	const [userInfo, setUserInfo] = useState({
-		userName: '',
-		name: '',
-		userRole: '',
-		isUserActive: false,
-		userCreatedAt: null,
-		passwordUpdatedAt: null,
-	});
+	const [userInfo, setUserInfo] = useRecoilState(editUserDetailsAtom);
 
 	useEffect(() => {
 		const userId = searchParams.get('userId');
@@ -72,10 +67,9 @@ export default function UserDetails() {
 					<UserActivationStatus isUserActive={userInfo.isUserActive} />
 					{info(
 						'Created on',
-						format(
-							parseISO(userInfo.userCreatedAt || '1970-01-01 00:01:02'),
-							'dd MMM yyyy'
-						),
+						userInfo.userCreatedAt
+							? format(parseISO(userInfo.userCreatedAt), 'dd MMM yyyy')
+							: '',
 						'edit-user-created-at'
 					)}
 					<UserPasswordUpdate passwordUpdatedOn={userInfo.passwordUpdatedAt} />

@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import ActivationSwitch from '@material-ui/core/Switch';
 import { useIosSwitchStyles } from '@mui-treasury/styles/switch/ios';
+import { useRecoilState } from 'recoil';
+import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
+import useNotification from 'hooks/useNotification';
+import {
+	notificationTypes,
+	notificationPositions,
+} from 'constants/notificationConstants';
+import { updateUserActivationStatus } from 'services/users/updateUserActivationStatus.service';
 import {
 	UserActivationStatusWrapper,
 	UserActivationStatusLabel,
@@ -9,13 +16,49 @@ import {
 	StatusLabel,
 } from './UserActivationStatus.style';
 
-function UserActivationStatus({ isUserActive }) {
+function UserActivationStatus() {
 	const iosStyles = useIosSwitchStyles();
-	const [activationStatus, setActivationStatus] = useState(isUserActive);
+	const [userInfo, setUserInfo] = useRecoilState(editUserDetailsAtom);
+	const [activationStatus, setActivationStatus] = useState(
+		userInfo.isUserActive
+	);
 
 	useEffect(() => {
-		setActivationStatus(isUserActive);
-	}, [isUserActive]);
+		setActivationStatus(userInfo.isUserActive);
+	}, [userInfo.isUserActive]);
+
+	const updateActivationStatus = (e) => {
+		updateUserActivationStatus(userInfo.userName, e.target.checked)
+			.then((res) => {
+				const { userName, updatedActivationStatus } = res;
+				setActivationStatus(updatedActivationStatus);
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					title: updatedActivationStatus
+						? 'User activated'
+						: 'User deactivated',
+					message: `User - ${userName} has been ${
+						updatedActivationStatus ? 'activated' : 'deactivated'
+					}`,
+					position: notificationPositions.NOTIFICATION_POSITION_BOTTOM_RIGHT,
+					animationIn: 'animate__slideInRight',
+					animationOut: 'animate__slideOutRight',
+				});
+				setUserInfo({
+					...userInfo,
+					isUserActive: updatedActivationStatus,
+				});
+			})
+			.catch(() => {
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
+					title: `Failed to update activation status`,
+					message: 'Please try again',
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
+			});
+	};
 
 	const { root, switchBase, checked, thumb, track } = iosStyles;
 
@@ -28,7 +71,7 @@ function UserActivationStatus({ isUserActive }) {
 					classes={{ root, switchBase, checked, thumb, track }}
 					checked={activationStatus}
 					onChange={(e) => {
-						setActivationStatus(e.target.checked);
+						updateActivationStatus(e);
 					}}
 				/>
 				<StatusLabel
@@ -41,9 +84,5 @@ function UserActivationStatus({ isUserActive }) {
 		</UserActivationStatusWrapper>
 	);
 }
-
-UserActivationStatus.propTypes = {
-	isUserActive: PropTypes.bool.isRequired,
-};
 
 export default UserActivationStatus;

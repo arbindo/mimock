@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import useNotification from 'hooks/useNotification';
 import { updateUserRole } from 'services/users/updateUserRole.service';
 import { ConfirmationModal } from 'components/common/Modals';
+import { useRecoilState } from 'recoil';
+import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import { notificationTypes } from 'constants/notificationConstants';
 import { getUserRoles } from 'services/users/getUserRoles.service.js';
 import {
@@ -16,8 +17,10 @@ import {
 	RoleHint,
 } from './UserRole.style.js';
 
-function UserRole({ userName, currentUserRole }) {
-	const isFirstRender = useRef(true);
+function UserRole() {
+	const [userInfo, setUserInfo] = useRecoilState(editUserDetailsAtom);
+	const { userName, userRole: currentUserRole } = userInfo;
+
 	const [roles, setRoles] = useState([]);
 	const [selectedRole, setSelectedRole] = useState(currentUserRole);
 	const [selectedRoleDescription, setSelectedRoleDescription] = useState('');
@@ -31,18 +34,13 @@ function UserRole({ userName, currentUserRole }) {
 
 	useEffect(() => {
 		setSelectedRole(currentUserRole);
-		setSelectedRoleDescription(
-			roles.find((role) => role.roleName === currentUserRole)?.roleDescription
-		);
-
-		if (!isFirstRender.current) {
-			return;
-		}
-		isFirstRender.current = false;
 
 		getUserRoles()
 			.then((res) => {
 				setRoles(res);
+				setSelectedRoleDescription(
+					res.find((role) => role.roleName === currentUserRole)?.roleDescription
+				);
 			})
 			.catch(() => {
 				setRoleFetchError(true);
@@ -60,7 +58,12 @@ function UserRole({ userName, currentUserRole }) {
 		setUpdatingUserRole(true);
 		updateUserRole(userName, selectedRole)
 			.then(() => {
+				setUpdatingUserRole(false);
 				setShowUpdateConfirmationModal(false);
+				setUserInfo({
+					...userInfo,
+					userRole: selectedRole,
+				});
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
 					title: 'User role updated successfully',
@@ -70,6 +73,7 @@ function UserRole({ userName, currentUserRole }) {
 				});
 			})
 			.catch(() => {
+				setUpdatingUserRole(false);
 				setShowUpdateConfirmationModal(false);
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
@@ -144,10 +148,5 @@ function UserRole({ userName, currentUserRole }) {
 		</If>
 	);
 }
-
-UserRole.propTypes = {
-	userName: PropTypes.string.isRequired,
-	currentUserRole: PropTypes.string.isRequired,
-};
 
 export default UserRole;

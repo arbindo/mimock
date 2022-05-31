@@ -6,5 +6,5 @@ export const updateUserRole = async (userName, role) => {
 		userRole: role,
 	})
 		.then((res) => res.data)
-		.catch((err) => err);
+		.catch((err) => Promise.reject(err));
 };
