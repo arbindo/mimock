@@ -62,7 +62,7 @@ const authenticate = async (url, requestData, config = {}) => {
 		});
 };
 
-const put = async (url, data, contentType, config) => {
+const put = async (url, data, contentType = 'application/json', config) => {
 	return await client
 		.put(url, data, {
 			headers: {
