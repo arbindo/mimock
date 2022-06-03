@@ -18,7 +18,13 @@ exports[`UserDetails should render user details 1`] = `
       <div
         class="w-1/2 font-sans subpixel-antialiased text-lg text-gray-500 mx-20"
       >
-        Tester
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+          disabled=""
+          readonly=""
+          type="text"
+          value="Tester"
+        />
       </div>
     </div>
     <div
@@ -33,7 +39,13 @@ exports[`UserDetails should render user details 1`] = `
       <div
         class="w-1/2 font-sans subpixel-antialiased text-lg text-gray-500 mx-20"
       >
-        test1
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+          disabled=""
+          readonly=""
+          type="text"
+          value="test1"
+        />
       </div>
     </div>
     <div
@@ -73,7 +85,13 @@ exports[`UserDetails should render user details 1`] = `
       <div
         class="w-1/2 font-sans subpixel-antialiased text-lg text-gray-500 mx-20"
       >
-        28 Apr 2022
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+          disabled=""
+          readonly=""
+          type="text"
+          value="28 Apr 2022"
+        />
       </div>
     </div>
     <div

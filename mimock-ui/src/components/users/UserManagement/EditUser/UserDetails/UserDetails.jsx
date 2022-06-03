@@ -10,6 +10,7 @@ import {
 	Label,
 	Info,
 	Value,
+	ValueInput,
 	UserDetailsFetchError,
 } from './UserDetails.style';
 import UserRole from './UserRole';
@@ -44,7 +45,9 @@ export default function UserDetails() {
 		return (
 			<Info key={key} data-testid={key}>
 				<Label>{label}</Label>
-				<Value>{value}</Value>
+				<Value>
+					<ValueInput disabled readOnly type='text' value={value} />
+				</Value>
 			</Info>
 		);
 	};

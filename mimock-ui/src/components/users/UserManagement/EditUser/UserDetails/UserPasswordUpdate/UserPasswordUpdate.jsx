@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 import {
 	UserPasswordUpdateWrapper,
 	UserPasswordUpdateLabel,
 	UserPasswordUpdateActions,
-	UpdatePasswordButton,
 	PasswordUpdatedDate,
+	EditPasswordIcon,
 } from './UserPasswordUpdate.style';
 
 function UserPasswordUpdate({ passwordUpdatedOn }) {
@@ -20,14 +22,11 @@ function UserPasswordUpdate({ passwordUpdatedOn }) {
 						{format(parseISO(passwordUpdatedOn), 'dd MMM yyyy')}
 					</PasswordUpdatedDate>
 				</If>
-				<UpdatePasswordButton
-					label='Update password'
-					dataTestid='update-password-btn'
-					background='bg-sky-500'
-					color='text-white'
-					additionalStyles='mx-10'
-					onclickHandler={() => {}}
-				/>
+				<Tooltip title='Update password'>
+					<IconButton data-testid='update-password-btn'>
+						<EditPasswordIcon />
+					</IconButton>
+				</Tooltip>
 			</UserPasswordUpdateActions>
 		</UserPasswordUpdateWrapper>
 	);

@@ -33,6 +33,25 @@ export const Value = tw.div`
     mx-20
 `;
 
+export const ValueInput = tw.input`
+    block
+    px-3
+    py-1.5
+    text-base
+    font-normal
+    text-gray-700
+    bg-gray-100
+    bg-clip-padding
+    border
+    border-solid
+    border-gray-300
+    rounded
+    transition
+    ease-in-out
+    m-0
+    focus:outline-none
+`;
+
 export const DynamicValue = tw.div`
     w-1/2
     mx-20
