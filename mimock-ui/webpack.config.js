@@ -10,6 +10,12 @@ module.exports = {
 		historyApiFallback: true,
 	},
 
+	resolve: {
+		fallback: {
+			crypto: false,
+		},
+	},
+
 	module: {
 		rules: [
 			{
