@@ -1,16 +1,14 @@
 import React from 'react';
 import { act, render, fireEvent } from '@testing-library/react';
 import { useRecoilState } from 'recoil';
-import { getUserRoles } from 'services/users/getUserRoles.service.js';
-import { updateUserRole } from 'services/users/updateUserRole.service';
+import { getUserRoles, updateUserRole } from 'services/users';
 import UserRole from './UserRole';
 
 const actualNotification = jest.requireActual('hooks/useNotification');
 
 let mockedRecoilFn = jest.fn();
 jest.mock('recoil');
-jest.mock('services/users/getUserRoles.service.js');
-jest.mock('services/users/updateUserRole.service');
+jest.mock('services/users');
 jest.mock('react-notifications-component', () => {
 	const Store = {
 		addNotification: jest.fn(),

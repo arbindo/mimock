@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
 import { useRecoilState } from 'recoil';
-import { getUserInfo } from 'services/users/getUserInfo.service';
+import { getUserInfo } from 'services/users';
 import UserDetails from './UserDetails';
 
 let mockedRecoilFn = jest.fn();
@@ -39,7 +39,7 @@ jest.mock('./UserPasswordUpdate', () => {
 
 	return () => UserPasswordUpdateMock;
 });
-jest.mock('services/users/getUserInfo.service');
+jest.mock('services/users');
 jest.mock('react-router-dom', () => ({
 	useSearchParams: () => [
 		{

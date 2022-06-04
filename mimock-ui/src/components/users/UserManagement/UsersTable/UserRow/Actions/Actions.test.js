@@ -25,7 +25,7 @@ jest.mock('react-router-dom', () => ({
 	...jest.requireActual('react-router-dom'),
 	useNavigate: () => mockedNavigation,
 }));
-jest.mock('services/users/deleteUser.service');
+jest.mock('services/users');
 
 describe('Actions', () => {
 	it('should render user actions', async () => {

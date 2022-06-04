@@ -1,12 +1,12 @@
 import React from 'react';
 import { act, render, fireEvent } from '@testing-library/react';
 import { useRecoilState } from 'recoil';
-import { updateUserActivationStatus } from 'services/users/updateUserActivationStatus.service';
+import { updateUserActivationStatus } from 'services/users';
 import UserActivationStatus from './UserActivationStatus';
 
 let mockedRecoilFn = jest.fn();
 jest.mock('recoil');
-jest.mock('services/users/updateUserActivationStatus.service');
+jest.mock('services/users');
 
 const actualNotification = jest.requireActual('hooks/useNotification');
 jest.mock('react-notifications-component', () => {

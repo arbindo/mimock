@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import { useRecoilState } from 'recoil';
-import { getUserInfo } from 'services/users/getUserInfo.service';
+import { getUserInfo } from 'services/users';
 import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import {
 	UserDetailsWrapper,

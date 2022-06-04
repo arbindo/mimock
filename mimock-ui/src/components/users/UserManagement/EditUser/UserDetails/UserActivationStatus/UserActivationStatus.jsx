@@ -8,7 +8,7 @@ import {
 	notificationTypes,
 	notificationPositions,
 } from 'constants/notificationConstants';
-import { updateUserActivationStatus } from 'services/users/updateUserActivationStatus.service';
+import { updateUserActivationStatus } from 'services/users';
 import {
 	UserActivationStatusWrapper,
 	UserActivationStatusLabel,

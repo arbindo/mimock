@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import useNotification from 'hooks/useNotification';
-import { updateUserRole } from 'services/users/updateUserRole.service';
+import { getUserRoles, updateUserRole } from 'services/users';
 import { ConfirmationModal } from 'components/common/Modals';
 import { useRecoilState } from 'recoil';
 import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import { notificationTypes } from 'constants/notificationConstants';
-import { getUserRoles } from 'services/users/getUserRoles.service.js';
 import {
 	UserRoleWrapper,
 	UserRoleActions,
