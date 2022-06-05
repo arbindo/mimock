@@ -97,6 +97,35 @@ describe('PasswordUpdateModal', () => {
 		expect(container).toMatchSnapshot();
 	});
 
+	it('should show passwords are empty', async () => {
+		const notificationSpy = jest.spyOn(actualNotification, 'default');
+		updatePassword.mockResolvedValue({});
+
+		let tree;
+		await act(async () => {
+			tree = await render(<PasswordUpdateModal userName='test1' />);
+		});
+
+		const { getByTestId, queryByTestId, container } = tree;
+
+		await act(async () => {
+			await fireEvent.click(getByTestId('password-update-confirm-button'));
+		});
+
+		expect(
+			queryByTestId('password-update-loading-header')
+		).not.toBeInTheDocument();
+
+		expect(updatePassword).toHaveBeenCalledTimes(0);
+		expect(notificationSpy).toHaveBeenCalledTimes(0);
+		expect(getByTestId('password-update-error')).toBeInTheDocument();
+		expect(getByTestId('password-update-error')).toHaveTextContent(
+			'Please enter password to continue'
+		);
+
+		expect(container).toMatchSnapshot();
+	});
+
 	it('should show password length error when password is less than 8 characters long', async () => {
 		const notificationSpy = jest.spyOn(actualNotification, 'default');
 		updatePassword.mockResolvedValue({});
@@ -220,12 +249,6 @@ describe('PasswordUpdateModal', () => {
 		const { getByTestId, queryByTestId } = tree;
 
 		await act(async () => {
-			await fireEvent.change(getByTestId('new-password-input'), {
-				target: { value: 'password123' },
-			});
-			await fireEvent.change(getByTestId('confirm-password-input'), {
-				target: { value: 'password123' },
-			});
 			await fireEvent.click(getByTestId('password-update-cancel-button'));
 		});
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'styles';
 import { useRecoilState } from 'recoil';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 import { ButtonVariants } from 'styles/Button';
@@ -17,6 +16,9 @@ import {
 	ButtonContainer,
 	PasswordError,
 	LoaderStyle,
+	PasswordUpdateForm,
+	CancelButton,
+	UpdateButton,
 } from './PasswordUpdateModal.style';
 
 function PasswordUpdateModal({ userName }) {
@@ -71,6 +73,14 @@ function PasswordUpdateModal({ userName }) {
 	};
 
 	const isPasswordValid = () => {
+		if (!password.newPassword || !password.confirmPassword) {
+			setPasswordError({
+				showError: true,
+				errorMessage: 'Please enter password to continue',
+			});
+			return false;
+		}
+
 		if (password.newPassword !== password.confirmPassword) {
 			setPasswordError({
 				showError: true,
@@ -98,7 +108,8 @@ function PasswordUpdateModal({ userName }) {
 		return true;
 	};
 
-	const updatePasswordHandler = () => {
+	const updatePasswordHandler = (e) => {
+		e.preventDefault();
 		if (!isPasswordValid()) {
 			return;
 		}
@@ -146,41 +157,46 @@ function PasswordUpdateModal({ userName }) {
 					/>
 				</When>
 				<Otherwise>
-					{passwordContainer(
-						'New Password',
-						'new-password',
-						password.newPassword,
-						newPasswordChange
-					)}
-					{passwordContainer(
-						'Confirm password',
-						'confirm-password',
-						password.confirmPassword,
-						confirmPasswordChange
-					)}
-					<If condition={passwordError.showError}>
-						<PasswordError data-testid='password-update-error'>
-							{passwordError.errorMessage}
-						</PasswordError>
-					</If>
-					<ButtonContainer>
-						<Button
-							dataTestid='password-update-cancel-button'
-							variant={ButtonVariants.RedButton}
-							label='Cancel'
-							width='w-1/2'
-							onclickHandler={() => {
-								closeModal();
-							}}
-						/>
-						<Button
-							dataTestid='password-update-confirm-button'
-							variant={ButtonVariants.GreenButton}
-							label='Update'
-							width='w-1/2'
-							onclickHandler={updatePasswordHandler}
-						/>
-					</ButtonContainer>
+					<PasswordUpdateForm onSubmit={updatePasswordHandler}>
+						{passwordContainer(
+							'New Password',
+							'new-password',
+							password.newPassword,
+							newPasswordChange
+						)}
+						{passwordContainer(
+							'Confirm password',
+							'confirm-password',
+							password.confirmPassword,
+							confirmPasswordChange
+						)}
+						<If condition={passwordError.showError}>
+							<PasswordError data-testid='password-update-error'>
+								{passwordError.errorMessage}
+							</PasswordError>
+						</If>
+						<ButtonContainer>
+							<UpdateButton
+								type='submit'
+								dataTestid='password-update-confirm-button'
+								variant={ButtonVariants.GreenButton}
+								label='Update'
+								required={true}
+								width='w-1/2'
+							/>
+							<CancelButton
+								type='button'
+								dataTestid='password-update-cancel-button'
+								variant={ButtonVariants.RedButton}
+								label='Cancel'
+								width='w-1/2'
+								required={true}
+								onclickHandler={() => {
+									closeModal();
+								}}
+							/>
+						</ButtonContainer>
+					</PasswordUpdateForm>
 				</Otherwise>
 			</Choose>
 		</PasswordModalWrapper>

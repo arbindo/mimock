@@ -1,5 +1,6 @@
 import tw from 'tailwind-styled-components';
 import { css } from '@emotion/react';
+import { Button } from 'styles';
 
 export const PasswordModalWrapper = tw.div`
   xl:w-3/4
@@ -57,6 +58,7 @@ export const ButtonContainer = tw.div`
   my-10
   w-1/2
   gap-6
+  flex-row-reverse
 `;
 
 export const PasswordError = tw.div`
@@ -77,3 +79,9 @@ export const LoaderStyle = css`
 	padding: 20px;
 	display: block;
 `;
+
+export const PasswordUpdateForm = tw.form``;
+
+export const CancelButton = tw(Button)``;
+
+export const UpdateButton = tw(Button)``;
