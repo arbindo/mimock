@@ -29,7 +29,7 @@ exports[`Header should render user management header 1`] = `
       </div>
     </div>
     <button
-      class="flex items-center justify-center gap-3 px-9 py-3 shadow-md rounded-md text-center text-lg font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-fit bg-green-300 dark:bg-green-400"
+      class="flex items-center justify-center gap-1 px-9 py-2 shadow-md rounded-sm text-center text-base font-semibold outline-none cursor-pointer hover:brightness-110 transition duration-100 text-white dark:text-white w-fit bg-teal-500 dark:bg-teal-400"
       data-testid="add-user-btn"
     >
       <svg
@@ -37,12 +37,12 @@ exports[`Header should render user management header 1`] = `
         height="1em"
         stroke="currentColor"
         stroke-width="0"
-        viewBox="0 0 24 24"
+        viewBox="0 0 448 512"
         width="1em"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M15 2.013H9V9H2v6h7v6.987h6V15h7V9h-7z"
+          d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"
         />
       </svg>
       ADD USER

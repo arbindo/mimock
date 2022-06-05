@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { IconButtonData } from '../../ButtonData';
 import { IconButtonWithLabelContainer } from './IconButtonWithLabel.style';
 import { AiFillCopy, AiOutlineCheck } from 'react-icons/ai';
-import { BiTrash, BiPlusMedical } from 'react-icons/bi';
-import { FaFilter, FaHome } from 'react-icons/fa';
+import { BiTrash } from 'react-icons/bi';
+import { FaFilter, FaHome, FaPlusSquare } from 'react-icons/fa';
 import CloseIcon from '../CloseIcon.jsx';
 
 function IconButtonWithLabel({
@@ -41,7 +41,7 @@ function getIcon(variant) {
 		case 'DELETE_BUTTON':
 			return <BiTrash />;
 		case 'ADD_BUTTON':
-			return <BiPlusMedical />;
+			return <FaPlusSquare />;
 		case 'COPY_BUTTON':
 			return <AiFillCopy />;
 		case 'FILTER_BUTTON':

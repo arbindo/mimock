@@ -31,8 +31,8 @@ const ButtonData = {
 
 const IconButtonData = {
 	ADD_BUTTON: {
-		background: 'bg-green-300 dark:bg-green-400',
-		color: 'text-lime-700 dark:text-white',
+		background: 'bg-teal-500 dark:bg-teal-400',
+		color: 'text-white dark:text-white',
 	},
 	DELETE_BUTTON: {
 		background: 'bg-red-600',

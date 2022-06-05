@@ -4,16 +4,19 @@ export const IconButtonWithLabelContainer = tw.button`
   flex
   items-center
   justify-center
-  gap-3
+  gap-1
   px-9
-  py-3
+  py-2
   shadow-md
-  rounded-md
+  rounded-sm
   text-center
-  text-lg
+  text-base
   font-semibold
+  outline-none
   cursor-pointer
-  hover:brightness-105
+  hover:brightness-110
+  transition
+  duration-100
   ${(props) => props.$color}
   ${(props) => (props.$width ? props.$width : 'w-fit')}
 	${(props) => props.$background}
