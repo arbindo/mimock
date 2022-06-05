@@ -9,6 +9,7 @@ const editUserDetailsAtom = atom({
 		isUserActive: false,
 		userCreatedAt: null,
 		passwordUpdatedAt: null,
+		showPasswordUpdateModal: false,
 	},
 });
 

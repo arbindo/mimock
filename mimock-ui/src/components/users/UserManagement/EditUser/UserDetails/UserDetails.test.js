@@ -39,6 +39,15 @@ jest.mock('./UserPasswordUpdate', () => {
 
 	return () => UserPasswordUpdateMock;
 });
+jest.mock('./UserPasswordUpdate/PasswordUpdateModal', () => {
+	const UserPasswordUpdateMock = (
+		<div data-testid='password-update-modal'>
+			<button>Update Password</button>
+		</div>
+	);
+
+	return () => UserPasswordUpdateMock;
+});
 jest.mock('services/users');
 jest.mock('react-router-dom', () => ({
 	useSearchParams: () => [
@@ -105,6 +114,7 @@ describe('UserDetails', () => {
 		);
 
 		expect(queryByTestId('edit-user-details-error')).not.toBeInTheDocument();
+		expect(queryByTestId('password-update-modal')).not.toBeInTheDocument();
 
 		useRecoilState.mockImplementation(() => {
 			return [
@@ -123,6 +133,65 @@ describe('UserDetails', () => {
 		await act(async () => {
 			rerender(<UserDetails />);
 		});
+
+		expect(container).toMatchSnapshot();
+	});
+
+	it('should render password update modal', async () => {
+		let tree;
+		await act(async () => {
+			tree = await render(<UserDetails />);
+		});
+
+		const { getByTestId, queryByTestId, container, rerender } = tree;
+
+		expect(getByTestId('edit-user-details')).toBeInTheDocument();
+
+		expect(getByTestId('edit-user-name')).toBeInTheDocument();
+		expect(getByTestId('edit-user-username')).toBeInTheDocument();
+		expect(getByTestId('edit-user-role')).toBeInTheDocument();
+		expect(getByTestId('edit-user-role')).toBeInTheDocument();
+		expect(getByTestId('edit-user-activation-status')).toBeInTheDocument();
+		expect(getByTestId('edit-user-created-at')).toBeInTheDocument();
+		expect(getByTestId('edit-user-update-password')).toBeInTheDocument();
+
+		expect(mockedRecoilFn).toHaveBeenCalledWith({
+			isUserActive: true,
+			name: 'Tester',
+			passwordUpdatedAt: null,
+			userCreatedAt: '2022-04-28 19:42:21',
+			userName: 'test1',
+			userRole: 'ADMIN',
+		});
+
+		expect(getUserInfo).toHaveBeenCalledTimes(1);
+		expect(getUserInfo).toHaveBeenCalledWith(
+			'd749184e-b60d-4ac0-b459-e3b9cc5710d1'
+		);
+
+		expect(queryByTestId('edit-user-details-error')).not.toBeInTheDocument();
+		expect(queryByTestId('password-update-modal')).not.toBeInTheDocument();
+
+		useRecoilState.mockImplementation(() => {
+			return [
+				{
+					userName: 'test1',
+					name: 'Tester',
+					isUserActive: false,
+					userRole: 'MANAGER',
+					userCreatedAt: '2022-04-28 19:42:21',
+					passwordUpdatedAt: '2022-04-28 20:35:35',
+					showPasswordUpdateModal: true,
+				},
+				mockedRecoilFn,
+			];
+		});
+
+		await act(async () => {
+			rerender(<UserDetails />);
+		});
+
+		expect(getByTestId('password-update-modal')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

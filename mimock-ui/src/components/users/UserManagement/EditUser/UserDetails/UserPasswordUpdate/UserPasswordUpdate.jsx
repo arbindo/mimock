@@ -4,6 +4,8 @@ import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
+import { useRecoilState } from 'recoil';
+import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import {
 	UserPasswordUpdateWrapper,
 	UserPasswordUpdateLabel,
@@ -13,6 +15,8 @@ import {
 } from './UserPasswordUpdate.style';
 
 function UserPasswordUpdate({ passwordUpdatedOn }) {
+	const [userInfo, setUserInfo] = useRecoilState(editUserDetailsAtom);
+
 	return (
 		<UserPasswordUpdateWrapper data-testid='edit-user-update-password'>
 			<UserPasswordUpdateLabel>Password updated on</UserPasswordUpdateLabel>
@@ -23,7 +27,15 @@ function UserPasswordUpdate({ passwordUpdatedOn }) {
 					</PasswordUpdatedDate>
 				</If>
 				<Tooltip title='Update password'>
-					<IconButton data-testid='update-password-btn'>
+					<IconButton
+						data-testid='update-password-btn'
+						onClick={() => {
+							setUserInfo({
+								...userInfo,
+								showPasswordUpdateModal: true,
+							});
+						}}
+					>
 						<EditPasswordIcon />
 					</IconButton>
 				</Tooltip>

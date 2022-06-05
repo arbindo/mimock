@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`UserDetails should render password update modal 1`] = `
+<div>
+  <div
+    data-testid="password-update-modal"
+  >
+    <button>
+      Update Password
+    </button>
+  </div>
+</div>
+`;
+
 exports[`UserDetails should render user details 1`] = `
 <div>
   <div

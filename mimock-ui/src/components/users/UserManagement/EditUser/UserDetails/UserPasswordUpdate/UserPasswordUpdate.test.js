@@ -1,8 +1,28 @@
 import React from 'react';
 import { act, render, fireEvent } from '@testing-library/react';
+import { useRecoilState } from 'recoil';
 import UserPasswordUpdate from './UserPasswordUpdate';
 
+let mockedRecoilFn = jest.fn();
+jest.mock('recoil');
+
 describe('UserPasswordUpdate', () => {
+	beforeEach(() => {
+		useRecoilState.mockImplementation(() => {
+			return [
+				{
+					userName: 'test1',
+					name: 'Tester',
+					isUserActive: false,
+					userRole: 'MANAGER',
+					passwordUpdatedAt: '2022-04-28 20:35:35',
+					showPasswordUpdateModal: false,
+				},
+				mockedRecoilFn,
+			];
+		});
+	});
+
 	it('should render UserPasswordUpdate', async () => {
 		let tree;
 		await act(async () => {
@@ -38,7 +58,7 @@ describe('UserPasswordUpdate', () => {
 		expect(container).toMatchSnapshot();
 	});
 
-	it('should click update password button', async () => {
+	it('should update recoil state to show password update modal on clicking update password button', async () => {
 		let tree;
 		await act(async () => {
 			tree = await render(
@@ -55,9 +75,18 @@ describe('UserPasswordUpdate', () => {
 		);
 
 		await act(async () => {
-			fireEvent.click(getByTestId('update-password-btn'));
+			await fireEvent.click(getByTestId('update-password-btn'));
 		});
 
+		expect(mockedRecoilFn).toHaveBeenCalledTimes(1);
+		expect(mockedRecoilFn).toHaveBeenCalledWith({
+			userName: 'test1',
+			name: 'Tester',
+			isUserActive: false,
+			userRole: 'MANAGER',
+			passwordUpdatedAt: '2022-04-28 20:35:35',
+			showPasswordUpdateModal: true,
+		});
 		expect(container).toMatchSnapshot();
 	});
 });

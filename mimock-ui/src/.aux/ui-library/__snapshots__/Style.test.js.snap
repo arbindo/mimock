@@ -29,7 +29,7 @@ exports[`Style should render custom button 2 1`] = `
 
 exports[`Style should render default button 1 1`] = `
 <button
-  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-5/6 bg-red-300 dark:bg-red-500"
+  class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-red-800 dark:text-white w-5/6 bg-red-300 dark:bg-red-500"
   data-testid="default-button-test-1"
 >
   Cancel
@@ -38,7 +38,7 @@ exports[`Style should render default button 1 1`] = `
 
 exports[`Style should render default button 2 1`] = `
 <button
-  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/2 bg-green-300 dark:bg-green-400"
+  class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-lime-700 dark:text-white w-1/2 bg-green-300 dark:bg-green-400"
   data-testid="default-button-test-2"
 >
   Success
@@ -47,7 +47,7 @@ exports[`Style should render default button 2 1`] = `
 
 exports[`Style should render default button 3 1`] = `
 <button
-  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
+  class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-fit bg-red-600"
   data-testid="default-button-test-3"
 >
   Cancel
@@ -56,7 +56,7 @@ exports[`Style should render default button 3 1`] = `
 
 exports[`Style should render default button 4 1`] = `
 <button
-  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-green-500"
+  class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/2 bg-green-500"
   data-testid="default-button-test-4"
 >
   Success
@@ -65,7 +65,7 @@ exports[`Style should render default button 4 1`] = `
 
 exports[`Style should render default button 5 1`] = `
 <button
-  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-blue-600"
+  class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-fit bg-blue-600"
   data-testid="default-button-test-5"
 >
   Primary
@@ -74,7 +74,7 @@ exports[`Style should render default button 5 1`] = `
 
 exports[`Style should render default button 6 1`] = `
 <button
-  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-3/4 bg-white dark:bg-slate-300"
+  class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-black w-3/4 bg-white dark:bg-slate-300"
   data-testid="default-button-test-6"
 >
   Default
@@ -83,7 +83,7 @@ exports[`Style should render default button 6 1`] = `
 
 exports[`Style should render default button 7 1`] = `
 <button
-  class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-teal-400"
+  class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-fit bg-teal-400"
   data-testid="default-button-test-7"
 >
   LOGIN
@@ -388,43 +388,43 @@ exports[`Style should render style for button, pill, card and text field 1`] = `
         class="w-full grid grid-cols-4 gap-4 gap-y-8"
       >
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-red-800 dark:text-white w-5/6 bg-red-300 dark:bg-red-500"
+          class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-red-800 dark:text-white w-5/6 bg-red-300 dark:bg-red-500"
           data-testid="default-button-test-1"
         >
           Cancel
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-lime-700 dark:text-white w-1/2 bg-green-300 dark:bg-green-400"
+          class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-lime-700 dark:text-white w-1/2 bg-green-300 dark:bg-green-400"
           data-testid="default-button-test-2"
         >
           Success
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-red-600"
+          class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-fit bg-red-600"
           data-testid="default-button-test-3"
         >
           Cancel
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-1/2 bg-green-500"
+          class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/2 bg-green-500"
           data-testid="default-button-test-4"
         >
           Success
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-blue-600"
+          class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-fit bg-blue-600"
           data-testid="default-button-test-5"
         >
           Primary
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-black w-3/4 bg-white dark:bg-slate-300"
+          class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-black w-3/4 bg-white dark:bg-slate-300"
           data-testid="default-button-test-6"
         >
           Default
         </button>
         <button
-          class="px-9 py-3 m-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 text-white w-fit bg-teal-400"
+          class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-fit bg-teal-400"
           data-testid="default-button-test-7"
         >
           LOGIN

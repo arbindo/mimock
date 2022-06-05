@@ -16,6 +16,7 @@ import {
 import UserRole from './UserRole';
 import UserActivationStatus from './UserActivationStatus';
 import UserPasswordUpdate from './UserPasswordUpdate';
+import PasswordUpdateModal from './UserPasswordUpdate/PasswordUpdateModal';
 
 export default function UserDetails() {
 	const [searchParams] = useSearchParams();
@@ -54,6 +55,9 @@ export default function UserDetails() {
 
 	return (
 		<Choose>
+			<When condition={userInfo.showPasswordUpdateModal}>
+				<PasswordUpdateModal userName={userInfo.userName} />
+			</When>
 			<When condition={userFetchError}>
 				<UserDetailsFetchError data-testid='edit-user-details-error'>
 					Failed to fetch user details. Please try again later.
