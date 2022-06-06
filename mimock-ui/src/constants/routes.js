@@ -33,5 +33,9 @@ export const routes = {
 			path: `${adminPrefix}/users/edit`,
 			secured: true,
 		},
+		addUser: {
+			path: `${adminPrefix}/users/add-user`,
+			secured: true,
+		},
 	},
 };

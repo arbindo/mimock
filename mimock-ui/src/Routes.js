@@ -12,6 +12,7 @@ import Users from './components/users';
 import EditUser from './components/users/UserManagement/EditUser';
 import Logout from './components/common/Logout';
 import Detail from './components/detail';
+import AddUser from './components/users/UserManagement/AddUser';
 
 function AppRoutes() {
 	useAxiosInterceptor();
@@ -52,6 +53,10 @@ function AppRoutes() {
 						<Route
 							path={routes.adminRoutes.editUsers.path}
 							element={secureAdminRoutes(<EditUser />)}
+						/>
+						<Route
+							path={routes.adminRoutes.addUser.path}
+							element={secureAdminRoutes(<AddUser />)}
 						/>
 					</Route>
 				</Route>
