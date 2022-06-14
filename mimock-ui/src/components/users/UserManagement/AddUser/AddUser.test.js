@@ -13,6 +13,7 @@ describe('AddUser', () => {
 
 		expect(getByTestId('add-new-user')).toBeInTheDocument();
 		expect(getByTestId('add-user-header')).toBeInTheDocument();
+		expect(getByTestId('add-user-form')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

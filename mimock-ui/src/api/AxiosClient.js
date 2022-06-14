@@ -33,7 +33,12 @@ const get = async (url, config = {}) => {
 		});
 };
 
-const post = async (url, requestData, contentType, config = {}) => {
+const post = async (
+	url,
+	requestData,
+	contentType = 'application/json',
+	config = {}
+) => {
 	return await client
 		.post(url, requestData, {
 			headers: {

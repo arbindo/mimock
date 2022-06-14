@@ -2,6 +2,7 @@ import React from 'react';
 import { IoPersonAdd } from 'react-icons/io5';
 import IconHeader from 'styles/IconHeader';
 import { AddUserWrapper, AddUserHeader } from './AddUser.style';
+import AddUserForm from './AddUserForm';
 
 export default function AddUser() {
 	return (
@@ -13,6 +14,7 @@ export default function AddUser() {
 					title='Add New User'
 				/>
 			</AddUserHeader>
+			<AddUserForm />
 		</AddUserWrapper>
 	);
 }

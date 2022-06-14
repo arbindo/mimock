@@ -1,0 +1,685 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddUserForm should call addNewUser api when all inputs are valid 1`] = `
+<div>
+  <form
+    class="w-11/12 pl-32"
+    data-testid="add-user-form"
+  >
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-name"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Name
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-name"
+          name="name"
+          placeholder="Enter name"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-userName"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Username
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-userName"
+          name="userName"
+          placeholder="Enter username"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-password"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Password
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-password"
+          name="password"
+          placeholder="Enter password"
+          type="password"
+        />
+      </div>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm password"
+          type="password"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-role"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        User role
+      </label>
+      <select
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
+        data-testid="input-role"
+        type="select"
+      >
+        <option
+          value="ADMIN"
+        >
+          ADMIN
+        </option>
+        <option
+          value="MANAGER"
+        >
+          MANAGER
+        </option>
+        <option
+          value="VIEWER"
+        >
+          VIEWER
+        </option>
+      </select>
+    </div>
+    <div
+      class="flex w-1/2 my-20 flex-row gap-4"
+    >
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-lime-700 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-green-300 dark:bg-green-400"
+        data-testid="add-user-submit-button"
+      >
+        Submit
+      </button>
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-red-800 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-red-300 dark:bg-red-500"
+        data-testid="add-user-reset-button"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`AddUserForm should display validation errors when inputs are not valid 1`] = `
+<div>
+  <form
+    class="w-11/12 pl-32"
+    data-testid="add-user-form"
+  >
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-name"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Name
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-2 border-rose-300"
+          data-testid="input-name"
+          name="name"
+          placeholder="Enter name"
+          type="text"
+        />
+        <div
+          class="text-red-500 text-sm font-sans subpixel-antialiased mt-1 mb-3 mx-4 relative"
+          data-testid="input-error-name"
+        >
+          Name is required
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-userName"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Username
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-2 border-rose-300"
+          data-testid="input-userName"
+          name="userName"
+          placeholder="Enter username"
+          type="text"
+        />
+        <div
+          class="text-red-500 text-sm font-sans subpixel-antialiased mt-1 mb-3 mx-4 relative"
+          data-testid="input-error-userName"
+        >
+          Username is required
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-password"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Password
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-2 border-rose-300"
+          data-testid="input-password"
+          name="password"
+          placeholder="Enter password"
+          type="password"
+        />
+        <div
+          class="text-red-500 text-sm font-sans subpixel-antialiased mt-1 mb-3 mx-4 relative"
+          data-testid="input-error-password"
+        >
+          Password is required
+        </div>
+      </div>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm password"
+          type="password"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-role"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        User role
+      </label>
+      <select
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
+        data-testid="input-role"
+        type="select"
+      >
+        <option
+          value="ADMIN"
+        >
+          ADMIN
+        </option>
+        <option
+          value="MANAGER"
+        >
+          MANAGER
+        </option>
+        <option
+          value="VIEWER"
+        >
+          VIEWER
+        </option>
+      </select>
+    </div>
+    <div
+      class="flex w-1/2 my-20 flex-row gap-4"
+    >
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-lime-700 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-green-300 dark:bg-green-400"
+        data-testid="add-user-submit-button"
+      >
+        Submit
+      </button>
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-red-800 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-red-300 dark:bg-red-500"
+        data-testid="add-user-reset-button"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`AddUserForm should render add user form with all elements 1`] = `
+<div>
+  <form
+    class="w-11/12 pl-32"
+    data-testid="add-user-form"
+  >
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-name"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Name
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-name"
+          name="name"
+          placeholder="Enter name"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-userName"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Username
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-userName"
+          name="userName"
+          placeholder="Enter username"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-password"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Password
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-password"
+          name="password"
+          placeholder="Enter password"
+          type="password"
+        />
+      </div>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm password"
+          type="password"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-role"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        User role
+      </label>
+      <select
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
+        data-testid="input-role"
+        type="select"
+      >
+        <option
+          value="ADMIN"
+        >
+          ADMIN
+        </option>
+        <option
+          value="MANAGER"
+        >
+          MANAGER
+        </option>
+        <option
+          value="VIEWER"
+        >
+          VIEWER
+        </option>
+      </select>
+    </div>
+    <div
+      class="flex w-1/2 my-20 flex-row gap-4"
+    >
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-lime-700 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-green-300 dark:bg-green-400"
+        data-testid="add-user-submit-button"
+      >
+        Submit
+      </button>
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-red-800 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-red-300 dark:bg-red-500"
+        data-testid="add-user-reset-button"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`AddUserForm should reset form on clicking reset button 1`] = `
+<div>
+  <form
+    class="w-11/12 pl-32"
+    data-testid="add-user-form"
+  >
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-name"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Name
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-name"
+          name="name"
+          placeholder="Enter name"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-userName"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Username
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-userName"
+          name="userName"
+          placeholder="Enter username"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-password"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Password
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-password"
+          name="password"
+          placeholder="Enter password"
+          type="password"
+        />
+      </div>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm password"
+          type="password"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-role"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        User role
+      </label>
+      <select
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
+        data-testid="input-role"
+        type="select"
+      >
+        <option
+          value="ADMIN"
+        >
+          ADMIN
+        </option>
+        <option
+          value="MANAGER"
+        >
+          MANAGER
+        </option>
+        <option
+          value="VIEWER"
+        >
+          VIEWER
+        </option>
+      </select>
+    </div>
+    <div
+      class="flex w-1/2 my-20 flex-row gap-4"
+    >
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-lime-700 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-green-300 dark:bg-green-400"
+        data-testid="add-user-submit-button"
+      >
+        Submit
+      </button>
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-red-800 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-red-300 dark:bg-red-500"
+        data-testid="add-user-reset-button"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`AddUserForm should show error banner when getUserRoles call fails 1`] = `
+<div>
+  <div
+    class="p-3 my-10 text-center bg-red-200 border-2 border-red-200 mx-auto text-red-600 font-sans w-3/4 font-semibold rounded-lg text-lg"
+    data-testid="user-role-error"
+  >
+    Failed to fetch user roles
+  </div>
+</div>
+`;
+
+exports[`AddUserForm should show error notification when addNewUser api call fails 1`] = `
+<div>
+  <form
+    class="w-11/12 pl-32"
+    data-testid="add-user-form"
+  >
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-name"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Name
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-name"
+          name="name"
+          placeholder="Enter name"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-userName"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Username
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-userName"
+          name="userName"
+          placeholder="Enter username"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-password"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Password
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-password"
+          name="password"
+          placeholder="Enter password"
+          type="password"
+        />
+      </div>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm password"
+          type="password"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="input-container-role"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        User role
+      </label>
+      <select
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
+        data-testid="input-role"
+        type="select"
+      >
+        <option
+          value="ADMIN"
+        >
+          ADMIN
+        </option>
+        <option
+          value="MANAGER"
+        >
+          MANAGER
+        </option>
+        <option
+          value="VIEWER"
+        >
+          VIEWER
+        </option>
+      </select>
+    </div>
+    <div
+      class="flex w-1/2 my-20 flex-row gap-4"
+    >
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-lime-700 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-green-300 dark:bg-green-400"
+        data-testid="add-user-submit-button"
+      >
+        Submit
+      </button>
+      <button
+        class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-red-800 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-red-300 dark:bg-red-500"
+        data-testid="add-user-reset-button"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+`;

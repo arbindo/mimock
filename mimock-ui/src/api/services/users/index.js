@@ -5,6 +5,7 @@ import { getUserRoles } from './getUserRoles.service';
 import { updateUserActivationStatus } from './updateUserActivationStatus.service';
 import { updateUserRole } from './updateUserRole.service';
 import { updatePassword } from './updatePassword.service';
+import { addNewUser } from './addUser.service';
 
 export {
 	getAllUsers,
@@ -14,4 +15,5 @@ export {
 	updatePassword,
 	updateUserActivationStatus,
 	updateUserRole,
+	addNewUser,
 };
