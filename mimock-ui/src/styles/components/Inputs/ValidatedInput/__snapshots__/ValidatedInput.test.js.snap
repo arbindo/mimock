@@ -42,7 +42,7 @@ exports[`ValidatedInput should render text input with error 1`] = `
       type="text"
     />
     <div
-      class="text-red-500 text-sm font-sans subpixel-antialiased mt-1 mb-3 mx-4 relative"
+      class="text-red-500 text-xs font-sans subpixel-antialiased mx-4 w-40 absolute"
       data-testid="input-error-text"
     >
       Text is invalid

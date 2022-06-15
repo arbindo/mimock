@@ -26,11 +26,10 @@ export const FormInput = tw.input`
 
 export const ErrorMessage = tw.div`
 	text-red-500
-	text-sm
+	text-xs
 	font-sans
 	subpixel-antialiased
-	mt-1
-	mb-3
 	mx-4
-	relative
+	w-40
+	absolute
 `;

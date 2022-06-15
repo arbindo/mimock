@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRecoilState } from 'recoil';
+import { useForm } from 'react-hook-form';
 import PropagateLoader from 'react-spinners/PropagateLoader';
+import { ValidatedInput } from 'styles';
 import { ButtonVariants } from 'styles/Button';
 import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import { updatePassword } from 'services/users';
@@ -12,9 +14,7 @@ import {
 	Header,
 	PasswordContainer,
 	Label,
-	PasswordInput,
 	ButtonContainer,
-	PasswordError,
 	LoaderStyle,
 	PasswordUpdateForm,
 	CancelButton,
@@ -24,42 +24,51 @@ import {
 function PasswordUpdateModal({ userName }) {
 	const [userInfo, setUserInfo] = useRecoilState(editUserDetailsAtom);
 	const [updatingPassword, setUpdatingPassword] = useState(false);
-	const [password, setPassword] = useState({
-		newPassword: '',
-		confirmPassword: '',
-	});
-	const [passwordError, setPasswordError] = useState({
-		showError: false,
-		errorMessage: '',
-	});
+	const {
+		register,
+		handleSubmit,
+		watch,
+		reset,
+		formState: { errors, isSubmitSuccessful },
+	} = useForm({ mode: 'all', reValidateMode: 'onChange' });
 
-	const newPasswordChange = (e) => {
-		setPasswordError(false);
-		setPassword({
-			...password,
-			newPassword: e.target.value,
-		});
+	const password = useRef({});
+	password.current = watch('password', '');
+
+	const validator = {
+		required: 'Password is required',
+		minLength: {
+			value: 8,
+			message: 'Password must be at least 8 characters',
+		},
+		maxLength: {
+			value: 128,
+			message: 'Password must be at most 128 characters',
+		},
 	};
 
-	const confirmPasswordChange = (e) => {
-		setPasswordError(false);
-		setPassword({
-			...password,
-			confirmPassword: e.target.value,
-		});
-	};
+	useEffect(() => {
+		reset();
+	}, [isSubmitSuccessful, reset]);
 
-	const passwordContainer = (label, testId, value, changeHandler) => {
+	const passwordContainer = (
+		label,
+		name,
+		placeHolder,
+		testId,
+		registerValues
+	) => {
 		return (
 			<PasswordContainer key={testId} data-testid={`${testId}-container`}>
 				<Label>{label}</Label>
-				<PasswordInput
-					data-testid={`${testId}-input`}
-					autoFocus={label === 'New Password' ? true : false}
+				<ValidatedInput
 					type='password'
-					value={value}
-					onChange={changeHandler}
-					maxLength={128}
+					name={name}
+					dataTestId={`${testId}-input`}
+					placeHolder={placeHolder}
+					error={errors[name] ? true : false}
+					errorMessage={errors[name] ? errors[name].message : ''}
+					register={registerValues}
 				/>
 			</PasswordContainer>
 		);
@@ -72,50 +81,11 @@ function PasswordUpdateModal({ userName }) {
 		});
 	};
 
-	const isPasswordValid = () => {
-		if (!password.newPassword || !password.confirmPassword) {
-			setPasswordError({
-				showError: true,
-				errorMessage: 'Please enter password to continue',
-			});
-			return false;
-		}
-
-		if (password.newPassword !== password.confirmPassword) {
-			setPasswordError({
-				showError: true,
-				errorMessage: 'Passwords do not match',
-			});
-			return false;
-		}
-
-		if (password.newPassword.length < 8) {
-			setPasswordError({
-				showError: true,
-				errorMessage: 'Password must be at least 8 characters long',
-			});
-			return false;
-		}
-
-		if (password.newPassword.length > 128) {
-			setPasswordError({
-				showError: true,
-				errorMessage: 'Password cannot be more than 128 characters',
-			});
-			return false;
-		}
-
-		return true;
-	};
-
-	const updatePasswordHandler = (e) => {
-		e.preventDefault();
-		if (!isPasswordValid()) {
-			return;
-		}
+	const updatePasswordHandler = (formData) => {
+		const { password } = formData;
 		setUpdatingPassword(true);
 
-		updatePassword(userName, password.newPassword)
+		updatePassword(userName, password)
 			.then(() => {
 				setUpdatingPassword(false);
 				useNotification({
@@ -157,24 +127,24 @@ function PasswordUpdateModal({ userName }) {
 					/>
 				</When>
 				<Otherwise>
-					<PasswordUpdateForm onSubmit={updatePasswordHandler}>
+					<PasswordUpdateForm onSubmit={handleSubmit(updatePasswordHandler)}>
 						{passwordContainer(
 							'New Password',
+							'password',
+							'Enter password',
 							'new-password',
-							password.newPassword,
-							newPasswordChange
+							register('password', validator)
 						)}
 						{passwordContainer(
 							'Confirm password',
+							'confirmPassword',
+							'Confirm password',
 							'confirm-password',
-							password.confirmPassword,
-							confirmPasswordChange
+							register('confirmPassword', {
+								validate: (value) =>
+									value === password.current || 'The passwords do not match',
+							})
 						)}
-						<If condition={passwordError.showError}>
-							<PasswordError data-testid='password-update-error'>
-								{passwordError.errorMessage}
-							</PasswordError>
-						</If>
 						<ButtonContainer>
 							<UpdateButton
 								type='submit'

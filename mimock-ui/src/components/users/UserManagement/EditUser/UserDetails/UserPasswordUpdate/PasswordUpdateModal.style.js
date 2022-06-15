@@ -30,7 +30,7 @@ export const PasswordContainer = tw.div`
   xl:w-1/2
   md:w-2/4
   mx-auto
-  my-4
+  my-8
   items-center
   align-middle
   justify-between
@@ -40,15 +40,7 @@ export const Label = tw.label`
   font-sans
   subpixel-antialiased
   text-gray-700
-`;
-
-export const PasswordInput = tw.input`
-  rounded-md
-  border
-  bg-gray-50
-  border-gray-200
-  outline-none
-  p-2
+  font-bold
 `;
 
 export const ButtonContainer = tw.div`
@@ -59,14 +51,6 @@ export const ButtonContainer = tw.div`
   w-1/2
   gap-6
   flex-row-reverse
-`;
-
-export const PasswordError = tw.div`
-  font-sans
-  font-semibold
-  my-3
-  text-red-500
-  text-center
 `;
 
 export const LoaderStyle = css`
