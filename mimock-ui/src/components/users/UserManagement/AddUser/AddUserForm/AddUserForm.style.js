@@ -13,13 +13,6 @@ export const InputContainer = tw.div`
 	my-8
 `;
 
-export const InputBlock = tw.div`
-	block
-	h-12
-	min-h-12
-	max-h-12
-`;
-
 export const Label = tw.label`
 	w-1/5
 	font-sans
@@ -27,35 +20,6 @@ export const Label = tw.label`
 	subpixel-antialiased	
 	text-lg
 	text-gray-600
-`;
-
-export const FormInput = tw.input`
-	block
-	px-3
-	py-1.5
-	text-base
-	font-normal
-	text-gray-700
-	bg-zinc-50
-	bg-clip-padding
-	border
-	border-solid
-	rounded
-	mx-4
-	focus:outline-blue-200
-	${(props) => (props.$error ? 'border-2 border-rose-300' : 'border-gray-300')}
-`;
-
-export const UserRoleInput = tw.select`
-    font-sans
-    rounded-md
-    shadow-md
-    font-semibold
-    p-2
-    border-2
-    border-gray-200
-    outline-none
-	mx-4
 `;
 
 export const ButtonContainer = tw.div`
@@ -69,17 +33,6 @@ export const ButtonContainer = tw.div`
 export const SubmitButton = tw(Button)``;
 
 export const ResetButton = tw(Button)``;
-
-export const ErrorMessage = tw.div`
-	text-red-500
-	text-sm
-	font-sans
-	subpixel-antialiased
-	mt-1
-	mb-3
-	mx-4
-	relative
-`;
 
 export const Error = tw.div`
     p-3

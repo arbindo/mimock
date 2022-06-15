@@ -229,6 +229,11 @@ describe('AddUserForm', () => {
 			fireEvent.click(getByTestId('add-user-reset-button'));
 		});
 
+		expect(getByTestId('input-name')).toHaveValue('');
+		expect(getByTestId('input-userName')).toHaveValue('');
+		expect(getByTestId('input-password')).toHaveValue('');
+		expect(getByTestId('input-confirmPassword')).toHaveValue('');
+
 		expect(getByTestId('add-user-submit-button')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();

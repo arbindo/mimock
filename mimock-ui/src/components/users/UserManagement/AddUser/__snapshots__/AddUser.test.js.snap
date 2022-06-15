@@ -123,7 +123,6 @@ exports[`AddUser should render add user component 1`] = `
         <select
           class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
           data-testid="input-role"
-          type="select"
         />
       </div>
       <div

@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ValidatedInput should accept input on triggering change event 1`] = `
+<div>
+  <div
+    class="block h-12 min-h-12 max-h-12"
+  >
+    <input
+      class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+      data-testid="text-input"
+      placeholder="Enter text"
+      type="text"
+    />
+  </div>
+</div>
+`;
+
+exports[`ValidatedInput should render password input without error 1`] = `
+<div>
+  <div
+    class="block h-12 min-h-12 max-h-12"
+  >
+    <input
+      class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+      data-testid="password-input"
+      placeholder="Enter password"
+      type="password"
+    />
+  </div>
+</div>
+`;
+
+exports[`ValidatedInput should render text input with error 1`] = `
+<div>
+  <div
+    class="block h-12 min-h-12 max-h-12"
+  >
+    <input
+      class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-2 border-rose-300"
+      data-testid="text-input"
+      placeholder="Enter text"
+      type="text"
+    />
+    <div
+      class="text-red-500 text-sm font-sans subpixel-antialiased mt-1 mb-3 mx-4 relative"
+      data-testid="input-error-text"
+    >
+      Text is invalid
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ValidatedInput should render text input without error 1`] = `
+<div>
+  <div
+    class="block h-12 min-h-12 max-h-12"
+  >
+    <input
+      class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+      data-testid="text-input"
+      placeholder="Enter text"
+      type="text"
+    />
+  </div>
+</div>
+`;

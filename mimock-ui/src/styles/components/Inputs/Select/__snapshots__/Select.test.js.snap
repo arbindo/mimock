@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select should change option on triggering event 1`] = `
+<div>
+  <select
+    class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
+    data-testid="select-input"
+  >
+    <option
+      data-testid="options"
+      selected=""
+      value="option 1"
+    >
+      option 1
+    </option>
+    <option
+      data-testid="options"
+      value="option 2"
+    >
+      option 2
+    </option>
+    <option
+      data-testid="options"
+      value="option 3"
+    >
+      option 3
+    </option>
+  </select>
+</div>
+`;
+
+exports[`Select should render select input with options 1`] = `
+<div>
+  <select
+    class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
+    data-testid="select-input"
+  >
+    <option
+      data-testid="options"
+      selected=""
+      value="option 1"
+    >
+      option 1
+    </option>
+    <option
+      data-testid="options"
+      value="option 2"
+    >
+      option 2
+    </option>
+    <option
+      data-testid="options"
+      value="option 3"
+    >
+      option 3
+    </option>
+  </select>
+</div>
+`;

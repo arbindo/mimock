@@ -4,18 +4,15 @@ import { ButtonVariants } from 'styles/Button';
 import { getUserRoles, addNewUser } from 'services/users';
 import useNotification from 'hooks/useNotification';
 import { notificationTypes } from 'constants/notificationConstants';
+import { ValidatedInput, Select } from 'styles';
 import { formInputData } from './formInputData.js';
 import {
 	FormContainer,
 	InputContainer,
 	Label,
-	FormInput,
-	UserRoleInput,
 	ButtonContainer,
 	SubmitButton,
 	ResetButton,
-	InputBlock,
-	ErrorMessage,
 	Error,
 } from './AddUserForm.style';
 
@@ -100,60 +97,50 @@ function AddUserForm() {
 							<Label>{item.label}</Label>
 							<Choose>
 								<When condition={item.name === 'password'}>
-									<InputBlock>
-										<FormInput
-											data-testid={`input-${item.name}`}
-											type={item.type}
-											placeholder={item.placeholder}
-											$error={errors[item.name]}
-											{...register(item.name, {
-												...item.validators,
-											})}
-										/>
-										<If condition={errors[item.name]}>
-											<ErrorMessage data-testid={`input-error-${item.name}`}>
-												{errors[item.name].message}
-											</ErrorMessage>
-										</If>
-									</InputBlock>
-									<InputBlock>
-										<FormInput
-											data-testid={`input-${item.nameConfirm}`}
-											type={item.type}
-											placeholder={item.placeholderConfirm}
-											$error={errors[item.nameConfirm]}
-											{...register(item.nameConfirm, {
-												validate: (value) =>
-													value === password.current ||
-													'The passwords do not match',
-											})}
-										/>
-										<If condition={errors[item.nameConfirm]}>
-											<ErrorMessage
-												data-testid={`input-error-${item.nameConfirm}`}
-											>
-												{errors[item.nameConfirm].message}
-											</ErrorMessage>
-										</If>
-									</InputBlock>
+									<ValidatedInput
+										type='password'
+										name={item.name}
+										dataTestId={`input-${item.name}`}
+										placeHolder={item.placeholder}
+										error={errors[item.name] ? true : false}
+										errorMessage={
+											errors[item.name] ? errors[item.name].message : ''
+										}
+										register={register(item.name, {
+											...item.validators,
+										})}
+									/>
+									<ValidatedInput
+										type='password'
+										name={item.nameConfirm}
+										dataTestId={`input-${item.nameConfirm}`}
+										placeHolder={item.placeholderConfirm}
+										error={errors[item.nameConfirm] ? true : false}
+										errorMessage={
+											errors[item.nameConfirm]
+												? errors[item.nameConfirm].message
+												: ''
+										}
+										register={register(item.nameConfirm, {
+											validate: (value) =>
+												value === password.current ||
+												'The passwords do not match',
+										})}
+									/>
 								</When>
 								<Otherwise>
-									<InputBlock>
-										<FormInput
-											data-testid={`input-${item.name}`}
-											type={item.type}
-											placeholder={item.placeholder}
-											$error={errors[item.name]}
-											{...register(item.name, {
-												...item.validators,
-											})}
-										/>
-										<If condition={errors[item.name]}>
-											<ErrorMessage data-testid={`input-error-${item.name}`}>
-												{errors[item.name].message}
-											</ErrorMessage>
-										</If>
-									</InputBlock>
+									<ValidatedInput
+										name={item.name}
+										dataTestId={`input-${item.name}`}
+										placeHolder={item.placeholder}
+										error={errors[item.name] ? true : false}
+										errorMessage={
+											errors[item.name] ? errors[item.name].message : ''
+										}
+										register={register(item.name, {
+											...item.validators,
+										})}
+									/>
 								</Otherwise>
 							</Choose>
 						</InputContainer>
@@ -161,19 +148,12 @@ function AddUserForm() {
 					<If condition={userRoles}>
 						<InputContainer data-testid='input-container-role'>
 							<Label>User role</Label>
-							<UserRoleInput
-								type='select'
-								value={role}
-								data-testid='input-role'
+							<Select
+								options={userRoles}
 								defaultValue={userRoles[0]}
+								dataTestId='input-role'
 								onChange={(e) => setRole(e.target.value)}
-							>
-								<For each='role' of={userRoles}>
-									<option key={role} value={role}>
-										{role}
-									</option>
-								</For>
-							</UserRoleInput>
+							/>
 						</InputContainer>
 					</If>
 					<ButtonContainer>
@@ -182,7 +162,6 @@ function AddUserForm() {
 							dataTestid='add-user-submit-button'
 							variant={ButtonVariants.GreenButton}
 							label='Submit'
-							required={true}
 							width='w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2'
 						/>
 						<ResetButton
@@ -190,7 +169,6 @@ function AddUserForm() {
 							dataTestid='add-user-reset-button'
 							variant={ButtonVariants.RedButton}
 							width='w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2'
-							required={true}
 							onclickHandler={() => {
 								clearErrors();
 								reset(undefined, {

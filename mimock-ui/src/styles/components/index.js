@@ -9,6 +9,7 @@ import Pill from './Pill';
 import Card from './Card';
 import Label from './Label';
 import IconHeader from './IconHeader';
+import { ValidatedInput, Select } from './Inputs';
 
 export {
 	Button,
@@ -21,4 +22,6 @@ export {
 	UserNameField,
 	PasswordField,
 	IconHeader,
+	ValidatedInput,
+	Select,
 };

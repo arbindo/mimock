@@ -92,19 +92,21 @@ exports[`AddUserForm should call addNewUser api when all inputs are valid 1`] = 
       <select
         class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
         data-testid="input-role"
-        type="select"
       >
         <option
+          data-testid="options"
           value="ADMIN"
         >
           ADMIN
         </option>
         <option
+          data-testid="options"
           value="MANAGER"
         >
           MANAGER
         </option>
         <option
+          data-testid="options"
           value="VIEWER"
         >
           VIEWER
@@ -241,19 +243,21 @@ exports[`AddUserForm should display validation errors when inputs are not valid 
       <select
         class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
         data-testid="input-role"
-        type="select"
       >
         <option
+          data-testid="options"
           value="ADMIN"
         >
           ADMIN
         </option>
         <option
+          data-testid="options"
           value="MANAGER"
         >
           MANAGER
         </option>
         <option
+          data-testid="options"
           value="VIEWER"
         >
           VIEWER
@@ -372,19 +376,21 @@ exports[`AddUserForm should render add user form with all elements 1`] = `
       <select
         class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
         data-testid="input-role"
-        type="select"
       >
         <option
+          data-testid="options"
           value="ADMIN"
         >
           ADMIN
         </option>
         <option
+          data-testid="options"
           value="MANAGER"
         >
           MANAGER
         </option>
         <option
+          data-testid="options"
           value="VIEWER"
         >
           VIEWER
@@ -503,19 +509,21 @@ exports[`AddUserForm should reset form on clicking reset button 1`] = `
       <select
         class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
         data-testid="input-role"
-        type="select"
       >
         <option
+          data-testid="options"
           value="ADMIN"
         >
           ADMIN
         </option>
         <option
+          data-testid="options"
           value="MANAGER"
         >
           MANAGER
         </option>
         <option
+          data-testid="options"
           value="VIEWER"
         >
           VIEWER
@@ -645,19 +653,21 @@ exports[`AddUserForm should show error notification when addNewUser api call fai
       <select
         class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
         data-testid="input-role"
-        type="select"
       >
         <option
+          data-testid="options"
           value="ADMIN"
         >
           ADMIN
         </option>
         <option
+          data-testid="options"
           value="MANAGER"
         >
           MANAGER
         </option>
         <option
+          data-testid="options"
           value="VIEWER"
         >
           VIEWER
