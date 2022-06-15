@@ -3,7 +3,7 @@
 exports[`Select should change option on triggering event 1`] = `
 <div>
   <select
-    class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
+    class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
     data-testid="select-input"
   >
     <option
@@ -32,7 +32,7 @@ exports[`Select should change option on triggering event 1`] = `
 exports[`Select should render select input with options 1`] = `
 <div>
   <select
-    class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
+    class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
     data-testid="select-input"
   >
     <option

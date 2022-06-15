@@ -9,5 +9,4 @@ export const SelectWrapper = tw.select`
     border-2
     border-gray-200
     outline-none
-    mx-4
 `;

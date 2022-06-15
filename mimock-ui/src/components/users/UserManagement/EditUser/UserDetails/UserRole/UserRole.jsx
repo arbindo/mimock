@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
 import useNotification from 'hooks/useNotification';
 import { getUserRoles, updateUserRole } from 'services/users';
 import { ConfirmationModal } from 'components/common/Modals';
 import { useRecoilState } from 'recoil';
 import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import { notificationTypes } from 'constants/notificationConstants';
-import {
-	UserRoleWrapper,
-	UserRoleActions,
-	RoleOptions,
-	UpdateRoleButton,
-	UserRoleLabel,
-	RoleHint,
-} from './UserRole.style.js';
+import UserRoleOptions from './UserRoleOptions';
+import { UserRoleWrapper, UserRoleLabel } from './UserRole.style.js';
 
 function UserRole() {
 	const [userInfo, setUserInfo] = useRecoilState(editUserDetailsAtom);
@@ -102,47 +94,16 @@ function UserRole() {
 			</If>
 			<UserRoleWrapper data-testid='edit-user-role'>
 				<UserRoleLabel>Role</UserRoleLabel>
-				<UserRoleActions>
-					<RoleOptions
-						data-testid='user-role-options'
-						value={selectedRole}
-						onChange={(e) => {
-							setSelectedRole(e.target.value);
-							setSelectedRoleDescription(
-								roles.find((role) => role.roleName === e.target.value)
-									?.roleDescription
-							);
-						}}
-					>
-						<For each='role' of={roles}>
-							<option key={role.roleName} value={role.roleName}>
-								{role.roleName}
-							</option>
-						</For>
-					</RoleOptions>
-					<Tooltip
-						data-testid='user-role-tooltip'
-						key={selectedRoleDescription}
-						title={selectedRoleDescription || 'No description available'}
-						arrow
-					>
-						<IconButton>
-							<RoleHint />
-						</IconButton>
-					</Tooltip>
-					<If condition={currentUserRole !== selectedRole}>
-						<UpdateRoleButton
-							label='Update role'
-							dataTestid='update-role-btn'
-							background='bg-green-300'
-							color='text-gray-700'
-							additionalStyles='mx-4'
-							onclickHandler={() => {
-								setShowUpdateConfirmationModal(true);
-							}}
-						/>
-					</If>
-				</UserRoleActions>
+				<UserRoleOptions
+					roles={roles}
+					selectedRole={selectedRole}
+					setSelectedRole={setSelectedRole}
+					enableRoleUpdate={true}
+					currentUserRole={currentUserRole}
+					selectedRoleDescription={selectedRoleDescription}
+					setSelectedRoleDescription={setSelectedRoleDescription}
+					setShowUpdateConfirmationModal={setShowUpdateConfirmationModal}
+				/>
 			</UserRoleWrapper>
 		</If>
 	);

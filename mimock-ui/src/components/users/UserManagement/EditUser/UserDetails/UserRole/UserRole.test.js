@@ -62,8 +62,8 @@ describe('UserRole', () => {
 		expect(queryByTestId('confirmation-modal')).not.toBeInTheDocument();
 		expect(queryByTestId('update-role-btn')).not.toBeInTheDocument();
 
-		expect(getByTestId('user-role-options')).toBeInTheDocument();
-		expect(getByTestId('user-role-options')).toHaveTextContent('MANAGER');
+		expect(getByTestId('input-role')).toBeInTheDocument();
+		expect(getByTestId('input-role')).toHaveTextContent('MANAGER');
 		expect(getByTestId('edit-user-role')).toBeInTheDocument();
 		expect(getByTestId('user-role-tooltip')).toBeInTheDocument();
 
@@ -113,7 +113,7 @@ describe('UserRole', () => {
 		expect(getUserRoles).toHaveBeenCalledTimes(1);
 
 		await act(async () => {
-			fireEvent.change(getByTestId('user-role-options'), {
+			fireEvent.change(getByTestId('input-role'), {
 				target: { value: 'ADMIN' },
 			});
 		});
@@ -136,7 +136,7 @@ describe('UserRole', () => {
 		expect(getUserRoles).toHaveBeenCalledTimes(1);
 
 		await act(async () => {
-			fireEvent.change(getByTestId('user-role-options'), {
+			fireEvent.change(getByTestId('input-role'), {
 				target: { value: 'ADMIN' },
 			});
 		});
@@ -163,7 +163,7 @@ describe('UserRole', () => {
 		expect(getUserRoles).toHaveBeenCalledTimes(1);
 
 		await act(async () => {
-			fireEvent.change(getByTestId('user-role-options'), {
+			fireEvent.change(getByTestId('input-role'), {
 				target: { value: 'ADMIN' },
 			});
 			fireEvent.click(getByTestId('update-role-btn'));
@@ -197,7 +197,7 @@ describe('UserRole', () => {
 		expect(getUserRoles).toHaveBeenCalledTimes(1);
 
 		await act(async () => {
-			fireEvent.change(getByTestId('user-role-options'), {
+			fireEvent.change(getByTestId('input-role'), {
 				target: { value: 'ADMIN' },
 			});
 			fireEvent.click(getByTestId('update-role-btn'));
@@ -247,7 +247,7 @@ describe('UserRole', () => {
 		expect(getUserRoles).toHaveBeenCalledTimes(1);
 
 		await act(async () => {
-			fireEvent.change(getByTestId('user-role-options'), {
+			fireEvent.change(getByTestId('input-role'), {
 				target: { value: 'ADMIN' },
 			});
 			fireEvent.click(getByTestId('update-role-btn'));

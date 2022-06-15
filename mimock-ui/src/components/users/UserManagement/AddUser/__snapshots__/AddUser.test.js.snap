@@ -120,9 +120,8 @@ exports[`AddUser should render add user component 1`] = `
         >
           User role
         </label>
-        <select
-          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mx-4"
-          data-testid="input-role"
+        <div
+          class="w-1/2 flex items-center align-middle mx-4"
         />
       </div>
       <div

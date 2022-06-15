@@ -13,23 +13,27 @@ exports[`UserRole should close update role confirmation modal on clicking cancel
         Role
       </div>
       <div
-        class="w-1/2 mx-20 flex items-center align-middle"
+        class="w-1/2 flex items-center align-middle mx-20"
       >
         <select
-          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
-          data-testid="user-role-options"
+          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+          data-testid="input-role"
         >
           <option
+            data-testid="options"
             value="ADMIN"
           >
             ADMIN
           </option>
           <option
+            data-testid="options"
+            selected=""
             value="MANAGER"
           >
             MANAGER
           </option>
           <option
+            data-testid="options"
             value="VIEWER"
           >
             VIEWER
@@ -88,23 +92,27 @@ exports[`UserRole should render user role 1`] = `
       Role
     </div>
     <div
-      class="w-1/2 mx-20 flex items-center align-middle"
+      class="w-1/2 flex items-center align-middle mx-20"
     >
       <select
-        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
-        data-testid="user-role-options"
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+        data-testid="input-role"
       >
         <option
+          data-testid="options"
           value="ADMIN"
         >
           ADMIN
         </option>
         <option
+          data-testid="options"
+          selected=""
           value="MANAGER"
         >
           MANAGER
         </option>
         <option
+          data-testid="options"
           value="VIEWER"
         >
           VIEWER
@@ -157,23 +165,27 @@ exports[`UserRole should show error notification when role update fails 1`] = `
         Role
       </div>
       <div
-        class="w-1/2 mx-20 flex items-center align-middle"
+        class="w-1/2 flex items-center align-middle mx-20"
       >
         <select
-          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
-          data-testid="user-role-options"
+          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+          data-testid="input-role"
         >
           <option
+            data-testid="options"
             value="ADMIN"
           >
             ADMIN
           </option>
           <option
+            data-testid="options"
+            selected=""
             value="MANAGER"
           >
             MANAGER
           </option>
           <option
+            data-testid="options"
             value="VIEWER"
           >
             VIEWER
@@ -232,23 +244,27 @@ exports[`UserRole should show update role button on changing user role 1`] = `
       Role
     </div>
     <div
-      class="w-1/2 mx-20 flex items-center align-middle"
+      class="w-1/2 flex items-center align-middle mx-20"
     >
       <select
-        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
-        data-testid="user-role-options"
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+        data-testid="input-role"
       >
         <option
+          data-testid="options"
           value="ADMIN"
         >
           ADMIN
         </option>
         <option
+          data-testid="options"
+          selected=""
           value="MANAGER"
         >
           MANAGER
         </option>
         <option
+          data-testid="options"
           value="VIEWER"
         >
           VIEWER
@@ -307,23 +323,27 @@ exports[`UserRole should show update role confirmation modal on clicking update 
         Role
       </div>
       <div
-        class="w-1/2 mx-20 flex items-center align-middle"
+        class="w-1/2 flex items-center align-middle mx-20"
       >
         <select
-          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
-          data-testid="user-role-options"
+          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+          data-testid="input-role"
         >
           <option
+            data-testid="options"
             value="ADMIN"
           >
             ADMIN
           </option>
           <option
+            data-testid="options"
+            selected=""
             value="MANAGER"
           >
             MANAGER
           </option>
           <option
+            data-testid="options"
             value="VIEWER"
           >
             VIEWER
@@ -412,23 +432,27 @@ exports[`UserRole should update role on clicking confirm button 1`] = `
         Role
       </div>
       <div
-        class="w-1/2 mx-20 flex items-center align-middle"
+        class="w-1/2 flex items-center align-middle mx-20"
       >
         <select
-          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none mr-2"
-          data-testid="user-role-options"
+          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+          data-testid="input-role"
         >
           <option
+            data-testid="options"
             value="ADMIN"
           >
             ADMIN
           </option>
           <option
+            data-testid="options"
+            selected=""
             value="MANAGER"
           >
             MANAGER
           </option>
           <option
+            data-testid="options"
             value="VIEWER"
           >
             VIEWER

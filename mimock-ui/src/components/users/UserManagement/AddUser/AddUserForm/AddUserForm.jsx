@@ -4,7 +4,7 @@ import { ButtonVariants } from 'styles/Button';
 import { getUserRoles, addNewUser } from 'services/users';
 import useNotification from 'hooks/useNotification';
 import { notificationTypes } from 'constants/notificationConstants';
-import { ValidatedInput, Select } from 'styles';
+import { ValidatedInput } from 'styles';
 import { formInputData } from './formInputData.js';
 import {
 	FormContainer,
@@ -15,6 +15,7 @@ import {
 	ResetButton,
 	Error,
 } from './AddUserForm.style';
+import UserRoleOptions from 'components/users/UserManagement/EditUser/UserDetails/UserRole/UserRoleOptions';
 
 function AddUserForm() {
 	const {
@@ -33,13 +34,14 @@ function AddUserForm() {
 	const [userRoles, setUserRoles] = useState([]);
 	const [role, setRole] = useState('');
 	const [roleFetchError, setRoleFetchError] = useState(false);
+	const [selectedRoleDescription, setSelectedRoleDescription] = useState('');
 
 	useEffect(() => {
 		setFocus('name');
 		getUserRoles()
 			.then((roles) => {
 				setRole(roles[0].roleName);
-				setUserRoles(roles.map((role) => role.roleName));
+				setUserRoles(roles);
 			})
 			.catch(() => {
 				setRoleFetchError(true);
@@ -148,11 +150,15 @@ function AddUserForm() {
 					<If condition={userRoles}>
 						<InputContainer data-testid='input-container-role'>
 							<Label>User role</Label>
-							<Select
-								options={userRoles}
-								defaultValue={userRoles[0]}
-								dataTestId='input-role'
-								onChange={(e) => setRole(e.target.value)}
+							<UserRoleOptions
+								margin='mx-4'
+								currentUserRole={userRoles[0]?.roleName}
+								roles={userRoles}
+								selectedRole={role}
+								setSelectedRole={setRole}
+								enableRoleUpdate={false}
+								selectedRoleDescription={selectedRoleDescription}
+								setSelectedRoleDescription={setSelectedRoleDescription}
 							/>
 						</InputContainer>
 					</If>

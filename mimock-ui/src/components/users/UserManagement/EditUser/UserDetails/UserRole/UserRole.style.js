@@ -1,13 +1,19 @@
 import tw from 'tailwind-styled-components';
 import { BsQuestionCircle } from 'react-icons/bs';
 import { CustomButton } from 'styles';
-import { Info, Label, DynamicValue } from '../UserDetails.style';
+import { Info, Label } from '../UserDetails.style';
 
 export const UserRoleWrapper = tw(Info)``;
 
 export const UserRoleLabel = tw(Label)``;
 
-export const UserRoleActions = tw(DynamicValue)``;
+export const UserRoleActions = tw.div`
+    w-1/2
+    flex
+    items-center
+    align-middle
+    ${(props) => (props.$margin ? props.$margin : 'mx-20')}
+`;
 
 export const RoleOptions = tw.select`
     font-sans
