@@ -20,6 +20,8 @@ import PropTypes from 'prop-types';
 import { FaCogs, FaPlusSquare } from 'react-icons/fa';
 import { MdDone, MdArchive, MdDelete } from 'react-icons/md';
 import { mockManagementConstants } from 'constants/globalConstants';
+import { useNavigate } from 'react-router-dom';
+import { routes } from 'constants/routes';
 
 function Toolbar({
 	handleSidebarBtnClick,
@@ -34,6 +36,7 @@ function Toolbar({
 		'hover-bg-opacity-5',
 		'hover:text-teal-500',
 	];
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (mocksListView == mockManagementConstants.DEFAULT_STATUS) {
@@ -47,7 +50,7 @@ function Toolbar({
 	}, [mocksListView]);
 
 	const handleAddMockBtnClick = () => {
-		console.log('Clicked add icon button');
+		navigate(routes.manageRoutes.addMock.path);
 	};
 
 	const handleViewMocksBtnClick = (e) => {

@@ -20,3 +20,9 @@ export const mockManagementConstants = {
 		serverError: 'Unable To Reach Server, Contact your system admin!!',
 	},
 };
+
+export const roles = {
+	ROLE_ADMIN: 'ROLE_ADMIN',
+	ROLE_MANAGER: 'ROLE_MANAGER',
+	ROLE_VIEWER: 'ROLE_VIEWER',
+};

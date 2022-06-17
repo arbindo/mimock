@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SecuredNavivator should navigate to home page when auth token validation fails 1`] = `
+exports[`SecuredNavigator should navigate to home page when auth token validation fails 1`] = `
 <div>
   <div
     data-testid="navigator"
@@ -10,7 +10,7 @@ exports[`SecuredNavivator should navigate to home page when auth token validatio
 </div>
 `;
 
-exports[`SecuredNavivator should render child when token validation is successful 1`] = `
+exports[`SecuredNavigator should render child when token validation is successful 1`] = `
 <div>
   <div
     data-testid="child"

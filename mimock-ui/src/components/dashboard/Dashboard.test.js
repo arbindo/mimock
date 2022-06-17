@@ -19,7 +19,7 @@ jest.mock('react', () => {
 		useState: mockedUseState.mockImplementation(() => [true, jest.fn()]),
 	};
 });
-
+jest.mock('react-router-dom');
 describe('Dashboard', () => {
 	it('should render all dashboard components', async () => {
 		const tree = await render(<Dashboard />);

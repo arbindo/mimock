@@ -5,17 +5,19 @@ import { useRecoilState } from 'recoil';
 import { getUserDetails } from 'utils/jwtUtils';
 import showFullPageLoader from 'atoms/showFullPageLoader';
 
-function Navigator({ children }) {
+function RoleBasedNavigator({ children, allowedRoles }) {
 	const [, setOpenFullPageLoader] = useRecoilState(showFullPageLoader);
 	const [isLoading, setIsLoading] = useState(true);
-	const [isAdminUser, setIsAdminUser] = useState(false);
+	const [isAllowedUserRole, setIsAllowedUserRole] = useState(false);
 
 	useEffect(() => {
 		setOpenFullPageLoader(true);
 
 		try {
 			const userDetails = getUserDetails();
-			setIsAdminUser(userDetails && userDetails.userRole === 'ROLE_ADMIN');
+			setIsAllowedUserRole(
+				allowedRoles && allowedRoles.includes(userDetails?.userRole)
+			);
 		} catch (e) {
 			console.error(e);
 		} finally {
@@ -27,7 +29,7 @@ function Navigator({ children }) {
 	return (
 		<If condition={!isLoading}>
 			<Choose>
-				<When condition={!isLoading && isAdminUser}>{children}</When>
+				<When condition={!isLoading && isAllowedUserRole}>{children}</When>
 				<Otherwise>
 					<PermissionErrorPage />
 				</Otherwise>
@@ -36,8 +38,9 @@ function Navigator({ children }) {
 	);
 }
 
-Navigator.propTypes = {
+RoleBasedNavigator.propTypes = {
 	children: PropTypes.node.isRequired,
+	allowedRoles: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default Navigator;
+export default RoleBasedNavigator;

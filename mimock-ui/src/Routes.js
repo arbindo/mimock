@@ -4,14 +4,15 @@ import { BrowserRouter as Router, Navigate } from 'react-router-dom';
 import Login from 'components/login';
 import useAxiosInterceptor from 'api/useAxiosInterceptor';
 import { routes } from './constants/routes';
+import { roles } from './constants/globalConstants';
 import SecuredNavigator from './navigators/SecuredNavigator';
-import AdminNavigator from './navigators/AdminNavigator';
+import RoleBasedNavigator from './navigators/RoleBasedNavigator';
 import Wrapper from './components/common/Wrapper';
 import Dashboard from './components/dashboard';
 import Users from './components/users';
 import EditUser from './components/users/UserManagement/EditUser';
 import Logout from './components/common/Logout';
-import Detail from './components/detail';
+import { AddMock, Detail } from './components/mockManagement';
 import AddUser from './components/users/UserManagement/AddUser';
 
 function AppRoutes() {
@@ -26,7 +27,19 @@ function AppRoutes() {
 	};
 
 	const secureAdminRoutes = (component) => {
-		return secureRoute(<AdminNavigator> {component} </AdminNavigator>);
+		return secureRoute(
+			<RoleBasedNavigator allowedRoles={[roles.ROLE_ADMIN]}>
+				{component}
+			</RoleBasedNavigator>
+		);
+	};
+
+	const secureManagerRoutes = (component) => {
+		return secureRoute(
+			<RoleBasedNavigator allowedRoles={[roles.ROLE_ADMIN, roles.ROLE_MANAGER]}>
+				{component}
+			</RoleBasedNavigator>
+		);
 	};
 
 	return (
@@ -44,6 +57,13 @@ function AppRoutes() {
 						element={secureRoute(<Detail />)}
 					/>
 					<Route path={routes.logout.path} element={secureRoute(<Logout />)} />
+					{/* Manager Routes */}
+					<Route path={routes.managePrefix}>
+						<Route
+							path={routes.manageRoutes.addMock.path}
+							element={secureManagerRoutes(<AddMock />)}
+						/>
+					</Route>
 					{/* Admin Routes */}
 					<Route path={routes.adminPrefix}>
 						<Route

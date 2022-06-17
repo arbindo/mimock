@@ -15,7 +15,7 @@ jest.mock('recoil', () => {
 jest.mock('services/authentication/validateToken.service');
 jest.mock('react-router-dom');
 
-describe('SecuredNavivator', () => {
+describe('SecuredNavigator', () => {
 	const TestComponent = () => {
 		return <div data-testid='child'>Child component</div>;
 	};

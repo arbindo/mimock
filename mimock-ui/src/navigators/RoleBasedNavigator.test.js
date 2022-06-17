@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, act, waitFor } from '@testing-library/react';
 import { mockedCookieGet } from 'mocks/cookieMock';
-import AdminNavigator from './AdminNavigator.jsx';
+import RoleBasedNavigator from './RoleBasedNavigator';
 
 let mockedRecoilFn;
 jest.mock('recoil', () => {
@@ -26,9 +26,9 @@ describe('AdminNavigator', () => {
 		let tree;
 		await act(async () => {
 			tree = await render(
-				<AdminNavigator>
+				<RoleBasedNavigator allowedRoles={['ROLE_ADMIN']}>
 					<TestComponent />
-				</AdminNavigator>
+				</RoleBasedNavigator>
 			);
 		});
 		const { getByTestId, container, queryByTestId } = tree;
@@ -52,9 +52,9 @@ describe('AdminNavigator', () => {
 		let tree;
 		await act(async () => {
 			tree = await render(
-				<AdminNavigator>
+				<RoleBasedNavigator allowedRoles={['ROLE_ADMIN']}>
 					<TestComponent />
-				</AdminNavigator>
+				</RoleBasedNavigator>
 			);
 		});
 		const { getByTestId, container, queryByTestId } = tree;
@@ -78,9 +78,9 @@ describe('AdminNavigator', () => {
 		let tree;
 		await act(async () => {
 			tree = await render(
-				<AdminNavigator>
+				<RoleBasedNavigator allowedRoles={['ROLE_ADMIN']}>
 					<TestComponent />
-				</AdminNavigator>
+				</RoleBasedNavigator>
 			);
 		});
 		const { getByTestId, container, queryByTestId } = tree;
@@ -96,17 +96,17 @@ describe('AdminNavigator', () => {
 		});
 	});
 
-	it('should show permission error page when user is not admin', async () => {
+	it('should show permission error page when user role is not permitted', async () => {
 		mockedCookieGet.mockImplementation(() => {
-			return 'eyJpYXQiOiJNb24gQXByIDExIDIzOjQ0OjI3IElTVCAyMDIyIiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyTmFtZSI6Im1pbW9ja19hZG1pbiIsInVzZXJSb2xlIjoiUk9MRV9NQU5BR0VSIiwic3ViIjoibWltb2NrX2FkbWluIiwiZXhwIjoxNjQ5NzAyNjY3fQ.LPui9yRnbtittDutEi6F05zNi4mUe_2plNx2EROxo_k';
+			return 'eyJpYXQiOiJNb24gQXByIDExIDIzOjQ0OjI3IElTVCAyMDIyIiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VyTmFtZSI6Im1pbW9ja191c2VyIiwidXNlclJvbGUiOiJST0xFX1ZJRVdFUiIsInN1YiI6Im1pbW9ja19hZG1pbiIsImV4cCI6MTY0OTcwMjY2N30.LPui9yRnbtittDutEi6F05zNi4mUe_2plNx2EROxo_k';
 		});
 
 		let tree;
 		await act(async () => {
 			tree = await render(
-				<AdminNavigator>
+				<RoleBasedNavigator allowedRoles={['ROLE_ADMIN', 'ROLE_MANAGER']}>
 					<TestComponent />
-				</AdminNavigator>
+				</RoleBasedNavigator>
 			);
 		});
 		const { getByTestId, container, queryByTestId } = tree;

@@ -1,5 +1,6 @@
 const root = '/mimock-ui';
 const adminPrefix = `${root}/admin`;
+const managePrefix = `${root}/manage`;
 
 export const routes = {
 	root,
@@ -23,6 +24,12 @@ export const routes = {
 	logout: {
 		path: `${root}/logout`,
 		secured: true,
+	},
+	manageRoutes: {
+		addMock: {
+			path: `${managePrefix}/mocks/add-mock`,
+			secured: true,
+		},
 	},
 	adminRoutes: {
 		users: {

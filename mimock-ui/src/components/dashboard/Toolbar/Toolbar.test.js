@@ -1,6 +1,12 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, act, fireEvent } from '@testing-library/react';
 import Toolbar from './Toolbar';
+
+const mockedNavigation = jest.fn(() => {});
+jest.mock('react-router-dom', () => ({
+	...jest.requireActual('react-router-dom'),
+	useNavigate: () => mockedNavigation,
+}));
 
 describe('Toolbar', () => {
 	it('should render toolbar component', async () => {
@@ -9,6 +15,25 @@ describe('Toolbar', () => {
 		const { container, getByTestId } = tree;
 
 		expect(getByTestId('toolbar-section')).toBeInTheDocument();
+
+		expect(container).toMatchSnapshot();
+	});
+
+	it('should navigate to add mock page on clicking add CTA', async () => {
+		const tree = await render(<Toolbar />);
+
+		const { container, getByTestId } = tree;
+
+		expect(getByTestId('toolbar-section')).toBeInTheDocument();
+
+		await act(async () => {
+			fireEvent.click(getByTestId('add-btn'));
+		});
+
+		expect(mockedNavigation).toHaveBeenCalledTimes(1);
+		expect(mockedNavigation).toHaveBeenCalledWith(
+			'/mimock-ui/manage/mocks/add-mock'
+		);
 
 		expect(container).toMatchSnapshot();
 	});
