@@ -8,6 +8,7 @@ import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
+import com.arbindo.mimock.manage.mimocks.models.response.ListMocksResponse;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
 import com.arbindo.mimock.security.JwtRequestFilter;
@@ -142,11 +143,12 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_PAGEABLE;
         String expectedContentType = "application/json";
-        Page<Mock> expectedMocks = generateMocksPageable();
-        String expectedResponseBody = convertObjectToJsonString(expectedMocks);
+        Page<Mock> expectedMocksFromDB = generateMocksPageable();
+        Page<ListMocksResponse> expectedListMocksResponse = getListMocksResponseInPageableFormat(expectedMocksFromDB);
+        String expectedResponseBody = convertObjectToJsonString(expectedListMocksResponse);
 
         lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any()))
-                .thenReturn(expectedMocks);
+                .thenReturn(expectedMocksFromDB);
 
         // Act
         MvcResult result = mockMvc.perform(get(route))
@@ -184,11 +186,12 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_PAGEABLE;
         String expectedContentType = "application/json";
-        Page<Mock> expectedMocks = generateMocksPageable();
-        String expectedResponseBody = convertObjectToJsonString(expectedMocks);
+        Page<Mock> expectedMocksFromDB = generateMocksPageable();
+        Page<ListMocksResponse> expectedListMocksResponse = getListMocksResponseInPageableFormat(expectedMocksFromDB);
+        String expectedResponseBody = convertObjectToJsonString(expectedListMocksResponse);
 
         lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class)))
-                .thenReturn(expectedMocks);
+                .thenReturn(expectedMocksFromDB);
 
         // Act
         MvcResult result = mockMvc.perform(get(route).param("status", "NONE"))

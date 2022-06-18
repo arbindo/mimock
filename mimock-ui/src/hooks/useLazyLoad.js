@@ -91,6 +91,7 @@ function useLazyLoad(mocksListView, pageNumber) {
 						authCookieRef,
 						pageNumber
 					);
+					console.log(listAllMocksApiResponse);
 					mocksListResponse.data = listAllMocksApiResponse.data.content;
 					mocksListResponse.status = listAllMocksApiResponse.status;
 					mocksListResponse.isLast = listAllMocksApiResponse.data.last;

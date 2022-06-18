@@ -99,7 +99,7 @@ function List({ mocksListView, handleClearFilter }) {
 											id={mock.id}
 											mockName={mock.mockName}
 											description={mock.description}
-											httpMethod={mock.httpMethod.method}
+											httpMethod={mock.httpMethod}
 											route={mock.route}
 										/>
 									);
@@ -110,7 +110,7 @@ function List({ mocksListView, handleClearFilter }) {
 											id={mock.id}
 											mockName={mock.mockName}
 											description={mock.description}
-											httpMethod={mock.httpMethod.method}
+											httpMethod={mock.httpMethod}
 											route={mock.route}
 										/>
 									);

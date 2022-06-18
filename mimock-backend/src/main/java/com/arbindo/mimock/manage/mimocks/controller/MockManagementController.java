@@ -6,7 +6,9 @@ import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.mapper.RequestModelMapper;
+import com.arbindo.mimock.manage.mimocks.mapper.ResponseModelMapper;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
+import com.arbindo.mimock.manage.mimocks.models.response.ListMocksResponse;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -78,10 +80,14 @@ public class MockManagementController {
             "the status filter (NONE, ARCHIVED, DELETED), if provided",
             tags = {"Mock Management"})
     @GetMapping(UrlConfig.MOCKS_PAGEABLE)
-    public ResponseEntity<Page<Mock>> getMocksAsPageable(@SortDefault(sort = "createdAt",
+    public ResponseEntity<Page<ListMocksResponse>> getMocksAsPageable(@SortDefault(sort = "createdAt",
             direction = Sort.Direction.DESC) Pageable pageable, @RequestParam(required = false) Status status) {
         Page<Mock> mockPageable = mockManagementService.getMocksAsPageable(pageable, status);
-        return ResponseEntity.ok(mockPageable);
+        if(mockPageable == null){
+            return ResponseEntity.ok(null);
+        }
+        Page<ListMocksResponse> responsePage = mockPageable.map(ResponseModelMapper::map);
+        return ResponseEntity.ok(responsePage);
     }
 
     @Operation(summary = "Get Mock", description = "Get mock based on the given mockId.", tags = {"Mock Management"})

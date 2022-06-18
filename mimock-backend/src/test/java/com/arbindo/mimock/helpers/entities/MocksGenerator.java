@@ -3,9 +3,11 @@ package com.arbindo.mimock.helpers.entities;
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.general.RandomDataGenerator;
 import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
+import com.arbindo.mimock.manage.mimocks.mapper.ResponseModelMapper;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
+import com.arbindo.mimock.manage.mimocks.models.response.ListMocksResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,10 @@ public class MocksGenerator {
 
     public static Page<Mock> generateMocksPageable() {
         return new PageImpl<>(generateListOfMocks(10));
+    }
+
+    public static Page<ListMocksResponse> getListMocksResponseInPageableFormat(Page<Mock> mocks) {
+        return mocks.map(ResponseModelMapper::map);
     }
 
     public static List<Mock> generateListOfMocks(int count) {
