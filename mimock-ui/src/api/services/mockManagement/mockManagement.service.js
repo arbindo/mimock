@@ -64,12 +64,17 @@ const listDeletedMocks = async (token, pageNumber) => {
 	);
 };
 
-const listMocksWithMultipleFilters = async (token, pageNumber, status, httpMethodFilter) => {
+const listMocksWithMultipleFilters = async (
+	token,
+	pageNumber,
+	status,
+	httpMethodFilter
+) => {
 	let urlToBeQueried = `/mocks/filter?size=${DEFAULT_LIST_FETCH_SIZE}&page=${pageNumber}`;
-	if(httpMethodFilter !== "" && httpMethodFilter !== undefined){
+	if (httpMethodFilter !== '' && httpMethodFilter !== undefined) {
 		urlToBeQueried += `&httpMethod=${httpMethodFilter}`;
 	}
-	if(status !== "" && status !== undefined){
+	if (status !== '' && status !== undefined) {
 		urlToBeQueried += `&status=${status}`;
 	}
 	return await get(urlToBeQueried, token);

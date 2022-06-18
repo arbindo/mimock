@@ -1,4 +1,5 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
+import { Cookies } from 'react-cookie';
 import { constants } from './constants';
 import {
 	ListContainer,
@@ -12,7 +13,7 @@ import {
 	LoaderStyle,
 	WarningBanner,
 	FilterTagsSection,
-	FilterTagSpan
+	FilterTagSpan,
 } from './List.style.js';
 import MockCard from './MockCard';
 import EmptyState from 'assets/empty-state.png';
@@ -24,12 +25,17 @@ import BarLoader from 'react-spinners/BarLoader';
 import useLazyLoad from 'src/hooks/useLazyLoad';
 import { useRecoilState } from 'recoil';
 import pageNumberAtom from 'atoms/pageNumberAtom';
-import { mockManagementConstants } from 'constants/globalConstants';
+import {
+	globalConstants,
+	mockManagementConstants,
+} from 'constants/globalConstants';
 
 function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 	const [pageNumber, setPageNumber] = useRecoilState(pageNumberAtom);
-	const [filterTags, setFilterTags] = useState([])
-	
+	const [filterTags, setFilterTags] = useState([]);
+	const [showWarningBannerInBin, setShowWarningBannerInBin] = useState(false);
+	const cookies = new Cookies();
+	const platformSettingsRef = useRef('');
 
 	const { mocksList, listTitle, isFilter, loading, error, hasMore } =
 		useLazyLoad(mocksListView, pageNumber, httpMethodFilter);
@@ -37,16 +43,28 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 	useEffect(() => {
 		setFilterTags(() => {
 			// remove the default status tags for mocksListView and httpMethodFilter
-			const statusTag = mocksListView !== 'ALL' ? `Status: ${mocksListView}` : '';
-			const httpMethodTag = httpMethodFilter !== '' ? `Http Method: ${httpMethodFilter}` : ''
-			return [statusTag, httpMethodTag].filter(item => item !== '')
+			const statusTag =
+				mocksListView !== 'ALL' ? `Status: ${mocksListView}` : '';
+			const httpMethodTag =
+				httpMethodFilter !== '' ? `Http Method: ${httpMethodFilter}` : '';
+			return [statusTag, httpMethodTag].filter((item) => item !== '');
 		});
-	}, [mocksListView, httpMethodFilter])
+		if (mocksListView === mockManagementConstants.DELETED_STATUS) {
+			platformSettingsRef.current = cookies.get(
+				globalConstants.PLATFORM_SETTINGS_COOKIE_NAME
+			);
+			setShowWarningBannerInBin(
+				platformSettingsRef.current.isFlushBinCronEnabled
+			);
+		} else {
+			setShowWarningBannerInBin(false);
+		}
+	}, [mocksListView, httpMethodFilter]);
 
 	const handleClearFilterHandler = () => {
-		setFilterTags([])
+		setFilterTags([]);
 		handleClearFilter();
-	}
+	};
 
 	const observer = useRef();
 	const lastItem = useCallback(
@@ -109,17 +127,20 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 						</If>
 					</ListTitleSpan>
 					<FilterTagsSection>
-						{filterTags.length > 0 && 
-						<>
-						<p>Filters Applied: </p>
-						{filterTags.map(filterTag =>
-						(<FilterTagSpan key={filterTag}>{filterTag}</FilterTagSpan>))}
-						</>
-						}
+						{filterTags.length > 0 && (
+							<>
+								<p>Filters Applied: </p>
+								{filterTags.map((filterTag, index) => (
+									<FilterTagSpan key={`${filterTag}_tag_${index}`}>
+										{filterTag}
+									</FilterTagSpan>
+								))}
+							</>
+						)}
 					</FilterTagsSection>
 					<Choose>
 						<When condition={mocksList.length > 0}>
-							{mocksListView === mockManagementConstants.DELETED_STATUS && (
+							{showWarningBannerInBin && (
 								<WarningBanner>
 									{' '}
 									<MdWarning /> Items in bin are deleted forever after 30 days!
@@ -167,6 +188,7 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 
 List.propTypes = {
 	mocksListView: PropTypes.string.isRequired,
+	httpMethodFilter: PropTypes.string.isRequired,
 	handleClearFilter: PropTypes.func.isRequired,
 };
 

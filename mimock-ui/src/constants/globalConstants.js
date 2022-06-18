@@ -1,6 +1,7 @@
 export const globalConstants = {
 	AUTH_TOKEN_COOKIE_NAME: '__authToken',
 	XSRF_COOKIE_NAME: 'XSRF-TOKEN',
+	PLATFORM_SETTINGS_COOKIE_NAME: 'platform-settings',
 };
 
 export const mockManagementConstants = {
@@ -13,7 +14,7 @@ export const mockManagementConstants = {
 		active: 'Active Mocks',
 		archived: 'Archived Mocks',
 		deleted: 'Deleted Mocks',
-		httpMethod: 'Http Method Based'
+		httpMethod: 'Http Method Based',
 	},
 	errors: {
 		unexpectedState:

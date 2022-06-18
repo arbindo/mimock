@@ -1,8 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Cookies } from 'react-cookie';
-import {
-	listMocksWithMultipleFilters
-} from 'services/mockManagement/mockManagement.service';
+import { listMocksWithMultipleFilters } from 'services/mockManagement/mockManagement.service';
 import {
 	globalConstants,
 	mockManagementConstants,
@@ -32,38 +30,44 @@ function useLazyLoad(mocksListView, pageNumber, httpMethodFilter) {
 	const ACTIVE = mockManagementConstants.ACTIVE_STATUS;
 	const ARCHIVED = mockManagementConstants.ARCHIVED_STATUS;
 	const DELETED = mockManagementConstants.DELETED_STATUS;
-	
-	const isHttpMethodFilterExists = httpMethodFilter !== undefined && httpMethodFilter !== "";
+
+	const isHttpMethodFilterExists =
+		httpMethodFilter !== undefined && httpMethodFilter !== '';
 	const isDefaultView = mocksListView === DEFAULT;
 
 	useEffect(() => {
 		setMocksList([]);
-	}, [mocksListView]);
+	}, [mocksListView, httpMethodFilter]);
 
 	useEffect(() => {
 		setLoading(true);
 		setIsFilter(isHttpMethodFilterExists || !isDefaultView);
-		
-		async function callMockService(mocksListView, httpMethodFilter, authCookieRef, pageNumber) {
-			let entityStatusString = "";
+
+		async function callMockService(
+			mocksListView,
+			httpMethodFilter,
+			authCookieRef,
+			pageNumber
+		) {
+			let entityStatusString = '';
 			switch (mocksListView) {
 				case ACTIVE: {
-					entityStatusString = "NONE";
+					entityStatusString = 'NONE';
 					setListTitle(mockManagementConstants.headerTitle.active);
 					break;
 				}
 				case ARCHIVED: {
-					entityStatusString = "ARCHIVED";
+					entityStatusString = 'ARCHIVED';
 					setListTitle(mockManagementConstants.headerTitle.archived);
 					break;
 				}
 				case DELETED: {
-					entityStatusString = "DELETED";
+					entityStatusString = 'DELETED';
 					setListTitle(mockManagementConstants.headerTitle.deleted);
 					break;
 				}
 				default: {
-					entityStatusString = "";
+					entityStatusString = '';
 					setListTitle(mockManagementConstants.headerTitle.all);
 					break;
 				}
@@ -73,7 +77,12 @@ function useLazyLoad(mocksListView, pageNumber, httpMethodFilter) {
 				status: 0,
 				isLast: false,
 			};
-			const listMocksResponse = await listMocksWithMultipleFilters(authCookieRef, pageNumber, entityStatusString, httpMethodFilter);
+			const listMocksResponse = await listMocksWithMultipleFilters(
+				authCookieRef,
+				pageNumber,
+				entityStatusString,
+				httpMethodFilter
+			);
 			mocksListResponse.data = listMocksResponse.data.content;
 			mocksListResponse.status = listMocksResponse.status;
 			mocksListResponse.isLast = listMocksResponse.data.last;
@@ -92,11 +101,11 @@ function useLazyLoad(mocksListView, pageNumber, httpMethodFilter) {
 		callMockService(mocksListView, httpMethodFilter, authCookieRef, pageNumber)
 			.then((res) => {
 				setMocksList((prevList) => {
-					if(isHttpMethodFilterExists){
+					if (isHttpMethodFilterExists) {
 						return [...res.data];
 					} else {
 						const combinedArray = [...prevList, ...res.data];
-						return combinedArray.filter((item, pos) => combinedArray.indexOf(item) === pos)
+						return combinedArray;
 					}
 				});
 				setHasMore(!res.isLast);

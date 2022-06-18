@@ -1,4 +1,4 @@
-import { get, put } from './AxiosClient';
+import { get, put } from 'api/AxiosClient';
 
 const listPlatformSettings = async (token) => {
 	return await get('/platform-settings', token);
