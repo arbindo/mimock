@@ -64,6 +64,17 @@ const listDeletedMocks = async (token, pageNumber) => {
 	);
 };
 
+const listMocksWithMultipleFilters = async (token, pageNumber, status, httpMethodFilter) => {
+	let urlToBeQueried = `/mocks/filter?size=${DEFAULT_LIST_FETCH_SIZE}&page=${pageNumber}`;
+	if(httpMethodFilter !== "" && httpMethodFilter !== undefined){
+		urlToBeQueried += `&httpMethod=${httpMethodFilter}`;
+	}
+	if(status !== "" && status !== undefined){
+		urlToBeQueried += `&status=${status}`;
+	}
+	return await get(urlToBeQueried, token);
+};
+
 const archiveMock = async (id, token) => {
 	return await post(`/mocks/${id}:archive`, null, token);
 };
@@ -83,6 +94,7 @@ export {
 	listActiveMocks,
 	listArchivedMocks,
 	listDeletedMocks,
+	listMocksWithMultipleFilters,
 	archiveMock,
 	unarchiveMock,
 };

@@ -1,17 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 import { Cookies } from 'react-cookie';
 import {
-	listArchivedMocks,
-	listDeletedMocks,
-	listMocks,
-	listActiveMocks,
+	listMocksWithMultipleFilters
 } from 'services/mockManagement/mockManagement.service';
 import {
 	globalConstants,
 	mockManagementConstants,
 } from 'constants/globalConstants';
 
-function useLazyLoad(mocksListView, pageNumber) {
+function useLazyLoad(mocksListView, pageNumber, httpMethodFilter) {
 	const cookies = new Cookies();
 	const authCookieRef = useRef('');
 	const csrfCookieRef = useRef('');
@@ -31,9 +28,13 @@ function useLazyLoad(mocksListView, pageNumber) {
 	const [isFilter, setIsFilter] = useState(false);
 	const [hasMore, setHasMore] = useState(false);
 
+	const DEFAULT = mockManagementConstants.DEFAULT_STATUS;
 	const ACTIVE = mockManagementConstants.ACTIVE_STATUS;
 	const ARCHIVED = mockManagementConstants.ARCHIVED_STATUS;
 	const DELETED = mockManagementConstants.DELETED_STATUS;
+	
+	const isHttpMethodFilterExists = httpMethodFilter !== undefined && httpMethodFilter !== "";
+	const isDefaultView = mocksListView === DEFAULT;
 
 	useEffect(() => {
 		setMocksList([]);
@@ -41,64 +42,41 @@ function useLazyLoad(mocksListView, pageNumber) {
 
 	useEffect(() => {
 		setLoading(true);
-
-		async function callMockService(mocksListView, authCookieRef, pageNumber) {
+		setIsFilter(isHttpMethodFilterExists || !isDefaultView);
+		
+		async function callMockService(mocksListView, httpMethodFilter, authCookieRef, pageNumber) {
+			let entityStatusString = "";
+			switch (mocksListView) {
+				case ACTIVE: {
+					entityStatusString = "NONE";
+					setListTitle(mockManagementConstants.headerTitle.active);
+					break;
+				}
+				case ARCHIVED: {
+					entityStatusString = "ARCHIVED";
+					setListTitle(mockManagementConstants.headerTitle.archived);
+					break;
+				}
+				case DELETED: {
+					entityStatusString = "DELETED";
+					setListTitle(mockManagementConstants.headerTitle.deleted);
+					break;
+				}
+				default: {
+					entityStatusString = "";
+					setListTitle(mockManagementConstants.headerTitle.all);
+					break;
+				}
+			}
 			let mocksListResponse = {
 				data: null,
 				status: 0,
 				isLast: false,
 			};
-			switch (mocksListView) {
-				case ACTIVE: {
-					const listActiveMocksApiResponse = await listActiveMocks(
-						authCookieRef,
-						pageNumber
-					);
-					mocksListResponse.data = listActiveMocksApiResponse.data.content;
-					mocksListResponse.status = listActiveMocksApiResponse.status;
-					mocksListResponse.isLast = listActiveMocksApiResponse.data.last;
-					setListTitle(mockManagementConstants.headerTitle.active);
-					setIsFilter(true);
-					break;
-				}
-				case ARCHIVED: {
-					const listArchivedMocksApiResponse = await listArchivedMocks(
-						authCookieRef,
-						pageNumber
-					);
-					mocksListResponse.data = listArchivedMocksApiResponse.data.content;
-					mocksListResponse.status = listArchivedMocksApiResponse.status;
-					mocksListResponse.isLast = listArchivedMocksApiResponse.data.last;
-					setListTitle(mockManagementConstants.headerTitle.archived);
-					setIsFilter(true);
-					break;
-				}
-				case DELETED: {
-					const listDeletedMocksApiResponse = await listDeletedMocks(
-						authCookieRef,
-						pageNumber
-					);
-					mocksListResponse.data = listDeletedMocksApiResponse.data.content;
-					mocksListResponse.status = listDeletedMocksApiResponse.status;
-					mocksListResponse.isLast = listDeletedMocksApiResponse.data.last;
-
-					setListTitle(mockManagementConstants.headerTitle.deleted);
-					setIsFilter(true);
-					break;
-				}
-				default: {
-					const listAllMocksApiResponse = await listMocks(
-						authCookieRef,
-						pageNumber
-					);
-					mocksListResponse.data = listAllMocksApiResponse.data.content;
-					mocksListResponse.status = listAllMocksApiResponse.status;
-					mocksListResponse.isLast = listAllMocksApiResponse.data.last;
-					setListTitle(mockManagementConstants.headerTitle.all);
-					setIsFilter(false);
-					break;
-				}
-			}
+			const listMocksResponse = await listMocksWithMultipleFilters(authCookieRef, pageNumber, entityStatusString, httpMethodFilter);
+			mocksListResponse.data = listMocksResponse.data.content;
+			mocksListResponse.status = listMocksResponse.status;
+			mocksListResponse.isLast = listMocksResponse.data.last;
 			if (mocksListResponse != null && mocksListResponse.status == 200) {
 				return mocksListResponse;
 			} else {
@@ -111,10 +89,15 @@ function useLazyLoad(mocksListView, pageNumber) {
 			}
 		}
 
-		callMockService(mocksListView, authCookieRef, pageNumber)
+		callMockService(mocksListView, httpMethodFilter, authCookieRef, pageNumber)
 			.then((res) => {
 				setMocksList((prevList) => {
-					return [...prevList, ...res.data];
+					if(isHttpMethodFilterExists){
+						return [...res.data];
+					} else {
+						const combinedArray = [...prevList, ...res.data];
+						return combinedArray.filter((item, pos) => combinedArray.indexOf(item) === pos)
+					}
 				});
 				setHasMore(!res.isLast);
 				setLoading(false);
@@ -126,7 +109,7 @@ function useLazyLoad(mocksListView, pageNumber) {
 					message: mockManagementConstants.errors.serverError,
 				});
 			});
-	}, [mocksListView, pageNumber]);
+	}, [mocksListView, pageNumber, httpMethodFilter]);
 
 	return { mocksList, listTitle, isFilter, loading, error, hasMore };
 }

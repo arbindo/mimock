@@ -17,6 +17,10 @@ public interface MocksRepository extends JpaRepository<Mock, UUID> {
 
     Page<Mock> findAllByEntityStatus(EntityStatus entityStatus, Pageable pageable);
 
+    Page<Mock> findAllByHttpMethod(HttpMethod httpMethod, Pageable pageable);
+
+    Page<Mock> findAllByEntityStatusAndHttpMethod(EntityStatus entityStatus, HttpMethod httpMethod, Pageable pageable);
+
     List<Mock> findAllByEntityStatusAndDeletedAt(EntityStatus entityStatus, ZonedDateTime deletedAt);
 
     Optional<Mock> findOneByMockName(String mockName);

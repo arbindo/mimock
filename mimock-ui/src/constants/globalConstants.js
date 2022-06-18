@@ -13,6 +13,7 @@ export const mockManagementConstants = {
 		active: 'Active Mocks',
 		archived: 'Archived Mocks',
 		deleted: 'Deleted Mocks',
+		httpMethod: 'Http Method Based'
 	},
 	errors: {
 		unexpectedState:

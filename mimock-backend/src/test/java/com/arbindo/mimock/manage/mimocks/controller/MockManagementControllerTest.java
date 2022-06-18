@@ -139,7 +139,7 @@ class MockManagementControllerTest {
     }
 
     @Test
-    void shouldReturnHttpOk_PageableListMocksApi_WithoutStatusQueryParam() throws Exception {
+    void shouldReturnHttpOk_PageableListMocksApi_WithoutQueryParams() throws Exception {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_PAGEABLE;
         String expectedContentType = "application/json";
@@ -147,7 +147,7 @@ class MockManagementControllerTest {
         Page<ListMocksResponse> expectedListMocksResponse = getListMocksResponseInPageableFormat(expectedMocksFromDB);
         String expectedResponseBody = convertObjectToJsonString(expectedListMocksResponse);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any()))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(), any()))
                 .thenReturn(expectedMocksFromDB);
 
         // Act
@@ -168,11 +168,13 @@ class MockManagementControllerTest {
         Page<Mock> expectedMocks = new PageImpl<>(new ArrayList<>());
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class)))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString()))
                 .thenReturn(expectedMocks);
 
         // Act
-        MvcResult result = mockMvc.perform(get(route).param("status", "NONE"))
+        MvcResult result = mockMvc.perform(get(route)
+                        .param("status", "NONE")
+                        .param("httpMethod", "GET"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(expectedContentType))
                 .andReturn();
@@ -190,11 +192,13 @@ class MockManagementControllerTest {
         Page<ListMocksResponse> expectedListMocksResponse = getListMocksResponseInPageableFormat(expectedMocksFromDB);
         String expectedResponseBody = convertObjectToJsonString(expectedListMocksResponse);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class)))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString()))
                 .thenReturn(expectedMocksFromDB);
 
         // Act
-        MvcResult result = mockMvc.perform(get(route).param("status", "NONE"))
+        MvcResult result = mockMvc.perform(get(route)
+                        .param("status", "NONE")
+                        .param("httpMethod", "GET"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(expectedContentType))
                 .andReturn();
@@ -208,11 +212,13 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_PAGEABLE;
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class)))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString()))
                 .thenReturn(null);
 
         // Act
-        MvcResult result = mockMvc.perform(get(route).param("status", "NONE"))
+        MvcResult result = mockMvc.perform(get(route)
+                        .param("status", "NONE")
+                        .param("httpMethod", "GET"))
                 .andExpect(status().isOk())
                 .andReturn();
 

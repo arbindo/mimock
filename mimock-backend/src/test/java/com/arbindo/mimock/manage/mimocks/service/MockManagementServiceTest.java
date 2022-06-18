@@ -124,12 +124,14 @@ class MockManagementServiceTest {
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
 
         verify(mockRepository, times(1)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByHttpMethod(any(HttpMethod.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByEntityStatusAndHttpMethod(any(EntityStatus.class), any(HttpMethod.class), any(Pageable.class));
         verify(mockEntityStatusService, times(1)).findByEntityStatus(anyString());
     }
 
@@ -142,12 +144,14 @@ class MockManagementServiceTest {
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(null);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
 
         verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByHttpMethod(any(HttpMethod.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByEntityStatusAndHttpMethod(any(EntityStatus.class), any(HttpMethod.class), any(Pageable.class));
         verify(mockRepository, times(1)).findAll(any(Pageable.class));
         verify(mockEntityStatusService, times(1)).findByEntityStatus(anyString());
     }
@@ -160,14 +164,105 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findAll(any(Pageable.class))).thenReturn(pageable);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), null);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), null, null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
 
         verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByHttpMethod(any(HttpMethod.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByEntityStatusAndHttpMethod(any(EntityStatus.class), any(HttpMethod.class), any(Pageable.class));
         verify(mockRepository, times(1)).findAll(any(Pageable.class));
         verify(mockEntityStatusService, times(0)).findByEntityStatus(anyString());
+    }
+
+    @Test
+    void shouldReturnFilteredListOfMocks_WhenHttpMethodIsValid() {
+        // Arrange
+        Page<Mock> pageable = generateMocksPageable();
+        HttpMethod httpMethod = generateHttpMethod();
+
+        lenient().when(mockRepository.findAllByHttpMethod(any(HttpMethod.class), any(Pageable.class)))
+                .thenReturn(pageable);
+        lenient().when(mockParamBuilder.findHttpMethodFromQueryString(anyString())).thenReturn(httpMethod);
+
+        // Act
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET");
+
+        // Assert
+        assertEquals(pageable.getTotalElements(), result.getTotalElements());
+
+        verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockRepository, times(1)).findAllByHttpMethod(any(HttpMethod.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByEntityStatusAndHttpMethod(any(EntityStatus.class), any(HttpMethod.class), any(Pageable.class));
+        verify(mockParamBuilder, times(1)).findHttpMethodFromQueryString(anyString());
+    }
+
+    @Test
+    void shouldReturnNonFilteredListOfMocks_WhenHttpMethodIsInvalid() {
+        // Arrange
+        Page<Mock> pageable = generateMocksPageable();
+
+        lenient().when(mockRepository.findAll(any(Pageable.class))).thenReturn(pageable);
+        lenient().when(mockParamBuilder.findHttpMethodFromQueryString(anyString())).thenReturn(null);
+
+        // Act
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET");
+
+        // Assert
+        assertEquals(pageable.getTotalElements(), result.getTotalElements());
+
+        verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByHttpMethod(any(HttpMethod.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByEntityStatusAndHttpMethod(any(EntityStatus.class), any(HttpMethod.class), any(Pageable.class));
+        verify(mockRepository, times(1)).findAll(any(Pageable.class));
+        verify(mockParamBuilder, times(1)).findHttpMethodFromQueryString(anyString());
+    }
+
+    @Test
+    void shouldReturnNonFilteredListOfMocks_WhenStatusAndHttpMethodParameterIsNull() {
+        // Arrange
+        Page<Mock> pageable = generateMocksPageable();
+
+        lenient().when(mockRepository.findAll(any(Pageable.class))).thenReturn(pageable);
+
+        // Act
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), null, null);
+
+        // Assert
+        assertEquals(pageable.getTotalElements(), result.getTotalElements());
+
+        verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByHttpMethod(any(HttpMethod.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByEntityStatusAndHttpMethod(any(EntityStatus.class), any(HttpMethod.class), any(Pageable.class));
+        verify(mockRepository, times(1)).findAll(any(Pageable.class));
+        verify(mockEntityStatusService, times(0)).findByEntityStatus(anyString());
+        verify(mockParamBuilder, times(0)).findHttpMethodFromQueryString(anyString());
+    }
+
+    @Test
+    void shouldReturnFilteredListOfMocks_WhenStatusAndHttpMethodIsValid() {
+        // Arrange
+        Page<Mock> pageable = generateMocksPageable();
+        EntityStatus entityStatus = generateDefaultEntityStatus();
+        HttpMethod httpMethod = generateHttpMethod();
+
+        lenient().when(mockRepository.findAllByEntityStatusAndHttpMethod(any(EntityStatus.class), any(HttpMethod.class), any(Pageable.class)))
+                .thenReturn(pageable);
+        lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
+        lenient().when(mockParamBuilder.findHttpMethodFromQueryString(anyString())).thenReturn(httpMethod);
+
+        // Act
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET");
+
+        // Assert
+        assertEquals(pageable.getTotalElements(), result.getTotalElements());
+
+        verify(mockRepository, times(0)).findAllByEntityStatus(any(EntityStatus.class), any(Pageable.class));
+        verify(mockRepository, times(0)).findAllByHttpMethod(any(HttpMethod.class), any(Pageable.class));
+        verify(mockRepository, times(1)).findAllByEntityStatusAndHttpMethod(any(EntityStatus.class), any(HttpMethod.class), any(Pageable.class));
+        verify(mockEntityStatusService, times(1)).findByEntityStatus(anyString());
+        verify(mockParamBuilder, times(1)).findHttpMethodFromQueryString(anyString());
     }
 
     @ParameterizedTest

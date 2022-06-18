@@ -2,10 +2,7 @@ package com.arbindo.mimock.manage.mimocks.service;
 
 import com.arbindo.mimock.audit.AuditorService;
 import com.arbindo.mimock.common.services.EntityStatusService;
-import com.arbindo.mimock.entities.BinaryResponse;
-import com.arbindo.mimock.entities.EntityStatus;
-import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.entities.TextualResponse;
+import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
@@ -63,12 +60,24 @@ public class MockManagementServiceImpl implements MockManagementService {
     }
 
     @Override
-    public Page<Mock> getMocksAsPageable(Pageable pageable, Status status) {
+    public Page<Mock> getMocksAsPageable(Pageable pageable, Status status, String httpMethod) {
+        HttpMethod httpMethodFromQueryString = null;
+        EntityStatus entityStatus = null;
+        if(ValidationUtil.isArgNotNull(httpMethod)){
+            httpMethodFromQueryString = mockParamBuilder.findHttpMethodFromQueryString(httpMethod);
+        }
         if (ValidationUtil.isArgNotNull(status)) {
-            EntityStatus entityStatus = entityStatusService.findByEntityStatus(status.name());
-            if (ValidationUtil.isArgNotNull(entityStatus)) {
-                return mocksRepository.findAllByEntityStatus(entityStatus, pageable);
-            }
+            entityStatus = entityStatusService.findByEntityStatus(status.name());
+        }
+        if(ValidationUtil.isArgNotNull(httpMethodFromQueryString)
+                && ValidationUtil.isArgNotNull(entityStatus)){
+            return mocksRepository.findAllByEntityStatusAndHttpMethod(entityStatus, httpMethodFromQueryString, pageable);
+        }
+        if(ValidationUtil.isArgNotNull(httpMethodFromQueryString)){
+            return mocksRepository.findAllByHttpMethod(httpMethodFromQueryString, pageable);
+        }
+        if (ValidationUtil.isArgNotNull(entityStatus)) {
+            return mocksRepository.findAllByEntityStatus(entityStatus, pageable);
         }
         return mocksRepository.findAll(pageable);
     }

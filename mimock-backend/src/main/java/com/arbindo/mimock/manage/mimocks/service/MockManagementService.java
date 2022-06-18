@@ -12,7 +12,7 @@ import java.util.List;
 public interface MockManagementService {
     List<Mock> getAllMocks();
 
-    Page<Mock> getMocksAsPageable(Pageable pageable, Status status);
+    Page<Mock> getMocksAsPageable(Pageable pageable, Status status, String httpMethod);
 
     Mock getMockById(String mockId);
 

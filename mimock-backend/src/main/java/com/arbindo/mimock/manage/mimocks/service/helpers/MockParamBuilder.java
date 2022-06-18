@@ -103,8 +103,20 @@ public class MockParamBuilder {
         return null;
     }
 
+    public HttpMethod findHttpMethodFromQueryString(String httpMethod) {
+        try{
+            return findHttpMethodInternal(httpMethod);
+        } catch (Exception e){
+            return null;
+        }
+    }
+
     public HttpMethod httpMethod() throws Exception {
         String httpMethod = request.getHttpMethod();
+        return findHttpMethodInternal(httpMethod);
+    }
+
+    private HttpMethod findHttpMethodInternal(String httpMethod) throws Exception {
         if (ValidationUtil.isNotNullOrEmpty(httpMethod)) {
             return httpMethodsRepository.findByMethod(httpMethod);
         }

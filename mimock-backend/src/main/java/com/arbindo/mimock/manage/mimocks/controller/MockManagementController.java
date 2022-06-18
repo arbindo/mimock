@@ -81,8 +81,9 @@ public class MockManagementController {
             tags = {"Mock Management"})
     @GetMapping(UrlConfig.MOCKS_PAGEABLE)
     public ResponseEntity<Page<ListMocksResponse>> getMocksAsPageable(@SortDefault(sort = "createdAt",
-            direction = Sort.Direction.DESC) Pageable pageable, @RequestParam(required = false) Status status) {
-        Page<Mock> mockPageable = mockManagementService.getMocksAsPageable(pageable, status);
+            direction = Sort.Direction.DESC) Pageable pageable, @RequestParam(required = false) Status status,
+            @RequestParam(required = false) String httpMethod) {
+        Page<Mock> mockPageable = mockManagementService.getMocksAsPageable(pageable, status, httpMethod);
         if(mockPageable == null){
             return ResponseEntity.ok(null);
         }

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { constants } from './constants';
 import {
 	ListContainer,
@@ -11,6 +11,8 @@ import {
 	MessageSpan,
 	LoaderStyle,
 	WarningBanner,
+	FilterTagsSection,
+	FilterTagSpan
 } from './List.style.js';
 import MockCard from './MockCard';
 import EmptyState from 'assets/empty-state.png';
@@ -24,11 +26,27 @@ import { useRecoilState } from 'recoil';
 import pageNumberAtom from 'atoms/pageNumberAtom';
 import { mockManagementConstants } from 'constants/globalConstants';
 
-function List({ mocksListView, handleClearFilter }) {
+function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 	const [pageNumber, setPageNumber] = useRecoilState(pageNumberAtom);
+	const [filterTags, setFilterTags] = useState([])
+	
 
 	const { mocksList, listTitle, isFilter, loading, error, hasMore } =
-		useLazyLoad(mocksListView, pageNumber);
+		useLazyLoad(mocksListView, pageNumber, httpMethodFilter);
+
+	useEffect(() => {
+		setFilterTags(() => {
+			// remove the default status tags for mocksListView and httpMethodFilter
+			const statusTag = mocksListView !== 'ALL' ? `Status: ${mocksListView}` : '';
+			const httpMethodTag = httpMethodFilter !== '' ? `Http Method: ${httpMethodFilter}` : ''
+			return [statusTag, httpMethodTag].filter(item => item !== '')
+		});
+	}, [mocksListView, httpMethodFilter])
+
+	const handleClearFilterHandler = () => {
+		setFilterTags([])
+		handleClearFilter();
+	}
 
 	const observer = useRef();
 	const lastItem = useCallback(
@@ -84,12 +102,21 @@ function List({ mocksListView, handleClearFilter }) {
 						<If condition={isFilter}>
 							<ListClearFilter>
 								<MdCancel />
-								<ListClearFilterText onClick={handleClearFilter}>
+								<ListClearFilterText onClick={handleClearFilterHandler}>
 									{constants.label.clearFilter}
 								</ListClearFilterText>
 							</ListClearFilter>
 						</If>
 					</ListTitleSpan>
+					<FilterTagsSection>
+						{filterTags.length > 0 && 
+						<>
+						<p>Filters Applied: </p>
+						{filterTags.map(filterTag =>
+						(<FilterTagSpan key={filterTag}>{filterTag}</FilterTagSpan>))}
+						</>
+						}
+					</FilterTagsSection>
 					<Choose>
 						<When condition={mocksList.length > 0}>
 							{mocksListView === mockManagementConstants.DELETED_STATUS && (

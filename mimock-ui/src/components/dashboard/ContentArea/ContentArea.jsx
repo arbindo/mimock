@@ -4,14 +4,15 @@ import Sidebar from './Sidebar';
 import { ContentAreaContainer } from './ContentArea.style';
 import PropTypes from 'prop-types';
 
-function ContentArea({ showSidebarSection, mocksListView, handleClearFilter }) {
+function ContentArea({ showSidebarSection, mocksListView, httpMethodFilter, handleClearFilter, handleOnBadgeClick }) {
 	return (
 		<ContentAreaContainer>
 			<If condition={showSidebarSection}>
-				<Sidebar />
+				<Sidebar onBadgeClick={handleOnBadgeClick} isFilterCleared={httpMethodFilter === ''} />
 			</If>
 			<List
 				mocksListView={mocksListView}
+				httpMethodFilter={httpMethodFilter}
 				handleClearFilter={handleClearFilter}
 			/>
 		</ContentAreaContainer>

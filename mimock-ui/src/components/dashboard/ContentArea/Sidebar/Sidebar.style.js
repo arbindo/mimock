@@ -135,6 +135,7 @@ export const BadgeFilter = tw.div`
     my-1
     mx-2
     cursor-pointer
+    border-2
 `;
 
 export const MiniBtnSpan = tw.span`

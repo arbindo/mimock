@@ -34,6 +34,7 @@ export const ListClearFilterText = tw.span`
     ml-0.5
     hover:underline
     hover:underline-offset-1
+    select-none
 `;
 
 export const ListTitleSpan = tw.span`
@@ -100,4 +101,25 @@ export const WarningBanner = tw.p`
     inline-flex
     items-center
     gap-2
+`;
+
+export const FilterTagsSection = tw.div`
+    inline-flex
+    items-center
+    justify-start
+    font-sans
+    text-sm
+    font-light
+    my-2
+    gap-1
+`;
+
+export const FilterTagSpan = tw.span`
+    bg-gray-400
+    text-white
+    px-2
+    py-1
+    shadow-sm
+    rounded-sm
+    select-none
 `;

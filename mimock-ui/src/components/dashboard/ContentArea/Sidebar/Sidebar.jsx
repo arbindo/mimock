@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
 	SideBarContainer,
 	SidebarBox,
@@ -26,7 +26,7 @@ import { notificationTypes } from 'constants/notificationConstants';
 import useNotification from 'hooks/useNotification';
 import fileDownload from 'js-file-download';
 
-function Sidebar() {
+function Sidebar({onBadgeClick, isFilterCleared}) {
 	const cookies = new Cookies();
 	const authCookieRef = useRef('');
 	const csrfCookieRef = useRef('');
@@ -36,9 +36,53 @@ function Sidebar() {
 		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
 	}, []);
 
+	const badgeRef = useRef([])
+	const totalBadgeFilterCount = constants.badgeFilterItems.length;
+
+	useEffect(() => {
+		if(isFilterCleared){
+			for(var i=0;i<totalBadgeFilterCount;i++){
+				const currentClasses = constants.badgeFilterItems[i].badgeColor.split(" ");
+				const activeClasses = constants.badgeFilterItems[i].activeBadgeColor.split(" ");
+				activeClasses.forEach(classes => {
+					badgeRef[i].classList.remove(classes);
+				});
+				currentClasses.forEach(classes => {
+					badgeRef[i].classList.add(classes);
+				})
+			}
+		}
+	}, [isFilterCleared])
+
 	const handleOnchange = (e) => {
 		console.log(e);
 	};
+
+	const handleHttpMethodBadgeClick = (key, item) => {		
+		const currentBadge = badgeRef[key];
+		const otherBadges = Object.keys(badgeRef).filter(index => index != key).reduce((obj, key) => { obj[key] = badgeRef[key]; return obj; }, {} );
+		const currentClasses = item.badgeColor.split(" ")
+		const activeClasses = item.activeBadgeColor.split(" ");
+		currentClasses.forEach(classes => {
+			currentBadge.classList.remove(classes);
+		});
+		activeClasses.forEach(classes => {
+			currentBadge.classList.add(classes);
+		});
+		for(var i=0;i<totalBadgeFilterCount;i++){
+			const currentClasses = constants.badgeFilterItems[i].badgeColor.split(" ");
+			const activeClasses = constants.badgeFilterItems[i].activeBadgeColor.split(" ");
+			if(i !== key){
+				activeClasses.forEach(classes => {
+					otherBadges[i].classList.remove(classes);
+				});
+				currentClasses.forEach(classes => {
+					otherBadges[i].classList.add(classes);
+				})
+			}
+		}
+		onBadgeClick(item.httpMethod)
+	}
 
 	const handleExportMocksBtnClick = () => {
 		exportMocks(authCookieRef)
@@ -102,6 +146,8 @@ function Sidebar() {
 								data-testid='card-badge'
 								key={key}
 								className={item.badgeColor}
+								ref={element => badgeRef[key] = element}
+								onClick={() => handleHttpMethodBadgeClick(key, item)}
 							>
 								{item.httpMethod}
 							</BadgeFilter>
