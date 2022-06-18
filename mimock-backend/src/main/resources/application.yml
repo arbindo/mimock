@@ -70,6 +70,7 @@ app:
 
 springdoc:
   swagger-ui:
+    doc-expansion: none
     csrf:
       enabled: true
       header-name: X-XSRF-TOKEN
