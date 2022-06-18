@@ -28,8 +28,8 @@ export const formInputData = [
 		validators: {
 			required: 'Username is required',
 			minLength: {
-				value: 4,
-				message: 'Username must be at least 4 characters',
+				value: 6,
+				message: 'Username must be at least 6 characters',
 			},
 			maxLength: {
 				value: 24,
