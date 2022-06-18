@@ -10,10 +10,7 @@ import { deleteUser } from 'services/users';
 import { ConfirmationModal } from 'components/common/Modals';
 import useNotification from 'hooks/useNotification';
 import deletionModalAtom from 'atoms/deletionModalAtom';
-import {
-	notificationTypes,
-	notificationPositions,
-} from 'constants/notificationConstants';
+import { notificationTypes } from 'constants/notificationConstants';
 import { ActionsWrapper, Options } from './Actions.style';
 
 function Actions({ userName, userId }) {
@@ -54,7 +51,6 @@ function Actions({ userName, userId }) {
 					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
 					title: 'Deletion successful',
 					message: `User - ${userName} has been deleted`,
-					position: notificationPositions.NOTIFICATION_POSITION_BOTTOM_RIGHT,
 					animationIn: 'animate__slideInRight',
 					animationOut: 'animate__slideOutRight',
 				});

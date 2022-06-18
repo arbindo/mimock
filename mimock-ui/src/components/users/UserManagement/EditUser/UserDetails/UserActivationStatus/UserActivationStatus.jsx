@@ -4,10 +4,7 @@ import { useIosSwitchStyles } from '@mui-treasury/styles/switch/ios';
 import { useRecoilState } from 'recoil';
 import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import useNotification from 'hooks/useNotification';
-import {
-	notificationTypes,
-	notificationPositions,
-} from 'constants/notificationConstants';
+import { notificationTypes } from 'constants/notificationConstants';
 import { updateUserActivationStatus } from 'services/users';
 import {
 	UserActivationStatusWrapper,
@@ -33,14 +30,15 @@ function UserActivationStatus() {
 				const { userName, updatedActivationStatus } = res;
 				setActivationStatus(updatedActivationStatus);
 				useNotification({
-					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					type: updatedActivationStatus
+						? notificationTypes.NOTIFICATION_TYPE_SUCCESS
+						: notificationTypes.NOTIFICATION_TYPE_WARNING,
 					title: updatedActivationStatus
 						? 'User activated'
 						: 'User deactivated',
 					message: `User - ${userName} has been ${
 						updatedActivationStatus ? 'activated' : 'deactivated'
 					}`,
-					position: notificationPositions.NOTIFICATION_POSITION_BOTTOM_RIGHT,
 					animationIn: 'animate__slideInRight',
 					animationOut: 'animate__slideOutRight',
 				});

@@ -122,7 +122,6 @@ describe('UserActivationStatus', () => {
 		expect(notificationSpy).toHaveBeenCalledWith({
 			animationIn: 'animate__slideInRight',
 			animationOut: 'animate__slideOutRight',
-			position: 'bottom-right',
 			message: 'User - test123 has been activated',
 			title: 'User activated',
 			type: 'success',
@@ -184,8 +183,7 @@ describe('UserActivationStatus', () => {
 			animationOut: 'animate__slideOutRight',
 			message: 'User - test123 has been deactivated',
 			title: 'User deactivated',
-			position: 'bottom-right',
-			type: 'success',
+			type: 'warning',
 		});
 
 		expect(container).toMatchSnapshot();

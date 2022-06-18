@@ -191,7 +191,6 @@ describe('Actions', () => {
 			type: 'success',
 			title: 'Deletion successful',
 			message: 'User - luke1 has been deleted',
-			position: 'bottom-right',
 			animationIn: 'animate__slideInRight',
 			animationOut: 'animate__slideOutRight',
 		});
