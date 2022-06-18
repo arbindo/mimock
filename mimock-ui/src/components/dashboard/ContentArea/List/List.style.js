@@ -85,3 +85,19 @@ export const LoaderStyle = css`
 	margin-bottom: 50px;
 	width: 1000px;
 `;
+
+export const WarningBanner = tw.p`
+    text-truncate
+    px-2
+    py-1
+    my-2
+    shadow-sm
+    rounded-sm
+    border-2
+    border-amber-400
+    bg-amber-200
+    select-none
+    inline-flex
+    items-center
+    gap-2
+`;

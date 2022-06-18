@@ -10,17 +10,19 @@ import {
 	MessageImageIcon,
 	MessageSpan,
 	LoaderStyle,
+	WarningBanner,
 } from './List.style.js';
 import MockCard from './MockCard';
 import EmptyState from 'assets/empty-state.png';
 import ErrorState from 'assets/server-down-state.png';
 import PropTypes from 'prop-types';
 import { FaFilter } from 'react-icons/fa';
-import { MdCancel } from 'react-icons/md';
+import { MdCancel, MdWarning } from 'react-icons/md';
 import BarLoader from 'react-spinners/BarLoader';
 import useLazyLoad from 'src/hooks/useLazyLoad';
 import { useRecoilState } from 'recoil';
 import pageNumberAtom from 'atoms/pageNumberAtom';
+import { mockManagementConstants } from 'constants/globalConstants';
 
 function List({ mocksListView, handleClearFilter }) {
 	const [pageNumber, setPageNumber] = useRecoilState(pageNumberAtom);
@@ -90,6 +92,12 @@ function List({ mocksListView, handleClearFilter }) {
 					</ListTitleSpan>
 					<Choose>
 						<When condition={mocksList.length > 0}>
+							{mocksListView === mockManagementConstants.DELETED_STATUS && (
+								<WarningBanner>
+									{' '}
+									<MdWarning /> Items in bin are deleted forever after 30 days!
+								</WarningBanner>
+							)}
 							{mocksList.map((mock, index) => {
 								if (mocksList.length === index + 1) {
 									return (
