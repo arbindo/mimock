@@ -12,6 +12,7 @@ export default function AddUser() {
 					dataTestId='add-user-header'
 					icon={<IoPersonAdd />}
 					title='Add New User'
+					enableBackNavigation={true}
 				/>
 			</AddUserHeader>
 			<AddUserForm />

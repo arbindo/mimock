@@ -2,6 +2,7 @@ import React from 'react';
 import { render, act } from '@testing-library/react';
 import EditUser from './EditUser';
 
+jest.mock('react-router-dom');
 jest.mock('./UserDetails', () => {
 	const UserDetailsMock = (
 		<div data-testid='edit-user-details'>User Details</div>

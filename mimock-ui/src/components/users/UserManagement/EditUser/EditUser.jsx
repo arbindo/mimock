@@ -12,6 +12,7 @@ export default function EditUser() {
 					icon={<FaEdit />}
 					title='Edit User'
 					dataTestId='edit-user-header'
+					enableBackNavigation={true}
 				/>
 			</EditUserHeader>
 			<UserDetails />
