@@ -104,7 +104,7 @@ export default function Dashboard() {
 				showSidebarSection={showSidebarSection}
 				mocksListView={mocksListView}
 				httpMethodFilter={httpMethodFilter}
-				handleClearFilter={handleOnClearFilterClick}
+				handleOnClearFilterClick={handleOnClearFilterClick}
 				handleOnBadgeClick={handleOnBadgeClick}
 			/>
 		</>

@@ -9,7 +9,6 @@ describe('MockCard', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('card')).toBeInTheDocument();
 		expect(getByTestId('card-title')).toBeInTheDocument();
 		expect(getByTestId('card-subtitle')).toBeInTheDocument();
 		expect(getByTestId('card-badge')).toBeInTheDocument();

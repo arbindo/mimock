@@ -27,18 +27,21 @@ import { notificationTypes } from 'constants/notificationConstants';
 import useNotification from 'hooks/useNotification';
 import fileDownload from 'js-file-download';
 
-function Sidebar({ onBadgeClick, isFilterCleared }) {
+function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
+	// #region Defaults
 	const cookies = new Cookies();
+	const totalBadgeFilterCount = constants.badgeFilterItems.length;
+	// #endregion
+
+	// #region Common Hooks
 	const authCookieRef = useRef('');
 	const csrfCookieRef = useRef('');
+	const badgeRef = useRef([]);
 
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
 		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
 	}, []);
-
-	const badgeRef = useRef([]);
-	const totalBadgeFilterCount = constants.badgeFilterItems.length;
 
 	useEffect(() => {
 		if (isFilterCleared) {
@@ -57,6 +60,9 @@ function Sidebar({ onBadgeClick, isFilterCleared }) {
 		}
 	}, [isFilterCleared]);
 
+	// #endregion
+
+	// #region Custom functions
 	const handleOnchange = (e) => {
 		console.log(e);
 	};
@@ -91,7 +97,7 @@ function Sidebar({ onBadgeClick, isFilterCleared }) {
 				});
 			}
 		}
-		onBadgeClick(item.httpMethod);
+		handleOnBadgeClick(item.httpMethod);
 	};
 
 	const handleExportMocksBtnClick = () => {
@@ -119,28 +125,35 @@ function Sidebar({ onBadgeClick, isFilterCleared }) {
 				});
 			});
 	};
+	// #endregion
 
 	return (
-		<SideBarContainer data-testid='sidebar-section'>
+		<SideBarContainer data-testid={constants.testIds.sidebarContainer}>
 			<SidebarBox>
-				<TitleSpan>
+				<TitleSpan data-testid={constants.testIds.sidebarHeader}>
 					<FaCogs /> <SpanText>{constants.headerTitle}</SpanText>
 				</TitleSpan>
-				<ComponentWrapper>
-					<ComponentLabel>{constants.label.exportImport}</ComponentLabel>
+				<ComponentWrapper data-testid={constants.testIds.exportImportComponent}>
+					<ComponentLabel>
+						{constants.label.exportImportComponent}
+					</ComponentLabel>
 					<RowComponentWrapper>
 						<ExportMocksButton
-							data-testid='export-mocks-btn'
+							data-testid={constants.testIds.exportMocksBtn}
+							id={constants.ids.exportMocksBtn}
+							name={constants.name.exportMocksBtn}
 							onClick={handleExportMocksBtnClick}
-							title={constants.title.exportBtn}
+							title={constants.title.exportMocksBtn}
 						>
 							<MiniBtnSpan>
 								<FaFileDownload /> {constants.label.exportMocksBtn}
 							</MiniBtnSpan>
 						</ExportMocksButton>
 						<ImportMocksButton
-							data-testid='import-mocks-btn'
-							title={constants.title.importBtn}
+							data-testid={constants.testIds.importMocksBtn}
+							id={constants.ids.importMocksBtn}
+							name={constants.name.importMocksBtn}
+							title={constants.title.importMocksBtn}
 						>
 							<MiniBtnSpan>
 								<FaFileUpload /> {constants.label.importMocksBtn}
@@ -148,12 +161,13 @@ function Sidebar({ onBadgeClick, isFilterCleared }) {
 						</ImportMocksButton>
 					</RowComponentWrapper>
 				</ComponentWrapper>
-				<ComponentWrapper>
-					<ComponentLabel>{constants.label.badgefilter}</ComponentLabel>
+				<ComponentWrapper data-testid={constants.testIds.badgeFilterComponent}>
+					<ComponentLabel>{constants.label.badgeFilter}</ComponentLabel>
 					<RowComponentWrapper>
 						{constants.badgeFilterItems.map((item, key) => (
 							<BadgeFilter
-								data-testid='card-badge'
+								data-testid={`${constants.testIds.badgeFilter}${key}`}
+								id={`${constants.ids.badgeFilter}${key}`}
 								key={key}
 								className={item.badgeColor}
 								ref={(element) => (badgeRef[key] = element)}
@@ -164,36 +178,37 @@ function Sidebar({ onBadgeClick, isFilterCleared }) {
 						))}
 					</RowComponentWrapper>
 				</ComponentWrapper>
-				<ComponentWrapper>
-					<ComponentLabel>{constants.label.radiogroup}</ComponentLabel>
-					{constants.radioGroupItems.map((item, key) => (
+				<ComponentWrapper data-testid={constants.testIds.responseTypeComponent}>
+					<ComponentLabel>{constants.label.responseType}</ComponentLabel>
+					{constants.responseTypeItems.map((item, key) => (
 						<FormCheckWrapper key={key}>
 							<RadioComponent
 								type='radio'
 								value=''
 								onChange={handleOnchange}
-								name='response-type'
-								id={`response-type-${key}`}
+								name={`${constants.name.responseType}${key}`}
+								data-testid={`${constants.testIds.responseType}${key}`}
+								id={`${constants.ids.responseType}${key}`}
 							></RadioComponent>
-							<RadioOptionText htmlFor={`response-type-${key}`}>
+							<RadioOptionText htmlFor={`${constants.ids.responseType}${key}`}>
 								{item}
 							</RadioOptionText>
 						</FormCheckWrapper>
 					))}
 				</ComponentWrapper>
-				<ComponentWrapper>
-					<ComponentLabel htmlFor='sort-element'>
-						{constants.label.sort}
+				<ComponentWrapper data-testid={constants.testIds.sortSelectComponent}>
+					<ComponentLabel htmlFor={constants.ids.sortSelect}>
+						{constants.label.sortSelect}
 					</ComponentLabel>
 					<SelectComponent
-						id='sort-element'
-						data-testid='sort-element'
+						id={constants.ids.sortSelect}
+						data-testid={constants.testIds.sortSelect}
 						defaultValue=''
 					>
 						<SelectOptionComponent value='' disabled hidden>
 							Choose...
 						</SelectOptionComponent>
-						{constants.sortItems.map((item, key) => (
+						{constants.sortSelectItems.map((item, key) => (
 							<SelectOptionComponent key={key}>{item}</SelectOptionComponent>
 						))}
 					</SelectComponent>
@@ -204,7 +219,7 @@ function Sidebar({ onBadgeClick, isFilterCleared }) {
 }
 
 Sidebar.propTypes = {
-	onBadgeClick: PropTypes.func.isRequired,
+	handleOnBadgeClick: PropTypes.func.isRequired,
 	isFilterCleared: PropTypes.bool.isRequired,
 };
 

@@ -8,7 +8,7 @@ describe('Sidebar', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('sidebar-section')).toBeInTheDocument();
+		expect(getByTestId('sidebar-container')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

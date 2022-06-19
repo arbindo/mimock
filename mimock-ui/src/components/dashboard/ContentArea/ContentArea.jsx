@@ -1,28 +1,30 @@
 import React from 'react';
+import { ContentAreaContainer } from './ContentArea.style';
+import { constants } from './constants';
+import PropTypes from 'prop-types';
 import List from './List';
 import Sidebar from './Sidebar';
-import { ContentAreaContainer } from './ContentArea.style';
-import PropTypes from 'prop-types';
 
 function ContentArea({
 	showSidebarSection,
 	mocksListView,
 	httpMethodFilter,
-	handleClearFilter,
+	handleOnClearFilterClick,
 	handleOnBadgeClick,
 }) {
+	const isFilterCleared = httpMethodFilter === '';
 	return (
-		<ContentAreaContainer>
+		<ContentAreaContainer data-testid={constants.testIds.contentAreaContainer}>
 			<If condition={showSidebarSection}>
 				<Sidebar
-					onBadgeClick={handleOnBadgeClick}
-					isFilterCleared={httpMethodFilter === ''}
+					handleOnBadgeClick={handleOnBadgeClick}
+					isFilterCleared={isFilterCleared}
 				/>
 			</If>
 			<List
 				mocksListView={mocksListView}
 				httpMethodFilter={httpMethodFilter}
-				handleClearFilter={handleClearFilter}
+				handleOnClearFilterClick={handleOnClearFilterClick}
 			/>
 		</ContentAreaContainer>
 	);
@@ -32,7 +34,7 @@ ContentArea.propTypes = {
 	showSidebarSection: PropTypes.bool.isRequired,
 	mocksListView: PropTypes.string.isRequired,
 	httpMethodFilter: PropTypes.string.isRequired,
-	handleClearFilter: PropTypes.func.isRequired,
+	handleOnClearFilterClick: PropTypes.func.isRequired,
 	handleOnBadgeClick: PropTypes.func.isRequired,
 };
 

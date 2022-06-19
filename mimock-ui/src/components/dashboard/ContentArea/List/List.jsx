@@ -1,6 +1,4 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
-import { Cookies } from 'react-cookie';
-import { constants } from './constants';
 import {
 	ListContainer,
 	ListTitle,
@@ -15,9 +13,10 @@ import {
 	FilterTagsSection,
 	FilterTagSpan,
 } from './List.style.js';
-import MockCard from './MockCard';
 import EmptyState from 'assets/empty-state.png';
 import ErrorState from 'assets/server-down-state.png';
+import { Cookies } from 'react-cookie';
+import { constants } from './constants';
 import PropTypes from 'prop-types';
 import { FaFilter } from 'react-icons/fa';
 import { MdCancel, MdWarning } from 'react-icons/md';
@@ -29,17 +28,26 @@ import {
 	globalConstants,
 	mockManagementConstants,
 } from 'constants/globalConstants';
+import MockCard from './MockCard';
 
-function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
-	const [pageNumber, setPageNumber] = useRecoilState(pageNumberAtom);
+function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
+	// #region Defaults
+	const cookies = new Cookies();
+	// #endregion
+
+	// #region States
 	const [filterTags, setFilterTags] = useState([]);
 	const [showWarningBannerInBin, setShowWarningBannerInBin] = useState(false);
-	const cookies = new Cookies();
-	const platformSettingsRef = useRef('');
+	// #endregion
 
+	// #region Recoil States
+	const [pageNumber, setPageNumber] = useRecoilState(pageNumberAtom);
+	// #endregion
+
+	// #region Common Hooks
+	const platformSettingsRef = useRef('');
 	const { mocksList, listTitle, isFilter, loading, error, hasMore } =
 		useLazyLoad(mocksListView, pageNumber, httpMethodFilter);
-
 	useEffect(() => {
 		setFilterTags(() => {
 			// remove the default status tags for mocksListView and httpMethodFilter
@@ -60,12 +68,6 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 			setShowWarningBannerInBin(false);
 		}
 	}, [mocksListView, httpMethodFilter]);
-
-	const handleClearFilterHandler = () => {
-		setFilterTags([]);
-		handleClearFilter();
-	};
-
 	const observer = useRef();
 	const lastItem = useCallback(
 		(node) => {
@@ -94,44 +96,65 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 		},
 		[loading, hasMore]
 	);
+	// #endregion
+
+	// #region Handler functions
+	const handleOnClearFilterClickHandler = () => {
+		setFilterTags([]);
+		handleOnClearFilterClick();
+	};
+	// #endregion
 
 	return (
-		<ListContainer data-testid='list-section'>
+		<ListContainer data-testid={constants.testIds.listContainer}>
 			<BarLoader
-				data-testid='list-mocks-loader'
+				data-testid={constants.testIds.listMocksLoader}
 				loading={loading}
-				color='teal'
+				color={constants.color.listMocksLoader}
 				size={1000}
 				css={LoaderStyle}
 			/>
 			<Choose>
 				<When condition={error.status}>
-					<MessageWrapper>
-						<MessageImageIcon src={ErrorState} />
-						<MessageSpan>{error.message}</MessageSpan>
+					<MessageWrapper data-testid={constants.testIds.listErrorContainer}>
+						<MessageImageIcon
+							data-testid={constants.testIds.listErrorImage}
+							src={ErrorState}
+						/>
+						<MessageSpan data-testid={constants.testIds.listErrorMessage}>
+							{error.message}
+						</MessageSpan>
 					</MessageWrapper>
 				</When>
 				<When condition={!error.status && !loading}>
 					<ListTitleSpan>
 						<If condition={isFilter}>
-							<FaFilter />
+							<FaFilter data-testid={constants.testIds.listFilterIcon} />
 						</If>
-						<ListTitle>{listTitle}</ListTitle>
+						<ListTitle data-testid={constants.testIds.listTitle}>
+							{listTitle}
+						</ListTitle>
 						<If condition={isFilter}>
-							<ListClearFilter>
-								<MdCancel />
-								<ListClearFilterText onClick={handleClearFilterHandler}>
+							<ListClearFilter data-testid={constants.testIds.listClearFilter}>
+								<MdCancel data-testid={constants.testIds.listClearFilterIcon} />
+								<ListClearFilterText
+									data-testid={constants.testIds.listClearFilterText}
+									onClick={handleOnClearFilterClickHandler}
+								>
 									{constants.label.clearFilter}
 								</ListClearFilterText>
 							</ListClearFilter>
 						</If>
 					</ListTitleSpan>
-					<FilterTagsSection>
+					<FilterTagsSection data-testid={constants.testIds.filterTagsSection}>
 						{filterTags.length > 0 && (
 							<>
-								<p>Filters Applied: </p>
+								<p>{constants.label.filterTagsSection}</p>
 								{filterTags.map((filterTag, index) => (
-									<FilterTagSpan key={`${filterTag}_tag_${index}`}>
+									<FilterTagSpan
+										data-testid={`${constants.testIds.filterTag}${index}`}
+										key={`${filterTag}_tag_${index}`}
+									>
 										{filterTag}
 									</FilterTagSpan>
 								))}
@@ -141,9 +164,9 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 					<Choose>
 						<When condition={mocksList.length > 0}>
 							{showWarningBannerInBin && (
-								<WarningBanner>
+								<WarningBanner data-testid={constants.testIds.warningBanner}>
 									{' '}
-									<MdWarning /> Items in bin are deleted forever after 30 days!
+									<MdWarning /> {constants.label.warningBanner}
 								</WarningBanner>
 							)}
 							{mocksList.map((mock, index) => {
@@ -153,6 +176,7 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 											innerRef={lastItem}
 											key={mock.id}
 											id={mock.id}
+											dataTestId={`${constants.testIds.mockCard}${mock.id}`}
 											mockName={mock.mockName}
 											description={mock.description}
 											httpMethod={mock.httpMethod}
@@ -164,6 +188,7 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 										<MockCard
 											key={mock.id}
 											id={mock.id}
+											dataTestId={`${constants.testIds.mockCard}${mock.id}`}
 											mockName={mock.mockName}
 											description={mock.description}
 											httpMethod={mock.httpMethod}
@@ -174,9 +199,16 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 							})}
 						</When>
 						<When condition={mocksList.length == 0}>
-							<MessageWrapper>
-								<MessageImageIcon src={EmptyState} />
-								<MessageSpan>{constants.errors.emptyState}</MessageSpan>
+							<MessageWrapper
+								data-testid={constants.testIds.listEmptyContainer}
+							>
+								<MessageImageIcon
+									data-testid={constants.testIds.listEmptyImage}
+									src={EmptyState}
+								/>
+								<MessageSpan data-testid={constants.testIds.listEmptyMessage}>
+									{constants.errors.emptyState}
+								</MessageSpan>
 							</MessageWrapper>
 						</When>
 					</Choose>
@@ -189,7 +221,7 @@ function List({ mocksListView, httpMethodFilter, handleClearFilter }) {
 List.propTypes = {
 	mocksListView: PropTypes.string.isRequired,
 	httpMethodFilter: PropTypes.string.isRequired,
-	handleClearFilter: PropTypes.func.isRequired,
+	handleOnClearFilterClick: PropTypes.func.isRequired,
 };
 
 export default List;

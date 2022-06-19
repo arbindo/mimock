@@ -1,25 +1,50 @@
 export const constants = {
 	headerTitle: 'Tools',
 	title: {
-		exportBtn: 'Export Mocks',
-		importBtn: 'Coming Soon!!',
+		exportMocksBtn: 'Export Mocks',
+		importMocksBtn: 'Coming Soon!!',
 	},
 	label: {
-		sort: 'Sort By',
-		radiogroup: 'Filter By Response Type',
-		badgefilter: 'Filter By HTTP Method',
-		exportImport: 'Bulk Operations',
+		exportImportComponent: 'Bulk Operations',
 		exportMocksBtn: 'Export',
 		importMocksBtn: 'Import',
+		badgeFilter: 'Filter By HTTP Method',
+		responseType: 'Filter By Response Type',
+		sortSelect: 'Sort By',
 	},
-	sortItems: [
+	name: {
+		exportMocksBtn: 'exportMocks',
+		importMocksBtn: 'importMocks',
+		responseType: 'response-type_',
+	},
+	ids: {
+		exportMocksBtn: 'export-mocks-btn',
+		importMocksBtn: 'import-mocks-btn',
+		badgeFilter: 'badge-filter_',
+		responseType: 'response_type_',
+		sortSelect: 'sort-selector',
+	},
+	testIds: {
+		sidebarContainer: 'sidebar-container',
+		sidebarHeader: 'sidebar-header',
+		exportImportComponent: 'bulk-operations',
+		exportMocksBtn: 'export-mocks-btn',
+		importMocksBtn: 'import-mocks-btn',
+		badgeFilterComponent: 'badge-filters',
+		badgeFilter: 'badge-filter_',
+		responseTypeComponent: 'response-types',
+		responseType: 'response_type_',
+		sortSelectComponent: 'sort-selectors',
+		sortSelect: 'sort-selector',
+	},
+	sortSelectItems: [
 		'Mock Name',
 		'Http Method',
 		'Status Code',
 		'Route',
 		'Time Created',
 	],
-	radioGroupItems: ['Textual Response', 'Binary Response', 'No Response'],
+	responseTypeItems: ['Textual Response', 'Binary Response', 'No Response'],
 	badgeFilterItems: [
 		{
 			httpMethod: 'GET',

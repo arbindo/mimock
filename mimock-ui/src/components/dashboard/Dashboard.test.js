@@ -28,7 +28,8 @@ describe('Dashboard', () => {
 
 		expect(getByTestId('titlebar-container')).toBeInTheDocument();
 		expect(getByTestId('toolbar-container')).toBeInTheDocument();
-		expect(getByTestId('list-section')).toBeInTheDocument();
+		expect(getByTestId('content-area-container')).toBeInTheDocument();
+		expect(getByTestId('list-container')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

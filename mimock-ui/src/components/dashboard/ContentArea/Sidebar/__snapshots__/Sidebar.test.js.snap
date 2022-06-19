@@ -4,13 +4,14 @@ exports[`Sidebar should render sidebar component 1`] = `
 <div>
   <div
     class="xl:w-1/4 flex flex-row mx-4 mt-4 md:w-full sm:w-full accordion"
-    data-testid="sidebar-section"
+    data-testid="sidebar-container"
   >
     <div
       class="w-full flex flex-col shadow-sm px-4 py-2 rounded-sm"
     >
       <span
         class="inline-flex items-center justify-center mb-4 text-gray-500"
+        data-testid="sidebar-header"
       >
         <svg
           fill="currentColor"
@@ -34,6 +35,7 @@ exports[`Sidebar should render sidebar component 1`] = `
       </span>
       <div
         class="flex flex-col mx-2 my-2"
+        data-testid="bulk-operations"
       >
         <label
           class="form-check-label inline-block text-gray-400 text-sm underline underline-offset-1 mb-1"
@@ -46,6 +48,8 @@ exports[`Sidebar should render sidebar component 1`] = `
           <div
             class="text-center px-2 py-1 my-1 mx-2 cursor-pointer bg-white text-gray-500 border-l-4 border-t-2 border-b-2 border-r-2 rounded-sm border-gray-400 shadow-sm hover:bg-black hover:bg-opacity-5 transition duration-150 ease-in-out sc-bdvvtL"
             data-testid="export-mocks-btn"
+            id="export-mocks-btn"
+            name="exportMocks"
             title="Export Mocks"
           >
             <span
@@ -71,6 +75,8 @@ exports[`Sidebar should render sidebar component 1`] = `
           <div
             class="text-center px-2 py-1 my-1 mx-2 cursor-pointer bg-white text-gray-500 border-l-4 border-t-2 border-b-2 border-r-2 rounded-sm border-gray-400 shadow-sm hover:bg-black hover:bg-opacity-5 transition duration-150 ease-in-out sc-gsDKAQ lbtiIT"
             data-testid="import-mocks-btn"
+            id="import-mocks-btn"
+            name="importMocks"
             title="Coming Soon!!"
           >
             <span
@@ -97,6 +103,7 @@ exports[`Sidebar should render sidebar component 1`] = `
       </div>
       <div
         class="flex flex-col mx-2 my-2"
+        data-testid="badge-filters"
       >
         <label
           class="form-check-label inline-block text-gray-400 text-sm underline underline-offset-1 mb-1"
@@ -108,55 +115,64 @@ exports[`Sidebar should render sidebar component 1`] = `
         >
           <div
             class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-blue-500 text-blue-500"
-            data-testid="card-badge"
+            data-testid="badge-filter_0"
+            id="badge-filter_0"
           >
             GET
           </div>
           <div
             class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-green-500 text-green-500"
-            data-testid="card-badge"
+            data-testid="badge-filter_1"
+            id="badge-filter_1"
           >
             POST
           </div>
           <div
             class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-yellow-500 text-yellow-500"
-            data-testid="card-badge"
+            data-testid="badge-filter_2"
+            id="badge-filter_2"
           >
             PUT
           </div>
           <div
             class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-red-500 text-red-500"
-            data-testid="card-badge"
+            data-testid="badge-filter_3"
+            id="badge-filter_3"
           >
             DELETE
           </div>
           <div
             class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-yellow-900 text-yellow-900"
-            data-testid="card-badge"
+            data-testid="badge-filter_4"
+            id="badge-filter_4"
           >
             PATCH
           </div>
           <div
             class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-pink-500 text-pink-500"
-            data-testid="card-badge"
+            data-testid="badge-filter_5"
+            id="badge-filter_5"
           >
             CONNECT
           </div>
           <div
             class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-indigo-500 text-indigo-500"
-            data-testid="card-badge"
+            data-testid="badge-filter_6"
+            id="badge-filter_6"
           >
             HEAD
           </div>
           <div
             class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-violet-500 text-violet-500"
-            data-testid="card-badge"
+            data-testid="badge-filter_7"
+            id="badge-filter_7"
           >
             TRACE
           </div>
           <div
             class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-gray-500 text-gray-500"
-            data-testid="card-badge"
+            data-testid="badge-filter_8"
+            id="badge-filter_8"
           >
             OPTIONS
           </div>
@@ -164,6 +180,7 @@ exports[`Sidebar should render sidebar component 1`] = `
       </div>
       <div
         class="flex flex-col mx-2 my-2"
+        data-testid="response-types"
       >
         <label
           class="form-check-label inline-block text-gray-400 text-sm underline underline-offset-1 mb-1"
@@ -175,14 +192,15 @@ exports[`Sidebar should render sidebar component 1`] = `
         >
           <input
             class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-            id="response-type-0"
-            name="response-type"
+            data-testid="response_type_0"
+            id="response_type_0"
+            name="response-type_0"
             type="radio"
             value=""
           />
           <label
             class="form-check-label inline-block text-xs text-gray-400"
-            for="response-type-0"
+            for="response_type_0"
           >
             Textual Response
           </label>
@@ -192,14 +210,15 @@ exports[`Sidebar should render sidebar component 1`] = `
         >
           <input
             class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-            id="response-type-1"
-            name="response-type"
+            data-testid="response_type_1"
+            id="response_type_1"
+            name="response-type_1"
             type="radio"
             value=""
           />
           <label
             class="form-check-label inline-block text-xs text-gray-400"
-            for="response-type-1"
+            for="response_type_1"
           >
             Binary Response
           </label>
@@ -209,14 +228,15 @@ exports[`Sidebar should render sidebar component 1`] = `
         >
           <input
             class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-            id="response-type-2"
-            name="response-type"
+            data-testid="response_type_2"
+            id="response_type_2"
+            name="response-type_2"
             type="radio"
             value=""
           />
           <label
             class="form-check-label inline-block text-xs text-gray-400"
-            for="response-type-2"
+            for="response_type_2"
           >
             No Response
           </label>
@@ -224,17 +244,18 @@ exports[`Sidebar should render sidebar component 1`] = `
       </div>
       <div
         class="flex flex-col mx-2 my-2"
+        data-testid="sort-selectors"
       >
         <label
           class="form-check-label inline-block text-gray-400 text-sm underline underline-offset-1 mb-1"
-          for="sort-element"
+          for="sort-selector"
         >
           Sort By
         </label>
         <select
           class="w-full justify-center border-2 rounded-sm border-gray-200 text-teal-500 text-sm outline-none mx-2 my-2"
-          data-testid="sort-element"
-          id="sort-element"
+          data-testid="sort-selector"
+          id="sort-selector"
         >
           <option
             class="bg-white truncate rounded-sm outline-none text-gray-400"

@@ -4,10 +4,11 @@ exports[`ContentArea should render content area component 1`] = `
 <div>
   <div
     class="w-full flex xl:flex-row md:flex-col mx-auto mt-6 mb-2 justify-center align-middle px-9 min-h-full"
+    data-testid="content-area-container"
   >
     <div
       class="flex flex-col justify-start align-middle w-full px-9 mt-4 mb-2"
-      data-testid="list-section"
+      data-testid="list-container"
     >
       <span
         class="css-srux5c-LoaderStyle"

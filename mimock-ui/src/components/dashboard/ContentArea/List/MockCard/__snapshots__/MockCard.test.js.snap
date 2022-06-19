@@ -4,7 +4,6 @@ exports[`MockCard should render mock card component 1`] = `
 <div>
   <a
     class="sc-bdvvtL w-full flex flex-row align-middle border-2 border-gray-100 shadow-sm rounded-sm px-4 py-2 mx-auto my-4 cursor-pointer hover:bg-gray-100 hover:translate-x-1"
-    data-testid="card"
     href="/mimock-ui/mocks/detail/undefined"
   >
     <div

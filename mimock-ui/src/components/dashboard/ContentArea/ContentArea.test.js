@@ -26,7 +26,8 @@ describe('ContentArea', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('list-section')).toBeInTheDocument();
+		expect(getByTestId('content-area-container')).toBeInTheDocument();
+		expect(getByTestId('list-container')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});
