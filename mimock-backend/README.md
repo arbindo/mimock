@@ -48,3 +48,7 @@ go.
 ```shell
 ./mvnw clean test -P startDatabase 
 ```
+
+## Enable prometheus scrapping for mimock
+
+The prometheus metrics for mimock is exposed on `/api/mimock/monitoring/prometheus` endpoint. The [prometheus.yml](../prometheus.yml)  file includes the required config for setting up your own prometheus scrapping for mimock

@@ -83,3 +83,13 @@ springdoc:
       header-name: X-XSRF-TOKEN
 
 flush-bin-cron-expression: "0 0 3 1 * *"
+
+management:
+  endpoints:
+    web:
+      base-path: "/api/mimock/monitoring"
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
