@@ -16,6 +16,7 @@ import { decideBadgeColor } from 'utils/badgeColor.js';
 import { notificationTypes } from 'constants/notificationConstants';
 import useNotification from 'hooks/useNotification';
 import { ConfirmationModal } from 'components/common/Modals';
+import { getUserDetails } from 'utils/jwtUtils';
 
 function Detail() {
 	const [mock, setMock] = useState(null);
@@ -23,6 +24,8 @@ function Detail() {
 	const [badgeColor, setBadgeColor] = useState('');
 	const [showDeletionModal, setShowDeletionModal] = useState(false);
 	const [deletingMock, setDeletingMock] = useState(false);
+	const [hideDetailActionsToolbar, setHideDetailActionsToolbar] =
+		useState(false);
 
 	const navigate = useNavigate();
 
@@ -47,6 +50,15 @@ function Detail() {
 					setBadgeColor(color);
 				})
 				.catch((err) => console.log(err));
+			try {
+				const userDetails = getUserDetails();
+				const isReadOnlyUser =
+					userDetails && userDetails.userRole === 'ROLE_VIEWER';
+				setHideDetailActionsToolbar(isReadOnlyUser);
+			} catch (e) {
+				console.log(e);
+				setHideDetailActionsToolbar(false);
+			}
 		}
 	}, []);
 
@@ -163,6 +175,7 @@ function Detail() {
 					/>
 				</If>
 				<DetailToolbar
+					hideDetailActionsToolbar={hideDetailActionsToolbar}
 					status={mock.entityStatus.status}
 					performArchiveMockOperation={performArchiveMockOperation}
 					performUnarchiveMockOperation={performUnarchiveMockOperation}

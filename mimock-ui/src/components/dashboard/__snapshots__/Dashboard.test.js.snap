@@ -151,25 +151,6 @@ exports[`Dashboard should render all dashboard components 1`] = `
           </button>
         </div>
       </div>
-      <button
-        class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 xl:ml-8 xl:mr-2 xl:my-2 px-1 py-1 rounded-sm text-sm focus:outline-none focus:ring-0 transition duration-150 ease-in-out xl:w-1/6 md:w-5/6 md:my-2 md:mx-auto text-white w-fit bg-teal-500"
-        data-testid="add-btn"
-      >
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          stroke-width="0"
-          viewBox="0 0 448 512"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"
-          />
-        </svg>
-        Add Mock
-      </button>
     </div>
   </div>
   <hr />

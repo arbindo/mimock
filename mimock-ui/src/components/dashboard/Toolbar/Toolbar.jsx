@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	ToolbarContainer,
 	ToolbarInnerContainer,
@@ -22,6 +22,7 @@ import { MdDone, MdArchive, MdDelete } from 'react-icons/md';
 import { mockManagementConstants } from 'constants/globalConstants';
 import { useNavigate } from 'react-router-dom';
 import { routes } from 'constants/routes';
+import { getUserDetails } from 'utils/jwtUtils';
 
 function Toolbar({
 	handleSidebarBtnClick,
@@ -37,6 +38,20 @@ function Toolbar({
 		'hover:text-teal-500',
 	];
 	const navigate = useNavigate();
+
+	const [hideAddMockBtn, setHideAddMockBtn] = useState(false);
+
+	useEffect(() => {
+		try {
+			const userDetails = getUserDetails();
+			const isReadOnlyUser =
+				userDetails && userDetails.userRole === 'ROLE_VIEWER';
+			setHideAddMockBtn(isReadOnlyUser);
+		} catch (e) {
+			console.log(e);
+			setHideAddMockBtn(false);
+		}
+	});
 
 	useEffect(() => {
 		if (mocksListView == mockManagementConstants.DEFAULT_STATUS) {
@@ -136,15 +151,17 @@ function Toolbar({
 							></RecycleBinViewButton>
 						</ViewMocksInnerWrapper>
 					</ViewMocksWrapper>
-					<AddMockButton
-						dataTestid='add-btn'
-						background='bg-teal-500'
-						label={constants.label.add}
-						color='text-white'
-						icon={<FaPlusSquare />}
-						additionalStyles={addMocksButtonAdditionalStyles}
-						onclickHandler={handleAddMockBtnClick}
-					></AddMockButton>
+					<If condition={!hideAddMockBtn}>
+						<AddMockButton
+							dataTestid='add-btn'
+							background='bg-teal-500'
+							label={constants.label.add}
+							color='text-white'
+							icon={<FaPlusSquare />}
+							additionalStyles={addMocksButtonAdditionalStyles}
+							onclickHandler={handleAddMockBtnClick}
+						></AddMockButton>
+					</If>
 				</ToolbarInnerContainer>
 			</ToolbarContainer>
 			<hr />

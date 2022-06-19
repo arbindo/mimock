@@ -34,3 +34,10 @@ export const OperationsContainer = tw.div`
     items-center
     justify-between
 `;
+
+export const WarningMessage = tw.span`
+    inline-flex
+    align-middle
+    items-center
+    gap-1
+`;
