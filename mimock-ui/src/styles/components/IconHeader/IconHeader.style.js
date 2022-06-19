@@ -10,6 +10,7 @@ export const IconHeaderWrapper = tw.div`
   text-2xl
   font-bold
   text-gray-700
+  ${(props) => props.$additionalStyles}
 `;
 
 export const Title = tw.div`

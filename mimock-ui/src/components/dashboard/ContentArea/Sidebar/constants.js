@@ -6,10 +6,9 @@ export const constants = {
 	},
 	label: {
 		sort: 'Sort By',
-		group: 'Group By',
 		radiogroup: 'Filter By Response Type',
 		badgefilter: 'Filter By HTTP Method',
-		exportImport: 'Export-Import Mocks',
+		exportImport: 'Bulk Operations',
 		exportMocksBtn: 'Export',
 		importMocksBtn: 'Import',
 	},
@@ -20,7 +19,6 @@ export const constants = {
 		'Route',
 		'Time Created',
 	],
-	groupItems: ['Http Method', 'Status Code'],
 	radioGroupItems: ['Textual Response', 'Binary Response', 'No Response'],
 	badgeFilterItems: [
 		{

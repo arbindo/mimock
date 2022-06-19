@@ -3,11 +3,11 @@
 exports[`Titlebar should render titlebar component 1`] = `
 <div>
   <div
-    class="w-11/12 flex flex-row mx-auto mt-4 mb-2 justify-center align-middle"
+    class="w-11/12 flex flex-row mx-auto mt-8 mb-4 justify-center align-middle"
     data-testid="titlebar-section"
   >
     <div
-      class="flex items-center align-middle font-sans text-2xl font-bold text-gray-700"
+      class="flex items-center align-middle font-sans text-2xl font-bold text-gray-700 px-2 mx-auto"
       data-testid="mocks-header"
     >
       <svg
@@ -33,7 +33,7 @@ exports[`Titlebar should render titlebar component 1`] = `
       class="w-5/6 flex flex-row mx-auto justify-end align-middle px-2"
     >
       <input
-        class="w-full my-2 mx-4 p-2 outline-none rounded-md border-2 border-gray-300 bg-white placeholder:italic placeholder:text-slate-400 sm:text-sm"
+        class="w-full my-2 mx-4 p-2 outline-none rounded-md border-2 border-gray-300 bg-white placeholder:italic placeholder:text-slate-400 sm:text-sm hidden"
         placeholder="Search"
       />
     </div>

@@ -3,7 +3,7 @@
 exports[`Toolbar should navigate to add mock page on clicking add CTA 1`] = `
 <div>
   <div
-    class="w-11/12 flex flex-row mx-auto mt-4 mb-4 justify-center align-middle px-2 md:items-center"
+    class="w-11/12 flex flex-row mx-auto mt-6 mb-4 justify-center align-middle px-2 md:items-center"
     data-testid="toolbar-section"
   >
     <button
@@ -143,7 +143,7 @@ exports[`Toolbar should navigate to add mock page on clicking add CTA 1`] = `
 exports[`Toolbar should render toolbar component 1`] = `
 <div>
   <div
-    class="w-11/12 flex flex-row mx-auto mt-4 mb-4 justify-center align-middle px-2 md:items-center"
+    class="w-11/12 flex flex-row mx-auto mt-6 mb-4 justify-center align-middle px-2 md:items-center"
     data-testid="toolbar-section"
   >
     <button

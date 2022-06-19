@@ -6,7 +6,7 @@ export const ToolbarContainer = tw.div`
     flex
     flex-row
     mx-auto
-    mt-4
+    mt-6
     mb-4
     justify-center
     align-middle

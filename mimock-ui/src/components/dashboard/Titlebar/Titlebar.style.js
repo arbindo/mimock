@@ -5,8 +5,8 @@ export const TitlebarContainer = tw.div`
     flex
     flex-row
     mx-auto
-    mt-4
-    mb-2
+    mt-8
+    mb-4
     justify-center
     align-middle
 `;
@@ -34,4 +34,5 @@ export const SearchField = tw.input`
     placeholder:italic 
     placeholder:text-slate-400
     sm:text-sm
+    hidden
 `;

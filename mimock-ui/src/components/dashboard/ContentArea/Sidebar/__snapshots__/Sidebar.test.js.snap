@@ -38,7 +38,7 @@ exports[`Sidebar should render sidebar component 1`] = `
         <label
           class="form-check-label inline-block text-gray-400 text-sm underline underline-offset-1 mb-1"
         >
-          Export-Import Mocks
+          Bulk Operations
         </label>
         <div
           class="flex flex-row flex-wrap justify-start align-items mx-2 mt-2"
@@ -69,7 +69,7 @@ exports[`Sidebar should render sidebar component 1`] = `
             </span>
           </div>
           <div
-            class="text-center px-2 py-1 my-1 mx-2 cursor-pointer bg-white text-gray-500 border-l-4 border-t-2 border-b-2 border-r-2 rounded-sm border-gray-400 shadow-sm hover:bg-black hover:bg-opacity-5 transition duration-150 ease-in-out sc-gsDKAQ jZLqzZ"
+            class="text-center px-2 py-1 my-1 mx-2 cursor-pointer bg-white text-gray-500 border-l-4 border-t-2 border-b-2 border-r-2 rounded-sm border-gray-400 shadow-sm hover:bg-black hover:bg-opacity-5 transition duration-150 ease-in-out sc-gsDKAQ lbtiIT"
             data-testid="import-mocks-btn"
             title="Coming Soon!!"
           >
@@ -269,41 +269,6 @@ exports[`Sidebar should render sidebar component 1`] = `
             class="bg-white truncate rounded-sm outline-none text-gray-400"
           >
             Time Created
-          </option>
-        </select>
-      </div>
-      <div
-        class="flex flex-col mx-2 my-2"
-      >
-        <label
-          class="form-check-label inline-block text-gray-400 text-sm underline underline-offset-1 mb-1"
-          for="group-element"
-        >
-          Group By
-        </label>
-        <select
-          class="w-full justify-center border-2 rounded-sm border-gray-200 text-teal-500 text-sm outline-none mx-2 my-2"
-          data-testid="group-element"
-          id="group-element"
-        >
-          <option
-            class="bg-white truncate rounded-sm outline-none text-gray-400"
-            disabled=""
-            hidden=""
-            selected=""
-            value=""
-          >
-            Choose...
-          </option>
-          <option
-            class="bg-white truncate rounded-sm outline-none text-gray-400"
-          >
-            Http Method
-          </option>
-          <option
-            class="bg-white truncate rounded-sm outline-none text-gray-400"
-          >
-            Status Code
           </option>
         </select>
       </div>

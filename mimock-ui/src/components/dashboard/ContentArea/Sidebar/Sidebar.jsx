@@ -198,23 +198,6 @@ function Sidebar({ onBadgeClick, isFilterCleared }) {
 						))}
 					</SelectComponent>
 				</ComponentWrapper>
-				<ComponentWrapper>
-					<ComponentLabel htmlFor='group-element'>
-						{constants.label.group}
-					</ComponentLabel>
-					<SelectComponent
-						id='group-element'
-						data-testid='group-element'
-						defaultValue=''
-					>
-						<SelectOptionComponent value='' disabled hidden>
-							Choose...
-						</SelectOptionComponent>
-						{constants.groupItems.map((item, key) => (
-							<SelectOptionComponent key={key}>{item}</SelectOptionComponent>
-						))}
-					</SelectComponent>
-				</ComponentWrapper>
 			</SidebarBox>
 		</SideBarContainer>
 	);

@@ -173,4 +173,5 @@ export const ExportMocksButton = styled(_MiniBtn)``;
 export const ImportMocksButton = styled(_MiniBtn)`
 	cursor: not-allowed;
 	opacity: 0.6;
+	display: none;
 `;

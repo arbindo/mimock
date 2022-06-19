@@ -16,6 +16,7 @@ function Titlebar() {
 					dataTestId='mocks-header'
 					icon={<FaCopy />}
 					title={constants.title}
+					additionalStyles={`px-2 mx-auto`}
 				/>
 				<TitlebarInnerContainer>
 					<SearchField placeholder={constants.placeholders.search} />
