@@ -14,7 +14,7 @@ describe('Toolbar', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('toolbar-section')).toBeInTheDocument();
+		expect(getByTestId('toolbar-container')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});
@@ -24,10 +24,10 @@ describe('Toolbar', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('toolbar-section')).toBeInTheDocument();
+		expect(getByTestId('toolbar-container')).toBeInTheDocument();
 
 		await act(async () => {
-			fireEvent.click(getByTestId('add-btn'));
+			fireEvent.click(getByTestId('add-mock-btn'));
 		});
 
 		expect(mockedNavigation).toHaveBeenCalledTimes(1);

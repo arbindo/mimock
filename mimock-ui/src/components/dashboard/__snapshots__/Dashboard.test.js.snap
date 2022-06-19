@@ -4,7 +4,7 @@ exports[`Dashboard should render all dashboard components 1`] = `
 <div>
   <div
     class="w-11/12 flex flex-row mx-auto mt-8 mb-4 justify-center align-middle"
-    data-testid="titlebar-section"
+    data-testid="titlebar-container"
   >
     <div
       class="flex items-center align-middle font-sans text-2xl font-bold text-gray-700 px-2 mx-auto"
@@ -31,20 +31,23 @@ exports[`Dashboard should render all dashboard components 1`] = `
     </div>
     <div
       class="w-5/6 flex flex-row mx-auto justify-end align-middle px-2"
+      data-testid="titlebar-inner-container"
     >
       <input
         class="w-full my-2 mx-4 p-2 outline-none rounded-md border-2 border-gray-300 bg-white placeholder:italic placeholder:text-slate-400 sm:text-sm hidden"
+        data-testid="mocks-search-field-input"
         placeholder="Search"
       />
     </div>
   </div>
   <div
     class="w-11/12 flex flex-row mx-auto mt-6 mb-4 justify-center align-middle px-2 md:items-center"
-    data-testid="toolbar-section"
+    data-testid="toolbar-container"
   >
     <button
       class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 mx-4 my-2 rounded-sm text-sm border-2 border-gray-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out md:my-2 text-gray-500 w-fit bg-white"
       data-testid="more-tools-btn"
+      id="more-tools-btn"
     >
       <svg
         fill="currentColor"
@@ -63,18 +66,20 @@ exports[`Dashboard should render all dashboard components 1`] = `
     </button>
     <div
       class="w-5/6 flex xl:flex-row md:flex-col mx-auto justify-end align-middle px-2"
+      data-testid="toolbar-inner-container"
     >
       <div
         class="flex flex-row items-center justify-center md:my-2"
+        data-testid="view-mocks-wrapper"
+        id="view-mocks-wrapper"
       >
         <div
           class="inline-flex"
-          role="group"
         >
           <button
             class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 rounded-l-sm border-2 border-gray-400 rounded-r-none text-sm leading-tight hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-gray-500 w-fit bg-white"
-            data-testid="active-view-btn"
-            id="active-view-btn"
+            data-testid="active-mocks-view-btn"
+            id="active-mocks-view-btn"
             name="ACTIVE"
           >
             <svg
@@ -99,8 +104,8 @@ exports[`Dashboard should render all dashboard components 1`] = `
           </button>
           <button
             class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 rounded-none text-sm border-t-2 border-b-2 border-gray-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-gray-500 w-fit bg-white"
-            data-testid="archived-view-btn"
-            id="archived-view-btn"
+            data-testid="archived-mocks-view-btn"
+            id="archived-mocks-view-btn"
             name="ARCHIVED"
           >
             <svg
@@ -125,8 +130,8 @@ exports[`Dashboard should render all dashboard components 1`] = `
           </button>
           <button
             class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 rounded-r-sm border-2 border-gray-400 rounded-l-none text-sm leading-tight hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-gray-500 w-fit bg-white"
-            data-testid="deleted-view-btn"
-            id="deleted-view-btn"
+            data-testid="recycle-bin-mocks-view-btn"
+            id="recycle-bin-mocks-view-btn"
             name="DELETED"
           >
             <svg
@@ -153,7 +158,9 @@ exports[`Dashboard should render all dashboard components 1`] = `
       </div>
     </div>
   </div>
-  <hr />
+  <hr
+    data-testid="toolbar-end-line"
+  />
   <div
     class="w-full flex xl:flex-row md:flex-col mx-auto mt-6 mb-2 justify-center align-middle px-9 min-h-full"
   >

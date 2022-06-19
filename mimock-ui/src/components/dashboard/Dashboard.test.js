@@ -26,8 +26,8 @@ describe('Dashboard', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('titlebar-section')).toBeInTheDocument();
-		expect(getByTestId('toolbar-section')).toBeInTheDocument();
+		expect(getByTestId('titlebar-container')).toBeInTheDocument();
+		expect(getByTestId('toolbar-container')).toBeInTheDocument();
 		expect(getByTestId('list-section')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();

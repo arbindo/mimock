@@ -1,5 +1,4 @@
 import React from 'react';
-import IconHeader from 'styles/IconHeader';
 import {
 	TitlebarContainer,
 	TitlebarInnerContainer,
@@ -7,19 +6,25 @@ import {
 } from './Titlebar.style';
 import { constants } from './constants';
 import { FaCopy } from 'react-icons/fa';
+import IconHeader from 'styles/IconHeader';
 
 function Titlebar() {
 	return (
 		<>
-			<TitlebarContainer data-testid='titlebar-section'>
+			<TitlebarContainer data-testid={constants.testIds.titlebarContainer}>
 				<IconHeader
-					dataTestId='mocks-header'
+					dataTestId={constants.testIds.mocksHeader}
 					icon={<FaCopy />}
 					title={constants.title}
-					additionalStyles={`px-2 mx-auto`}
+					additionalStyles={constants.additionalStyles.mocksHeader}
 				/>
-				<TitlebarInnerContainer>
-					<SearchField placeholder={constants.placeholders.search} />
+				<TitlebarInnerContainer
+					data-testid={constants.testIds.titlebarInnerContainer}
+				>
+					<SearchField
+						data-testid={constants.testIds.searchField}
+						placeholder={constants.placeholders.search}
+					/>
 				</TitlebarInnerContainer>
 			</TitlebarContainer>
 		</>

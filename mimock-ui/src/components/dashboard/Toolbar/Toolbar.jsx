@@ -8,10 +8,10 @@ import {
 	moreToolsMockButtonAdditonalStyles,
 	ViewMocksWrapper,
 	ViewMocksInnerWrapper,
-	GeneralMocksViewButton,
+	ActiveMocksViewButton,
 	ArchivedMocksViewButton,
 	RecycleBinViewButton,
-	generalMocksViewButtonAdditionalStyles,
+	activeMocksViewButtonAdditionalStyles,
 	archivedMocksViewButtonAdditionalStyles,
 	recycleBinViewButtonAdditionalStyles,
 } from './Toolbar.style';
@@ -25,10 +25,11 @@ import { routes } from 'constants/routes';
 import { getUserDetails } from 'utils/jwtUtils';
 
 function Toolbar({
-	handleSidebarBtnClick,
-	handleMockListsView,
+	handleOnSidebarBtnClick,
+	handleOnMockListsViewChange,
 	mocksListView,
 }) {
+	// #region Defaults
 	const activeClassList = [
 		'bg-teal-500',
 		'text-white',
@@ -37,10 +38,14 @@ function Toolbar({
 		'hover-bg-opacity-5',
 		'hover:text-teal-500',
 	];
-	const navigate = useNavigate();
+	// #endregion Defaults
 
+	// #region States
 	const [hideAddMockBtn, setHideAddMockBtn] = useState(false);
+	// #endregion States
 
+	// #region Common Hooks
+	const navigate = useNavigate();
 	useEffect(() => {
 		try {
 			const userDetails = getUserDetails();
@@ -51,19 +56,26 @@ function Toolbar({
 			console.log(e);
 			setHideAddMockBtn(false);
 		}
-	});
-
+	}, []);
 	useEffect(() => {
 		if (mocksListView == mockManagementConstants.DEFAULT_STATUS) {
-			const activeMockBtn = document.getElementById('active-view-btn');
-			const archivedMockBtn = document.getElementById('archived-view-btn');
-			const deletedMockBtn = document.getElementById('deleted-view-btn');
+			const activeMockBtn = document.getElementById(
+				constants.ids.activeMocksViewButton
+			);
+			const archivedMockBtn = document.getElementById(
+				constants.ids.archivedMocksViewButton
+			);
+			const deletedMockBtn = document.getElementById(
+				constants.ids.recycleBinMocksViewButton
+			);
 			activeMockBtn.classList.remove(...activeClassList);
 			archivedMockBtn.classList.remove(...activeClassList);
 			deletedMockBtn.classList.remove(...activeClassList);
 		}
 	}, [mocksListView]);
+	// #endregion Common Hooks
 
+	// #region Handler functions
 	const handleAddMockBtnClick = () => {
 		navigate(routes.manageRoutes.addMock.path);
 	};
@@ -72,9 +84,15 @@ function Toolbar({
 		const targetElement = e.target;
 		const parentElement = e.target.parentElement;
 		let viewName = '';
-		const activeMockBtn = document.getElementById('active-view-btn');
-		const archivedMockBtn = document.getElementById('archived-view-btn');
-		const deletedMockBtn = document.getElementById('deleted-view-btn');
+		const activeMockBtn = document.getElementById(
+			constants.ids.activeMocksViewButton
+		);
+		const archivedMockBtn = document.getElementById(
+			constants.ids.archivedMocksViewButton
+		);
+		const deletedMockBtn = document.getElementById(
+			constants.ids.recycleBinMocksViewButton
+		);
 		activeMockBtn.classList.remove(...activeClassList);
 		archivedMockBtn.classList.remove(...activeClassList);
 		deletedMockBtn.classList.remove(...activeClassList);
@@ -98,52 +116,59 @@ function Toolbar({
 				deletedMockBtn.classList.add(...activeClassList);
 				break;
 		}
-		handleMockListsView(viewName);
+		handleOnMockListsViewChange(viewName);
 	};
+	// #endregion Handler functions
 
 	return (
 		<>
-			<ToolbarContainer data-testid='toolbar-section'>
+			<ToolbarContainer data-testid={constants.testIds.toolbarContainer}>
 				<MoreToolsMockButton
-					dataTestid='more-tools-btn'
-					background='bg-white'
-					label={constants.label.sidebar}
-					color='text-gray-500'
+					dataTestid={constants.testIds.moreToolsButton}
+					id={constants.ids.moreToolsButton}
+					background={constants.background.moreToolsButton}
+					label={constants.label.moreToolsButton}
+					color={constants.color.moreToolsButton}
 					icon={<FaCogs />}
 					additionalStyles={moreToolsMockButtonAdditonalStyles}
-					onclickHandler={handleSidebarBtnClick}
+					onclickHandler={handleOnSidebarBtnClick}
 				></MoreToolsMockButton>
-				<ToolbarInnerContainer>
-					<ViewMocksWrapper>
-						<ViewMocksInnerWrapper role='group'>
-							<GeneralMocksViewButton
-								dataTestid='active-view-btn'
-								id='active-view-btn'
-								background='bg-white'
+				<ToolbarInnerContainer
+					data-testid={constants.testIds.toolbarInnerContainer}
+				>
+					<ViewMocksWrapper
+						data-testid={constants.testIds.viewMocksWrapper}
+						id={constants.ids.viewMocksWrapper}
+					>
+						<ViewMocksInnerWrapper>
+							<ActiveMocksViewButton
+								dataTestid={constants.testIds.activeMocksViewButton}
+								id={constants.ids.activeMocksViewButton}
+								background={constants.background.activeMocksViewButton}
 								label={constants.label.generalView}
-								color='text-gray-500'
+								color={constants.color.activeMocksViewButton}
 								icon={<MdDone name={constants.name.generalView} />}
-								additionalStyles={generalMocksViewButtonAdditionalStyles}
+								additionalStyles={activeMocksViewButtonAdditionalStyles}
 								name={constants.name.generalView}
 								onclickHandler={handleViewMocksBtnClick}
-							></GeneralMocksViewButton>
+							></ActiveMocksViewButton>
 							<ArchivedMocksViewButton
-								dataTestid='archived-view-btn'
-								id='archived-view-btn'
-								background='bg-white'
+								dataTestid={constants.testIds.archivedMocksViewButton}
+								id={constants.ids.archivedMocksViewButton}
+								background={constants.background.archivedMocksViewButton}
 								label={constants.label.archivedView}
-								color='text-gray-500'
+								color={constants.color.archivedMocksViewButton}
 								icon={<MdArchive name={constants.name.archivedView} />}
 								additionalStyles={archivedMocksViewButtonAdditionalStyles}
 								name={constants.name.archivedView}
 								onclickHandler={handleViewMocksBtnClick}
 							></ArchivedMocksViewButton>
 							<RecycleBinViewButton
-								dataTestid='deleted-view-btn'
-								id='deleted-view-btn'
-								background='bg-white'
+								dataTestid={constants.testIds.recycleBinMocksViewButton}
+								id={constants.ids.recycleBinMocksViewButton}
+								background={constants.background.recycleBinMocksViewButton}
 								label={constants.label.recycleBinView}
-								color='text-gray-500'
+								color={constants.color.recycleBinMocksViewButton}
 								icon={<MdDelete name={constants.name.recycleBinView} />}
 								additionalStyles={recycleBinViewButtonAdditionalStyles}
 								name={constants.name.recycleBinView}
@@ -153,10 +178,11 @@ function Toolbar({
 					</ViewMocksWrapper>
 					<If condition={!hideAddMockBtn}>
 						<AddMockButton
-							dataTestid='add-btn'
-							background='bg-teal-500'
+							dataTestid={constants.testIds.addMockButton}
+							id={constants.ids.addMockButton}
+							background={constants.background.addMockButton}
 							label={constants.label.add}
-							color='text-white'
+							color={constants.color.addMockButton}
 							icon={<FaPlusSquare />}
 							additionalStyles={addMocksButtonAdditionalStyles}
 							onclickHandler={handleAddMockBtnClick}
@@ -164,14 +190,14 @@ function Toolbar({
 					</If>
 				</ToolbarInnerContainer>
 			</ToolbarContainer>
-			<hr />
+			<hr data-testid={constants.testIds.divider} />
 		</>
 	);
 }
 
 Toolbar.propTypes = {
-	handleSidebarBtnClick: PropTypes.func.isRequired,
-	handleMockListsView: PropTypes.func.isRequired,
+	handleOnSidebarBtnClick: PropTypes.func.isRequired,
+	handleOnMockListsViewChange: PropTypes.func.isRequired,
 	mocksListView: PropTypes.string.isRequired,
 };
 

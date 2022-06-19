@@ -79,8 +79,8 @@ export const ViewMocksInnerWrapper = tw.div`
     inline-flex
 `;
 
-export const GeneralMocksViewButton = tw(CustomButton)``;
-export const generalMocksViewButtonAdditionalStyles = `
+export const ActiveMocksViewButton = tw(CustomButton)``;
+export const activeMocksViewButtonAdditionalStyles = `
     h-10 
     rounded-l-sm 
     border-2
