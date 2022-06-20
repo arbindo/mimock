@@ -66,7 +66,7 @@ export const MetaInner = tw.div`
     align-middle
 `;
 
-export const Link = tw.p`
+export const Link = tw.div`
     text-base
     text-center
     text-black
