@@ -17,9 +17,17 @@ import {
 	MiniBtnSpan,
 	ExportMocksButton,
 	ImportMocksButton,
+	SortIconsWrapper,
+	SortIcons,
 } from './Sidebar.style.js';
 import { constants } from './constants';
-import { FaCogs, FaFileDownload, FaFileUpload } from 'react-icons/fa';
+import {
+	FaCogs,
+	FaFileDownload,
+	FaFileUpload,
+	FaSortAmountUp,
+	FaSortAmountDown,
+} from 'react-icons/fa';
 import { exportMocks } from 'services/mockManagement/exportMock.service';
 import { Cookies } from 'react-cookie';
 import { globalConstants } from 'constants/globalConstants';
@@ -27,7 +35,13 @@ import { notificationTypes } from 'constants/notificationConstants';
 import useNotification from 'hooks/useNotification';
 import fileDownload from 'js-file-download';
 
-function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
+function Sidebar({
+	handleOnBadgeClick,
+	isFilterCleared,
+	isSortColumnCleared,
+	handleOnChangeSortSelector,
+	handleOnClickSortDirection,
+}) {
 	// #region Defaults
 	const cookies = new Cookies();
 	const {
@@ -48,6 +62,7 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 	const authCookieRef = useRef('');
 	const csrfCookieRef = useRef('');
 	const badgeRef = useRef([]);
+	const sortSelectorRef = useRef();
 
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
@@ -68,6 +83,12 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 			}
 		}
 	}, [isFilterCleared]);
+
+	useEffect(() => {
+		if (isSortColumnCleared) {
+			sortSelectorRef.current.value = '';
+		}
+	}, [isSortColumnCleared]);
 	// #endregion
 
 	// #region Handler functions
@@ -131,6 +152,19 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 				});
 			});
 	};
+
+	const handleOnChangeSelect = (e) => {
+		handleOnChangeSortSelector(e.target.value);
+	};
+
+	const handleOnChangeSortDirection = (e) => {
+		let sortDirection = e.target.name;
+		if (sortDirection === undefined) {
+			sortDirection = e.target.parentElement.name;
+		}
+		handleOnClickSortDirection(sortDirection);
+	};
+
 	// #endregion
 
 	return (
@@ -201,19 +235,34 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 					))}
 				</ComponentWrapper>
 				<ComponentWrapper data-testid={testIds.sortSelectComponent}>
-					<ComponentLabel htmlFor={ids.sortSelect}>
+					<ComponentLabel
+						htmlFor={ids.sortSelect}
+						className={'inline-flex justify-between'}
+					>
 						{label.sortSelect}
+						<SortIconsWrapper>
+							<SortIcons onClick={handleOnChangeSortDirection} name='asc'>
+								<FaSortAmountUp /> ASC
+							</SortIcons>
+							<SortIcons onClick={handleOnChangeSortDirection} name='desc'>
+								<FaSortAmountDown /> DESC
+							</SortIcons>
+						</SortIconsWrapper>
 					</ComponentLabel>
 					<SelectComponent
 						id={ids.sortSelect}
 						data-testid={testIds.sortSelect}
+						onChange={handleOnChangeSelect}
 						defaultValue=''
+						ref={sortSelectorRef}
 					>
 						<SelectOptionComponent value='' disabled hidden>
 							Choose...
 						</SelectOptionComponent>
 						{sortSelectItems.map((item, key) => (
-							<SelectOptionComponent key={key}>{item}</SelectOptionComponent>
+							<SelectOptionComponent key={key} value={item.value}>
+								{item.label}
+							</SelectOptionComponent>
 						))}
 					</SelectComponent>
 				</ComponentWrapper>
@@ -225,6 +274,9 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 Sidebar.propTypes = {
 	handleOnBadgeClick: PropTypes.func.isRequired,
 	isFilterCleared: PropTypes.bool.isRequired,
+	isSortColumnCleared: PropTypes.bool.isRequired,
+	handleOnChangeSortSelector: PropTypes.func.isRequired,
+	handleOnClickSortDirection: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

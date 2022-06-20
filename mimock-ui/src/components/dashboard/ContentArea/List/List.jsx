@@ -30,7 +30,13 @@ import {
 } from 'constants/globalConstants';
 import MockCard from './MockCard';
 
-function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
+function List({
+	mocksListView,
+	httpMethodFilter,
+	sortColumn,
+	sortDirection,
+	handleOnClearFilterClick,
+}) {
 	// #region Defaults
 	const cookies = new Cookies();
 	const { label, testIds, errors, color } = constants;
@@ -48,7 +54,13 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 	// #region Common Hooks
 	const platformSettingsRef = useRef('');
 	const { mocksList, listTitle, isFilter, loading, error, hasMore } =
-		useLazyLoad(mocksListView, pageNumber, httpMethodFilter);
+		useLazyLoad(
+			mocksListView,
+			pageNumber,
+			httpMethodFilter,
+			sortColumn,
+			sortDirection
+		);
 	useEffect(() => {
 		setFilterTags(() => {
 			// remove the default status tags for mocksListView and httpMethodFilter
@@ -56,7 +68,15 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 				mocksListView !== 'ALL' ? `Status: ${mocksListView}` : '';
 			const httpMethodTag =
 				httpMethodFilter !== '' ? `Http Method: ${httpMethodFilter}` : '';
-			return [statusTag, httpMethodTag].filter((item) => item !== '');
+			const sortDirectionQueryParam =
+				sortDirection !== '' ? `,${sortDirection}` : ',desc';
+			const sortColumnWithDirectionTag =
+				sortColumn !== ''
+					? `Sort: ${sortColumn.toUpperCase()}${sortDirectionQueryParam.toUpperCase()}`
+					: '';
+			return [statusTag, httpMethodTag, sortColumnWithDirectionTag].filter(
+				(item) => item !== ''
+			);
 		});
 		if (mocksListView === mockManagementConstants.DELETED_STATUS) {
 			platformSettingsRef.current = cookies.get(
@@ -68,7 +88,7 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 		} else {
 			setShowWarningBannerInBin(false);
 		}
-	}, [mocksListView, httpMethodFilter]);
+	}, [mocksListView, httpMethodFilter, sortColumn, sortDirection]);
 	const observer = useRef();
 	const lastItem = useCallback(
 		(node) => {
@@ -218,6 +238,8 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 List.propTypes = {
 	mocksListView: PropTypes.string.isRequired,
 	httpMethodFilter: PropTypes.string.isRequired,
+	sortColumn: PropTypes.string.isRequired,
+	sortDirection: PropTypes.string.isRequired,
 	handleOnClearFilterClick: PropTypes.func.isRequired,
 };
 

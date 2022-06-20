@@ -21,6 +21,8 @@ function Dashboard() {
 	const [showSidebarSection, setShowSidebarSection] = useState(false);
 	const [mocksListView, setMocksListView] = useState(DEFAULT_STATUS);
 	const [httpMethodFilter, setHttpMethodFilter] = useState('');
+	const [sortColumn, setSortColumn] = useState('');
+	const [sortDirection, setSortDirection] = useState('');
 	// #endregion
 
 	// #region Recoil States
@@ -76,6 +78,10 @@ function Dashboard() {
 		setMocksListView(DEFAULT_STATUS);
 		// reset httpMethod filter to ''
 		setHttpMethodFilter('');
+		// reset sortColumn to ''
+		setSortColumn('');
+		// reset sortDirection to ''
+		setSortDirection('');
 	};
 
 	const handleOnBadgeClick = (httpMethod) => {
@@ -90,6 +96,19 @@ function Dashboard() {
 			return httpMethod;
 		});
 	};
+
+	const handleOnChangeSortSelector = (sortColumn) => {
+		// set page number back to 0 (since view is changed)
+		setPageNumber(0);
+		setSortColumn(sortColumn);
+	};
+
+	const handleOnClickSortDirection = (sortOrder) => {
+		// set page number back to 0 (since view is changed)
+		setPageNumber(0);
+		setSortDirection(sortOrder);
+	};
+
 	// #endregion
 
 	return (
@@ -104,8 +123,12 @@ function Dashboard() {
 				showSidebarSection={showSidebarSection}
 				mocksListView={mocksListView}
 				httpMethodFilter={httpMethodFilter}
+				sortColumn={sortColumn}
+				sortDirection={sortDirection}
 				handleOnClearFilterClick={handleOnClearFilterClick}
 				handleOnBadgeClick={handleOnBadgeClick}
+				handleOnChangeSortSelector={handleOnChangeSortSelector}
+				handleOnClickSortDirection={handleOnClickSortDirection}
 			/>
 		</>
 	);

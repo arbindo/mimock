@@ -6,7 +6,13 @@ import {
 	mockManagementConstants,
 } from 'constants/globalConstants';
 
-function useLazyLoad(mocksListView, pageNumber, httpMethodFilter) {
+function useLazyLoad(
+	mocksListView,
+	pageNumber,
+	httpMethodFilter,
+	sortColumn,
+	sortDirection
+) {
 	const cookies = new Cookies();
 	const authCookieRef = useRef('');
 	const csrfCookieRef = useRef('');
@@ -33,19 +39,24 @@ function useLazyLoad(mocksListView, pageNumber, httpMethodFilter) {
 
 	const isHttpMethodFilterExists =
 		httpMethodFilter !== undefined && httpMethodFilter !== '';
+	const isSortColumnSelected = sortColumn !== undefined && sortColumn !== '';
 	const isDefaultView = mocksListView === DEFAULT;
 
 	useEffect(() => {
 		setMocksList([]);
-	}, [mocksListView, httpMethodFilter]);
+	}, [mocksListView, httpMethodFilter, sortColumn, sortDirection]);
 
 	useEffect(() => {
 		setLoading(true);
-		setIsFilter(isHttpMethodFilterExists || !isDefaultView);
+		setIsFilter(
+			isHttpMethodFilterExists || isSortColumnSelected || !isDefaultView
+		);
 
 		async function callMockService(
 			mocksListView,
 			httpMethodFilter,
+			sortColumn,
+			sortDirection,
 			authCookieRef,
 			pageNumber
 		) {
@@ -77,11 +88,15 @@ function useLazyLoad(mocksListView, pageNumber, httpMethodFilter) {
 				status: 0,
 				isLast: false,
 			};
+			const sortDirectionQueryParam =
+				sortDirection !== undefined ? `,${sortDirection}` : ',desc';
+			const sortColumnWithDirection = `${sortColumn}${sortDirectionQueryParam}`;
 			const listMocksResponse = await listMocksWithMultipleFilters(
 				authCookieRef,
 				pageNumber,
 				entityStatusString,
-				httpMethodFilter
+				httpMethodFilter,
+				sortColumnWithDirection
 			);
 			mocksListResponse.data = listMocksResponse.data.content;
 			mocksListResponse.status = listMocksResponse.status;
@@ -98,7 +113,14 @@ function useLazyLoad(mocksListView, pageNumber, httpMethodFilter) {
 			}
 		}
 
-		callMockService(mocksListView, httpMethodFilter, authCookieRef, pageNumber)
+		callMockService(
+			mocksListView,
+			httpMethodFilter,
+			sortColumn,
+			sortDirection,
+			authCookieRef,
+			pageNumber
+		)
 			.then((res) => {
 				setMocksList((prevList) => {
 					if (isHttpMethodFilterExists) {
@@ -118,7 +140,7 @@ function useLazyLoad(mocksListView, pageNumber, httpMethodFilter) {
 					message: mockManagementConstants.errors.serverError,
 				});
 			});
-	}, [mocksListView, pageNumber, httpMethodFilter]);
+	}, [mocksListView, pageNumber, httpMethodFilter, sortColumn, sortDirection]);
 
 	return { mocksList, listTitle, isFilter, loading, error, hasMore };
 }

@@ -175,3 +175,26 @@ export const ImportMocksButton = styled(_MiniBtn)`
 	opacity: 0.6;
 	display: none;
 `;
+
+export const SortIconsWrapper = tw.span`
+    flex
+    flex-row
+    align-middle
+    items-center
+    justify-end
+    gap-0.5
+`;
+
+export const SortIcons = tw.button`
+    inline-flex
+    align-middle
+    items-center
+    cursor-pointer
+    gap-0.5
+    text-sm
+    font-light
+    text-truncate
+    text-gray-500
+    px-1
+    py-0.5
+`;

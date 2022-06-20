@@ -38,11 +38,12 @@ export const constants = {
 		sortSelect: 'sort-selector',
 	},
 	sortSelectItems: [
-		'Mock Name',
-		'Http Method',
-		'Status Code',
-		'Route',
-		'Time Created',
+		{ label: 'Mock Name', value: 'mockName' },
+		{ label: 'Http Method', value: 'httpMethod' },
+		{ label: 'Status Code', value: 'statusCode' },
+		{ label: 'Route', value: 'route' },
+		{ label: 'Time Created', value: 'createdAt' },
+		{ label: 'Last Modified', value: 'updatedAt' },
 	],
 	responseTypeItems: ['Textual Response', 'Binary Response', 'No Response'],
 	badgeFilterItems: [

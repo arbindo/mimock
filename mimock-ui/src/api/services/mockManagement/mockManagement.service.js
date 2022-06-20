@@ -68,7 +68,8 @@ const listMocksWithMultipleFilters = async (
 	token,
 	pageNumber,
 	status,
-	httpMethodFilter
+	httpMethodFilter,
+	sortColumnWithDirection
 ) => {
 	let urlToBeQueried = `/mocks/filter?size=${DEFAULT_LIST_FETCH_SIZE}&page=${pageNumber}`;
 	if (httpMethodFilter !== '' && httpMethodFilter !== undefined) {
@@ -76,6 +77,9 @@ const listMocksWithMultipleFilters = async (
 	}
 	if (status !== '' && status !== undefined) {
 		urlToBeQueried += `&status=${status}`;
+	}
+	if (sortColumnWithDirection !== '' && sortColumnWithDirection !== undefined) {
+		urlToBeQueried += `&sort=${sortColumnWithDirection}`;
 	}
 	return await get(urlToBeQueried, token);
 };

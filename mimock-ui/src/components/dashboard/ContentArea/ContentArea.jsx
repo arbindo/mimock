@@ -9,11 +9,16 @@ function ContentArea({
 	showSidebarSection,
 	mocksListView,
 	httpMethodFilter,
+	sortColumn,
+	sortDirection,
 	handleOnClearFilterClick,
 	handleOnBadgeClick,
+	handleOnChangeSortSelector,
+	handleOnClickSortDirection,
 }) {
 	// #region Defaults
 	const isFilterCleared = httpMethodFilter === '';
+	const isSortColumnCleared = sortColumn === '';
 	const { testIds } = constants;
 	// #endregion
 
@@ -23,11 +28,16 @@ function ContentArea({
 				<Sidebar
 					handleOnBadgeClick={handleOnBadgeClick}
 					isFilterCleared={isFilterCleared}
+					isSortColumnCleared={isSortColumnCleared}
+					handleOnChangeSortSelector={handleOnChangeSortSelector}
+					handleOnClickSortDirection={handleOnClickSortDirection}
 				/>
 			</If>
 			<List
 				mocksListView={mocksListView}
 				httpMethodFilter={httpMethodFilter}
+				sortColumn={sortColumn}
+				sortDirection={sortDirection}
 				handleOnClearFilterClick={handleOnClearFilterClick}
 			/>
 		</ContentAreaContainer>
@@ -38,8 +48,12 @@ ContentArea.propTypes = {
 	showSidebarSection: PropTypes.bool.isRequired,
 	mocksListView: PropTypes.string.isRequired,
 	httpMethodFilter: PropTypes.string.isRequired,
+	sortColumn: PropTypes.string.isRequired,
+	sortDirection: PropTypes.string.isRequired,
 	handleOnClearFilterClick: PropTypes.func.isRequired,
 	handleOnBadgeClick: PropTypes.func.isRequired,
+	handleOnChangeSortSelector: PropTypes.func.isRequired,
+	handleOnClickSortDirection: PropTypes.func.isRequired,
 };
 
 export default ContentArea;
