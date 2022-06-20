@@ -18,7 +18,7 @@ describe('Detail', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('detail-section')).toBeInTheDocument();
+		expect(getByTestId('detail-container')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

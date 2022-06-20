@@ -9,27 +9,36 @@ import {
 } from './ResponsePane.style';
 import PropTypes from 'prop-types';
 import Prism from 'prismjs';
+import { constants } from './constants';
 
 function ResponsePane({ responseHeader, contentType, responseBody }) {
+	// #region Common Hooks
 	useEffect(() => {
 		Prism.highlightAll();
 	}, []);
+	// #endregion
 
 	return (
-		<NavTabPane data-testid='response-pane-section'>
+		<NavTabPane data-testid={constants.testIds.responseNavTabPane}>
 			<ContentItem>
-				<ItemLabel>Response Header</ItemLabel>
-				<ItemPreFormat>
+				<ItemLabel>{constants.labels.responseHeader}</ItemLabel>
+				<ItemPreFormat data-testid={constants.testIds.responseHeader}>
 					<Code>{responseHeader}</Code>
 				</ItemPreFormat>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Response Content Type</ItemLabel>
-				<Item type='text' defaultValue={contentType} disabled readOnly />
+				<ItemLabel>{constants.labels.responseContentType}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.responseContentType}
+					type={constants.defaultFieldType}
+					defaultValue={contentType}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Expected Response</ItemLabel>
-				<ItemPreFormat>
+				<ItemLabel>{constants.labels.expectedResponse}</ItemLabel>
+				<ItemPreFormat data-testid={constants.testIds.expectedResponse}>
 					<Code>{responseBody}</Code>
 				</ItemPreFormat>
 			</ContentItem>

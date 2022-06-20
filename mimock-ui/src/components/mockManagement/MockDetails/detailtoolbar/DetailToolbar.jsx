@@ -27,43 +27,69 @@ function DetailToolbar({
 	performEditMockOperation,
 }) {
 	return (
-		<DetailToolbarContainer data-testid='detail-toolbar-section'>
-			<BackButton to={`/mimock-ui/mocks`} dataTestid='back-btn'>
+		<DetailToolbarContainer
+			data-testid={constants.testIds.detailToolbarContainer}
+		>
+			<BackButton
+				to={`/mimock-ui/mocks`}
+				data-testid={constants.testIds.backBtn}
+				id={constants.ids.backBtn}
+			>
 				<MiniBtnSpan>
 					<FaArrowCircleLeft /> {constants.label.backBtn}
 				</MiniBtnSpan>
 			</BackButton>
 			<If condition={!hideDetailActionsToolbar}>
-				<OperationsContainer>
+				<OperationsContainer
+					data-testid={constants.testIds.operationsContainer}
+				>
 					<Choose>
 						<When condition={status == 'NONE'}>
-							<BaseButton onClick={performArchiveMockOperation}>
+							<BaseButton
+								data-testid={constants.testIds.archiveBtn}
+								id={constants.ids.archiveBtn}
+								onClick={performArchiveMockOperation}
+							>
 								<MiniBtnSpan>
 									<MdArchive /> {constants.label.archiveBtn}
 								</MiniBtnSpan>
 							</BaseButton>
-							<BaseButton onClick={performDeleteMockOperation}>
+							<BaseButton
+								data-testid={constants.testIds.deleteBtn}
+								id={constants.ids.deleteBtn}
+								onClick={performDeleteMockOperation}
+							>
 								<MiniBtnSpan>
 									<MdDelete /> {constants.label.deleteBtn}
 								</MiniBtnSpan>
 							</BaseButton>
-							<BaseButton onClick={performEditMockOperation}>
+							<BaseButton
+								data-testid={constants.testIds.editBtn}
+								id={constants.ids.editBtn}
+								onClick={performEditMockOperation}
+							>
 								<MiniBtnSpan>
 									<MdEdit /> {constants.label.editBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 						</When>
 						<When condition={status == 'ARCHIVED'}>
-							<BaseButton onClick={performUnarchiveMockOperation}>
+							<BaseButton
+								data-testid={constants.testIds.unarchiveBtn}
+								id={constants.ids.unarchiveBtn}
+								onClick={performUnarchiveMockOperation}
+							>
 								<MiniBtnSpan>
 									<MdUnarchive /> {constants.label.unarchiveBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 						</When>
 						<When condition={status == 'DELETED'}>
-							<WarningMessage>
-								<MdOutlineReportProblem /> No actions permitted. This mock
-								resource has been already deleted.
+							<WarningMessage
+								data-testid={constants.testIds.warningMessage}
+								id={constants.ids.warningMessage}
+							>
+								<MdOutlineReportProblem /> {constants.label.warningMessage}
 							</WarningMessage>
 						</When>
 					</Choose>

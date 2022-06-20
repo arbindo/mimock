@@ -11,21 +11,21 @@ import ContentArea from './ContentArea';
 import Titlebar from './Titlebar';
 import Toolbar from './Toolbar';
 
-export default function Dashboard() {
+function Dashboard() {
 	// #region Defaults
 	const cookies = new Cookies();
 	const DEFAULT_STATUS = mockManagementConstants.DEFAULT_STATUS;
-	// #endregion Defaults
+	// #endregion
 
 	// #region States
 	const [showSidebarSection, setShowSidebarSection] = useState(false);
 	const [mocksListView, setMocksListView] = useState(DEFAULT_STATUS);
 	const [httpMethodFilter, setHttpMethodFilter] = useState('');
-	// #endregion States
+	// #endregion
 
 	// #region Recoil States
 	const [, setPageNumber] = useRecoilState(pageNumberAtom);
-	// #endregion Recoil States
+	// #endregion
 
 	// #region Common Hooks
 	const authCookieRef = useRef('');
@@ -54,7 +54,7 @@ export default function Dashboard() {
 		};
 	}, []);
 
-	// #endregion Common Hooks
+	// #endregion
 
 	// #region Handler functions
 	const handleOnSidebarBtnClick = () => {
@@ -90,7 +90,7 @@ export default function Dashboard() {
 			return httpMethod;
 		});
 	};
-	// #endregion Handler functions
+	// #endregion
 
 	return (
 		<>
@@ -110,3 +110,5 @@ export default function Dashboard() {
 		</>
 	);
 }
+
+export default Dashboard;

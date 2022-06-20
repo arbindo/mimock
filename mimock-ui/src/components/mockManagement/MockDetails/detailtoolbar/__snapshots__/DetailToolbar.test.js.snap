@@ -4,12 +4,13 @@ exports[`DetailToolbar should render detail toolbar component 1`] = `
 <div>
   <div
     class="flex flex-row justify-between align-middle w-full mt-4 mb-2"
-    data-testid="detail-toolbar-section"
+    data-testid="detail-toolbar-container"
   >
     <a
       class="sc-bdvvtL"
-      datatestid="back-btn"
+      data-testid="back-btn"
       href="/mimock-ui/mocks"
+      id="back-btn"
     >
       <span
         class="inline-flex items-center justify-between gap-1"
@@ -33,6 +34,7 @@ exports[`DetailToolbar should render detail toolbar component 1`] = `
     </a>
     <div
       class="inline-flex items-center justify-between"
+      data-testid="operations-container"
     />
   </div>
 </div>

@@ -59,10 +59,9 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 			}
 		}
 	}, [isFilterCleared]);
-
 	// #endregion
 
-	// #region Custom functions
+	// #region Handler functions
 	const handleOnchange = (e) => {
 		console.log(e);
 	};

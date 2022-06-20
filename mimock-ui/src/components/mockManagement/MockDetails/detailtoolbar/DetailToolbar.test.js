@@ -9,7 +9,7 @@ describe('DetailToolbar', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('detail-toolbar-section')).toBeInTheDocument();
+		expect(getByTestId('detail-toolbar-container')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

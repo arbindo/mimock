@@ -4,7 +4,7 @@ exports[`GeneralPane should render general pane component 1`] = `
 <div>
   <div
     class="grid grid-cols-2 gap-6 fade px-4 py-2 my-2"
-    data-testid="general-pane-section"
+    data-testid="general-nav-tab-pane"
   >
     <div
       class="mb-3"
@@ -16,6 +16,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-id"
         disabled=""
         readonly=""
         type="text"
@@ -32,6 +33,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-name"
         disabled=""
         readonly=""
         type="text"
@@ -48,6 +50,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-description"
         disabled=""
         readonly=""
         type="text"
@@ -64,6 +67,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-entity-status"
         disabled=""
         readonly=""
         type="text"
@@ -80,6 +84,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-http-method"
         disabled=""
         readonly=""
         type="text"
@@ -96,6 +101,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-route"
         disabled=""
         readonly=""
         type="text"
@@ -112,6 +118,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-query-params"
         disabled=""
         readonly=""
         type="text"
@@ -128,6 +135,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-status-code"
         disabled=""
         readonly=""
         type="text"
@@ -144,6 +152,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-created-by"
         disabled=""
         readonly=""
         type="text"
@@ -160,6 +169,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-created-at"
         disabled=""
         readonly=""
         type="text"
@@ -176,6 +186,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-last-modified-by"
         disabled=""
         readonly=""
         type="text"
@@ -192,6 +203,7 @@ exports[`GeneralPane should render general pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="mock-last-modified-at"
         disabled=""
         readonly=""
         type="text"

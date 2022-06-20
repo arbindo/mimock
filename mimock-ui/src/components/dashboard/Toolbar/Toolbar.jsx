@@ -38,11 +38,11 @@ function Toolbar({
 		'hover-bg-opacity-5',
 		'hover:text-teal-500',
 	];
-	// #endregion Defaults
+	// #endregion
 
 	// #region States
 	const [hideAddMockBtn, setHideAddMockBtn] = useState(false);
-	// #endregion States
+	// #endregion
 
 	// #region Common Hooks
 	const navigate = useNavigate();
@@ -73,7 +73,7 @@ function Toolbar({
 			deletedMockBtn.classList.remove(...activeClassList);
 		}
 	}, [mocksListView]);
-	// #endregion Common Hooks
+	// #endregion
 
 	// #region Handler functions
 	const handleAddMockBtnClick = () => {
@@ -118,7 +118,7 @@ function Toolbar({
 		}
 		handleOnMockListsViewChange(viewName);
 	};
-	// #endregion Handler functions
+	// #endregion
 
 	return (
 		<>

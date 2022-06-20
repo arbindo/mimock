@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavTabPane, ContentItem, ItemLabel, Item } from './GeneralPane.style';
 import PropTypes from 'prop-types';
+import { constants } from './constants';
 
 function GeneralPane({
 	uniqueId,
@@ -17,54 +18,126 @@ function GeneralPane({
 	updatedAt,
 }) {
 	return (
-		<NavTabPane data-testid='general-pane-section'>
+		<NavTabPane data-testid={constants.testIds.generalNavTabPane}>
 			<ContentItem>
-				<ItemLabel>Mock Unique Identifier</ItemLabel>
-				<Item type='text' defaultValue={uniqueId} disabled readOnly />
+				<ItemLabel>{constants.labels.mockId}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.mockId}
+					type={constants.defaultFieldType}
+					defaultValue={uniqueId}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Mock Name</ItemLabel>
-				<Item type='text' defaultValue={mockName} disabled readOnly />
+				<ItemLabel>{constants.labels.mockName}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.mockName}
+					type={constants.defaultFieldType}
+					defaultValue={mockName}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Description</ItemLabel>
-				<Item type='text' defaultValue={description} disabled readOnly />
+				<ItemLabel>{constants.labels.description}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.description}
+					type={constants.defaultFieldType}
+					defaultValue={description}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Status</ItemLabel>
-				<Item type='text' defaultValue={entityStatus} disabled readOnly />
+				<ItemLabel>{constants.labels.entityStatus}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.entityStatus}
+					type={constants.defaultFieldType}
+					defaultValue={entityStatus}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>HTTP Method</ItemLabel>
-				<Item type='text' defaultValue={httpMethod} disabled readOnly />
+				<ItemLabel>{constants.labels.httpMethod}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.httpMethod}
+					type={constants.defaultFieldType}
+					defaultValue={httpMethod}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Route</ItemLabel>
-				<Item type='text' defaultValue={route} disabled readOnly />
+				<ItemLabel>{constants.labels.route}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.route}
+					type={constants.defaultFieldType}
+					defaultValue={route}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Query Params</ItemLabel>
-				<Item type='text' defaultValue={queryParams} disabled readOnly />
+				<ItemLabel>{constants.labels.queryParams}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.queryParams}
+					type={constants.defaultFieldType}
+					defaultValue={queryParams}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Expected Status Code</ItemLabel>
-				<Item type='text' defaultValue={statusCode} disabled readOnly />
+				<ItemLabel>{constants.labels.statusCode}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.statusCode}
+					type={constants.defaultFieldType}
+					defaultValue={statusCode}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Created By</ItemLabel>
-				<Item type='text' defaultValue={createdBy} disabled readOnly />
+				<ItemLabel>{constants.labels.createdBy}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.createdBy}
+					type={constants.defaultFieldType}
+					defaultValue={createdBy}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Created At</ItemLabel>
-				<Item type='text' defaultValue={createdAt} disabled readOnly />
+				<ItemLabel>{constants.labels.createdAt}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.createdAt}
+					type={constants.defaultFieldType}
+					defaultValue={createdAt}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Last Modified By</ItemLabel>
-				<Item type='text' defaultValue={modifiedBy} disabled readOnly />
+				<ItemLabel>{constants.labels.lastModifiedBy}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.lastModifiedBy}
+					type={constants.defaultFieldType}
+					defaultValue={modifiedBy}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>Last Modified At</ItemLabel>
-				<Item type='text' defaultValue={updatedAt} disabled readOnly />
+				<ItemLabel>{constants.labels.lastModifiedAt}</ItemLabel>
+				<Item
+					data-testid={constants.testIds.lastModifiedAt}
+					type={constants.defaultFieldType}
+					defaultValue={updatedAt}
+					disabled
+					readOnly
+				/>
 			</ContentItem>
 		</NavTabPane>
 	);

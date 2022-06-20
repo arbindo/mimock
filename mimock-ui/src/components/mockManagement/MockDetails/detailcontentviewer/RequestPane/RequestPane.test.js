@@ -9,7 +9,7 @@ describe('RequestPane', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('request-pane-section')).toBeInTheDocument();
+		expect(getByTestId('request-nav-tab-pane')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

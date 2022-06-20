@@ -4,7 +4,7 @@ exports[`ResponsePane should render response pane component 1`] = `
 <div>
   <div
     class="grid grid-cols-1 gap-6 fade px-4 py-2 my-2"
-    data-testid="response-pane-section"
+    data-testid="response-nav-tab-pane"
   >
     <div
       class="mb-3"
@@ -16,6 +16,7 @@ exports[`ResponsePane should render response pane component 1`] = `
       </label>
       <pre
         class="language-json"
+        data-testid="response-header"
         tabindex="0"
       >
         <code
@@ -33,6 +34,7 @@ exports[`ResponsePane should render response pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="response-content-type"
         disabled=""
         readonly=""
         type="text"
@@ -49,6 +51,7 @@ exports[`ResponsePane should render response pane component 1`] = `
       </label>
       <pre
         class="language-json"
+        data-testid="expected-response"
         tabindex="0"
       >
         <code

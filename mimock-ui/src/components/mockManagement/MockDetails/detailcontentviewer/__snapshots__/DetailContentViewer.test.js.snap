@@ -14,6 +14,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
       >
         <div
           class="inline-flex items-center justify-center align-middle gap-2 nav-link w-full block font-medium text-xs leading-tight border-2 border-transparent px-6 py-3 my-2 rounded-sm hover:bg-black hover:bg-opacity-5 hover:text-teal-500 focus:outline-none focus:ring-0 transition duration-150 ease-in-out cursor-pointer bg-teal-500 text-white"
+          data-testid="general-pane"
           id="general-pane"
         >
           <svg
@@ -29,7 +30,8 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
               d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
             />
           </svg>
-           General
+           
+          General
         </div>
       </li>
       <li
@@ -37,6 +39,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
       >
         <div
           class="inline-flex items-center justify-center align-middle gap-2 nav-link w-full block font-medium text-xs leading-tight border-2 border-transparent px-6 py-3 my-2 rounded-sm hover:bg-black hover:bg-opacity-5 hover:text-teal-500 focus:outline-none focus:ring-0 transition duration-150 ease-in-out cursor-pointer bg-white text-gray-400"
+          data-testid="request-pane"
           id="request-pane"
         >
           <svg
@@ -52,7 +55,8 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
               d="M8 256C8 119 119 8 256 8s248 111 248 248-111 248-248 248S8 393 8 256zm143.6 28.9l72.4-75.5V392c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24V209.4l72.4 75.5c9.3 9.7 24.8 9.9 34.3.4l10.9-11c9.4-9.4 9.4-24.6 0-33.9L273 107.7c-9.4-9.4-24.6-9.4-33.9 0L106.3 240.4c-9.4 9.4-9.4 24.6 0 33.9l10.9 11c9.6 9.5 25.1 9.3 34.4-.4z"
             />
           </svg>
-           Request
+           
+          Request
         </div>
       </li>
       <li
@@ -60,6 +64,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
       >
         <div
           class="inline-flex items-center justify-center align-middle gap-2 nav-link w-full block font-medium text-xs leading-tight border-2 border-transparent px-6 py-3 my-2 rounded-sm hover:bg-black hover:bg-opacity-5 hover:text-teal-500 focus:outline-none focus:ring-0 transition duration-150 ease-in-out cursor-pointer bg-white text-gray-400"
+          data-testid="response-pane"
           id="response-pane"
         >
           <svg
@@ -81,10 +86,11 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
     </ul>
     <div
       class="tab-content font-light shadow-sm rounded-sm mt-2 mb-4 px-4 py-2 border-2 border-gray-100"
+      data-testid="tab-content-container"
     >
       <div
         class="grid grid-cols-2 gap-6 fade px-4 py-2 my-2"
-        data-testid="general-pane-section"
+        data-testid="general-nav-tab-pane"
       >
         <div
           class="mb-3"
@@ -96,6 +102,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-id"
             disabled=""
             readonly=""
             type="text"
@@ -112,6 +119,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-name"
             disabled=""
             readonly=""
             type="text"
@@ -128,6 +136,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-description"
             disabled=""
             readonly=""
             type="text"
@@ -144,6 +153,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-entity-status"
             disabled=""
             readonly=""
             type="text"
@@ -160,6 +170,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-http-method"
             disabled=""
             readonly=""
             type="text"
@@ -176,6 +187,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-route"
             disabled=""
             readonly=""
             type="text"
@@ -192,6 +204,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-query-params"
             disabled=""
             readonly=""
             type="text"
@@ -208,6 +221,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-status-code"
             disabled=""
             readonly=""
             type="text"
@@ -224,6 +238,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-created-by"
             disabled=""
             readonly=""
             type="text"
@@ -240,6 +255,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-created-at"
             disabled=""
             readonly=""
             type="text"
@@ -256,6 +272,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-last-modified-by"
             disabled=""
             readonly=""
             type="text"
@@ -272,6 +289,7 @@ exports[`DetailContentViewer should render detail content viewer component 1`] =
           </label>
           <input
             class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+            data-testid="mock-last-modified-at"
             disabled=""
             readonly=""
             type="text"

@@ -12,7 +12,10 @@ function ContentArea({
 	handleOnClearFilterClick,
 	handleOnBadgeClick,
 }) {
+	// #region Defaults
 	const isFilterCleared = httpMethodFilter === '';
+	// #endregion
+
 	return (
 		<ContentAreaContainer data-testid={constants.testIds.contentAreaContainer}>
 			<If condition={showSidebarSection}>

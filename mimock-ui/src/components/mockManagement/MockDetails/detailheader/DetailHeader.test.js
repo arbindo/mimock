@@ -100,7 +100,7 @@ describe('DetailHeader', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('detail-header-section')).toBeInTheDocument();
+		expect(getByTestId('detail-header-container')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

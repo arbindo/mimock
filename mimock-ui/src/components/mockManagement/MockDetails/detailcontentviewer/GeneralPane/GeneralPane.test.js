@@ -9,7 +9,7 @@ describe('GeneralPane', () => {
 
 		const { container, getByTestId } = tree;
 
-		expect(getByTestId('general-pane-section')).toBeInTheDocument();
+		expect(getByTestId('general-nav-tab-pane')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

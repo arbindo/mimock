@@ -4,7 +4,7 @@ exports[`RequestPane should render request pane component 1`] = `
 <div>
   <div
     class="grid grid-cols-2 gap-6 fade px-4 py-2 my-2"
-    data-testid="request-pane-section"
+    data-testid="request-nav-tab-pane"
   >
     <div
       class="mb-3"
@@ -16,6 +16,7 @@ exports[`RequestPane should render request pane component 1`] = `
       </label>
       <pre
         class="bg-white my-0 language-json"
+        data-testid="request-headers"
         tabindex="0"
       >
         <code
@@ -33,6 +34,7 @@ exports[`RequestPane should render request pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="request-headers-match-exact"
         disabled=""
         readonly=""
         type="text"
@@ -49,6 +51,7 @@ exports[`RequestPane should render request pane component 1`] = `
       </label>
       <pre
         class="bg-white my-0 language-json"
+        data-testid="request-body"
         tabindex="0"
       >
         <code
@@ -66,6 +69,7 @@ exports[`RequestPane should render request pane component 1`] = `
       </label>
       <input
         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+        data-testid="request-body-type"
         disabled=""
         readonly=""
         type="text"

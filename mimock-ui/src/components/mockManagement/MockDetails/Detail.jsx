@@ -9,16 +9,22 @@ import {
 import { Cookies } from 'react-cookie';
 import { globalConstants } from 'constants/globalConstants';
 import { DetailContainer } from './Detail.style';
-import DetailToolbar from './detailtoolbar/DetailToolbar';
-import DetailHeader from './detailheader';
-import DetailContentViewer from './detailcontentviewer';
 import { decideBadgeColor } from 'utils/badgeColor.js';
 import { notificationTypes } from 'constants/notificationConstants';
 import useNotification from 'hooks/useNotification';
 import { ConfirmationModal } from 'components/common/Modals';
 import { getUserDetails } from 'utils/jwtUtils';
+import DetailToolbar from './detailtoolbar/DetailToolbar';
+import DetailHeader from './detailheader';
+import DetailContentViewer from './detailcontentviewer';
+import { constants } from './constants';
 
 function Detail() {
+	// #region Defaults
+	const cookies = new Cookies();
+	// #endregion
+
+	// #region States
 	const [mock, setMock] = useState(null);
 	const [mockId, setMockId] = useState(null);
 	const [badgeColor, setBadgeColor] = useState('');
@@ -26,11 +32,12 @@ function Detail() {
 	const [deletingMock, setDeletingMock] = useState(false);
 	const [hideDetailActionsToolbar, setHideDetailActionsToolbar] =
 		useState(false);
+	// #endregion
 
+	// #region Common Hooks
 	const navigate = useNavigate();
-
 	const location = useLocation();
-	const cookies = new Cookies();
+
 	const authCookieRef = useRef('');
 	const csrfCookieRef = useRef('');
 
@@ -61,7 +68,9 @@ function Detail() {
 			}
 		}
 	}, []);
+	// #endregion
 
+	// #region Handler functions
 	const performArchiveMockOperation = () => {
 		archiveMock(mockId, authCookieRef)
 			.then((res) => {
@@ -155,17 +164,18 @@ function Detail() {
 	const performEditMockOperation = () => {
 		console.log('Edit Btn Clicked');
 	};
+	// #endregion
 
 	return (
-		<DetailContainer data-testid='detail-section'>
+		<DetailContainer data-testid={constants.testIds.detailContainer}>
 			<If condition={mock != null}>
 				<If condition={showDeletionModal}>
 					<ConfirmationModal
-						message={`Are you sure you want to delete mock "${mock.mockName}" ?`}
-						cancelButtonLabel='Cancel'
-						confirmButtonLabel='Delete Mock'
+						message={`${constants.confirmationModal.loadingMessage} "${mock.mockName}" ?`}
+						cancelButtonLabel={constants.confirmationModal.cancelButtonLabel}
+						confirmButtonLabel={constants.confirmationModal.confirmButtonLabel}
 						loading={deletingMock}
-						loadingMessage={`Deleting mock. Please wait...`}
+						loadingMessage={constants.confirmationModal.loadingMessage}
 						onConfirm={async () => {
 							await handleDeleteMock();
 						}}
