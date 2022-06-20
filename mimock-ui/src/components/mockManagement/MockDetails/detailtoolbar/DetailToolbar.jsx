@@ -26,70 +26,70 @@ function DetailToolbar({
 	performDeleteMockOperation,
 	performEditMockOperation,
 }) {
+	// #region Defaults
+	const { testIds, ids, label } = constants;
+	// #endregion
+
 	return (
-		<DetailToolbarContainer
-			data-testid={constants.testIds.detailToolbarContainer}
-		>
+		<DetailToolbarContainer data-testid={testIds.detailToolbarContainer}>
 			<BackButton
 				to={`/mimock-ui/mocks`}
-				data-testid={constants.testIds.backBtn}
-				id={constants.ids.backBtn}
+				data-testid={testIds.backBtn}
+				id={ids.backBtn}
 			>
 				<MiniBtnSpan>
-					<FaArrowCircleLeft /> {constants.label.backBtn}
+					<FaArrowCircleLeft /> {label.backBtn}
 				</MiniBtnSpan>
 			</BackButton>
 			<If condition={!hideDetailActionsToolbar}>
-				<OperationsContainer
-					data-testid={constants.testIds.operationsContainer}
-				>
+				<OperationsContainer data-testid={testIds.operationsContainer}>
 					<Choose>
 						<When condition={status == 'NONE'}>
 							<BaseButton
-								data-testid={constants.testIds.archiveBtn}
-								id={constants.ids.archiveBtn}
+								data-testid={testIds.archiveBtn}
+								id={ids.archiveBtn}
 								onClick={performArchiveMockOperation}
 							>
 								<MiniBtnSpan>
-									<MdArchive /> {constants.label.archiveBtn}
+									<MdArchive /> {label.archiveBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 							<BaseButton
-								data-testid={constants.testIds.deleteBtn}
-								id={constants.ids.deleteBtn}
+								data-testid={testIds.deleteBtn}
+								id={ids.deleteBtn}
 								onClick={performDeleteMockOperation}
 							>
 								<MiniBtnSpan>
-									<MdDelete /> {constants.label.deleteBtn}
+									<MdDelete /> {label.deleteBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 							<BaseButton
-								data-testid={constants.testIds.editBtn}
-								id={constants.ids.editBtn}
+								data-testid={testIds.editBtn}
+								id={ids.editBtn}
 								onClick={performEditMockOperation}
 							>
 								<MiniBtnSpan>
-									<MdEdit /> {constants.label.editBtn}
+									<MdEdit /> {label.editBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 						</When>
 						<When condition={status == 'ARCHIVED'}>
 							<BaseButton
-								data-testid={constants.testIds.unarchiveBtn}
-								id={constants.ids.unarchiveBtn}
+								data-testid={testIds.unarchiveBtn}
+								id={ids.unarchiveBtn}
 								onClick={performUnarchiveMockOperation}
 							>
 								<MiniBtnSpan>
-									<MdUnarchive /> {constants.label.unarchiveBtn}
+									<MdUnarchive /> {label.unarchiveBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 						</When>
 						<When condition={status == 'DELETED'}>
 							<WarningMessage
-								data-testid={constants.testIds.warningMessage}
-								id={constants.ids.warningMessage}
+								data-testid={testIds.warningMessage}
+								id={ids.warningMessage}
 							>
-								<MdOutlineReportProblem /> {constants.label.warningMessage}
+								<MdOutlineReportProblem /> {label.warningMessage}
 							</WarningMessage>
 						</When>
 					</Choose>

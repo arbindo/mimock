@@ -17,6 +17,10 @@ function RequestPane({
 	requestBody,
 	requestBodyType,
 }) {
+	// #region Defaults
+	const { testIds, labels, defaultFieldType } = constants;
+	// #endregion
+
 	// #region Common Hooks
 	useEffect(() => {
 		Prism.highlightAll();
@@ -24,34 +28,34 @@ function RequestPane({
 	// #endregion
 
 	return (
-		<NavTabPane data-testid={constants.testIds.requestNavTabPane}>
+		<NavTabPane data-testid={testIds.requestNavTabPane}>
 			<ContentItem>
-				<ItemLabel>{constants.labels.requestHeaders}</ItemLabel>
-				<ItemPreFormat data-testid={constants.testIds.requestHeaders}>
+				<ItemLabel>{labels.requestHeaders}</ItemLabel>
+				<ItemPreFormat data-testid={testIds.requestHeaders}>
 					<Code>{requestHeader}</Code>
 				</ItemPreFormat>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>{constants.labels.requestHeadersMatchExact}</ItemLabel>
+				<ItemLabel>{labels.requestHeadersMatchExact}</ItemLabel>
 				<Item
-					data-testid={constants.testIds.requestHeadersMatchExact}
-					type={constants.defaultFieldType}
+					data-testid={testIds.requestHeadersMatchExact}
+					type={defaultFieldType}
 					defaultValue={matchExact}
 					disabled
 					readOnly
 				/>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>{constants.labels.requestBody}</ItemLabel>
-				<ItemPreFormat data-testid={constants.testIds.requestBody}>
+				<ItemLabel>{labels.requestBody}</ItemLabel>
+				<ItemPreFormat data-testid={testIds.requestBody}>
 					<Code>{requestBody}</Code>
 				</ItemPreFormat>
 			</ContentItem>
 			<ContentItem>
-				<ItemLabel>{constants.labels.requestBodyType}</ItemLabel>
+				<ItemLabel>{labels.requestBodyType}</ItemLabel>
 				<Item
-					data-testid={constants.testIds.requestBodyType}
-					type={constants.defaultFieldType}
+					data-testid={testIds.requestBodyType}
+					type={defaultFieldType}
 					defaultValue={requestBodyType}
 					disabled
 					readOnly

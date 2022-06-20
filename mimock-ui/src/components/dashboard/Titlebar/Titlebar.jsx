@@ -9,21 +9,22 @@ import { FaCopy } from 'react-icons/fa';
 import IconHeader from 'styles/IconHeader';
 
 function Titlebar() {
+	// #region Defaults
+	const { title, placeholders, additionalStyles, testIds } = constants;
+	// #endregion
 	return (
 		<>
-			<TitlebarContainer data-testid={constants.testIds.titlebarContainer}>
+			<TitlebarContainer data-testid={testIds.titlebarContainer}>
 				<IconHeader
-					dataTestId={constants.testIds.mocksHeader}
+					dataTestId={testIds.mocksHeader}
 					icon={<FaCopy />}
-					title={constants.title}
-					additionalStyles={constants.additionalStyles.mocksHeader}
+					title={title}
+					additionalStyles={additionalStyles.mocksHeader}
 				/>
-				<TitlebarInnerContainer
-					data-testid={constants.testIds.titlebarInnerContainer}
-				>
+				<TitlebarInnerContainer data-testid={testIds.titlebarInnerContainer}>
 					<SearchField
-						data-testid={constants.testIds.searchField}
-						placeholder={constants.placeholders.search}
+						data-testid={testIds.searchField}
+						placeholder={placeholders.search}
 					/>
 				</TitlebarInnerContainer>
 			</TitlebarContainer>

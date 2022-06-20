@@ -26,6 +26,7 @@ function MockCard({
 }) {
 	// #region States
 	const [badgeColor, setBadgeColor] = useState('');
+	const { testIds, additionalStyles } = constants;
 	// #endregion
 
 	// #region Common Hooks
@@ -42,26 +43,19 @@ function MockCard({
 			to={`/mimock-ui/mocks/detail/${id}`}
 		>
 			<CardTitleContainer>
-				<CardTitle data-testid={constants.testIds.cardTitle}>
-					{mockName}
-				</CardTitle>
-				<CardSubtitle data-testid={constants.testIds.cardSubtitle}>
+				<CardTitle data-testid={testIds.cardTitle}>{mockName}</CardTitle>
+				<CardSubtitle data-testid={testIds.cardSubtitle}>
 					{description}
 				</CardSubtitle>
 			</CardTitleContainer>
 			<CardMetaContainer>
 				<CardMetaInner>
-					<CardBadge
-						data-testid={constants.testIds.cardBadge}
-						className={badgeColor}
-					>
+					<CardBadge data-testid={testIds.cardBadge} className={badgeColor}>
 						{httpMethod}
 					</CardBadge>
 					<CardLinkSpan>
-						<FaLink className={constants.additionalStyles.cardLink} />{' '}
-						<CardLink data-testid={constants.testIds.cardLink}>
-							{route}
-						</CardLink>
+						<FaLink className={additionalStyles.cardLink} />{' '}
+						<CardLink data-testid={testIds.cardLink}>{route}</CardLink>
 					</CardLinkSpan>
 				</CardMetaInner>
 			</CardMetaContainer>

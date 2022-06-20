@@ -22,6 +22,7 @@ import { constants } from './constants';
 function Detail() {
 	// #region Defaults
 	const cookies = new Cookies();
+	const { testIds, confirmationModal } = constants;
 	// #endregion
 
 	// #region States
@@ -167,15 +168,15 @@ function Detail() {
 	// #endregion
 
 	return (
-		<DetailContainer data-testid={constants.testIds.detailContainer}>
+		<DetailContainer data-testid={testIds.detailContainer}>
 			<If condition={mock != null}>
 				<If condition={showDeletionModal}>
 					<ConfirmationModal
-						message={`${constants.confirmationModal.loadingMessage} "${mock.mockName}" ?`}
-						cancelButtonLabel={constants.confirmationModal.cancelButtonLabel}
-						confirmButtonLabel={constants.confirmationModal.confirmButtonLabel}
+						message={`${confirmationModal.loadingMessage} "${mock.mockName}" ?`}
+						cancelButtonLabel={confirmationModal.cancelButtonLabel}
+						confirmButtonLabel={confirmationModal.confirmButtonLabel}
 						loading={deletingMock}
-						loadingMessage={constants.confirmationModal.loadingMessage}
+						loadingMessage={confirmationModal.loadingMessage}
 						onConfirm={async () => {
 							await handleDeleteMock();
 						}}

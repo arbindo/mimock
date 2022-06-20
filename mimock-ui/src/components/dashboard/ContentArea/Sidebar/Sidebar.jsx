@@ -30,7 +30,18 @@ import fileDownload from 'js-file-download';
 function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 	// #region Defaults
 	const cookies = new Cookies();
-	const totalBadgeFilterCount = constants.badgeFilterItems.length;
+	const {
+		headerTitle,
+		title,
+		label,
+		name,
+		ids,
+		testIds,
+		sortSelectItems,
+		responseTypeItems,
+		badgeFilterItems,
+	} = constants;
+	const totalBadgeFilterCount = badgeFilterItems.length;
 	// #endregion
 
 	// #region Common Hooks
@@ -46,10 +57,8 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 	useEffect(() => {
 		if (isFilterCleared) {
 			for (var i = 0; i < totalBadgeFilterCount; i++) {
-				const currentClasses =
-					constants.badgeFilterItems[i].badgeColor.split(' ');
-				const activeClasses =
-					constants.badgeFilterItems[i].activeBadgeColor.split(' ');
+				const currentClasses = badgeFilterItems[i].badgeColor.split(' ');
+				const activeClasses = badgeFilterItems[i].activeBadgeColor.split(' ');
 				activeClasses.forEach((classes) => {
 					badgeRef[i].classList.remove(classes);
 				});
@@ -83,10 +92,8 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 			currentBadge.classList.add(classes);
 		});
 		for (var i = 0; i < totalBadgeFilterCount; i++) {
-			const currentClasses =
-				constants.badgeFilterItems[i].badgeColor.split(' ');
-			const activeClasses =
-				constants.badgeFilterItems[i].activeBadgeColor.split(' ');
+			const currentClasses = badgeFilterItems[i].badgeColor.split(' ');
+			const activeClasses = badgeFilterItems[i].activeBadgeColor.split(' ');
 			if (i !== key) {
 				activeClasses.forEach((classes) => {
 					otherBadges[i].classList.remove(classes);
@@ -127,46 +134,44 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 	// #endregion
 
 	return (
-		<SideBarContainer data-testid={constants.testIds.sidebarContainer}>
+		<SideBarContainer data-testid={testIds.sidebarContainer}>
 			<SidebarBox>
-				<TitleSpan data-testid={constants.testIds.sidebarHeader}>
-					<FaCogs /> <SpanText>{constants.headerTitle}</SpanText>
+				<TitleSpan data-testid={testIds.sidebarHeader}>
+					<FaCogs /> <SpanText>{headerTitle}</SpanText>
 				</TitleSpan>
-				<ComponentWrapper data-testid={constants.testIds.exportImportComponent}>
-					<ComponentLabel>
-						{constants.label.exportImportComponent}
-					</ComponentLabel>
+				<ComponentWrapper data-testid={testIds.exportImportComponent}>
+					<ComponentLabel>{label.exportImportComponent}</ComponentLabel>
 					<RowComponentWrapper>
 						<ExportMocksButton
-							data-testid={constants.testIds.exportMocksBtn}
-							id={constants.ids.exportMocksBtn}
-							name={constants.name.exportMocksBtn}
+							data-testid={testIds.exportMocksBtn}
+							id={ids.exportMocksBtn}
+							name={name.exportMocksBtn}
 							onClick={handleExportMocksBtnClick}
-							title={constants.title.exportMocksBtn}
+							title={title.exportMocksBtn}
 						>
 							<MiniBtnSpan>
-								<FaFileDownload /> {constants.label.exportMocksBtn}
+								<FaFileDownload /> {label.exportMocksBtn}
 							</MiniBtnSpan>
 						</ExportMocksButton>
 						<ImportMocksButton
-							data-testid={constants.testIds.importMocksBtn}
-							id={constants.ids.importMocksBtn}
-							name={constants.name.importMocksBtn}
-							title={constants.title.importMocksBtn}
+							data-testid={testIds.importMocksBtn}
+							id={ids.importMocksBtn}
+							name={name.importMocksBtn}
+							title={title.importMocksBtn}
 						>
 							<MiniBtnSpan>
-								<FaFileUpload /> {constants.label.importMocksBtn}
+								<FaFileUpload /> {label.importMocksBtn}
 							</MiniBtnSpan>
 						</ImportMocksButton>
 					</RowComponentWrapper>
 				</ComponentWrapper>
-				<ComponentWrapper data-testid={constants.testIds.badgeFilterComponent}>
-					<ComponentLabel>{constants.label.badgeFilter}</ComponentLabel>
+				<ComponentWrapper data-testid={testIds.badgeFilterComponent}>
+					<ComponentLabel>{label.badgeFilter}</ComponentLabel>
 					<RowComponentWrapper>
-						{constants.badgeFilterItems.map((item, key) => (
+						{badgeFilterItems.map((item, key) => (
 							<BadgeFilter
-								data-testid={`${constants.testIds.badgeFilter}${key}`}
-								id={`${constants.ids.badgeFilter}${key}`}
+								data-testid={`${testIds.badgeFilter}${key}`}
+								id={`${ids.badgeFilter}${key}`}
 								key={key}
 								className={item.badgeColor}
 								ref={(element) => (badgeRef[key] = element)}
@@ -177,37 +182,37 @@ function Sidebar({ handleOnBadgeClick, isFilterCleared }) {
 						))}
 					</RowComponentWrapper>
 				</ComponentWrapper>
-				<ComponentWrapper data-testid={constants.testIds.responseTypeComponent}>
-					<ComponentLabel>{constants.label.responseType}</ComponentLabel>
-					{constants.responseTypeItems.map((item, key) => (
+				<ComponentWrapper data-testid={testIds.responseTypeComponent}>
+					<ComponentLabel>{label.responseType}</ComponentLabel>
+					{responseTypeItems.map((item, key) => (
 						<FormCheckWrapper key={key}>
 							<RadioComponent
 								type='radio'
 								value=''
 								onChange={handleOnchange}
-								name={`${constants.name.responseType}${key}`}
-								data-testid={`${constants.testIds.responseType}${key}`}
-								id={`${constants.ids.responseType}${key}`}
+								name={`${name.responseType}${key}`}
+								data-testid={`${testIds.responseType}${key}`}
+								id={`${ids.responseType}${key}`}
 							></RadioComponent>
-							<RadioOptionText htmlFor={`${constants.ids.responseType}${key}`}>
+							<RadioOptionText htmlFor={`${ids.responseType}${key}`}>
 								{item}
 							</RadioOptionText>
 						</FormCheckWrapper>
 					))}
 				</ComponentWrapper>
-				<ComponentWrapper data-testid={constants.testIds.sortSelectComponent}>
-					<ComponentLabel htmlFor={constants.ids.sortSelect}>
-						{constants.label.sortSelect}
+				<ComponentWrapper data-testid={testIds.sortSelectComponent}>
+					<ComponentLabel htmlFor={ids.sortSelect}>
+						{label.sortSelect}
 					</ComponentLabel>
 					<SelectComponent
-						id={constants.ids.sortSelect}
-						data-testid={constants.testIds.sortSelect}
+						id={ids.sortSelect}
+						data-testid={testIds.sortSelect}
 						defaultValue=''
 					>
 						<SelectOptionComponent value='' disabled hidden>
 							Choose...
 						</SelectOptionComponent>
-						{constants.sortSelectItems.map((item, key) => (
+						{sortSelectItems.map((item, key) => (
 							<SelectOptionComponent key={key}>{item}</SelectOptionComponent>
 						))}
 					</SelectComponent>

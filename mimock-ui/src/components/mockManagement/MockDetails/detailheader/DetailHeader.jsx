@@ -16,25 +16,26 @@ import PropTypes from 'prop-types';
 import { constants } from './constants';
 
 function DetailHeader({ mock, badgeColor }) {
+	// #region Defaults
+	const { testIds } = constants;
+	// #endregion
+
 	return (
-		<HeaderContainer data-testid={constants.testIds.detailHeaderContainer}>
-			<TitleContainer data-testid={constants.testIds.titleContainer}>
-				<Title data-testid={constants.testIds.mockTitle}>{mock.mockName}</Title>
-				<Subtitle data-testid={constants.testIds.mockSubtitle}>
+		<HeaderContainer data-testid={testIds.detailHeaderContainer}>
+			<TitleContainer data-testid={testIds.titleContainer}>
+				<Title data-testid={testIds.mockTitle}>{mock.mockName}</Title>
+				<Subtitle data-testid={testIds.mockSubtitle}>
 					{mock.description}
 				</Subtitle>
-				<Link data-testid={constants.testIds.mockLink}>
+				<Link data-testid={testIds.mockLink}>
 					<LinkDiv>
 						<FaLink /> <LinkText>{mock.route}</LinkText>
 					</LinkDiv>
 				</Link>
 			</TitleContainer>
-			<MetaContainer data-testid={constants.testIds.metaContainer}>
+			<MetaContainer data-testid={testIds.metaContainer}>
 				<MetaInner>
-					<Badge
-						data-testid={constants.testIds.mockBadge}
-						className={badgeColor}
-					>
+					<Badge data-testid={testIds.mockBadge} className={badgeColor}>
 						{mock.httpMethod.method}
 					</Badge>
 				</MetaInner>

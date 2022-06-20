@@ -18,17 +18,22 @@ import {
 } from './LoginForm.style';
 import { constants } from './constants';
 
-export default function LoginForm() {
+function LoginForm() {
+	// #region Defaults
 	const cookies = new Cookies();
+	const { labels, placeholders, errors, testIds } = constants;
+	// #endregion
 
-	const authCookieRef = useRef('');
-	const csrfCookieRef = useRef('');
-
+	// #region States
 	const [errorMessage, setErrorMessage] = useState('');
 	const [userName, setUserName] = useState('');
 	const [password, setPassword] = useState('');
 	const [authCookie, setAuthCookie] = useState('');
+	// #endregion
 
+	// #region Common Hooks
+	const authCookieRef = useRef('');
+	const csrfCookieRef = useRef('');
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
 		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
@@ -53,7 +58,9 @@ export default function LoginForm() {
 			clearAuthToken();
 		}
 	}, [authCookieRef.current, csrfCookieRef.current]);
+	// #endregion
 
+	// #region Handler functions
 	const clearCsrfCookie = () => {
 		if (csrfCookieRef.current) {
 			cookies.remove(globalConstants.XSRF_COOKIE_NAME, {
@@ -72,12 +79,12 @@ export default function LoginForm() {
 
 	const isCredentialsValid = () => {
 		if (userName === '') {
-			setErrorMessage(constants.errors.userNameEmpty);
+			setErrorMessage(errors.userNameEmpty);
 			return false;
 		}
 
 		if (password === '') {
-			setErrorMessage(constants.errors.passwordEmpty);
+			setErrorMessage(errors.passwordEmpty);
 			return false;
 		}
 
@@ -99,17 +106,18 @@ export default function LoginForm() {
 			})
 			.catch(() => {
 				clearCsrfCookie();
-				setErrorMessage(constants.errors.loginFailed);
+				setErrorMessage(errors.loginFailed);
 			});
 	};
+	// #endregion
 
 	return (
-		<LoginFormContainer data-testid='login-form'>
+		<LoginFormContainer data-testid={testIds.loginForm}>
 			<If condition={authCookie}>
 				<Navigate to={routes.mocks.path} replace={true} />
 			</If>
 
-			<Title>Login to mimock</Title>
+			<Title>{labels.loginFormTitle}</Title>
 			<Underline />
 
 			<InputWrapper
@@ -119,12 +127,10 @@ export default function LoginForm() {
 					authenticateUser();
 				}}
 			>
-				<Label data-testid='login-username-label'>
-					{constants.labels.userName}
-				</Label>
+				<Label data-testid={testIds.userNameLabel}>{labels.userName}</Label>
 				<UserNameField
-					data-testid='login-username-input'
-					placeholder={constants.placeholders.userName}
+					data-testid={testIds.userNameInput}
+					placeholder={placeholders.userName}
 					required
 					autoComplete='off'
 					value={userName}
@@ -134,13 +140,11 @@ export default function LoginForm() {
 					}}
 				/>
 
-				<Label data-testid='login-password-label'>
-					{constants.labels.password}
-				</Label>
+				<Label data-testid={testIds.passwordLabel}>{labels.password}</Label>
 				<PasswordField
-					data-testid='login-password-input'
+					data-testid={testIds.passwordInput}
 					type='password'
-					placeholder={constants.placeholders.password}
+					placeholder={placeholders.password}
 					required
 					autoComplete='off'
 					value={password}
@@ -151,9 +155,9 @@ export default function LoginForm() {
 				/>
 
 				<SubmitButton
-					dataTestid='login-submit'
+					dataTestid={testIds.loginBtn}
 					background='bg-teal-500'
-					label='Login'
+					label={labels.loginBtn}
 					color='text-white'
 					width='w-full'
 					additionalStyles='mt-5'
@@ -161,8 +165,12 @@ export default function LoginForm() {
 				/>
 			</InputWrapper>
 			<If condition={errorMessage}>
-				<ErrorLabel data-testid='login-error-label'>{errorMessage}</ErrorLabel>
+				<ErrorLabel data-testid={testIds.loginFailedLabel}>
+					{errorMessage}
+				</ErrorLabel>
 			</If>
 		</LoginFormContainer>
 	);
 }
+
+export default LoginForm;

@@ -14,10 +14,11 @@ function ContentArea({
 }) {
 	// #region Defaults
 	const isFilterCleared = httpMethodFilter === '';
+	const { testIds } = constants;
 	// #endregion
 
 	return (
-		<ContentAreaContainer data-testid={constants.testIds.contentAreaContainer}>
+		<ContentAreaContainer data-testid={testIds.contentAreaContainer}>
 			<If condition={showSidebarSection}>
 				<Sidebar
 					handleOnBadgeClick={handleOnBadgeClick}

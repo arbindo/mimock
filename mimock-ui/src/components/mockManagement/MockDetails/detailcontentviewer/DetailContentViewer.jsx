@@ -18,6 +18,10 @@ import {
 import { constants } from './constants';
 
 function DetailContentViewer({ mock }) {
+	// #region Defaults
+	const { testIds, ids, labels, additionalStyles } = constants;
+	// #endregion
+
 	// #region States
 	const [showGeneralPane, setShowGeneralPane] = useState(true);
 	const [showRequestPane, setShowRequestPane] = useState(false);
@@ -51,54 +55,54 @@ function DetailContentViewer({ mock }) {
 
 	return (
 		<DetailContentViewerContainer
-			data-testid={constants.testIds.detailContentViewerSection}
+			data-testid={testIds.detailContentViewerSection}
 		>
 			<NavTabsContainer>
 				<NavTab>
 					<NavTabLink
-						id={constants.ids.generalPane}
-						data-testid={constants.testIds.generalPane}
+						id={ids.generalPane}
+						data-testid={testIds.generalPane}
 						className={
 							showGeneralPane
-								? constants.additionalStyles.active
-								: constants.additionalStyles.normal
+								? additionalStyles.active
+								: additionalStyles.normal
 						}
 						onClick={handleTabHeaderClick}
 					>
-						<FaInfoCircle /> {constants.labels.generalPane}
+						<FaInfoCircle /> {labels.generalPane}
 					</NavTabLink>
 				</NavTab>
 				<NavTab>
 					<NavTabLink
-						id={constants.ids.requestPane}
-						data-testid={constants.testIds.requestPane}
+						id={ids.requestPane}
+						data-testid={testIds.requestPane}
 						className={
 							showRequestPane
-								? constants.additionalStyles.active
-								: constants.additionalStyles.normal
+								? additionalStyles.active
+								: additionalStyles.normal
 						}
 						onClick={handleTabHeaderClick}
 					>
-						<FaArrowCircleUp /> {constants.labels.requestPane}
+						<FaArrowCircleUp /> {labels.requestPane}
 					</NavTabLink>
 				</NavTab>
 				<NavTab>
 					<NavTabLink
-						id={constants.ids.responsePane}
-						data-testid={constants.testIds.responsePane}
+						id={ids.responsePane}
+						data-testid={testIds.responsePane}
 						className={
 							showResponsePane
-								? constants.additionalStyles.active
-								: constants.additionalStyles.normal
+								? additionalStyles.active
+								: additionalStyles.normal
 						}
 						onClick={handleTabHeaderClick}
 					>
 						<FaArrowCircleDown />
-						{constants.labels.responsePane}
+						{labels.responsePane}
 					</NavTabLink>
 				</NavTab>
 			</NavTabsContainer>
-			<NavTabContent data-testid={constants.testIds.tabContentContainer}>
+			<NavTabContent data-testid={testIds.tabContentContainer}>
 				<If condition={showGeneralPane}>
 					<GeneralPane
 						uniqueId={mock.id}

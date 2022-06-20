@@ -33,6 +33,7 @@ import MockCard from './MockCard';
 function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 	// #region Defaults
 	const cookies = new Cookies();
+	const { label, testIds, errors, color } = constants;
 	// #endregion
 
 	// #region States
@@ -106,22 +107,22 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 	// #endregion
 
 	return (
-		<ListContainer data-testid={constants.testIds.listContainer}>
+		<ListContainer data-testid={testIds.listContainer}>
 			<BarLoader
-				data-testid={constants.testIds.listMocksLoader}
+				data-testid={testIds.listMocksLoader}
 				loading={loading}
-				color={constants.color.listMocksLoader}
+				color={color.listMocksLoader}
 				size={1000}
 				css={LoaderStyle}
 			/>
 			<Choose>
 				<When condition={error.status}>
-					<MessageWrapper data-testid={constants.testIds.listErrorContainer}>
+					<MessageWrapper data-testid={testIds.listErrorContainer}>
 						<MessageImageIcon
-							data-testid={constants.testIds.listErrorImage}
+							data-testid={testIds.listErrorImage}
 							src={ErrorState}
 						/>
-						<MessageSpan data-testid={constants.testIds.listErrorMessage}>
+						<MessageSpan data-testid={testIds.listErrorMessage}>
 							{error.message}
 						</MessageSpan>
 					</MessageWrapper>
@@ -129,30 +130,28 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 				<When condition={!error.status && !loading}>
 					<ListTitleSpan>
 						<If condition={isFilter}>
-							<FaFilter data-testid={constants.testIds.listFilterIcon} />
+							<FaFilter data-testid={testIds.listFilterIcon} />
 						</If>
-						<ListTitle data-testid={constants.testIds.listTitle}>
-							{listTitle}
-						</ListTitle>
+						<ListTitle data-testid={testIds.listTitle}>{listTitle}</ListTitle>
 						<If condition={isFilter}>
-							<ListClearFilter data-testid={constants.testIds.listClearFilter}>
-								<MdCancel data-testid={constants.testIds.listClearFilterIcon} />
+							<ListClearFilter data-testid={testIds.listClearFilter}>
+								<MdCancel data-testid={testIds.listClearFilterIcon} />
 								<ListClearFilterText
-									data-testid={constants.testIds.listClearFilterText}
+									data-testid={testIds.listClearFilterText}
 									onClick={handleOnClearFilterClickHandler}
 								>
-									{constants.label.clearFilter}
+									{label.clearFilter}
 								</ListClearFilterText>
 							</ListClearFilter>
 						</If>
 					</ListTitleSpan>
-					<FilterTagsSection data-testid={constants.testIds.filterTagsSection}>
+					<FilterTagsSection data-testid={testIds.filterTagsSection}>
 						{filterTags.length > 0 && (
 							<>
-								<p>{constants.label.filterTagsSection}</p>
+								<p>{label.filterTagsSection}</p>
 								{filterTags.map((filterTag, index) => (
 									<FilterTagSpan
-										data-testid={`${constants.testIds.filterTag}${index}`}
+										data-testid={`${testIds.filterTag}${index}`}
 										key={`${filterTag}_tag_${index}`}
 									>
 										{filterTag}
@@ -164,9 +163,9 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 					<Choose>
 						<When condition={mocksList.length > 0}>
 							{showWarningBannerInBin && (
-								<WarningBanner data-testid={constants.testIds.warningBanner}>
+								<WarningBanner data-testid={testIds.warningBanner}>
 									{' '}
-									<MdWarning /> {constants.label.warningBanner}
+									<MdWarning /> {label.warningBanner}
 								</WarningBanner>
 							)}
 							{mocksList.map((mock, index) => {
@@ -176,7 +175,7 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 											innerRef={lastItem}
 											key={mock.id}
 											id={mock.id}
-											dataTestId={`${constants.testIds.mockCard}${mock.id}`}
+											dataTestId={`${testIds.mockCard}${mock.id}`}
 											mockName={mock.mockName}
 											description={mock.description}
 											httpMethod={mock.httpMethod}
@@ -188,7 +187,7 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 										<MockCard
 											key={mock.id}
 											id={mock.id}
-											dataTestId={`${constants.testIds.mockCard}${mock.id}`}
+											dataTestId={`${testIds.mockCard}${mock.id}`}
 											mockName={mock.mockName}
 											description={mock.description}
 											httpMethod={mock.httpMethod}
@@ -199,15 +198,13 @@ function List({ mocksListView, httpMethodFilter, handleOnClearFilterClick }) {
 							})}
 						</When>
 						<When condition={mocksList.length == 0}>
-							<MessageWrapper
-								data-testid={constants.testIds.listEmptyContainer}
-							>
+							<MessageWrapper data-testid={testIds.listEmptyContainer}>
 								<MessageImageIcon
-									data-testid={constants.testIds.listEmptyImage}
+									data-testid={testIds.listEmptyImage}
 									src={EmptyState}
 								/>
-								<MessageSpan data-testid={constants.testIds.listEmptyMessage}>
-									{constants.errors.emptyState}
+								<MessageSpan data-testid={testIds.listEmptyMessage}>
+									{errors.emptyState}
 								</MessageSpan>
 							</MessageWrapper>
 						</When>
