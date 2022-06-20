@@ -63,6 +63,7 @@ function Sidebar({
 	const csrfCookieRef = useRef('');
 	const badgeRef = useRef([]);
 	const sortSelectorRef = useRef();
+	const sortIconsWrapperRef = useRef();
 
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
@@ -87,6 +88,9 @@ function Sidebar({
 	useEffect(() => {
 		if (isSortColumnCleared) {
 			sortSelectorRef.current.value = '';
+			sortIconsWrapperRef.current.classList.add('hidden');
+		} else {
+			sortIconsWrapperRef.current.classList.remove('hidden');
 		}
 	}, [isSortColumnCleared]);
 	// #endregion
@@ -240,7 +244,7 @@ function Sidebar({
 						className={'inline-flex justify-between'}
 					>
 						{label.sortSelect}
-						<SortIconsWrapper>
+						<SortIconsWrapper ref={sortIconsWrapperRef}>
 							<SortIcons onClick={handleOnChangeSortDirection} name='asc'>
 								<FaSortAmountUp /> ASC
 							</SortIcons>
