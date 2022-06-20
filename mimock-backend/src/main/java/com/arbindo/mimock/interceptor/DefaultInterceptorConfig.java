@@ -24,6 +24,8 @@ public class DefaultInterceptorConfig implements WebMvcConfigurer {
                 .excludePathPatterns(UrlConfig.SWAGGER_UI_HTML_PATH)
                 .excludePathPatterns(UrlConfig.API_PATH + UrlConfig.VERSION + "/**")
                 .excludePathPatterns("/")
+                .excludePathPatterns(UrlConfig.API_PATH + "/manage/monitoring")
+                .excludePathPatterns(UrlConfig.API_PATH + "/manage/monitoring/*")
                 .excludePathPatterns("/*.js",
                         "/*.css",
                         "/*.html",
