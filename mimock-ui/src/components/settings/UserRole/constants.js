@@ -1,0 +1,12 @@
+export const constants = {
+	testIds: {
+		userRoleContainer: 'user-role-container',
+		userRoleHeader: 'user-role-header',
+		rolePill: 'role-pill-',
+		roleInfoMessage: 'role-info-message',
+	},
+	label: {
+		roleHeader: 'Current Role',
+		roleMessage: 'Reach out to your ADMIN to update your role',
+	},
+};

@@ -14,6 +14,7 @@ import EditUser from './components/users/UserManagement/EditUser';
 import Logout from './components/common/Logout';
 import { AddMock, Detail } from './components/mockManagement';
 import AddUser from './components/users/UserManagement/AddUser';
+import Settings from './components/settings';
 
 function AppRoutes() {
 	useAxiosInterceptor();
@@ -55,6 +56,10 @@ function AppRoutes() {
 					<Route
 						path={routes.mocksDetail.path}
 						element={secureRoute(<Detail />)}
+					/>
+					<Route
+						path={routes.settings.path}
+						element={secureRoute(<Settings />)}
 					/>
 					<Route path={routes.logout.path} element={secureRoute(<Logout />)} />
 					{/* Manager Routes */}

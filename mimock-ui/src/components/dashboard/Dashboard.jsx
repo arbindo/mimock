@@ -6,7 +6,7 @@ import {
 } from 'constants/globalConstants';
 import { useRecoilState } from 'recoil';
 import pageNumberAtom from 'atoms/pageNumberAtom';
-import { listPlatformSettings } from 'services/mockManagement/platformSettings.service';
+import { fetchDefaultPlatformSettings } from 'services/mockManagement/fetchDefaultPlatformSettings.service';
 import ContentArea from './ContentArea';
 import Titlebar from './Titlebar';
 import Toolbar from './Toolbar';
@@ -36,17 +36,15 @@ function Dashboard() {
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
 		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
-		async function callPlatformSettingsService() {
-			const response = await listPlatformSettings(authCookieRef);
-			if (response != null && response.status == 200) {
-				return response.data[0];
-			}
-			return null;
+		async function callFetchDefaultPlatformSettings() {
+			const response = await fetchDefaultPlatformSettings(authCookieRef);
+			return response;
 		}
 		// call platform settings service and set the values in the cookies
-		callPlatformSettingsService()
+		callFetchDefaultPlatformSettings()
 			.then((res) => {
-				cookies.set(globalConstants.PLATFORM_SETTINGS_COOKIE_NAME, res);
+				// just call this API to fetch default settings and store in the cookies
+				console.log(res);
 			})
 			.catch((err) => console.log(err));
 		return () => {

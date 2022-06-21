@@ -39,8 +39,12 @@ public class PlatformSettingsServiceImpl implements PlatformSettingsService {
         // Now we update single default entry. In the future, this service will be extensible for each user
         try {
             PlatformSettings defaultPlatformSettings = platformSettingsRepository.findAll().get(0);
-            defaultPlatformSettings.setIsExportImportEnabled(request.getIsExportImportEnabled());
-            defaultPlatformSettings.setIsFlushBinCronEnabled(request.getIsFlushBinCronEnabled());
+            if(ValidationUtil.isArgNotNull(request.getIsExportImportEnabled())){
+                defaultPlatformSettings.setIsExportImportEnabled(request.getIsExportImportEnabled());
+            }
+            if(ValidationUtil.isArgNotNull(request.getIsFlushBinCronEnabled())){
+                defaultPlatformSettings.setIsFlushBinCronEnabled(request.getIsFlushBinCronEnabled());
+            }
             defaultPlatformSettings.setUpdatedAt(ZonedDateTime.now());
             platformSettingsRepository.save(defaultPlatformSettings);
             return defaultPlatformSettings;
