@@ -7,11 +7,15 @@ import PlatformSettings from './PlatformSettings';
 function Settings() {
 	const [username, setUsername] = useState('');
 	const [userrole, setUserrole] = useState('');
+	const [isReadOnlyUser, setIsReadOnlyUser] = useState(false);
 
 	useEffect(() => {
 		try {
 			const userDetails = getUserDetails();
 			const { userName, userRole } = userDetails;
+			const isReadOnlyUser =
+				userDetails && userDetails.userRole === 'ROLE_VIEWER';
+			setIsReadOnlyUser(isReadOnlyUser);
 			setUsername(userName);
 			setUserrole(userRole.split('_')[1]);
 		} catch (e) {
@@ -23,7 +27,9 @@ function Settings() {
 		<>
 			<Header username={username} />
 			<UserRole role={userrole}></UserRole>
-			<PlatformSettings />
+			<If condition={!isReadOnlyUser}>
+				<PlatformSettings />
+			</If>
 		</>
 	);
 }
