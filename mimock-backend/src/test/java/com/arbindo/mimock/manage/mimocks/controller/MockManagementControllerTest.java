@@ -5,6 +5,7 @@ import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
+import com.arbindo.mimock.manage.mimocks.enums.ExpectedResponseType;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
@@ -147,7 +148,7 @@ class MockManagementControllerTest {
         Page<ListMocksResponse> expectedListMocksResponse = getListMocksResponseInPageableFormat(expectedMocksFromDB);
         String expectedResponseBody = convertObjectToJsonString(expectedListMocksResponse);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(), any()))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(), any(), any()))
                 .thenReturn(expectedMocksFromDB);
 
         // Act
@@ -168,7 +169,7 @@ class MockManagementControllerTest {
         Page<Mock> expectedMocks = new PageImpl<>(new ArrayList<>());
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString()))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), any(ExpectedResponseType.class)))
                 .thenReturn(expectedMocks);
 
         // Act
@@ -192,7 +193,7 @@ class MockManagementControllerTest {
         Page<ListMocksResponse> expectedListMocksResponse = getListMocksResponseInPageableFormat(expectedMocksFromDB);
         String expectedResponseBody = convertObjectToJsonString(expectedListMocksResponse);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString()))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), any(ExpectedResponseType.class)))
                 .thenReturn(expectedMocksFromDB);
 
         // Act
@@ -212,7 +213,7 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_PAGEABLE;
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString()))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), any(ExpectedResponseType.class)))
                 .thenReturn(null);
 
         // Act

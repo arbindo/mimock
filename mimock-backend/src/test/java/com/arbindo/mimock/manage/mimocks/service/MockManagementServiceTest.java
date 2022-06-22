@@ -3,6 +3,7 @@ package com.arbindo.mimock.manage.mimocks.service;
 import com.arbindo.mimock.audit.AuditorService;
 import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.*;
+import com.arbindo.mimock.manage.mimocks.enums.ExpectedResponseType;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
@@ -124,7 +125,7 @@ class MockManagementServiceTest {
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null, ExpectedResponseType.EMPTY_RESPONSE);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -144,7 +145,7 @@ class MockManagementServiceTest {
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(null);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null, ExpectedResponseType.EMPTY_RESPONSE);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -164,7 +165,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findAll(any(Pageable.class))).thenReturn(pageable);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), null, null);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), null, null, null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -187,7 +188,7 @@ class MockManagementServiceTest {
         lenient().when(mockParamBuilder.findHttpMethodFromQueryString(anyString())).thenReturn(httpMethod);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET");
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET", ExpectedResponseType.EMPTY_RESPONSE);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -207,7 +208,7 @@ class MockManagementServiceTest {
         lenient().when(mockParamBuilder.findHttpMethodFromQueryString(anyString())).thenReturn(null);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET");
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET", ExpectedResponseType.EMPTY_RESPONSE);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -227,7 +228,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findAll(any(Pageable.class))).thenReturn(pageable);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), null, null);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), null, null, null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -253,7 +254,7 @@ class MockManagementServiceTest {
         lenient().when(mockParamBuilder.findHttpMethodFromQueryString(anyString())).thenReturn(httpMethod);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET");
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET", ExpectedResponseType.EMPTY_RESPONSE);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());

@@ -35,6 +35,7 @@ function List({
 	httpMethodFilter,
 	sortColumn,
 	sortDirection,
+	expectedResponseType,
 	handleOnClearFilterClick,
 }) {
 	// #region Defaults
@@ -59,7 +60,8 @@ function List({
 			pageNumber,
 			httpMethodFilter,
 			sortColumn,
-			sortDirection
+			sortDirection,
+			expectedResponseType
 		);
 	useEffect(() => {
 		setFilterTags(() => {
@@ -240,6 +242,7 @@ List.propTypes = {
 	httpMethodFilter: PropTypes.string.isRequired,
 	sortColumn: PropTypes.string.isRequired,
 	sortDirection: PropTypes.string.isRequired,
+	expectedResponseType: PropTypes.string.isRequired,
 	handleOnClearFilterClick: PropTypes.func.isRequired,
 };
 

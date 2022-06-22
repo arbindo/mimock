@@ -3,6 +3,7 @@ package com.arbindo.mimock.manage.mimocks.service;
 import com.arbindo.mimock.audit.AuditorService;
 import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.*;
+import com.arbindo.mimock.manage.mimocks.enums.ExpectedResponseType;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
@@ -60,7 +61,8 @@ public class MockManagementServiceImpl implements MockManagementService {
     }
 
     @Override
-    public Page<Mock> getMocksAsPageable(Pageable pageable, Status status, String httpMethod) {
+    public Page<Mock> getMocksAsPageable(Pageable pageable, Status status,
+                                         String httpMethod, ExpectedResponseType expectedResponseType) {
         HttpMethod httpMethodFromQueryString = null;
         EntityStatus entityStatus = null;
         if(ValidationUtil.isArgNotNull(httpMethod)){

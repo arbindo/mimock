@@ -23,6 +23,7 @@ function Dashboard() {
 	const [httpMethodFilter, setHttpMethodFilter] = useState('');
 	const [sortColumn, setSortColumn] = useState('');
 	const [sortDirection, setSortDirection] = useState('');
+	const [expectedResponseType, setExpectedResponseType] = useState('');
 	// #endregion
 
 	// #region Recoil States
@@ -80,6 +81,8 @@ function Dashboard() {
 		setSortColumn('');
 		// reset sortDirection to ''
 		setSortDirection('');
+		// reset expectResponseType to ''
+		setExpectedResponseType('');
 	};
 
 	const handleOnBadgeClick = (httpMethod) => {
@@ -107,6 +110,12 @@ function Dashboard() {
 		setSortDirection(sortOrder);
 	};
 
+	const handleOnChangeResponseTypeFilter = (responseTypeFilter) => {
+		// set page number back to 0 (since view is changed)
+		setPageNumber(0);
+		setExpectedResponseType(responseTypeFilter);
+	};
+
 	// #endregion
 
 	return (
@@ -123,10 +132,12 @@ function Dashboard() {
 				httpMethodFilter={httpMethodFilter}
 				sortColumn={sortColumn}
 				sortDirection={sortDirection}
+				expectedResponseType={expectedResponseType}
 				handleOnClearFilterClick={handleOnClearFilterClick}
 				handleOnBadgeClick={handleOnBadgeClick}
 				handleOnChangeSortSelector={handleOnChangeSortSelector}
 				handleOnClickSortDirection={handleOnClickSortDirection}
+				handleOnChangeResponseTypeFilter={handleOnChangeResponseTypeFilter}
 			/>
 		</>
 	);

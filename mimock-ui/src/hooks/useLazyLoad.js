@@ -11,7 +11,8 @@ function useLazyLoad(
 	pageNumber,
 	httpMethodFilter,
 	sortColumn,
-	sortDirection
+	sortDirection,
+	expectedResponseType
 ) {
 	const cookies = new Cookies();
 	const authCookieRef = useRef('');
@@ -41,15 +42,26 @@ function useLazyLoad(
 		httpMethodFilter !== undefined && httpMethodFilter !== '';
 	const isSortColumnSelected = sortColumn !== undefined && sortColumn !== '';
 	const isDefaultView = mocksListView === DEFAULT;
+	const isExpectedResponseTypeSelected =
+		expectedResponseType !== undefined && expectedResponseType !== '';
 
 	useEffect(() => {
 		setMocksList([]);
-	}, [mocksListView, httpMethodFilter, sortColumn, sortDirection]);
+	}, [
+		mocksListView,
+		httpMethodFilter,
+		sortColumn,
+		sortDirection,
+		expectedResponseType,
+	]);
 
 	useEffect(() => {
 		setLoading(true);
 		setIsFilter(
-			isHttpMethodFilterExists || isSortColumnSelected || !isDefaultView
+			isHttpMethodFilterExists ||
+				isSortColumnSelected ||
+				isExpectedResponseTypeSelected ||
+				!isDefaultView
 		);
 
 		async function callMockService(
@@ -57,6 +69,7 @@ function useLazyLoad(
 			httpMethodFilter,
 			sortColumn,
 			sortDirection,
+			expectedResponseType,
 			authCookieRef,
 			pageNumber
 		) {
@@ -88,14 +101,20 @@ function useLazyLoad(
 				status: 0,
 				isLast: false,
 			};
-			const sortDirectionQueryParam = sortDirection !== undefined && sortDirection !== '' ? `,${sortDirection}` : ',desc';
-			const sortColumnWithDirection = isSortColumnSelected ? `${sortColumn}${sortDirectionQueryParam}` : '';
+			const sortDirectionQueryParam =
+				sortDirection !== undefined && sortDirection !== ''
+					? `,${sortDirection}`
+					: ',desc';
+			const sortColumnWithDirection = isSortColumnSelected
+				? `${sortColumn}${sortDirectionQueryParam}`
+				: '';
 			const listMocksResponse = await listMocksWithMultipleFilters(
 				authCookieRef,
 				pageNumber,
 				entityStatusString,
 				httpMethodFilter,
-				sortColumnWithDirection
+				sortColumnWithDirection,
+				expectedResponseType
 			);
 			mocksListResponse.data = listMocksResponse.data.content;
 			mocksListResponse.status = listMocksResponse.status;
@@ -117,6 +136,7 @@ function useLazyLoad(
 			httpMethodFilter,
 			sortColumn,
 			sortDirection,
+			expectedResponseType,
 			authCookieRef,
 			pageNumber
 		)
@@ -139,7 +159,14 @@ function useLazyLoad(
 					message: mockManagementConstants.errors.serverError,
 				});
 			});
-	}, [mocksListView, pageNumber, httpMethodFilter, sortColumn, sortDirection]);
+	}, [
+		mocksListView,
+		pageNumber,
+		httpMethodFilter,
+		sortColumn,
+		sortDirection,
+		expectedResponseType,
+	]);
 
 	return { mocksList, listTitle, isFilter, loading, error, hasMore };
 }

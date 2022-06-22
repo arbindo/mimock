@@ -4,6 +4,7 @@ import com.arbindo.mimock.common.constants.Messages;
 import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
 import com.arbindo.mimock.entities.Mock;
+import com.arbindo.mimock.manage.mimocks.enums.ExpectedResponseType;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.mapper.RequestModelMapper;
 import com.arbindo.mimock.manage.mimocks.mapper.ResponseModelMapper;
@@ -82,8 +83,14 @@ public class MockManagementController {
     @GetMapping(UrlConfig.MOCKS_PAGEABLE)
     public ResponseEntity<Page<ListMocksResponse>> getMocksAsPageable(@SortDefault(sort = "createdAt",
             direction = Sort.Direction.DESC) Pageable pageable, @RequestParam(required = false) Status status,
-            @RequestParam(required = false) String httpMethod) {
-        Page<Mock> mockPageable = mockManagementService.getMocksAsPageable(pageable, status, httpMethod);
+            @RequestParam(required = false) String httpMethod, @RequestParam(required = false) String expectedResponseType) {
+        ExpectedResponseType responseType;
+        try {
+            responseType = expectedResponseType != null ? ExpectedResponseType.valueOf(expectedResponseType) : ExpectedResponseType.EMPTY_RESPONSE;
+        } catch (Exception e){
+            responseType = ExpectedResponseType.EMPTY_RESPONSE;
+        }
+        Page<Mock> mockPageable = mockManagementService.getMocksAsPageable(pageable, status, httpMethod, responseType);
         if(mockPageable == null){
             return ResponseEntity.ok(null);
         }

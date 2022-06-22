@@ -45,7 +45,11 @@ export const constants = {
 		{ label: 'Time Created', value: 'createdAt' },
 		{ label: 'Last Modified', value: 'updatedAt' },
 	],
-	responseTypeItems: ['Textual Response', 'Binary Response', 'No Response'],
+	responseTypeItems: [
+		{ label: 'Textual Response', value: 'TEXTUAL_RESPONSE' },
+		{ label: 'Binary Response', value: 'BINARY_RESPONSE' },
+		{ label: 'No Response', value: 'EMPTY_RESPONSE' },
+	],
 	badgeFilterItems: [
 		{
 			httpMethod: 'GET',

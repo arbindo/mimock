@@ -41,6 +41,7 @@ function Sidebar({
 	isSortColumnCleared,
 	handleOnChangeSortSelector,
 	handleOnClickSortDirection,
+	handleOnChangeResponseTypeFilter,
 }) {
 	// #region Defaults
 	const cookies = new Cookies();
@@ -96,8 +97,9 @@ function Sidebar({
 	// #endregion
 
 	// #region Handler functions
-	const handleOnchange = (e) => {
-		console.log(e);
+	const handleOnChangeResponseTypeRadio = (e) => {
+		console.log(e.target.value);
+		handleOnChangeResponseTypeFilter(e.target.value);
 	};
 
 	const handleHttpMethodBadgeClick = (key, item) => {
@@ -226,14 +228,14 @@ function Sidebar({
 						<FormCheckWrapper key={key}>
 							<RadioComponent
 								type='radio'
-								value=''
-								onChange={handleOnchange}
-								name={`${name.responseType}${key}`}
+								value={item.value}
+								onChange={handleOnChangeResponseTypeRadio}
+								name={`${name.responseType}`}
 								data-testid={`${testIds.responseType}${key}`}
 								id={`${ids.responseType}${key}`}
 							></RadioComponent>
 							<RadioOptionText htmlFor={`${ids.responseType}${key}`}>
-								{item}
+								{item.label}
 							</RadioOptionText>
 						</FormCheckWrapper>
 					))}
@@ -281,6 +283,7 @@ Sidebar.propTypes = {
 	isSortColumnCleared: PropTypes.bool.isRequired,
 	handleOnChangeSortSelector: PropTypes.func.isRequired,
 	handleOnClickSortDirection: PropTypes.func.isRequired,
+	handleOnChangeResponseTypeFilter: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

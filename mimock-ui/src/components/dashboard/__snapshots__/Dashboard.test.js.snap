@@ -357,9 +357,9 @@ exports[`Dashboard should render all dashboard components 1`] = `
               class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
               data-testid="response_type_0"
               id="response_type_0"
-              name="response-type_0"
+              name="response-type_"
               type="radio"
-              value=""
+              value="TEXTUAL_RESPONSE"
             />
             <label
               class="form-check-label inline-block text-xs text-gray-400"
@@ -375,9 +375,9 @@ exports[`Dashboard should render all dashboard components 1`] = `
               class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
               data-testid="response_type_1"
               id="response_type_1"
-              name="response-type_1"
+              name="response-type_"
               type="radio"
-              value=""
+              value="BINARY_RESPONSE"
             />
             <label
               class="form-check-label inline-block text-xs text-gray-400"
@@ -393,9 +393,9 @@ exports[`Dashboard should render all dashboard components 1`] = `
               class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
               data-testid="response_type_2"
               id="response_type_2"
-              name="response-type_2"
+              name="response-type_"
               type="radio"
-              value=""
+              value="EMPTY_RESPONSE"
             />
             <label
               class="form-check-label inline-block text-xs text-gray-400"
