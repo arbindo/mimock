@@ -88,9 +88,8 @@ function useLazyLoad(
 				status: 0,
 				isLast: false,
 			};
-			const sortDirectionQueryParam =
-				sortDirection !== undefined ? `,${sortDirection}` : ',desc';
-			const sortColumnWithDirection = `${sortColumn}${sortDirectionQueryParam}`;
+			const sortDirectionQueryParam = sortDirection !== undefined && sortDirection !== '' ? `,${sortDirection}` : ',desc';
+			const sortColumnWithDirection = isSortColumnSelected ? `${sortColumn}${sortDirectionQueryParam}` : '';
 			const listMocksResponse = await listMocksWithMultipleFilters(
 				authCookieRef,
 				pageNumber,
