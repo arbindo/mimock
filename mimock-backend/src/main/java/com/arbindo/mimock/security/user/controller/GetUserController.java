@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -74,11 +75,18 @@ public class GetUserController {
             }
     )
     @GetMapping(path = UrlConfig.GET_USER_BY_ID, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<GetUserResponse> getUserById(@RequestParam(name = "userId") String userId) {
-        log.log(Level.INFO, "Getting single user with ID : {}", userId);
+    public ResponseEntity<GetUserResponse> getUserInfo(@RequestParam(name = "userId") Optional<String> userId,
+                                                       @RequestParam(name = "userName") Optional<String> userName) {
 
         try {
-            UserInfo user = userService.getUserById(UUID.fromString(userId));
+            UserInfo user = null;
+            if (userId.isPresent()) {
+                log.log(Level.INFO, "Getting single user with ID : {}", userId.get());
+                user = userService.getUserById(UUID.fromString(userId.get()));
+            } else if (userName.isPresent()) {
+                log.log(Level.INFO, "Getting single user with userName : {}", userName.get());
+                user = userService.getUserByUserName(userName.get());
+            }
             return ResponseEntity.ok(new GetUserInfoResponse(user));
         } catch (UsernameNotFoundException e) {
             log.log(Level.ERROR, e.getMessage());

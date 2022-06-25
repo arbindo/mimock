@@ -146,4 +146,52 @@ class GetUserServiceTest {
 
         assertThrows(UsernameNotFoundException.class, () -> userService.getUserById(any(UUID.class)));
     }
+
+    @Test
+    void shouldReturnUserInfo_WhenUsersWithTheUserNameExistInDB() {
+        UserRole userRole = UserRole.builder()
+                .roleName("ADMIN")
+                .build();
+
+        User user = User.builder()
+                .id(UUID.randomUUID())
+                .userName("test_1")
+                .password("$2a$12$xQ6KO0MicjoJcBGBQfE62e7JuoyAB2JOOE578suh0QXLzx091K3Ca")
+                .userRoles(userRole)
+                .isUserBlocked(false)
+                .isUserActive(true)
+                .build();
+
+        lenient().when(userRepository.findUserByUserName(user.getUserName())).thenReturn(Optional.of(user));
+
+        UserInfo expectedUserInfo = UserInfo.builder()
+                .userId(user.getId().toString())
+                .userName(user.getUserName())
+                .name(user.getName())
+                .isUserActive(user.getIsUserActive())
+                .isUserLocked(user.getIsUserBlocked())
+                .isUserCurrentlyLoggedIn(user.getIsSessionActive())
+                .userRole("ADMIN")
+                .userCreatedAt(user.getCreatedAt())
+                .isUserDeleted(false)
+                .build();
+
+        UserInfo actualUserInfo = userService.getUserByUserName(user.getUserName());
+
+        assertEquals(expectedUserInfo.getUserId(), actualUserInfo.getUserId());
+        assertEquals(expectedUserInfo.getUserName(), actualUserInfo.getUserName());
+        assertEquals(expectedUserInfo.getName(), actualUserInfo.getName());
+        assertEquals(expectedUserInfo.getIsUserActive(), actualUserInfo.getIsUserActive());
+        assertEquals(expectedUserInfo.getUserRole(), actualUserInfo.getUserRole());
+        assertFalse(actualUserInfo.getIsUserDeleted());
+        assertFalse(actualUserInfo.getIsUserLocked());
+        assertTrue(actualUserInfo.getIsUserActive());
+    }
+
+    @Test
+    void shouldThrowUserNameNotFoundException_WhenUsersWithTheUserNameDoesNotExistInDB() {
+        lenient().when(userRepository.findByUserName("test_1")).thenReturn(Optional.empty());
+
+        assertThrows(UsernameNotFoundException.class, () -> userService.getUserByUserName(any(String.class)));
+    }
 }

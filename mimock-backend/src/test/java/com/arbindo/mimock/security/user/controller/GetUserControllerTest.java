@@ -181,6 +181,55 @@ class GetUserControllerTest {
     }
 
     @Test
+    void shouldReturnUserInfoWithStatusOK_WhenUserNameExists() throws Exception {
+        UUID userId = UUID.randomUUID();
+        String route = UrlConfig.USER_PATH + UrlConfig.GET_USER_BY_ID + "?userName=admin";
+        String expectedContentType = "application/json";
+        UserInfo userInfo = UserInfo.builder()
+                .userId(userId.toString())
+                .userName("admin")
+                .name("test")
+                .isUserActive(true)
+                .isUserLocked(false)
+                .isUserCurrentlyLoggedIn(false)
+                .userRole("ADMIN")
+                .userCreatedAt(ZonedDateTime.now())
+                .isUserDeleted(false)
+                .build();
+        GetUserInfoResponse response = new GetUserInfoResponse(userInfo);
+
+        String expectedResponseBody = convertObjectToJsonString(response);
+
+        lenient().when(mockUserService.getUserByUserName("admin")).thenReturn(userInfo);
+
+        MvcResult result = mockMvc.perform(get(route))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        assertEquals(expectedResponseBody, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void shouldReturnStatusNotFound_WhenUserNameDoesNotExist() throws Exception {
+        String route = UrlConfig.USER_PATH + UrlConfig.GET_USER_BY_ID + "?userName=admin";
+        String expectedContentType = "application/json";
+
+        String expectedErrorMessage = "user not found";
+
+        lenient().when(mockUserService.getUserByUserName("admin")).thenThrow(new UsernameNotFoundException(expectedErrorMessage));
+
+        MvcResult result = mockMvc.perform(get(route))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        Map<String, Object> responseMap = convertJSONStringToMap(result.getResponse().getContentAsString());
+        assertNotNull(responseMap);
+        assertEquals(expectedErrorMessage, responseMap.get("message"));
+    }
+
+    @Test
     void shouldReturnStatusInternalServerError_WhenAnExceptionOccurs() throws Exception {
         UUID userId = UUID.randomUUID();
         String route = UrlConfig.USER_PATH + UrlConfig.GET_USER_BY_ID + "?userId=" + userId;

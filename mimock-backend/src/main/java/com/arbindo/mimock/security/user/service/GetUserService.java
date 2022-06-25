@@ -51,4 +51,17 @@ public class GetUserService {
         log.log(Level.DEBUG, "Returning info for the user");
         return mapper.mappedUserResponse(user.get());
     }
+
+    public UserInfo getUserByUserName(String userName) {
+        log.log(Level.INFO, "Getting info for user with userName : {}", userName);
+        Optional<User> user = userRepository.findUserByUserName(userName);
+
+        if (user.isEmpty()) {
+            log.log(Level.ERROR, "User with the username - {} does not exist", userName);
+            throw new UsernameNotFoundException("User does not exist");
+        }
+
+        log.log(Level.DEBUG, "Returning info for the user");
+        return mapper.mappedUserResponse(user.get());
+    }
 }
