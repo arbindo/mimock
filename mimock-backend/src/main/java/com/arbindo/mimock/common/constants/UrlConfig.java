@@ -16,7 +16,6 @@ public class UrlConfig {
 
     // role based prefix
     public static final String ADMIN = "/admin";
-    public static final String MANAGE = "/manage";
     // end role based routes
 
     // region SWAGGER

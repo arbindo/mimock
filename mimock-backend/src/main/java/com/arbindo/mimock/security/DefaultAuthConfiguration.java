@@ -46,6 +46,11 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
         CustomHttpAuthorization.authorizeBasedOnHttpMethodAndUserRole(http);
 
         http.authorizeRequests()
+                .antMatchers(adminPath + "/users/update-password").hasAnyRole(
+                        Role.ADMIN.toString(),
+                        Role.MANAGER.toString(),
+                        Role.VIEWER.toString()
+                )
                 .antMatchers(adminPath + wildCardPath).hasRole(Role.ADMIN.toString())
                 .antMatchers(UrlConfig.AUTHENTICATE).permitAll().and().authorizeRequests()
                 .antMatchers(apiPath + wildCardPath).hasAnyRole(

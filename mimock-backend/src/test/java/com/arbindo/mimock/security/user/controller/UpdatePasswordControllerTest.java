@@ -5,6 +5,8 @@ import com.arbindo.mimock.entities.User;
 import com.arbindo.mimock.helpers.general.JsonMapper;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.security.JwtRequestFilter;
+import com.arbindo.mimock.security.UserPermissionValidator;
+import com.arbindo.mimock.security.exceptions.UserNotPermittedException;
 import com.arbindo.mimock.security.user.models.request.UpdatePasswordRequest;
 import com.arbindo.mimock.security.user.service.UpdatePasswordService;
 import org.junit.jupiter.api.Test;
@@ -60,6 +62,9 @@ class UpdatePasswordControllerTest {
     UpdatePasswordService mockUpdatePasswordService;
 
     @MockBean
+    UserPermissionValidator mockUserPermissionValidator;
+
+    @MockBean
     JwtRequestFilter jwtRequestFilter;
 
     private final String route = UrlConfig.UPDATE_PASSWORD;
@@ -77,6 +82,7 @@ class UpdatePasswordControllerTest {
                 .build();
 
         lenient().when(mockUpdatePasswordService.updatePassword(any())).thenReturn(user);
+        lenient().doNothing().when(mockUserPermissionValidator).isUserAllowedToPerformAction(request.getUserName());
 
         mockMvc.perform(
                         put(route)
@@ -95,6 +101,33 @@ class UpdatePasswordControllerTest {
                 .build();
 
         lenient().when(mockUpdatePasswordService.updatePassword(any())).thenThrow(UsernameNotFoundException.class);
+        lenient().doNothing().when(mockUserPermissionValidator).isUserAllowedToPerformAction(request.getUserName());
+
+        mockMvc.perform(
+                        put(route)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .content(Objects.requireNonNull(JsonMapper.convertObjectToJsonString(request)))
+                )
+                .andExpect(status().isInternalServerError())
+                .andReturn();
+    }
+
+    @Test
+    void shouldRespondWithStatusInternalServerError_WhenUserIsNotAllowedToUpdatePassword() throws Exception {
+        UpdatePasswordRequest request = UpdatePasswordRequest.builder()
+                .userName("test_user")
+                .password("$2a$12$AnCFHRMd8.UlVlKUZxVpXeuBRaBd1G3LGJ1GTbQxBxTulzm0NpVmq")
+                .build();
+
+        User user = User.builder()
+                .userName(request.getUserName())
+                .password(request.getPassword())
+                .build();
+
+        lenient().when(mockUpdatePasswordService.updatePassword(any())).thenReturn(user);
+        lenient().doThrow(UserNotPermittedException.class)
+                .when(mockUserPermissionValidator)
+                .isUserAllowedToPerformAction(request.getUserName());
 
         mockMvc.perform(
                         put(route)
