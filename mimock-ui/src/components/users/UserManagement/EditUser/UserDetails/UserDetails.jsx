@@ -26,7 +26,7 @@ export default function UserDetails() {
 	useEffect(() => {
 		const userId = searchParams.get('userId');
 
-		getUserInfo(userId)
+		getUserInfo({ userId })
 			.then((user) => {
 				setUserInfo({
 					userName: user.userName,

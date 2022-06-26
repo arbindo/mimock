@@ -6,6 +6,7 @@ import {
 	SwitchComponentLabel,
 	SwitchComponentStatusActions,
 	StatusLabel,
+	PlatformSettingsOptions,
 } from './PlatformSettings.style';
 import { updatePlatformSettings } from 'services/mockManagement/updatePlatformSettings.service';
 import { Cookies } from 'react-cookie';
@@ -93,42 +94,46 @@ function PlatformSettings() {
 			<PlatformSettingsHeader data-testid={testIds.settingsHeader}>
 				{label.settingsHeader}
 			</PlatformSettingsHeader>
-			<SwitchComponentWrapper>
-				<SwitchComponentLabel>{label.switchComponentBulk}</SwitchComponentLabel>
-				<SwitchComponentStatusActions>
-					<ActivationSwitch
-						data-testid={testIds.switchComponentBulk}
-						classes={{ root, switchBase, checked, thumb, track }}
-						checked={isExportImportMocksEnabled}
-						value={isExportImportMocksEnabled}
-						onChange={(e) => {
-							updateExportImportSettingHandler(e);
-						}}
-					/>
-					<StatusLabel $isActive={isExportImportMocksEnabled}>
-						{isExportImportMocksEnabled ? 'Active' : 'Inactive'}
-					</StatusLabel>
-				</SwitchComponentStatusActions>
-			</SwitchComponentWrapper>
-			<SwitchComponentWrapper>
-				<SwitchComponentLabel>
-					{label.switchComponentAutoflush}
-				</SwitchComponentLabel>
-				<SwitchComponentStatusActions>
-					<ActivationSwitch
-						data-testid={testIds.switchComponentBulk}
-						classes={{ root, switchBase, checked, thumb, track }}
-						checked={isBinCronJobEnabled}
-						value={isBinCronJobEnabled}
-						onChange={(e) => {
-							updateFlushBinCronSettingHandler(e);
-						}}
-					/>
-					<StatusLabel $isActive={isBinCronJobEnabled}>
-						{isBinCronJobEnabled ? 'Active' : 'Inactive'}
-					</StatusLabel>
-				</SwitchComponentStatusActions>
-			</SwitchComponentWrapper>
+			<PlatformSettingsOptions>
+				<SwitchComponentWrapper>
+					<SwitchComponentLabel>
+						{label.switchComponentBulk}
+					</SwitchComponentLabel>
+					<SwitchComponentStatusActions>
+						<ActivationSwitch
+							data-testid={testIds.switchComponentBulk}
+							classes={{ root, switchBase, checked, thumb, track }}
+							checked={isExportImportMocksEnabled}
+							value={isExportImportMocksEnabled}
+							onChange={(e) => {
+								updateExportImportSettingHandler(e);
+							}}
+						/>
+						<StatusLabel $isActive={isExportImportMocksEnabled}>
+							{isExportImportMocksEnabled ? 'Active' : 'Inactive'}
+						</StatusLabel>
+					</SwitchComponentStatusActions>
+				</SwitchComponentWrapper>
+				<SwitchComponentWrapper>
+					<SwitchComponentLabel>
+						{label.switchComponentAutoflush}
+					</SwitchComponentLabel>
+					<SwitchComponentStatusActions>
+						<ActivationSwitch
+							data-testid={testIds.switchComponentBulk}
+							classes={{ root, switchBase, checked, thumb, track }}
+							checked={isBinCronJobEnabled}
+							value={isBinCronJobEnabled}
+							onChange={(e) => {
+								updateFlushBinCronSettingHandler(e);
+							}}
+						/>
+						<StatusLabel $isActive={isBinCronJobEnabled}>
+							{isBinCronJobEnabled ? 'Active' : 'Inactive'}
+						</StatusLabel>
+					</SwitchComponentStatusActions>
+				</SwitchComponentWrapper>
+			</PlatformSettingsOptions>
 		</SettingsContainer>
 	);
 }

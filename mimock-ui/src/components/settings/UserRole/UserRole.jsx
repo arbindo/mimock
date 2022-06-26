@@ -1,15 +1,15 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import RolePill from 'users/UsersTable/UserRow/RolePill';
 import { constants } from './constants';
 import {
 	UserRoleContainer,
-	UserRoleWrapper,
-	PillWrapper,
+	RoleContent,
 	UserRoleHeader,
-	Pill,
-	RoleInfoMessage,
+	InfoMessageContainer,
+	Message,
+	InfoIcon,
 } from './UserRole.style';
-import { FaInfoCircle } from 'react-icons/fa';
 
 function UserRole({ role }) {
 	// #region Defaults
@@ -18,19 +18,21 @@ function UserRole({ role }) {
 
 	return (
 		<UserRoleContainer data-testid={testIds.userRoleContainer}>
-			<UserRoleWrapper>
-				<UserRoleHeader data-testid={testIds.userRoleHeader}>
-					{label.roleHeader}
-				</UserRoleHeader>
-				<PillWrapper>
-					<Pill data-testid={`${testIds.rolePill}${role}`} role={role}>
-						{role}
-					</Pill>
-					<RoleInfoMessage data-testid={testIds.roleInfoMessage} role={role}>
-						<FaInfoCircle /> {label.roleMessage}
-					</RoleInfoMessage>
-				</PillWrapper>
-			</UserRoleWrapper>
+			<UserRoleHeader data-testid={testIds.userRoleHeader}>
+				{label.roleHeader}
+			</UserRoleHeader>
+			<RoleContent>
+				<RolePill role={role} margin='mx-0' />
+				<If condition={role !== 'ADMIN'}>
+					<InfoMessageContainer
+						data-testid={testIds.roleInfoMessage}
+						role={role}
+					>
+						<InfoIcon />
+						<Message>{label.roleMessage}</Message>
+					</InfoMessageContainer>
+				</If>
+			</RoleContent>
 		</UserRoleContainer>
 	);
 }

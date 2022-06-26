@@ -1,47 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserRole should render user role 1`] = `
+exports[`UserRole should render user role pill for ADMIN 1`] = `
 <div>
   <div
-    class="flex flex-col justify-start align-middle w-full px-9 mt-4 mb-8"
+    class="flex my-8"
     data-testid="user-role-container"
   >
     <div
-      class="inline-flex items-center align-middle my-2 justify-start"
+      class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600 mx-20"
+      data-testid="user-role-header"
+    >
+      Current Role
+    </div>
+    <div
+      class="block w-1/2 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
     >
       <div
-        class="font-sans font-bold subpixel-antialiased text-2xl text-gray-600 mx-20"
-        data-testid="user-role-header"
+        class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-teal-400 mx-0"
+        data-testid="role-pill-ADMIN"
+        role="ADMIN"
       >
-        Current Role
+        ADMIN
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserRole should render user role pill for non-admin 1`] = `
+<div>
+  <div
+    class="flex my-8"
+    data-testid="user-role-container"
+  >
+    <div
+      class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600 mx-20"
+      data-testid="user-role-header"
+    >
+      Current Role
+    </div>
+    <div
+      class="block w-1/2 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+    >
+      <div
+        class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-indigo-400 mx-0"
+        data-testid="role-pill-MANAGER"
+        role="MANAGER"
+      >
+        MANAGER
       </div>
       <div
-        class="flex flex-col items-center align-middle justify-center"
+        class="flex align-middle items-center gap-1 mt-2"
+        data-testid="role-info-message"
+        role="MANAGER"
       >
-        <div
-          class="font-sans font-semibold text-white text-sm text-center antialiased mx-20 w-40 py-1 px-2 rounded-sm shadow-sm select-none"
-          data-testid="role-pill-undefined"
-        />
-        <span
-          class="inline-flex align-middle items-center gap-1 mt-1 text-sm font-light text-gray-500 break-words"
-          data-testid="role-info-message"
+        <svg
+          class="text-xl"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            fill="currentColor"
-            height="1em"
-            stroke="currentColor"
-            stroke-width="0"
-            viewBox="0 0 512 512"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-            />
-          </svg>
-           
+          <path
+            d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+          />
+        </svg>
+        <div
+          class="text-sm font-normal text-gray-500 break-words"
+        >
           Reach out to your ADMIN to update your role
-        </span>
+        </div>
       </div>
     </div>
   </div>

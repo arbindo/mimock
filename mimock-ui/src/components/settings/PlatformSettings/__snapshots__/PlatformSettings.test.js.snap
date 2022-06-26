@@ -3,104 +3,108 @@
 exports[`PlatformSettings should render platform settings 1`] = `
 <div>
   <div
-    class="flex flex-col justify-start align-middle w-full px-9 mt-8 mb-4"
+    class="flex flex-col justify-start align-middle w-full mt-8 mb-4"
     data-testid="psettings-container"
   >
     <div
-      class="font-sans font-bold subpixel-antialiased text-2xl text-gray-600 mx-20 mb-4"
+      class="font-sans font-bold subpixel-antialiased text-lg text-gray-600 mx-20 mb-4"
       data-testid="psettings-header"
     >
       Platform Settings
     </div>
     <div
-      class="flex items-center align-middle my-2 justify-start"
+      class="block w-11/12 mx-24"
     >
       <div
-        class="font-sans font-semibold subpixel-antialiased text-xl text-gray-600 mx-20"
+        class="flex items-center align-middle my-2 justify-start"
       >
-        Bulk Mock Operations
-      </div>
-      <div
-        class="flex items-center align-middle"
-      >
-        <span
-          class="MuiSwitch-root IosSwitch-root-1"
+        <div
+          class="font-sans subpixel-antialiased text-gray-600 mx-10"
+        >
+          Bulk Mock Operations
+        </div>
+        <div
+          class="flex items-center align-middle mx-10"
         >
           <span
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-7 MuiSwitch-switchBase IosSwitch-switchBase-2 MuiSwitch-colorSecondary"
-            data-testid="switch-component-bulk"
+            class="MuiSwitch-root IosSwitch-root-1"
           >
             <span
-              class="MuiIconButton-label"
+              aria-disabled="false"
+              class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-7 MuiSwitch-switchBase IosSwitch-switchBase-2 MuiSwitch-colorSecondary"
+              data-testid="switch-component-bulk"
             >
-              <input
-                class="PrivateSwitchBase-input-10 MuiSwitch-input"
-                type="checkbox"
-                value="false"
-              />
               <span
-                class="MuiSwitch-thumb IosSwitch-thumb-3"
+                class="MuiIconButton-label"
+              >
+                <input
+                  class="PrivateSwitchBase-input-10 MuiSwitch-input"
+                  type="checkbox"
+                  value="false"
+                />
+                <span
+                  class="MuiSwitch-thumb IosSwitch-thumb-3"
+                />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
               />
             </span>
             <span
-              class="MuiTouchRipple-root"
+              class="MuiSwitch-track IosSwitch-track-4"
             />
           </span>
-          <span
-            class="MuiSwitch-track IosSwitch-track-4"
-          />
-        </span>
-        <div
-          class="font-sans font-light text-sm mx-4 text-slate-300"
-        >
-          Inactive
+          <div
+            class="font-sans font-semibold text-sm mx-4 text-slate-300"
+          >
+            Inactive
+          </div>
         </div>
       </div>
-    </div>
-    <div
-      class="flex items-center align-middle my-2 justify-start"
-    >
       <div
-        class="font-sans font-semibold subpixel-antialiased text-xl text-gray-600 mx-20"
+        class="flex items-center align-middle my-2 justify-start"
       >
-        AutoFlush Recycle Bin
-      </div>
-      <div
-        class="flex items-center align-middle"
-      >
-        <span
-          class="MuiSwitch-root IosSwitch-root-1"
+        <div
+          class="font-sans subpixel-antialiased text-gray-600 mx-10"
+        >
+          AutoFlush Recycle Bin
+        </div>
+        <div
+          class="flex items-center align-middle mx-10"
         >
           <span
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-7 MuiSwitch-switchBase IosSwitch-switchBase-2 MuiSwitch-colorSecondary"
-            data-testid="switch-component-bulk"
+            class="MuiSwitch-root IosSwitch-root-1"
           >
             <span
-              class="MuiIconButton-label"
+              aria-disabled="false"
+              class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-7 MuiSwitch-switchBase IosSwitch-switchBase-2 MuiSwitch-colorSecondary"
+              data-testid="switch-component-bulk"
             >
-              <input
-                class="PrivateSwitchBase-input-10 MuiSwitch-input"
-                type="checkbox"
-                value="false"
-              />
               <span
-                class="MuiSwitch-thumb IosSwitch-thumb-3"
+                class="MuiIconButton-label"
+              >
+                <input
+                  class="PrivateSwitchBase-input-10 MuiSwitch-input"
+                  type="checkbox"
+                  value="false"
+                />
+                <span
+                  class="MuiSwitch-thumb IosSwitch-thumb-3"
+                />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
               />
             </span>
             <span
-              class="MuiTouchRipple-root"
+              class="MuiSwitch-track IosSwitch-track-4"
             />
           </span>
-          <span
-            class="MuiSwitch-track IosSwitch-track-4"
-          />
-        </span>
-        <div
-          class="font-sans font-light text-sm mx-4 text-slate-300"
-        >
-          Inactive
+          <div
+            class="font-sans font-semibold text-sm mx-4 text-slate-300"
+          >
+            Inactive
+          </div>
         </div>
       </div>
     </div>

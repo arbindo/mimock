@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import Header from './Header';
 import UserRole from './UserRole';
 import { getUserDetails } from 'utils/jwtUtils';
+import PasswordUpdateModal from 'editUser/UserDetails/UserPasswordUpdate/PasswordUpdateModal';
+import { SettingsContainer } from './Settings.style';
 import PlatformSettings from './PlatformSettings';
+import UpdatePassword from './UpdatePassword';
 
 function Settings() {
-	const [username, setUsername] = useState('');
-	const [userrole, setUserrole] = useState('');
+	const [userName, setUserName] = useState('');
+	const [userRole, setUserRole] = useState('');
 	const [isReadOnlyUser, setIsReadOnlyUser] = useState(false);
+	const [userInfo] = useRecoilState(editUserDetailsAtom);
 
 	useEffect(() => {
 		try {
@@ -16,8 +22,8 @@ function Settings() {
 			const isReadOnlyUser =
 				userDetails && userDetails.userRole === 'ROLE_VIEWER';
 			setIsReadOnlyUser(isReadOnlyUser);
-			setUsername(userName);
-			setUserrole(userRole.split('_')[1]);
+			setUserName(userName);
+			setUserRole(userRole.split('_')[1]);
 		} catch (e) {
 			console.log(e);
 		}
@@ -25,11 +31,21 @@ function Settings() {
 
 	return (
 		<>
-			<Header username={username} />
-			<UserRole role={userrole}></UserRole>
-			<If condition={!isReadOnlyUser}>
-				<PlatformSettings />
-			</If>
+			<Header username={userName} />
+			<Choose>
+				<When condition={!userInfo.showPasswordUpdateModal}>
+					<SettingsContainer>
+						<UpdatePassword userName={userName} userRole={userRole} />
+						<UserRole role={userRole} />
+						<If condition={!isReadOnlyUser}>
+							<PlatformSettings />
+						</If>
+					</SettingsContainer>
+				</When>
+				<Otherwise>
+					<PasswordUpdateModal userName={userName} />
+				</Otherwise>
+			</Choose>
 		</>
 	);
 }

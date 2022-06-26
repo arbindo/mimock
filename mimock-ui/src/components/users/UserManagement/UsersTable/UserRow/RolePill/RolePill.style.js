@@ -21,4 +21,5 @@ export const Pill = tw.div`
     shadow-sm
     
     ${(props) => roleBackground[props.role]}
+    ${(props) => (props.$margin ? props.$margin : 'mx-auto')}
 `;

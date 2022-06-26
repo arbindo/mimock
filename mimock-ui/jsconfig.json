@@ -13,6 +13,8 @@
 			"config/*": ["src/config/*"],
 			"common/*": ["src/common/*"],
 			"styles": ["/src/styles/components/*"],
+			"users": ["/src/components/users/UserManagement/*"],
+			"editUser": ["/src/components/users/UserManagement/EditUser/*"],
 			"assets": ["/src/assets/*"],
 			"hooks": ["/src/hooks/*"],
 			"atoms": ["/src/atoms/*"],

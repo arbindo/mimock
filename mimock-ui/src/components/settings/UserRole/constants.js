@@ -2,7 +2,6 @@ export const constants = {
 	testIds: {
 		userRoleContainer: 'user-role-container',
 		userRoleHeader: 'user-role-header',
-		rolePill: 'role-pill-',
 		roleInfoMessage: 'role-info-message',
 	},
 	label: {

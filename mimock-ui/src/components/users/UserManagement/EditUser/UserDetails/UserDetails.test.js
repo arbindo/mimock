@@ -109,9 +109,9 @@ describe('UserDetails', () => {
 		});
 
 		expect(getUserInfo).toHaveBeenCalledTimes(1);
-		expect(getUserInfo).toHaveBeenCalledWith(
-			'd749184e-b60d-4ac0-b459-e3b9cc5710d1'
-		);
+		expect(getUserInfo).toHaveBeenCalledWith({
+			userId: 'd749184e-b60d-4ac0-b459-e3b9cc5710d1',
+		});
 
 		expect(queryByTestId('edit-user-details-error')).not.toBeInTheDocument();
 		expect(queryByTestId('password-update-modal')).not.toBeInTheDocument();
@@ -165,9 +165,9 @@ describe('UserDetails', () => {
 		});
 
 		expect(getUserInfo).toHaveBeenCalledTimes(1);
-		expect(getUserInfo).toHaveBeenCalledWith(
-			'd749184e-b60d-4ac0-b459-e3b9cc5710d1'
-		);
+		expect(getUserInfo).toHaveBeenCalledWith({
+			userId: 'd749184e-b60d-4ac0-b459-e3b9cc5710d1',
+		});
 
 		expect(queryByTestId('edit-user-details-error')).not.toBeInTheDocument();
 		expect(queryByTestId('password-update-modal')).not.toBeInTheDocument();
@@ -214,9 +214,9 @@ describe('UserDetails', () => {
 		expect(queryByTestId('edit-user-details')).not.toBeInTheDocument();
 
 		expect(getUserInfo).toHaveBeenCalledTimes(1);
-		expect(getUserInfo).toHaveBeenCalledWith(
-			'd749184e-b60d-4ac0-b459-e3b9cc5710d1'
-		);
+		expect(getUserInfo).toHaveBeenCalledWith({
+			userId: 'd749184e-b60d-4ac0-b459-e3b9cc5710d1',
+		});
 
 		expect(container).toMatchSnapshot();
 	});
