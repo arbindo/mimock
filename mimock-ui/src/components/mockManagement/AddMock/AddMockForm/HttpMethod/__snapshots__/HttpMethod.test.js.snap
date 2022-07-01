@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HttpMethod should render HttpMethod with methods fetched from api 1`] = `
+<div>
+  <div
+    class="flex items-center align-middle my-8"
+    data-testid="http-method-selector"
+  >
+    <label
+      class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      data-testid="http-methods-label"
+    >
+      HTTP Method
+    </label>
+    <div
+      class="mx-4"
+    >
+      <select
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+        data-testid="http-methods"
+      >
+        <option
+          data-testid="options"
+          selected=""
+          value="GET"
+        >
+          GET
+        </option>
+        <option
+          data-testid="options"
+          value="POST"
+        >
+          POST
+        </option>
+        <option
+          data-testid="options"
+          value="DELETE"
+        >
+          DELETE
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`HttpMethod should set HTTP method on change 1`] = `
+<div>
+  <div
+    class="flex items-center align-middle my-8"
+    data-testid="http-method-selector"
+  >
+    <label
+      class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      data-testid="http-methods-label"
+    >
+      HTTP Method
+    </label>
+    <div
+      class="mx-4"
+    >
+      <select
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+        data-testid="http-methods"
+      >
+        <option
+          data-testid="options"
+          selected=""
+          value="GET"
+        >
+          GET
+        </option>
+        <option
+          data-testid="options"
+          value="POST"
+        >
+          POST
+        </option>
+        <option
+          data-testid="options"
+          value="DELETE"
+        >
+          DELETE
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+`;

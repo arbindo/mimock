@@ -36,7 +36,7 @@ export const addMockFormInputData = [
 		},
 	},
 	{
-		name: 'status',
+		name: 'httpStatus',
 		label: 'HTTP Status',
 		type: 'text',
 		placeholder: 'Enter HTTP status',

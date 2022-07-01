@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
+<div>
+  <div
+    class="w-full h-full mx-10"
+    data-testid="add-mock-form"
+  >
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="form-item-name"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Mock name
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-name"
+          name="name"
+          placeholder="Enter mock name"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="form-item-description"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Mock description
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-description"
+          name="description"
+          placeholder="Enter mock description"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="form-item-httpStatus"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        HTTP Status
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-httpStatus"
+          name="httpStatus"
+          placeholder="Enter HTTP status"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="form-item-route"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+      >
+        Route to mock
+      </label>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="input-route"
+          name="route"
+          placeholder="Enter route to mock"
+          type="text"
+        />
+      </div>
+      <button
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+        data-mui-internal-clone-element="true"
+        data-testid="route-tooltip"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 16 16"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+          />
+          <path
+            d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
+          />
+        </svg>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="flex items-center align-middle my-8"
+      data-testid="http-method-selector"
+    >
+      <label
+        class="w-1/5 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+        data-testid="http-methods-label"
+      >
+        HTTP Method
+      </label>
+      <div
+        class="mx-4"
+      >
+        <select
+          class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+          data-testid="http-methods"
+        >
+          <option
+            data-testid="options"
+            value="GET"
+          >
+            GET
+          </option>
+          <option
+            data-testid="options"
+            value="POST"
+          >
+            POST
+          </option>
+          <option
+            data-testid="options"
+            value="DELETE"
+          >
+            DELETE
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+`;
