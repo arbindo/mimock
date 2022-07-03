@@ -2,6 +2,7 @@ import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import Tooltip from '@mui/material/Tooltip';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
+import { Button } from 'styles';
 
 export const QueryParamsWrapper = tw.form`
     w-full
@@ -59,14 +60,19 @@ export const QueryParamTextWrapper = tw.div`
     w-full
 `;
 
-export const QueryParamText = tw.textarea`
-    bg-gray-200
+export const QueryParamText = tw.input`
+    bg-gray-100
     outline-blue-200
     border-blue-200
     border-2
+    p-2
     text-gray-800
     font-sans
     rounded-md
     w-full
     mx-auto
+`;
+
+export const SaveQueryParamButton = tw(Button)`
+    my-5
 `;

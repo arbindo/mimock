@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput should accept input with value 1`] = `
+<div>
+  <div
+    class="block h-12 min-h-12 max-h-12"
+  >
+    <input
+      class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+      data-testid="text-input"
+      placeholder="Enter text"
+      type="text"
+      value="test"
+    />
+  </div>
+</div>
+`;
+
+exports[`TextInput should render text input 1`] = `
+<div>
+  <div
+    class="block h-12 min-h-12 max-h-12"
+  >
+    <input
+      class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+      data-testid="text-input"
+      placeholder="Enter text"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;

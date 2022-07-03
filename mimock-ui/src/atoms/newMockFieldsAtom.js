@@ -5,15 +5,18 @@ const newMockFieldsAtom = atom({
 	default: {
 		name: '',
 		description: '',
-		httpStatus: 200,
 		route: '',
 		httpMethod: 'GET',
+		responseContentType: 'application/json',
 		queryParams: '',
-		requestHeaders: '',
-		shouldMatchExactRequestHeaders: false,
+		shouldDoExactHeaderMatching: false,
+		requestHeader: '',
 		requestBody: '',
+		requestBodyType: '',
+		statusCode: 200,
+		expectedTextResponse: '',
 		responseHeaders: '',
-		responseBody: '',
+		binaryFile: '',
 	},
 });
 

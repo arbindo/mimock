@@ -1,8 +1,8 @@
+import { styled } from '@material-ui/styles';
+import Accordion from '@mui/material/Accordion';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import React from 'react';
 import tw from 'tailwind-styled-components';
-import { styled } from '@material-ui/styles';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import Accordion from '@mui/material/Accordion';
 
 export const AddMockFormWrapper = tw.div`
 	w-full
@@ -42,6 +42,7 @@ export const HttpMethodSelect = tw.div`
 export const AccordionWrapper = tw(Accordion)`
 	w-1/2
 	my-8
+	p-2
 `;
 
 export const HtmlTooltip = styled(({ className, ...props }) => (

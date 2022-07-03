@@ -33,12 +33,16 @@ describe('AddMockFrom', () => {
 		const { getByTestId, container } = tree;
 
 		expect(getByTestId('add-mock-form')).toBeInTheDocument();
+
 		expect(getByTestId('form-item-name')).toBeInTheDocument();
 		expect(getByTestId('form-item-description')).toBeInTheDocument();
-		expect(getByTestId('form-item-httpStatus')).toBeInTheDocument();
+		expect(getByTestId('form-item-statusCode')).toBeInTheDocument();
 		expect(getByTestId('form-item-route')).toBeInTheDocument();
-		expect(getByTestId('http-method-selector')).toBeInTheDocument();
 		expect(getByTestId('route-tooltip')).toBeInTheDocument();
+
+		expect(getByTestId('http-method-selector')).toBeInTheDocument();
+
+		expect(getByTestId('query-param-form')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

@@ -1,26 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import IconButton from '@mui/material/IconButton';
 import { BsQuestionCircle } from 'react-icons/bs';
 import { ValidatedInput } from 'styles';
 import { useRecoilState } from 'recoil';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
 import HttpMethod from './HttpMethod';
-import { addMockFormInputData } from './formInputData';
+import { addMockFormInputData, accordionData } from './formInputData';
 import {
 	AddMockFormWrapper,
 	FormItem,
 	FormLabel,
 	HtmlTooltip,
+	AccordionWrapper,
+	AccordionHeader,
 } from './AddMockForm.style';
 
 export default function AddMockForm() {
-	const [mockData] = useRecoilState(newMockFieldsAtom);
+	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
 
 	const {
 		register,
 		formState: { errors },
 	} = useForm({ mode: 'all', reValidateMode: 'onChange' });
+
+	useEffect(() => {
+		return () =>
+			setMockData({
+				name: '',
+				description: '',
+				route: '',
+				httpMethod: 'GET',
+				responseContentType: 'application/json',
+				queryParams: '',
+				shouldDoExactHeaderMatching: false,
+				requestHeader: '',
+				requestBody: '',
+				requestBodyType: '',
+				statusCode: 200,
+				expectedTextResponse: '',
+				responseHeaders: '',
+				binaryFile: '',
+			});
+	}, []);
 
 	return (
 		<AddMockFormWrapper data-testid='add-mock-form'>
@@ -52,6 +77,18 @@ export default function AddMockForm() {
 				</FormItem>
 			</For>
 			<HttpMethod selectedMethod={mockData.httpMethod} />
+			<For each='accordionItem' of={accordionData}>
+				<AccordionWrapper key={accordionItem.id}>
+					<AccordionSummary
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls='panel1a-content'
+						id='panel1a-header'
+					>
+						<AccordionHeader>{accordionItem.title}</AccordionHeader>
+					</AccordionSummary>
+					<AccordionDetails>{accordionItem.content}</AccordionDetails>
+				</AccordionWrapper>
+			</For>
 		</AddMockFormWrapper>
 	);
 }

@@ -36,7 +36,7 @@ export const addMockFormInputData = [
 		},
 	},
 	{
-		name: 'httpStatus',
+		name: 'statusCode',
 		label: 'HTTP Status',
 		type: 'text',
 		placeholder: 'Enter HTTP status',
@@ -98,13 +98,5 @@ export const accordionData = [
 		title: 'Query Params',
 		id: 'query',
 		content: <QueryParam />,
-	},
-	{
-		title: 'Request Headers',
-		id: 'requestHeaders',
-	},
-	{
-		title: 'Request Body',
-		id: 'requestBody',
 	},
 ];

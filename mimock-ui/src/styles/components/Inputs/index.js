@@ -1,4 +1,5 @@
 import ValidatedInput from './ValidatedInput';
+import TextInput from './TextInput';
 import Select from './Select';
 
-export { ValidatedInput, Select };
+export { TextInput, ValidatedInput, Select };

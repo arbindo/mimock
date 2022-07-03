@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import IconButton from '@mui/material/IconButton';
 import { VscListFlat, VscCode } from 'react-icons/vsc';
-import { ValidatedInput } from 'styles';
+import { TextInput } from 'styles';
 import { useRecoilState } from 'recoil';
+import queryString from 'query-string';
+import { ButtonVariants } from 'styles/Button';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
 import {
 	QueryParamsWrapper,
@@ -17,75 +18,99 @@ import {
 	NoQueryParamLabel,
 	QueryParamTextWrapper,
 	QueryParamText,
+	SaveQueryParamButton,
 } from './QueryParam.style';
 
 export default function QueryParam() {
-	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
+	const [inputIndex, setInputIndex] = useState([]);
+	const [counter, setCounter] = useState(0);
+	const [inputState, setInputState] = useState({});
 	const [viewMode, setViewMode] = useState('text');
-	const [queryParam, setQueryParam] = useState('');
-	const { register, control, watch } = useForm({
-		mode: 'all',
-	});
-	const watchFieldArray = watch('queryParam');
+	const [queryParamValue, setQueryParamValue] = useState('');
+	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
 
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name: 'queryParam',
-	});
+	useEffect(() => {
+		if (mockData.queryParams) {
+			setQueryParamValue(mockData.queryParams);
+		}
+	}, [mockData.queryParams]);
+
+	useEffect(() => {
+		const queryParams = queryString.parse(queryParamValue);
+		const keys = Object.keys(queryParams);
+
+		if (queryParamValue === '=') {
+			setQueryParamValue('');
+		}
+
+		if (queryParams && keys.length) {
+			const indices = keys.map((key, idx) => idx);
+			setInputIndex(indices);
+			setCounter(keys.length);
+
+			const inputStates = {};
+			indices.forEach((idx) => {
+				inputStates[`queryParam_${idx}_key`] = keys[idx];
+				inputStates[`queryParam_${idx}_value`] = queryParams[keys[idx]];
+			});
+
+			setInputState(inputStates);
+		} else {
+			setInputIndex([0]);
+			setCounter(1);
+			setInputState({
+				[`queryParam_${0}_key`]: '',
+				[`queryParam_${0}_value`]: '',
+			});
+		}
+	}, [queryParamValue]);
 
 	const buildQueryParams = () => {
-		if (!watchFieldArray || watchFieldArray.length === 0) {
-			return;
-		}
-
-		const params = watchFieldArray.map((field) => {
-			if (field.key && field.value) {
-				return field.key + '=' + field.value;
-			} else {
-				return '';
-			}
+		let paramObject = {};
+		inputIndex.forEach((idx) => {
+			paramObject[inputState[`queryParam_${idx}_key`]] =
+				inputState[`queryParam_${idx}_value`];
 		});
 
-		if (params && params.length) {
-			const queryParams = params.join('&');
-			setMockData({
-				...mockData,
-				queryParams,
-			});
-			setQueryParam(queryParams);
-		} else {
-			setQueryParam(params.join(''));
-		}
+		setQueryParamValue(queryString.stringify(paramObject));
 	};
 
-	const input = (id, index) => {
+	const input = (index) => {
 		return (
-			<InputContainer key={id}>
-				<ValidatedInput
-					name={`queryParam.[${index}].key`}
-					dataTestId={`queryParam.[${index}].key`}
+			<InputContainer key={`queryParamContainer-${index}`}>
+				<TextInput
+					name={`queryParam_${index}_key`}
+					dataTestId={`queryParam_${index}_key`}
 					placeHolder='key'
-					register={register(`queryParam.[${index}].key`, {
-						required: 'Key is required',
-					})}
+					value={inputState[`queryParam_${index}_key`]}
+					onChange={(e) => {
+						setInputState({
+							...inputState,
+							[`queryParam_${index}_key`]: e.target.value,
+						});
+					}}
 				/>
-				<ValidatedInput
-					name={`queryParam.[${index}].value`}
-					dataTestId={`queryParam.[${index}].value`}
+				<TextInput
+					name={`queryParam_${index}_value`}
+					dataTestId={`queryParam_${index}_value`}
 					placeHolder='value'
-					register={register(`queryParam.[${index}].value`, {
-						required: 'Value is required',
-					})}
+					value={inputState[`queryParam_${index}_value`]}
+					onChange={(e) => {
+						setInputState({
+							...inputState,
+							[`queryParam_${index}_value`]: e.target.value,
+						});
+					}}
 				/>
 				<ActionToolTip
-					data-testid='user-role-tooltip'
+					data-testid={`remove-param-tooltip-${index}`}
 					key={'tooltip-remove'}
 					title={'Remove param'}
 					arrow
 				>
 					<IconButton
 						onClick={() => {
-							remove(index);
+							removeInput(index);
 						}}
 					>
 						<DeleteIcon />
@@ -95,65 +120,120 @@ export default function QueryParam() {
 		);
 	};
 
+	const addInput = () => {
+		setInputIndex([...inputIndex, counter]);
+		setCounter(counter + 1);
+		setInputState({
+			...inputState,
+			[`queryParam.[${counter}].key`]: '',
+			[`queryParam.[${counter}].value`]: '',
+		});
+	};
+
+	const removeInput = (index) => {
+		const newInputIndex = inputIndex.filter((i) => i !== index);
+		setInputIndex(newInputIndex);
+		setCounter(counter - 1);
+
+		let tempInputValues = inputState;
+		delete tempInputValues[`queryParam_${index}_key`];
+		delete tempInputValues[`queryParam_${index}_value`];
+
+		setInputState(tempInputValues);
+	};
+
+	const saveQueryParams = (e) => {
+		e.preventDefault();
+
+		let paramObject = {};
+		inputIndex.forEach((idx) => {
+			paramObject[inputState[`queryParam_${idx}_key`]] =
+				inputState[`queryParam_${idx}_value`];
+		});
+		setMockData({
+			...mockData,
+			queryParams: queryString.stringify(paramObject),
+		});
+	};
+
 	return (
-		<QueryParamsWrapper>
+		<QueryParamsWrapper
+			data-testid='query-param-form'
+			onSubmit={saveQueryParams}
+		>
 			<ToggleButtonGroup
 				value={viewMode}
 				color='primary'
+				data-testid='view-mode'
 				exclusive
-				type='submit'
-				onChange={() => {
-					buildQueryParams();
-					setViewMode(viewMode === 'text' ? 'code' : 'text');
+				onChange={(e, mode) => {
+					if (mode !== null) {
+						buildQueryParams();
+						setViewMode(viewMode === 'text' ? 'code' : 'text');
+					}
 				}}
 			>
-				<ToggleButton value='text'>
+				<ToggleButton data-testid='view-mode-text' value='text'>
 					<VscListFlat />
 				</ToggleButton>
-				<If condition={watchFieldArray && watchFieldArray.length !== 0}>
-					<ToggleButton value='code'>
+				<If condition={inputIndex && inputIndex.length !== 0}>
+					<ToggleButton data-testid='view-mode-code' value='code'>
 						<VscCode />
 					</ToggleButton>
 				</If>
 			</ToggleButtonGroup>
-			<ActionToolTip
-				data-testid='user-role-tooltip'
-				key={'tooltip-add'}
-				title={'Add new query param'}
-				arrow
-			>
-				<IconButton
-					onClick={() => {
-						append({ key: '', value: '' });
-					}}
+			<If condition={viewMode === 'text'}>
+				<ActionToolTip
+					data-testid='add-param-button'
+					key={'tooltip-add'}
+					title={'Add new query param'}
+					arrow
 				>
-					<AddIcon />
-				</IconButton>
-			</ActionToolTip>
-			<If condition={fields.length === 0}>
-				<NoQueryParam>
-					<NoQueryParamLabel>No query params added</NoQueryParamLabel>
+					<IconButton
+						onClick={() => {
+							addInput();
+						}}
+					>
+						<AddIcon />
+					</IconButton>
+				</ActionToolTip>
+			</If>
+			<If condition={inputIndex.length === 0}>
+				<NoQueryParam data-testid='no-query-param'>
+					<NoQueryParamLabel>No query params added yet</NoQueryParamLabel>
 				</NoQueryParam>
 			</If>
 			<Choose>
 				<When condition={viewMode === 'text'}>
-					<For each='field' index='idx' of={fields}>
-						{input(field.id, idx)}
+					<For each='index' index='idx' of={inputIndex}>
+						{input(index)}
 					</For>
 				</When>
 				<Otherwise>
-					<If condition={watchFieldArray.length !== 0}>
-						<QueryParamTextWrapper>
+					<If condition={inputIndex.length !== 0}>
+						<QueryParamTextWrapper data-testid='query-param-text'>
 							<QueryParamText
-								rows={5}
-								cols={50}
-								disabled
-								value={queryParam}
+								type='text'
+								data-testid='query-param-text-input'
+								placeholder='Enter query params'
+								value={queryParamValue}
+								onChange={(e) => {
+									setQueryParamValue(e.target.value);
+								}}
 							></QueryParamText>
 						</QueryParamTextWrapper>
 					</If>
 				</Otherwise>
 			</Choose>
+			<If condition={inputIndex.length !== 0}>
+				<SaveQueryParamButton
+					type='submit'
+					dataTestid='save-queryParam-button'
+					variant={ButtonVariants.BlueButton}
+					label='Save'
+					width='w-1/4'
+				/>
+			</If>
 		</QueryParamsWrapper>
 	);
 }
