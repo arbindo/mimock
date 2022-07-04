@@ -2,7 +2,7 @@ import tw from 'tailwind-styled-components';
 
 export const ButtonContainer = tw.button`
   px-9
-  py-3
+  py-2
   shadow-md
   rounded-md
   text-center

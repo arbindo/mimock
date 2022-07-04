@@ -199,7 +199,7 @@ exports[`QueryParam should add new query params using key-value inputs 1`] = `
       Query params saved for submission
     </div>
     <button
-      class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
       data-testid="save-queryParam-button"
     >
       Save
@@ -459,7 +459,7 @@ exports[`QueryParam should add new query params using text input 1`] = `
       Query params saved for submission
     </div>
     <button
-      class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
       data-testid="save-queryParam-button"
     >
       Save
@@ -719,7 +719,7 @@ exports[`QueryParam should build query param inputs when query params are alread
       Query params saved for submission
     </div>
     <button
-      class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
       data-testid="save-queryParam-button"
     >
       Save
@@ -946,7 +946,7 @@ exports[`QueryParam should render query params when initial value is empty 1`] =
       </button>
     </div>
     <button
-      class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
       data-testid="save-queryParam-button"
     >
       Save

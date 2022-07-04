@@ -153,13 +153,13 @@ exports[`AddUser should render add user component 1`] = `
         class="flex w-1/2 my-20 flex-row gap-4"
       >
         <button
-          class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-lime-700 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-green-300 dark:bg-green-400"
+          class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-lime-700 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-green-300 dark:bg-green-400"
           data-testid="add-user-submit-button"
         >
           Submit
         </button>
         <button
-          class="px-9 py-3 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-red-800 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-red-300 dark:bg-red-500"
+          class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-red-800 dark:text-white w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2 bg-red-300 dark:bg-red-500"
           data-testid="add-user-reset-button"
         >
           Reset
