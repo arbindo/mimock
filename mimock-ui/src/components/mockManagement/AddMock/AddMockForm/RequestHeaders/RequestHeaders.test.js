@@ -203,11 +203,11 @@ describe('RequestHeaders', () => {
 			fireEvent.click(getByTestId('add-header-button'));
 		});
 
-		await act(() => {
-			fireEvent.change(getByTestId('requestHeader_2_key'), {
+		await act(async () => {
+			await fireEvent.change(getByTestId('requestHeader_2_key'), {
 				target: { value: 'logging' },
 			});
-			fireEvent.change(getByTestId('requestHeader_2_value'), {
+			await fireEvent.change(getByTestId('requestHeader_2_value'), {
 				target: { value: 'DEBUG' },
 			});
 		});
@@ -276,8 +276,8 @@ describe('RequestHeaders', () => {
 			});
 		});
 
-		await act(() => {
-			fireEvent.click(getByTestId('view-mode-text'));
+		await act(async () => {
+			await fireEvent.click(getByTestId('view-mode-text'));
 		});
 
 		expect(getByTestId('requestHeader_0_key')).toHaveValue('Authorization');
