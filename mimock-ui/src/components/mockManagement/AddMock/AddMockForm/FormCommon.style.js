@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { Button } from 'styles';
 
-export const QueryParamsWrapper = tw.form`
+export const FormWrapper = tw.form`
     w-full
 `;
 
@@ -33,7 +33,7 @@ export const ActionToolTip = styled(Tooltip)`
 	margin-top: -8px !important;
 `;
 
-export const NoQueryParam = tw.div`
+export const NoItem = tw.div`
     flex
     items-center
     align-middle
@@ -41,7 +41,7 @@ export const NoQueryParam = tw.div`
     justify-center
 `;
 
-export const NoQueryParamLabel = tw.div`
+export const NoItemLabel = tw.div`
     font-sans
     font-light
     text-lg
@@ -55,13 +55,13 @@ export const AddNewIcon = tw(AddIcon)`
     text-green-500
 `;
 
-export const QueryParamTextWrapper = tw.div`
+export const TextWrapper = tw.div`
     my-4
     w-full
 `;
 
-export const QueryParamText = tw.input`
-    bg-gray-100
+export const ParsedTextInput = tw.input`
+    bg-gray-50
     outline-blue-200
     border-blue-200
     border-2
@@ -73,6 +73,31 @@ export const QueryParamText = tw.input`
     mx-auto
 `;
 
-export const SaveQueryParamButton = tw(Button)`
+export const ParsedTextArea = tw.textarea`
+    bg-gray-50
+    outline-blue-200
+    border-blue-200
+    border-2
+    p-2
+    text-gray-800
+    font-sans
+    rounded-md
+    w-full
+    mx-auto
+`;
+
+export const SaveButton = tw(Button)`
     my-5
+`;
+
+export const SuccessPrompt = tw.div`
+    font-sans
+    mb-4
+    text-green-600
+`;
+
+export const FailurePrompt = tw.div`
+    font-sans
+    mb-4
+    text-red-600
 `;

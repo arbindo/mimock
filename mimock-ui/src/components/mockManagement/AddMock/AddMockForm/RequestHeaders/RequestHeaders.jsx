@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import IconButton from '@mui/material/IconButton';
 import { VscListFlat, VscCode } from 'react-icons/vsc';
-import { TextInput } from 'styles';
 import { useRecoilState } from 'recoil';
-import queryString from 'query-string';
-import { ButtonVariants } from 'styles/Button';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
+import { ButtonVariants } from 'styles/Button';
+import { TextInput } from 'styles';
+import ToggleMatchingMode from './ToggleMatchingMode';
 import {
 	FormWrapper,
 	InputContainer,
@@ -17,106 +17,115 @@ import {
 	NoItem,
 	NoItemLabel,
 	TextWrapper,
-	ParsedTextInput,
+	ParsedTextArea,
 	SaveButton,
+	FailurePrompt,
 	SuccessPrompt,
 } from '../FormCommon.style';
 
-export default function QueryParam() {
+export default function RequestHeaders() {
 	const [inputIndex, setInputIndex] = useState([]);
 	const [counter, setCounter] = useState(0);
 	const [inputState, setInputState] = useState({});
 	const [viewMode, setViewMode] = useState('text');
-	const [queryParamValue, setQueryParamValue] = useState('');
+	const [requestHeaderValue, setRequestHeaderValue] = useState('');
+	const [parsingError, setParsingError] = useState(false);
 	const [promptSuccess, setPromptSuccess] = useState(false);
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
 
 	useEffect(() => {
-		if (mockData.queryParams) {
-			setQueryParamValue(mockData.queryParams);
+		if (mockData.requestHeader) {
+			setRequestHeaderValue(mockData.requestHeader);
 		}
-	}, [mockData.queryParams]);
+	}, [mockData.requestHeader]);
 
 	useEffect(() => {
 		if (counter === 0) {
 			setMockData({
 				...mockData,
-				queryParams: '',
+				requestHeader: '',
 			});
 		}
 	}, [counter]);
 
 	useEffect(() => {
-		const queryParams = queryString.parse(queryParamValue);
-		const keys = Object.keys(queryParams);
-
-		if (queryParamValue === '=') {
-			setQueryParamValue('');
+		if (!requestHeaderValue || !requestHeaderValue.startsWith('{')) {
+			setRequestHeaderValue('');
+			return;
 		}
 
-		if (queryParams && keys.length) {
+		let requestHeaders;
+		try {
+			const sanitizedValue = requestHeaderValue
+				.replaceAll("'", '"')
+				.replace(/[\n\r\t ]*/g, '');
+
+			requestHeaders = JSON.parse(sanitizedValue.toString());
+		} catch (e) {
+			setParsingError(true);
+			return;
+		}
+		setParsingError(false);
+
+		const keys = Object.keys(requestHeaders);
+
+		if (requestHeaders && keys.length) {
 			const indices = keys.map((key, idx) => idx);
 			setInputIndex(indices);
 			setCounter(keys.length);
 
 			const inputStates = {};
 			indices.forEach((idx) => {
-				inputStates[`queryParam_${idx}_key`] = keys[idx];
-				inputStates[`queryParam_${idx}_value`] = queryParams[keys[idx]];
+				inputStates[`requestHeader_${idx}_key`] = keys[idx];
+				inputStates[`requestHeader_${idx}_value`] =
+					requestHeaders[keys[idx]].toString();
 			});
 
 			setInputState(inputStates);
-		} else {
-			setInputIndex([0]);
-			setCounter(1);
-			setInputState({
-				[`queryParam_${0}_key`]: '',
-				[`queryParam_${0}_value`]: '',
-			});
 		}
-	}, [queryParamValue]);
+	}, [requestHeaderValue]);
 
-	const buildQueryParams = () => {
-		let paramObject = {};
+	const buildHeaders = () => {
+		let headerObject = {};
 		inputIndex.forEach((idx) => {
-			paramObject[inputState[`queryParam_${idx}_key`]] =
-				inputState[`queryParam_${idx}_value`];
+			headerObject[inputState[`requestHeader_${idx}_key`]] =
+				inputState[`requestHeader_${idx}_value`];
 		});
 
-		setQueryParamValue(queryString.stringify(paramObject));
+		setRequestHeaderValue(JSON.stringify(headerObject, null, 2));
 	};
 
 	const input = (index) => {
 		return (
-			<InputContainer key={`queryParamContainer-${index}`}>
+			<InputContainer key={`requestHeaderContainer-${index}`}>
 				<TextInput
-					name={`queryParam_${index}_key`}
-					dataTestId={`queryParam_${index}_key`}
+					name={`requestHeader_${index}_key`}
+					dataTestId={`requestHeader_${index}_key`}
 					placeHolder='key'
-					value={inputState[`queryParam_${index}_key`]}
+					value={inputState[`requestHeader_${index}_key`]}
 					onChange={(e) => {
 						setInputState({
 							...inputState,
-							[`queryParam_${index}_key`]: e.target.value,
+							[`requestHeader_${index}_key`]: e.target.value,
 						});
 					}}
 				/>
 				<TextInput
-					name={`queryParam_${index}_value`}
-					dataTestId={`queryParam_${index}_value`}
+					name={`requestHeader_${index}_value`}
+					dataTestId={`requestHeader_${index}_value`}
 					placeHolder='value'
-					value={inputState[`queryParam_${index}_value`]}
+					value={inputState[`requestHeader_${index}_value`]}
 					onChange={(e) => {
 						setInputState({
 							...inputState,
-							[`queryParam_${index}_value`]: e.target.value,
+							[`requestHeader_${index}_value`]: e.target.value,
 						});
 					}}
 				/>
 				<ActionToolTip
-					data-testid={`remove-param-tooltip-${index}`}
+					data-testid={`remove-header-tooltip-${index}`}
 					key={'tooltip-remove'}
-					title={'Remove param'}
+					title={'Remove header'}
 					arrow
 				>
 					<IconButton
@@ -136,8 +145,8 @@ export default function QueryParam() {
 		setCounter(counter + 1);
 		setInputState({
 			...inputState,
-			[`queryParam_${counter}_key`]: '',
-			[`queryParam_${counter}_value`]: '',
+			[`requestHeader_${counter}_key`]: '',
+			[`requestHeader_${counter}_value`]: '',
 		});
 	};
 
@@ -147,33 +156,34 @@ export default function QueryParam() {
 		setCounter(counter - 1);
 
 		let tempInputValues = inputState;
-		delete tempInputValues[`queryParam_${index}_key`];
-		delete tempInputValues[`queryParam_${index}_value`];
+		delete tempInputValues[`requestHeader_${index}_key`];
+		delete tempInputValues[`requestHeader_${index}_value`];
 
 		setInputState(tempInputValues);
 	};
 
-	const saveQueryParams = (e) => {
+	const saveHeaders = (e) => {
 		e.preventDefault();
 
-		let paramObject = {};
+		let headerObject = {};
 		inputIndex.forEach((idx) => {
-			paramObject[inputState[`queryParam_${idx}_key`]] =
-				inputState[`queryParam_${idx}_value`];
+			headerObject[inputState[`requestHeader_${idx}_key`]] =
+				inputState[`requestHeader_${idx}_value`];
 		});
 		setMockData({
 			...mockData,
-			queryParams: queryString.stringify(paramObject),
+			requestHeader: JSON.stringify(headerObject),
 		});
 
 		setPromptSuccess(true);
 		setTimeout(() => {
 			setPromptSuccess(false);
-		}, 4500);
+		}, 6000);
 	};
 
 	return (
-		<FormWrapper data-testid='query-param-form' onSubmit={saveQueryParams}>
+		<FormWrapper data-testid='request-header-form' onSubmit={saveHeaders}>
+			<ToggleMatchingMode />
 			<ToggleButtonGroup
 				value={viewMode}
 				color='primary'
@@ -181,7 +191,7 @@ export default function QueryParam() {
 				exclusive
 				onChange={(e, mode) => {
 					if (mode !== null) {
-						buildQueryParams();
+						buildHeaders();
 						setViewMode(viewMode === 'text' ? 'code' : 'text');
 					}
 				}}
@@ -197,9 +207,9 @@ export default function QueryParam() {
 			</ToggleButtonGroup>
 			<If condition={viewMode === 'text'}>
 				<ActionToolTip
-					data-testid='add-param-button'
+					data-testid='add-header-button'
 					key={'tooltip-add'}
-					title={'Add new query param'}
+					title={'Add new header'}
 					arrow
 				>
 					<IconButton
@@ -212,8 +222,8 @@ export default function QueryParam() {
 				</ActionToolTip>
 			</If>
 			<If condition={inputIndex.length === 0}>
-				<NoItem data-testid='no-query-param'>
-					<NoItemLabel>No query params added yet</NoItemLabel>
+				<NoItem data-testid='no-header'>
+					<NoItemLabel>No headers added yet</NoItemLabel>
 				</NoItem>
 			</If>
 			<Choose>
@@ -224,29 +234,35 @@ export default function QueryParam() {
 				</When>
 				<Otherwise>
 					<If condition={inputIndex.length !== 0}>
-						<TextWrapper data-testid='query-param-text'>
-							<ParsedTextInput
+						<TextWrapper data-testid='request-header-text'>
+							<ParsedTextArea
 								type='text'
-								data-testid='query-param-text-input'
-								placeholder='Enter query params'
-								value={queryParamValue}
+								data-testid='request-header-text-input'
+								placeholder='Enter request headers has JSON'
+								rows={10}
+								value={requestHeaderValue}
 								onChange={(e) => {
-									setQueryParamValue(e.target.value);
+									setRequestHeaderValue(e.target.value);
 								}}
-							></ParsedTextInput>
+							/>
 						</TextWrapper>
 					</If>
 				</Otherwise>
 			</Choose>
+			<If condition={parsingError}>
+				<FailurePrompt data-testid='parsing-error'>
+					Failed to parse request headers text
+				</FailurePrompt>
+			</If>
 			<If condition={promptSuccess}>
 				<SuccessPrompt data-testid='success-prompt'>
-					Query params saved for submission
+					Request headers saved for submission
 				</SuccessPrompt>
 			</If>
 			<If condition={inputIndex.length !== 0}>
 				<SaveButton
 					type='submit'
-					dataTestid='save-queryParam-button'
+					dataTestid='save-requestHeader-button'
 					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'

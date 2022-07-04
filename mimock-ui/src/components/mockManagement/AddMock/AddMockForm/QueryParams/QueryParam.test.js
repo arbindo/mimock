@@ -5,6 +5,7 @@ import QueryParam from './QueryParam';
 
 let mockedRecoilFn = jest.fn();
 jest.mock('recoil');
+jest.useFakeTimers();
 
 describe('QueryParam', () => {
 	beforeEach(() => {
@@ -31,6 +32,7 @@ describe('QueryParam', () => {
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('add-param-button')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
+		expect(queryByTestId('success-prompt')).not.toBeInTheDocument();
 
 		await act(() => {
 			fireEvent.click(getByTestId('view-mode-code'));
@@ -65,6 +67,7 @@ describe('QueryParam', () => {
 		expect(getByTestId('add-param-button')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
 		expect(queryByTestId('no-query-param')).not.toBeInTheDocument();
+		expect(queryByTestId('success-prompt')).not.toBeInTheDocument();
 
 		expect(getByTestId('queryParam_0_key')).toBeInTheDocument();
 		expect(getByTestId('queryParam_0_value')).toBeInTheDocument();
@@ -72,6 +75,11 @@ describe('QueryParam', () => {
 		await act(() => {
 			fireEvent.click(getByTestId('remove-param-tooltip-0'));
 			fireEvent.click(getByTestId('view-mode-text'));
+		});
+
+		expect(mockedRecoilFn).toHaveBeenCalledWith({
+			name: 'Tester',
+			queryParams: '',
 		});
 
 		expect(queryByTestId('view-mode-code')).not.toBeInTheDocument();
@@ -95,6 +103,7 @@ describe('QueryParam', () => {
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
 		expect(queryByTestId('no-query-param')).not.toBeInTheDocument();
+		expect(queryByTestId('success-prompt')).not.toBeInTheDocument();
 
 		await act(() => {
 			fireEvent.change(getByTestId('queryParam_0_key'), {
@@ -139,6 +148,10 @@ describe('QueryParam', () => {
 			queryParams: 'page=1&version=1.0.0',
 		});
 
+		expect(getByTestId('success-prompt')).toHaveTextContent(
+			'Query params saved for submission'
+		);
+
 		expect(container).toMatchSnapshot();
 	});
 
@@ -154,6 +167,7 @@ describe('QueryParam', () => {
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
 		expect(queryByTestId('no-query-param')).not.toBeInTheDocument();
+		expect(queryByTestId('success-prompt')).not.toBeInTheDocument();
 
 		await act(() => {
 			fireEvent.click(getByTestId('view-mode-code'));
@@ -187,6 +201,10 @@ describe('QueryParam', () => {
 			queryParams: 'active=true&serviceName=Student&version=1.0',
 		});
 
+		expect(getByTestId('success-prompt')).toHaveTextContent(
+			'Query params saved for submission'
+		);
+
 		expect(container).toMatchSnapshot();
 	});
 
@@ -212,6 +230,7 @@ describe('QueryParam', () => {
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
 		expect(queryByTestId('no-query-param')).not.toBeInTheDocument();
+		expect(queryByTestId('success-prompt')).not.toBeInTheDocument();
 
 		await act(() => {
 			fireEvent.click(getByTestId('view-mode-code'));
@@ -242,6 +261,10 @@ describe('QueryParam', () => {
 			name: 'Tester',
 			queryParams: 'active=true&serviceName=Student&version=1.0',
 		});
+
+		expect(getByTestId('success-prompt')).toHaveTextContent(
+			'Query params saved for submission'
+		);
 
 		expect(container).toMatchSnapshot();
 	});
