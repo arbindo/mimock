@@ -212,6 +212,8 @@ describe('RequestHeaders', () => {
 			});
 		});
 
+		expect(queryByTestId('parsing-error')).not.toBeInTheDocument();
+
 		await act(() => {
 			fireEvent.click(getByTestId('save-requestHeader-button'));
 		});
