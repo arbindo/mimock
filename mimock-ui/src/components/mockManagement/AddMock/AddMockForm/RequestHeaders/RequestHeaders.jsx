@@ -28,14 +28,23 @@ export default function RequestHeaders() {
 	const [counter, setCounter] = useState(0);
 	const [inputState, setInputState] = useState({});
 	const [viewMode, setViewMode] = useState('text');
-	const [requestHeaderValue, setRequestHeaderValue] = useState('');
+	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
+	const [requestHeaderValue, setRequestHeaderValue] = useState(
+		mockData.requestHeader
+	);
 	const [parsingError, setParsingError] = useState(false);
 	const [promptSuccess, setPromptSuccess] = useState(false);
-	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
 
 	useEffect(() => {
 		if (mockData.requestHeader) {
-			setRequestHeaderValue(mockData.requestHeader);
+			let parsedRequestHeader;
+			try {
+				parsedRequestHeader = JSON.parse(mockData.requestHeader);
+			} catch (e) {
+				setParsingError(true);
+				return;
+			}
+			setRequestHeaderValue(JSON.stringify(parsedRequestHeader, null, 2));
 		}
 	}, [mockData.requestHeader]);
 
@@ -49,8 +58,15 @@ export default function RequestHeaders() {
 	}, [counter]);
 
 	useEffect(() => {
-		if (!requestHeaderValue || !requestHeaderValue.startsWith('{')) {
+		if (requestHeaderValue === '' || requestHeaderValue === '{}') {
 			setRequestHeaderValue('');
+			setInputIndex([0]);
+			setCounter(1);
+			setInputState({
+				requestHeader_0_key: '',
+				requestHeader_0_value: '',
+			});
+
 			return;
 		}
 
@@ -58,7 +74,7 @@ export default function RequestHeaders() {
 		try {
 			const sanitizedValue = requestHeaderValue
 				.replaceAll("'", '"')
-				.replace(/[\n\r\t ]*/g, '');
+				.replace(/[\n\r\t]*/g, '');
 
 			requestHeaders = JSON.parse(sanitizedValue.toString());
 		} catch (e) {
@@ -82,14 +98,25 @@ export default function RequestHeaders() {
 			});
 
 			setInputState(inputStates);
+		} else {
+			setInputIndex([]);
+			setCounter(0);
+			setInputState({});
 		}
 	}, [requestHeaderValue]);
 
 	const buildHeaders = () => {
 		let headerObject = {};
+
 		inputIndex.forEach((idx) => {
-			headerObject[inputState[`requestHeader_${idx}_key`]] =
-				inputState[`requestHeader_${idx}_value`];
+			const key = inputState[`requestHeader_${idx}_key`];
+			const value = inputState[`requestHeader_${idx}_value`];
+
+			if (!key || !value) {
+				return;
+			}
+
+			headerObject[key] = value;
 		});
 
 		setRequestHeaderValue(JSON.stringify(headerObject, null, 2));
@@ -254,12 +281,12 @@ export default function RequestHeaders() {
 					Failed to parse request headers text
 				</FailurePrompt>
 			</If>
-			<If condition={promptSuccess}>
+			<If condition={promptSuccess && !parsingError}>
 				<SuccessPrompt data-testid='success-prompt'>
 					Request headers saved for submission
 				</SuccessPrompt>
 			</If>
-			<If condition={inputIndex.length !== 0}>
+			<If condition={!parsingError && inputIndex.length !== 0}>
 				<SaveButton
 					type='submit'
 					dataTestid='save-requestHeader-button'

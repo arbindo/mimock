@@ -422,6 +422,7 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                 >
                   <div
                     class="block' w-full"
+                    data-testid="header-matching-toggle"
                   >
                     <div
                       class="flex justify-start items-center mb-5 aligm-middle"
@@ -450,6 +451,7 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                       </span>
                       <div
                         class="font-sans text-lg text-gray-600 mx-2"
+                        data-testid="header-match-label"
                       >
                         Partial Matching
                       </div>
@@ -476,6 +478,7 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                       </svg>
                       <div
                         class="text-sm font-light text-gray-500 mx-2 text-justify"
+                        data-testid="header-match-hint"
                       >
                         Performs a loose comparison and validates only the custom headers configured below while sending a request to the mocked endpoint. Other headers sent in the request will be ignored
                       </div>
@@ -511,6 +514,31 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                         class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                       />
                     </button>
+                    <button
+                      aria-pressed="false"
+                      class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeMedium MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-d9c359-MuiButtonBase-root-MuiToggleButton-root"
+                      data-testid="view-mode-code"
+                      tabindex="0"
+                      type="button"
+                      value="code"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height="1em"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 16 16"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M4.708 5.578L2.061 8.224l2.647 2.646-.708.708-3-3V7.87l3-3 .708.708zm7-.708L11 5.578l2.647 2.646L11 10.87l.708.708 3-3V7.87l-3-3zM4.908 13l.894.448 5-10L9.908 3l-5 10z"
+                        />
+                      </svg>
+                      <span
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                      />
+                    </button>
                   </div>
                   <button
                     aria-label="Add new header"
@@ -539,15 +567,63 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                     />
                   </button>
                   <div
-                    class="flex items-center align-middle mx-auto justify-center"
-                    data-testid="no-header"
+                    class="flex items-center align-middle my-4"
                   >
                     <div
-                      class="font-sans font-light text-lg text-gray-600 mx-4 -mt-2"
+                      class="block h-12 min-h-12 max-h-12"
                     >
-                      No headers added yet
+                      <input
+                        class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+                        data-testid="requestHeader_0_key"
+                        placeholder="key"
+                        type="text"
+                        value=""
+                      />
                     </div>
+                    <div
+                      class="block h-12 min-h-12 max-h-12"
+                    >
+                      <input
+                        class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+                        data-testid="requestHeader_0_value"
+                        placeholder="value"
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                    <button
+                      aria-label="Remove header"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+                      data-mui-internal-clone-element="true"
+                      data-testid="remove-header-tooltip-0"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <svg
+                        class="cursor-pointer text-red-600 font-sans text-3xl"
+                        fill="currentColor"
+                        height="1em"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 1024 1024"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm192 472c0 4.4-3.6 8-8 8H328c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h368c4.4 0 8 3.6 8 8v48z"
+                        />
+                      </svg>
+                      <span
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                      />
+                    </button>
                   </div>
+                  <button
+                    class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+                    data-testid="save-requestHeader-button"
+                  >
+                    Save
+                  </button>
                 </form>
               </div>
             </div>

@@ -19,7 +19,7 @@ export default function ToggleMatchingMode() {
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
 
 	return (
-		<ToggleModeWrapper>
+		<ToggleModeWrapper data-testid='header-matching-toggle'>
 			<SwitchWrapper>
 				<Switch
 					data-testid='header-matching-switch'
@@ -32,7 +32,7 @@ export default function ToggleMatchingMode() {
 						});
 					}}
 				/>
-				<SwitchLabel>
+				<SwitchLabel data-testid='header-match-label'>
 					{mockData.shouldDoExactHeaderMatching
 						? 'Exact Matching'
 						: 'Partial Matching'}
@@ -40,7 +40,7 @@ export default function ToggleMatchingMode() {
 			</SwitchWrapper>
 			<HintWrapper>
 				<HintIcon />
-				<Hint>
+				<Hint data-testid='header-match-hint'>
 					{mockData.shouldDoExactHeaderMatching
 						? 'Expects all headers to match exactly when sending a request to the mocked endpoint. Do not use this if your client could send additional request headers'
 						: 'Performs a loose comparison and validates only the custom headers configured below while sending a request to the mocked endpoint. Other headers sent in the request will be ignored'}

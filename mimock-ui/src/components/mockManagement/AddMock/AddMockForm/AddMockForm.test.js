@@ -18,6 +18,7 @@ describe('AddMockFrom', () => {
 					name: 'Tester',
 					httpMethod: '',
 					route: '',
+					requestHeader: '',
 				},
 				mockedRecoilFn,
 			];
@@ -43,6 +44,7 @@ describe('AddMockFrom', () => {
 		expect(getByTestId('http-method-selector')).toBeInTheDocument();
 
 		expect(getByTestId('query-param-form')).toBeInTheDocument();
+		expect(getByTestId('request-header-form')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});
