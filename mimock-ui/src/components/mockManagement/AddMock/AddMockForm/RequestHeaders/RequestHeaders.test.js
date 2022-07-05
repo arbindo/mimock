@@ -158,10 +158,6 @@ describe('RequestHeaders', () => {
 		expect(queryByTestId('success-prompt')).not.toBeInTheDocument();
 
 		await act(() => {
-			fireEvent.click(getByTestId('add-header-button'));
-		});
-
-		await act(() => {
 			fireEvent.change(getByTestId('requestHeader_0_key'), {
 				target: { value: 'Authorization' },
 			});
@@ -204,10 +200,10 @@ describe('RequestHeaders', () => {
 		});
 
 		await act(async () => {
-			await fireEvent.change(getByTestId('requestHeader_2_key'), {
+			fireEvent.change(getByTestId('requestHeader_2_key'), {
 				target: { value: 'logging' },
 			});
-			await fireEvent.change(getByTestId('requestHeader_2_value'), {
+			fireEvent.change(getByTestId('requestHeader_2_value'), {
 				target: { value: 'DEBUG' },
 			});
 		});
@@ -249,10 +245,6 @@ describe('RequestHeaders', () => {
 		expect(queryByTestId('success-prompt')).not.toBeInTheDocument();
 
 		await act(() => {
-			fireEvent.click(getByTestId('add-header-button'));
-		});
-
-		await act(() => {
 			fireEvent.click(getByTestId('view-mode-code'));
 		});
 
@@ -277,7 +269,7 @@ describe('RequestHeaders', () => {
 		});
 
 		await act(async () => {
-			await fireEvent.click(getByTestId('view-mode-text'));
+			fireEvent.click(getByTestId('view-mode-text'));
 		});
 
 		expect(getByTestId('requestHeader_0_key')).toHaveValue('Authorization');
