@@ -692,9 +692,11 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                 >
                   <div
                     class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
+                    data-testid="request-body-type-wrapper"
                   >
                     <div
                       class="font-sans text-gray-600 mx-4 text-justify font-semibold"
+                      data-testid="request-body-type-label"
                     >
                       Request body type
                     </div>

@@ -14,8 +14,10 @@ export default function RequestBodyType() {
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
 
 	return (
-		<RequestBodyTypeWrapper>
-			<TypeLabel>Request body type</TypeLabel>
+		<RequestBodyTypeWrapper data-testid='request-body-type-wrapper'>
+			<TypeLabel data-testid='request-body-type-label'>
+				Request body type
+			</TypeLabel>
 			<Select
 				options={types}
 				defaultValue={types[0]}
