@@ -631,6 +631,178 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
         </div>
       </div>
     </div>
+    <div
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+    >
+      <div
+        aria-controls="panel1a-content"
+        aria-expanded="false"
+        class="MuiButtonBase-root MuiAccordionSummary-root MuiAccordionSummary-gutters css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root"
+        id="panel1a-header"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="MuiAccordionSummary-content MuiAccordionSummary-contentGutters css-o4b71y-MuiAccordionSummary-content"
+        >
+          <label
+            class="w-11/12 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
+          >
+            Request Body
+          </label>
+        </div>
+        <div
+          class="MuiAccordionSummary-expandIconWrapper css-yw020d-MuiAccordionSummary-expandIconWrapper"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ExpandMoreIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
+        style="min-height: 0px;"
+      >
+        <div
+          class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
+        >
+          <div
+            class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
+          >
+            <div
+              aria-labelledby="panel1a-header"
+              class="MuiAccordion-region"
+              id="panel1a-content"
+              role="region"
+            >
+              <div
+                class="MuiAccordionDetails-root css-15v22id-MuiAccordionDetails-root"
+              >
+                <form
+                  class="w-full"
+                  data-testid="request-body-form"
+                >
+                  <div
+                    class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
+                  >
+                    <div
+                      class="font-sans text-gray-600 mx-4 text-justify font-semibold"
+                    >
+                      Request body type
+                    </div>
+                    <select
+                      class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+                      data-testid="request-body-type"
+                    >
+                      <option
+                        data-testid="options"
+                        selected=""
+                        value="application/json"
+                      >
+                        application/json
+                      </option>
+                      <option
+                        data-testid="options"
+                        value="application/x-www-form-urlencoded"
+                      >
+                        application/x-www-form-urlencoded
+                      </option>
+                      <option
+                        data-testid="options"
+                        value="multipart/form-data"
+                      >
+                        multipart/form-data
+                      </option>
+                    </select>
+                  </div>
+                  <div
+                    class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
+                    data-testid="view-mode"
+                    role="group"
+                  >
+                    <button
+                      aria-pressed="true"
+                      class="MuiButtonBase-root MuiToggleButton-root Mui-selected MuiToggleButton-sizeMedium MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-d9c359-MuiButtonBase-root-MuiToggleButton-root"
+                      data-testid="view-mode-text"
+                      tabindex="0"
+                      type="button"
+                      value="text"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height="1em"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 16 16"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2 10V9h12v1H2zm0-4h12v1H2V6zm12-3v1H2V3h12zM2 12v1h12v-1H2z"
+                        />
+                      </svg>
+                      <span
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                  <button
+                    aria-label="Add new request body"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+                    data-mui-internal-clone-element="true"
+                    data-testid="add-request-body-button"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <svg
+                      class="cursor-pointer text-green-600 font-sans text-3xl"
+                      fill="currentColor"
+                      height="1em"
+                      stroke="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 1024 1024"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm192 472c0 4.4-3.6 8-8 8H544v152c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V544H328c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h152V328c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v152h152c4.4 0 8 3.6 8 8v48z"
+                      />
+                    </svg>
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                  <div
+                    class="flex items-center align-middle mx-auto justify-center"
+                    data-testid="no-request-body"
+                  >
+                    <div
+                      class="font-sans font-light text-lg text-gray-600 mx-4 -mt-2"
+                    >
+                      No request body fields added yet
+                    </div>
+                  </div>
+                  <div
+                    class="font-sans mb-4 text-red-600"
+                    data-testid="parsing-error"
+                  >
+                    Failed to parse request body text
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

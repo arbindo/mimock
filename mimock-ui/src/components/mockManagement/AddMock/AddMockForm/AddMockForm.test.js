@@ -45,6 +45,7 @@ describe('AddMockFrom', () => {
 
 		expect(getByTestId('query-param-form')).toBeInTheDocument();
 		expect(getByTestId('request-header-form')).toBeInTheDocument();
+		expect(getByTestId('request-body-form')).toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();
 	});

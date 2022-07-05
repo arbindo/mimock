@@ -457,7 +457,7 @@ exports[`RequestHeaders should add new header using text input 1`] = `
       <textarea
         class="bg-gray-50 outline-blue-200 border-blue-200 border-2 p-2 text-gray-800 font-sans rounded-md w-full mx-auto"
         data-testid="request-header-text-input"
-        placeholder="Enter request headers has JSON"
+        placeholder="Enter request headers as JSON"
         rows="10"
         type="text"
       >
@@ -830,7 +830,7 @@ exports[`RequestHeaders should fill in request headers when headers are already 
       <textarea
         class="bg-gray-50 outline-blue-200 border-blue-200 border-2 p-2 text-gray-800 font-sans rounded-md w-full mx-auto"
         data-testid="request-header-text-input"
-        placeholder="Enter request headers has JSON"
+        placeholder="Enter request headers as JSON"
         rows="10"
         type="text"
       >
