@@ -9,4 +9,5 @@ export const SelectWrapper = tw.select`
     border-2
     border-gray-200
     outline-none
+    ${(props) => (props.$width ? props.$width : '')}
 `;

@@ -2,6 +2,7 @@ import React from 'react';
 import QueryParam from './QueryParams';
 import RequestHeaders from './RequestHeaders';
 import RequestBody from './RequestBody';
+import Response from './Response';
 
 export const addMockFormInputData = [
 	{
@@ -110,5 +111,10 @@ export const accordionData = [
 		title: 'Request Body',
 		id: 'requestBody',
 		content: <RequestBody />,
+	},
+	{
+		title: 'Response',
+		id: 'response',
+		content: <Response />,
 	},
 ];
