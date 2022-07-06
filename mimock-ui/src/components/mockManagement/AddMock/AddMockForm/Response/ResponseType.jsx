@@ -1,43 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Select } from 'styles';
-import { useRecoilState } from 'recoil';
-import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import { getResponseTypes } from 'services/staticRecords/getResponseContentTypes.service';
 import { ResponseTypeWrapper, TypeLabel } from './Response.style';
 
-function ResponseType({ type }) {
-	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
-	const [responseTypes, setResponseTypes] = useState([]);
+function ResponseType({ type, responseContentType, setResponseContentType }) {
+	const [responseTypes, setResponseTypes] = useState(null);
+	const [filteredResponseTypes, setFilteredResponseTypes] = useState([]);
+	const [defaultResponseType, setDefaultResponseType] =
+		useState(responseContentType);
 
 	useEffect(() => {
-		setMockData({
-			...mockData,
-			responseContentType:
-				type === 'text' ? 'application/json' : 'application/pdf',
+		getResponseTypes().then((types) => {
+			setResponseTypes(types);
 		});
+	}, []);
 
-		getResponseTypes().then((responseTypes) => {
-			setResponseTypes(responseTypes[type]);
-		});
-	}, [type]);
+	useEffect(() => {
+		if (type && responseTypes) {
+			const filteredTypes = responseTypes[type];
+			filteredTypes.includes(defaultResponseType)
+				? setDefaultResponseType(defaultResponseType)
+				: setDefaultResponseType(filteredTypes[0]);
+			setFilteredResponseTypes(filteredTypes);
+		}
+	}, [type, responseTypes]);
 
 	return (
-		<If condition={type && responseTypes}>
+		<If condition={type && filteredResponseTypes}>
 			<ResponseTypeWrapper data-testid='response-type-wrapper'>
 				<TypeLabel data-testid='response-type-label'>Response Type</TypeLabel>
-				<Select
-					options={responseTypes}
-					defaultValue={
-						type === 'text' ? 'application/json' : 'application/pdf'
-					}
-					dataTestId='response-type'
-					width='w-1/3'
+				<Autocomplete
+					disablePortal
+					id='response-types'
+					options={filteredResponseTypes}
+					defaultValue={defaultResponseType}
+					value={defaultResponseType}
+					sx={{ width: 300 }}
+					renderInput={(params) => (
+						<TextField {...params} label='Response type' />
+					)}
 					onChange={(e) => {
-						setMockData({
-							...mockData,
-							responseContentType: e.target.value,
-						});
+						setResponseContentType(e.target.value);
 					}}
 				/>
 			</ResponseTypeWrapper>
@@ -47,6 +52,8 @@ function ResponseType({ type }) {
 
 ResponseType.propTypes = {
 	type: PropTypes.string.isRequired,
+	responseContentType: PropTypes.string.isRequired,
+	setResponseContentType: PropTypes.func.isRequired,
 };
 
 export default ResponseType;

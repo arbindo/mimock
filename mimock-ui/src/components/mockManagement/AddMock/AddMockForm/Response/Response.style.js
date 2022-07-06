@@ -41,26 +41,23 @@ export const FileUploadWrapper = tw.div`
 `;
 
 export const UploadContainer = tw.div`
-    text-center
+    block
     border-2
-    p-6
+    p-8
     border-dashed
-    border-2
     rounded-md
     border-gray-400
-    font-sans
-    font-semibold
-    text-gray-400
     shadow-md
     outline-blue-200
     cursor-pointer
+
     active:bg-blue-50
     hover:bg-blue-50
+    hover:border-blue-200
     active:text-blue-500
 `;
 
 export const UploadInput = tw.input`
-    w-full
 `;
 
 export const UploadedFile = tw.div`
@@ -79,10 +76,19 @@ export const Label = tw.div`
     font-sans
     font-semibold
     mx-4
+    hover:text-blue-500
 `;
 
 export const File = tw.div`
     font-sans
     text-justify
     text-gray-600
+`;
+
+export const UploadMessage = tw.div`
+    font-sans
+    text-gray-600
+    text-center
+    mx-auto
+    hover:text-blue-500
 `;

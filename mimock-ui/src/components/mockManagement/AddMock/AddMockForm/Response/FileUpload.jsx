@@ -8,6 +8,7 @@ import {
 	UploadContainer,
 	UploadInput,
 	UploadedFile,
+	UploadMessage,
 	Label,
 	File,
 } from './Response.style';
@@ -38,7 +39,7 @@ export default function FileUpload() {
 				<When condition={mockData.binaryFile === ''}>
 					<UploadContainer {...getRootProps({ className: 'dropzone' })}>
 						<UploadInput {...getInputProps()} />
-						<p>Drag and drop the required file</p>
+						<UploadMessage>Drag and drop the file to upload</UploadMessage>
 					</UploadContainer>
 				</When>
 				<Otherwise>
