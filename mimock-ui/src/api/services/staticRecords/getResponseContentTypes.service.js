@@ -15,8 +15,8 @@ export const getResponseTypes = async () => {
 			});
 
 			return {
-				text: textTypes,
-				binary: binaryTypes,
+				TEXTUAL_RESPONSE: textTypes,
+				BINARY_RESPONSE: binaryTypes,
 			};
 		})
 		.catch((err) => Promise.reject(err));

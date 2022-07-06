@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import IconButton from '@mui/material/IconButton';
-import { useRecoilState } from 'recoil';
-import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
 import {
 	FileUploadWrapper,
 	UploadContainer,
@@ -14,18 +13,10 @@ import {
 } from './Response.style';
 import { DeleteIcon, ActionToolTip } from '../FormCommon.style';
 
-export default function FileUpload() {
-	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
-
-	const onDrop = useCallback(
-		(acceptedFiles) => {
-			setMockData({
-				...mockData,
-				binaryFile: acceptedFiles[0],
-			});
-		},
-		[setMockData]
-	);
+function FileUpload({ binaryFile, setBinaryFile }) {
+	const onDrop = useCallback((acceptedFiles) => {
+		setBinaryFile(acceptedFiles[0]);
+	}, []);
 
 	const { getRootProps, getInputProps } = useDropzone({
 		multiple: false,
@@ -36,17 +27,17 @@ export default function FileUpload() {
 	return (
 		<FileUploadWrapper data-testid='file-upload'>
 			<Choose>
-				<When condition={mockData.binaryFile === ''}>
+				<When condition={!binaryFile}>
 					<UploadContainer {...getRootProps({ className: 'dropzone' })}>
 						<UploadInput {...getInputProps()} />
 						<UploadMessage>Drag and drop the file to upload</UploadMessage>
 					</UploadContainer>
 				</When>
 				<Otherwise>
-					<UploadedFile key={mockData.binaryFile.path}>
+					<UploadedFile key={binaryFile.path}>
 						<Label>Uploaded files</Label>
 						<File>
-							{mockData.binaryFile.path} - {mockData.binaryFile.size} bytes
+							{binaryFile.path} - {binaryFile.size} bytes
 						</File>
 						<ActionToolTip
 							data-testid={`remove-file`}
@@ -56,10 +47,7 @@ export default function FileUpload() {
 						>
 							<IconButton
 								onClick={() => {
-									setMockData({
-										...mockData,
-										binaryFile: '',
-									});
+									setBinaryFile(null);
 								}}
 							>
 								<DeleteIcon />
@@ -71,3 +59,10 @@ export default function FileUpload() {
 		</FileUploadWrapper>
 	);
 }
+
+FileUpload.propTypes = {
+	binaryFile: PropTypes.object,
+	setBinaryFile: PropTypes.func.isRequired,
+};
+
+export default FileUpload;

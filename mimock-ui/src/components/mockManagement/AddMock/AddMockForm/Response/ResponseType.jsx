@@ -20,7 +20,7 @@ function ResponseType({ type, responseContentType, setResponseContentType }) {
 	useEffect(() => {
 		if (type && responseTypes) {
 			const filteredTypes = responseTypes[type];
-			filteredTypes.includes(defaultResponseType)
+			filteredTypes?.includes(defaultResponseType)
 				? setDefaultResponseType(defaultResponseType)
 				: setDefaultResponseType(filteredTypes[0]);
 			setFilteredResponseTypes(filteredTypes);
@@ -33,6 +33,7 @@ function ResponseType({ type, responseContentType, setResponseContentType }) {
 				<TypeLabel data-testid='response-type-label'>Response Type</TypeLabel>
 				<Autocomplete
 					disablePortal
+					data-testid='response-type-autocomplete'
 					id='response-types'
 					options={filteredResponseTypes}
 					defaultValue={defaultResponseType}

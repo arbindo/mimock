@@ -874,14 +874,13 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                         class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
                       >
                         <span
-                          class="MuiRadio-root MuiRadio-colorPrimary MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary PrivateSwitchBase-root Mui-checked css-vqmohf-MuiButtonBase-root-MuiRadio-root"
+                          class="MuiRadio-root MuiRadio-colorPrimary MuiButtonBase-root MuiRadio-root MuiRadio-colorPrimary PrivateSwitchBase-root css-vqmohf-MuiButtonBase-root-MuiRadio-root"
                         >
                           <input
-                            checked=""
                             class="PrivateSwitchBase-input css-1m9pwf3"
                             name=":r4:"
                             type="radio"
-                            value="text"
+                            value="TEXTUAL_RESPONSE"
                           />
                           <span
                             class="css-hyxlzm"
@@ -899,7 +898,7 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                             </svg>
                             <svg
                               aria-hidden="true"
-                              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-11zohuh-MuiSvgIcon-root"
+                              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1hhw7if-MuiSvgIcon-root"
                               data-testid="RadioButtonCheckedIcon"
                               focusable="false"
                               viewBox="0 0 24 24"
@@ -929,7 +928,7 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                             class="PrivateSwitchBase-input css-1m9pwf3"
                             name=":r4:"
                             type="radio"
-                            value="binary"
+                            value="BINARY_RESPONSE"
                           />
                           <span
                             class="css-hyxlzm"
@@ -970,92 +969,27 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                     </div>
                   </div>
                   <div
-                    class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
-                    data-testid="response-type-wrapper"
+                    class="w-full"
+                    data-testid="file-upload"
                   >
                     <div
-                      class="font-sans text-gray-600 mx-4 text-justify font-semibold"
-                      data-testid="response-type-label"
+                      class="block border-2 p-8 border-dashed rounded-md border-gray-400 shadow-md outline-blue-200 cursor-pointer active:bg-blue-50 hover:bg-blue-50 hover:border-blue-200 active:text-blue-500 dropzone"
+                      role="presentation"
+                      tabindex="0"
                     >
-                      Response Type
-                    </div>
-                    <div
-                      aria-expanded="false"
-                      class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-viou3o-MuiAutocomplete-root"
-                      role="combobox"
-                    >
+                      <input
+                        class=""
+                        style="display: none;"
+                        tabindex="-1"
+                        type="file"
+                      />
                       <div
-                        class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                        class="font-sans text-gray-600 text-center mx-auto hover:text-blue-500"
                       >
-                        <label
-                          class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
-                          data-shrink="false"
-                          for="response-types"
-                          id="response-types-label"
-                        >
-                          Response type
-                        </label>
-                        <div
-                          class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root"
-                        >
-                          <input
-                            aria-autocomplete="list"
-                            aria-invalid="false"
-                            autocapitalize="none"
-                            autocomplete="off"
-                            class="MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-nxo287-MuiInputBase-input-MuiOutlinedInput-input"
-                            id="response-types"
-                            spellcheck="false"
-                            type="text"
-                            value=""
-                          />
-                          <div
-                            class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
-                          >
-                            <button
-                              aria-label="Open"
-                              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-popupIndicator css-qzbt6i-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
-                              tabindex="-1"
-                              title="Open"
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden="true"
-                                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                                data-testid="ArrowDropDownIcon"
-                                focusable="false"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  d="M7 10l5 5 5-5z"
-                                />
-                              </svg>
-                              <span
-                                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                              />
-                            </button>
-                          </div>
-                          <fieldset
-                            aria-hidden="true"
-                            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                          >
-                            <legend
-                              class="css-173wfxe"
-                            >
-                              <span>
-                                Response type
-                              </span>
-                            </legend>
-                          </fieldset>
-                        </div>
+                        Drag and drop the file to upload
                       </div>
                     </div>
                   </div>
-                  <textarea
-                    class="bg-gray-50 outline-blue-200 border-blue-200 border-2 p-2 text-gray-800 font-sans rounded-md w-full mx-auto"
-                    cols="10"
-                    rows="5"
-                  />
                 </form>
               </div>
             </div>

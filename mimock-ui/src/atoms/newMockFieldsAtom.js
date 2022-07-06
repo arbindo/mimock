@@ -8,6 +8,7 @@ const newMockFieldsAtom = atom({
 		route: '',
 		httpMethod: 'GET',
 		responseContentType: 'application/json',
+		responseType: 'TEXTUAL_RESPONSE',
 		queryParams: '',
 		shouldDoExactHeaderMatching: false,
 		requestHeader: '',
@@ -16,7 +17,7 @@ const newMockFieldsAtom = atom({
 		statusCode: 200,
 		expectedTextResponse: '',
 		responseHeaders: '',
-		binaryFile: '',
+		binaryFile: null,
 	},
 });
 

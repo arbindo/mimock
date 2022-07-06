@@ -12,8 +12,13 @@ import { ResponseWrapper, TextResponse } from './Response.style';
 import { SaveButton, SuccessPrompt } from '../FormCommon.style';
 
 export default function Response() {
-	const [responseType, setResponseType] = useState('text');
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
+
+	const [responseType, setResponseType] = useState(mockData.responseType);
+	const [textResponse, setTextResponse] = useState(
+		mockData.expectedTextResponse
+	);
+	const [binaryFile, setBinaryFile] = useState(mockData.binaryFile);
 
 	const [responseContentType, setResponseContentType] = useState(
 		mockData.responseContentType
@@ -22,12 +27,14 @@ export default function Response() {
 
 	const changeResponseType = (e) => {
 		setResponseType(e.target.value);
-		if (e.target.value === 'text') {
+		if (e.target.value === 'TEXTUAL_RESPONSE') {
+			setBinaryFile(null);
 			setMockData({
 				...mockData,
 				binaryFile: '',
 			});
 		} else {
+			setTextResponse('');
 			setMockData({
 				...mockData,
 				expectedTextResponse: '',
@@ -38,15 +45,21 @@ export default function Response() {
 	const saveResponse = (e) => {
 		e.preventDefault();
 
-		setMockData({
-			...mockData,
-			expectedTextResponse:
-				responseType === 'text' ? mockData.expectedTextResponse : '',
-			binaryFile: responseType === 'file' ? mockData.binaryFile : '',
-		});
+		if (responseType === 'BINARY_RESPONSE') {
+			setMockData({
+				...mockData,
+				expectedTextResponse: '',
+				binaryFile: binaryFile,
+			});
+		} else {
+			setMockData({
+				...mockData,
+				binaryFile: '',
+				expectedTextResponse: textResponse,
+			});
+		}
 
 		setShowSuccess(true);
-
 		setTimeout(() => {
 			setShowSuccess(false);
 		}, 3000);
@@ -57,12 +70,12 @@ export default function Response() {
 			<FormControl>
 				<RadioGroup row value={responseType} onChange={changeResponseType}>
 					<FormControlLabel
-						value='text'
+						value='TEXTUAL_RESPONSE'
 						control={<Radio />}
 						label='Text Response'
 					/>
 					<FormControlLabel
-						value='binary'
+						value='BINARY_RESPONSE'
 						control={<Radio />}
 						label='Binary Response'
 					/>
@@ -74,21 +87,18 @@ export default function Response() {
 				setResponseContentType={setResponseContentType}
 			/>
 			<Choose>
-				<When condition={responseType === 'text'}>
+				<When condition={responseType === 'TEXTUAL_RESPONSE'}>
 					<TextResponse
 						rows={5}
 						cols={10}
-						value={mockData.expectedTextResponse}
+						value={textResponse}
 						onChange={(e) => {
-							setMockData({
-								...mockData,
-								expectedTextResponse: e.target.value,
-							});
+							setTextResponse(e.target.value);
 						}}
 					/>
 				</When>
 				<Otherwise>
-					<FileUpload />
+					<FileUpload binaryFile={binaryFile} setBinaryFile={setBinaryFile} />
 				</Otherwise>
 			</Choose>
 			<If condition={showSuccess}>
@@ -96,7 +106,7 @@ export default function Response() {
 					Response saved successfully for submission
 				</SuccessPrompt>
 			</If>
-			<If condition={mockData.expectedTextResponse || mockData.binaryFile}>
+			<If condition={textResponse || binaryFile}>
 				<SaveButton
 					type='submit'
 					dataTestid='save-requestBody-button'
