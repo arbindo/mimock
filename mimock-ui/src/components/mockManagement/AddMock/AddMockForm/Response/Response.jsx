@@ -48,12 +48,14 @@ export default function Response() {
 		if (responseType === 'BINARY_RESPONSE') {
 			setMockData({
 				...mockData,
+				responseContentType,
 				expectedTextResponse: '',
 				binaryFile: binaryFile,
 			});
 		} else {
 			setMockData({
 				...mockData,
+				responseContentType,
 				binaryFile: '',
 				expectedTextResponse: textResponse,
 			});
@@ -66,9 +68,15 @@ export default function Response() {
 	};
 
 	return (
-		<ResponseWrapper onSubmit={saveResponse}>
+		<ResponseWrapper data-testid='response-wrapper' onSubmit={saveResponse}>
 			<FormControl>
-				<RadioGroup row value={responseType} onChange={changeResponseType}>
+				<RadioGroup
+					row
+					data-testid='response-type-radio'
+					value={responseType}
+					onChange={changeResponseType}
+					name='responseType-radio-group'
+				>
 					<FormControlLabel
 						value='TEXTUAL_RESPONSE'
 						control={<Radio />}
@@ -89,6 +97,7 @@ export default function Response() {
 			<Choose>
 				<When condition={responseType === 'TEXTUAL_RESPONSE'}>
 					<TextResponse
+						data-testid='text-response'
 						rows={5}
 						cols={10}
 						value={textResponse}
@@ -102,14 +111,14 @@ export default function Response() {
 				</Otherwise>
 			</Choose>
 			<If condition={showSuccess}>
-				<SuccessPrompt>
+				<SuccessPrompt data-testid='success-prompt'>
 					Response saved successfully for submission
 				</SuccessPrompt>
 			</If>
 			<If condition={textResponse || binaryFile}>
 				<SaveButton
 					type='submit'
-					dataTestid='save-requestBody-button'
+					dataTestid='save-response-button'
 					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'

@@ -29,15 +29,17 @@ function FileUpload({ binaryFile, setBinaryFile }) {
 			<Choose>
 				<When condition={!binaryFile}>
 					<UploadContainer {...getRootProps({ className: 'dropzone' })}>
-						<UploadInput {...getInputProps()} />
-						<UploadMessage>Drag and drop the file to upload</UploadMessage>
+						<UploadInput data-testid='upload-input' {...getInputProps()} />
+						<UploadMessage data-testid='upload-message'>
+							Drag and drop to upload the file
+						</UploadMessage>
 					</UploadContainer>
 				</When>
 				<Otherwise>
-					<UploadedFile key={binaryFile.path}>
-						<Label>Uploaded files</Label>
-						<File>
-							{binaryFile.path} - {binaryFile.size} bytes
+					<UploadedFile data-testid='uploaded-file'>
+						<Label data-testid='uploaded-label'>Uploaded files</Label>
+						<File data-testid='uploaded-file-details'>
+							{binaryFile.name} - {binaryFile.size} bytes
 						</File>
 						<ActionToolTip
 							data-testid={`remove-file`}

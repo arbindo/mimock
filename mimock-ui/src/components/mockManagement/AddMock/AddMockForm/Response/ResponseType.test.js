@@ -14,7 +14,6 @@ describe('ResponseType', () => {
 		});
 
 		let tree;
-
 		await act(async () => {
 			tree = render(
 				<ResponseType
@@ -45,10 +44,10 @@ describe('ResponseType', () => {
 		let tree;
 
 		await act(async () => {
-			tree = render(
+			tree = await render(
 				<ResponseType
 					type='BINARY_RESPONSE'
-					responseContentType='text/plain'
+					responseContentType='application/octet-stream'
 					setResponseContentType={jest.fn()}
 				/>
 			);

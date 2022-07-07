@@ -862,12 +862,14 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
               >
                 <form
                   class="w-full"
+                  data-testid="response-wrapper"
                 >
                   <div
                     class="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
                   >
                     <div
                       class="MuiFormGroup-root MuiFormGroup-row css-qfz70r-MuiFormGroup-root"
+                      data-testid="response-type-radio"
                       role="radiogroup"
                     >
                       <label
@@ -878,7 +880,7 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                         >
                           <input
                             class="PrivateSwitchBase-input css-1m9pwf3"
-                            name=":r4:"
+                            name="responseType-radio-group"
                             type="radio"
                             value="TEXTUAL_RESPONSE"
                           />
@@ -926,7 +928,7 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                         >
                           <input
                             class="PrivateSwitchBase-input css-1m9pwf3"
-                            name=":r4:"
+                            name="responseType-radio-group"
                             type="radio"
                             value="BINARY_RESPONSE"
                           />
@@ -979,14 +981,16 @@ exports[`AddMockFrom should render AddMockForm with all input fields 1`] = `
                     >
                       <input
                         class=""
+                        data-testid="upload-input"
                         style="display: none;"
                         tabindex="-1"
                         type="file"
                       />
                       <div
                         class="font-sans text-gray-600 text-center mx-auto hover:text-blue-500"
+                        data-testid="upload-message"
                       >
-                        Drag and drop the file to upload
+                        Drag and drop to upload the file
                       </div>
                     </div>
                   </div>

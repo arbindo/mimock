@@ -6,10 +6,8 @@ import { getResponseTypes } from 'services/staticRecords/getResponseContentTypes
 import { ResponseTypeWrapper, TypeLabel } from './Response.style';
 
 function ResponseType({ type, responseContentType, setResponseContentType }) {
-	const [responseTypes, setResponseTypes] = useState(null);
 	const [filteredResponseTypes, setFilteredResponseTypes] = useState([]);
-	const [defaultResponseType, setDefaultResponseType] =
-		useState(responseContentType);
+	const [responseTypes, setResponseTypes] = useState(null);
 
 	useEffect(() => {
 		getResponseTypes().then((types) => {
@@ -20,12 +18,15 @@ function ResponseType({ type, responseContentType, setResponseContentType }) {
 	useEffect(() => {
 		if (type && responseTypes) {
 			const filteredTypes = responseTypes[type];
-			filteredTypes?.includes(defaultResponseType)
-				? setDefaultResponseType(defaultResponseType)
-				: setDefaultResponseType(filteredTypes[0]);
 			setFilteredResponseTypes(filteredTypes);
+
+			const defaultType = filteredTypes.includes(responseContentType)
+				? responseContentType
+				: filteredTypes[0];
+			!filteredTypes.includes(responseContentType);
+			setResponseContentType(defaultType);
 		}
-	}, [type, responseTypes]);
+	}, [type, responseTypes, responseContentType]);
 
 	return (
 		<If condition={type && filteredResponseTypes}>
@@ -36,14 +37,13 @@ function ResponseType({ type, responseContentType, setResponseContentType }) {
 					data-testid='response-type-autocomplete'
 					id='response-types'
 					options={filteredResponseTypes}
-					defaultValue={defaultResponseType}
-					value={defaultResponseType}
+					value={responseContentType || ''}
 					sx={{ width: 300 }}
 					renderInput={(params) => (
 						<TextField {...params} label='Response type' />
 					)}
-					onChange={(e) => {
-						setResponseContentType(e.target.value);
+					onChange={(e, val) => {
+						setResponseContentType(val);
 					}}
 				/>
 			</ResponseTypeWrapper>
