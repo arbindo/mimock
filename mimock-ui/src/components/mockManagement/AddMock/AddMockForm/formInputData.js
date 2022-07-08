@@ -3,6 +3,7 @@ import QueryParam from './QueryParams';
 import RequestHeaders from './RequestHeaders';
 import RequestBody from './RequestBody';
 import Response from './Response';
+import ResponseHeaders from './ResponseHeaders';
 
 export const addMockFormInputData = [
 	{
@@ -116,5 +117,10 @@ export const accordionData = [
 		title: 'Response',
 		id: 'response',
 		content: <Response />,
+	},
+	{
+		title: 'Response Headers',
+		id: 'responseHeaders',
+		content: <ResponseHeaders />,
 	},
 ];
