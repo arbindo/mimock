@@ -55,7 +55,7 @@ describe('FileUpload', () => {
 		expect(queryByTestId('upload-input')).not.toBeInTheDocument();
 
 		expect(getByTestId('uploaded-file')).toBeInTheDocument();
-		expect(getByTestId('uploaded-label')).toHaveTextContent('Uploaded files');
+		expect(getByTestId('uploaded-label')).toHaveTextContent('Uploaded file');
 
 		expect(container).toMatchSnapshot();
 	});
@@ -79,7 +79,7 @@ describe('FileUpload', () => {
 		expect(queryByTestId('upload-input')).not.toBeInTheDocument();
 
 		expect(getByTestId('uploaded-file')).toBeInTheDocument();
-		expect(getByTestId('uploaded-label')).toHaveTextContent('Uploaded files');
+		expect(getByTestId('uploaded-label')).toHaveTextContent('Uploaded file');
 		expect(getByTestId('uploaded-file-details')).toHaveTextContent(
 			'ping.png - 4 bytes'
 		);

@@ -37,7 +37,7 @@ function FileUpload({ binaryFile, setBinaryFile }) {
 				</When>
 				<Otherwise>
 					<UploadedFile data-testid='uploaded-file'>
-						<Label data-testid='uploaded-label'>Uploaded files</Label>
+						<Label data-testid='uploaded-label'>Uploaded file</Label>
 						<File data-testid='uploaded-file-details'>
 							{binaryFile.name} - {binaryFile.size} bytes
 						</File>
