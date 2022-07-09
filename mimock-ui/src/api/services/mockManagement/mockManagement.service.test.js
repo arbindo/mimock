@@ -68,7 +68,9 @@ describe('Mock management service', () => {
 			const response = await getMockById(1, 'token');
 
 			expect(get).toHaveBeenCalledTimes(1);
-			expect(get).toHaveBeenCalledWith('/mocks/1', 'token');
+			expect(get).toHaveBeenCalledWith('/mocks/1', {
+				showFullPageLoader: true,
+			});
 
 			expect(response).toBeTruthy();
 			expect(response.data).toBe(expectedMock);
@@ -79,7 +81,9 @@ describe('Mock management service', () => {
 
 			await getMockById(1, 'token').catch((err) => {
 				expect(get).toHaveBeenCalledTimes(1);
-				expect(get).toHaveBeenCalledWith('/mocks/1', 'token');
+				expect(get).toHaveBeenCalledWith('/mocks/1', {
+					showFullPageLoader: true,
+				});
 
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);
@@ -149,8 +153,8 @@ describe('Mock management service', () => {
 			expect(put).toHaveBeenCalledWith(
 				'/mocks/1',
 				requestData,
-				'token',
-				'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03'
+				'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03',
+				{ showFullPageLoader: true }
 			);
 
 			expect(response).toBeTruthy();
@@ -165,8 +169,8 @@ describe('Mock management service', () => {
 				expect(put).toHaveBeenCalledWith(
 					'/mocks/1',
 					new FormData(),
-					'token',
-					'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03'
+					'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03',
+					{ showFullPageLoader: true }
 				);
 
 				expect(err).toBeTruthy();
