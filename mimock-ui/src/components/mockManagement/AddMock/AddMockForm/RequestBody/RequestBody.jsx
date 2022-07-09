@@ -200,6 +200,7 @@ export default function RequestBody() {
 		setMockData({
 			...mockData,
 			requestBody: JSON.stringify(requestBodyObject, null, 2),
+			requestBodyType: mockData.requestBodyType,
 		});
 
 		setPromptSuccess(true);
