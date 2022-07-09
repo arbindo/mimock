@@ -28,7 +28,7 @@ describe('QueryParam', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('query-param-form')).toBeInTheDocument();
+		expect(getByTestId('query-param-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('add-param-button')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe('QueryParam', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('query-param-form')).toBeInTheDocument();
+		expect(getByTestId('query-param-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('add-param-button')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe('QueryParam', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('query-param-form')).toBeInTheDocument();
+		expect(getByTestId('query-param-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
 		expect(queryByTestId('no-query-param')).not.toBeInTheDocument();
@@ -163,7 +163,7 @@ describe('QueryParam', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('query-param-form')).toBeInTheDocument();
+		expect(getByTestId('query-param-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
 		expect(queryByTestId('no-query-param')).not.toBeInTheDocument();
@@ -226,7 +226,7 @@ describe('QueryParam', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('query-param-form')).toBeInTheDocument();
+		expect(getByTestId('query-param-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-queryParam-button')).toBeInTheDocument();
 		expect(queryByTestId('no-query-param')).not.toBeInTheDocument();

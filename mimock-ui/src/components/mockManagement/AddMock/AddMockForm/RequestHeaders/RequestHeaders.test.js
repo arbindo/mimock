@@ -29,7 +29,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-header-form')).toBeInTheDocument();
+		expect(getByTestId('request-header-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('header-matching-toggle')).toBeInTheDocument();
 		expect(getByTestId('header-match-hint')).toHaveTextContent(
@@ -69,7 +69,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, getByRole, container, rerender } = tree;
 
-		expect(getByTestId('request-header-form')).toBeInTheDocument();
+		expect(getByTestId('request-header-wrapper')).toBeInTheDocument();
 		expect(getByTestId('header-matching-toggle')).toBeInTheDocument();
 		expect(getByTestId('header-match-hint')).toHaveTextContent(
 			'Performs a loose comparison and validates only the custom headers configured below while sending a request to the mocked endpoint. Other headers sent in the request will be ignored'
@@ -111,7 +111,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-header-form')).toBeInTheDocument();
+		expect(getByTestId('request-header-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-requestHeader-button')).toBeInTheDocument();
 
@@ -149,7 +149,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-header-form')).toBeInTheDocument();
+		expect(getByTestId('request-header-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('header-matching-toggle')).toBeInTheDocument();
 		expect(getByTestId('save-requestHeader-button')).toBeInTheDocument();
@@ -236,7 +236,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-header-form')).toBeInTheDocument();
+		expect(getByTestId('request-header-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('header-matching-toggle')).toBeInTheDocument();
 		expect(getByTestId('save-requestHeader-button')).toBeInTheDocument();
@@ -326,7 +326,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-header-form')).toBeInTheDocument();
+		expect(getByTestId('request-header-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(queryByTestId('no-header')).not.toBeInTheDocument();
 		expect(getByTestId('header-matching-toggle')).toBeInTheDocument();

@@ -2,9 +2,9 @@
 
 exports[`ResponseHeaders should add new header using key-value inputs 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="response-headers-form"
+    data-testid="response-headers-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -256,15 +256,15 @@ exports[`ResponseHeaders should add new header using key-value inputs 1`] = `
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`ResponseHeaders should add new header using text input 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="response-headers-form"
+    data-testid="response-headers-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -351,15 +351,15 @@ exports[`ResponseHeaders should add new header using text input 1`] = `
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`ResponseHeaders should fill in response headers when headers are already set 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="response-headers-form"
+    data-testid="response-headers-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -447,15 +447,15 @@ exports[`ResponseHeaders should fill in response headers when headers are alread
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`ResponseHeaders should remove response headers on clicking remove button 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="response-headers-form"
+    data-testid="response-headers-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -597,15 +597,15 @@ exports[`ResponseHeaders should remove response headers on clicking remove butto
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`ResponseHeaders should render response headers when initial value is empty 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="response-headers-form"
+    data-testid="response-headers-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -747,6 +747,6 @@ exports[`ResponseHeaders should render response headers when initial value is em
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;

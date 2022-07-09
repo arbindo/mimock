@@ -6,7 +6,7 @@ export const CustomButtonContainer = tw.button`
   justify-center
   gap-1
   px-9
-  py-2
+  py-3
   mx-auto
   shadow-md
   rounded-md

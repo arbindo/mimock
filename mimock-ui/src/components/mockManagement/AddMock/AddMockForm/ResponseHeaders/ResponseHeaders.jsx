@@ -208,7 +208,7 @@ export default function ResponseHeaders() {
 	};
 
 	return (
-		<FormWrapper data-testid='response-headers-form' onSubmit={saveHeaders}>
+		<FormWrapper data-testid='response-headers-wrapper'>
 			<ToggleButtonGroup
 				value={viewMode}
 				color='primary'
@@ -286,11 +286,11 @@ export default function ResponseHeaders() {
 			</If>
 			<If condition={!parsingError && inputIndex.length !== 0}>
 				<SaveButton
-					type='submit'
 					dataTestid='save-responseHeader-button'
 					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'
+					onclickHandler={saveHeaders}
 				/>
 			</If>
 		</FormWrapper>

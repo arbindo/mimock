@@ -105,8 +105,8 @@ describe('Mock management service', () => {
 			expect(post).toHaveBeenCalledWith(
 				'/mocks',
 				requestData,
-				'token',
-				'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03'
+				'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03',
+				{ showFullPageLoader: true }
 			);
 
 			expect(response).toBeTruthy();
@@ -121,8 +121,8 @@ describe('Mock management service', () => {
 				expect(post).toHaveBeenCalledWith(
 					'/mocks',
 					new FormData(),
-					'token',
-					'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03'
+					'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03',
+					{ showFullPageLoader: true }
 				);
 
 				expect(err).toBeTruthy();

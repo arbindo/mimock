@@ -68,7 +68,7 @@ export default function Response() {
 	};
 
 	return (
-		<ResponseWrapper data-testid='response-wrapper' onSubmit={saveResponse}>
+		<ResponseWrapper data-testid='response-wrapper'>
 			<FormControl>
 				<RadioGroup
 					row
@@ -117,11 +117,11 @@ export default function Response() {
 			</If>
 			<If condition={textResponse || binaryFile}>
 				<SaveButton
-					type='submit'
 					dataTestid='save-response-button'
 					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'
+					onclickHandler={saveResponse}
 				/>
 			</If>
 		</ResponseWrapper>

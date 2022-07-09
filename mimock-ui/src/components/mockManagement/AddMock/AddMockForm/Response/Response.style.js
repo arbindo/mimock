@@ -19,7 +19,7 @@ export const TypeLabel = tw.div`
     font-semibold
 `;
 
-export const ResponseWrapper = tw.form`
+export const ResponseWrapper = tw.div`
     w-full
 `;
 

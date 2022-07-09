@@ -209,7 +209,7 @@ export default function RequestHeaders() {
 	};
 
 	return (
-		<FormWrapper data-testid='request-header-form' onSubmit={saveHeaders}>
+		<FormWrapper data-testid='request-header-wrapper'>
 			<ToggleMatchingMode />
 			<ToggleButtonGroup
 				value={viewMode}
@@ -288,11 +288,11 @@ export default function RequestHeaders() {
 			</If>
 			<If condition={!parsingError && inputIndex.length !== 0}>
 				<SaveButton
-					type='submit'
 					dataTestid='save-requestHeader-button'
 					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'
+					onclickHandler={saveHeaders}
 				/>
 			</If>
 		</FormWrapper>

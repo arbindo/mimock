@@ -28,7 +28,7 @@ describe('ResponseHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('response-headers-form')).toBeInTheDocument();
+		expect(getByTestId('response-headers-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 
 		expect(queryByTestId('no-header')).not.toBeInTheDocument();
@@ -64,7 +64,7 @@ describe('ResponseHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('response-headers-form')).toBeInTheDocument();
+		expect(getByTestId('response-headers-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-responseHeader-button')).toBeInTheDocument();
 
@@ -101,7 +101,7 @@ describe('ResponseHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('response-headers-form')).toBeInTheDocument();
+		expect(getByTestId('response-headers-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-responseHeader-button')).toBeInTheDocument();
 
@@ -201,7 +201,7 @@ describe('ResponseHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('response-headers-form')).toBeInTheDocument();
+		expect(getByTestId('response-headers-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-responseHeader-button')).toBeInTheDocument();
 
@@ -304,7 +304,7 @@ describe('ResponseHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('response-headers-form')).toBeInTheDocument();
+		expect(getByTestId('response-headers-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(queryByTestId('no-header')).not.toBeInTheDocument();
 		expect(getByTestId('save-responseHeader-button')).toBeInTheDocument();

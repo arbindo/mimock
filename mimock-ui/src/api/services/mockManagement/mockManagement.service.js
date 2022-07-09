@@ -10,12 +10,12 @@ const getMockById = async (id, token) => {
 	return await get(`/mocks/${id}`, token);
 };
 
-const createMock = async (requestData, token) => {
+const createMock = async (requestData) => {
 	return await post(
 		`/mocks`,
 		requestData,
-		token,
-		'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03'
+		'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03',
+		{ showFullPageLoader: true }
 	);
 };
 

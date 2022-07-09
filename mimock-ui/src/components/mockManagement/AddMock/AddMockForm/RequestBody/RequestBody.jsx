@@ -209,7 +209,7 @@ export default function RequestBody() {
 	};
 
 	return (
-		<FormWrapper data-testid='request-body-form' onSubmit={saveRequestBody}>
+		<FormWrapper data-testid='request-body-wrapper'>
 			<RequestBodyType />
 			<ToggleButtonGroup
 				value={viewMode}
@@ -288,11 +288,11 @@ export default function RequestBody() {
 			</If>
 			<If condition={!parsingError && inputIndex.length !== 0}>
 				<SaveButton
-					type='submit'
 					dataTestid='save-requestBody-button'
 					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'
+					onclickHandler={saveRequestBody}
 				/>
 			</If>
 		</FormWrapper>

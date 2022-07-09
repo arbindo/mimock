@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { Button } from 'styles';
 
-export const FormWrapper = tw.form`
+export const FormWrapper = tw.div`
     w-full
 `;
 

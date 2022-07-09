@@ -2,9 +2,9 @@
 
 exports[`RequestHeaders should add new header using key-value inputs 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="request-body-form"
+    data-testid="request-body-wrapper"
   >
     <div
       class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
@@ -291,15 +291,15 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`RequestHeaders should add new header using text input 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="request-body-form"
+    data-testid="request-body-wrapper"
   >
     <div
       class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
@@ -421,15 +421,15 @@ exports[`RequestHeaders should add new header using text input 1`] = `
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`RequestHeaders should fill in request headers when headers are already set 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="request-body-form"
+    data-testid="request-body-wrapper"
   >
     <div
       class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
@@ -552,15 +552,15 @@ exports[`RequestHeaders should fill in request headers when headers are already 
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`RequestHeaders should remove request body on clicking remove button 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="request-body-form"
+    data-testid="request-body-wrapper"
   >
     <div
       class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
@@ -737,15 +737,15 @@ exports[`RequestHeaders should remove request body on clicking remove button 1`]
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`RequestHeaders should render request body when initial value is empty 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="request-body-form"
+    data-testid="request-body-wrapper"
   >
     <div
       class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
@@ -922,6 +922,6 @@ exports[`RequestHeaders should render request body when initial value is empty 1
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;

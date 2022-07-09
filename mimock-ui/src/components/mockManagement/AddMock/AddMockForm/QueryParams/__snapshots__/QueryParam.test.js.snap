@@ -2,9 +2,9 @@
 
 exports[`QueryParam should add new query params using key-value inputs 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="query-param-form"
+    data-testid="query-param-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -204,15 +204,15 @@ exports[`QueryParam should add new query params using key-value inputs 1`] = `
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`QueryParam should add new query params using text input 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="query-param-form"
+    data-testid="query-param-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -464,15 +464,15 @@ exports[`QueryParam should add new query params using text input 1`] = `
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`QueryParam should build query param inputs when query params are already set 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="query-param-form"
+    data-testid="query-param-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -724,15 +724,15 @@ exports[`QueryParam should build query param inputs when query params are alread
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`QueryParam should remove query param on clicking remove button 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="query-param-form"
+    data-testid="query-param-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -801,15 +801,15 @@ exports[`QueryParam should remove query param on clicking remove button 1`] = `
         No query params added yet
       </div>
     </div>
-  </form>
+  </div>
 </div>
 `;
 
 exports[`QueryParam should render query params when initial value is empty 1`] = `
 <div>
-  <form
+  <div
     class="w-full"
-    data-testid="query-param-form"
+    data-testid="query-param-wrapper"
   >
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
@@ -951,6 +951,6 @@ exports[`QueryParam should render query params when initial value is empty 1`] =
     >
       Save
     </button>
-  </form>
+  </div>
 </div>
 `;

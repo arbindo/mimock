@@ -11,7 +11,7 @@ exports[`Style should render card 1`] = `
 
 exports[`Style should render custom button 1 1`] = `
 <button
-  class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-orange-400"
+  class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-orange-400"
   data-testid="custom-button-test-1"
 >
   Custom1
@@ -20,7 +20,7 @@ exports[`Style should render custom button 1 1`] = `
 
 exports[`Style should render custom button 2 1`] = `
 <button
-  class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-indigo-300"
+  class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-indigo-300"
   data-testid="custom-button-test-2"
 >
   Custom2
@@ -430,13 +430,13 @@ exports[`Style should render style for button, pill, card and text field 1`] = `
           LOGIN
         </button>
         <button
-          class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-orange-400"
+          class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-orange-400"
           data-testid="custom-button-test-1"
         >
           Custom1
         </button>
         <button
-          class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-indigo-300"
+          class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 text-white w-fit bg-indigo-300"
           data-testid="custom-button-test-2"
         >
           Custom2

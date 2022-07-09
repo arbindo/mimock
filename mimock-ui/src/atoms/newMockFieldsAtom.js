@@ -13,11 +13,11 @@ const newMockFieldsAtom = atom({
 		shouldDoExactHeaderMatching: false,
 		requestHeader: '',
 		requestBody: '',
-		requestBodyType: '',
+		requestBodyType: 'application/json',
 		statusCode: 200,
 		expectedTextResponse: '',
 		responseHeaders: '',
-		binaryFile: null,
+		binaryFile: new File([], ''),
 	},
 });
 
