@@ -17,7 +17,7 @@ function HttpMethod({ selectedMethod }) {
 	}, []);
 
 	return (
-		<If condition={httpMethods && httpMethods.length}>
+		<If condition={selectedMethod && httpMethods && httpMethods.length}>
 			<FormItem data-testid='http-method-selector'>
 				<FormLabel data-testid='http-methods-label'>HTTP Method</FormLabel>
 				<HttpMethodSelect>
