@@ -1,12 +1,12 @@
 package com.arbindo.mimock.helpers.entities;
 
+import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.helpers.general.RandomDataGenerator;
-import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
+import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.mapper.ResponseModelMapper;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
-import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.response.ListMocksResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -16,10 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.arbindo.mimock.helpers.general.RandomDataGenerator.*;
 
@@ -316,6 +313,7 @@ public class MocksGenerator {
                 .httpMethod(getValidHttpMethod())
                 .responseContentType(getValidResponseContentType())
                 .queryParams(generateRandomAlphanumericString())
+                .queryParamValue(new HashMap<>())
                 .statusCode(generateRandomNumber())
                 .expectedTextResponse(generateRandomAlphanumericString())
                 .binaryFile(getMockMultipartFile())

@@ -8,6 +8,7 @@ import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,6 +20,10 @@ class RequestModelMapperTest {
         String requestHeadersAsString = RandomDataGenerator.generateRequestHeadersAsString();
         String responseHeadersAsString = RandomDataGenerator.generateResponseHeadersAsString();
         String requestBodyAsString = RandomDataGenerator.generateRequestBodyAsString();
+        Map<String, Object> queryParamMap = new HashMap<>() {{
+            put("version", "1.0");
+            put("auto", "true");
+        }};
 
         MockRequest requestToBeMapped = MockRequest.builder()
                 .name(request.getName())
@@ -27,7 +32,7 @@ class RequestModelMapperTest {
                 .httpMethod(request.getHttpMethod())
                 .statusCode(request.getStatusCode())
                 .responseContentType(request.getResponseContentType())
-                .queryParams(request.getQueryParams())
+                .queryParams("version=1.0&auto=true")
                 .requestHeader(requestHeadersAsString)
                 .shouldDoExactHeaderMatching(request.isHeaderMatchingSetToStrict())
                 .requestBody(requestBodyAsString)
@@ -43,7 +48,8 @@ class RequestModelMapperTest {
                 .httpMethod(request.getHttpMethod())
                 .statusCode(request.getStatusCode())
                 .responseContentType(request.getResponseContentType())
-                .queryParams(request.getQueryParams())
+                .queryParams("version=1.0&auto=true")
+                .queryParamValue(queryParamMap)
                 .requestHeader(JsonMapper.convertJSONStringToMapWithLowerCaseKeys(requestHeadersAsString))
                 .shouldDoExactHeaderMatching(request.isHeaderMatchingSetToStrict())
                 .requestBody(JsonMapper.convertJSONStringToMapWithLowerCaseKeys(requestBodyAsString))

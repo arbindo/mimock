@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -58,6 +59,11 @@ public class Mock {
     @Column(name = "query_params", length = 1024)
     @Schema(example = "name=John&age=10", description = "Associated query params of the mock")
     private String queryParams;
+
+    @Column(name = "query_param_values")
+    @Type(type = "json")
+    @Schema(description = "Parsed query param values")
+    private Map<String, Object> queryParamValues;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ManyToOne(fetch = FetchType.EAGER)

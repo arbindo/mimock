@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,27 +20,23 @@ public interface MocksRepository extends JpaRepository<Mock, UUID> {
 
     Page<Mock> findAllByHttpMethod(HttpMethod httpMethod, Pageable pageable);
 
-    Page<Mock> findAllByTextualResponseIsNotNull(Pageable pageable);
-
-    Page<Mock> findAllByBinaryResponseIsNotNull(Pageable pageable);
-
     Page<Mock> findAllByEntityStatusAndHttpMethod(EntityStatus entityStatus, HttpMethod httpMethod, Pageable pageable);
 
     List<Mock> findAllByEntityStatusAndDeletedAt(EntityStatus entityStatus, ZonedDateTime deletedAt);
 
     Optional<Mock> findOneByMockName(String mockName);
 
-    Optional<Mock> findOneByRouteAndHttpMethodAndQueryParamsAndRequestBodiesForMockAndRequestHeadersAndDeletedAtIsNull
+    Optional<Mock> findOneByRouteAndHttpMethodAndQueryParamValuesAndRequestBodiesForMockAndRequestHeadersAndDeletedAtIsNull
             (String route,
              HttpMethod httpMethod,
-             String queryParams,
+             Map<String, Object> queryParamValue,
              RequestBodiesForMock requestBodiesForMock,
              RequestHeader requestHeaders);
 
-    List<Mock> findOneByRouteAndHttpMethodAndQueryParamsAndRequestBodiesForMockAndDeletedAtIsNull
+    List<Mock> findOneByRouteAndHttpMethodAndQueryParamValuesAndRequestBodiesForMockAndDeletedAtIsNull
             (String route,
              HttpMethod httpMethod,
-             String queryParams,
+             Map<String, Object> queryParamValue,
              RequestBodiesForMock requestBodiesForMock);
 
     List<Mock> findOneByRouteAndHttpMethodAndRequestBodiesForMockAndDeletedAtIsNull
@@ -50,21 +47,21 @@ public interface MocksRepository extends JpaRepository<Mock, UUID> {
 
     default Optional<Mock> findUniqueMock(String route,
                                           HttpMethod httpMethod,
-                                          String queryParams,
+                                          Map<String, Object> queryParamValue,
                                           RequestBodiesForMock requestBodiesForMock,
                                           RequestHeader requestHeaders) {
-        return findOneByRouteAndHttpMethodAndQueryParamsAndRequestBodiesForMockAndRequestHeadersAndDeletedAtIsNull(route,
+        return findOneByRouteAndHttpMethodAndQueryParamValuesAndRequestBodiesForMockAndRequestHeadersAndDeletedAtIsNull(route,
                 httpMethod,
-                queryParams,
+                queryParamValue,
                 requestBodiesForMock,
                 requestHeaders);
     }
 
     default List<Mock> findUniqueMock(String route,
                                       HttpMethod httpMethod,
-                                      String queryParams,
+                                      Map<String, Object> queryParams,
                                       RequestBodiesForMock requestBodiesForMock) {
-        return findOneByRouteAndHttpMethodAndQueryParamsAndRequestBodiesForMockAndDeletedAtIsNull(
+        return findOneByRouteAndHttpMethodAndQueryParamValuesAndRequestBodiesForMockAndDeletedAtIsNull(
                 route,
                 httpMethod,
                 queryParams,

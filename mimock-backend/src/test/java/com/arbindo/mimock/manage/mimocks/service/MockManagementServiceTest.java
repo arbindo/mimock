@@ -507,7 +507,7 @@ class MockManagementServiceTest {
     }
 
     @Test
-    void shouldFlushDeletedMocks(){
+    void shouldFlushDeletedMocks() {
         // Arrange
         EntityStatus entityStatus = generateDeletedEntityStatus();
         lenient().when(mockEntityStatusService.getDeletedMockEntityStatus()).thenReturn(entityStatus);
@@ -521,7 +521,7 @@ class MockManagementServiceTest {
     }
 
     @Test
-    void shouldFlushDeletedMocks_ThrowsException(){
+    void shouldFlushDeletedMocks_ThrowsException() {
         // Arrange
         EntityStatus entityStatus = generateDeletedEntityStatus();
         lenient().when(mockEntityStatusService.getDeletedMockEntityStatus()).thenReturn(entityStatus);
@@ -655,7 +655,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findUniqueMock(
                 request.getRoute(),
                 HttpMethod.builder().method(request.getHttpMethod()).build(),
-                request.getQueryParams(),
+                request.getQueryParamValue(),
                 RequestBodiesForMock.builder().requestBody(request.getRequestBody()).build(),
                 RequestHeader.builder().requestHeader(request.getRequestHeader()).build()
         )).thenReturn(emptyMock);
@@ -709,7 +709,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findUniqueMock(
                 request.getRoute(),
                 HttpMethod.builder().method(request.getHttpMethod()).build(),
-                request.getQueryParams(),
+                request.getQueryParamValue(),
                 RequestBodiesForMock.builder().requestBody(request.getRequestBody()).build(),
                 RequestHeader.builder().requestHeader(request.getRequestHeader()).build()
         )).thenReturn(emptyMock);
@@ -760,7 +760,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findUniqueMock(
                 request.getRoute(),
                 HttpMethod.builder().method(request.getHttpMethod()).build(),
-                request.getQueryParams(),
+                request.getQueryParamValue(),
                 RequestBodiesForMock.builder().requestBody(request.getRequestBody()).build(),
                 RequestHeader.builder().requestHeader(request.getRequestHeader()).build()
         )).thenReturn(emptyMock);
@@ -814,7 +814,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findUniqueMock(
                 request.getRoute(),
                 HttpMethod.builder().method(request.getHttpMethod()).build(),
-                request.getQueryParams(),
+                request.getQueryParamValue(),
                 RequestBodiesForMock.builder().requestBody(request.getRequestBody()).build(),
                 RequestHeader.builder().requestHeader(request.getRequestHeader()).build()
         )).thenReturn(emptyMock);

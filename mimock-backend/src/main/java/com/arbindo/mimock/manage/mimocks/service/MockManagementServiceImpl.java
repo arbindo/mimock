@@ -65,17 +65,17 @@ public class MockManagementServiceImpl implements MockManagementService {
                                          String httpMethod, ExpectedResponseType expectedResponseType) {
         HttpMethod httpMethodFromQueryString = null;
         EntityStatus entityStatus = null;
-        if(ValidationUtil.isArgNotNull(httpMethod)){
+        if (ValidationUtil.isArgNotNull(httpMethod)) {
             httpMethodFromQueryString = mockParamBuilder.findHttpMethodFromQueryString(httpMethod);
         }
         if (ValidationUtil.isArgNotNull(status)) {
             entityStatus = entityStatusService.findByEntityStatus(status.name());
         }
-        if(ValidationUtil.isArgNotNull(httpMethodFromQueryString)
-                && ValidationUtil.isArgNotNull(entityStatus)){
+        if (ValidationUtil.isArgNotNull(httpMethodFromQueryString)
+                && ValidationUtil.isArgNotNull(entityStatus)) {
             return mocksRepository.findAllByEntityStatusAndHttpMethod(entityStatus, httpMethodFromQueryString, pageable);
         }
-        if(ValidationUtil.isArgNotNull(httpMethodFromQueryString)){
+        if (ValidationUtil.isArgNotNull(httpMethodFromQueryString)) {
             return mocksRepository.findAllByHttpMethod(httpMethodFromQueryString, pageable);
         }
         if (ValidationUtil.isArgNotNull(entityStatus)) {
@@ -160,7 +160,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             mocksRepository.deleteAll(deletedMocks);
             log.log(Level.INFO, "Flushed " + deletedMocks.size() + " mock(s)!");
             return;
-        } catch (Exception e){
+        } catch (Exception e) {
             log.log(Level.DEBUG, e.getMessage());
         }
         log.log(Level.DEBUG, "Unable to flush deleted mocks!");
@@ -182,7 +182,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             Optional<Mock> matchingMock = mocksRepository.findUniqueMock(
                     request.getRoute(),
                     mockParamBuilder.httpMethod(),
-                    request.getQueryParams(),
+                    request.getQueryParamValue(),
                     mockParamBuilder.requestBody(),
                     mockParamBuilder.requestHeaders()
             );
@@ -254,6 +254,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                 .responseContentType(mockParamBuilder.responseContentType(responseContentTypeString))
                 .statusCode(request.getStatusCode())
                 .queryParams(request.getQueryParams())
+                .queryParamValues(request.getQueryParamValue())
                 .description(request.getDescription())
                 .createdAt(ZonedDateTime.now())
                 .createdBy(currentAuditor)
@@ -292,7 +293,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             Optional<Mock> matchingMock = mocksRepository.findUniqueMock(
                     request.getRoute(),
                     mockParamBuilder.httpMethod(),
-                    request.getQueryParams(),
+                    request.getQueryParamValue(),
                     mockParamBuilder.requestBody(),
                     mockParamBuilder.requestHeaders()
             );
@@ -341,6 +342,7 @@ public class MockManagementServiceImpl implements MockManagementService {
                 .responseContentType(mockParamBuilder.responseContentType(responseContentTypeString))
                 .statusCode(request.getStatusCode())
                 .queryParams(request.getQueryParams())
+                .queryParamValues(request.getQueryParamValue())
                 .description(request.getDescription())
                 .createdAt(mock.getCreatedAt())
                 .createdBy(mock.getCreatedBy())
