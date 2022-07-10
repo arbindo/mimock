@@ -32,7 +32,7 @@ describe('Toolbar', () => {
 
 		expect(mockedNavigation).toHaveBeenCalledTimes(1);
 		expect(mockedNavigation).toHaveBeenCalledWith(
-			'/mimock-ui/manage/mocks/add-mock'
+			'/mimock-ui/mocks/manage/add-mock'
 		);
 
 		expect(container).toMatchSnapshot();

@@ -1,6 +1,6 @@
 const root = '/mimock-ui';
 const adminPrefix = `${root}/admin`;
-const managePrefix = `${root}/manage`;
+const manageMocksPrefix = `${root}/mocks/manage`;
 
 export const routes = {
 	root,
@@ -27,7 +27,11 @@ export const routes = {
 	},
 	manageRoutes: {
 		addMock: {
-			path: `${managePrefix}/mocks/add-mock`,
+			path: `${manageMocksPrefix}/add-mock`,
+			secured: true,
+		},
+		editMock: {
+			path: `${manageMocksPrefix}/edit-mock`,
 			secured: true,
 		},
 	},

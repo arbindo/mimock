@@ -6396,6 +6396,11 @@ jest@^27.4.3:
     import-local "^3.0.2"
     jest-cli "^27.5.1"
 
+js-base64@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-3.7.2.tgz#816d11d81a8aff241603d19ce5761e13e41d7745"
+  integrity sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==
+
 js-file-download@^0.4.12:
   version "0.4.12"
   resolved "https://registry.yarnpkg.com/js-file-download/-/js-file-download-0.4.12.tgz#10c70ef362559a5b23cdbdc3bd6f399c3d91d821"

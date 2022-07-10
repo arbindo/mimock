@@ -14,7 +14,7 @@ exports[`FileUpload should drop file to dropzone input 1`] = `
         class="text-center font-sans font-semibold mx-4 hover:text-blue-500"
         data-testid="uploaded-label"
       >
-        Uploaded files
+        Uploaded file
       </div>
       <div
         class="font-sans text-justify text-gray-600"

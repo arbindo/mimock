@@ -3,12 +3,13 @@ import { atom } from 'recoil';
 const newMockFieldsAtom = atom({
 	key: 'newMockFieldsAtom',
 	default: {
+		id: '',
 		name: '',
 		description: '',
 		route: '',
-		httpMethod: 'GET',
+		httpMethod: '',
 		responseContentType: 'application/json',
-		responseType: 'TEXTUAL_RESPONSE',
+		responseType: '',
 		queryParams: '',
 		shouldDoExactHeaderMatching: false,
 		requestHeader: '',
@@ -17,7 +18,7 @@ const newMockFieldsAtom = atom({
 		statusCode: 200,
 		expectedTextResponse: '',
 		responseHeaders: '',
-		binaryFile: new File([], ''),
+		binaryFile: null,
 	},
 });
 

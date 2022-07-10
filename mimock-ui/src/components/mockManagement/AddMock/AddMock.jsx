@@ -1,21 +1,33 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { IconHeader } from 'src/styles/components';
 import { BiAddToQueue } from 'react-icons/bi';
 import { AddMockWrapper, AddMockHeader } from './AddMock.style';
-import AddMockForm from './AddMockForm/AddMockForm';
+import AddMockForm from './AddMockForm';
+import { mockManagementConstants } from '../constants';
 
-export default function AddMock() {
+function AddMock({ mode }) {
 	return (
 		<AddMockWrapper data-testid='add-mock'>
 			<AddMockHeader>
 				<IconHeader
 					icon={<BiAddToQueue />}
-					title='Add new mock'
+					title={
+						mode === mockManagementConstants.mode.CREATE
+							? 'Add new mock'
+							: 'Edit mock'
+					}
 					dataTestId='add-mock-header'
 					enableBackNavigation={true}
 				/>
 			</AddMockHeader>
-			<AddMockForm />
+			<AddMockForm mode={mode} />
 		</AddMockWrapper>
 	);
 }
+
+AddMock.propTypes = {
+	mode: PropTypes.string.isRequired,
+};
+
+export default AddMock;

@@ -163,7 +163,7 @@ function Detail() {
 	};
 
 	const performEditMockOperation = () => {
-		console.log('Edit Btn Clicked');
+		navigate(`/mimock-ui/mocks/manage/edit-mock?mockId=${mockId}`);
 	};
 	// #endregion
 

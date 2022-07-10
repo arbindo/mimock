@@ -63,6 +63,7 @@ export const ButtonWrapper = tw.div`
 	w-1/2
 	flex
 	flex-row-reverse
+	gap-4
 `;
 
 export const ActionButton = tw(CustomButton)``;

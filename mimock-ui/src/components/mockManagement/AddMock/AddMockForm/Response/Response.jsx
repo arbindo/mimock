@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -15,15 +15,25 @@ export default function Response() {
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
 
 	const [responseType, setResponseType] = useState(mockData.responseType);
-	const [textResponse, setTextResponse] = useState(
-		mockData.expectedTextResponse
-	);
+	const [textResponse, setTextResponse] = useState('');
 	const [binaryFile, setBinaryFile] = useState(mockData.binaryFile);
 
 	const [responseContentType, setResponseContentType] = useState(
 		mockData.responseContentType
 	);
 	const [showSuccess, setShowSuccess] = useState(false);
+
+	useEffect(() => {
+		setTextResponse(mockData.expectedTextResponse);
+		setBinaryFile(mockData.binaryFile);
+		setResponseType(mockData.responseType || 'TEXTUAL_RESPONSE');
+		setResponseContentType(mockData.responseContentType);
+	}, [
+		mockData.expectedTextResponse,
+		mockData.binaryFile,
+		mockData.responseType,
+		mockData.responseContentType,
+	]);
 
 	const changeResponseType = (e) => {
 		setResponseType(e.target.value);
@@ -50,13 +60,13 @@ export default function Response() {
 				...mockData,
 				responseContentType,
 				expectedTextResponse: '',
-				binaryFile: binaryFile,
+				binaryFile,
 			});
 		} else {
 			setMockData({
 				...mockData,
 				responseContentType,
-				binaryFile: '',
+				binaryFile: null,
 				expectedTextResponse: textResponse,
 			});
 		}
