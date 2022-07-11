@@ -45,7 +45,7 @@ exports[`Dashboard should render all dashboard components 1`] = `
     data-testid="toolbar-container"
   >
     <button
-      class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 mx-4 my-2 rounded-sm text-sm border-2 border-gray-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out md:my-2 text-gray-500 w-fit bg-white"
+      class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 mx-4 my-2 rounded-sm text-sm border-2 border-gray-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out md:my-2 text-gray-500 w-fit bg-white"
       data-testid="more-tools-btn"
       id="more-tools-btn"
     >
@@ -77,7 +77,7 @@ exports[`Dashboard should render all dashboard components 1`] = `
           class="inline-flex"
         >
           <button
-            class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 rounded-l-sm border-2 border-gray-400 rounded-r-none text-sm leading-tight hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-gray-500 w-fit bg-white"
+            class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 rounded-l-sm border-2 border-gray-400 rounded-r-none text-sm leading-tight hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-gray-500 w-fit bg-white"
             data-testid="active-mocks-view-btn"
             id="active-mocks-view-btn"
             name="ACTIVE"
@@ -103,7 +103,7 @@ exports[`Dashboard should render all dashboard components 1`] = `
             Active
           </button>
           <button
-            class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 rounded-none text-sm border-t-2 border-b-2 border-gray-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-gray-500 w-fit bg-white"
+            class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 rounded-none text-sm border-t-2 border-b-2 border-gray-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-gray-500 w-fit bg-white"
             data-testid="archived-mocks-view-btn"
             id="archived-mocks-view-btn"
             name="ARCHIVED"
@@ -129,7 +129,7 @@ exports[`Dashboard should render all dashboard components 1`] = `
             Archived
           </button>
           <button
-            class="flex items-center justify-center gap-1 px-9 py-2 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 rounded-r-sm border-2 border-gray-400 rounded-l-none text-sm leading-tight hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-gray-500 w-fit bg-white"
+            class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 h-10 rounded-r-sm border-2 border-gray-400 rounded-l-none text-sm leading-tight hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-gray-500 w-fit bg-white"
             data-testid="recycle-bin-mocks-view-btn"
             id="recycle-bin-mocks-view-btn"
             name="DELETED"

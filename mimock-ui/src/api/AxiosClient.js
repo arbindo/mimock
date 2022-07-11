@@ -48,7 +48,6 @@ const post = async (
 			...config,
 		})
 		.catch((err) => {
-			LogError(err);
 			return Promise.reject(err);
 		});
 };

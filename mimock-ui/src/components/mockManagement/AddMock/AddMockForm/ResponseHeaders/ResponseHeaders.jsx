@@ -7,7 +7,6 @@ import { useRecoilState } from 'recoil';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
 import { ButtonVariants } from 'styles/Button';
 import { TextInput } from 'styles';
-import RequestBodyType from './RequestBodyType';
 import {
 	FormWrapper,
 	InputContainer,
@@ -23,78 +22,78 @@ import {
 	SuccessPrompt,
 } from '../FormCommon.style';
 
-export default function RequestBody() {
+export default function ResponseHeaders() {
 	const [inputIndex, setInputIndex] = useState([]);
 	const [counter, setCounter] = useState(0);
 	const [inputState, setInputState] = useState({});
 	const [viewMode, setViewMode] = useState('text');
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
-	const [requestBodyValue, setRequestBodyValue] = useState(
-		mockData.requestBody
+	const [responseHeaderValue, setResponseHeaderValue] = useState(
+		mockData.responseHeaders
 	);
 	const [parsingError, setParsingError] = useState(false);
 	const [promptSuccess, setPromptSuccess] = useState(false);
 
 	useEffect(() => {
-		if (mockData.requestBody) {
-			let parsedRequestBody;
+		if (mockData.responseHeaders) {
+			let parsedResponseHeader;
 			try {
-				parsedRequestBody = JSON.parse(mockData.requestBody);
+				parsedResponseHeader = JSON.parse(mockData.responseHeaders);
 			} catch (e) {
 				setParsingError(true);
 				return;
 			}
-			setRequestBodyValue(JSON.stringify(parsedRequestBody, null, 2));
+			setResponseHeaderValue(JSON.stringify(parsedResponseHeader, null, 2));
 		}
-	}, [mockData.requestBody]);
+	}, [mockData.responseHeaders]);
 
 	useEffect(() => {
 		if (counter === 0) {
 			setMockData({
 				...mockData,
-				requestBody: '',
+				responseHeaders: '',
 			});
 		}
 	}, [counter]);
 
 	useEffect(() => {
-		if (requestBodyValue === '' || requestBodyValue === '{}') {
-			setRequestBodyValue('');
+		if (responseHeaderValue === '' || responseHeaderValue === '{}') {
+			setResponseHeaderValue('');
 			setInputIndex([0]);
 			setCounter(1);
 			setInputState({
-				requestBody_0_key: '',
-				requestBody_0_value: '',
+				responseHeader_0_key: '',
+				responseHeader_0_value: '',
 			});
 
 			return;
 		}
 
-		let requestBody;
+		let responseHeaders;
 		try {
-			const sanitizedValue = requestBodyValue
+			const sanitizedValue = responseHeaderValue
 				.replaceAll("'", '"')
 				.replace(/[\n\r\t]*/g, '');
 
-			requestBody = JSON.parse(sanitizedValue.toString());
+			responseHeaders = JSON.parse(sanitizedValue.toString());
 		} catch (e) {
 			setParsingError(true);
 			return;
 		}
 		setParsingError(false);
 
-		const keys = Object.keys(requestBody);
+		const keys = Object.keys(responseHeaders);
 
-		if (requestBody && keys.length) {
+		if (responseHeaders && keys.length) {
 			const indices = keys.map((key, idx) => idx);
 			setInputIndex(indices);
 			setCounter(keys.length);
 
 			const inputStates = {};
 			indices.forEach((idx) => {
-				inputStates[`requestBody_${idx}_key`] = keys[idx];
-				inputStates[`requestBody_${idx}_value`] =
-					requestBody[keys[idx]].toString();
+				inputStates[`responseHeader_${idx}_key`] = keys[idx];
+				inputStates[`responseHeader_${idx}_value`] =
+					responseHeaders[keys[idx]].toString();
 			});
 
 			setInputState(inputStates);
@@ -103,56 +102,56 @@ export default function RequestBody() {
 			setCounter(0);
 			setInputState({});
 		}
-	}, [requestBodyValue]);
+	}, [responseHeaderValue]);
 
-	const buildRequestBody = () => {
-		let bodyObject = {};
+	const buildHeaders = () => {
+		let headerObject = {};
 
 		inputIndex.forEach((idx) => {
-			const key = inputState[`requestBody_${idx}_key`];
-			const value = inputState[`requestBody_${idx}_value`];
+			const key = inputState[`responseHeader_${idx}_key`];
+			const value = inputState[`responseHeader_${idx}_value`];
 
 			if (!key || !value) {
 				return;
 			}
 
-			bodyObject[key] = value;
+			headerObject[key] = value;
 		});
 
-		setRequestBodyValue(JSON.stringify(bodyObject, null, 2));
+		setResponseHeaderValue(JSON.stringify(headerObject, null, 2));
 	};
 
 	const input = (index) => {
 		return (
-			<InputContainer key={`requestBodyContainer-${index}`}>
+			<InputContainer key={`responseHeaderContainer-${index}`}>
 				<TextInput
-					name={`requestBody_${index}_key`}
-					dataTestId={`requestBody_${index}_key`}
+					name={`responseHeader_${index}_key`}
+					dataTestId={`responseHeader_${index}_key`}
 					placeHolder='key'
-					value={inputState[`requestBody_${index}_key`]}
+					value={inputState[`responseHeader_${index}_key`]}
 					onChange={(e) => {
 						setInputState({
 							...inputState,
-							[`requestBody_${index}_key`]: e.target.value,
+							[`responseHeader_${index}_key`]: e.target.value,
 						});
 					}}
 				/>
 				<TextInput
-					name={`requestBody_${index}_value`}
-					dataTestId={`requestBody_${index}_value`}
+					name={`responseHeader_${index}_value`}
+					dataTestId={`responseHeader_${index}_value`}
 					placeHolder='value'
-					value={inputState[`requestBody_${index}_value`]}
+					value={inputState[`responseHeader_${index}_value`]}
 					onChange={(e) => {
 						setInputState({
 							...inputState,
-							[`requestBody_${index}_value`]: e.target.value,
+							[`responseHeader_${index}_value`]: e.target.value,
 						});
 					}}
 				/>
 				<ActionToolTip
-					data-testid={`remove-request-body-tooltip-${index}`}
+					data-testid={`remove-header-tooltip-${index}`}
 					key={'tooltip-remove'}
-					title={'Remove request body'}
+					title={'Remove header'}
 					arrow
 				>
 					<IconButton
@@ -172,8 +171,8 @@ export default function RequestBody() {
 		setCounter(counter + 1);
 		setInputState({
 			...inputState,
-			[`requestBody_${counter}_key`]: '',
-			[`requestBody_${counter}_value`]: '',
+			[`responseHeader_${counter}_key`]: '',
+			[`responseHeader_${counter}_value`]: '',
 		});
 	};
 
@@ -183,24 +182,23 @@ export default function RequestBody() {
 		setCounter(counter - 1);
 
 		let tempInputValues = inputState;
-		delete tempInputValues[`requestBody_${index}_key`];
-		delete tempInputValues[`requestBody_${index}_value`];
+		delete tempInputValues[`responseHeader_${index}_key`];
+		delete tempInputValues[`responseHeader_${index}_value`];
 
 		setInputState(tempInputValues);
 	};
 
-	const saveRequestBody = (e) => {
+	const saveHeaders = (e) => {
 		e.preventDefault();
 
-		let requestBodyObject = {};
+		let headerObject = {};
 		inputIndex.forEach((idx) => {
-			requestBodyObject[inputState[`requestBody_${idx}_key`]] =
-				inputState[`requestBody_${idx}_value`];
+			headerObject[inputState[`responseHeader_${idx}_key`]] =
+				inputState[`responseHeader_${idx}_value`];
 		});
 		setMockData({
 			...mockData,
-			requestBody: JSON.stringify(requestBodyObject, null, 2),
-			requestBodyType: mockData.requestBodyType,
+			responseHeaders: JSON.stringify(headerObject, null, 2),
 		});
 
 		setPromptSuccess(true);
@@ -210,8 +208,7 @@ export default function RequestBody() {
 	};
 
 	return (
-		<FormWrapper data-testid='request-body-wrapper'>
-			<RequestBodyType />
+		<FormWrapper data-testid='response-headers-wrapper'>
 			<ToggleButtonGroup
 				value={viewMode}
 				color='primary'
@@ -219,7 +216,7 @@ export default function RequestBody() {
 				exclusive
 				onChange={(e, mode) => {
 					if (mode !== null) {
-						buildRequestBody();
+						buildHeaders();
 						setViewMode(viewMode === 'text' ? 'code' : 'text');
 					}
 				}}
@@ -235,9 +232,9 @@ export default function RequestBody() {
 			</ToggleButtonGroup>
 			<If condition={viewMode === 'text'}>
 				<ActionToolTip
-					data-testid='add-request-body-button'
+					data-testid='add-header-button'
 					key={'tooltip-add'}
-					title={'Add new request body'}
+					title={'Add new header'}
 					arrow
 				>
 					<IconButton
@@ -250,8 +247,8 @@ export default function RequestBody() {
 				</ActionToolTip>
 			</If>
 			<If condition={inputIndex.length === 0}>
-				<NoItem data-testid='no-request-body'>
-					<NoItemLabel>No request body fields added yet</NoItemLabel>
+				<NoItem data-testid='no-header'>
+					<NoItemLabel>No headers added yet</NoItemLabel>
 				</NoItem>
 			</If>
 			<Choose>
@@ -262,15 +259,15 @@ export default function RequestBody() {
 				</When>
 				<Otherwise>
 					<If condition={inputIndex.length !== 0}>
-						<TextWrapper data-testid='request-body-text'>
+						<TextWrapper data-testid='response-header-text'>
 							<ParsedTextArea
 								type='text'
-								data-testid='request-body-text-input'
-								placeholder='Enter request body as JSON'
+								data-testid='response-header-text-input'
+								placeholder='Enter response headers as JSON'
 								rows={10}
-								value={requestBodyValue}
+								value={responseHeaderValue}
 								onChange={(e) => {
-									setRequestBodyValue(e.target.value);
+									setResponseHeaderValue(e.target.value);
 								}}
 							/>
 						</TextWrapper>
@@ -279,21 +276,21 @@ export default function RequestBody() {
 			</Choose>
 			<If condition={parsingError}>
 				<FailurePrompt data-testid='parsing-error'>
-					Failed to parse request body text
+					Failed to parse response headers text
 				</FailurePrompt>
 			</If>
 			<If condition={promptSuccess && !parsingError}>
 				<SuccessPrompt data-testid='success-prompt'>
-					Request body fields saved for submission
+					Response headers saved for submission
 				</SuccessPrompt>
 			</If>
 			<If condition={!parsingError && inputIndex.length !== 0}>
 				<SaveButton
-					dataTestid='save-requestBody-button'
+					dataTestid='save-responseHeader-button'
 					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'
-					onclickHandler={saveRequestBody}
+					onclickHandler={saveHeaders}
 				/>
 			</If>
 		</FormWrapper>

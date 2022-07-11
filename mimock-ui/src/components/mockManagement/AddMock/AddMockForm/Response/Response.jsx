@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -15,9 +15,7 @@ export default function Response() {
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
 
 	const [responseType, setResponseType] = useState(mockData.responseType);
-	const [textResponse, setTextResponse] = useState(
-		mockData.expectedTextResponse
-	);
+	const [textResponse, setTextResponse] = useState('');
 	const [binaryFile, setBinaryFile] = useState(mockData.binaryFile);
 
 	const [responseContentType, setResponseContentType] = useState(
@@ -25,13 +23,25 @@ export default function Response() {
 	);
 	const [showSuccess, setShowSuccess] = useState(false);
 
+	useEffect(() => {
+		setTextResponse(mockData.expectedTextResponse);
+		setBinaryFile(mockData.binaryFile);
+		setResponseType(mockData.responseType || 'TEXTUAL_RESPONSE');
+		setResponseContentType(mockData.responseContentType);
+	}, [
+		mockData.expectedTextResponse,
+		mockData.binaryFile,
+		mockData.responseType,
+		mockData.responseContentType,
+	]);
+
 	const changeResponseType = (e) => {
 		setResponseType(e.target.value);
 		if (e.target.value === 'TEXTUAL_RESPONSE') {
 			setBinaryFile(null);
 			setMockData({
 				...mockData,
-				binaryFile: '',
+				binaryFile: null,
 			});
 		} else {
 			setTextResponse('');
@@ -50,13 +60,15 @@ export default function Response() {
 				...mockData,
 				responseContentType,
 				expectedTextResponse: '',
-				binaryFile: binaryFile,
+				responseType: 'BINARY_RESPONSE',
+				binaryFile,
 			});
 		} else {
 			setMockData({
 				...mockData,
 				responseContentType,
-				binaryFile: '',
+				binaryFile: null,
+				responseType: 'TEXTUAL_RESPONSE',
 				expectedTextResponse: textResponse,
 			});
 		}
@@ -68,7 +80,7 @@ export default function Response() {
 	};
 
 	return (
-		<ResponseWrapper data-testid='response-wrapper' onSubmit={saveResponse}>
+		<ResponseWrapper data-testid='response-wrapper'>
 			<FormControl>
 				<RadioGroup
 					row
@@ -117,11 +129,11 @@ export default function Response() {
 			</If>
 			<If condition={textResponse || binaryFile}>
 				<SaveButton
-					type='submit'
 					dataTestid='save-response-button'
 					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'
+					onclickHandler={saveResponse}
 				/>
 			</If>
 		</ResponseWrapper>

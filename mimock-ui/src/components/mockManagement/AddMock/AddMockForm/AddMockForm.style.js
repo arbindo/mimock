@@ -1,10 +1,11 @@
+import tw from 'tailwind-styled-components';
 import { styled } from '@material-ui/styles';
 import Accordion from '@mui/material/Accordion';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import React from 'react';
-import tw from 'tailwind-styled-components';
+import { CustomButton } from 'styles';
 
-export const AddMockFormWrapper = tw.div`
+export const AddMockFormWrapper = tw.form`
 	w-full
 	h-full
 	mx-10
@@ -55,3 +56,14 @@ export const HtmlTooltip = styled(({ className, ...props }) => (
 		border: '1px solid #dadde9',
 	},
 }));
+
+export const ButtonWrapper = tw.div`
+	pt-5
+	pb-36
+	w-1/2
+	flex
+	flex-row-reverse
+	gap-4
+`;
+
+export const ActionButton = tw(CustomButton)``;

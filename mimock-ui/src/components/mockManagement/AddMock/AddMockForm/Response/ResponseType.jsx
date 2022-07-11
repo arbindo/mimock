@@ -29,7 +29,7 @@ function ResponseType({ type, responseContentType, setResponseContentType }) {
 	}, [type, responseTypes, responseContentType]);
 
 	return (
-		<If condition={type && filteredResponseTypes}>
+		<If condition={type && responseContentType && filteredResponseTypes}>
 			<ResponseTypeWrapper data-testid='response-type-wrapper'>
 				<TypeLabel data-testid='response-type-label'>Response Type</TypeLabel>
 				<Autocomplete

@@ -10,15 +10,17 @@ import com.arbindo.mimock.repository.HttpMethodsRepository;
 import com.arbindo.mimock.repository.MocksRepository;
 import com.arbindo.mimock.repository.RequestBodiesForMockRepository;
 import com.arbindo.mimock.repository.RequestHeadersRepository;
+import com.google.common.base.Splitter;
 import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -57,20 +59,12 @@ public class GenericMockRequestService {
                 .findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(request.getRequestBody());
 
         List<Mock> resultFromDB;
-        if (StringUtils.isBlank(queryParam)) {
-            resultFromDB = repository.findUniqueMock(
-                    route,
-                    httpMethod,
-                    requestBody.orElse(null)
-            );
-        } else {
-            resultFromDB = repository.findUniqueMock(
-                    route,
-                    httpMethod,
-                    queryParam,
-                    requestBody.orElse(null)
-            );
-        }
+        resultFromDB = repository.findUniqueMock(
+                route,
+                httpMethod,
+                buildQueryParamMap(queryParam),
+                requestBody.orElse(null)
+        );
 
         if (CollectionUtils.isEmpty(resultFromDB)) {
             log.log(Level.ERROR, "No matching rows returned from DB");
@@ -132,5 +126,23 @@ public class GenericMockRequestService {
         }
 
         return Boolean.TRUE;
+    }
+
+    private Map<String, Object> buildQueryParamMap(String queryParams) {
+        Map<String, Object> queryParamValues = new HashMap<>();
+
+        try {
+            Map<String, String> splitMap = Splitter.on("&").trimResults()
+                    .withKeyValueSeparator('=')
+                    .split(queryParams);
+
+            splitMap.entrySet().stream().forEach(i -> {
+                queryParamValues.put(i.getKey(), i.getValue());
+            });
+        } catch (Exception e) {
+            log.log(Level.ERROR, "Query params {} is not valid", queryParams);
+        }
+
+        return queryParamValues;
     }
 }

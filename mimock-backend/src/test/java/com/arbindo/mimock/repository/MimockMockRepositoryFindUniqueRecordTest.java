@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -90,7 +87,15 @@ class MimockMockRepositoryFindUniqueRecordTest {
 
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
+        Map<String, Object> expectedQueryParamMap = new HashMap<>();
+        expectedQueryParamMap.put("version", "1.0");
+        expectedQueryParamMap.put("auto", "true");
+
         String queryParams = "version=1.0.0&auto=false";
+        Map<String, Object> queryParamMap = new HashMap<>();
+        queryParamMap.put("version", "1.0");
+        queryParamMap.put("auto", "false");
+
         UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
@@ -102,6 +107,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .requestBodiesForMock(expectedRequestBody)
                 .requestHeaders(expectedRequestHeader)
                 .queryParams(expectedQueryParams)
+                .queryParamValues(expectedQueryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
@@ -116,6 +122,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
+                .queryParamValues(queryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
@@ -133,7 +140,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
         Optional<Mock> resultFromDB = repository.findUniqueMock(
                 expectedRoute,
                 expectedHttpMethod,
-                expectedQueryParams,
+                expectedQueryParamMap,
                 expectedRequestBody,
                 expectedRequestHeader
         );
@@ -180,7 +187,15 @@ class MimockMockRepositoryFindUniqueRecordTest {
 
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
+        Map<String, Object> expectedQueryParamMap = new HashMap<>();
+        expectedQueryParamMap.put("version", "1.0.0");
+        expectedQueryParamMap.put("auto", "true");
+
         String queryParams = "version=1.0.0&auto=false";
+        Map<String, Object> queryParamMap = new HashMap<>();
+        queryParamMap.put("version", "1.0");
+        queryParamMap.put("auto", "false");
+
         UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
@@ -192,6 +207,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .requestBodiesForMock(null)
                 .requestHeaders(expectedRequestHeader)
                 .queryParams(expectedQueryParams)
+                .queryParamValues(expectedQueryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
@@ -206,6 +222,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
+                .queryParamValues(queryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
@@ -223,7 +240,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
         Optional<Mock> resultFromDB = repository.findUniqueMock(
                 expectedRoute,
                 expectedHttpMethod,
-                expectedQueryParams,
+                expectedQueryParamMap,
                 null,
                 expectedRequestHeader
         );
@@ -274,7 +291,15 @@ class MimockMockRepositoryFindUniqueRecordTest {
 
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
+        Map<String, Object> expectedQueryParamMap = new HashMap<>();
+        expectedQueryParamMap.put("version", "1.0");
+        expectedQueryParamMap.put("auto", "true");
+
         String queryParams = "version=1.0.0&auto=false";
+        Map<String, Object> queryParamMap = new HashMap<>();
+        queryParamMap.put("version", "1.0");
+        queryParamMap.put("auto", "false");
+
         UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
@@ -286,6 +311,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .requestBodiesForMock(expectedRequestBody)
                 .requestHeaders(null)
                 .queryParams(expectedQueryParams)
+                .queryParamValues(expectedQueryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
@@ -300,6 +326,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
+                .queryParamValues(queryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
@@ -317,7 +344,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
         Optional<Mock> resultFromDB = repository.findUniqueMock(
                 expectedRoute,
                 expectedHttpMethod,
-                expectedQueryParams,
+                expectedQueryParamMap,
                 expectedRequestBody,
                 null
         );
@@ -358,7 +385,15 @@ class MimockMockRepositoryFindUniqueRecordTest {
 
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
+        Map<String, Object> expectedQueryParamMap = new HashMap<>();
+        expectedQueryParamMap.put("version", "1.0");
+        expectedQueryParamMap.put("auto", "true");
+
         String queryParams = "version=1.0.0&auto=false";
+        Map<String, Object> queryParamMap = new HashMap<>();
+        queryParamMap.put("version", "1.0");
+        queryParamMap.put("auto", "false");
+
         UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
@@ -370,6 +405,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .requestBodiesForMock(null)
                 .requestHeaders(null)
                 .queryParams(expectedQueryParams)
+                .queryParamValues(expectedQueryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
@@ -384,6 +420,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
+                .queryParamValues(queryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
@@ -401,7 +438,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
         Optional<Mock> resultFromDB = repository.findUniqueMock(
                 expectedRoute,
                 expectedHttpMethod,
-                expectedQueryParams,
+                expectedQueryParamMap,
                 null,
                 null
         );
@@ -468,7 +505,15 @@ class MimockMockRepositoryFindUniqueRecordTest {
 
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
+        Map<String, Object> expectedQueryParamMap = new HashMap<>();
+        expectedQueryParamMap.put("version", "1.0");
+        expectedQueryParamMap.put("auto", "true");
+
         String queryParams = "version=1.0.0&auto=false";
+        Map<String, Object> queryParamMap = new HashMap<>();
+        queryParamMap.put("version", "1.0");
+        queryParamMap.put("auto", "false");
+
         UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
@@ -480,6 +525,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .requestBodiesForMock(expectedRequestBody)
                 .requestHeaders(expectedRequestHeader)
                 .queryParams(expectedQueryParams)
+                .queryParamValues(expectedQueryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
@@ -494,6 +540,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
+                .queryParamValues(queryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
@@ -511,7 +558,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
         Optional<Mock> resultFromDB = repository.findUniqueMock(
                 expectedRoute,
                 expectedHttpMethod,
-                expectedQueryParams,
+                expectedQueryParamMap,
                 nonMatchingRequestBody,
                 expectedRequestHeader
         );
@@ -556,7 +603,15 @@ class MimockMockRepositoryFindUniqueRecordTest {
 
         String expectedRoute = "/api/mock/test";
         String expectedQueryParams = "version=1.0.0&auto=true";
+        Map<String, Object> expectedQueryParamMap = new HashMap<>();
+        expectedQueryParamMap.put("version", "1.0.0");
+        expectedQueryParamMap.put("auto", "true");
+
         String queryParams = "version=1.0.0&auto=false";
+        Map<String, Object> queryParamMap = new HashMap<>();
+        queryParamMap.put("version", "1.0.0");
+        queryParamMap.put("auto", "false");
+
         UUID expectedMockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14aaaa");
         UUID mockId = UUID.fromString("98737aed-e655-4bfd-88c5-ab10df14bbbb");
 
@@ -568,6 +623,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .requestBodiesForMock(expectedRequestBody)
                 .requestHeaders(expectedRequestHeader)
                 .queryParams(expectedQueryParams)
+                .queryParamValues(expectedQueryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(200)
@@ -582,6 +638,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
                 .route(expectedRoute)
                 .httpMethod(httpMethod)
                 .queryParams(queryParams)
+                .queryParamValues(queryParamMap)
                 .textualResponse(textualResponse)
                 .responseContentType(responseContentType)
                 .statusCode(400)
@@ -599,7 +656,7 @@ class MimockMockRepositoryFindUniqueRecordTest {
         List<Mock> resultFromDB = repository.findUniqueMock(
                 expectedRoute,
                 expectedHttpMethod,
-                expectedQueryParams,
+                expectedQueryParamMap,
                 expectedRequestBody
         );
         assertFalse(resultFromDB.isEmpty());

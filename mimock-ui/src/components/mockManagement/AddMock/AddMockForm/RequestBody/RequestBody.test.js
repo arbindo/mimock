@@ -29,7 +29,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-body-form')).toBeInTheDocument();
+		expect(getByTestId('request-body-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('request-body-type-wrapper')).toBeInTheDocument();
 		expect(getByTestId('request-body-type-label')).toHaveTextContent(
@@ -70,7 +70,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-body-form')).toBeInTheDocument();
+		expect(getByTestId('request-body-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('request-body-type-wrapper')).toBeInTheDocument();
 		expect(getByTestId('request-body-type-label')).toHaveTextContent(
@@ -118,7 +118,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-body-form')).toBeInTheDocument();
+		expect(getByTestId('request-body-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('request-body-type-wrapper')).toBeInTheDocument();
 		expect(getByTestId('save-requestBody-button')).toBeInTheDocument();
@@ -215,7 +215,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-body-form')).toBeInTheDocument();
+		expect(getByTestId('request-body-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(getByTestId('save-requestBody-button')).toBeInTheDocument();
 
@@ -319,7 +319,7 @@ describe('RequestHeaders', () => {
 
 		const { getByTestId, container, queryByTestId } = tree;
 
-		expect(getByTestId('request-body-form')).toBeInTheDocument();
+		expect(getByTestId('request-body-wrapper')).toBeInTheDocument();
 		expect(getByTestId('view-mode')).toBeInTheDocument();
 		expect(queryByTestId('no-request-body')).not.toBeInTheDocument();
 		expect(getByTestId('save-requestBody-button')).toBeInTheDocument();

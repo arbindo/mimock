@@ -173,7 +173,7 @@ export default function QueryParam() {
 	};
 
 	return (
-		<FormWrapper data-testid='query-param-form' onSubmit={saveQueryParams}>
+		<FormWrapper data-testid='query-param-wrapper'>
 			<ToggleButtonGroup
 				value={viewMode}
 				color='primary'
@@ -245,11 +245,11 @@ export default function QueryParam() {
 			</If>
 			<If condition={inputIndex.length !== 0}>
 				<SaveButton
-					type='submit'
 					dataTestid='save-queryParam-button'
 					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'
+					onclickHandler={saveQueryParams}
 				/>
 			</If>
 		</FormWrapper>

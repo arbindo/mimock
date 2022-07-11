@@ -145,7 +145,7 @@ describe('Response', () => {
 			responseType: 'TEXTUAL_RESPONSE',
 			responseContentType: 'text/plain',
 			expectedTextResponse: 'This is a test response',
-			binaryFile: '',
+			binaryFile: null,
 		});
 
 		expect(container).toMatchSnapshot();

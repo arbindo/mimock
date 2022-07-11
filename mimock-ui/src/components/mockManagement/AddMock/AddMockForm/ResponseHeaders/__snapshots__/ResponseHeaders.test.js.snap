@@ -1,46 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RequestHeaders should add new header using key-value inputs 1`] = `
+exports[`ResponseHeaders should add new header using key-value inputs 1`] = `
 <div>
   <div
     class="w-full"
-    data-testid="request-body-wrapper"
+    data-testid="response-headers-wrapper"
   >
-    <div
-      class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
-      data-testid="request-body-type-wrapper"
-    >
-      <div
-        class="font-sans text-gray-600 mx-4 text-justify font-semibold"
-        data-testid="request-body-type-label"
-      >
-        Request body type
-      </div>
-      <select
-        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
-        data-testid="request-body-type"
-      >
-        <option
-          data-testid="options"
-          selected=""
-          value="application/json"
-        >
-          application/json
-        </option>
-        <option
-          data-testid="options"
-          value="application/x-www-form-urlencoded"
-        >
-          application/x-www-form-urlencoded
-        </option>
-        <option
-          data-testid="options"
-          value="multipart/form-data"
-        >
-          multipart/form-data
-        </option>
-      </select>
-    </div>
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
       data-testid="view-mode"
@@ -98,10 +63,10 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
       </button>
     </div>
     <button
-      aria-label="Add new request body"
+      aria-label="Add new header"
       class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
       data-mui-internal-clone-element="true"
-      data-testid="add-request-body-button"
+      data-testid="add-header-button"
       tabindex="0"
       type="button"
     >
@@ -131,10 +96,10 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_0_key"
+          data-testid="responseHeader_0_key"
           placeholder="key"
           type="text"
-          value="userId"
+          value="token"
         />
       </div>
       <div
@@ -142,17 +107,17 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_0_value"
+          data-testid="responseHeader_0_value"
           placeholder="value"
           type="text"
-          value="1"
+          value="AFXAS78HJH"
         />
       </div>
       <button
-        aria-label="Remove request body"
+        aria-label="Remove header"
         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
         data-mui-internal-clone-element="true"
-        data-testid="remove-request-body-tooltip-0"
+        data-testid="remove-header-tooltip-0"
         tabindex="0"
         type="button"
       >
@@ -183,10 +148,10 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_1_key"
+          data-testid="responseHeader_1_key"
           placeholder="key"
           type="text"
-          value="pageFilter"
+          value="sessionId"
         />
       </div>
       <div
@@ -194,17 +159,17 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_1_value"
+          data-testid="responseHeader_1_value"
           placeholder="value"
           type="text"
-          value="type"
+          value="1212UDS-121HJH-HJH89"
         />
       </div>
       <button
-        aria-label="Remove request body"
+        aria-label="Remove header"
         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
         data-mui-internal-clone-element="true"
-        data-testid="remove-request-body-tooltip-1"
+        data-testid="remove-header-tooltip-1"
         tabindex="0"
         type="button"
       >
@@ -235,10 +200,10 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_2_key"
+          data-testid="responseHeader_2_key"
           placeholder="key"
           type="text"
-          value="title"
+          value="authenticated"
         />
       </div>
       <div
@@ -246,17 +211,17 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_2_value"
+          data-testid="responseHeader_2_value"
           placeholder="value"
           type="text"
-          value="Coder"
+          value="true"
         />
       </div>
       <button
-        aria-label="Remove request body"
+        aria-label="Remove header"
         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
         data-mui-internal-clone-element="true"
-        data-testid="remove-request-body-tooltip-2"
+        data-testid="remove-header-tooltip-2"
         tabindex="0"
         type="button"
       >
@@ -283,11 +248,11 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
       class="font-sans mb-4 text-green-600"
       data-testid="success-prompt"
     >
-      Request body fields saved for submission
+      Response headers saved for submission
     </div>
     <button
       class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
-      data-testid="save-requestBody-button"
+      data-testid="save-responseHeader-button"
     >
       Save
     </button>
@@ -295,47 +260,12 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
 </div>
 `;
 
-exports[`RequestHeaders should add new header using text input 1`] = `
+exports[`ResponseHeaders should add new header using text input 1`] = `
 <div>
   <div
     class="w-full"
-    data-testid="request-body-wrapper"
+    data-testid="response-headers-wrapper"
   >
-    <div
-      class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
-      data-testid="request-body-type-wrapper"
-    >
-      <div
-        class="font-sans text-gray-600 mx-4 text-justify font-semibold"
-        data-testid="request-body-type-label"
-      >
-        Request body type
-      </div>
-      <select
-        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
-        data-testid="request-body-type"
-      >
-        <option
-          data-testid="options"
-          selected=""
-          value="application/json"
-        >
-          application/json
-        </option>
-        <option
-          data-testid="options"
-          value="application/x-www-form-urlencoded"
-        >
-          application/x-www-form-urlencoded
-        </option>
-        <option
-          data-testid="options"
-          value="multipart/form-data"
-        >
-          multipart/form-data
-        </option>
-      </select>
-    </div>
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
       data-testid="view-mode"
@@ -394,18 +324,18 @@ exports[`RequestHeaders should add new header using text input 1`] = `
     </div>
     <div
       class="my-4 w-full"
-      data-testid="request-body-text"
+      data-testid="response-header-text"
     >
       <textarea
         class="bg-gray-50 outline-blue-200 border-blue-200 border-2 p-2 text-gray-800 font-sans rounded-md w-full mx-auto"
-        data-testid="request-body-text-input"
-        placeholder="Enter request body as JSON"
+        data-testid="response-header-text-input"
+        placeholder="Enter response headers as JSON"
         rows="10"
         type="text"
       >
         {
-  "userId": "1",
-  "pageFilter": "type"
+  "Authenticated": "true",
+  "session": "12HJHJ-23SDWX-89HJH9"
 }
       </textarea>
     </div>
@@ -413,11 +343,11 @@ exports[`RequestHeaders should add new header using text input 1`] = `
       class="font-sans mb-4 text-green-600"
       data-testid="success-prompt"
     >
-      Request body fields saved for submission
+      Response headers saved for submission
     </div>
     <button
       class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
-      data-testid="save-requestBody-button"
+      data-testid="save-responseHeader-button"
     >
       Save
     </button>
@@ -425,47 +355,12 @@ exports[`RequestHeaders should add new header using text input 1`] = `
 </div>
 `;
 
-exports[`RequestHeaders should fill in request headers when headers are already set 1`] = `
+exports[`ResponseHeaders should fill in response headers when headers are already set 1`] = `
 <div>
   <div
     class="w-full"
-    data-testid="request-body-wrapper"
+    data-testid="response-headers-wrapper"
   >
-    <div
-      class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
-      data-testid="request-body-type-wrapper"
-    >
-      <div
-        class="font-sans text-gray-600 mx-4 text-justify font-semibold"
-        data-testid="request-body-type-label"
-      >
-        Request body type
-      </div>
-      <select
-        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
-        data-testid="request-body-type"
-      >
-        <option
-          data-testid="options"
-          selected=""
-          value="application/json"
-        >
-          application/json
-        </option>
-        <option
-          data-testid="options"
-          value="application/x-www-form-urlencoded"
-        >
-          application/x-www-form-urlencoded
-        </option>
-        <option
-          data-testid="options"
-          value="multipart/form-data"
-        >
-          multipart/form-data
-        </option>
-      </select>
-    </div>
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
       data-testid="view-mode"
@@ -524,19 +419,19 @@ exports[`RequestHeaders should fill in request headers when headers are already 
     </div>
     <div
       class="my-4 w-full"
-      data-testid="request-body-text"
+      data-testid="response-header-text"
     >
       <textarea
         class="bg-gray-50 outline-blue-200 border-blue-200 border-2 p-2 text-gray-800 font-sans rounded-md w-full mx-auto"
-        data-testid="request-body-text-input"
-        placeholder="Enter request body as JSON"
+        data-testid="response-header-text-input"
+        placeholder="Enter response headers as JSON"
         rows="10"
         type="text"
       >
         {
-  "userId": "1",
-  "pageFilter": "date",
-  "page": "2"
+  "Authorization": "Bearer token",
+  "sessionId": "AX112AS16",
+  "logger": "DEBUG"
 }
       </textarea>
     </div>
@@ -544,11 +439,11 @@ exports[`RequestHeaders should fill in request headers when headers are already 
       class="font-sans mb-4 text-green-600"
       data-testid="success-prompt"
     >
-      Request body fields saved for submission
+      Response headers saved for submission
     </div>
     <button
       class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
-      data-testid="save-requestBody-button"
+      data-testid="save-responseHeader-button"
     >
       Save
     </button>
@@ -556,47 +451,12 @@ exports[`RequestHeaders should fill in request headers when headers are already 
 </div>
 `;
 
-exports[`RequestHeaders should remove request body on clicking remove button 1`] = `
+exports[`ResponseHeaders should remove response headers on clicking remove button 1`] = `
 <div>
   <div
     class="w-full"
-    data-testid="request-body-wrapper"
+    data-testid="response-headers-wrapper"
   >
-    <div
-      class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
-      data-testid="request-body-type-wrapper"
-    >
-      <div
-        class="font-sans text-gray-600 mx-4 text-justify font-semibold"
-        data-testid="request-body-type-label"
-      >
-        Request body type
-      </div>
-      <select
-        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
-        data-testid="request-body-type"
-      >
-        <option
-          data-testid="options"
-          selected=""
-          value="application/json"
-        >
-          application/json
-        </option>
-        <option
-          data-testid="options"
-          value="application/x-www-form-urlencoded"
-        >
-          application/x-www-form-urlencoded
-        </option>
-        <option
-          data-testid="options"
-          value="multipart/form-data"
-        >
-          multipart/form-data
-        </option>
-      </select>
-    </div>
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
       data-testid="view-mode"
@@ -654,10 +514,10 @@ exports[`RequestHeaders should remove request body on clicking remove button 1`]
       </button>
     </div>
     <button
-      aria-label="Add new request body"
+      aria-label="Add new header"
       class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
       data-mui-internal-clone-element="true"
-      data-testid="add-request-body-button"
+      data-testid="add-header-button"
       tabindex="0"
       type="button"
     >
@@ -687,7 +547,7 @@ exports[`RequestHeaders should remove request body on clicking remove button 1`]
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_0_key"
+          data-testid="responseHeader_0_key"
           placeholder="key"
           type="text"
           value=""
@@ -698,17 +558,17 @@ exports[`RequestHeaders should remove request body on clicking remove button 1`]
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_0_value"
+          data-testid="responseHeader_0_value"
           placeholder="value"
           type="text"
           value=""
         />
       </div>
       <button
-        aria-label="Remove request body"
+        aria-label="Remove header"
         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
         data-mui-internal-clone-element="true"
-        data-testid="remove-request-body-tooltip-0"
+        data-testid="remove-header-tooltip-0"
         tabindex="0"
         type="button"
       >
@@ -733,7 +593,7 @@ exports[`RequestHeaders should remove request body on clicking remove button 1`]
     </div>
     <button
       class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
-      data-testid="save-requestBody-button"
+      data-testid="save-responseHeader-button"
     >
       Save
     </button>
@@ -741,47 +601,12 @@ exports[`RequestHeaders should remove request body on clicking remove button 1`]
 </div>
 `;
 
-exports[`RequestHeaders should render request body when initial value is empty 1`] = `
+exports[`ResponseHeaders should render response headers when initial value is empty 1`] = `
 <div>
   <div
     class="w-full"
-    data-testid="request-body-wrapper"
+    data-testid="response-headers-wrapper"
   >
-    <div
-      class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
-      data-testid="request-body-type-wrapper"
-    >
-      <div
-        class="font-sans text-gray-600 mx-4 text-justify font-semibold"
-        data-testid="request-body-type-label"
-      >
-        Request body type
-      </div>
-      <select
-        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
-        data-testid="request-body-type"
-      >
-        <option
-          data-testid="options"
-          selected=""
-          value="application/json"
-        >
-          application/json
-        </option>
-        <option
-          data-testid="options"
-          value="application/x-www-form-urlencoded"
-        >
-          application/x-www-form-urlencoded
-        </option>
-        <option
-          data-testid="options"
-          value="multipart/form-data"
-        >
-          multipart/form-data
-        </option>
-      </select>
-    </div>
     <div
       class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
       data-testid="view-mode"
@@ -839,10 +664,10 @@ exports[`RequestHeaders should render request body when initial value is empty 1
       </button>
     </div>
     <button
-      aria-label="Add new request body"
+      aria-label="Add new header"
       class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
       data-mui-internal-clone-element="true"
-      data-testid="add-request-body-button"
+      data-testid="add-header-button"
       tabindex="0"
       type="button"
     >
@@ -872,7 +697,7 @@ exports[`RequestHeaders should render request body when initial value is empty 1
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_0_key"
+          data-testid="responseHeader_0_key"
           placeholder="key"
           type="text"
           value=""
@@ -883,17 +708,17 @@ exports[`RequestHeaders should render request body when initial value is empty 1
       >
         <input
           class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
-          data-testid="requestBody_0_value"
+          data-testid="responseHeader_0_value"
           placeholder="value"
           type="text"
           value=""
         />
       </div>
       <button
-        aria-label="Remove request body"
+        aria-label="Remove header"
         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
         data-mui-internal-clone-element="true"
-        data-testid="remove-request-body-tooltip-0"
+        data-testid="remove-header-tooltip-0"
         tabindex="0"
         type="button"
       >
@@ -918,7 +743,7 @@ exports[`RequestHeaders should render request body when initial value is empty 1
     </div>
     <button
       class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
-      data-testid="save-requestBody-button"
+      data-testid="save-responseHeader-button"
     >
       Save
     </button>

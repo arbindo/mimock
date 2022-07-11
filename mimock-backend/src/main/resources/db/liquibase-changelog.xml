@@ -34,4 +34,6 @@
     <include file="changelogs/0028_insert_platform_settings.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0029_add_unique_selectors_for_mocks.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0030_alter_mocks_add_columns_for_audit.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0031_alter_mocks_add_column_query_param_value.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0032_update_unique_selectors_for_mocks.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

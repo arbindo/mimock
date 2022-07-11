@@ -6,25 +6,25 @@ const getAllMocks = async (token) => {
 	return await get('/mocks', token);
 };
 
-const getMockById = async (id, token) => {
-	return await get(`/mocks/${id}`, token);
+const getMockById = async (id) => {
+	return await get(`/mocks/${id}`, { showFullPageLoader: true });
 };
 
-const createMock = async (requestData, token) => {
+const createMock = async (requestData) => {
 	return await post(
 		`/mocks`,
 		requestData,
-		token,
-		'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03'
+		'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03',
+		{ showFullPageLoader: true }
 	);
 };
 
-const updateMock = async (id, requestData, token) => {
+const updateMock = async (id, requestData) => {
 	return await put(
 		`/mocks/${id}`,
 		requestData,
-		token,
-		'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03'
+		'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03',
+		{ showFullPageLoader: true }
 	);
 };
 

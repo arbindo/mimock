@@ -12,7 +12,7 @@ import Dashboard from './components/dashboard';
 import Users from './components/users';
 import EditUser from './components/users/UserManagement/EditUser';
 import Logout from './components/common/Logout';
-import { AddMock, Detail } from './components/mockManagement';
+import { AddMock, Detail, EditMock } from './components/mockManagement';
 import AddUser from './components/users/UserManagement/AddUser';
 import Settings from './components/settings';
 
@@ -66,7 +66,11 @@ function AppRoutes() {
 					<Route path={routes.managePrefix}>
 						<Route
 							path={routes.manageRoutes.addMock.path}
-							element={secureManagerRoutes(<AddMock />)}
+							element={secureManagerRoutes(<AddMock mode='create' />)}
+						/>
+						<Route
+							path={routes.manageRoutes.editMock.path}
+							element={secureManagerRoutes(<EditMock />)}
 						/>
 					</Route>
 					{/* Admin Routes */}

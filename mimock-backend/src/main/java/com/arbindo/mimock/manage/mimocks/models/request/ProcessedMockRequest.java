@@ -18,6 +18,7 @@ public class ProcessedMockRequest {
     private int statusCode;
     private String responseContentType;
     private String queryParams;
+    private Map<String, Object> queryParamValue;
     private Map<String, Object> requestHeader;
     private Boolean shouldDoExactHeaderMatching;
     private Map<String, Object> responseHeaders;
