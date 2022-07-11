@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import { CustomButton } from 'styles';
+import { IconButtonWithLabel } from 'styles/Button';
 
 export const ResponseTypeWrapper = tw.div`
     flex
@@ -112,7 +112,7 @@ export const UploadError = tw.div`
     my-2
 `;
 
-export const DownloadFile = tw(CustomButton)``;
+export const DownloadFile = tw(IconButtonWithLabel)``;
 
 export const RemoveFile = tw.div`
     pt-2

@@ -6,6 +6,7 @@ import { useRecoilState } from 'recoil';
 import fileDownload from 'js-file-download';
 import mime from 'mime';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
+import { IconButtonVariants } from 'styles/Button';
 import {
 	FileUploadWrapper,
 	UploadContainer,
@@ -101,12 +102,9 @@ function FileUpload({ binaryFile, setBinaryFile }) {
 							</When>
 							<When condition={mode === 'edit'}>
 								<DownloadFile
-									label='Download file'
 									dataTestid={`download-file-${mockData.id}`}
-									background='bg-blue-500'
-									color='text-white'
-									additionalStyles='ml-0 break-normal'
-									width='w-1/3'
+									label='Download file'
+									variant={IconButtonVariants.DownloadButton}
 									onclickHandler={downloadFile}
 								/>
 							</When>
