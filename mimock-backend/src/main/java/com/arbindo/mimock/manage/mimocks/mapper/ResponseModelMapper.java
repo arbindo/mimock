@@ -15,6 +15,8 @@ public class ResponseModelMapper {
                 .description(mock.getDescription())
                 .route(mock.getRoute())
                 .httpMethod(mock.getHttpMethod().getMethod())
+                .isArchived(mock.isArchived())
+                .isDeleted(mock.isDeleted())
                 .build();
     }
 }

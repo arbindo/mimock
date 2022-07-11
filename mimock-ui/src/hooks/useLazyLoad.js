@@ -167,6 +167,7 @@ function useLazyLoad(
 		sortDirection,
 		expectedResponseType,
 	]);
+	console.log(mocksList);
 
 	return { mocksList, listTitle, isFilter, loading, error, hasMore };
 }

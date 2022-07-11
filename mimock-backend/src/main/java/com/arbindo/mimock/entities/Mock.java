@@ -121,6 +121,10 @@ public class Mock {
     @Schema(description = "Modified By")
     private String modifiedBy;
 
+    public boolean isDeleted() {
+        return Status.valueOf(getEntityStatus().getStatus()) == Status.DELETED;
+    }
+
     public boolean isArchived() {
         return Status.valueOf(getEntityStatus().getStatus()) == Status.ARCHIVED;
     }

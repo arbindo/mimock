@@ -18,7 +18,6 @@ import {
 import { constants } from './constants';
 
 function DetailContentViewer({ mock }) {
-	console.log(mock);
 	// #region Defaults
 	const { testIds, ids, labels, additionalStyles } = constants;
 	// #endregion

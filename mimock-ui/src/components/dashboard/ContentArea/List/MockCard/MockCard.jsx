@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
 	CardContainer,
+	CardCrossBadge,
 	CardTitleContainer,
 	CardTitle,
 	CardSubtitle,
@@ -23,10 +24,13 @@ function MockCard({
 	description,
 	httpMethod,
 	route,
+	isDeleted,
+	isArchived,
 }) {
 	// #region States
 	const [badgeColor, setBadgeColor] = useState('');
 	const { testIds, additionalStyles } = constants;
+	const crossBadgeText = isDeleted ? 'DELETED' : isArchived ? 'ARCHIVED' : '';
 	// #endregion
 
 	// #region Common Hooks
@@ -42,6 +46,11 @@ function MockCard({
 			ref={innerRef}
 			to={`/mimock-ui/mocks/detail/${id}`}
 		>
+			<If condition={crossBadgeText !== ''}>
+				<CardCrossBadge isDeleted={isDeleted} isArchived={isArchived}>
+					{crossBadgeText}
+				</CardCrossBadge>
+			</If>
 			<CardTitleContainer>
 				<CardTitle data-testid={testIds.cardTitle}>{mockName}</CardTitle>
 				<CardSubtitle data-testid={testIds.cardSubtitle}>
@@ -71,6 +80,8 @@ MockCard.propTypes = {
 	description: PropTypes.string,
 	httpMethod: PropTypes.string.isRequired,
 	route: PropTypes.string.isRequired,
+	isDeleted: PropTypes.bool.isRequired,
+	isArchived: PropTypes.bool.isRequired,
 };
 
 export default MockCard;

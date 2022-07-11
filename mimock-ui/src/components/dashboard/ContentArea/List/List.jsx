@@ -215,6 +215,8 @@ function List({
 											description={mock.description}
 											httpMethod={mock.httpMethod}
 											route={mock.route}
+											isDeleted={mock.deleted}
+											isArchived={mock.archived}
 										/>
 									);
 								} else {
@@ -227,6 +229,8 @@ function List({
 											description={mock.description}
 											httpMethod={mock.httpMethod}
 											route={mock.route}
+											isDeleted={mock.deleted}
+											isArchived={mock.archived}
 										/>
 									);
 								}

@@ -13,4 +13,6 @@ public class ListMocksResponse {
     private String description;
     private String route;
     private String httpMethod;
+    private boolean isArchived;
+    private boolean isDeleted;
 }
