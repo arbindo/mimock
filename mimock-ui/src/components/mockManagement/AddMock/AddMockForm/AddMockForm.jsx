@@ -26,6 +26,8 @@ import {
 	AccordionHeader,
 	ButtonWrapper,
 	ActionButton,
+	LabelContainer,
+	Required,
 } from './AddMockForm.style';
 import { mockManagementConstants } from '../../constants';
 
@@ -167,7 +169,12 @@ function AddMockForm({ mode }) {
 			>
 				<For each='item' of={registeredInputs}>
 					<FormItem data-testid={`form-item-${item.name}`} key={item.name}>
-						<FormLabel>{item.label}</FormLabel>
+						<LabelContainer>
+							<FormLabel>{item.label}</FormLabel>
+							<If condition={item.required}>
+								<Required>*</Required>
+							</If>
+						</LabelContainer>
 						<ValidatedInput
 							name={item.name}
 							dataTestId={`input-${item.name}`}
@@ -218,7 +225,7 @@ function AddMockForm({ mode }) {
 							? 'create-mock-button'
 							: 'update-mock-button'
 					}
-					background='bg-green-500'
+					background='bg-teal-500'
 					color='text-white'
 					additionalStyles='ml-0 break-normal'
 					width='w-1/3'
@@ -228,7 +235,7 @@ function AddMockForm({ mode }) {
 					<ActionButton
 						label='Reset'
 						dataTestid='reset-button'
-						background='bg-red-500'
+						background='bg-rose-500'
 						color='text-white'
 						width='w-1/3'
 						additionalStyles='mx-0 break-normal'

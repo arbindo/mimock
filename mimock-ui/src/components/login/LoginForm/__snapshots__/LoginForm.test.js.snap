@@ -47,7 +47,7 @@ exports[`LoginForm should clear auth cookies when auth token is invalid 1`] = `
         value=""
       />
       <button
-        class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 px-9 py-3 mt-5 text-white w-full bg-teal-500"
         data-testid="login-submit"
       >
         Login
@@ -118,7 +118,7 @@ exports[`LoginForm should enter credentials to login 1`] = `
         value="test@123"
       />
       <button
-        class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 px-9 py-3 mt-5 text-white w-full bg-teal-500"
         data-testid="login-submit"
       >
         Login
@@ -189,7 +189,7 @@ exports[`LoginForm should navigate to mocks page when user is already authentica
         value=""
       />
       <button
-        class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 px-9 py-3 mt-5 text-white w-full bg-teal-500"
         data-testid="login-submit"
       >
         Login
@@ -246,7 +246,7 @@ exports[`LoginForm should render login form when user is not already logged in 1
         value=""
       />
       <button
-        class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 px-9 py-3 mt-5 text-white w-full bg-teal-500"
         data-testid="login-submit"
       >
         Login
@@ -303,7 +303,7 @@ exports[`LoginForm should show error message credentials are empty 1`] = `
         value=""
       />
       <button
-        class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 px-9 py-3 mt-5 text-white w-full bg-teal-500"
         data-testid="login-submit"
       >
         Login
@@ -366,7 +366,7 @@ exports[`LoginForm should show error message when getToken api call fails 1`] = 
         value="test@123"
       />
       <button
-        class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 px-9 py-3 mt-5 text-white w-full bg-teal-500"
         data-testid="login-submit"
       >
         Login
@@ -429,7 +429,7 @@ exports[`LoginForm should show error message when password is empty 1`] = `
         value=""
       />
       <button
-        class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 px-9 py-3 mt-5 text-white w-full bg-teal-500"
         data-testid="login-submit"
       >
         Login
@@ -492,7 +492,7 @@ exports[`LoginForm should show error message when user name is empty 1`] = `
         value="test@123"
       />
       <button
-        class="flex items-center justify-center gap-1 px-9 py-3 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 mt-5 text-white w-full bg-teal-500"
+        class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-110 px-9 py-3 mt-5 text-white w-full bg-teal-500"
         data-testid="login-submit"
       >
         Login

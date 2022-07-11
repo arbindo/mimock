@@ -103,7 +103,7 @@ function FileUpload({ binaryFile, setBinaryFile }) {
 								<DownloadFile
 									label='Download file'
 									dataTestid={`download-file-${mockData.id}`}
-									background='bg-orange-500'
+									background='bg-blue-500'
 									color='text-white'
 									additionalStyles='ml-0 break-normal'
 									width='w-1/3'

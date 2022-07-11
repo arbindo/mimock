@@ -251,7 +251,7 @@ exports[`ResponseHeaders should add new header using key-value inputs 1`] = `
       Response headers saved for submission
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-responseHeader-button"
     >
       Save
@@ -346,7 +346,7 @@ exports[`ResponseHeaders should add new header using text input 1`] = `
       Response headers saved for submission
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-responseHeader-button"
     >
       Save
@@ -442,7 +442,7 @@ exports[`ResponseHeaders should fill in response headers when headers are alread
       Response headers saved for submission
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-responseHeader-button"
     >
       Save
@@ -592,7 +592,7 @@ exports[`ResponseHeaders should remove response headers on clicking remove butto
       </button>
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-responseHeader-button"
     >
       Save
@@ -742,7 +742,7 @@ exports[`ResponseHeaders should render response headers when initial value is em
       </button>
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-responseHeader-button"
     >
       Save

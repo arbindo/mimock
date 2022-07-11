@@ -12,6 +12,7 @@ export const addMockFormInputData = (data, mode) => {
 			label: 'Mock name',
 			type: 'text',
 			placeholder: 'Enter mock name',
+			required: true,
 			validators: {
 				required: 'Mock name is required',
 				value: data?.name?.toString(),
@@ -30,6 +31,7 @@ export const addMockFormInputData = (data, mode) => {
 			label: 'Mock description',
 			type: 'text',
 			placeholder: 'Enter mock description',
+			required: true,
 			validators: {
 				required: 'Mock description is required',
 				value: data?.description?.toString(),
@@ -48,6 +50,7 @@ export const addMockFormInputData = (data, mode) => {
 			label: 'HTTP Status',
 			type: 'text',
 			placeholder: 'Enter HTTP status',
+			required: true,
 			validators: {
 				required: 'HTTP status is required',
 				valueAsNumber: true,
@@ -63,6 +66,7 @@ export const addMockFormInputData = (data, mode) => {
 			label: 'Route to mock',
 			type: 'text',
 			placeholder: 'Enter route to mock',
+			required: true,
 			hint: (
 				<div className='w-full'>
 					<div className='my-2 font-bold font-sans'>

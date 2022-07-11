@@ -11,6 +11,8 @@ function CustomButton({
 	onclickHandler,
 	dataTestid,
 	additionalStyles,
+	hover,
+	padding,
 	name,
 	id,
 }) {
@@ -22,6 +24,8 @@ function CustomButton({
 			$background={background}
 			onClick={onclickHandler}
 			$additionalStyles={additionalStyles}
+			$hover={hover}
+			$padding={padding}
 			name={name}
 			id={id}
 		>
@@ -42,6 +46,8 @@ CustomButton.propTypes = {
 	additionalStyles: PropTypes.string,
 	name: PropTypes.string,
 	id: PropTypes.string,
+	hover: PropTypes.string,
+	padding: PropTypes.string,
 };
 
 export default CustomButton;

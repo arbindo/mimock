@@ -5,8 +5,6 @@ export const CustomButtonContainer = tw.button`
   items-center
   justify-center
   gap-1
-  px-9
-  py-3
   mx-auto
   shadow-md
   rounded-md
@@ -14,7 +12,8 @@ export const CustomButtonContainer = tw.button`
   text-base
   font-semibold
   cursor-pointer
-  hover:brightness-110
+  ${(props) => props.$hover || 'hover:brightness-110'}
+  ${(props) => props.$padding || 'px-9 py-3'}
   ${(props) => props.$additionalStyles}
   ${(props) => props.$color}
   ${(props) => (props.$width ? props.$width : 'w-fit')}

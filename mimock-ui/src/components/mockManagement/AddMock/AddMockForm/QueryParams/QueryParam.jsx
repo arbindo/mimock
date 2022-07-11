@@ -6,7 +6,6 @@ import { VscListFlat, VscCode } from 'react-icons/vsc';
 import { TextInput } from 'styles';
 import { useRecoilState } from 'recoil';
 import queryString from 'query-string';
-import { ButtonVariants } from 'styles/Button';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
 import {
 	FormWrapper,
@@ -246,9 +245,13 @@ export default function QueryParam() {
 			<If condition={inputIndex.length !== 0}>
 				<SaveButton
 					dataTestid='save-queryParam-button'
-					variant={ButtonVariants.BlueButton}
 					label='Save'
 					width='w-1/4'
+					background='bg-grey-50'
+					color='text-gray-600'
+					hover='hover:border-gray-500 hover:bg-gray-200'
+					padding='py-2 px-2'
+					additionalStyles='mx-0 break-normal p-0 border-2 border-gray-400'
 					onclickHandler={saveQueryParams}
 				/>
 			</If>

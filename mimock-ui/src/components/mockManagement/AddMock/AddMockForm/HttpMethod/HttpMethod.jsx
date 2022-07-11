@@ -4,7 +4,8 @@ import { useRecoilState } from 'recoil';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
 import { getHttpMethods } from 'services/staticRecords/getHttpMethods.service';
 import { Select } from 'styles';
-import { FormItem, FormLabel, HttpMethodSelect } from '../AddMockForm.style';
+import { FormLabel } from './HttpMethod.style';
+import { FormItem, HttpMethodSelect } from '../AddMockForm.style';
 
 function HttpMethod({ selectedMethod }) {
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);

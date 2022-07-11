@@ -2,7 +2,7 @@ import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import Tooltip from '@mui/material/Tooltip';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
-import { Button } from 'styles';
+import { CustomButton } from 'styles';
 
 export const FormWrapper = tw.div`
     w-full
@@ -86,9 +86,7 @@ export const ParsedTextArea = tw.textarea`
     mx-auto
 `;
 
-export const SaveButton = tw(Button)`
-    my-5
-`;
+export const SaveButton = tw(CustomButton)``;
 
 export const SuccessPrompt = tw.div`
     font-sans

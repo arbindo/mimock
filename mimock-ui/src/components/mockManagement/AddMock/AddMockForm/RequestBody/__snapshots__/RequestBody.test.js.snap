@@ -286,7 +286,7 @@ exports[`RequestHeaders should add new header using key-value inputs 1`] = `
       Request body fields saved for submission
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-requestBody-button"
     >
       Save
@@ -416,7 +416,7 @@ exports[`RequestHeaders should add new header using text input 1`] = `
       Request body fields saved for submission
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-requestBody-button"
     >
       Save
@@ -547,7 +547,7 @@ exports[`RequestHeaders should fill in request headers when headers are already 
       Request body fields saved for submission
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-requestBody-button"
     >
       Save
@@ -732,7 +732,7 @@ exports[`RequestHeaders should remove request body on clicking remove button 1`]
       </button>
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-requestBody-button"
     >
       Save
@@ -917,7 +917,7 @@ exports[`RequestHeaders should render request body when initial value is empty 1
       </button>
     </div>
     <button
-      class="px-9 py-2 shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:brightness-105 outline-none text-white w-1/4 bg-blue-600"
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
       data-testid="save-requestBody-button"
     >
       Save

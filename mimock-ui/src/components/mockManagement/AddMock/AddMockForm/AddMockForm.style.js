@@ -18,8 +18,14 @@ export const FormItem = tw.div`
 	my-8
 `;
 
-export const FormLabel = tw.label`
+export const LabelContainer = tw.div`
+	flex
+	items-center
+	gap-3
 	w-1/5
+`;
+
+export const FormLabel = tw.label`
 	font-sans
 	font-bold
 	subpixel-antialiased	
@@ -67,3 +73,10 @@ export const ButtonWrapper = tw.div`
 `;
 
 export const ActionButton = tw(CustomButton)``;
+
+export const Required = tw.div`
+    font-sans
+    text-red-600
+    mb-1
+    font-bold
+`;
