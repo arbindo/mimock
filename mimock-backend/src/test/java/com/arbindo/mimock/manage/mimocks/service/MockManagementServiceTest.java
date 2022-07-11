@@ -125,7 +125,7 @@ class MockManagementServiceTest {
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null, ExpectedResponseType.EMPTY_RESPONSE);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null, null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -145,7 +145,7 @@ class MockManagementServiceTest {
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(null);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null, ExpectedResponseType.EMPTY_RESPONSE);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, null, null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -188,7 +188,7 @@ class MockManagementServiceTest {
         lenient().when(mockParamBuilder.findHttpMethodFromQueryString(anyString())).thenReturn(httpMethod);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET", ExpectedResponseType.EMPTY_RESPONSE);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET", null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -208,7 +208,7 @@ class MockManagementServiceTest {
         lenient().when(mockParamBuilder.findHttpMethodFromQueryString(anyString())).thenReturn(null);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET", ExpectedResponseType.EMPTY_RESPONSE);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET", null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());
@@ -221,7 +221,7 @@ class MockManagementServiceTest {
     }
 
     @Test
-    void shouldReturnNonFilteredListOfMocks_WhenStatusAndHttpMethodParameterIsNull() {
+    void shouldReturnNonFilteredListOfMocks_WhenStatusHttpMethodAndExpectedResponseTypeParametersAreNull() {
         // Arrange
         Page<Mock> pageable = generateMocksPageable();
 
@@ -254,7 +254,7 @@ class MockManagementServiceTest {
         lenient().when(mockParamBuilder.findHttpMethodFromQueryString(anyString())).thenReturn(httpMethod);
 
         // Act
-        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET", ExpectedResponseType.EMPTY_RESPONSE);
+        Page<Mock> result = mockManagementService.getMocksAsPageable(Pageable.unpaged(), Status.NONE, "GET", null);
 
         // Assert
         assertEquals(pageable.getTotalElements(), result.getTotalElements());

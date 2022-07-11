@@ -21,6 +21,7 @@ function ContentArea({
 	// #region Defaults
 	const isFilterCleared = httpMethodFilter === '';
 	const isSortColumnCleared = sortColumn === '';
+	const isExpectedResponseTypeCleared = expectedResponseType === '';
 	const { testIds } = constants;
 	// #endregion
 
@@ -31,6 +32,7 @@ function ContentArea({
 					handleOnBadgeClick={handleOnBadgeClick}
 					isFilterCleared={isFilterCleared}
 					isSortColumnCleared={isSortColumnCleared}
+					isExpectedResponseTypeCleared={isExpectedResponseTypeCleared}
 					handleOnChangeSortSelector={handleOnChangeSortSelector}
 					handleOnClickSortDirection={handleOnClickSortDirection}
 					handleOnChangeResponseTypeFilter={handleOnChangeResponseTypeFilter}

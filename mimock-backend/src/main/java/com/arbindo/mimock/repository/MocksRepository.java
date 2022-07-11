@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @Repository
 public interface MocksRepository extends JpaRepository<Mock, UUID> {
+
     Optional<Mock> findOneByRouteAndHttpMethodAndQueryParams(String route, HttpMethod httpMethod, String queryParams);
 
     Page<Mock> findAllByEntityStatus(EntityStatus entityStatus, Pageable pageable);
@@ -20,10 +21,23 @@ public interface MocksRepository extends JpaRepository<Mock, UUID> {
     Page<Mock> findAllByHttpMethod(HttpMethod httpMethod, Pageable pageable);
 
     Page<Mock> findAllByTextualResponseIsNotNull(Pageable pageable);
-
     Page<Mock> findAllByBinaryResponseIsNotNull(Pageable pageable);
+    Page<Mock> findAllByTextualResponseIsNullAndBinaryResponseIsNull(Pageable pageable);
 
     Page<Mock> findAllByEntityStatusAndHttpMethod(EntityStatus entityStatus, HttpMethod httpMethod, Pageable pageable);
+    Page<Mock> findAllByEntityStatusAndTextualResponseIsNotNull(EntityStatus entityStatus, Pageable pageable);
+    Page<Mock> findAllByEntityStatusAndBinaryResponseIsNotNull(EntityStatus entityStatus, Pageable pageable);
+    Page<Mock> findAllByEntityStatusAndTextualResponseIsNullAndBinaryResponseIsNull(EntityStatus entityStatus, Pageable pageable);
+    Page<Mock> findAllByHttpMethodAndTextualResponseIsNotNull(HttpMethod httpMethod, Pageable pageable);
+    Page<Mock> findAllByHttpMethodAndBinaryResponseIsNotNull(HttpMethod httpMethod, Pageable pageable);
+    Page<Mock> findAllByHttpMethodAndTextualResponseIsNullAndBinaryResponseIsNull(HttpMethod httpMethod, Pageable pageable);
+
+    Page<Mock> findAllByEntityStatusAndHttpMethodAndTextualResponseIsNotNull(EntityStatus entityStatus, HttpMethod httpMethod,
+                                                                             Pageable pageable);
+    Page<Mock> findAllByEntityStatusAndHttpMethodAndBinaryResponseIsNotNull(EntityStatus entityStatus, HttpMethod httpMethod,
+                                                                            Pageable pageable);
+    Page<Mock> findAllByEntityStatusAndHttpMethodAndTextualResponseIsNullAndBinaryResponseIsNull(EntityStatus entityStatus,
+                                                                                                 HttpMethod httpMethod, Pageable pageable);
 
     List<Mock> findAllByEntityStatusAndDeletedAt(EntityStatus entityStatus, ZonedDateTime deletedAt);
 

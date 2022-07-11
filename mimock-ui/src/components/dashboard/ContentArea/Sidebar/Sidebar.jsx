@@ -39,6 +39,7 @@ function Sidebar({
 	handleOnBadgeClick,
 	isFilterCleared,
 	isSortColumnCleared,
+	isExpectedResponseTypeCleared,
 	handleOnChangeSortSelector,
 	handleOnClickSortDirection,
 	handleOnChangeResponseTypeFilter,
@@ -65,6 +66,7 @@ function Sidebar({
 	const badgeRef = useRef([]);
 	const sortSelectorRef = useRef();
 	const sortIconsWrapperRef = useRef();
+	const expectedResponseTypeRef = useRef([]);
 
 	useEffect(() => {
 		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
@@ -94,11 +96,24 @@ function Sidebar({
 			sortIconsWrapperRef.current.classList.remove('hidden');
 		}
 	}, [isSortColumnCleared]);
+
+	useEffect(() => {
+		if (isExpectedResponseTypeCleared) {
+			for (
+				let index = 0;
+				index < Object.keys(expectedResponseTypeRef).length - 1;
+				index++
+			) {
+				const element = expectedResponseTypeRef[index];
+				element.checked = false;
+			}
+		}
+	}, [isExpectedResponseTypeCleared]);
 	// #endregion
 
 	// #region Handler functions
 	const handleOnChangeResponseTypeRadio = (e) => {
-		console.log(e.target.value);
+		e.target.checked = true;
 		handleOnChangeResponseTypeFilter(e.target.value);
 	};
 
@@ -227,7 +242,9 @@ function Sidebar({
 					{responseTypeItems.map((item, key) => (
 						<FormCheckWrapper key={key}>
 							<RadioComponent
+								ref={(element) => (expectedResponseTypeRef[key] = element)}
 								type='radio'
+								defaultChecked={false}
 								value={item.value}
 								onChange={handleOnChangeResponseTypeRadio}
 								name={`${name.responseType}`}
@@ -281,6 +298,7 @@ Sidebar.propTypes = {
 	handleOnBadgeClick: PropTypes.func.isRequired,
 	isFilterCleared: PropTypes.bool.isRequired,
 	isSortColumnCleared: PropTypes.bool.isRequired,
+	isExpectedResponseTypeCleared: PropTypes.bool.isRequired,
 	handleOnChangeSortSelector: PropTypes.func.isRequired,
 	handleOnClickSortDirection: PropTypes.func.isRequired,
 	handleOnChangeResponseTypeFilter: PropTypes.func.isRequired,

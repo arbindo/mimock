@@ -15,7 +15,7 @@ export const constants = {
 	name: {
 		exportMocksBtn: 'exportMocks',
 		importMocksBtn: 'importMocks',
-		responseType: 'response-type_',
+		responseType: 'response-type',
 	},
 	ids: {
 		exportMocksBtn: 'export-mocks-btn',

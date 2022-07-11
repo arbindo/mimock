@@ -76,9 +76,16 @@ function List({
 				sortColumn !== ''
 					? `Sort: ${sortColumn.toUpperCase()}${sortDirectionQueryParam.toUpperCase()}`
 					: '';
-			return [statusTag, httpMethodTag, sortColumnWithDirectionTag].filter(
-				(item) => item !== ''
-			);
+			const expectedResponseTypeTag =
+				expectedResponseType !== ''
+					? `ResponseType: ${expectedResponseType}`
+					: '';
+			return [
+				statusTag,
+				httpMethodTag,
+				sortColumnWithDirectionTag,
+				expectedResponseTypeTag,
+			].filter((item) => item !== '');
 		});
 		if (mocksListView === mockManagementConstants.DELETED_STATUS) {
 			platformSettingsRef.current = cookies.get(
@@ -90,7 +97,13 @@ function List({
 		} else {
 			setShowWarningBannerInBin(false);
 		}
-	}, [mocksListView, httpMethodFilter, sortColumn, sortDirection]);
+	}, [
+		mocksListView,
+		httpMethodFilter,
+		sortColumn,
+		sortDirection,
+		expectedResponseType,
+	]);
 	const observer = useRef();
 	const lastItem = useCallback(
 		(node) => {

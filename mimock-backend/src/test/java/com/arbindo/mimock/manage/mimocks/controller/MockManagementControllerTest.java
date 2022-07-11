@@ -169,13 +169,14 @@ class MockManagementControllerTest {
         Page<Mock> expectedMocks = new PageImpl<>(new ArrayList<>());
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), any(ExpectedResponseType.class)))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), anyString()))
                 .thenReturn(expectedMocks);
 
         // Act
         MvcResult result = mockMvc.perform(get(route)
                         .param("status", "NONE")
-                        .param("httpMethod", "GET"))
+                        .param("httpMethod", "GET")
+                        .param("expectedResponseType", "EMPTY_RESPONSE"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(expectedContentType))
                 .andReturn();
@@ -193,13 +194,14 @@ class MockManagementControllerTest {
         Page<ListMocksResponse> expectedListMocksResponse = getListMocksResponseInPageableFormat(expectedMocksFromDB);
         String expectedResponseBody = convertObjectToJsonString(expectedListMocksResponse);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), any(ExpectedResponseType.class)))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), anyString()))
                 .thenReturn(expectedMocksFromDB);
 
         // Act
         MvcResult result = mockMvc.perform(get(route)
                         .param("status", "NONE")
-                        .param("httpMethod", "GET"))
+                        .param("httpMethod", "GET")
+                        .param("expectedResponseType", "EMPTY_RESPONSE"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(expectedContentType))
                 .andReturn();
@@ -213,7 +215,7 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_PAGEABLE;
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), any(ExpectedResponseType.class)))
+        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), anyString()))
                 .thenReturn(null);
 
         // Act
