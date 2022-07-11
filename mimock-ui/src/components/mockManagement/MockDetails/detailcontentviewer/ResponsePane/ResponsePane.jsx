@@ -6,12 +6,25 @@ import {
 	Item,
 	ItemPreFormat,
 	Code,
+	DownloadWrapper,
+	DownloadFile,
 } from './ResponsePane.style';
 import PropTypes from 'prop-types';
 import Prism from 'prismjs';
+import mime from 'mime';
+import fileDownload from 'js-file-download';
+import { Base64 } from 'js-base64';
+import { IconButtonVariants } from 'styles/Button';
 import { constants } from './constants';
 
-function ResponsePane({ responseHeader, contentType, responseBody }) {
+function ResponsePane({
+	responseHeader,
+	contentType,
+	mockId,
+	textResponse,
+	binaryResponse,
+	responseType,
+}) {
 	// #region Defaults
 	const { testIds, labels, defaultFieldType } = constants;
 	// #endregion
@@ -20,6 +33,17 @@ function ResponsePane({ responseHeader, contentType, responseBody }) {
 	useEffect(() => {
 		Prism.highlightAll();
 	}, []);
+	// #endregion
+
+	// #region Handler functions
+	const downloadFile = (e) => {
+		e.preventDefault();
+
+		const fileName = `${mockId}.${mime.getExtension(contentType)}`;
+		const blob = new Blob([Base64.toUint8Array(binaryResponse)]);
+
+		fileDownload(blob, fileName);
+	};
 	// #endregion
 
 	return (
@@ -42,9 +66,23 @@ function ResponsePane({ responseHeader, contentType, responseBody }) {
 			</ContentItem>
 			<ContentItem>
 				<ItemLabel>{labels.expectedResponse}</ItemLabel>
-				<ItemPreFormat data-testid={testIds.expectedResponse}>
-					<Code>{responseBody}</Code>
-				</ItemPreFormat>
+				<Choose>
+					<When condition={responseType === 'TEXTUAL_RESPONSE'}>
+						<ItemPreFormat data-testid={testIds.expectedResponse}>
+							<Code>{textResponse}</Code>
+						</ItemPreFormat>
+					</When>
+					<When condition={responseType === 'BINARY_RESPONSE'}>
+						<DownloadWrapper>
+							<DownloadFile
+								dataTestid={`download-file`}
+								label='Download file'
+								variant={IconButtonVariants.DownloadButton}
+								onclickHandler={downloadFile}
+							/>
+						</DownloadWrapper>
+					</When>
+				</Choose>
 			</ContentItem>
 		</NavTabPane>
 	);
@@ -53,7 +91,10 @@ function ResponsePane({ responseHeader, contentType, responseBody }) {
 ResponsePane.propTypes = {
 	responseHeader: PropTypes.string.isRequired,
 	contentType: PropTypes.string.isRequired,
-	responseBody: PropTypes.string.isRequired,
+	responseType: PropTypes.string.isRequired,
+	mockId: PropTypes.string.isRequired,
+	binaryResponse: PropTypes.string,
+	textResponse: PropTypes.string,
 };
 
 export default ResponsePane;

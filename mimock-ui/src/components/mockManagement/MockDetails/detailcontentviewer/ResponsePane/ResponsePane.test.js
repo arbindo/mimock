@@ -5,7 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 
 describe('ResponsePane', () => {
 	it('should render response pane component', async () => {
-		const tree = await render(<ResponsePane />, { wrapper: BrowserRouter });
+		const tree = await render(
+			<ResponsePane responseType='TEXTUAL_RESPONSE' />,
+			{ wrapper: BrowserRouter }
+		);
 
 		const { container, getByTestId } = tree;
 

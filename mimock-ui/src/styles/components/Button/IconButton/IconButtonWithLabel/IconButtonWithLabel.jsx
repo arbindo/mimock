@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { IconButtonData } from '../../ButtonData';
-import { IconButtonWithLabelContainer } from './IconButtonWithLabel.style';
+import {
+	IconButtonWithLabelContainer,
+	DownloadIcon,
+} from './IconButtonWithLabel.style';
 import { AiFillCopy, AiOutlineCheck } from 'react-icons/ai';
 import { BiTrash } from 'react-icons/bi';
 import { FaFilter, FaHome, FaPlusSquare } from 'react-icons/fa';
@@ -48,6 +51,8 @@ function getIcon(variant) {
 			return <FaFilter />;
 		case 'HOME_BUTTON':
 			return <FaHome />;
+		case 'DOWNLOAD_BUTTON':
+			return <DownloadIcon />;
 		default:
 			return <AiOutlineCheck />;
 	}

@@ -147,6 +147,7 @@ function DetailContentViewer({ mock }) {
 				</If>
 				<If condition={showResponsePane}>
 					<ResponsePane
+						mockId={mock.id}
 						responseHeader={
 							mock.responseHeaders !== undefined
 								? JSON.stringify(mock.responseHeaders.responseHeader)
@@ -157,11 +158,13 @@ function DetailContentViewer({ mock }) {
 								? mock.responseContentType.contentType
 								: labels.fallback
 						}
-						responseBody={
+						responseType={mock.responseContentType?.responseType?.name}
+						textResponse={
 							mock.textualResponse !== undefined
 								? mock.textualResponse.responseBody
 								: labels.fallback
 						}
+						binaryResponse={mock.binaryResponse?.responseFile || null}
 					/>
 				</If>
 			</NavTabContent>

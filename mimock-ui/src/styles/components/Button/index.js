@@ -13,6 +13,7 @@ export const ButtonVariants = {
 	BlueButton: 'INDIGO_BUTTON',
 	TealButton: 'TEAL_BUTTON',
 	DefaultButton: 'DEFAULT_BUTTON',
+	DownloadButton: 'DOWNLOAD_BUTTON',
 };
 
 export const IconButtonVariants = {
@@ -23,6 +24,7 @@ export const IconButtonVariants = {
 	FilterButton: 'FILTER_BUTTON',
 	DefaultButton: 'DEFAULT_BUTTON',
 	HomeButton: 'HOME_BUTTON',
+	DownloadButton: 'DOWNLOAD_BUTTON',
 };
 
 export { Button, CustomButton, IconButtonWithLabel, IconButtonWithoutLabel };

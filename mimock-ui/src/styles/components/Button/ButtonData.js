@@ -58,6 +58,10 @@ const IconButtonData = {
 		background: 'bg-indigo-600 dark:bg-indigo-800',
 		color: 'text-white',
 	},
+	DOWNLOAD_BUTTON: {
+		background: 'bg-blue-500',
+		color: 'text-white',
+	},
 };
 
 export { ButtonData, IconButtonData };

@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+import { IconButtonWithLabel } from 'styles/Button';
 
 export const NavTabPane = tw.div`
     grid
@@ -46,3 +47,9 @@ export const ItemPreFormat = tw.pre`
 export const Code = tw.code`
     language-json
 `;
+
+export const DownloadWrapper = tw.div`
+    my-4
+`;
+
+export const DownloadFile = tw(IconButtonWithLabel)``;
