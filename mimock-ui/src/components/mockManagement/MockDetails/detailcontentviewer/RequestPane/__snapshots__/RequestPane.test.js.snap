@@ -15,7 +15,7 @@ exports[`RequestPane should render request pane component 1`] = `
         Request Headers
       </label>
       <pre
-        class="bg-white my-0 language-json"
+        class="border border-solid border-gray-300 bg-white my-0 language-json"
         data-testid="request-headers"
         tabindex="0"
       >
@@ -50,7 +50,7 @@ exports[`RequestPane should render request pane component 1`] = `
         Request Body
       </label>
       <pre
-        class="bg-white my-0 language-json"
+        class="border border-solid border-gray-300 bg-white my-0 language-json"
         data-testid="request-body"
         tabindex="0"
       >

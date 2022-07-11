@@ -18,6 +18,7 @@ import {
 import { constants } from './constants';
 
 function DetailContentViewer({ mock }) {
+	console.log(mock);
 	// #region Defaults
 	const { testIds, ids, labels, additionalStyles } = constants;
 	// #endregion
@@ -111,7 +112,9 @@ function DetailContentViewer({ mock }) {
 						entityStatus={mock.entityStatus.status}
 						httpMethod={mock.httpMethod.method}
 						route={mock.route}
-						queryParams={mock.queryParams}
+						queryParams={
+							mock.queryParams !== '' ? mock.queryParams : labels.fallback
+						}
 						statusCode={mock.statusCode}
 						createdBy={mock.createdBy}
 						createdAt={mock.createdAt}
@@ -121,19 +124,45 @@ function DetailContentViewer({ mock }) {
 				</If>
 				<If condition={showRequestPane}>
 					<RequestPane
-						requestHeader={JSON.stringify(mock.requestHeaders.requestHeader)}
-						matchExact={mock.requestHeaders.matchExact.toString()}
-						requestBody={JSON.stringify(mock.requestBodiesForMock.requestBody)}
+						requestHeader={
+							mock.requestHeaders !== undefined
+								? JSON.stringify(mock.requestHeaders.requestHeader)
+								: labels.fallback
+						}
+						matchExact={
+							mock.requestHeaders !== undefined
+								? mock.requestHeaders.matchExact.toString()
+								: labels.fallback
+						}
+						requestBody={
+							mock.requestBodiesForMock !== undefined
+								? JSON.stringify(mock.requestBodiesForMock.requestBody)
+								: labels.fallback
+						}
 						requestBodyType={
-							mock.requestBodiesForMock.requestBodyType.requestBodyType
+							mock.requestBodiesForMock !== undefined
+								? mock.requestBodiesForMock.requestBodyType.requestBodyType
+								: labels.fallback
 						}
 					/>
 				</If>
 				<If condition={showResponsePane}>
 					<ResponsePane
-						responseHeader={JSON.stringify(mock.responseHeaders.responseHeader)}
-						contentType={mock.responseContentType.contentType}
-						responseBody={mock.textualResponse.responseBody}
+						responseHeader={
+							mock.responseHeaders !== undefined
+								? JSON.stringify(mock.responseHeaders.responseHeader)
+								: labels.fallback
+						}
+						contentType={
+							mock.responseContentType !== undefined
+								? mock.responseContentType.contentType
+								: labels.fallback
+						}
+						responseBody={
+							mock.textualResponse !== undefined
+								? mock.textualResponse.responseBody
+								: labels.fallback
+						}
 					/>
 				</If>
 			</NavTabContent>

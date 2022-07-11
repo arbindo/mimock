@@ -15,6 +15,7 @@ export const constants = {
 		generalPane: 'General',
 		requestPane: 'Request',
 		responsePane: 'Response',
+		fallback: '----',
 	},
 	additionalStyles: {
 		active: 'bg-teal-500 text-white',

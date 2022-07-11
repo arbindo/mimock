@@ -40,6 +40,7 @@ export const Item = tw.input`
 `;
 
 export const ItemPreFormat = tw.pre`
+    border border-solid border-gray-300
     bg-white
     my-0
 `;
