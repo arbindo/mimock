@@ -3,6 +3,7 @@ import { atom } from 'recoil';
 const newMockFieldsAtom = atom({
 	key: 'newMockFieldsAtom',
 	default: {
+		mode: 'create',
 		id: '',
 		name: '',
 		description: '',

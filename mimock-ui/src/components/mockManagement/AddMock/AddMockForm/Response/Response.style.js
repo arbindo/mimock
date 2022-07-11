@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+import { CustomButton } from 'styles';
 
 export const ResponseTypeWrapper = tw.div`
     flex
@@ -68,7 +69,7 @@ export const UploadedFile = tw.div`
     justify-start
     align-middle
     p-2
-    my-2
+    my-10
 `;
 
 export const Label = tw.div`
@@ -91,4 +92,29 @@ export const UploadMessage = tw.div`
     text-center
     mx-auto
     hover:text-blue-500
+`;
+
+export const SizeHint = tw.div`
+    font-light
+    font-sans
+    text-gray-500
+    text-center
+    text-sm
+    italic
+    my-2
+`;
+
+export const UploadError = tw.div`
+    font-sans
+    text-red-500
+    text-center
+    mx-auto
+    my-2
+`;
+
+export const DownloadFile = tw(CustomButton)``;
+
+export const RemoveFile = tw.div`
+    pt-2
+    ml-2
 `;

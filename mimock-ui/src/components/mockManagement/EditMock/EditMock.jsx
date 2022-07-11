@@ -15,7 +15,7 @@ export default function EditMock() {
 		setIsLoading(true);
 		getMock(searchParams.get('mockId'))
 			.then((data) => {
-				setMockData(data);
+				setMockData({ ...data, mode: mockManagementConstants.mode.EDIT });
 			})
 			.catch(() => {});
 		setIsLoading(false);

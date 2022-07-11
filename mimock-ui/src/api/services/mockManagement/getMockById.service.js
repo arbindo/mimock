@@ -30,11 +30,7 @@ export const getMock = async (id) => {
 			responseHeaders:
 				JSON.stringify(mockData.responseHeaders?.responseHeader) || '',
 			binaryFile: mockData.binaryResponse?.responseFile
-				? new File(
-						[Base64.decode(mockData.binaryResponse?.responseFile)],
-						'____'
-						// eslint-disable-next-line no-mixed-spaces-and-tabs
-				  )
+				? new Blob([Base64.toUint8Array(mockData.binaryResponse?.responseFile)])
 				: null,
 		};
 

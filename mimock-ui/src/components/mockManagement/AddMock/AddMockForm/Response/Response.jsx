@@ -41,7 +41,7 @@ export default function Response() {
 			setBinaryFile(null);
 			setMockData({
 				...mockData,
-				binaryFile: '',
+				binaryFile: null,
 			});
 		} else {
 			setTextResponse('');
@@ -60,6 +60,7 @@ export default function Response() {
 				...mockData,
 				responseContentType,
 				expectedTextResponse: '',
+				responseType: 'BINARY_RESPONSE',
 				binaryFile,
 			});
 		} else {
@@ -67,6 +68,7 @@ export default function Response() {
 				...mockData,
 				responseContentType,
 				binaryFile: null,
+				responseType: 'TEXTUAL_RESPONSE',
 				expectedTextResponse: textResponse,
 			});
 		}

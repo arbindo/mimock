@@ -79,6 +79,7 @@
         "date-fns": "^2.28.0",
         "js-base64": "^3.7.2",
         "js-file-download": "^0.4.12",
+        "mime": "^3.0.0",
         "prettier": "^2.5.1",
         "prismjs": "^1.28.0",
         "prop-types": "^15.8.1",
