@@ -7,6 +7,7 @@ import fileDownload from 'js-file-download';
 import mime from 'mime';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
 import { IconButtonVariants } from 'styles/Button';
+import { mockManagementConstants } from 'constants/mockManagementConstants';
 import {
 	FileUploadWrapper,
 	UploadContainer,
@@ -33,7 +34,7 @@ function FileUpload({ binaryFile, setBinaryFile }) {
 
 	const onDrop = useCallback((acceptedFiles) => {
 		setIsError({ error: false, errorMessage: '' });
-		setMode('create');
+		setMode(mockManagementConstants.mode.CREATE);
 
 		if (acceptedFiles.length <= 0) {
 			setIsError({
@@ -95,12 +96,12 @@ function FileUpload({ binaryFile, setBinaryFile }) {
 					<UploadedFile data-testid='uploaded-file'>
 						<Label data-testid='uploaded-label'>Uploaded file</Label>
 						<Choose>
-							<When condition={mode === 'create'}>
+							<When condition={mode === mockManagementConstants.mode.CREATE}>
 								<File data-testid='uploaded-file-details'>
 									{binaryFile.name} - {binaryFile.size} bytes
 								</File>
 							</When>
-							<When condition={mode === 'edit'}>
+							<When condition={mode === mockManagementConstants.mode.EDIT}>
 								<DownloadFile
 									dataTestid={`download-file-${mockData.id}`}
 									label='Download file'

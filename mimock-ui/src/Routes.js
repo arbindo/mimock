@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router';
 import { BrowserRouter as Router, Navigate } from 'react-router-dom';
 import Login from 'components/login';
 import useAxiosInterceptor from 'api/useAxiosInterceptor';
+import { mockManagementConstants } from './constants/mockManagementConstants';
 import { routes } from './constants/routes';
 import { roles } from './constants/globalConstants';
 import SecuredNavigator from './navigators/SecuredNavigator';
@@ -66,7 +67,9 @@ function AppRoutes() {
 					<Route path={routes.managePrefix}>
 						<Route
 							path={routes.manageRoutes.addMock.path}
-							element={secureManagerRoutes(<AddMock mode='create' />)}
+							element={secureManagerRoutes(
+								<AddMock mode={mockManagementConstants.mode.CREATE} />
+							)}
 						/>
 						<Route
 							path={routes.manageRoutes.editMock.path}

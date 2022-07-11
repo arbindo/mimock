@@ -1,9 +1,10 @@
 import { atom } from 'recoil';
+import { mockManagementConstants } from 'constants/mockManagementConstants';
 
 const newMockFieldsAtom = atom({
 	key: 'newMockFieldsAtom',
 	default: {
-		mode: 'create',
+		mode: mockManagementConstants.mode.CREATE,
 		id: '',
 		name: '',
 		description: '',

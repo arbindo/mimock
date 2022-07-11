@@ -1,4 +1,5 @@
 import React from 'react';
+import { mockManagementConstants } from 'constants/mockManagementConstants';
 import QueryParam from './QueryParams';
 import RequestHeaders from './RequestHeaders';
 import RequestBody from './RequestBody';
@@ -107,7 +108,7 @@ export const addMockFormInputData = (data, mode) => {
 		},
 	];
 
-	if (mode === 'create') {
+	if (mode === mockManagementConstants.mode.CREATE) {
 		return inputData;
 	}
 
