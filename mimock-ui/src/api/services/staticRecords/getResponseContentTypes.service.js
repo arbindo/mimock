@@ -1,4 +1,5 @@
 import { get } from 'api/AxiosClient';
+import { mockManagementConstants } from 'constants/mockManagementConstants';
 
 export const getResponseTypes = async () => {
 	return await get('/static-records/response-content-types')
@@ -7,7 +8,9 @@ export const getResponseTypes = async () => {
 			let binaryTypes = [];
 
 			res.data.forEach((item) => {
-				if (item.responseType.name === 'TEXTUAL_RESPONSE') {
+				if (
+					item.responseType.name === mockManagementConstants.TEXTUAL_RESPONSE
+				) {
 					textTypes.push(item.contentType);
 				} else {
 					binaryTypes.push(item.contentType);

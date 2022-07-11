@@ -4,7 +4,7 @@ import { IconHeader } from 'src/styles/components';
 import { BiAddToQueue } from 'react-icons/bi';
 import { AddMockWrapper, AddMockHeader } from './AddMock.style';
 import AddMockForm from './AddMockForm';
-import { mockManagementConstants } from '../constants';
+import { mockManagementConstants } from 'constants/mockManagementConstants';
 
 function AddMock({ mode }) {
 	return (

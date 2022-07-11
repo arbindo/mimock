@@ -15,6 +15,7 @@ import mime from 'mime';
 import fileDownload from 'js-file-download';
 import { Base64 } from 'js-base64';
 import { IconButtonVariants } from 'styles/Button';
+import { mockManagementConstants } from 'constants/mockManagementConstants';
 import { constants } from './constants';
 
 function ResponsePane({
@@ -67,12 +68,18 @@ function ResponsePane({
 			<ContentItem>
 				<ItemLabel>{labels.expectedResponse}</ItemLabel>
 				<Choose>
-					<When condition={responseType === 'TEXTUAL_RESPONSE'}>
+					<When
+						condition={
+							responseType === mockManagementConstants.TEXTUAL_RESPONSE
+						}
+					>
 						<ItemPreFormat data-testid={testIds.expectedResponse}>
 							<Code>{textResponse}</Code>
 						</ItemPreFormat>
 					</When>
-					<When condition={responseType === 'BINARY_RESPONSE'}>
+					<When
+						condition={responseType === mockManagementConstants.BINARY_RESPONSE}
+					>
 						<DownloadWrapper>
 							<DownloadFile
 								dataTestid={`download-file`}

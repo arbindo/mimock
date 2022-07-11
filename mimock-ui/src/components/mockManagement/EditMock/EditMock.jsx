@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 import { useSearchParams } from 'react-router-dom';
 import { getMock } from 'services/mockManagement/getMockById.service';
 import AddMock from '../AddMock';
-import { mockManagementConstants } from '../constants';
+import { mockManagementConstants } from 'constants/mockManagementConstants';
 
 export default function EditMock() {
 	const [, setMockData] = useRecoilState(newMockFieldsAtom);

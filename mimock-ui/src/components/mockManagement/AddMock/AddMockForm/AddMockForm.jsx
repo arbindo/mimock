@@ -15,6 +15,7 @@ import {
 } from 'services/mockManagement/mockManagement.service';
 import useNotification from 'hooks/useNotification';
 import { notificationTypes } from 'constants/notificationConstants';
+import { mockManagementConstants } from 'constants/mockManagementConstants';
 import HttpMethod from './HttpMethod';
 import { addMockFormInputData, accordionData } from './formInputData';
 import {
@@ -29,7 +30,6 @@ import {
 	LabelContainer,
 	Required,
 } from './AddMockForm.style';
-import { mockManagementConstants } from '../../constants';
 
 function AddMockForm({ mode }) {
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
@@ -55,7 +55,7 @@ function AddMockForm({ mode }) {
 			route: '',
 			httpMethod: 'GET',
 			responseContentType: 'application/json',
-			responseType: 'TEXTUAL_RESPONSE',
+			responseType: mockManagementConstants.TEXTUAL_RESPONSE,
 			queryParams: '',
 			shouldDoExactHeaderMatching: false,
 			requestHeader: '',

@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import { useRecoilState } from 'recoil';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
 import { ButtonVariants } from 'styles/Button';
+import { mockManagementConstants } from 'constants/mockManagementConstants';
 import ResponseType from './ResponseType';
 import FileUpload from './FileUpload';
 import { ResponseWrapper, TextResponse } from './Response.style';
@@ -26,7 +27,9 @@ export default function Response() {
 	useEffect(() => {
 		setTextResponse(mockData.expectedTextResponse);
 		setBinaryFile(mockData.binaryFile);
-		setResponseType(mockData.responseType || 'TEXTUAL_RESPONSE');
+		setResponseType(
+			mockData.responseType || mockManagementConstants.TEXTUAL_RESPONSE
+		);
 		setResponseContentType(mockData.responseContentType);
 	}, [
 		mockData.expectedTextResponse,
@@ -37,7 +40,7 @@ export default function Response() {
 
 	const changeResponseType = (e) => {
 		setResponseType(e.target.value);
-		if (e.target.value === 'TEXTUAL_RESPONSE') {
+		if (e.target.value === mockManagementConstants.TEXTUAL_RESPONSE) {
 			setBinaryFile(null);
 			setMockData({
 				...mockData,
@@ -55,12 +58,12 @@ export default function Response() {
 	const saveResponse = (e) => {
 		e.preventDefault();
 
-		if (responseType === 'BINARY_RESPONSE') {
+		if (responseType === mockManagementConstants.BINARY_RESPONSE) {
 			setMockData({
 				...mockData,
 				responseContentType,
 				expectedTextResponse: '',
-				responseType: 'BINARY_RESPONSE',
+				responseType: mockManagementConstants.BINARY_RESPONSE,
 				binaryFile,
 			});
 		} else {
@@ -68,7 +71,7 @@ export default function Response() {
 				...mockData,
 				responseContentType,
 				binaryFile: null,
-				responseType: 'TEXTUAL_RESPONSE',
+				responseType: mockManagementConstants.TEXTUAL_RESPONSE,
 				expectedTextResponse: textResponse,
 			});
 		}
@@ -90,12 +93,12 @@ export default function Response() {
 					name='responseType-radio-group'
 				>
 					<FormControlLabel
-						value='TEXTUAL_RESPONSE'
+						value={mockManagementConstants.TEXTUAL_RESPONSE}
 						control={<Radio />}
 						label='Text Response'
 					/>
 					<FormControlLabel
-						value='BINARY_RESPONSE'
+						value={mockManagementConstants.BINARY_RESPONSE}
 						control={<Radio />}
 						label='Binary Response'
 					/>
@@ -107,7 +110,9 @@ export default function Response() {
 				setResponseContentType={setResponseContentType}
 			/>
 			<Choose>
-				<When condition={responseType === 'TEXTUAL_RESPONSE'}>
+				<When
+					condition={responseType === mockManagementConstants.TEXTUAL_RESPONSE}
+				>
 					<TextResponse
 						data-testid='text-response'
 						rows={5}
