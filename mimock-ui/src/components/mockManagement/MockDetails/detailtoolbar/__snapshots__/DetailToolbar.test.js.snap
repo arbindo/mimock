@@ -7,15 +7,16 @@ exports[`DetailToolbar should render detail toolbar component 1`] = `
     data-testid="detail-toolbar-container"
   >
     <a
-      class="sc-bdvvtL"
+      class="sc-bdvvtL px-2 py-2 mx-1 hover:bg-gray-100"
       data-testid="back-btn"
       href="/mimock-ui/mocks"
       id="back-btn"
     >
       <span
-        class="inline-flex items-center justify-between gap-1"
+        class="inline-flex items-center justify-between gap-2 text-lg text-gray-600"
       >
         <svg
+          class="text-2xl text-gray-600"
           fill="currentColor"
           height="1em"
           stroke="currentColor"

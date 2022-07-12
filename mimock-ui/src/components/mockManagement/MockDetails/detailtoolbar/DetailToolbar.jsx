@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
 	DetailToolbarContainer,
 	MiniBtnSpan,
@@ -6,17 +7,14 @@ import {
 	BaseButton,
 	OperationsContainer,
 	WarningMessage,
+	ArchiveIcon,
+	UnArchiveIcon,
+	DeleteIcon,
+	EditIcon,
+	BackIcon,
+	ReportProblemIcon,
 } from './DetailToolbar.style';
 import { constants } from './constants';
-import { FaArrowCircleLeft } from 'react-icons/fa';
-import {
-	MdArchive,
-	MdUnarchive,
-	MdDelete,
-	MdEdit,
-	MdOutlineReportProblem,
-} from 'react-icons/md';
-import PropTypes from 'prop-types';
 
 function DetailToolbar({
 	hideDetailActionsToolbar,
@@ -38,7 +36,7 @@ function DetailToolbar({
 				id={ids.backBtn}
 			>
 				<MiniBtnSpan>
-					<FaArrowCircleLeft /> {label.backBtn}
+					<BackIcon /> {label.backBtn}
 				</MiniBtnSpan>
 			</BackButton>
 			<If condition={!hideDetailActionsToolbar}>
@@ -51,7 +49,7 @@ function DetailToolbar({
 								onClick={performArchiveMockOperation}
 							>
 								<MiniBtnSpan>
-									<MdArchive /> {label.archiveBtn}
+									<ArchiveIcon /> {label.archiveBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 							<BaseButton
@@ -60,7 +58,7 @@ function DetailToolbar({
 								onClick={performDeleteMockOperation}
 							>
 								<MiniBtnSpan>
-									<MdDelete /> {label.deleteBtn}
+									<DeleteIcon /> {label.deleteBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 							<BaseButton
@@ -69,7 +67,7 @@ function DetailToolbar({
 								onClick={performEditMockOperation}
 							>
 								<MiniBtnSpan>
-									<MdEdit /> {label.editBtn}
+									<EditIcon /> {label.editBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 						</When>
@@ -80,7 +78,7 @@ function DetailToolbar({
 								onClick={performUnarchiveMockOperation}
 							>
 								<MiniBtnSpan>
-									<MdUnarchive /> {label.unarchiveBtn}
+									<UnArchiveIcon /> {label.unarchiveBtn}
 								</MiniBtnSpan>
 							</BaseButton>
 						</When>
@@ -89,7 +87,7 @@ function DetailToolbar({
 								data-testid={testIds.warningMessage}
 								id={ids.warningMessage}
 							>
-								<MdOutlineReportProblem /> {label.warningMessage}
+								<ReportProblemIcon /> {label.warningMessage}
 							</WarningMessage>
 						</When>
 					</Choose>
