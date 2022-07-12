@@ -23,19 +23,17 @@ export const CardContainer = tw(_CardRouterLink)`
     overflow-hidden
 `;
 
-export const CardCrossBadge = tw.span`
-    ${(props) => (props.isDeleted ? 'bg-red-400 text-white' : '')}
-    ${(props) => (props.isArchived ? 'bg-amber-400 text-black' : '')}
+export const CardTopBadge = tw.span`
+    ${(props) => (props.$isDeleted ? 'bg-red-400 text-white' : '')}
+    ${(props) => (props.$isArchived ? 'bg-amber-400 text-black' : '')}
     text-white
     px-2
     py-1
     my-auto
     shadow-sm
-    rounded-sm
-    text-sm
+    text-xs
     relative
-    transform
-    -rotate-90
+    -top-10
     -left-4
 `;
 

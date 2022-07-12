@@ -11,10 +11,7 @@ export const mockManagementConstants = {
 	DELETED_STATUS: 'DELETED',
 	headerTitle: {
 		all: 'All Mocks',
-		active: 'Active Mocks',
-		archived: 'Archived Mocks',
-		deleted: 'Deleted Mocks',
-		httpMethod: 'Http Method Based',
+		filtered: 'Filtered Mocks',
 	},
 	errors: {
 		unexpectedState:

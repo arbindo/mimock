@@ -13,6 +13,21 @@ export const HeaderContainer = tw.div`
     py-2
     mx-auto
     my-4
+    overflow-hidden
+`;
+
+export const CardTopBadge = tw.span`
+    ${(props) => (props.$isDeleted ? 'bg-red-400 text-white' : '')}
+    ${(props) => (props.$isArchived ? 'bg-amber-400 text-black' : '')}
+    text-white
+    px-2
+    py-1
+    my-auto
+    shadow-sm
+    text-xs
+    relative
+    -top-14
+    -left-4
 `;
 
 export const TitleContainer = tw.div`

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
 	CardContainer,
-	CardCrossBadge,
+	CardTopBadge,
 	CardTitleContainer,
 	CardTitle,
 	CardSubtitle,
@@ -47,9 +47,9 @@ function MockCard({
 			to={`/mimock-ui/mocks/detail/${id}`}
 		>
 			<If condition={crossBadgeText !== ''}>
-				<CardCrossBadge isDeleted={isDeleted} isArchived={isArchived}>
+				<CardTopBadge $isDeleted={isDeleted} $isArchived={isArchived}>
 					{crossBadgeText}
-				</CardCrossBadge>
+				</CardTopBadge>
 			</If>
 			<CardTitleContainer>
 				<CardTitle data-testid={testIds.cardTitle}>{mockName}</CardTitle>

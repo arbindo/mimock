@@ -57,12 +57,12 @@ function useLazyLoad(
 
 	useEffect(() => {
 		setLoading(true);
-		setIsFilter(
+		const isFilterActive =
 			isHttpMethodFilterExists ||
-				isSortColumnSelected ||
-				isExpectedResponseTypeSelected ||
-				!isDefaultView
-		);
+			isSortColumnSelected ||
+			isExpectedResponseTypeSelected ||
+			!isDefaultView;
+		setIsFilter(isFilterActive);
 
 		async function callMockService(
 			mocksListView,
@@ -77,22 +77,18 @@ function useLazyLoad(
 			switch (mocksListView) {
 				case ACTIVE: {
 					entityStatusString = 'NONE';
-					setListTitle(mockManagementConstants.headerTitle.active);
 					break;
 				}
 				case ARCHIVED: {
 					entityStatusString = 'ARCHIVED';
-					setListTitle(mockManagementConstants.headerTitle.archived);
 					break;
 				}
 				case DELETED: {
 					entityStatusString = 'DELETED';
-					setListTitle(mockManagementConstants.headerTitle.deleted);
 					break;
 				}
 				default: {
 					entityStatusString = '';
-					setListTitle(mockManagementConstants.headerTitle.all);
 					break;
 				}
 			}
@@ -150,6 +146,11 @@ function useLazyLoad(
 					}
 				});
 				setHasMore(!res.isLast);
+				setListTitle(
+					isFilterActive
+						? mockManagementConstants.headerTitle.filtered
+						: mockManagementConstants.headerTitle.all
+				);
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -167,7 +168,6 @@ function useLazyLoad(
 		sortDirection,
 		expectedResponseType,
 	]);
-	console.log(mocksList);
 
 	return { mocksList, listTitle, isFilter, loading, error, hasMore };
 }

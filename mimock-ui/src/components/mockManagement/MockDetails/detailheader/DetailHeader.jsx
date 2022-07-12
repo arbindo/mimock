@@ -1,6 +1,7 @@
 import React from 'react';
 import {
 	HeaderContainer,
+	CardTopBadge,
 	TitleContainer,
 	Title,
 	Subtitle,
@@ -18,10 +19,20 @@ import { constants } from './constants';
 function DetailHeader({ mock, badgeColor }) {
 	// #region Defaults
 	const { testIds } = constants;
+	const crossBadgeText = mock.deleted
+		? 'DELETED'
+		: mock.archived
+		? 'ARCHIVED'
+		: '';
 	// #endregion
 
 	return (
 		<HeaderContainer data-testid={testIds.detailHeaderContainer}>
+			<If condition={crossBadgeText !== ''}>
+				<CardTopBadge $isDeleted={mock.deleted} $isArchived={mock.archived}>
+					{crossBadgeText}
+				</CardTopBadge>
+			</If>
 			<TitleContainer data-testid={testIds.titleContainer}>
 				<Title data-testid={testIds.mockTitle}>{mock.mockName}</Title>
 				<Subtitle data-testid={testIds.mockSubtitle}>
