@@ -4,6 +4,7 @@ import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.manage.mimocks.service.ExportImportService;
+import com.arbindo.mimock.manage.mimocks.service.ListMocksService;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.ExportImportDisabledException;
 import com.arbindo.mimock.security.JwtRequestFilter;
@@ -46,6 +47,9 @@ public class ExportImportMockControllerTest {
 
     @MockBean
     MockManagementService mockManagementService;
+
+    @MockBean
+    ListMocksService listMocksService;
 
     @MockBean
     ExportImportService exportImportService;
@@ -110,7 +114,7 @@ public class ExportImportMockControllerTest {
 
         List<Mock> expectedMocks = generateListOfMocks();
 
-        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
+        lenient().when(listMocksService.getAllMocks()).thenReturn(expectedMocks);
         lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
 
         // Act
@@ -134,7 +138,7 @@ public class ExportImportMockControllerTest {
 
         List<Mock> expectedMocks = generateListOfMocks();
 
-        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
+        lenient().when(listMocksService.getAllMocks()).thenReturn(expectedMocks);
         lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
 
         doThrow(IOException.class).when(exportImportService).exportMockListToCsv(any(PrintWriter.class), anyList());
@@ -167,7 +171,7 @@ public class ExportImportMockControllerTest {
         String fileName = "mocks_2022-02-04_19-31-05.csv";
         List<Mock> expectedMocks = generateListOfMocks();
 
-        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
+        lenient().when(listMocksService.getAllMocks()).thenReturn(expectedMocks);
         lenient().when(exportImportService.generateFileName()).thenReturn(fileName);
 
         doThrow(ExportImportDisabledException.class).when(exportImportService).validateExportImportFeature();

@@ -5,11 +5,11 @@ import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.common.wrapper.GenericResponseWrapper;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
-import com.arbindo.mimock.manage.mimocks.enums.ExpectedResponseType;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.models.response.ListMocksResponse;
+import com.arbindo.mimock.manage.mimocks.service.ListMocksService;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
 import com.arbindo.mimock.security.JwtRequestFilter;
@@ -69,6 +69,9 @@ class MockManagementControllerTest {
     MockManagementService mockManagementService;
 
     @MockBean
+    ListMocksService listMocksService;
+
+    @MockBean
     DataSource mockDataSource;
 
     @MockBean
@@ -91,7 +94,7 @@ class MockManagementControllerTest {
         List<Mock> expectedMocks = new ArrayList<>();
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
-        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
+        lenient().when(listMocksService.getAllMocks()).thenReturn(expectedMocks);
 
         // Act
         MvcResult result = mockMvc.perform(get(route))
@@ -111,7 +114,7 @@ class MockManagementControllerTest {
         List<Mock> expectedMocks = generateListOfMocks();
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
-        lenient().when(mockManagementService.getAllMocks()).thenReturn(expectedMocks);
+        lenient().when(listMocksService.getAllMocks()).thenReturn(expectedMocks);
 
         // Act
         MvcResult result = mockMvc.perform(get(route))
@@ -128,7 +131,7 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH;
 
-        lenient().when(mockManagementService.getAllMocks()).thenReturn(null);
+        lenient().when(listMocksService.getAllMocks()).thenReturn(null);
 
         // Act
         MvcResult result = mockMvc.perform(get(route))
@@ -148,7 +151,7 @@ class MockManagementControllerTest {
         Page<ListMocksResponse> expectedListMocksResponse = getListMocksResponseInPageableFormat(expectedMocksFromDB);
         String expectedResponseBody = convertObjectToJsonString(expectedListMocksResponse);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(), any(), any()))
+        lenient().when(listMocksService.getMocksAsPageable(any(Pageable.class), any(), any(), any()))
                 .thenReturn(expectedMocksFromDB);
 
         // Act
@@ -169,7 +172,7 @@ class MockManagementControllerTest {
         Page<Mock> expectedMocks = new PageImpl<>(new ArrayList<>());
         String expectedResponseBody = convertObjectToJsonString(expectedMocks);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), anyString()))
+        lenient().when(listMocksService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), anyString()))
                 .thenReturn(expectedMocks);
 
         // Act
@@ -194,7 +197,7 @@ class MockManagementControllerTest {
         Page<ListMocksResponse> expectedListMocksResponse = getListMocksResponseInPageableFormat(expectedMocksFromDB);
         String expectedResponseBody = convertObjectToJsonString(expectedListMocksResponse);
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), anyString()))
+        lenient().when(listMocksService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), anyString()))
                 .thenReturn(expectedMocksFromDB);
 
         // Act
@@ -215,7 +218,7 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + "/" + UrlConfig.MOCKS_PAGEABLE;
 
-        lenient().when(mockManagementService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), anyString()))
+        lenient().when(listMocksService.getMocksAsPageable(any(Pageable.class), any(Status.class), anyString(), anyString()))
                 .thenReturn(null);
 
         // Act

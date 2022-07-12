@@ -3,8 +3,6 @@ package com.arbindo.mimock.manage.mimocks.service;
 import com.arbindo.mimock.audit.AuditorService;
 import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.manage.mimocks.enums.ExpectedResponseType;
-import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
 import com.arbindo.mimock.manage.mimocks.service.helpers.MockParamBuilder;
@@ -18,8 +16,6 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,93 +50,6 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Autowired
     AuditorService auditorService;
-
-    @Override
-    public List<Mock> getAllMocks() {
-        return mocksRepository.findAll();
-    }
-
-    @Override
-    public Page<Mock> getMocksAsPageable(Pageable pageable, Status entityStatusParam,
-                                         String httpMethodParam, String expectedResponseTypeParam) {
-        HttpMethod httpMethod = null;
-        EntityStatus entityStatus = null;
-        ExpectedResponseType expectedResponseType = null;
-        try{
-            expectedResponseType = ExpectedResponseType.valueOf(expectedResponseTypeParam);
-        }catch(Exception e){
-            log.log(Level.DEBUG, e.getMessage());
-        }
-        if(ValidationUtil.isArgNotNull(httpMethodParam)){
-            httpMethod = mockParamBuilder.findHttpMethodFromQueryString(httpMethodParam);
-        }
-        if (ValidationUtil.isArgNotNull(entityStatusParam)) {
-            entityStatus = entityStatusService.findByEntityStatus(entityStatusParam.name());
-        }
-
-        if(ValidationUtil.isArgNotNull(httpMethod)
-                && ValidationUtil.isArgNotNull(entityStatus)
-                && ValidationUtil.isArgNotNull(expectedResponseType)){
-            switch (expectedResponseType){
-                case TEXTUAL_RESPONSE:
-                    return mocksRepository.findAllByEntityStatusAndHttpMethodAndTextualResponseIsNotNull(entityStatus,
-                            httpMethod, pageable);
-                case BINARY_RESPONSE:
-                    return mocksRepository.findAllByEntityStatusAndHttpMethodAndBinaryResponseIsNotNull(entityStatus,
-                            httpMethod, pageable);
-                case EMPTY_RESPONSE:
-                    return mocksRepository.findAllByEntityStatusAndHttpMethodAndTextualResponseIsNullAndBinaryResponseIsNull(
-                            entityStatus, httpMethod, pageable);
-            }
-        }
-
-        if(ValidationUtil.isArgNotNull(httpMethod)
-                && ValidationUtil.isArgNotNull(entityStatus)){
-            return mocksRepository.findAllByEntityStatusAndHttpMethod(entityStatus, httpMethod, pageable);
-        }
-
-        if(ValidationUtil.isArgNotNull(entityStatus) && ValidationUtil.isArgNotNull(expectedResponseType)){
-            switch (expectedResponseType){
-                case TEXTUAL_RESPONSE:
-                    return mocksRepository.findAllByEntityStatusAndTextualResponseIsNotNull(entityStatus, pageable);
-                case BINARY_RESPONSE:
-                    return mocksRepository.findAllByEntityStatusAndBinaryResponseIsNotNull(entityStatus, pageable);
-                case EMPTY_RESPONSE:
-                    return mocksRepository.findAllByEntityStatusAndTextualResponseIsNullAndBinaryResponseIsNull(entityStatus, pageable);
-            }
-        }
-
-        if(ValidationUtil.isArgNotNull(httpMethod) && ValidationUtil.isArgNotNull(expectedResponseType)){
-            switch (expectedResponseType){
-                case TEXTUAL_RESPONSE:
-                    return mocksRepository.findAllByHttpMethodAndTextualResponseIsNotNull(httpMethod, pageable);
-                case BINARY_RESPONSE:
-                    return mocksRepository.findAllByHttpMethodAndBinaryResponseIsNotNull(httpMethod, pageable);
-                case EMPTY_RESPONSE:
-                    return mocksRepository.findAllByHttpMethodAndTextualResponseIsNullAndBinaryResponseIsNull(httpMethod, pageable);
-            }
-        }
-
-        if(ValidationUtil.isArgNotNull(httpMethod)){
-            return mocksRepository.findAllByHttpMethod(httpMethod, pageable);
-        }
-        if (ValidationUtil.isArgNotNull(entityStatus)) {
-            return mocksRepository.findAllByEntityStatus(entityStatus, pageable);
-        }
-        if(ValidationUtil.isArgNotNull(expectedResponseType)
-                && expectedResponseType == ExpectedResponseType.TEXTUAL_RESPONSE){
-            return mocksRepository.findAllByTextualResponseIsNotNull(pageable);
-        }
-        if(ValidationUtil.isArgNotNull(expectedResponseType)
-                && expectedResponseType == ExpectedResponseType.BINARY_RESPONSE){
-            return mocksRepository.findAllByBinaryResponseIsNotNull(pageable);
-        }
-        if(ValidationUtil.isArgNotNull(expectedResponseType)
-                && expectedResponseType == ExpectedResponseType.EMPTY_RESPONSE){
-            return mocksRepository.findAllByTextualResponseIsNullAndBinaryResponseIsNull(pageable);
-        }
-        return mocksRepository.findAll(pageable);
-    }
 
     @Override
     public Mock getMockById(String mockId) {

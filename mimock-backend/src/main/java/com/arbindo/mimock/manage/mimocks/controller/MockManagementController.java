@@ -9,6 +9,7 @@ import com.arbindo.mimock.manage.mimocks.mapper.RequestModelMapper;
 import com.arbindo.mimock.manage.mimocks.mapper.ResponseModelMapper;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.response.ListMocksResponse;
+import com.arbindo.mimock.manage.mimocks.service.ListMocksService;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,6 +44,9 @@ public class MockManagementController {
     @Autowired
     private MockManagementService mockManagementService;
 
+    @Autowired
+    private ListMocksService listMocksService;
+
     @Operation(summary = "Create Mock", description = "Creates a mock as per the given data in multi-part form.",
             tags = {"Mock Management"})
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -73,7 +77,7 @@ public class MockManagementController {
     @Operation(summary = "List Mocks", description = "List all mocks.", tags = {"Mock Management"})
     @GetMapping
     public ResponseEntity<List<Mock>> getAllMocks() {
-        return ResponseEntity.ok(mockManagementService.getAllMocks());
+        return ResponseEntity.ok(listMocksService.getAllMocks());
     }
 
     @Operation(summary = "List Mocks As Pageable", description = "List all mocks in pageable format and filter based on " +
@@ -83,7 +87,7 @@ public class MockManagementController {
     public ResponseEntity<Page<ListMocksResponse>> getMocksAsPageable(@SortDefault(sort = "createdAt",
             direction = Sort.Direction.DESC) Pageable pageable, @RequestParam(required = false) Status status,
             @RequestParam(required = false) String httpMethod, @RequestParam(required = false) String expectedResponseType) {
-        Page<Mock> mockPageable = mockManagementService.getMocksAsPageable(pageable, status, httpMethod, expectedResponseType);
+        Page<Mock> mockPageable = listMocksService.getMocksAsPageable(pageable, status, httpMethod, expectedResponseType);
         if(mockPageable == null){
             return ResponseEntity.ok(null);
         }

@@ -3,6 +3,7 @@ package com.arbindo.mimock.manage.mimocks.controller;
 import com.arbindo.mimock.common.constants.UrlConfig;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.manage.mimocks.service.ExportImportService;
+import com.arbindo.mimock.manage.mimocks.service.ListMocksService;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.ExportImportDisabledException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,6 +29,9 @@ public class ExportImportMockController {
 
     @Autowired
     private MockManagementService mockManagementService;
+
+    @Autowired
+    private ListMocksService listMocksService;
 
     @Autowired
     private ExportImportService exportImportService;
@@ -56,7 +60,7 @@ public class ExportImportMockController {
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=" + exportImportService.generateFileName();
         try {
-            List<Mock> mockList = mockManagementService.getAllMocks();
+            List<Mock> mockList = listMocksService.getAllMocks();
             response.setContentType("text/csv");
             response.setHeader(headerKey, headerValue);
             exportImportService.exportMockListToCsv(response.getWriter(), mockList);
