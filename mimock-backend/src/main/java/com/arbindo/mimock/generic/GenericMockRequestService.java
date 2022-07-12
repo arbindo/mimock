@@ -1,11 +1,9 @@
 package com.arbindo.mimock.generic;
 
-import com.arbindo.mimock.entities.HttpMethod;
-import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.entities.RequestBodiesForMock;
-import com.arbindo.mimock.entities.RequestHeader;
+import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.generic.helpers.RequestHeaderComparator;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
+import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.repository.HttpMethodsRepository;
 import com.arbindo.mimock.repository.MocksRepository;
 import com.arbindo.mimock.repository.RequestBodiesForMockRepository;
@@ -75,6 +73,12 @@ public class GenericMockRequestService {
         log.log(Level.INFO, "Returning matching mock");
 
         List<Mock> matchingMock = resultFromDB.stream().filter(mock -> {
+            EntityStatus entityStatus = mock.getEntityStatus();
+            if (entityStatus != null && !entityStatus.getStatus().equals(Status.NONE.name())) {
+                log.log(Level.INFO, "Mock cannot be served as it is in {} state", entityStatus.getStatus());
+                return false;
+            }
+
             if (mock.getRequestHeaders() == null) {
                 log.log(Level.INFO, "Matching mock from DB has no headers. Skipping header validation");
                 return true;
@@ -90,7 +94,7 @@ public class GenericMockRequestService {
 
 
         if (matchingMock.isEmpty()) {
-            String errorMessage = "Mocks returned from the DB does not have same headers";
+            String errorMessage = "There are no matching mocks available";
             log.log(Level.ERROR, errorMessage);
             throw new MatchingMockNotFoundException(errorMessage);
         }

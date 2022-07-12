@@ -15,7 +15,10 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -121,12 +124,64 @@ class DefaultHttpInterceptorTest {
         mockHttpServletRequest.setQueryString("active=true&type=test");
         mockHttpServletRequest.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, requestURI);
 
+        OutputStream os = BufferedOutputStream.nullOutputStream();
+        PrintWriter pw = new PrintWriter(os);
+
         lenient().when(genericMockRequestController.serveRequest(expectedURI, mockHttpServletRequest)).thenReturn(Optional.empty());
+        lenient().when(mockHttpServletResponse.getWriter()).thenReturn(pw);
 
         boolean interceptorStatus = defaultHttpInterceptor.preHandle(mockHttpServletRequest, mockHttpServletResponse, new Object());
 
         verify(genericMockRequestController, times(1)).serveRequest(expectedURI, mockHttpServletRequest);
         verify(mockHttpServletResponse, times(1)).setStatus(expectedStatus);
+        verify(mockHttpServletResponse, times(1)).getWriter();
+        verify(mockHttpServletResponse, times(1)).getWriter();
+
+        assertFalse(interceptorStatus);
+    }
+
+    @Test
+    void shouldRespondWith404_WhenErrorResponseWriterIsNull() throws Exception {
+        MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
+        String requestURI = "api/test/v1";
+        String expectedURI = "/api/test/v1";
+        int expectedStatus = 404;
+
+        mockHttpServletRequest.setRequestURI(requestURI);
+        mockHttpServletRequest.setQueryString("active=true&type=test");
+        mockHttpServletRequest.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, requestURI);
+
+        lenient().when(genericMockRequestController.serveRequest(expectedURI, mockHttpServletRequest)).thenReturn(Optional.empty());
+        lenient().when(mockHttpServletResponse.getWriter()).thenReturn(null);
+
+        boolean interceptorStatus = defaultHttpInterceptor.preHandle(mockHttpServletRequest, mockHttpServletResponse, new Object());
+
+        verify(genericMockRequestController, times(1)).serveRequest(expectedURI, mockHttpServletRequest);
+        verify(mockHttpServletResponse, times(1)).setStatus(expectedStatus);
+        verify(mockHttpServletResponse, times(1)).getWriter();
+
+        assertFalse(interceptorStatus);
+    }
+
+    @Test
+    void shouldRespondWith404_WhenErrorResponseWriterThrowsException() throws Exception {
+        MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
+        String requestURI = "api/test/v1";
+        String expectedURI = "/api/test/v1";
+        int expectedStatus = 404;
+
+        mockHttpServletRequest.setRequestURI(requestURI);
+        mockHttpServletRequest.setQueryString("active=true&type=test");
+        mockHttpServletRequest.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, requestURI);
+
+        lenient().when(genericMockRequestController.serveRequest(expectedURI, mockHttpServletRequest)).thenReturn(Optional.empty());
+        lenient().when(mockHttpServletResponse.getWriter()).thenThrow(IOException.class);
+
+        boolean interceptorStatus = defaultHttpInterceptor.preHandle(mockHttpServletRequest, mockHttpServletResponse, new Object());
+
+        verify(genericMockRequestController, times(1)).serveRequest(expectedURI, mockHttpServletRequest);
+        verify(mockHttpServletResponse, times(1)).setStatus(expectedStatus);
+        verify(mockHttpServletResponse, times(1)).getWriter();
 
         assertFalse(interceptorStatus);
     }

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.HandlerMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class DefaultHttpInterceptor implements HandlerInterceptor {
 
         if (domainModelForMock.isEmpty()) {
             log.log(Level.WARN, "No matching mock exists. Sending back 404");
-            response.setStatus(NOT_FOUND.value());
+            writeErrorResponse(response);
             return false;
         }
 
@@ -80,6 +81,31 @@ public class DefaultHttpInterceptor implements HandlerInterceptor {
             log.log(Level.ERROR, "Response writer exited with a failure : {}", e.getMessage());
             log.log(Level.INFO, "Sending back internal server error");
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        }
+    }
+
+    private void writeErrorResponse(HttpServletResponse response) {
+        try {
+            log.log(Level.INFO, "Writing error response");
+            PrintWriter writer = response.getWriter();
+            response.setStatus(NOT_FOUND.value());
+            if (writer == null) {
+                return;
+            }
+            String errorMessage = "<body>" +
+                    "<h2>There are no matching mocks available</h2>" +
+                    "<p>If you have setup a mock for this endpoint, please check the following,</p>" +
+                    "<p>1. Check if query params are correct</p>" +
+                    "<p>2. Check if request headers are correct</p>" +
+                    "<p>3. Check if request body is correct</p>" +
+                    "<p>4. Mock is in ACTIVE state (not ARCHIVED or DELETED)</p>" +
+                    "</body>";
+
+            writer.write(errorMessage);
+            writer.close();
+        } catch (IOException e) {
+            log.log(Level.ERROR, "Error response writer exited with a failure : {}", e.getMessage());
+            response.setStatus(NOT_FOUND.value());
         }
     }
 

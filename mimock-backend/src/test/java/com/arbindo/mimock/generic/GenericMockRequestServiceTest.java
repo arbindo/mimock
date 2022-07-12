@@ -13,6 +13,8 @@ import com.arbindo.mimock.repository.RequestHeadersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -329,7 +331,7 @@ class GenericMockRequestServiceTest {
     void shouldThrowMatchingMockNotFoundException_WhenRequestHeadersDoNotMatch() {
         String method = "GET";
         String expectedRoute = "/api/testmock/testroute";
-        String expectedExceptionMessage = "Mocks returned from the DB does not have same headers";
+        String expectedExceptionMessage = "There are no matching mocks available";
 
         Map<String, String> queryParamMap = new HashMap<>() {{
             put("version", "1.0");
@@ -387,5 +389,98 @@ class GenericMockRequestServiceTest {
 
         assertNotNull(matchingMockNotFoundException);
         assertEquals(expectedExceptionMessage, matchingMockNotFoundException.getMessage());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"ARCHIVED", "DELETED"})
+    void shouldThrowMatchingMockNotFoundException_WhenEntityStatusIsNotNONE(String status) {
+        String method = "GET";
+        String expectedRoute = "/api/testmock/testroute";
+        Map<String, Object> requestHeaderMap1 = RandomDataGenerator.getRequestHeaders();
+        Map<String, Object> requestHeaderMap2 = RandomDataGenerator.getRequestHeaders();
+        String requestBody = "{\"name\": \"blog\", \"auto_init\": true, \"private\": true, \"gitignore_template\": \"nanoc\"}";
+        Map<String, String> queryParamMap = new HashMap<>() {{
+            put("version", "1.0");
+            put("auto", "true");
+        }};
+
+        GenericRequestModel genericRequestModel = GenericRequestModel.builder()
+                .httpMethod(method)
+                .queryParam("version=1.0.0&auto=true")
+                .queryParamMap(queryParamMap)
+                .route(expectedRoute)
+                .requestHeaders(requestHeaderMap1)
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
+                .build();
+
+        HttpMethod httpMethod = HttpMethod.builder()
+                .method(method)
+                .id(httpMethodsDBHelper.getHttpMethodByMethod(method).getId())
+                .build();
+
+        ResponseContentType responseContentType = responseContentTypeDBHelper.findOneByContentType("application/json");
+        RequestHeader requestHeader1 = RequestHeader.builder()
+                .requestHeader(requestHeaderMap1)
+                .matchExact(true)
+                .build();
+        RequestHeader requestHeader2 = RequestHeader.builder()
+                .requestHeader(requestHeaderMap2)
+                .matchExact(true)
+                .build();
+
+        RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
+                .requestBody(JsonMapper.convertJSONStringToMap(requestBody))
+                .build();
+
+        EntityStatus entityStatus = EntityStatus.builder()
+                .status(status)
+                .build();
+
+        Mock expectedMock = Mock.builder()
+                .route(genericRequestModel.getRoute())
+                .httpMethod(httpMethod)
+                .responseContentType(responseContentType)
+                .requestHeaders(requestHeader1)
+                .requestBodiesForMock(requestBodiesForMock)
+                .statusCode(200)
+                .entityStatus(entityStatus)
+                .build();
+
+        Mock altMock = Mock.builder()
+                .route(genericRequestModel.getRoute())
+                .httpMethod(httpMethod)
+                .responseContentType(responseContentType)
+                .requestHeaders(requestHeader2)
+                .requestBodiesForMock(requestBodiesForMock)
+                .statusCode(200)
+                .build();
+
+        lenient().when(requestBodiesForMockRepository.findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(anyMap()))
+                .thenReturn(Optional.of(requestBodiesForMock));
+        lenient().when(mockHttpMethodsRepository.findByMethod(method)).thenReturn(httpMethod);
+        lenient().when(mockRepository.findUniqueMock(
+                anyString(),
+                any(HttpMethod.class),
+                anyMap(),
+                any(RequestBodiesForMock.class))
+        ).thenReturn(List.of(expectedMock, altMock));
+
+        MatchingMockNotFoundException matchingMockNotFoundException = assertThrows(
+                MatchingMockNotFoundException.class,
+                () -> genericMockRequestService.serveMockRequest(genericRequestModel)
+        );
+
+        verify(requestBodiesForMockRepository, times(1))
+                .findRequestBodiesForMockByRequestBodyAndDeletedAtIsNull(anyMap());
+        verify(mockHttpMethodsRepository, times(1)).findByMethod(method);
+        verify(mockRepository, times(1)).findUniqueMock(
+                anyString(),
+                any(HttpMethod.class),
+                anyMap(),
+                any(RequestBodiesForMock.class)
+        );
+
+        assertNotNull(matchingMockNotFoundException);
+        assertEquals("There are no matching mocks available", matchingMockNotFoundException.getMessage());
     }
 }
