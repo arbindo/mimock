@@ -16,7 +16,7 @@ public class FlushBinCronJobServiceImpl implements FlushBinCronJobService {
     PlatformSettingsService platformSettingsService;
 
     @Autowired
-    MockManagementService mockManagementService;
+    DeleteMockService deleteMockService;
 
     @Override
     @Scheduled(cron = "${flush-bin-cron-expression}")
@@ -27,7 +27,7 @@ public class FlushBinCronJobServiceImpl implements FlushBinCronJobService {
             return;
         }
         log.log(Level.INFO, "Starting CRON scheduler job.");
-        mockManagementService.flushDeletedMocks();
+        deleteMockService.flushDeletedMocks();
         log.log(Level.INFO, "Completed CRON scheduler job.");
     }
 }

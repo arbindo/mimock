@@ -9,6 +9,7 @@ import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.models.response.ListMocksResponse;
+import com.arbindo.mimock.manage.mimocks.service.DeleteMockService;
 import com.arbindo.mimock.manage.mimocks.service.ListMocksService;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
@@ -70,6 +71,9 @@ class MockManagementControllerTest {
 
     @MockBean
     ListMocksService listMocksService;
+
+    @MockBean
+    DeleteMockService deleteMockService;
 
     @MockBean
     DataSource mockDataSource;
@@ -283,7 +287,7 @@ class MockManagementControllerTest {
         String mockId = UUID.randomUUID().toString();
         String route = UrlConfig.MOCKS_PATH + "/" + mockId;
 
-        lenient().when(mockManagementService.softDeleteMockById(mockId)).thenReturn(false);
+        lenient().when(deleteMockService.softDeleteMockById(mockId)).thenReturn(false);
 
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST, Messages.DELETE_RESOURCE_FAILED, null);
         String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
@@ -306,7 +310,7 @@ class MockManagementControllerTest {
         String mockId = mock.getId().toString();
         String route = UrlConfig.MOCKS_PATH + "/" + mockId;
 
-        lenient().when(mockManagementService.softDeleteMockById(mockId)).thenReturn(true);
+        lenient().when(deleteMockService.softDeleteMockById(mockId)).thenReturn(true);
 
         // Act
         MvcResult result = mockMvc.perform(delete(route))
@@ -323,7 +327,7 @@ class MockManagementControllerTest {
         String mockId = UUID.randomUUID().toString();
         String route = UrlConfig.MOCKS_PATH + "/" + mockId + UrlConfig.FORCE_DELETE_ACTION;
 
-        lenient().when(mockManagementService.hardDeleteMockById(mockId)).thenReturn(false);
+        lenient().when(deleteMockService.hardDeleteMockById(mockId)).thenReturn(false);
 
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST, Messages.DELETE_RESOURCE_FAILED, null);
         String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
@@ -346,7 +350,7 @@ class MockManagementControllerTest {
         String mockId = mock.getId().toString();
         String route = UrlConfig.MOCKS_PATH + "/" + mockId + UrlConfig.FORCE_DELETE_ACTION;
 
-        lenient().when(mockManagementService.hardDeleteMockById(mockId)).thenReturn(true);
+        lenient().when(deleteMockService.hardDeleteMockById(mockId)).thenReturn(true);
 
         // Act
         MvcResult result = mockMvc.perform(delete(route))
@@ -362,7 +366,7 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH;
 
-        lenient().when(mockManagementService.deleteAllMocks()).thenReturn(false);
+        lenient().when(deleteMockService.deleteAllMocks()).thenReturn(false);
 
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.BAD_REQUEST, Messages.DELETE_ALL_RESOURCES_FAILED, null);
         String expectedResponseBody = convertObjectToJsonString(genericResponseWrapper);
@@ -383,7 +387,7 @@ class MockManagementControllerTest {
         // Arrange
         String route = UrlConfig.MOCKS_PATH;
 
-        lenient().when(mockManagementService.deleteAllMocks()).thenReturn(true);
+        lenient().when(deleteMockService.deleteAllMocks()).thenReturn(true);
 
         // Act
         MvcResult result = mockMvc.perform(delete(route))

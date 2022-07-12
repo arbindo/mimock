@@ -23,7 +23,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -63,74 +62,6 @@ public class MockManagementServiceImpl implements MockManagementService {
         }
         log.log(Level.DEBUG, "Invalid Mock Id!");
         return null;
-    }
-
-    @Override
-    public boolean hardDeleteMockById(String mockId) {
-        if (ValidationUtil.isNotNullOrEmpty(mockId)) {
-            try {
-                Mock mock = getMockById(mockId);
-                if (mock != null) {
-                    mocksRepository.delete(mock);
-                    return true;
-                }
-            } catch (Exception e) {
-                log.log(Level.DEBUG, e.getMessage());
-                return false;
-            }
-        }
-        log.log(Level.DEBUG, "Invalid Mock Id!");
-        return false;
-    }
-
-    @Transactional
-    @Override
-    public boolean softDeleteMockById(String mockId) {
-        if (ValidationUtil.isNotNullOrEmpty(mockId)) {
-            try {
-                Mock mock = getMockById(mockId);
-                if (mock != null) {
-                    // Perform only soft delete i.e. Mark EntityStatus as DELETED
-                    EntityStatus entityStatus = entityStatusService.getDeletedMockEntityStatus();
-                    mock.setEntityStatus(entityStatus);
-                    mock.setDeletedAt(ZonedDateTime.now());
-                    mocksRepository.save(mock);
-                    return true;
-                }
-            } catch (Exception e) {
-                log.log(Level.DEBUG, e.getMessage());
-                return false;
-            }
-        }
-        log.log(Level.DEBUG, "Invalid Mock Id!");
-        return false;
-    }
-
-    @Override
-    public boolean deleteAllMocks() {
-        try {
-            mocksRepository.deleteAll();
-            return true;
-        } catch (Exception e) {
-            log.log(Level.DEBUG, e.getMessage());
-        }
-        log.log(Level.DEBUG, "Unable to delete all mocks!");
-        return false;
-    }
-
-    @Override
-    public void flushDeletedMocks() {
-        try {
-            EntityStatus entityStatus = entityStatusService.getDeletedMockEntityStatus();
-            ZonedDateTime thirtyDaysAgo = ZonedDateTime.now().minusDays(30);
-            List<Mock> deletedMocks = mocksRepository.findAllByEntityStatusAndDeletedAt(entityStatus, thirtyDaysAgo);
-            mocksRepository.deleteAll(deletedMocks);
-            log.log(Level.INFO, "Flushed " + deletedMocks.size() + " mock(s)!");
-            return;
-        } catch (Exception e) {
-            log.log(Level.DEBUG, e.getMessage());
-        }
-        log.log(Level.DEBUG, "Unable to flush deleted mocks!");
     }
 
     @Transactional(rollbackOn = {Exception.class, RuntimeException.class, MockAlreadyExistsException.class})

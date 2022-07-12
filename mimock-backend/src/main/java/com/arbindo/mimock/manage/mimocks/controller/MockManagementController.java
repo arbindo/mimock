@@ -9,6 +9,7 @@ import com.arbindo.mimock.manage.mimocks.mapper.RequestModelMapper;
 import com.arbindo.mimock.manage.mimocks.mapper.ResponseModelMapper;
 import com.arbindo.mimock.manage.mimocks.models.request.MockRequest;
 import com.arbindo.mimock.manage.mimocks.models.response.ListMocksResponse;
+import com.arbindo.mimock.manage.mimocks.service.DeleteMockService;
 import com.arbindo.mimock.manage.mimocks.service.ListMocksService;
 import com.arbindo.mimock.manage.mimocks.service.MockManagementService;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
@@ -46,6 +47,9 @@ public class MockManagementController {
 
     @Autowired
     private ListMocksService listMocksService;
+
+    @Autowired
+    private DeleteMockService deleteMockService;
 
     @Operation(summary = "Create Mock", description = "Creates a mock as per the given data in multi-part form.",
             tags = {"Mock Management"})
@@ -110,7 +114,7 @@ public class MockManagementController {
     @Operation(summary = "Delete Mock", description = "Performs soft delete on mock based on the given mockId.", tags = {"Mock Management"})
     @DeleteMapping("{mockId}")
     public ResponseEntity<GenericResponseWrapper<Mock>> softDeleteMockById(@PathVariable String mockId) {
-        boolean isMockDeleted = mockManagementService.softDeleteMockById(mockId);
+        boolean isMockDeleted = deleteMockService.softDeleteMockById(mockId);
         if (isMockDeleted) {
             return ResponseEntity.noContent().build();
         }
@@ -126,7 +130,7 @@ public class MockManagementController {
             tags = {"Mock Management"})
     @DeleteMapping("{mockId}" + UrlConfig.FORCE_DELETE_ACTION)
     public ResponseEntity<GenericResponseWrapper<Mock>> hardDeleteMockById(@PathVariable String mockId) {
-        boolean isMockDeleted = mockManagementService.hardDeleteMockById(mockId);
+        boolean isMockDeleted = deleteMockService.hardDeleteMockById(mockId);
         if (isMockDeleted) {
             return ResponseEntity.noContent().build();
         }
@@ -141,7 +145,7 @@ public class MockManagementController {
     @Operation(summary = "Delete Mocks", description = "Deletes all mocks.", tags = {"Mock Management"})
     @DeleteMapping
     public ResponseEntity<GenericResponseWrapper<Boolean>> deleteAllMocks() {
-        boolean allMocksDeleted = mockManagementService.deleteAllMocks();
+        boolean allMocksDeleted = deleteMockService.deleteAllMocks();
         if (allMocksDeleted) {
             return ResponseEntity.noContent().build();
         }

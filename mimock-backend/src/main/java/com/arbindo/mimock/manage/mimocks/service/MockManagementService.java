@@ -7,14 +7,6 @@ public interface MockManagementService {
 
     Mock getMockById(String mockId);
 
-    boolean hardDeleteMockById(String mockId);
-
-    boolean softDeleteMockById(String mockId);
-
-    boolean deleteAllMocks();
-
-    void flushDeletedMocks();
-
     Mock createMock(ProcessedMockRequest request);
 
     Mock updateMock(String mockId, ProcessedMockRequest request);
