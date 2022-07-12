@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+import { FaRegCopy } from 'react-icons/fa';
 
 export const HeaderContainer = tw.div`
     w-full
@@ -88,6 +89,8 @@ export const Link = tw.div`
     truncate
     font-light
     my-1
+    py-2
+    cursor-pointer
 `;
 
 export const LinkDiv = tw.div`
@@ -97,6 +100,18 @@ export const LinkDiv = tw.div`
     text-teal-500
 `;
 
-export const LinkText = tw.span`
+export const LinkText = tw.a`
     text-black
+    hover:text-blue-500
+    mx-2
+`;
+
+export const CopyLink = tw.div`
+    ml-2
+    mt-1
+`;
+
+export const CopyIcon = tw(FaRegCopy)`
+    text-2xl
+    text-slate-600
 `;

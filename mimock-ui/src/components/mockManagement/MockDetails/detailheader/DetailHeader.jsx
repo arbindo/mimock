@@ -1,4 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { FaLink } from 'react-icons/fa';
+import PropTypes from 'prop-types';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { config } from 'config';
+
+import { constants } from './constants';
 import {
 	HeaderContainer,
 	CardTopBadge,
@@ -11,10 +19,9 @@ import {
 	Link,
 	LinkDiv,
 	LinkText,
+	CopyLink,
+	CopyIcon,
 } from './DetailHeader.style';
-import { FaLink } from 'react-icons/fa';
-import PropTypes from 'prop-types';
-import { constants } from './constants';
 
 function DetailHeader({ mock, badgeColor }) {
 	// #region Defaults
@@ -24,6 +31,30 @@ function DetailHeader({ mock, badgeColor }) {
 		: mock.archived
 		? 'ARCHIVED'
 		: '';
+	// #endregion
+
+	// #region State
+	const [generatedURL, setGeneratedURL] = useState('');
+	const [isCopied, setIsCopied] = useState(false);
+	// #endregion
+
+	// #region Effects
+	useEffect(() => {
+		let url = `${config.hostName[process.env.NODE_ENV]}${mock.route}`;
+		if (mock.queryParams.length > 0) {
+			url += `?${mock.queryParams}`;
+		}
+
+		setGeneratedURL(url);
+	}, [mock.route]);
+
+	useEffect(() => {
+		if (isCopied) {
+			setTimeout(() => {
+				setIsCopied(false);
+			}, 1000);
+		}
+	}, [isCopied]);
 	// #endregion
 
 	return (
@@ -40,7 +71,22 @@ function DetailHeader({ mock, badgeColor }) {
 				</Subtitle>
 				<Link data-testid={testIds.mockLink}>
 					<LinkDiv>
-						<FaLink /> <LinkText>{mock.route}</LinkText>
+						<FaLink />
+						<LinkText href={generatedURL} target='_blank'>
+							{mock.route}
+						</LinkText>
+						<CopyLink data-testid='copy-url-button' key='copy-url'>
+							<CopyToClipboard
+								text={generatedURL}
+								onCopy={() => setIsCopied(true)}
+							>
+								<Tooltip title={isCopied ? 'URL Copied' : 'Copy URL'}>
+									<IconButton>
+										<CopyIcon />
+									</IconButton>
+								</Tooltip>
+							</CopyToClipboard>
+						</CopyLink>
 					</LinkDiv>
 				</Link>
 			</TitleContainer>

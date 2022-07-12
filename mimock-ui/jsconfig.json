@@ -20,7 +20,8 @@
 			"atoms": ["/src/atoms/*"],
 			"constants": ["/src/constants/*"],
 			"utils": ["/src/utils/*"],
-			"mocks": ["/src/__mocks__/*"]
+			"mocks": ["/src/__mocks__/*"],
+			"config": ["/src/Config.js"]
 		}
 	}
 }
