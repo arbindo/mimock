@@ -48,5 +48,9 @@ app:
     jwt-secret-key: C4BE6B45CBBD4CBADFE5E22F4BCDBAF8 # Only for testing. Do not use this in production.
     cors-config:
       allowed-origins: http://localhost:3000,http://localhost:3001
+      allowed-methods: POST,GET,PUT,DELETE,OPTIONS
+      allowed-headers: Authorization,Content-Type,X-Requested-With,Accept,X-XSRF-TOKEN
+      exposed-headers: Cache-Control,Content-Language,Content-Length,Content-Type,Content-Disposition,Expires,Last-Modified,Pragma
+
 
 flush-bin-cron-expression: "*/4 * * * * *"

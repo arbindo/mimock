@@ -32,6 +32,15 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
     @Value("#{'${app.security.cors-config.allowed-origins}'.split(',')}")
     private List<String> corsAllowedOrigins;
 
+    @Value("#{'${app.security.cors-config.allowed-methods}'.split(',')}")
+    private List<String> corsAllowedMethods;
+
+    @Value("#{'${app.security.cors-config.allowed-headers}'.split(',')}")
+    private List<String> corsAllowedHeaders;
+
+    @Value("#{'${app.security.cors-config.exposed-headers}'.split(',')}")
+    private List<String> corsExposedHeaders;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -62,7 +71,7 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         setupCSRF(http, apiPath + wildCardPath);
-        setupCorsConfig(http);
+        setupCorsConfig(http, apiPath + wildCardPath);
 
         http.headers().frameOptions().sameOrigin();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
@@ -75,29 +84,15 @@ public class DefaultAuthConfiguration extends WebSecurityConfigurerAdapter {
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
     }
 
-    private void setupCorsConfig(HttpSecurity http) throws Exception {
-        http.cors(cors -> {
+    private void setupCorsConfig(HttpSecurity http, String apiPath) throws Exception {
+        http.antMatcher(apiPath).cors(cors -> {
             CorsConfigurationSource cs = resources -> {
                 CorsConfiguration corsConfiguration = new CorsConfiguration();
                 corsConfiguration.setAllowedOrigins(corsAllowedOrigins);
-                corsConfiguration.setAllowedMethods(List.of("POST", "GET", "PUT", "DELETE", "OPTIONS"));
-                corsConfiguration.setAllowedHeaders(List.of(
-                        "Authorization",
-                        "Content-Type",
-                        "X-Requested-With",
-                        "Accept",
-                        "X-XSRF-TOKEN"));
+                corsConfiguration.setAllowedMethods(corsAllowedMethods);
+                corsConfiguration.setAllowedHeaders(corsAllowedHeaders);
+                corsConfiguration.setExposedHeaders(corsExposedHeaders);
                 corsConfiguration.setAllowCredentials(true);
-                corsConfiguration.setExposedHeaders(List.of(
-                        "Cache-Control",
-                        "Content-Language",
-                        "Content-Length",
-                        "Content-Type",
-                        "Content-Disposition",
-                        "Expires",
-                        "Last-Modified",
-                        "Pragma"
-                ));
                 return corsConfiguration;
             };
 

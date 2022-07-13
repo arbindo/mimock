@@ -17,7 +17,7 @@ class HttpMethodsRepositoryTest {
     HttpMethodsRepository httpMethodsRepository;
 
     @ParameterizedTest
-    @ValueSource(strings = {"GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"})
+    @ValueSource(strings = {"GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "TRACE", "PATCH"})
     void shouldReturnHttpMethodForValidMethod(String method) {
         // Act
         HttpMethod httpMethod = httpMethodsRepository.findByMethod(method);
@@ -27,7 +27,7 @@ class HttpMethodsRepositoryTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"TEST", "RANDOM", "EXEC", "123X"})
+    @ValueSource(strings = {"TEST", "RANDOM", "EXEC", "123X", "OPTIONS"})
     void shouldReturnNullForInvalidMethod(String method) {
         // Act
         HttpMethod httpMethod = httpMethodsRepository.findByMethod(method);
