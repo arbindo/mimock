@@ -10,6 +10,7 @@ import {
 	CardMetaInner,
 	CardLink,
 	CardLinkSpan,
+	LinkIcon,
 } from './MockCard.style.js';
 import { FaLink } from 'react-icons/fa';
 import { constants } from './constants';
@@ -29,7 +30,7 @@ function MockCard({
 }) {
 	// #region States
 	const [badgeColor, setBadgeColor] = useState('');
-	const { testIds, additionalStyles } = constants;
+	const { testIds } = constants;
 	const crossBadgeText = isDeleted ? 'DELETED' : isArchived ? 'ARCHIVED' : '';
 	// #endregion
 
@@ -63,7 +64,9 @@ function MockCard({
 						{httpMethod}
 					</CardBadge>
 					<CardLinkSpan>
-						<FaLink className={additionalStyles.cardLink} />{' '}
+						<LinkIcon>
+							<FaLink />
+						</LinkIcon>
 						<CardLink data-testid={testIds.cardLink}>{route}</CardLink>
 					</CardLinkSpan>
 				</CardMetaInner>

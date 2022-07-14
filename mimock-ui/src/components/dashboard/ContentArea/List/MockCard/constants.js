@@ -6,7 +6,4 @@ export const constants = {
 		cardBadge: 'card-badge',
 		cardLink: 'card-link',
 	},
-	additionalStyles: {
-		cardLink: 'xl:text-xl md:text-3xl',
-	},
 };

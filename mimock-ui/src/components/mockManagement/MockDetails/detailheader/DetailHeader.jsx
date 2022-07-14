@@ -19,6 +19,7 @@ import {
 	Link,
 	LinkDiv,
 	LinkText,
+	LinkIcon,
 	CopyLink,
 	CopyIcon,
 } from './DetailHeader.style';
@@ -71,7 +72,9 @@ function DetailHeader({ mock, badgeColor }) {
 				</Subtitle>
 				<Link data-testid={testIds.mockLink}>
 					<LinkDiv>
-						<FaLink />
+						<LinkIcon>
+							<FaLink />
+						</LinkIcon>
 						<LinkText href={generatedURL} target='_blank'>
 							{mock.route}
 						</LinkText>

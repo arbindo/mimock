@@ -89,11 +89,12 @@ export const CardMetaInner = tw.div`
 
 export const CardLink = tw.div`
     text-lg
-    text-center
+    text-left
     text-black
     font-light
     truncate
     my-1
+    max-w-1/2
 `;
 
 export const CardLinkSpan = tw.span`
@@ -102,4 +103,12 @@ export const CardLinkSpan = tw.span`
     justify-center
     text-teal-500
     mx-2
+`;
+
+export const LinkIcon = tw.div`
+    text-xl
+    w-10
+    min-w-10
+    max-w-10
+    mr-1
 `;

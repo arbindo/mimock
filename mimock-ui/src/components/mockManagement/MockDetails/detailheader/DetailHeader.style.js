@@ -90,7 +90,6 @@ export const Link = tw.div`
     font-light
     my-1
     py-2
-    cursor-pointer
 `;
 
 export const LinkDiv = tw.div`
@@ -103,7 +102,20 @@ export const LinkDiv = tw.div`
 export const LinkText = tw.a`
     text-black
     hover:text-blue-500
-    mx-2
+    mx-1
+    cursor-pointer
+    max-w-1/2
+    min-w-1/4
+    text-left
+    truncate
+`;
+
+export const LinkIcon = tw.div`
+    text-xl
+    w-10
+    min-w-10
+    max-w-10
+    p-0
 `;
 
 export const CopyLink = tw.div`
