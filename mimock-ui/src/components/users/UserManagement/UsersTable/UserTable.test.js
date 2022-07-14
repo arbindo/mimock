@@ -136,7 +136,7 @@ describe('UserTable', () => {
 			await rerender(<UserTable />);
 		});
 
-		expect(getAllUsers).toHaveBeenCalledTimes(1);
+		expect(getAllUsers).toHaveBeenCalledTimes(2);
 
 		expect(container).toMatchSnapshot();
 	});

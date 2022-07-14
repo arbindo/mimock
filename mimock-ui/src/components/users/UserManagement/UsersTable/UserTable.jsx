@@ -20,8 +20,6 @@ export default function UserTable() {
 	const [refreshUserList] = useRecoilState(deletionModalAtom);
 
 	useEffect(() => {
-		if (refreshUserList) return;
-
 		getAllUsers()
 			.then((users) => {
 				setGettingUsers(false);
