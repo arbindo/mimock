@@ -27,6 +27,10 @@ const ButtonData = {
 		background: 'bg-white dark:bg-slate-300',
 		color: 'text-black',
 	},
+	ROSE_BUTTON: {
+		background: 'bg-rose-500',
+		color: 'text-white',
+	},
 };
 
 const IconButtonData = {

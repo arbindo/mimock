@@ -166,16 +166,18 @@ function AddUserForm() {
 						<SubmitButton
 							type='submit'
 							dataTestid='add-user-submit-button'
-							variant={ButtonVariants.GreenButton}
+							variant={ButtonVariants.TealButton}
 							label='Submit'
 							width='w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2'
 						/>
 						<ResetButton
 							label='Reset'
 							dataTestid='add-user-reset-button'
-							variant={ButtonVariants.RedButton}
+							variant={ButtonVariants.RoseButton}
 							width='w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/4 sm:w-1/2'
-							onclickHandler={() => {
+							onclickHandler={(e) => {
+								e.preventDefault();
+
 								clearErrors();
 								reset(undefined, {
 									keepError: false,

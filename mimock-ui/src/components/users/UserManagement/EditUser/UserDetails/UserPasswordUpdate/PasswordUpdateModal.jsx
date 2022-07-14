@@ -149,7 +149,7 @@ function PasswordUpdateModal({ userName }) {
 							<UpdateButton
 								type='submit'
 								dataTestid='password-update-confirm-button'
-								variant={ButtonVariants.GreenButton}
+								variant={ButtonVariants.TealButton}
 								label='Update'
 								required={true}
 								width='w-1/2'
@@ -157,7 +157,7 @@ function PasswordUpdateModal({ userName }) {
 							<CancelButton
 								type='button'
 								dataTestid='password-update-cancel-button'
-								variant={ButtonVariants.RedButton}
+								variant={ButtonVariants.RoseButton}
 								label='Cancel'
 								width='w-1/2'
 								required={true}

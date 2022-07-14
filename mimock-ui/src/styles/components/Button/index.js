@@ -12,6 +12,7 @@ export const ButtonVariants = {
 	DarkGreenButton: 'DARK_GREEN_BUTTON',
 	BlueButton: 'INDIGO_BUTTON',
 	TealButton: 'TEAL_BUTTON',
+	RoseButton: 'ROSE_BUTTON',
 	DefaultButton: 'DEFAULT_BUTTON',
 	DownloadButton: 'DOWNLOAD_BUTTON',
 };
