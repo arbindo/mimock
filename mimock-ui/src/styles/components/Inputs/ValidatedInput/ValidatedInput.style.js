@@ -30,6 +30,6 @@ export const ErrorMessage = tw.div`
 	font-sans
 	subpixel-antialiased
 	mx-4
-	w-40
+	w-64
 	absolute
 `;

@@ -193,7 +193,7 @@ exports[`AddUserForm should display validation errors when inputs are not valid 
           type="text"
         />
         <div
-          class="text-red-500 text-xs font-sans subpixel-antialiased mx-4 w-40 absolute"
+          class="text-red-500 text-xs font-sans subpixel-antialiased mx-4 w-64 absolute"
           data-testid="input-error-name"
         >
           Name is required
@@ -220,7 +220,7 @@ exports[`AddUserForm should display validation errors when inputs are not valid 
           type="text"
         />
         <div
-          class="text-red-500 text-xs font-sans subpixel-antialiased mx-4 w-40 absolute"
+          class="text-red-500 text-xs font-sans subpixel-antialiased mx-4 w-64 absolute"
           data-testid="input-error-userName"
         >
           Username is required
@@ -247,7 +247,7 @@ exports[`AddUserForm should display validation errors when inputs are not valid 
           type="password"
         />
         <div
-          class="text-red-500 text-xs font-sans subpixel-antialiased mx-4 w-40 absolute"
+          class="text-red-500 text-xs font-sans subpixel-antialiased mx-4 w-64 absolute"
           data-testid="input-error-password"
         >
           Password is required

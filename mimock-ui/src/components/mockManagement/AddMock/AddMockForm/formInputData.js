@@ -1,4 +1,6 @@
 import React from 'react';
+import isAlphanumeric from 'validator/lib/isAlphanumeric';
+import isURL from 'validator/lib/isURL';
 import { mockManagementConstants } from 'constants/mockManagementConstants';
 import QueryParam from './QueryParams';
 import RequestHeaders from './RequestHeaders';
@@ -25,6 +27,12 @@ export const addMockFormInputData = (data, mode) => {
 					value: 255,
 					message: 'Name must be at most 255 characters',
 				},
+				validate: (value) => {
+					if (isAlphanumeric(value, undefined, { ignore: '- ' })) {
+						return true;
+					}
+					return 'Name must contain only letters, numbers and underscores';
+				},
 			},
 		},
 		{
@@ -43,6 +51,12 @@ export const addMockFormInputData = (data, mode) => {
 				maxLength: {
 					value: 255,
 					message: 'Description must be at most 255 characters',
+				},
+				validate: (value) => {
+					if (isAlphanumeric(value, undefined, { ignore: '- ' })) {
+						return true;
+					}
+					return 'Description must contain only letters, numbers and underscores';
 				},
 			},
 		},
@@ -80,6 +94,7 @@ export const addMockFormInputData = (data, mode) => {
 						<li>Route should not contain a trailing slash</li>
 						<li>Route should not start with /mimock-ui/</li>
 						<li>Route should not start with /api/mimock/</li>
+						<li>Route should contain only valid characters</li>
 					</ul>
 				</div>
 			),
@@ -103,6 +118,21 @@ export const addMockFormInputData = (data, mode) => {
 						!v.endsWith('/') || 'Route cannot contain a trailing slash',
 					startsWithForwardSlash: (v) =>
 						v.startsWith('/') || 'Route must start with a forward slash',
+					validURL: (v) => {
+						if (
+							isURL(v, {
+								require_protocol: false,
+								allow_underscores: true,
+								require_host: false,
+								require_port: false,
+								allow_query_components: false,
+								validate_length: true,
+							})
+						) {
+							return true;
+						}
+						return 'Route is not a valid URL';
+					},
 				},
 			},
 		},
