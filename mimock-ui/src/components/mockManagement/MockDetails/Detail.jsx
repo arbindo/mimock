@@ -172,7 +172,7 @@ function Detail() {
 			<If condition={mock != null}>
 				<If condition={showDeletionModal}>
 					<ConfirmationModal
-						message={`${confirmationModal.loadingMessage} "${mock.mockName}" ?`}
+						message={`${confirmationModal.message} - "${mock.mockName}" ?`}
 						cancelButtonLabel={confirmationModal.cancelButtonLabel}
 						confirmButtonLabel={confirmationModal.confirmButtonLabel}
 						loading={deletingMock}

@@ -23,7 +23,7 @@ exports[`DetailHeader should render detail header component 1`] = `
         This is a long test description 1234567890
       </p>
       <div
-        class="text-base text-center text-black truncate font-light my-1 py-2"
+        class="text-base text-center text-black truncate font-light my-1"
         data-testid="mock-link"
       >
         <div

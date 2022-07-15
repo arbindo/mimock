@@ -27,7 +27,7 @@ export const CardTopBadge = tw.span`
     shadow-sm
     text-xs
     relative
-    -top-14
+    -top-16
     -left-4
 `;
 
@@ -89,7 +89,6 @@ export const Link = tw.div`
     truncate
     font-light
     my-1
-    py-2
 `;
 
 export const LinkDiv = tw.div`
