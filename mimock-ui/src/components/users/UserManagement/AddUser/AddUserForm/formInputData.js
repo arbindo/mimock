@@ -1,3 +1,6 @@
+import isAlpha from 'validator/lib/isAlpha';
+import isAlphanumeric from 'validator/lib/isAlphanumeric';
+
 export const formInputData = [
 	{
 		name: 'name',
@@ -14,9 +17,11 @@ export const formInputData = [
 				value: 24,
 				message: 'Name must be at most 24 characters',
 			},
-			pattern: {
-				value: /^[a-zA-Z ]*$/,
-				message: 'Name must be alphabetic',
+			validate: (value) => {
+				if (isAlpha(value, undefined, { ignore: ' ' })) {
+					return true;
+				}
+				return 'Name must be alphabetic';
 			},
 		},
 	},
@@ -34,6 +39,12 @@ export const formInputData = [
 			maxLength: {
 				value: 24,
 				message: 'Username must be at most 24 characters',
+			},
+			validate: (value) => {
+				if (isAlphanumeric(value, undefined, { ignore: '_' })) {
+					return true;
+				}
+				return 'Username must contain only alphanumeric characters';
 			},
 		},
 	},
