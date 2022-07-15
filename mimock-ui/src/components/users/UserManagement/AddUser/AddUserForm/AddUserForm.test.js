@@ -241,7 +241,13 @@ describe('AddUserForm', () => {
 
 	it('should show error notification when addNewUser api call fails', async () => {
 		const notificationSpy = jest.spyOn(actualNotification, 'default');
-		addNewUser.mockRejectedValueOnce(new Error('Error adding user'));
+		addNewUser.mockRejectedValueOnce({
+			response: {
+				data: {
+					message: 'User already exists',
+				},
+			},
+		});
 
 		let tree;
 		await act(async () => {
@@ -300,7 +306,7 @@ describe('AddUserForm', () => {
 		expect(notificationSpy).toHaveBeenCalledWith({
 			animationIn: 'animate__slideInRight',
 			animationOut: 'animate__slideOutRight',
-			message: 'Please try again',
+			message: 'User already exists',
 			title: 'Failed to add new user',
 			type: 'danger',
 		});

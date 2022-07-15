@@ -70,11 +70,11 @@ function AddUserForm() {
 					animationOut: 'animate__slideOutRight',
 				});
 			})
-			.catch(() => {
+			.catch((err) => {
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
 					title: 'Failed to add new user',
-					message: 'Please try again',
+					message: err.response?.data?.message,
 					animationIn: 'animate__slideInRight',
 					animationOut: 'animate__slideOutRight',
 				});
