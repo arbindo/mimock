@@ -91,10 +91,5 @@ export const constants = {
 			badgeColor: 'border-violet-500 text-violet-500',
 			activeBadgeColor: 'border-violet-400 bg-violet-500 text-white',
 		},
-		{
-			httpMethod: 'OPTIONS',
-			badgeColor: 'border-gray-500 text-gray-500',
-			activeBadgeColor: 'border-gray-400 bg-gray-500 text-white',
-		},
 	],
 };

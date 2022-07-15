@@ -169,13 +169,6 @@ exports[`Sidebar should render sidebar component 1`] = `
           >
             TRACE
           </div>
-          <div
-            class="text-center px-2 py-1 rounded-md shadow-sm select-none my-1 mx-2 cursor-pointer border-2 border-gray-500 text-gray-500"
-            data-testid="badge-filter_8"
-            id="badge-filter_8"
-          >
-            OPTIONS
-          </div>
         </div>
       </div>
       <div
