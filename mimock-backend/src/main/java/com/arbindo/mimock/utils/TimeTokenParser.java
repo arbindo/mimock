@@ -16,8 +16,8 @@ public class TimeTokenParser {
         MINUTE('m', 1.0 / 60.0),
         SECOND('s', 1.0 / 3600.0);
 
-        char token;
-        double hourValue;
+        final char token;
+        final double hourValue;
 
         TimeMetrics(char token, double hourValue) {
             this.token = token;

@@ -63,8 +63,15 @@ spring:
 
 app:
   security:
-    jwt-expiry-in-seconds: ${MIMOCK_JWT_EXPIRY_IN_SECONDS}
-    jwt-secret-key: ${MIMOCK_JWT_SECRET} # Only for testing. Do not use this in production.
+    # NOTES
+    # Session timeout value accepts time tokens such as 1s, 2h, 35m etc.,
+    # Allowed values
+    # s - seconds | m - minutes | h - hours | d - days | w - weeks | M - months | y - years
+    # It accepts only whole numeric values (E.g: 210m => Valid ; 3.5h => Invalid)
+    # If the token is invalid, then the default timeout value will be used ( 1 Hour )
+    jwt-expiry-duration: ${MIMOCK_JWT_EXPIRY_DURATION}
+    # End
+    jwt-secret-key: ${MIMOCK_JWT_SECRET}
     cors-config:
       allowed-origins: ${MIMOCK_CORS_ORIGINS}
       allowed-methods: ${MIMOCK_CORS_METHODS}

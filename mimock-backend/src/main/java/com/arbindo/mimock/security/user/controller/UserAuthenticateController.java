@@ -7,6 +7,7 @@ import com.arbindo.mimock.security.user.models.response.authentication.Authentic
 import com.arbindo.mimock.security.user.models.response.authentication.AuthenticationResponse;
 import com.arbindo.mimock.security.user.models.response.authentication.AuthenticationTokenResponse;
 import com.arbindo.mimock.security.utils.JWTUtils;
+import com.arbindo.mimock.utils.TimeTokenParser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -87,7 +88,7 @@ public class UserAuthenticateController {
                 AuthenticationTokenResponse.builder()
                         .token(jwtUtils.generateJWT(userDetails, userClaims))
                         .expiresAt(jwtUtils.getTokenExpiryTimestamp())
-                        .expiresAfterSeconds(Long.parseLong(jwtUtils.getJwtExpiryInSeconds()))
+                        .expiresAfterSeconds(TimeTokenParser.durationInSeconds(jwtUtils.getJwtExpiryDuration()))
                         .build()
         );
     }

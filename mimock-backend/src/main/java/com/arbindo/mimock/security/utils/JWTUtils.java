@@ -1,5 +1,6 @@
 package com.arbindo.mimock.security.utils;
 
+import com.arbindo.mimock.utils.TimeTokenParser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.Getter;
@@ -17,8 +18,8 @@ import java.util.function.Function;
 public class JWTUtils {
 
     @Getter
-    @Value("${app.security.jwt-expiry-in-seconds}")
-    private String jwtExpiryInSeconds;
+    @Value("${app.security.jwt-expiry-duration}")
+    private String jwtExpiryDuration;
 
     @Value("${app.security.jwt-secret-key}")
     private String jwtSecretKey;
@@ -45,7 +46,7 @@ public class JWTUtils {
     }
 
     public Date getTokenExpiryTimestamp() {
-        return new Date(System.currentTimeMillis() + (Long.parseLong(jwtExpiryInSeconds) * 1000));
+        return new Date(System.currentTimeMillis() + (TimeTokenParser.durationInSeconds(jwtExpiryDuration) * 1000));
     }
 
     private SecretKeySpec getSigningKey() {
