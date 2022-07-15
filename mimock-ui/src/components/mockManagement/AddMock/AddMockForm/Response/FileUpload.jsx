@@ -23,7 +23,7 @@ import {
 } from './Response.style';
 import { DeleteIcon, ActionToolTip } from '../FormCommon.style';
 
-function FileUpload({ binaryFile, setBinaryFile }) {
+function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
 	const [mockData] = useRecoilState(newMockFieldsAtom);
 
 	const [isError, setIsError] = useState({
@@ -33,29 +33,42 @@ function FileUpload({ binaryFile, setBinaryFile }) {
 	const [mode, setMode] = useState('');
 
 	const onDrop = useCallback((acceptedFiles) => {
-		setIsError({ error: false, errorMessage: '' });
-		setMode(mockManagementConstants.mode.CREATE);
-
-		if (acceptedFiles.length <= 0) {
+		if (acceptedFiles.length > 0) {
 			setIsError({
-				error: true,
-				errorMessage: 'The file is not allowed',
+				error: false,
+				errorMessage: '',
 			});
-			return;
+			setMode(mockManagementConstants.mode.CREATE);
+			setBinaryFile(acceptedFiles[0]);
 		}
-		setBinaryFile(acceptedFiles[0]);
 	}, []);
 
 	const { getRootProps, getInputProps } = useDropzone({
 		multiple: false,
 		maxSize: 5242880,
 		onDrop,
-		onError: (error) => {
-			console.log(error);
-			setIsError({
-				error: true,
-				errorMessage: error.message,
-			});
+		validator: (file) => {
+			if (file.size > 5242880) {
+				const error = {
+					error: true,
+					errorMessage: 'The file size is too large. Max size is 5MB',
+				};
+				setIsError(error);
+				return error;
+			}
+
+			const fileType = mime.getType(file.path);
+			if (fileType !== responseContentType) {
+				const rejectedFileType = mime.getExtension(fileType);
+				const error = {
+					error: true,
+					errorMessage: `The file type ${rejectedFileType} is not allowed for ${responseContentType}`,
+				};
+				setIsError(error);
+				return error;
+			}
+
+			return null;
 		},
 	});
 
@@ -136,6 +149,7 @@ function FileUpload({ binaryFile, setBinaryFile }) {
 FileUpload.propTypes = {
 	binaryFile: PropTypes.object,
 	setBinaryFile: PropTypes.func.isRequired,
+	responseContentType: PropTypes.string.isRequired,
 };
 
 export default FileUpload;

@@ -166,7 +166,7 @@ exports[`FileUpload should render file upload input for edit mode 1`] = `
 </div>
 `;
 
-exports[`FileUpload should show error when file drop fails 1`] = `
+exports[`FileUpload should show error when file size is greater than 5MB 1`] = `
 <div>
   <div
     class="w-full"
@@ -200,7 +200,48 @@ exports[`FileUpload should show error when file drop fails 1`] = `
         class="font-sans text-red-500 text-center mx-auto my-2"
         data-testid="upload-error"
       >
-        The file is not allowed
+        The file size is too large. Max size is 5MB
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FileUpload should show error when file type is not valid 1`] = `
+<div>
+  <div
+    class="w-full"
+    data-testid="file-upload"
+  >
+    <div
+      class="block border-2 p-8 border-dashed rounded-md border-gray-400 shadow-md outline-blue-200 cursor-pointer active:bg-blue-50 hover:bg-blue-50 hover:border-blue-200 active:text-blue-500 dropzone"
+      role="presentation"
+      tabindex="0"
+    >
+      <input
+        class=""
+        data-testid="upload-input"
+        style="display: none;"
+        tabindex="-1"
+        type="file"
+      />
+      <div
+        class="font-sans text-gray-600 text-center mx-auto hover:text-blue-500"
+        data-testid="upload-message"
+      >
+        Drag and drop to upload the file
+      </div>
+      <div
+        class="font-light font-sans text-gray-500 text-center text-sm italic my-2"
+        data-testid="upload-size-hint"
+      >
+        Max upload size : 5 MB
+      </div>
+      <div
+        class="font-sans text-red-500 text-center mx-auto my-2"
+        data-testid="upload-error"
+      >
+        The file type jpeg is not allowed for application/pdf
       </div>
     </div>
   </div>

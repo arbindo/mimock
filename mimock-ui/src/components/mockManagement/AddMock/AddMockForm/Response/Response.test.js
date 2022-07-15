@@ -12,7 +12,7 @@ describe('Response', () => {
 	beforeEach(() => {
 		getResponseTypes.mockResolvedValue({
 			TEXTUAL_RESPONSE: ['text/plain', 'text/html'],
-			BINARY_RESPONSE: ['application/octet-stream', 'application/pdf'],
+			BINARY_RESPONSE: ['image/png', 'application/pdf'],
 		});
 
 		useRecoilState.mockImplementation(() => {
@@ -201,7 +201,7 @@ describe('Response', () => {
 			binaryFile: file,
 			expectedTextResponse: '',
 			name: 'Tester',
-			responseContentType: 'application/octet-stream',
+			responseContentType: 'image/png',
 			responseType: 'BINARY_RESPONSE',
 		});
 

@@ -124,7 +124,11 @@ export default function Response() {
 					/>
 				</When>
 				<Otherwise>
-					<FileUpload binaryFile={binaryFile} setBinaryFile={setBinaryFile} />
+					<FileUpload
+						responseContentType={responseContentType}
+						binaryFile={binaryFile}
+						setBinaryFile={setBinaryFile}
+					/>
 				</Otherwise>
 			</Choose>
 			<If condition={showSuccess}>

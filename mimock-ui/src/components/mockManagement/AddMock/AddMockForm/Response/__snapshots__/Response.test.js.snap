@@ -1102,7 +1102,7 @@ exports[`Response should upload file and save response 1`] = `
               id="response-types"
               spellcheck="false"
               type="text"
-              value="application/octet-stream"
+              value="image/png"
             />
             <div
               class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"

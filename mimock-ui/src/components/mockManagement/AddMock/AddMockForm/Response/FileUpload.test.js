@@ -32,7 +32,12 @@ describe('FileUpload', () => {
 	it('should render file upload input', async () => {
 		let tree;
 		await act(async () => {
-			tree = await render(<FileUpload setBinaryFile={mockSetBinaryFile} />);
+			tree = await render(
+				<FileUpload
+					responseContentType='application/pdf'
+					setBinaryFile={mockSetBinaryFile}
+				/>
+			);
 		});
 
 		const { getByTestId, queryByTestId, container } = tree;
@@ -88,10 +93,18 @@ describe('FileUpload', () => {
 		expect(container).toMatchSnapshot();
 	});
 
-	it('should show error when file drop fails', async () => {
+	it('should show error when file type is not valid', async () => {
+		mime.getType.mockImplementation(() => 'image/jpeg');
+		mime.getExtension.mockImplementation(() => 'jpeg');
+
 		let tree;
 		await act(async () => {
-			tree = await render(<FileUpload setBinaryFile={mockSetBinaryFile} />);
+			tree = await render(
+				<FileUpload
+					responseContentType='application/pdf'
+					setBinaryFile={mockSetBinaryFile}
+				/>
+			);
 		});
 
 		const { getByTestId, queryByTestId, container } = tree;
@@ -100,14 +113,55 @@ describe('FileUpload', () => {
 
 		const fileInput = getByTestId('upload-input');
 		await act(async () => {
-			fireEvent.change(fileInput, { target: { files: [] } });
+			fireEvent.change(fileInput, {
+				target: { files: [new File([], 'test.jpeg')] },
+			});
 		});
 
 		expect(mockSetBinaryFile).toHaveBeenCalledTimes(0);
 
 		expect(getByTestId('upload-input')).toBeInTheDocument();
 		expect(getByTestId('upload-error')).toHaveTextContent(
-			'The file is not allowed'
+			'The file type jpeg is not allowed for application/pdf'
+		);
+
+		expect(queryByTestId('uploaded-file')).not.toBeInTheDocument();
+
+		expect(container).toMatchSnapshot();
+	});
+
+	it('should show error when file size is greater than 5MB', async () => {
+		mime.getType.mockImplementation(() => 'application/pdf');
+
+		let tree;
+		await act(async () => {
+			tree = await render(
+				<FileUpload
+					responseContentType='application/pdf'
+					setBinaryFile={mockSetBinaryFile}
+				/>
+			);
+		});
+
+		const { getByTestId, queryByTestId, container } = tree;
+
+		expect(getByTestId('file-upload')).toBeInTheDocument();
+
+		const fileInput = getByTestId('upload-input');
+		const file = new File([], 'test.pdf');
+		Object.defineProperty(file, 'size', { value: 6000000 });
+
+		await act(async () => {
+			fireEvent.change(fileInput, {
+				target: { files: [file] },
+			});
+		});
+
+		expect(mockSetBinaryFile).toHaveBeenCalledTimes(0);
+
+		expect(getByTestId('upload-input')).toBeInTheDocument();
+		expect(getByTestId('upload-error')).toHaveTextContent(
+			'The file size is too large. Max size is 5MB'
 		);
 
 		expect(queryByTestId('uploaded-file')).not.toBeInTheDocument();
