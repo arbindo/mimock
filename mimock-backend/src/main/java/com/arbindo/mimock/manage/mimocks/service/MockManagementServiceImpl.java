@@ -2,7 +2,9 @@ package com.arbindo.mimock.manage.mimocks.service;
 
 import com.arbindo.mimock.audit.AuditorService;
 import com.arbindo.mimock.common.services.EntityStatusService;
-import com.arbindo.mimock.entities.*;
+import com.arbindo.mimock.entities.BinaryResponse;
+import com.arbindo.mimock.entities.Mock;
+import com.arbindo.mimock.entities.TextualResponse;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
 import com.arbindo.mimock.manage.mimocks.service.helpers.MockParamBuilder;
@@ -203,6 +205,9 @@ public class MockManagementServiceImpl implements MockManagementService {
             }
 
             setResponseForMockToBeUpdated(request, mock, updatedMock);
+            updatedMock.setRequestBodiesForMock(mockParamBuilder.requestBody());
+            updatedMock.setResponseHeaders(mockParamBuilder.responseHeaders());
+            updatedMock.setRequestHeaders(mockParamBuilder.requestHeaders());
 
             mocksRepository.save(updatedMock);
             return updatedMock;
