@@ -13,7 +13,7 @@ function Settings() {
 	const [userName, setUserName] = useState('');
 	const [userRole, setUserRole] = useState('');
 	const [isReadOnlyUser, setIsReadOnlyUser] = useState(false);
-	const [userInfo] = useRecoilState(editUserDetailsAtom);
+	const [userInfo, setUserInfo] = useRecoilState(editUserDetailsAtom);
 
 	useEffect(() => {
 		try {
@@ -27,6 +27,13 @@ function Settings() {
 		} catch (e) {
 			console.log(e);
 		}
+
+		return () => {
+			setUserInfo({
+				...userInfo,
+				showPasswordUpdateModal: false,
+			});
+		};
 	}, []);
 
 	return (

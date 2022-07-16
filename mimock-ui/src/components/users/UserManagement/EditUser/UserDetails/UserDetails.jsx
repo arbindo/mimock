@@ -40,6 +40,14 @@ export default function UserDetails() {
 			.catch(() => {
 				setUserFetchError(true);
 			});
+
+		return () => {
+			setUserInfo({
+				...userInfo,
+				showPasswordUpdateModal: false,
+			});
+			setUserFetchError(false);
+		};
 	}, []);
 
 	const info = (label, value, key) => {
