@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @AllArgsConstructor
@@ -17,12 +18,14 @@ public class AddUserRequest {
     @NotBlank(message = "Name of the user cannot be empty")
     @Schema(example = "Gandalf", description = "Name of the user")
     @Size(min = 4, max = 24)
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9 ]{3,24}", message = "Name must contain only alphabets")
     private String name;
 
     @NotBlank(message = "Username cannot be empty")
     @Schema(example = "mithrandir_69", description = "Unique user name for the user")
-    @Size(min = 6, message = "User name must be at least 6 characters long")
+    @Size(min = 4, message = "User name must be at least 6 characters long")
     @Size(max = 24, message = "User name cannot be more than 24 characters")
+    @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9_]{3,24}", message = "User name must contain only alphanumeric characters")
     private String userName;
 
     @NotBlank(message = "Password cannot be empty")
