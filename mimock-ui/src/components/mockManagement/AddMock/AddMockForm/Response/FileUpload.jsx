@@ -86,6 +86,20 @@ function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
 		setMode(mockData.mode);
 	}, [mockData.mode]);
 
+	useEffect(() => {
+		if (binaryFile === null) {
+			return;
+		}
+
+		if (mockData.responseContentType !== responseContentType) {
+			setBinaryFile(null);
+		} else {
+			if (mockData.binaryFile) {
+				setBinaryFile(mockData.binaryFile);
+			}
+		}
+	}, [responseContentType]);
+
 	return (
 		<FileUploadWrapper data-testid='file-upload'>
 			<Choose>
@@ -150,6 +164,10 @@ FileUpload.propTypes = {
 	binaryFile: PropTypes.object,
 	setBinaryFile: PropTypes.func.isRequired,
 	responseContentType: PropTypes.string.isRequired,
+};
+
+FileUpload.defaultProps = {
+	binaryFile: null,
 };
 
 export default FileUpload;

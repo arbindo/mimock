@@ -60,9 +60,16 @@ describe('FileUpload', () => {
 	});
 
 	it('should drop file to dropzone input', async () => {
+		mime.getType.mockImplementation(() => 'image/png');
+
 		let tree;
 		await act(async () => {
-			tree = await render(<FileUpload setBinaryFile={mockSetBinaryFile} />);
+			tree = await render(
+				<FileUpload
+					responseContentType='image/png'
+					setBinaryFile={mockSetBinaryFile}
+				/>
+			);
 		});
 
 		const { getByTestId, queryByTestId, rerender, container } = tree;
@@ -96,6 +103,21 @@ describe('FileUpload', () => {
 	});
 
 	it('should show error when file type is not valid', async () => {
+		useRecoilState.mockImplementation(() => {
+			return [
+				{
+					id: '1',
+					name: '',
+					responseType: 'BINARY_RESPONSE',
+					responseContentType: 'application/pdf',
+					expectedTextResponse: '',
+					binaryFile: null,
+					mode: 'create',
+				},
+				mockedRecoilFn,
+			];
+		});
+
 		mime.getType.mockImplementation(() => 'image/jpeg');
 		mime.getExtension.mockImplementation(() => 'jpeg');
 
@@ -133,13 +155,13 @@ describe('FileUpload', () => {
 	});
 
 	it('should show error when file size is greater than 5MB', async () => {
-		mime.getType.mockImplementation(() => 'application/pdf');
+		mime.getType.mockImplementation(() => 'image/png');
 
 		let tree;
 		await act(async () => {
 			tree = await render(
 				<FileUpload
-					responseContentType='application/pdf'
+					responseContentType='image/png'
 					setBinaryFile={mockSetBinaryFile}
 				/>
 			);
@@ -150,7 +172,7 @@ describe('FileUpload', () => {
 		expect(getByTestId('file-upload')).toBeInTheDocument();
 
 		const fileInput = getByTestId('upload-input');
-		const file = new File([], 'test.pdf');
+		const file = new File([], 'test.png');
 		Object.defineProperty(file, 'size', { value: 6000000 });
 
 		await act(async () => {
@@ -180,7 +202,11 @@ describe('FileUpload', () => {
 		let tree;
 		await act(async () => {
 			tree = await render(
-				<FileUpload binaryFile={file} setBinaryFile={mockSetBinaryFile} />
+				<FileUpload
+					responseContentType='image/png'
+					binaryFile={file}
+					setBinaryFile={mockSetBinaryFile}
+				/>
 			);
 		});
 
@@ -225,7 +251,11 @@ describe('FileUpload', () => {
 		let tree;
 		await act(async () => {
 			tree = await render(
-				<FileUpload binaryFile={blob} setBinaryFile={mockSetBinaryFile} />
+				<FileUpload
+					responseContentType='image/png'
+					binaryFile={blob}
+					setBinaryFile={mockSetBinaryFile}
+				/>
 			);
 		});
 
