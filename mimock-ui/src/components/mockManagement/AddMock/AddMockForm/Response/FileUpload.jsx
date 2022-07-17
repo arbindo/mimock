@@ -75,9 +75,9 @@ function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
 	const downloadFile = (e) => {
 		e.preventDefault();
 
-		const fileName = `${mockData.id}.${mime.getExtension(
-			mockData.responseContentType
-		)}`;
+		const fileName = `${mockData.id}.${
+			mime.getExtension(mockData.responseContentType) || 'bin'
+		}`;
 
 		fileDownload(binaryFile, fileName);
 	};

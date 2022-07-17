@@ -40,7 +40,7 @@ function ResponsePane({
 	const downloadFile = (e) => {
 		e.preventDefault();
 
-		const fileName = `${mockId}.${mime.getExtension(contentType)}`;
+		const fileName = `${mockId}.${mime.getExtension(contentType) || '.bin'}`;
 		const blob = new Blob([Base64.toUint8Array(binaryResponse)]);
 
 		fileDownload(blob, fileName);

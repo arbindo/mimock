@@ -14,19 +14,21 @@ jest.mock('mime');
 const mockSetBinaryFile = jest.fn();
 
 describe('FileUpload', () => {
-	useRecoilState.mockImplementation(() => {
-		return [
-			{
-				id: '1',
-				name: '',
-				responseType: 'BINARY_RESPONSE',
-				responseContentType: 'image/png',
-				expectedTextResponse: '',
-				binaryFile: null,
-				mode: 'create',
-			},
-			mockedRecoilFn,
-		];
+	beforeEach(() => {
+		useRecoilState.mockImplementation(() => {
+			return [
+				{
+					id: '1',
+					name: '',
+					responseType: 'BINARY_RESPONSE',
+					responseContentType: 'image/png',
+					expectedTextResponse: '',
+					binaryFile: null,
+					mode: 'create',
+				},
+				mockedRecoilFn,
+			];
+		});
 	});
 
 	it('should render file upload input', async () => {
@@ -248,6 +250,57 @@ describe('FileUpload', () => {
 
 		expect(fileDownload).toHaveBeenCalledTimes(1);
 		expect(fileDownload).toHaveBeenCalledWith(blob, '1.png');
+
+		expect(container).toMatchSnapshot();
+	});
+
+	it('should fallback to bin extension when extension for content type is null', async () => {
+		const blob = new Blob([138, 80, 78, 72]);
+
+		jest.spyOn(mime, 'getExtension').mockReturnValue(null);
+
+		useRecoilState.mockImplementation(() => {
+			return [
+				{
+					id: '2',
+					name: 'Audio mock',
+					responseType: 'BINARY_RESPONSE',
+					responseContentType: 'audio/aac',
+					binaryFile: blob,
+					mode: 'edit',
+				},
+				mockedRecoilFn,
+			];
+		});
+
+		let tree;
+		await act(async () => {
+			tree = await render(
+				<FileUpload binaryFile={blob} setBinaryFile={mockSetBinaryFile} />
+			);
+		});
+
+		const { getByTestId, queryByTestId, container } = tree;
+
+		expect(getByTestId('file-upload')).toBeInTheDocument();
+		expect(getByTestId('download-file-2')).toBeInTheDocument();
+		expect(getByTestId('remove-file')).toBeInTheDocument();
+
+		expect(queryByTestId('upload-input')).not.toBeInTheDocument();
+		expect(queryByTestId('uploaded-file-details')).not.toBeInTheDocument();
+		expect(queryByTestId('upload-size-hint')).not.toBeInTheDocument();
+		expect(queryByTestId('upload-message')).not.toBeInTheDocument();
+		expect(queryByTestId('upload-error')).not.toBeInTheDocument();
+
+		await act(async () => {
+			fireEvent.click(getByTestId('download-file-2'));
+		});
+
+		expect(mime.getExtension).toHaveBeenCalledTimes(1);
+		expect(mime.getExtension).toHaveBeenCalledWith('audio/aac');
+
+		expect(fileDownload).toHaveBeenCalledTimes(1);
+		expect(fileDownload).toHaveBeenCalledWith(blob, '2.bin');
 
 		expect(container).toMatchSnapshot();
 	});
