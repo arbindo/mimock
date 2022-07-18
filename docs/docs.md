@@ -64,6 +64,15 @@ The [docker-compose.yml](docker-compose.yml) has the required setup to spin up t
 docker-compose -f docker-compose.yml up -d
 ```
 
+### Setup to run mimock within a k8s cluster
+
+The [mimock-k8s](mimock-k8s) directory has sample kubernetes manifest to give an idea of how to setup mimock within a k8s cluster. 
+
+
+### Setup metric collection for mimock
+
+The Prometheus metrics for mimock is exposed on `/api/mimock/monitoring/prometheus` endpoint. The [prometheus.yml](../prometheus.yml)  file includes the required config for setting up your own prometheus scrapping for mimock
+
 ## Features
 
 This section explains the features available in the Mimock application.
@@ -77,7 +86,7 @@ Unique features offered by the Mimock utility tool is mentioned as follows,
 - **Access Management:** The platform follows the role based user model and the admin can assign roles to the users to setup and restrict the access
 - **Multi-Response:** With the multi-response feature support, setup your mock to serve a normal JSON response or a JPEG image file or even your desired PDF document
 
-### Definitions and Explanations
+## Definitions and Explanations
 
 #### User
 
