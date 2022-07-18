@@ -4,7 +4,7 @@ Mock REST API endpoints in real-time
 
 ## Introduction
 
-Mimock is an utility tool to setup mocks for REST API endpoints to mimic the actual endpoints. This tool will be helpful to test UI applications locally or in CI/CD pipelines. Mimock follows an interceptor based pattern which enables the developer to test the endpoints without having to restart the application.
+Mimock is a utility tool to setup mocks for REST API endpoints to mimic the actual endpoints. This tool will be helpful to test UI applications locally or in CI/CD pipelines. Mimock follows an interceptor-based pattern which enables the developer to test the endpoints without having to restart the application.
 
 This project is geared towards both open-source and enterprise applications which offers REST API based solutions. Mimock acts as a faster, easier to setup and automated testing utility tool which can be easily adopted by different projects into their deliverables pipeline.
 
@@ -14,16 +14,16 @@ Mimock is published under open-source [Apache-2.0 license](LICENSE).
 
 Mimock is developed for the purpose of setting up mocks for REST endpoints without the hassle of maintaining any code for the mocks. The application exposes a React based UI which can be used by anyone with no prior coding experience to create and maintain mocks. 
 
-If an UI application is build with configurable origin for the backend it is consuming, then mimock can be wired up in its place to serve the required reponse. This is applicable for backend services as well which rely on other API or services to process a request. 
+If an UI application is built with configurable origin for the backend it is consuming, then mimock can be wired up in its place to serve the required response. This is applicable for backend services as well which rely on other API or services to process a request. 
 
-Some example use cases are as follows,
+Some examples use cases are as follows,
 
-- If your UI (Web or Mobile) relies on an external metered API which incurs cost based on the total hits, then mimock can be used in its place to mimick that API and serve the response on lower environments or CI/CD pipelines which runs UI automation tests
+- If your UI (Web or Mobile) relies on an external metered API which incurs cost based on the total hits, then mimock can be used in its place to mimic that API and serve the response on lower environments or CI/CD pipelines which runs UI automation tests
 - If a backend API relies on another endpoint to download a PDF document and if that PDF server's latency is high which is not bearable for just testing the service locally or while running integration tests on pipelines, then mimock will come in handy for serving the required PDF document
 
 ## Download Options
 
-### JAR with startup script
+### JAR with start-up script
 
 Mimock is a Java based application, hence it requires `Java 8+` to run the application. 
 
@@ -46,7 +46,7 @@ docker pull mimock/mimock
 
 ### Setup to run mimock locally
 
-Ensure PostgreSQL is setup with an user and a schema for mimock to automatically complete the required table setup
+Ensure PostgreSQL is setup with a user and a schema for mimock to automatically complete the required table setup
 
 `mimock.properties` - The bundle includes the properties file with the required configuration to start mimock. Check the config file and ensure the custom config items are properly setup
 
@@ -54,6 +54,14 @@ Download the bundle for the required platform from [above](#download-options) an
 
 ```shell
 java -jar mimock.jar --spring.config.location=./mimock.properties
+```
+
+### Setup to run mimock docker container
+
+The [docker-compose.yml](docker-compose.yml) has the required setup to spin up the PostgreSQL and mimock app containers. The environment variables required for the mimock springboot app are available in the [local.env](local.env) file and the same is referred in the docker-compose manifest. Update the required env values and run the following command to start mimock
+
+```shell
+docker-compose -f docker-compose.yml up -d
 ```
 
 ## Features
@@ -77,7 +85,7 @@ User is the important entity for the Access management on this platform. The use
 
 #### UserRole
 
-User role indicates the role for the particular user. Access management for this platform is role based and the user is mapped to one of the role as mentioned below,
+User role indicates the role for the user. Access management for this platform is role based and the user is mapped to one of the roles as mentioned below,
 
     - ADMIN - A person who has access to all features of the platform and has control over the other users of the platform for access management. It is the super-user behaviour.
     - MANAGER - A person who has access to all features of the platform.
@@ -89,13 +97,13 @@ This is the primary resource of the platform.
 
 A mock can have a name, description, route, httpMethod and so on as mentioned in the API model of the Mock entity.
 
-The structure of mock entity mimics the actual endpoint. The mocks will be setup by the user via API or UI based upon their requirements. Whenever the actual endpoints are called, the request is intercepted and the stored mocked entity is called to test the API behaviour and expected response results.
+The structure of mock entity mimics the actual endpoint. The mocks will be setup by the user via API or UI based upon their requirements. Whenever the actual endpoints are called, the request is intercepted, and the stored mocked entity is called to test the API behaviour and expected response results.
 
 #### Platform Settings
 
-This entity contains the feature control of the platform for the every user.
+This entity contains the feature control of the platform for every user.
 
-Currently there is a single platform setting common for all users but in the upcoming releases these platform settings will be converted to an each user-specific setting and this will be permitted/restricted by the access management policies decided by the developers who are using the tool.
+Currently there is a single platform setting common for all users but in the upcoming releases these platform settings will be converted to each user-specific setting and this will be permitted/restricted by the access management policies decided by the developers who are using the tool.
 
 Some of the current settings include export/import of mocks, auto flush of recycle bin and so on.
 
