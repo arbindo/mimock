@@ -3,12 +3,57 @@ kind: ConfigMap
 metadata:
   name: mimock-config
 data:
-  MIMOCK_LOG_LEVEL: "INFO"
-  MIOMCK_KEYSTORE_ENABLE: "true"
-  MIMOCK_KEYSTORE_PATH: "/home/mimock/keystore.p12"
+  # # Mimock app setup
+  # Log level to use
+  # Set it to DEBUG if you want to deubg any application issues
+  MIMOCK_LOG_LEVEL: INFO
+
+  # # To enable SSL for the server
+  # In a production setup, it is advised to enable this
+  # NOTE: If this option is disabled, then the bundled UI will be disabled to access the API
+  MIOMCK_KEYSTORE_ENABLE: false
+
+  # # Enable the following if 'ssl.enabled' is 'true'
+  # # Path to the JKS keystore file
+  # # Follow general instructions to create a keystore file
+  MIMOCK_KEYSTORE_PATH: ""
+
+  # The schema to use for the database
+  # This is a required field and if a schema is not created, it needs to be setup before starting the application
+  MIMOCK_DB_SCHEMA: mimock_schema_dev
+
+  # URL to access the database
   MIMOCK_DB_HOST: "localhost"
   MIMOCK_DB_PORT: "5432"
-  MIMOCK_DB_URL: "jdbc:postgresql://${MIMOCK_DB_HOST}:${MIMOCK_DB_PORT}/mimock_db"
-  MIMOCK_DB_SCHEMA: "mimock_schema"
   MIMOCK_DB_NAME: "mimock_db"
-  MIMOCK_JWT_EXPIRY_IN_SECONDS: "3600"
+  MIMOCK_DB_URL: "jdbc:postgresql://${MIMOCK_DB_HOST}:${MIMOCK_DB_PORT}/${MIMOCK_DB_NAME}"
+
+  # User created for accessing the database
+  MIMOCK_DB_USER: mimock
+
+  # User session timeout duration
+  # Allowed values
+  # s - seconds | m - minutes | h - hours | d - days | w - weeks | M - months | y - years
+  # It accepts only whole numeric values (E.g: 210m : > Valid ; 3.5h : > Invalid)
+  # If the token is invalid, then the default timeout value will be used ( 1 Hour )
+  MIMOCK_JWT_EXPIRY_DURATION: 1h
+
+  # Valid HmacSHA256 key generated for the application
+  # !! IMPORTANT !!
+  # REPLACE THE BELOW WITH A NEWLY GENERATED 256 BIT KEY (32 Characters)
+  MIMOCK_JWT_SECRET: B4982E53863B4DA7FDA4E1236C4BAF8A
+
+  # # Cors setup
+
+  # Origins to be allowed to access the application
+  # If the UI application wants to access mimock, then ensure the origin of the UI server is included here
+  MIMOCK_CORS_ORIGINS: http://localhost:3001
+
+  # Methods that should be allowed from cross origin requests
+  MIMOCK_CORS_METHODS: GET,POST,PUT,DELETE,OPTIONS
+
+  # Request headers that should be allowed from cross origin requests
+  MIMOCK_CORS_ALLOWED_HEADERS: Authorization,Content-Type,X-Requested-With,Accept,X-XSRF-TOKEN
+
+  # Response headers that are allowed to be exposed for cross origin requests
+  MIMOCK_CORS_EXPOSED_HEADERS: Cache-Control,Content-Language,Content-Length,Content-Type,Content-Disposition,Expires,Last-Modified,Pragma
