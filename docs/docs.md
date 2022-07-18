@@ -2,19 +2,43 @@
 
 Mock REST API endpoints in real-time
 
-## Intro
+## Introduction
 
-Mimock is an utility tool to setup mock REST API endpoints to mimic the actual endpoints. This tool will be helpful to test UI applications locally or in CI/CD pipelines. Mimock follows an interceptor based pattern which enables the developer to test the endpoints without having to restart the application.
+Mimock is an utility tool to setup mocks for REST API endpoints to mimic the actual endpoints. This tool will be helpful to test UI applications locally or in CI/CD pipelines. Mimock follows an interceptor based pattern which enables the developer to test the endpoints without having to restart the application.
 
 This project is geared towards both open-source and enterprise applications which offers REST API based solutions. Mimock acts as a faster, easier to setup and automated testing utility tool which can be easily adopted by different projects into their deliverables pipeline.
 
-Mimock is published under open-source Apache-2.0 license.
+Mimock is published under open-source [Apache-2.0 license](LICENSE).
 
 ## Purpose
 
+Mimock is developed for the purpose of setting up mocks for REST endpoints without the hassle of maintaining any code for the mocks. The application exposes a React based UI which can be used by anyone with no prior coding experience to create and maintain mocks. 
+
+If an UI application is build with configurable origin for the backend it is consuming, then mimock can be wired up in its place to serve the required reponse. This is applicable for backend services as well which rely on other API or services to process a request. 
+
+Some example use cases are as follows,
+
+- If your UI (Web or Mobile) relies on an external metered API which incurs cost based on the total hits, then mimock can be used in its place to mimick that API and serve the response on lower environments or CI/CD pipelines which runs UI automation tests
+- If a backend API relies on another endpoint to download a PDF document and if that PDF server's latency is high which is not bearable for just testing the service locally or while running integration tests on pipelines, then mimock will come in handy for serving the required PDF document
+
 ## Download Options
 
+### JAR with startup script
+
+Mimock is a Java based application, hence it requires `Java 8+` to run the application. 
+
+- [**Windows**](https://github.com/arbindo/mimock/archive/refs/tags/mimock-windows.zip)
+- [**Linux**](https://github.com/arbindo/mimock/archive/refs/tags/mimock-linux.tar.gz)
+- [**MacOS**](https://github.com/arbindo/mimock/archive/refs/tags/mimock-macos.tar.gz)
+
+### Docker image
+
+```shell
+docker pull mimock/mimock
+```
+
 ## Setup Instructions
+
 
 ## Features
 
@@ -24,13 +48,10 @@ This section explains the features available in the Mimock application.
 
 Unique features offered by the Mimock utility tool is mentioned as follows,
 
-- Intuitive UI --> Provides an intuitive UI which lets anyone to manage mocks without any coding experience.
-
-- No Re-Deployment --> Mocks can be added in real time and no application restart is required. Mocks are created/updated on-the-go which ensures faster development and turn-around time.
-
-- Access Management --> The platform follows the uer role model and the admin can allocate roles to the users to setup and restrict the access.
-
-- Multi-Response --> With the multi-response feature support, setup your mock to serve a normal JSON response or a JPEG image file or even your desired PDF document.
+- **Intuitive UI:** Provides an intuitive UI which lets anyone to manage mocks without any coding experience
+- **No Re-Deployment:** Mocks can be added in real time and no application restart is required. Mocks are created/updated on-the-go which ensures faster development and turn-around time
+- **Access Management:** The platform follows the role based user model and the admin can assign roles to the users to setup and restrict the access
+- **Multi-Response:** With the multi-response feature support, setup your mock to serve a normal JSON response or a JPEG image file or even your desired PDF document
 
 ### Definitions and Explanations
 
