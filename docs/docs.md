@@ -39,6 +39,22 @@ docker pull mimock/mimock
 
 ## Setup Instructions
 
+| **Requirements** |
+| - |
+| Java 8+ |
+| PostgreSQL 13+ |
+
+### Setup to run mimock locally
+
+Ensure PostgreSQL is setup with an user and a schema for mimock to automatically complete the required table setup
+
+`mimock.properties` - The bundle includes the properties file with the required configuration to start mimock. Check the config file and ensure the custom config items are properly setup
+
+Download the bundle for the required platform from [above](#download-options) and run the following command to start mimock 
+
+```shell
+java -jar mimock.jar --spring.config.location=./mimock.properties
+```
 
 ## Features
 
