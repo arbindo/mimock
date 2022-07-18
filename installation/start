@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if ! command -v "java" >/dev/null 2>&1; then
+    echo "❌ 'java is not available'"
+    echo "Exiting app"
+    exit 1
+fi
+
+while getopts p: flag; do
+    case "${flag}" in
+    p) port=${OPTARG} ;;
+    esac
+done
+
+if [ -z "${port}" ]; then
+    port=8080
+fi
+
+echo "Starting mimock on PORT ${port}"
+
+java -jar ./lib/mimock.jar --spring.config.location=./mimock.properties --server.port=${port}
