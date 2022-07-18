@@ -1,7 +1,7 @@
 version: "3.3"
 services:
-  mimock-pg-database:
-    container_name: mimock-pg-database
+  mimock-db:
+    container_name: mimock-db
     image: postgres:13.5-alpine
     env_file:
       - local.env
@@ -12,17 +12,17 @@ services:
 
   mimock:
     depends_on:
-      - mimock-pg-database
+      - mimock-db
     build:
       context: .
     container_name: mimock
     networks:
       - mimock-network
     ports:
-      - "9002:8080"
+      - "8080:8080"
     env_file:
       - local.env
-    image: mimock
+    image: mimock/mimock:latest
 
 networks:
   mimock-network:
