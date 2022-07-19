@@ -18,7 +18,7 @@ jobs:
         run: |
           cp -p ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar ./installation/lib/mimock.jar
 
-          7z a -r -tzip mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip ./installation/lib/* ./installation/start.bat ./installation/mimock.properties
+          zip mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip installation/lib installation/start.bat installation/mimock.properties
           tar czf mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz --directory=installation lib start mimock.properties
 
       - name: Publish JAR
