@@ -44,7 +44,7 @@ docker pull mimock/mimock
 | Java 8+ |
 | PostgreSQL 13+ |
 
-### Setup to run mimock locally
+### Run mimock locally
 
 Ensure PostgreSQL is setup with a user and a schema for mimock to automatically complete the required table setup
 
@@ -56,7 +56,7 @@ Download the bundle for the required platform from [above](#download-options) an
 java -jar mimock.jar --spring.config.location=./mimock.properties
 ```
 
-### Setup to run mimock docker container
+### Run mimock docker container
 
 The [docker-compose.yml](docker-compose.yml) has the required setup to spin up the PostgreSQL and mimock app containers. The environment variables required for the mimock springboot app are available in the [local.env](local.env) file and the same is referred in the docker-compose manifest. Update the required env values and run the following command to start mimock
 
@@ -64,10 +64,13 @@ The [docker-compose.yml](docker-compose.yml) has the required setup to spin up t
 docker-compose -f docker-compose.yml up -d
 ```
 
-### Setup to run mimock within a k8s cluster
+### Run mimock within a k8s cluster
 
 The [mimock-k8s](mimock-k8s) directory has sample kubernetes manifest to give an idea of how to setup mimock within a k8s cluster. 
 
+### Run mimock on a CI pipeline
+
+A [demo project](https://github.com/arbindo/demo-app) is available on Github, which simulates a scenario of running a UI automation test by setting up mocks using mimock. The project is a simple web application which relies on two endpoints, one for a JSON response and the other for a webp image. The mocks for the two endpoints are setup within the workflow and the UI automation script captures the results as snapshots, and publishes the same to the [workflow summary](https://github.com/arbindo/demo-app/actions/runs/2685049363)
 
 ### Setup metric collection for mimock
 
