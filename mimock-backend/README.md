@@ -20,7 +20,7 @@ to whitelist the domain which is hosting the mimock backend.
 **Requirements**
 
 - Docker
-- JRE 11+
+- JRE 8+
 
 **Start postgresql Database container**
 
