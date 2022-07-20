@@ -40,13 +40,21 @@ docker pull mimock/mimock
 ## Setup Instructions
 
 | **Requirements** |
-| - |
-| Java 8+ |
-| PostgreSQL 13+ |
+| ---------------- |
+| Java 8+          |
+| PostgreSQL 13+   |
 
 ### Run mimock locally
 
 Ensure PostgreSQL is setup with a user and a schema for mimock to automatically complete the required table setup
+
+The downloaded bundle includes `setup_database` script to setup the required user, database and schema for mimock.
+
+```shell
+# Script content
+# If the 'postgres' user does not exist, use an existing user  `-U <user_name>` to run the SQL script.
+psql -h localhost -p 5432 -U postgres -f ./psql_setup.sql
+```
 
 `mimock.properties` - The bundle includes the properties file with the required configuration to start mimock. Check the config file and ensure the custom config items are properly setup
 
