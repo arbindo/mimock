@@ -23,6 +23,8 @@ services:
     env_file:
       - local.env
     image: mimock/mimock:latest
+    volumes:
+      - ./mimock.jks:/home/mimock/mimock.jks
 
 networks:
   mimock-network:

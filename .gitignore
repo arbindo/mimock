@@ -5,3 +5,5 @@ node_modules/
 
 /installation/**/*.jar
 /installation/**/*.jks
+
+*.jks

@@ -38,7 +38,7 @@ test-ci:
 	docker-compose -f docker-compose.test.yml up --abort-on-container-exit --exit-code-from mimock-test
 
 bundle-app: start-database
-	cd ./mimock-ui && yarn && yarn test && yarn build && \
+	cd ./mimock-ui && yarn && yarn test && NODE_NEV=production yarn build && \
 	mkdir -p $(STATIC_DIR) && \
 	mv ./dist/* ../mimock-backend/src/main/resources/static/mimock-ui/ && cd .. && \
 	cd ./mimock-backend && ./mvnw -ntp clean package && cd ..
