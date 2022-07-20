@@ -66,9 +66,15 @@ java -jar mimock.jar --spring.config.location=./mimock.properties
 
 ### Run mimock docker container
 
-The [docker-compose.yml](docker-compose.yml) has the required setup to spin up the PostgreSQL and mimock app containers. The environment variables required for the mimock springboot app are available in the [local.env](local.env) file and the same is referred in the docker-compose manifest. Update the required env values and run the following command to start mimock
+The [docker-compose.yml](docker-compose.yml) has the required setup to spin up the PostgreSQL and mimock app containers. The environment variables required for the mimock springboot app are available in the [local.env](local.env) file and the same is referred in the docker-compose manifest.
+
+Before running the service, a new keystore must be generated and placed in the root where the `docker-compose.yml` file is located. If you already have a signed certificate, then the same can be used to generate a new keystore.
 
 ```shell
+# To generate a new keystore
+keytool -genkey -v -keystore <.jks file path> -keyalg RSA -keysize 2048 -validity 10000 -alias <alias name> -storepass <store password> -keypass <key password> -storetype jks
+
+# Start the service
 docker-compose -f docker-compose.yml up -d
 ```
 
