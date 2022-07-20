@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+echo "Setting up PostgreSQL database for mimock..."
+
+# Pass the default username `-U <user_name>` to the following command.
+psql -h localhost -p 5432 -U postgres -f ./psql_setup.sql
+
+echo "PostgreSQL database setup complete."

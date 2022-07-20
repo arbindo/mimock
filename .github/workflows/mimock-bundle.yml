@@ -18,8 +18,12 @@ jobs:
         run: |
           cp -p ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar ./installation/lib/mimock.jar
 
-          zip mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip installation/lib installation/start.bat installation/mimock.properties
-          tar czf mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz --directory=installation lib start mimock.properties
+          cd ./installation
+          zip -r mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip lib/*
+          cd .. && mv ./installation/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip .
+          zip -ju mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip installation/*.bat installation/mimock.properties installation/psql_setup.sql
+
+          tar czf mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz --directory=installation lib start mimock.properties setup_database psql_setup.sql
 
       - name: Publish JAR
         uses: actions/upload-artifact@v2
@@ -27,7 +31,7 @@ jobs:
           name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}-jar.zip
           path: |
             ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar
-            
+
       - name: Publish Linux Bundle
         uses: actions/upload-artifact@v2
         with:
