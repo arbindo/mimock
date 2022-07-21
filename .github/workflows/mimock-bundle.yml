@@ -60,7 +60,7 @@ jobs:
 
   push-docker-image:
     name: Push Docker image to Docker Hub
-    needs: bundle-app
+    needs: hold-release
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
