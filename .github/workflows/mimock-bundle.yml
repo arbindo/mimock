@@ -46,7 +46,51 @@ jobs:
           path: |
             mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip
 
+  hold-release:
+    name: Wait for review
+    needs: bundle-app
+    runs-on: ubuntu-latest
+    environment:
+      name: mimockRelease
+
+    steps:
+      - name: Wait for reviewer to initiate the release
+        run: |
+          echo "Awaiting Review!"
+
+  push-docker-image:
+    name: Push Docker image to Docker Hub
+    needs: bundle-app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Build JAR bundle-app
+        working-directory: mimock-backend
+        run: |
+          ./mvnw -ntp clean package -P packageJar -Dmaven.test.skip=true
+
       - name: Build mimock docker image
         run: |
-          docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.min && echo "Docker image build validated"
-          docker system prune -f && docker image prune --all -f
+          docker build -t mimock:latest . -f ./Dockerfile.min
+          docker tag mimock:latest mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: mimock/mimock
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.MIMOCK_CURRENT_VERSION }},latest
