@@ -90,6 +90,18 @@ A [demo project](https://github.com/arbindo/demo-app) is available on Github, wh
 
 The Prometheus metrics for mimock is exposed on `/api/mimock/monitoring/prometheus` endpoint. The [prometheus.yml](../prometheus.yml)  file includes the required config for setting up your own prometheus scrapping for mimock
 
+## How to login?
+
+Mimock follows a role based user management system and the services can be accessed only by an authenticated user. To handle initial application setup, a default ADMIN user is created, which can be used to create other users.
+
+|Username|Password|Role|
+|--|--|--|
+|`mimock_admin`|`password`|`ADMIN`|
+
+More details about user roles are available [here](#userrole)
+
+>It is recommended to create a new ADMIN user and then use that to delete the default `mimock_admin` user
+
 ## Features
 
 This section explains the features available in the Mimock application.
