@@ -47,7 +47,7 @@ spring:
             banner: false
 
   datasource:
-    url: ${MIMOCK_DB_URL} # E.g: jdbc:postgresql://localhost:5427/mimock_db
+    url: ${MIMOCK_DB_URL} # E.g: jdbc:postgresql://localhost:5432/mimock_db
     username: ${MIMOCK_DB_USER}
     password: ${MIMOCK_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
