@@ -313,4 +313,135 @@ describe('AddUserForm', () => {
 
 		expect(container).toMatchSnapshot();
 	});
+
+	describe('InputFieldErrors', () => {
+		it('show min error for name', async () => {
+			let tree;
+			await act(async () => {
+				tree = await render(<AddUserForm />);
+			});
+
+			const { getByTestId, getByText, container } = tree;
+
+			await act(async () => {
+				fireEvent.change(getByTestId('input-name'), {
+					target: { value: 'Tes' },
+				});
+			});
+
+			expect(
+				getByText('Name must be at least 4 characters')
+			).toBeInTheDocument();
+
+			expect(container).toMatchSnapshot();
+		});
+
+		it('show max error for name', async () => {
+			let tree;
+			await act(async () => {
+				tree = await render(<AddUserForm />);
+			});
+
+			const { getByTestId, getByText, container } = tree;
+
+			await act(async () => {
+				fireEvent.change(getByTestId('input-name'), {
+					target: { value: 'eTFtwWffjetjybJFDTEYccHigJgBZS' },
+				});
+			});
+
+			expect(
+				getByText('Name must be at most 24 characters')
+			).toBeInTheDocument();
+
+			expect(container).toMatchSnapshot();
+		});
+
+		it('show min error for username', async () => {
+			let tree;
+			await act(async () => {
+				tree = await render(<AddUserForm />);
+			});
+
+			const { getByTestId, getByText, container } = tree;
+
+			await act(async () => {
+				fireEvent.change(getByTestId('input-userName'), {
+					target: { value: 'use' },
+				});
+			});
+
+			expect(
+				getByText('Username must be at least 4 characters')
+			).toBeInTheDocument();
+
+			expect(container).toMatchSnapshot();
+		});
+
+		it('show max error for username', async () => {
+			let tree;
+			await act(async () => {
+				tree = await render(<AddUserForm />);
+			});
+
+			const { getByTestId, getByText, container } = tree;
+
+			await act(async () => {
+				fireEvent.change(getByTestId('input-userName'), {
+					target: { value: 'dUHPD3niVAQSTqBxLUPhNw9CT36DHf' },
+				});
+			});
+
+			expect(
+				getByText('Username must be at most 24 characters')
+			).toBeInTheDocument();
+
+			expect(container).toMatchSnapshot();
+		});
+
+		it('show min error for password', async () => {
+			let tree;
+			await act(async () => {
+				tree = await render(<AddUserForm />);
+			});
+
+			const { getByTestId, getByText, container } = tree;
+
+			await act(async () => {
+				fireEvent.change(getByTestId('input-password'), {
+					target: { value: 'pass12' },
+				});
+			});
+
+			expect(
+				getByText('Password must be at least 8 characters')
+			).toBeInTheDocument();
+
+			expect(container).toMatchSnapshot();
+		});
+
+		it('show max error for password', async () => {
+			let tree;
+			await act(async () => {
+				tree = await render(<AddUserForm />);
+			});
+
+			const { getByTestId, getByText, container } = tree;
+
+			await act(async () => {
+				fireEvent.change(getByTestId('input-password'), {
+					target: {
+						value:
+							'XWG_D#w=E=;LzG((=:qC)5DmH-V_n.gU==UQ3Pp8C4tya:RVFRbxn3bB?3tfX*KU:UY8E7q3=6/X%wrf&fyrqK-GYxT%F+Eyf3t:,jp=&-BZ66kjEb;uzk&kWP*#:5YJH',
+					},
+				});
+			});
+
+			expect(
+				getByText('Password must be at most 128 characters')
+			).toBeInTheDocument();
+
+			expect(container).toMatchSnapshot();
+		});
+	});
 });

@@ -11,7 +11,7 @@ export const formInputData = [
 			required: 'Name is required',
 			minLength: {
 				value: 4,
-				message: 'Name must be at least 6 characters',
+				message: 'Name must be at least 4 characters',
 			},
 			maxLength: {
 				value: 24,
@@ -34,7 +34,7 @@ export const formInputData = [
 			required: 'Username is required',
 			minLength: {
 				value: 4,
-				message: 'Username must be at least 6 characters',
+				message: 'Username must be at least 4 characters',
 			},
 			maxLength: {
 				value: 24,
