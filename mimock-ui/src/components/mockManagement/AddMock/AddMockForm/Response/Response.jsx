@@ -40,7 +40,7 @@ export default function Response() {
 
 	const changeResponseType = (e) => {
 		setResponseType(e.target.value);
-		if (e.target.value === mockManagementConstants.TEXTUAL_RESPONSE) {
+		if (responseType === mockManagementConstants.TEXTUAL_RESPONSE) {
 			setBinaryFile(null);
 			setMockData({
 				...mockData,
