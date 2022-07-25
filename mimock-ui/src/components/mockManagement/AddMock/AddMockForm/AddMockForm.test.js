@@ -21,6 +21,12 @@ jest.mock('react-notifications-component', () => {
 	return { Store };
 });
 
+const mockedNavigation = jest.fn(() => {});
+jest.mock('react-router-dom', () => ({
+	...jest.requireActual('react-router-dom'),
+	useNavigate: () => mockedNavigation,
+}));
+
 const recoilStateForCreate = {
 	id: '',
 	name: '',
@@ -99,10 +105,19 @@ describe('AddMockFrom', () => {
 			expect(container).toMatchSnapshot();
 		});
 
-		it('should create new mock on clicking submit', async () => {
+		it('should create new mock and navigate to details page on clicking submit', async () => {
 			const notificationSpy = jest.spyOn(actualNotification, 'default');
 
-			createMock.mockImplementation(() => Promise.resolve({}));
+			createMock.mockImplementation(() =>
+				Promise.resolve({
+					data: {
+						data: {
+							id: 1,
+							name: 'User mock',
+						},
+					},
+				})
+			);
 
 			let tree;
 			await act(async () => {
@@ -143,6 +158,84 @@ describe('AddMockFrom', () => {
 				animationIn: 'animate__slideInRight',
 				animationOut: 'animate__slideOutRight',
 			});
+
+			expect(mockedNavigation).toHaveBeenCalledTimes(1);
+			expect(mockedNavigation).toHaveBeenCalledWith(
+				'/mimock-ui/mocks/detail/1'
+			);
+
+			expect(mockedRecoilFn).toHaveBeenLastCalledWith({
+				name: '',
+				description: '',
+				route: '',
+				httpMethod: 'GET',
+				responseContentType: 'application/json',
+				responseType: 'TEXTUAL_RESPONSE',
+				queryParams: '',
+				shouldDoExactHeaderMatching: false,
+				requestHeader: '',
+				requestBody: '',
+				requestBodyType: 'application/json',
+				statusCode: 200,
+				expectedTextResponse: '',
+				responseHeaders: '',
+				binaryFile: null,
+			});
+
+			expect(container).toMatchSnapshot();
+		});
+
+		it('should create new mock and navigate to previous page on clicking submit', async () => {
+			const notificationSpy = jest.spyOn(actualNotification, 'default');
+
+			createMock.mockImplementation(() =>
+				Promise.resolve({
+					data: {},
+				})
+			);
+
+			let tree;
+			await act(async () => {
+				tree = await render(<AddMockForm mode='create' />);
+			});
+
+			const { getByTestId, container } = tree;
+
+			expect(getByTestId('add-mock-form')).toBeInTheDocument();
+			expect(getByTestId('reset-button')).toBeInTheDocument();
+
+			await act(async () => {
+				fireEvent.change(getByTestId('input-name'), {
+					target: { value: 'User mock' },
+				});
+				fireEvent.change(getByTestId('input-description'), {
+					target: { value: 'new mock for users endpoint' },
+				});
+				fireEvent.change(getByTestId('input-statusCode'), {
+					target: { value: '200' },
+				});
+				fireEvent.change(getByTestId('input-route'), {
+					target: { value: '/api/v1/users' },
+				});
+				fireEvent.click(getByTestId('create-mock-button'));
+			});
+
+			expect(createMock).toHaveBeenCalledTimes(1);
+			expect(createMock).toHaveBeenCalledWith(
+				expect.objectContaining(new FormData())
+			);
+
+			expect(notificationSpy).toHaveBeenCalledTimes(1);
+			expect(notificationSpy).toHaveBeenCalledWith({
+				type: 'success',
+				title: 'New mock created successfully',
+				message: 'Mock can be accessed at /api/v1/users',
+				animationIn: 'animate__slideInRight',
+				animationOut: 'animate__slideOutRight',
+			});
+
+			expect(mockedNavigation).toHaveBeenCalledTimes(1);
+			expect(mockedNavigation).toHaveBeenCalledWith(-1);
 
 			expect(mockedRecoilFn).toHaveBeenLastCalledWith({
 				name: '',
@@ -355,10 +448,18 @@ describe('AddMockFrom', () => {
 			expect(container).toMatchSnapshot();
 		});
 
-		it('should update existing mock on clicking submit', async () => {
+		it('should update existing mock and navigate to mock details page on clicking submit', async () => {
 			const notificationSpy = jest.spyOn(actualNotification, 'default');
 
-			updateMock.mockImplementation(() => Promise.resolve({}));
+			updateMock.mockImplementation(() =>
+				Promise.resolve({
+					data: {
+						data: {
+							id: '1',
+						},
+					},
+				})
+			);
 
 			let tree;
 			await act(async () => {
@@ -389,6 +490,75 @@ describe('AddMockFrom', () => {
 				animationIn: 'animate__slideInRight',
 				animationOut: 'animate__slideOutRight',
 			});
+
+			expect(mockedNavigation).toHaveBeenCalledTimes(1);
+			expect(mockedNavigation).toHaveBeenCalledWith(
+				'/mimock-ui/mocks/detail/1'
+			);
+
+			expect(mockedRecoilFn).toHaveBeenLastCalledWith({
+				binaryFile: null,
+				description: 'Mock for github users api',
+				expectedTextResponse: '{"id": 1, "name": "John Doe"}',
+				httpMethod: 'POST',
+				id: '1',
+				name: 'Github mock',
+				queryParams: 'lang=en',
+				requestBody: '{"name": "John Doe"}',
+				requestBodyType: 'application/json',
+				requestHeader: '{"Authorization": "Bearer 12345"}',
+				responseContentType: 'application/json',
+				responseType: 'TEXTUAL_RESPONSE',
+				route: '/api/github/users',
+				responseHeaders: '',
+				shouldDoExactHeaderMatching: false,
+				statusCode: 200,
+			});
+
+			expect(container).toMatchSnapshot();
+		});
+
+		it('should update existing mock on clicking submit', async () => {
+			const notificationSpy = jest.spyOn(actualNotification, 'default');
+
+			updateMock.mockImplementation(() =>
+				Promise.resolve({
+					data: {},
+				})
+			);
+
+			let tree;
+			await act(async () => {
+				tree = await render(<AddMockForm mode='edit' />);
+			});
+
+			const { getByTestId, container } = tree;
+
+			expect(getByTestId('add-mock-form')).toBeInTheDocument();
+
+			const updateBtn = getByTestId('update-mock-button');
+			await act(async () => {
+				expect(updateBtn).toHaveTextContent('Update mock');
+				fireEvent.click(updateBtn);
+			});
+
+			expect(updateMock).toHaveBeenCalledTimes(1);
+			expect(updateMock).toHaveBeenCalledWith(
+				'1',
+				expect.objectContaining(new FormData())
+			);
+
+			expect(notificationSpy).toHaveBeenCalledTimes(1);
+			expect(notificationSpy).toHaveBeenCalledWith({
+				type: 'success',
+				title: 'Mock updated successfully',
+				message: 'Mock 1 has been updated',
+				animationIn: 'animate__slideInRight',
+				animationOut: 'animate__slideOutRight',
+			});
+
+			expect(mockedNavigation).toHaveBeenCalledTimes(1);
+			expect(mockedNavigation).toHaveBeenCalledWith(-1);
 
 			expect(mockedRecoilFn).toHaveBeenLastCalledWith({
 				binaryFile: null,

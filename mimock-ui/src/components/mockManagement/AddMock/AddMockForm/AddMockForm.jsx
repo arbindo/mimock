@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import { BsQuestionCircle } from 'react-icons/bs';
 import { ValidatedInput } from 'styles';
@@ -32,6 +33,7 @@ import {
 } from './AddMockForm.style';
 
 function AddMockForm({ mode }) {
+	const navigate = useNavigate();
 	const [mockData, setMockData] = useRecoilState(newMockFieldsAtom);
 	const [registeredInputs, setRegisteredInputs] = useState([]);
 	const [shouldRenderInputs, setShouldRenderInputs] = useState(false);
@@ -81,7 +83,7 @@ function AddMockForm({ mode }) {
 
 	const createNewMock = (data, route) => {
 		createMock(data)
-			.then(() => {
+			.then((res) => {
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
 					title: 'New mock created successfully',
@@ -90,6 +92,12 @@ function AddMockForm({ mode }) {
 					animationOut: 'animate__slideOutRight',
 				});
 				clearMockData();
+				const mockId = res.data?.data?.id;
+				if (mockId) {
+					navigate(`/mimock-ui/mocks/detail/${mockId}`);
+				} else {
+					navigate(-1);
+				}
 			})
 			.catch((err) => {
 				useNotification({
@@ -104,7 +112,7 @@ function AddMockForm({ mode }) {
 
 	const updateExistingMock = (data) => {
 		updateMock(mockData.id, data)
-			.then(() => {
+			.then((res) => {
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
 					title: 'Mock updated successfully',
@@ -112,6 +120,12 @@ function AddMockForm({ mode }) {
 					animationIn: 'animate__slideInRight',
 					animationOut: 'animate__slideOutRight',
 				});
+				const mockId = res.data?.data?.id;
+				if (mockId) {
+					navigate(`/mimock-ui/mocks/detail/${mockId}`);
+				} else {
+					navigate(-1);
+				}
 			})
 			.catch((err) => {
 				useNotification({
