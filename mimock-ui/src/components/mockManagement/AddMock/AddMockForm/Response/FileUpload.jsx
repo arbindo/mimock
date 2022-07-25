@@ -58,7 +58,11 @@ function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
 			}
 
 			const fileType = mime.getType(file.path);
-			if (fileType !== responseContentType) {
+
+			if (
+				responseContentType !== 'application/octet-stream' &&
+				fileType !== responseContentType
+			) {
 				const rejectedFileType = mime.getExtension(fileType);
 				const error = {
 					error: true,

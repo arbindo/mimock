@@ -63,7 +63,7 @@ const IconButtonData = {
 		color: 'text-white',
 	},
 	DOWNLOAD_BUTTON: {
-		background: 'bg-blue-500',
+		background: 'bg-slate-500',
 		color: 'text-white',
 	},
 };

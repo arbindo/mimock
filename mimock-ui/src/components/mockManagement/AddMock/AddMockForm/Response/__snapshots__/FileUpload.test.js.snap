@@ -77,7 +77,7 @@ exports[`FileUpload should fallback to bin extension when extension for content 
         Uploaded file
       </div>
       <button
-        class="flex items-center justify-center gap-1 px-9 py-2 shadow-md rounded-sm text-center text-base font-semibold outline-none cursor-pointer hover:brightness-110 transition duration-100 text-white w-fit bg-blue-500"
+        class="flex items-center justify-center gap-1 px-9 py-2 shadow-md rounded-sm text-center text-base font-semibold outline-none cursor-pointer hover:brightness-110 transition duration-100 text-white w-fit bg-slate-500"
         data-testid="download-file-2"
       >
         <svg
@@ -183,7 +183,7 @@ exports[`FileUpload should render file upload input for edit mode 1`] = `
         Uploaded file
       </div>
       <button
-        class="flex items-center justify-center gap-1 px-9 py-2 shadow-md rounded-sm text-center text-base font-semibold outline-none cursor-pointer hover:brightness-110 transition duration-100 text-white w-fit bg-blue-500"
+        class="flex items-center justify-center gap-1 px-9 py-2 shadow-md rounded-sm text-center text-base font-semibold outline-none cursor-pointer hover:brightness-110 transition duration-100 text-white w-fit bg-slate-500"
         data-testid="download-file-1"
       >
         <svg
@@ -313,6 +313,66 @@ exports[`FileUpload should show error when file type is not valid 1`] = `
         data-testid="upload-error"
       >
         The file type jpeg is not allowed for application/pdf
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FileUpload should skip validation error when file type is octet stream 1`] = `
+<div>
+  <div
+    class="w-full"
+    data-testid="file-upload"
+  >
+    <div
+      class="mx-auto w-full flex items-center justify-start align-middle p-2 my-10"
+      data-testid="uploaded-file"
+    >
+      <div
+        class="text-center font-sans font-semibold mx-4 hover:text-blue-500"
+        data-testid="uploaded-label"
+      >
+        Uploaded file
+      </div>
+      <div
+        class="font-sans text-justify text-gray-600"
+        data-testid="uploaded-file-details"
+      >
+        ping.jpeg
+         - 
+        4
+         bytes
+      </div>
+      <div
+        class="pt-2 ml-2"
+      >
+        <button
+          aria-label="Remove file"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+          data-mui-internal-clone-element="true"
+          data-testid="remove-file"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            class="cursor-pointer text-red-600 font-sans text-3xl"
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm192 472c0 4.4-3.6 8-8 8H328c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h368c4.4 0 8 3.6 8 8v48z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
       </div>
     </div>
   </div>

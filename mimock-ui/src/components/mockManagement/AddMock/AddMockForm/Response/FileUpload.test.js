@@ -154,6 +154,65 @@ describe('FileUpload', () => {
 		expect(container).toMatchSnapshot();
 	});
 
+	it('should skip validation error when file type is octet stream', async () => {
+		useRecoilState.mockImplementation(() => {
+			return [
+				{
+					id: '1',
+					name: '',
+					responseType: 'BINARY_RESPONSE',
+					responseContentType: 'application/octet-stream',
+					expectedTextResponse: '',
+					binaryFile: null,
+					mode: 'create',
+				},
+				mockedRecoilFn,
+			];
+		});
+
+		mime.getType.mockImplementation(() => 'image/jpeg');
+		mime.getExtension.mockImplementation(() => 'jpeg');
+
+		let tree;
+		await act(async () => {
+			tree = await render(
+				<FileUpload
+					responseContentType='application/octet-stream'
+					setBinaryFile={mockSetBinaryFile}
+				/>
+			);
+		});
+
+		const { getByTestId, queryByTestId, rerender, container } = tree;
+
+		expect(getByTestId('file-upload')).toBeInTheDocument();
+		expect(queryByTestId('uploaded-file')).not.toBeInTheDocument();
+
+		const fileInput = getByTestId('upload-input');
+		const file = new File(['file'], 'ping.jpeg', {
+			type: 'image/jpeg',
+		});
+		await act(async () => {
+			fireEvent.change(fileInput, { target: { files: [file] } });
+		});
+
+		expect(mockSetBinaryFile).toHaveBeenCalledTimes(1);
+		expect(mockSetBinaryFile).toHaveBeenCalledWith(file);
+
+		await act(async () => {
+			rerender(
+				<FileUpload binaryFile={file} setBinaryFile={mockSetBinaryFile} />
+			);
+		});
+
+		expect(queryByTestId('upload-input')).not.toBeInTheDocument();
+
+		expect(getByTestId('uploaded-file')).toBeInTheDocument();
+		expect(getByTestId('uploaded-label')).toHaveTextContent('Uploaded file');
+
+		expect(container).toMatchSnapshot();
+	});
+
 	it('should show error when file size is greater than 5MB', async () => {
 		mime.getType.mockImplementation(() => 'image/png');
 
