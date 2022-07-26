@@ -32,6 +32,7 @@ export default function ResponseHeaders() {
 		mockData.responseHeaders
 	);
 	const [parsingError, setParsingError] = useState(false);
+	const [emptyError, setEmptyError] = useState(false);
 	const [promptSuccess, setPromptSuccess] = useState(false);
 
 	useEffect(() => {
@@ -54,6 +55,7 @@ export default function ResponseHeaders() {
 				responseHeaders: '',
 			});
 		}
+		setEmptyError(false);
 	}, [counter]);
 
 	useEffect(() => {
@@ -111,7 +113,7 @@ export default function ResponseHeaders() {
 			const key = inputState[`responseHeader_${idx}_key`];
 			const value = inputState[`responseHeader_${idx}_value`];
 
-			if (!key || !value) {
+			if (!key) {
 				return;
 			}
 
@@ -196,11 +198,31 @@ export default function ResponseHeaders() {
 			headerObject[inputState[`responseHeader_${idx}_key`]] =
 				inputState[`responseHeader_${idx}_value`];
 		});
+
+		let isEmpty;
+		Object.keys(headerObject).forEach((key) => {
+			if (key === '') {
+				isEmpty = true;
+				return;
+			}
+		});
+		if (isEmpty) {
+			setEmptyError(() => {
+				setTimeout(() => {
+					setEmptyError(false);
+				}, 5000);
+				return true;
+			});
+			setPromptSuccess(false);
+			return;
+		}
+
 		setMockData({
 			...mockData,
 			responseHeaders: JSON.stringify(headerObject, null, 2),
 		});
 
+		setEmptyError(false);
 		setPromptSuccess(true);
 		setTimeout(() => {
 			setPromptSuccess(false);
@@ -277,6 +299,11 @@ export default function ResponseHeaders() {
 			<If condition={parsingError}>
 				<FailurePrompt data-testid='parsing-error'>
 					Failed to parse response headers text
+				</FailurePrompt>
+			</If>
+			<If condition={emptyError}>
+				<FailurePrompt data-testid='empty-error'>
+					Empty keys encountered
 				</FailurePrompt>
 			</If>
 			<If condition={promptSuccess && !parsingError}>

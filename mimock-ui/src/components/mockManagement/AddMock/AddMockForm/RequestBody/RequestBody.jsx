@@ -33,6 +33,7 @@ export default function RequestBody() {
 		mockData.requestBody
 	);
 	const [parsingError, setParsingError] = useState(false);
+	const [emptyError, setEmptyError] = useState(false);
 	const [promptSuccess, setPromptSuccess] = useState(false);
 
 	useEffect(() => {
@@ -55,6 +56,7 @@ export default function RequestBody() {
 				requestBody: '',
 			});
 		}
+		setEmptyError(false);
 	}, [counter]);
 
 	useEffect(() => {
@@ -112,7 +114,7 @@ export default function RequestBody() {
 			const key = inputState[`requestBody_${idx}_key`];
 			const value = inputState[`requestBody_${idx}_value`];
 
-			if (!key || !value) {
+			if (!key) {
 				return;
 			}
 
@@ -197,12 +199,32 @@ export default function RequestBody() {
 			requestBodyObject[inputState[`requestBody_${idx}_key`]] =
 				inputState[`requestBody_${idx}_value`];
 		});
+
+		let isEmpty;
+		Object.keys(requestBodyObject).forEach((key) => {
+			if (key === '') {
+				isEmpty = true;
+				return;
+			}
+		});
+		if (isEmpty) {
+			setEmptyError(() => {
+				setTimeout(() => {
+					setEmptyError(false);
+				}, 5000);
+				return true;
+			});
+			setPromptSuccess(false);
+			return;
+		}
+
 		setMockData({
 			...mockData,
 			requestBody: JSON.stringify(requestBodyObject, null, 2),
 			requestBodyType: mockData.requestBodyType,
 		});
 
+		setEmptyError(false);
 		setPromptSuccess(true);
 		setTimeout(() => {
 			setPromptSuccess(false);
@@ -280,6 +302,11 @@ export default function RequestBody() {
 			<If condition={parsingError}>
 				<FailurePrompt data-testid='parsing-error'>
 					Failed to parse request body text
+				</FailurePrompt>
+			</If>
+			<If condition={emptyError}>
+				<FailurePrompt data-testid='empty-error'>
+					Empty keys encountered
 				</FailurePrompt>
 			</If>
 			<If condition={promptSuccess && !parsingError}>

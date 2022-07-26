@@ -228,6 +228,50 @@ describe('RequestHeaders', () => {
 		expect(container).toMatchSnapshot();
 	});
 
+	it('should show empty key error when key is empty', async () => {
+		let tree;
+		await act(async () => {
+			tree = await render(<RequestHeaders />);
+		});
+
+		const { getByTestId, container, queryByTestId } = tree;
+
+		expect(getByTestId('request-header-wrapper')).toBeInTheDocument();
+		expect(getByTestId('view-mode')).toBeInTheDocument();
+		expect(getByTestId('header-matching-toggle')).toBeInTheDocument();
+		expect(getByTestId('save-requestHeader-button')).toBeInTheDocument();
+
+		expect(queryByTestId('no-header')).not.toBeInTheDocument();
+		expect(queryByTestId('success-prompt')).not.toBeInTheDocument();
+		expect(queryByTestId('empty-error')).not.toBeInTheDocument();
+
+		await act(() => {
+			fireEvent.click(getByTestId('save-requestHeader-button'));
+		});
+
+		expect(getByTestId('empty-error')).toBeInTheDocument();
+		expect(getByTestId('empty-error')).toHaveTextContent(
+			'Empty keys encountered'
+		);
+
+		await act(() => {
+			fireEvent.change(getByTestId('requestHeader_0_key'), {
+				target: { value: '' },
+			});
+			fireEvent.change(getByTestId('requestHeader_0_value'), {
+				target: { value: 'Bearer token' },
+			});
+		});
+
+		await act(() => {
+			fireEvent.click(getByTestId('save-requestHeader-button'));
+		});
+
+		expect(getByTestId('empty-error')).toBeInTheDocument();
+
+		expect(container).toMatchSnapshot();
+	});
+
 	it('should add new header using text input', async () => {
 		let tree;
 		await act(async () => {

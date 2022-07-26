@@ -925,3 +925,194 @@ exports[`RequestHeaders should render request body when initial value is empty 1
   </div>
 </div>
 `;
+
+exports[`RequestHeaders should show empty key error when key is empty 1`] = `
+<div>
+  <div
+    class="w-full"
+    data-testid="request-body-wrapper"
+  >
+    <div
+      class="flex items-center justify-start mt-2 mb-10 p-2 align-middle w-full"
+      data-testid="request-body-type-wrapper"
+    >
+      <div
+        class="font-sans text-gray-600 mx-4 text-justify font-semibold"
+        data-testid="request-body-type-label"
+      >
+        Request body type
+      </div>
+      <select
+        class="font-sans rounded-md shadow-md font-semibold p-2 border-2 border-gray-200 outline-none"
+        data-testid="request-body-type"
+      >
+        <option
+          data-testid="options"
+          selected=""
+          value="application/json"
+        >
+          application/json
+        </option>
+        <option
+          data-testid="options"
+          value="application/x-www-form-urlencoded"
+        >
+          application/x-www-form-urlencoded
+        </option>
+        <option
+          data-testid="options"
+          value="multipart/form-data"
+        >
+          multipart/form-data
+        </option>
+      </select>
+    </div>
+    <div
+      class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
+      data-testid="view-mode"
+      role="group"
+    >
+      <button
+        aria-pressed="true"
+        class="MuiButtonBase-root MuiToggleButton-root Mui-selected MuiToggleButton-sizeMedium MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-d9c359-MuiButtonBase-root-MuiToggleButton-root"
+        data-testid="view-mode-text"
+        tabindex="0"
+        type="button"
+        value="text"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 16 16"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 10V9h12v1H2zm0-4h12v1H2V6zm12-3v1H2V3h12zM2 12v1h12v-1H2z"
+          />
+        </svg>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        aria-pressed="false"
+        class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeMedium MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-d9c359-MuiButtonBase-root-MuiToggleButton-root"
+        data-testid="view-mode-code"
+        tabindex="0"
+        type="button"
+        value="code"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 16 16"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.708 5.578L2.061 8.224l2.647 2.646-.708.708-3-3V7.87l3-3 .708.708zm7-.708L11 5.578l2.647 2.646L11 10.87l.708.708 3-3V7.87l-3-3zM4.908 13l.894.448 5-10L9.908 3l-5 10z"
+          />
+        </svg>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <button
+      aria-label="Add new request body"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element="true"
+      data-testid="add-request-body-button"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        class="cursor-pointer text-green-600 font-sans text-3xl"
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 1024 1024"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm192 472c0 4.4-3.6 8-8 8H544v152c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V544H328c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h152V328c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v152h152c4.4 0 8 3.6 8 8v48z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+    <div
+      class="flex items-center align-middle my-4"
+    >
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="requestBody_0_key"
+          placeholder="key"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="requestBody_0_value"
+          placeholder="value"
+          type="text"
+          value="1"
+        />
+      </div>
+      <button
+        aria-label="Remove request body"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+        data-mui-internal-clone-element="true"
+        data-testid="remove-request-body-tooltip-0"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          class="cursor-pointer text-red-600 font-sans text-3xl"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm192 472c0 4.4-3.6 8-8 8H328c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h368c4.4 0 8 3.6 8 8v48z"
+          />
+        </svg>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="font-sans mb-4 text-red-600"
+      data-testid="empty-error"
+    >
+      Empty keys encountered
+    </div>
+    <button
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
+      data-testid="save-requestBody-button"
+    >
+      Save
+    </button>
+  </div>
+</div>
+`;

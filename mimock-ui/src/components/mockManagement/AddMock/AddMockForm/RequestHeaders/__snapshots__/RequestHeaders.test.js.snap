@@ -338,10 +338,10 @@ exports[`RequestHeaders should add new header using text input 1`] = `
         class="flex justify-start items-center mb-5 aligm-middle"
       >
         <span
-          class="IosSwitch-root-25 MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
+          class="IosSwitch-root-31 MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
         >
           <span
-            class="IosSwitch-switchBase-26 MuiSwitch-switchBase MuiSwitch-colorPrimary MuiButtonBase-root IosSwitch-switchBase-26 MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase"
+            class="IosSwitch-switchBase-32 MuiSwitch-switchBase MuiSwitch-colorPrimary MuiButtonBase-root IosSwitch-switchBase-32 MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase"
             data-testid="header-matching-switch"
           >
             <input
@@ -349,14 +349,14 @@ exports[`RequestHeaders should add new header using text input 1`] = `
               type="checkbox"
             />
             <span
-              class="IosSwitch-thumb-27 MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+              class="IosSwitch-thumb-33 MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
             />
             <span
               class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </span>
           <span
-            class="IosSwitch-track-28 MuiSwitch-track css-1yjjitx-MuiSwitch-track"
+            class="IosSwitch-track-34 MuiSwitch-track css-1yjjitx-MuiSwitch-track"
           />
         </span>
         <div
@@ -711,10 +711,10 @@ exports[`RequestHeaders should fill in request headers when headers are already 
         class="flex justify-start items-center mb-5 aligm-middle"
       >
         <span
-          class="IosSwitch-root-31 MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
+          class="IosSwitch-root-37 MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
         >
           <span
-            class="IosSwitch-switchBase-32 MuiSwitch-switchBase MuiSwitch-colorPrimary MuiButtonBase-root IosSwitch-switchBase-32 MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase"
+            class="IosSwitch-switchBase-38 MuiSwitch-switchBase MuiSwitch-colorPrimary MuiButtonBase-root IosSwitch-switchBase-38 MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase"
             data-testid="header-matching-switch"
           >
             <input
@@ -722,14 +722,14 @@ exports[`RequestHeaders should fill in request headers when headers are already 
               type="checkbox"
             />
             <span
-              class="IosSwitch-thumb-33 MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+              class="IosSwitch-thumb-39 MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
             />
             <span
               class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </span>
           <span
-            class="IosSwitch-track-34 MuiSwitch-track css-1yjjitx-MuiSwitch-track"
+            class="IosSwitch-track-40 MuiSwitch-track css-1yjjitx-MuiSwitch-track"
           />
         </span>
         <div
@@ -1274,6 +1274,226 @@ exports[`RequestHeaders should render request headers when initial value is empt
           class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
+    </div>
+    <button
+      class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"
+      data-testid="save-requestHeader-button"
+    >
+      Save
+    </button>
+  </div>
+</div>
+`;
+
+exports[`RequestHeaders should show empty key error when key is empty 1`] = `
+<div>
+  <div
+    class="w-full"
+    data-testid="request-header-wrapper"
+  >
+    <div
+      class="block' w-full"
+      data-testid="header-matching-toggle"
+    >
+      <div
+        class="flex justify-start items-center mb-5 aligm-middle"
+      >
+        <span
+          class="IosSwitch-root-25 MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
+        >
+          <span
+            class="IosSwitch-switchBase-26 MuiSwitch-switchBase MuiSwitch-colorPrimary MuiButtonBase-root IosSwitch-switchBase-26 MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase"
+            data-testid="header-matching-switch"
+          >
+            <input
+              class="MuiSwitch-input PrivateSwitchBase-input css-1m9pwf3"
+              type="checkbox"
+            />
+            <span
+              class="IosSwitch-thumb-27 MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+            />
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </span>
+          <span
+            class="IosSwitch-track-28 MuiSwitch-track css-1yjjitx-MuiSwitch-track"
+          />
+        </span>
+        <div
+          class="font-sans text-lg text-gray-600 mx-2"
+          data-testid="header-match-label"
+        >
+          Partial Matching
+        </div>
+      </div>
+      <div
+        class="flex items-center justify-start gap-2 align-middle my-auto mx-2 mt-4 mb-6"
+      >
+        <svg
+          class="text-6xl text-gray-500"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+          />
+          <path
+            d="M464 688a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm24-112h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"
+          />
+        </svg>
+        <div
+          class="text-sm font-light text-gray-500 mx-2 text-justify"
+          data-testid="header-match-hint"
+        >
+          Performs a loose comparison and validates only the custom headers configured below while sending a request to the mocked endpoint. Other headers sent in the request will be ignored
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiToggleButtonGroup-root css-1gjgmky-MuiToggleButtonGroup-root"
+      data-testid="view-mode"
+      role="group"
+    >
+      <button
+        aria-pressed="true"
+        class="MuiButtonBase-root MuiToggleButton-root Mui-selected MuiToggleButton-sizeMedium MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-d9c359-MuiButtonBase-root-MuiToggleButton-root"
+        data-testid="view-mode-text"
+        tabindex="0"
+        type="button"
+        value="text"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 16 16"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 10V9h12v1H2zm0-4h12v1H2V6zm12-3v1H2V3h12zM2 12v1h12v-1H2z"
+          />
+        </svg>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        aria-pressed="false"
+        class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeMedium MuiToggleButton-primary MuiToggleButtonGroup-grouped MuiToggleButtonGroup-groupedHorizontal css-d9c359-MuiButtonBase-root-MuiToggleButton-root"
+        data-testid="view-mode-code"
+        tabindex="0"
+        type="button"
+        value="code"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 16 16"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.708 5.578L2.061 8.224l2.647 2.646-.708.708-3-3V7.87l3-3 .708.708zm7-.708L11 5.578l2.647 2.646L11 10.87l.708.708 3-3V7.87l-3-3zM4.908 13l.894.448 5-10L9.908 3l-5 10z"
+          />
+        </svg>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <button
+      aria-label="Add new header"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+      data-mui-internal-clone-element="true"
+      data-testid="add-header-button"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        class="cursor-pointer text-green-600 font-sans text-3xl"
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 1024 1024"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm192 472c0 4.4-3.6 8-8 8H544v152c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V544H328c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h152V328c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v152h152c4.4 0 8 3.6 8 8v48z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+    <div
+      class="flex items-center align-middle my-4"
+    >
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="requestHeader_0_key"
+          placeholder="key"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="block h-12 min-h-12 max-h-12"
+      >
+        <input
+          class="block px-3 py-1.5 text-base font-normal text-gray-700 bg-zinc-50 bg-clip-padding border border-solid rounded mx-4 focus:outline-blue-200 border-gray-300"
+          data-testid="requestHeader_0_value"
+          placeholder="value"
+          type="text"
+          value="Bearer token"
+        />
+      </div>
+      <button
+        aria-label="Remove header"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium sc-dkPtRN cYtIRe css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+        data-mui-internal-clone-element="true"
+        data-testid="remove-header-tooltip-0"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          class="cursor-pointer text-red-600 font-sans text-3xl"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm192 472c0 4.4-3.6 8-8 8H328c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h368c4.4 0 8 3.6 8 8v48z"
+          />
+        </svg>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="font-sans mb-4 text-red-600"
+      data-testid="empty-error"
+    >
+      Empty keys encountered
     </div>
     <button
       class="flex items-center justify-center gap-1 mx-auto shadow-md rounded-md text-center text-base font-semibold cursor-pointer hover:border-gray-500 hover:bg-gray-200 py-2 px-2 mx-0 break-normal p-0 border-2 border-gray-400 text-gray-600 w-1/4 bg-grey-50"

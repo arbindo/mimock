@@ -193,6 +193,49 @@ describe('ResponseHeaders', () => {
 		expect(container).toMatchSnapshot();
 	});
 
+	it('should show empty key error when key is empty', async () => {
+		let tree;
+		await act(async () => {
+			tree = await render(<ResponseHeaders />);
+		});
+
+		const { getByTestId, container, queryByTestId } = tree;
+
+		expect(getByTestId('response-headers-wrapper')).toBeInTheDocument();
+		expect(getByTestId('view-mode')).toBeInTheDocument();
+		expect(getByTestId('save-responseHeader-button')).toBeInTheDocument();
+
+		expect(queryByTestId('no-header')).not.toBeInTheDocument();
+		expect(queryByTestId('success-prompt')).not.toBeInTheDocument();
+		expect(queryByTestId('empty-error')).not.toBeInTheDocument();
+
+		await act(() => {
+			fireEvent.click(getByTestId('save-responseHeader-button'));
+		});
+
+		expect(getByTestId('empty-error')).toBeInTheDocument();
+		expect(getByTestId('empty-error')).toHaveTextContent(
+			'Empty keys encountered'
+		);
+
+		await act(() => {
+			fireEvent.change(getByTestId('responseHeader_0_key'), {
+				target: { value: '' },
+			});
+			fireEvent.change(getByTestId('responseHeader_0_value'), {
+				target: { value: '1212UDS-121HJH-HJH89' },
+			});
+		});
+
+		await act(() => {
+			fireEvent.click(getByTestId('save-responseHeader-button'));
+		});
+
+		expect(getByTestId('empty-error')).toBeInTheDocument();
+
+		expect(container).toMatchSnapshot();
+	});
+
 	it('should add new header using text input', async () => {
 		let tree;
 		await act(async () => {
