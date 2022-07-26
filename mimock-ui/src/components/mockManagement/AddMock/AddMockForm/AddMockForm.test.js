@@ -40,7 +40,7 @@ const recoilStateForCreate = {
 	requestHeader: '',
 	requestBody: '',
 	requestBodyType: 'application/json',
-	statusCode: 200,
+	statusCode: null,
 	expectedTextResponse: '',
 	responseHeaders: '',
 	binaryFile: null,
@@ -176,7 +176,7 @@ describe('AddMockFrom', () => {
 				requestHeader: '',
 				requestBody: '',
 				requestBodyType: 'application/json',
-				statusCode: 200,
+				statusCode: null,
 				expectedTextResponse: '',
 				responseHeaders: '',
 				binaryFile: null,
@@ -249,7 +249,7 @@ describe('AddMockFrom', () => {
 				requestHeader: '',
 				requestBody: '',
 				requestBodyType: 'application/json',
-				statusCode: 200,
+				statusCode: null,
 				expectedTextResponse: '',
 				responseHeaders: '',
 				binaryFile: null,
@@ -361,7 +361,7 @@ describe('AddMockFrom', () => {
 			expect(getByTestId('input-description')).toHaveValue(
 				'new mock for users endpoint'
 			);
-			expect(getByTestId('input-statusCode')).toHaveValue('200');
+			expect(getByTestId('input-statusCode')).toHaveValue(200);
 			expect(getByTestId('input-route')).toHaveValue('/api/v1/users');
 
 			await act(async () => {
@@ -370,7 +370,7 @@ describe('AddMockFrom', () => {
 
 			expect(getByTestId('input-name')).toHaveValue('');
 			expect(getByTestId('input-description')).toHaveValue('');
-			expect(getByTestId('input-statusCode')).toHaveValue('200');
+			expect(getByTestId('input-statusCode')).toHaveValue(null);
 			expect(getByTestId('input-route')).toHaveValue('');
 
 			expect(createMock).toHaveBeenCalledTimes(0);
@@ -389,7 +389,7 @@ describe('AddMockFrom', () => {
 				requestHeader: '',
 				requestBody: '',
 				requestBodyType: 'application/json',
-				statusCode: 200,
+				statusCode: null,
 				expectedTextResponse: '',
 				responseHeaders: '',
 				binaryFile: null,
@@ -427,7 +427,7 @@ describe('AddMockFrom', () => {
 				expect(getByTestId('input-description')).toHaveValue(
 					'Mock for github users api'
 				);
-				expect(getByTestId('input-statusCode')).toHaveValue('200');
+				expect(getByTestId('input-statusCode')).toHaveValue(200);
 				expect(getByTestId('input-route')).toHaveValue('/api/github/users');
 				expect(getByTestId('http-methods')).toHaveValue('POST');
 

@@ -62,14 +62,14 @@ export const addMockFormInputData = (data, mode) => {
 		},
 		{
 			name: 'statusCode',
-			label: 'HTTP Status',
-			type: 'text',
+			label: 'HTTP Status Code',
+			type: 'number',
 			placeholder: 'Enter HTTP status',
 			required: true,
 			validators: {
 				required: 'HTTP status is required',
 				valueAsNumber: true,
-				value: data?.statusCode?.toString() || 200,
+				value: data?.statusCode?.toString(),
 				validate: {
 					lessThan: (v) => parseInt(v) < 600 || 'Not a valid HTTP status',
 					greaterThan: (v) => parseInt(v) >= 100 || 'Not a valid HTTP status',

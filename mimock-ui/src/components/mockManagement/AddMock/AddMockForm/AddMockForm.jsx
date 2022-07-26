@@ -63,7 +63,7 @@ function AddMockForm({ mode }) {
 			requestHeader: '',
 			requestBody: '',
 			requestBodyType: 'application/json',
-			statusCode: 200,
+			statusCode: null,
 			expectedTextResponse: '',
 			responseHeaders: '',
 			binaryFile: null,
@@ -191,6 +191,7 @@ function AddMockForm({ mode }) {
 						</LabelContainer>
 						<ValidatedInput
 							name={item.name}
+							type={item.type}
 							dataTestId={`input-${item.name}`}
 							placeHolder={item.placeholder}
 							error={errors[item.name] ? true : false}

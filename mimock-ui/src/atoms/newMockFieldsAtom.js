@@ -17,7 +17,7 @@ const newMockFieldsAtom = atom({
 		requestHeader: '',
 		requestBody: '',
 		requestBodyType: 'application/json',
-		statusCode: 200,
+		statusCode: null,
 		expectedTextResponse: '',
 		responseHeaders: '',
 		binaryFile: null,
