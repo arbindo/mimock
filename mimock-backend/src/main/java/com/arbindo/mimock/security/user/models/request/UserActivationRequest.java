@@ -20,8 +20,8 @@ public class UserActivationRequest {
     private Boolean isUserActive;
 
     @NotBlank(message = "Username cannot be empty")
-    @Size(min = 6, message = "User name must be at least 6 characters long")
-    @Size(max = 128, message = "User name cannot be more than 128 characters")
+    @Size(min = 4, message = "User name must be at least 4 characters long")
+    @Size(max = 24, message = "User name cannot be more than 24 characters")
     @Schema(description = "Username for which the activation status need to be set", example = "mimock_admin")
     private String userName;
 }

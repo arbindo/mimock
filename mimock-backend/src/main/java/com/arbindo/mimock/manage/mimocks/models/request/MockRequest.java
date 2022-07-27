@@ -21,7 +21,7 @@ public class MockRequest {
     private String name;
 
     @NotBlank
-    @Size(min = 1, max = 255, message = "Description should be at least 1-250 characters")
+    @Size(min = 1, max = 255, message = "Description should be at least 1-255 characters")
     @Schema(example = "This is my new mock!!!", description = "Custom Description of the Mock")
     private String description;
 

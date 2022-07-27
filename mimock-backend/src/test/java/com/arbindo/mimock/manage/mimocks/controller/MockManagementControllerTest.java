@@ -603,7 +603,7 @@ class MockManagementControllerTest {
                         .param("description", mockRequest.getDescription()))
                 .andExpect(status().isBadRequest())
                 .andExpect(response -> assertNotNull(response.getResolvedException()))
-                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("Description should be at least 1-250 characters")))
+                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("Description should be at least 1-255 characters")))
                 .andReturn();
 
         // Modify the MockRequest.Description with longer value
@@ -621,7 +621,7 @@ class MockManagementControllerTest {
                         .param("description", mockRequest.getDescription()))
                 .andExpect(status().isBadRequest())
                 .andExpect(response -> assertNotNull(response.getResolvedException()))
-                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("Description should be at least 1-250 characters")))
+                .andExpect(response -> assertTrue(response.getResolvedException().getMessage().contains("Description should be at least 1-255 characters")))
                 .andReturn();
     }
 
