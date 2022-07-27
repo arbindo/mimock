@@ -3,7 +3,8 @@ import { css } from '@emotion/react';
 import { Button } from 'styles';
 
 export const PasswordModalWrapper = tw.div`
-  xl:w-3/4
+  2xl:w-1/2
+  xl:w-2/4
   md:w-11/12
   bg-white
   mx-auto
@@ -18,17 +19,19 @@ export const PasswordModalWrapper = tw.div`
 export const Header = tw.div`
   font-sans
   subpixel-antialiased
-  text-base
+  text-2xl
   text-center
-  text-gray-400
+  text-gray-600
   mt-2
   mb-10
 `;
 
 export const PasswordContainer = tw.div`
   flex
-  xl:w-1/2
+  2xl:w-1/2
+  xl:w-3/4
   md:w-2/4
+  sm:w-3/4
   mx-auto
   my-8
   items-center
@@ -48,7 +51,10 @@ export const ButtonContainer = tw.div`
   mx-auto
   justify-evenly
   my-10
-  w-1/2
+  2xl:w-1/2
+  xl:w-3/4
+  md:w-2/4
+  sm:w-3/4
   gap-6
   flex-row-reverse
 `;
@@ -64,7 +70,9 @@ export const LoaderStyle = css`
 	display: block;
 `;
 
-export const PasswordUpdateForm = tw.form``;
+export const PasswordUpdateForm = tw.form`
+  w-full
+`;
 
 export const CancelButton = tw(Button)``;
 
