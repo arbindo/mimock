@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { ButtonVariants } from 'styles/Button';
 import { getUserRoles, addNewUser } from 'services/users';
 import useNotification from 'hooks/useNotification';
@@ -31,6 +32,7 @@ function AddUserForm() {
 	const password = useRef({});
 	password.current = watch('password', '');
 
+	const navigate = useNavigate();
 	const [userRoles, setUserRoles] = useState([]);
 	const [role, setRole] = useState('');
 	const [roleFetchError, setRoleFetchError] = useState(false);
@@ -69,6 +71,7 @@ function AddUserForm() {
 					animationIn: 'animate__slideInRight',
 					animationOut: 'animate__slideOutRight',
 				});
+				navigate(-1);
 			})
 			.catch((err) => {
 				useNotification({

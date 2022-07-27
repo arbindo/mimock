@@ -13,6 +13,12 @@ jest.mock('react-notifications-component', () => {
 	return { Store };
 });
 
+const mockedNavigation = jest.fn(() => {});
+jest.mock('react-router-dom', () => ({
+	...jest.requireActual('react-router-dom'),
+	useNavigate: () => mockedNavigation,
+}));
+
 describe('AddUserForm', () => {
 	beforeEach(() => {
 		getUserRoles.mockResolvedValue([
@@ -115,6 +121,7 @@ describe('AddUserForm', () => {
 		expect(getByTestId('input-error-password')).toBeInTheDocument();
 
 		expect(getByTestId('add-user-reset-button')).toBeInTheDocument();
+		expect(mockedNavigation).toHaveBeenCalledTimes(0);
 
 		expect(addNewUser).not.toHaveBeenCalled();
 
@@ -187,6 +194,8 @@ describe('AddUserForm', () => {
 			title: 'New user added successfully',
 			type: 'success',
 		});
+		expect(mockedNavigation).toHaveBeenCalledTimes(1);
+		expect(mockedNavigation).toHaveBeenCalledWith(-1);
 
 		expect(container).toMatchSnapshot();
 	});
