@@ -19,6 +19,7 @@ export const Pill = tw.div`
     px-2
     rounded-sm
     shadow-sm
+    select-none
     
     ${(props) => roleBackground[props.role]}
     ${(props) => (props.$margin ? props.$margin : 'mx-auto')}

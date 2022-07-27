@@ -16,7 +16,7 @@ exports[`UserRole should render user role pill for ADMIN 1`] = `
       class="block w-1/2 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
     >
       <div
-        class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-teal-400 mx-0"
+        class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm select-none bg-teal-400 mx-0"
         data-testid="role-pill-ADMIN"
         role="ADMIN"
       >
@@ -43,7 +43,7 @@ exports[`UserRole should render user role pill for non-admin 1`] = `
       class="block w-1/2 font-sans font-bold subpixel-antialiased text-lg text-gray-600"
     >
       <div
-        class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-indigo-400 mx-0"
+        class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm select-none bg-indigo-400 mx-0"
         data-testid="role-pill-MANAGER"
         role="MANAGER"
       >

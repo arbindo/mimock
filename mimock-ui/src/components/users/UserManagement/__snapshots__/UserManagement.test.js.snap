@@ -118,7 +118,7 @@ exports[`UserManagement should render user management 1`] = `
           data-testid="user-role"
         >
           <div
-            class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-teal-400"
+            class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm select-none bg-teal-400"
             data-testid="role-pill-ADMIN"
             role="ADMIN"
           >

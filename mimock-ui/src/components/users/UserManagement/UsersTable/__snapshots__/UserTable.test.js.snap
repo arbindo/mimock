@@ -68,7 +68,7 @@ exports[`UserTable should not repeat get user call when refresh is not required 
         data-testid="user-role"
       >
         <div
-          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-teal-400"
+          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm select-none bg-teal-400"
           data-testid="role-pill-ADMIN"
           role="ADMIN"
         >
@@ -185,7 +185,7 @@ exports[`UserTable should not repeat get user call when refresh is not required 
         data-testid="user-role"
       >
         <div
-          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-indigo-400"
+          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm select-none bg-indigo-400"
           data-testid="role-pill-MANAGER"
           role="MANAGER"
         >
@@ -302,7 +302,7 @@ exports[`UserTable should not repeat get user call when refresh is not required 
         data-testid="user-role"
       >
         <div
-          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-slate-500"
+          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm select-none bg-slate-500"
           data-testid="role-pill-VIEWER"
           role="VIEWER"
         >
@@ -470,7 +470,7 @@ exports[`UserTable should render user table with all the users 1`] = `
         data-testid="user-role"
       >
         <div
-          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-teal-400"
+          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm select-none bg-teal-400"
           data-testid="role-pill-ADMIN"
           role="ADMIN"
         >
@@ -587,7 +587,7 @@ exports[`UserTable should render user table with all the users 1`] = `
         data-testid="user-role"
       >
         <div
-          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-indigo-400"
+          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm select-none bg-indigo-400"
           data-testid="role-pill-MANAGER"
           role="MANAGER"
         >
@@ -704,7 +704,7 @@ exports[`UserTable should render user table with all the users 1`] = `
         data-testid="user-role"
       >
         <div
-          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm bg-slate-500"
+          class="font-sans font-semibold text-white text-sm text-center antialiased mx-auto w-24 p-1 px-2 rounded-sm shadow-sm select-none bg-slate-500"
           data-testid="role-pill-VIEWER"
           role="VIEWER"
         >
