@@ -4,22 +4,20 @@ Mock REST API endpoints in real-time
 
 ## Introduction
 
-Mimock is a utility tool to setup mocks for REST API endpoints to mimic the actual endpoints. This tool will be helpful to test UI applications locally or in CI/CD pipelines. Mimock follows an interceptor-based pattern which enables the developer to test the endpoints without having to restart the application.
+Mimock is a utility to setup mocks for REST API endpoints to mimic the response of the actual endpoints. This tool will be helpful for testing UI applications locally or in CI/CD pipelines. Mimock follows an interceptor-based pattern which enables the users to setup and use the mocks in real time without any need for re-deployment.
 
-This project is geared towards both open-source and enterprise applications which offers REST API based solutions. Mimock acts as a faster, easier to setup and automated testing utility tool which can be easily adopted by different projects into their deliverables pipeline.
-
-Mimock is published under open-source [Apache-2.0 license](LICENSE).
+This project is geared towards both open-source and enterprise applications that offer REST API based solutions. Mimock functions as a faster, easier to set up and automate testing utility tool that can be easily integrated into the deliverables pipeline of various projects.
 
 ## Purpose
 
-Mimock is developed for the purpose of setting up mocks for REST endpoints without the hassle of maintaining any code for the mocks. The application exposes a React based UI which can be used by anyone with no prior coding experience to create and maintain mocks. 
+Mimock can be used for setting up mocks for REST endpoints without the hassle of maintaining any code for the mocks. The application exposes a React-based UI which can be used by anyone with no prior coding experience to create and maintain mocks.
 
-If an UI application is built with configurable origin for the backend it is consuming, then mimock can be wired up in its place to serve the required response. This is applicable for backend services as well which rely on other API or services to process a request. 
+If a UI application is built with a configurable origin for the backend it is consuming, then mimock origin can be wired up in its place to serve the required response. This is applicable for backend services as well, which rely on other APIs or services to process a request.
 
-Some examples use cases are as follows,
+Some examples of the use cases of mimock are as follows
 
-- If your UI (Web or Mobile) relies on an external metered API which incurs cost based on the total hits, then mimock can be used in its place to mimic that API and serve the response on lower environments or CI/CD pipelines which runs UI automation tests
-- If a backend API relies on another endpoint to download a PDF document and if that PDF server's latency is high which is not bearable for just testing the service locally or while running integration tests on pipelines, then mimock will come in handy for serving the required PDF document
+- If your UI (Web or Mobile) relies on an external metered API which incurs a cost based on the total hits, then mimock can be used in its place to mimic that API and serve the response on lower environments or CI/CD pipelines which run UI automation tests.
+- If a backend API relies on another endpoint to download a PDF document and if that PDF server's latency is high, which is not bearable for just testing the service locally or while running integration tests on pipelines, then mimock will come in handy for serving the required PDF document.
 
 ## Download Options
 
@@ -46,9 +44,7 @@ docker pull mimock/mimock
 
 ### Run mimock locally
 
-Ensure PostgreSQL is setup with a user and a schema for mimock to automatically complete the required table setup
-
-The downloaded bundle includes `setup_database` script to setup the required user, database and schema for mimock.
+Ensure that PostgreSQL is installed on the target machine. The downloaded bundle includes `setup_database` script to setup the required user, database and schema for mimock.
 
 ```shell
 # Script content
@@ -80,19 +76,20 @@ docker-compose -f docker-compose.yml up -d
 
 ### Run mimock within a k8s cluster
 
-The [mimock-k8s](mimock-k8s) directory has sample kubernetes manifest to give an idea of how to setup mimock within a k8s cluster. 
+The [mimock-k8s](mimock-k8s) directory has a set of kubernetes manifest files to give an idea of how to setup mimock within a k8s cluster.
+
 
 ### Run mimock on a CI pipeline
 
-A [demo project](https://github.com/arbindo/demo-app) is available on Github, which simulates a scenario of running a UI automation test by setting up mocks using mimock. The project is a simple web application which relies on two endpoints, one for a JSON response and the other for a webp image. The mocks for the two endpoints are setup within the workflow and the UI automation script captures the results as snapshots, and publishes the same to the [workflow summary](https://github.com/arbindo/demo-app/actions/runs/2685049363)
+A [demo project](https://github.com/arbindo/demo-app) is available on Github, which simulates a scenario of running an UI automation test by setting up mocks using mimock. The project is a simple web application which relies on two endpoints, one for a `json` response and the other for a `webp` image. The mocks for both the endpoints are setup within the workflow and the UI automation script captures the results as snapshots, and publishes the same to the [workflow summary](https://github.com/arbindo/demo-app/actions/runs/2685049363)
 
 ### Setup metric collection for mimock
 
-The Prometheus metrics for mimock is exposed on `/api/mimock/monitoring/prometheus` endpoint. The [prometheus.yml](../prometheus.yml)  file includes the required config for setting up your own prometheus scrapping for mimock
+The Prometheus metrics for mimock is exposed on `/api/mimock/monitoring/prometheus`. The [prometheus.yml](prometheus.yml) file includes the required config for setting up your own prometheus scrapping for mimock
 
 ## How to login?
 
-Mimock follows a role based user management system and the services can be accessed only by an authenticated user. To handle initial application setup, a default ADMIN user is created, which can be used to create other users.
+Mimock follows a role-based user management system and the services can be accessed only by an authenticated user. To handle initial application setup, a default ADMIN user is created, which can be used to create other users.
 
 |Username|Password|Role|
 |--|--|--|
@@ -104,46 +101,42 @@ More details about user roles are available [here](#userrole)
 
 ## Features
 
-This section explains the features available in the Mimock application.
+Some of the key features offered by the Mimock are as follows
 
-### Overview
-
-Unique features offered by the Mimock utility tool is mentioned as follows,
-
-- **Intuitive UI:** Provides an intuitive UI which lets anyone to manage mocks without any coding experience
-- **No Re-Deployment:** Mocks can be added in real time and no application restart is required. Mocks are created/updated on-the-go which ensures faster development and turn-around time
-- **Access Management:** The platform follows the role based user model and the admin can assign roles to the users to setup and restrict the access
-- **Multi-Response:** With the multi-response feature support, setup your mock to serve a normal JSON response or a JPEG image file or even your desired PDF document
+- **Intuitive UI:** Provides an intuitive UI which lets anyone manage mocks without any coding experience.
+- **No Re-Deployment:** Mocks can be added in real time, and no application restart is required. Mocks are created and updated on-the-go, which ensures faster development and turn-around time.
+- **Access Management:** The platform follows a role-based user management model and the admin can assign roles to the users to setup and restrict their access.
+- **Support for multiple response types:** Mimock supports both text and binary response for mocks. So if you want a mock to serve a normal JSON response or a JPEG image file or a PDF document, it can be done in a jiffy.
 
 ## Definitions and Explanations
 
 #### User
 
-User is the important entity for the Access management on this platform. The user can login to the platform to use the features both via API and UI.
+Mimock uses secured endpoints, which allows only authenticated users to access the API endpoints or the UI functionalities. It is not possible to use mimock without an existing user.
 
 #### UserRole
 
-User role indicates the role for the user. Access management for this platform is role based and the user is mapped to one of the roles as mentioned below,
+User role indicates the role assigned to the user. Access management for this platform is role-based, and the defenition of the roles are as follows
 
-    - ADMIN - A person who has access to all features of the platform and has control over the other users of the platform for access management. It is the super-user behaviour.
-    - MANAGER - A person who has access to all features of the platform.
-    - VIEWER - A person who has read-only access to the platform.
+    - **ADMIN** - has access to all features of the platform and has control over the other users of the platform for access management. Admin users can create, edit or delete existing user, and also inherits the permission to manage all the mocks.
+    - **MANAGER** - inherits the permission to manage mocks (create, edit and delete), but user management is not within the scope of the manager.
+    - **VIEWER** - inhertis view only access to mocks. A viewer cannot manage mocks or users.
 
 #### Mock
 
 This is the primary resource of the platform.
 
-A mock can have a name, description, route, httpMethod and so on as mentioned in the API model of the Mock entity.
+A mock can have a name, description, route, httpMethod and other REST api oriented fields.
 
-The structure of mock entity mimics the actual endpoint. The mocks will be setup by the user via API or UI based upon their requirements. Whenever the actual endpoints are called, the request is intercepted, and the stored mocked entity is called to test the API behaviour and expected response results.
+The structure of the mock entity mimics the actual endpoint. The mocks can be setup and managed by the user (ADMIN or MANAGER) via the API or the UI. Mimock performs mock matching based on the route, http method, and the query parameters. If an existing match is found based on the mentioned fields, then the next level of comparison will be performed based on the available request body and request headers. Upon performing a complete match, the platform will respond with the expected HTTP response (text-based response or binary files).
 
 #### Platform Settings
 
 This entity contains the feature control of the platform for every user.
 
-Currently there is a single platform setting common for all users but in the upcoming releases these platform settings will be converted to each user-specific setting and this will be permitted/restricted by the access management policies decided by the developers who are using the tool.
+Currently there is a single platform setting common for all users but in the upcoming releases these platform settings will be converted to user-specific setting and this will be permitted/restricted by the access management policies decided by the users who are using the tool.
 
-Some of the current settings include export/import of mocks, auto flush of recycle bin and so on.
+The currently supported platform settings include export/import of mocks and auto flush of recycle bin.
 
 ### APIs
 
