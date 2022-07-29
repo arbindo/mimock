@@ -9,16 +9,35 @@ Mimock
 <p align="center">
 Setup mocks for REST endpoints
 </p>
+
+<div style="display: flex;" align="center">
+  <a href="https://codecov.io/gh/arbindo/mimock" > 
+   <img src="https://codecov.io/gh/arbindo/mimock/branch/main/graph/badge.svg?token=OD0SWFC9BV"/> 
+  </a>
+
+  <a href="https://github.com/arbindo/mimock/actions/workflows/mimock-ui.yml">
+    <img src="https://github.com/arbindo/mimock/actions/workflows/mimock-ui.yml/badge.svg" />
+  </a>
+
+  <a href="https://github.com/arbindo/mimock/actions/workflows/mimock-backend.yml">
+    <img src="https://github.com/arbindo/mimock/actions/workflows/mimock-backend.yml/badge.svg" />
+  </a>
+
+  <a href="https://hub.docker.com/r/mimock/mimock">
+    <img src="https://img.shields.io/static/v1?label=mimock/mimock&message=v0.0.1&color=blue&logo=docker" />
+  </a>
+</div>
+
 <hr />
 </div>
 
+## Overview
 
+Mimock is a utility to setup mocks for REST API endpoints to mimic the response of the actual endpoints. This tool will be helpful for testing UI applications locally or in CI/CD pipelines. Mimock follows an interceptor-based pattern which enables the users to setup and use the mocks in real time without any need for re-deployment.
 
-Mimock is an utility tool to setup mocks for REST API endpoints to mimic the actual endpoints. This tool will be helpful to test UI applications locally or in CI/CD pipelines. Mimock follows an interceptor based pattern which enables the developer to test the endpoints without having to restart the application.
+This project is geared towards both open-source and enterprise applications that offer REST API based solutions. Mimock functions as a faster, easier to set up and automate testing utility tool that can be easily integrated into the deliverables pipeline of various projects.
 
-This project is geared towards both open-source and enterprise applications which offers REST API based solutions. Mimock acts as a faster, easier to setup and automated testing utility tool which can be easily adopted by different projects into their deliverables pipeline.
-
-Mimock is published under open-source [Apache-2.0 license](LICENSE).
+Mimock is published under the open-source [Apache-2.0 license](LICENSE).
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/47709856/180043326-c23999de-17e7-4fe4-a611-7896e7289ca0.png" alt="mock-dashboard" style="width:680px;" />
@@ -26,17 +45,12 @@ Mimock is published under open-source [Apache-2.0 license](LICENSE).
 
 ## Features
 
-This section explains the features available in the Mimock application.
+Some of the key features offered by the Mimock are as follows
 
-### Overview
-
-Unique features offered by the Mimock utility tool is mentioned as follows,
-
-- **Intuitive UI:** Provides an intuitive UI which lets anyone to manage mocks without any coding experience
-- **No Re-Deployment:** Mocks can be added in real time and no application restart is required. Mocks are created/updated on-the-go which ensures faster development and turn-around time
-- **Access Management:** The platform follows the role based user model and the admin can assign roles to the users to setup and restrict the access
-- **Multi-Response:** With the multi-response feature support, setup your mock to serve a normal JSON response or a JPEG image file or even your desired PDF document
-
+- **Intuitive UI:** Provides an intuitive UI which lets anyone manage mocks without any coding experience.
+- **No Re-Deployment:** Mocks can be added in real time, and no application restart is required. Mocks are created and updated on-the-go, which ensures faster development and turn-around time.
+- **Access Management:** The platform follows a role-based user management model and the admin can assign roles to the users to setup and restrict their access.
+- **Support for multiple response types:** Mimock supports both text and binary response for mocks. So if you want a mock to serve a normal JSON response or a JPEG image file or a PDF document, it can be done in a jiffy.
 
 ## Download Options
 
@@ -44,9 +58,9 @@ Unique features offered by the Mimock utility tool is mentioned as follows,
 
 Mimock is a Java based application, hence it requires `Java 8+` to run the application. 
 
-- [**Windows**](https://github.com/arbindo/mimock/archive/refs/tags/mimock-windows.zip)
-- [**Linux**](https://github.com/arbindo/mimock/archive/refs/tags/mimock-linux.tar.gz)
-- [**MacOS**](https://github.com/arbindo/mimock/archive/refs/tags/mimock-macos.tar.gz)
+- [**Windows**](https://github.com/arbindo/mimock/releases/download/alpha-v0.0.1/mimock-0.0.1.zip)
+- [**Linux**](https://github.com/arbindo/mimock/releases/download/alpha-v0.0.1/mimock-0.0.1.tar.gz)
+- [**MacOS**](https://github.com/arbindo/mimock/releases/download/alpha-v0.0.1/mimock-0.0.1.tar.gz)
 
 ### Docker image
 
@@ -63,11 +77,11 @@ docker pull mimock/mimock
 
 ### Run mimock locally
 
-Ensure PostgreSQL is setup with a user and a schema for mimock to automatically complete the required table setup
+Ensure PostgreSQL is setup with a user and a schema for mimock to automatically complete the required table setup.
 
-`mimock.properties` - The bundle includes the properties file with the required configuration to start mimock. Check the config file and ensure the custom config items are properly setup
+`mimock.properties` - The bundle includes the properties file with the required configuration to start mimock. Check the config file and ensure the custom config items are properly setup.
 
-Download the bundle for the required platform from [above](#download-options) and run the following command to start mimock 
+Download the platform-specific bundle from [above]. (#download-options) and run the following command to start mimock.
 
 ```shell
 java -jar mimock.jar --spring.config.location=./mimock.properties
@@ -75,7 +89,7 @@ java -jar mimock.jar --spring.config.location=./mimock.properties
 
 ### Run mimock docker container
 
-The [docker-compose.yml](docker-compose.yml) has the required setup to spin up the PostgreSQL and mimock app containers. The environment variables required for the mimock springboot app are available in the [local.env](local.env) file and the same is referred in the docker-compose manifest. Update the required env values and run the following command to start mimock
+The [docker-compose.yml](docker-compose.yml) has the required setup to spin up PostgreSQL and mimock app containers. The environment variables required for the mimock springboot app are available in the [local.env](local.env) file and the same are referred to in the docker-compose manifest. Update the required env values and run the following command to start mimock
 
 ```shell
 docker-compose -f docker-compose.yml up -d
@@ -83,15 +97,15 @@ docker-compose -f docker-compose.yml up -d
 
 ### Run mimock within a k8s cluster
 
-The [mimock-k8s](mimock-k8s) directory has sample kubernetes manifest to give an idea of how to setup mimock within a k8s cluster. 
+The [mimock-k8s](mimock-k8s) directory has a set of kubernetes manifest files to give an idea of how to setup mimock within a k8s cluster.
 
 ### Run mimock on a CI pipeline
 
-A [demo project](https://github.com/arbindo/demo-app) is available on Github, which simulates a scenario of running a UI automation test by setting up mocks using mimock. The project is a simple web application which relies on two endpoints, one for a JSON response and the other for a webp image. The mocks for the two endpoints are setup within the workflow and the UI automation script captures the results as snapshots, and publishes the same to the [workflow summary](https://github.com/arbindo/demo-app/actions/runs/2685049363)
+A [demo project](https://github.com/arbindo/demo-app) is available on Github, which simulates a scenario of running an UI automation test by setting up mocks using mimock. The project is a simple web application which relies on two endpoints, one for a `json` response and the other for a `webp` image. The mocks for both the endpoints are setup within the workflow and the UI automation script captures the results as snapshots, and publishes the same to the [workflow summary](https://github.com/arbindo/demo-app/actions/runs/2685049363)
 
 ### Setup metric collection for mimock
 
-The Prometheus metrics for mimock is exposed on `/api/mimock/monitoring/prometheus` endpoint. The [prometheus.yml](../prometheus.yml)  file includes the required config for setting up your own prometheus scrapping for mimock
+The Prometheus metrics for mimock is exposed on `/api/mimock/monitoring/prometheus`. The [prometheus.yml](prometheus.yml) file includes the required config for setting up your own prometheus scrapping for mimock
 
 ## Support
 
