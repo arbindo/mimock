@@ -73,7 +73,10 @@ jobs:
 
       - name: Build mimock docker image
         run: |
-          docker build -t mimock:latest . -f ./Dockerfile.min
+          docker build -t mimock:slim . -f ./Dockerfile.slim
+          docker tag mimock:slim mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
+
+          docker build -t mimock:latest . -f ./Dockerfile.complete
           docker tag mimock:latest mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}
 
       - name: Log in to Docker Hub
@@ -93,4 +96,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.MIMOCK_CURRENT_VERSION }},latest
+          tags: ${{ secrets.MIMOCK_CURRENT_VERSION }},latest,${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
