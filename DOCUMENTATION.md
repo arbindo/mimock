@@ -25,15 +25,69 @@ Some examples of the use cases of mimock are as follows
 
 Mimock is a Java based application, hence it requires `Java 8+` to run the application. 
 
-- [**Windows**](https://github.com/arbindo/mimock/archive/refs/tags/mimock-windows.zip)
-- [**Linux**](https://github.com/arbindo/mimock/archive/refs/tags/mimock-linux.tar.gz)
-- [**MacOS**](https://github.com/arbindo/mimock/archive/refs/tags/mimock-macos.tar.gz)
+-   [**Windows**](https://github.com/arbindo/mimock/releases/download/v0.0.1/mimock-0.0.1.zip)
+-   [**Linux**](https://github.com/arbindo/mimock/releases/download/v0.0.1/mimock-0.0.1.tar.gz)
+-   [**MacOS**](https://github.com/arbindo/mimock/releases/download/v0.0.1/mimock-0.0.1.tar.gz)
+-   [**docker-compose.yml**](https://github.com/arbindo/mimock/releases/download/v0.0.1/docker-compose.yml)
 
 ### Docker image
 
+There are two variants of docker images available for mimock
+
+-   `complete` version [recommended]
+
+The docker image with the `latest` tag includes all the required artifacts to use mimock with no additional setup. The container can be directly started to use the application and this variant is best suited for local developments workflows.
+
 ```shell
-docker pull mimock/mimock
+docker pull mimock/mimock:latest
+
+docker run --name mimock -d -p <destination port>:8080 mimock/mimock:latest
+
+# Once the container is ready, mimock will be available on https://localhost:<destination port>
 ```
+
+-   `slim` version
+
+The slim variant includes only the jar file of the application. The database and keystore setup need to be done by the user, and the required environment variables must be passed to run the container. This image variant is intended for a highly customized setup
+
+```shell
+docker pull mimock/mimock:slim
+
+# Ensure that PostgreSQL Database is setup before starting the container
+# The Dockerfile.pg has a minimal setup for spinning up a DB container
+
+docker run --name mimock-slim -d -p <destination port>:8080 \
+ -e MIMOCK_LOG_LEVEL=INFO \
+ -e MIMOCK_KEYSTORE_ENABLE=false \
+ -e MIMOCK_DB_SCHEMA=mimock_schema_dev \
+ -e MIMOCK_DB_URL=jdbc:postgresql://mimock-db:5432/mimock_db \
+ -e MIMOCK_DB_USER=mimock \
+ -e MIMOCK_DB_PASSWORD=<db password> \
+ -e MIMOCK_JWT_EXPIRY_DURATION=24h \
+ -e MIMOCK_JWT_SECRET=<key with 32 characters> \
+ -e MIMOCK_CORS_ORIGINS=http://localhost:3001 \
+ -e MIMOCK_CORS_METHODS=GET,POST,PUT,DELETE,OPTIONS \
+ -e MIMOCK_CORS_ALLOWED_HEADERS=Authorization,Content-Type,X-Requested-With,Accept,X-XSRF-TOKEN \
+ -e MIMOCK_CORS_EXPOSED_HEADERS=Cache-Control,Content-Language,Content-Length,Content-Type,Content-Disposition,Expires,Last-Modified,Pragma \
+ mimock/mimock:slim
+
+ # Once the container is ready, mimock will be available on http://localhost:<destination port>
+```
+
+### Docker setup using docker-compose file
+
+If docker-compose is preferred, then the [docker-compose.yml](https://github.com/arbindo/mimock/blob/main/docker-compose.yml) file includes the services to setup the DB and the app container.
+
+```shell
+docker-compose up -d
+
+# Destination port can be updated to the desired value if another service is running on port 8080
+#     ports:
+#      - "<desired port>:8080"
+
+# Mimock will be available on https://localhost:8080
+```
+
 
 ## Setup Instructions
 
