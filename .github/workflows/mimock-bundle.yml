@@ -73,11 +73,11 @@ jobs:
 
       - name: Build mimock docker image
         run: |
-          docker build -t mimock:slim . -f ./Dockerfile.slim
-          docker tag mimock:slim mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
+          docker build -t mimock/mimock:slim . -f ./Dockerfile.slim
+          docker tag mimock/mimock:slim mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
 
-          docker build -t mimock:latest . -f ./Dockerfile.complete
-          docker tag mimock:latest mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}
+          docker build -t mimock/mimock:latest . -f ./Dockerfile.complete
+          docker tag mimock/mimock:latest mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
