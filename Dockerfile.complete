@@ -1,0 +1,40 @@
+FROM alpine:3.15.0
+
+WORKDIR /home/mimock
+
+COPY ${PWD}/mimock-backend/target/mimock*.jar .
+
+RUN apk add openjdk11-jre
+RUN apk add postgresql13
+RUN tr -dc A-Z0-9 </dev/urandom | head -c 16 >/tmp/db.password
+RUN tr -dc A-Z0-9 </dev/urandom | head -c 32 >/tmp/key.password
+RUN tr -dc A-Z0-9 </dev/urandom | head -c 32 >/tmp/jwt.password
+
+# RUN addgroup -S postgres && adduser -S postgres -G postgres
+RUN mkdir -p /var/lib/postgresql/data
+RUN mkdir -p /run/postgresql/
+RUN chown -R postgres:postgres /run/postgresql/
+RUN chmod -R 777 /var/lib/postgresql/data
+RUN chown -R postgres:postgres /var/lib/postgresql/data
+RUN su - postgres -c "initdb /var/lib/postgresql/data"
+RUN echo "host all  all    0.0.0.0/0  md5" >>/var/lib/postgresql/data/pg_hba.conf
+
+RUN export MIMOCK_DB_PASSWORD=$(cat /tmp/db.password) && su - postgres -c "pg_ctl start -D /var/lib/postgresql/data -l /var/lib/postgresql/log.log && psql --command \"ALTER USER postgres WITH ENCRYPTED PASSWORD 'postgres';\" &&   echo \"CREATE user mimock WITH CREATEDB LOGIN PASSWORD '$MIMOCK_DB_PASSWORD'\" | psql && psql --command \"CREATE DATABASE mimock_db OWNER mimock;\" && psql --command \"CREATE SCHEMA IF NOT EXISTS mimock_schema AUTHORIZATION mimock;\""
+
+RUN export MIMOCK_KEYSTORE_PASSWORD=$(cat /tmp/key.password) && keytool -genkey -v -keystore mimock.jks -keyalg RSA -keysize 2048 -validity 10000 -alias mimock -storepass $MIMOCK_KEYSTORE_PASSWORD -keypass $MIMOCK_KEYSTORE_PASSWORD -dname "CN=mimock, OU=mimock, O=mimock, L=mimock, S=mimock, C=mimock" -storetype jks
+
+ENV MIMOCK_KEYSTORE_ENABLE=true
+ENV MIMOCK_KEYSTORE_PATH=mimock.jks
+ENV MIMOCK_KEYSTORE_PASSWORD=ironclaw
+ENV MIMOCK_DB_SCHEMA=mimock_schema
+ENV MIMOCK_DB_URL=jdbc:postgresql://localhost:5432/mimock_db
+ENV MIMOCK_DB_USER=mimock
+ENV MIMOCK_JWT_EXPIRY_DURATION=24h
+ENV MIMOCK_CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+ENV MIMOCK_CORS_METHODS=POST,GET,PUT,DELETE,OPTIONS
+ENV MIMOCK_CORS_ALLOWED_HEADERS=Authorization,Content-Type,X-Requested-With,Accept,X-XSRF-TOKEN
+ENV MIMOCK_CORS_EXPOSED_HEADERS=Cache-Control,Content-Language,Content-Length,Content-Type,Content-Disposition,Expires,Last-Modified,Pragma
+
+EXPOSE 8080
+
+CMD export MIMOCK_JWT_SECRET=$(cat /tmp/jwt.password) && export MIMOCK_KEYSTORE_PASSWORD=$(cat /tmp/key.password) && export MIMOCK_DB_PASSWORD=$(cat /tmp/db.password) && su - postgres -c "pg_ctl restart -D /var/lib/postgresql/data -l /var/lib/postgresql/log.log" && java -jar mimock-0.0.1.jar
