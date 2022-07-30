@@ -94,6 +94,5 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          context: .
           push: true
-          tags: ${{ secrets.MIMOCK_CURRENT_VERSION }},latest,${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
+          tags: mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }},mimock/mimock:latest,mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
