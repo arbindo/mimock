@@ -14,9 +14,14 @@ spec:
       labels:
         app: mimock
     spec:
+      volumes:
+        - name: mimock-volume
+          persistentVolumeClaim:
+            claimName: mimock-pvc
+
       containers:
         - name: mimock-app
-          image: mimock/mimock:0.0.1-alpha
+          image: mimock/mimock:slim
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -32,6 +37,11 @@ spec:
                 name: mimock-config
             - secretRef:
                 name: mimock-secrets
+          command: ["/bin/sh", "-c"]
+          args:
+            [
+              'keytool -genkey -v -keystore /home/mimock/mimock.jks -keyalg RSA -keysize 2048 -validity 10000 -alias mimock -storepass ironclaw -keypass ironclaw -dname "CN=mimock, OU=mimock, O=mimock, L=mimock, S=mimock, C=mimock" -storetype jks; java -jar mimock-0.0.1.jar',
+            ]
 
         - name: mimock-db
           image: postgres:13.5-alpine

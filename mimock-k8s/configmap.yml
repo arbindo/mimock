@@ -11,12 +11,11 @@ data:
   # # To enable SSL for the server
   # In a production setup, it is advised to enable this
   # NOTE: If this option is disabled, then the bundled UI will be disabled to access the API
-  MIOMCK_KEYSTORE_ENABLE: false
+  MIMOCK_KEYSTORE_ENABLE: "true"
 
-  # # Enable the following if 'ssl.enabled' is 'true'
-  # # Path to the JKS keystore file
-  # # Follow general instructions to create a keystore file
-  MIMOCK_KEYSTORE_PATH: ""
+  # # The keytoolJob job will generate a new keystore for the server
+  MIMOCK_KEYSTORE_PATH: "mimock.jks"
+  MIMOCK_KEYSTORE_PASSWORD: $MIMOCK_KEYSTORE_PASSWORD
 
   # The schema to use for the database
   # This is a required field and if a schema is not created, it needs to be setup before starting the application
