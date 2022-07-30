@@ -120,7 +120,17 @@ docker-compose up -d
 # Mimock will be available on https://localhost:8080
 ```
 
-## Initial
+## How to login?
+
+Mimock follows a role based user management system and the services can be accessed only by an authenticated user. To handle initial application setup, a default ADMIN user is created, which can be used to create other users.
+
+| Username       | Password   | Role    |
+| -------------- | ---------- | ------- |
+| `mimock_admin` | `password` | `ADMIN` |
+
+More details about user roles are available [here](/definitions-and-explanations#userrole)
+
+> It is recommended to create a new ADMIN user and then use that to disable the default `mimock_admin` user
 
 ## Setup Instructions
 
