@@ -1,12 +1,12 @@
 logging:
   level:
-    root: ${MIMOCK_LOG_LEVEL}
+    root: INFO
 
 server:
   ssl:
-    enabled: '${MIOMCK_KEYSTORE_ENABLE}'
+    enabled: '${MIMOCK_KEYSTORE_ENABLE}'
     key-store: '${MIMOCK_KEYSTORE_PATH}'
-    key-store-password: '${MIOMCK_KEYSTORE_PASSWORD}'
+    key-store-password: '${MIMOCK_KEYSTORE_PASSWORD}'
     key-store-type: PKCS12
     enabled-protocols: TLSv1.3
 
