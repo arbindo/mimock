@@ -9,22 +9,49 @@ services:
       - mimock-network
     ports:
       - "5427:5432"
+  
+  mimock-keystore:
+    container_name: mimock-keystore
+    image: alpine:3.15.0
+    volumes:
+     - mimock-volume:/home/mimock
+    command: /bin/sh -c "apk add openjdk11-jre && keytool -genkey -v -keystore /home/mimock/mimock.jks -keyalg RSA -keysize 2048 -validity 10000 -alias mimock -storepass ironclaw -keypass ironclaw -dname \"CN=mimock, OU=mimock, O=mimock, L=mimock, S=mimock, C=mimock\" -storetype jks"
+    networks:
+      - mimock-network
 
   mimock:
     depends_on:
       - mimock-db
-    build:
-      context: .
+      - mimock-keystore
+    image: mimock/mimock:slim
     container_name: mimock
+    volumes:
+     - mimock-volume:/home/mimock
     networks:
       - mimock-network
     ports:
       - "8080:8080"
-    env_file:
-      - local.env
-    image: mimock/mimock:latest
-    volumes:
-      - ./mimock.jks:/home/mimock/mimock.jks
+    environment:
+      - POSTGRES_USER=mimock
+      - POSTGRES_PASSWORD=ironclaw
+      - POSTGRES_DB=mimock_db
+      - MIMOCK_LOG_LEVEL=INFO
+      - MIMOCK_KEYSTORE_ENABLE=true # set to false to disable secured connection
+      - MIMOCK_KEYSTORE_PATH=mimock.jks
+      - MIMOCK_KEYSTORE_PASSWORD=ironclaw
+      - MIMOCK_DB_SCHEMA=mimock_schema_dev
+      - MIMOCK_DB_URL=jdbc:postgresql://mimock-db:5432/mimock_db
+      - MIMOCK_DB_USER=mimock
+      - MIMOCK_DB_PASSWORD=ironclaw
+      - MIMOCK_JWT_EXPIRY_DURATION=24h
+      - MIMOCK_JWT_SECRET=B4982E53863B4DA7FDA4E1236C4BAF8A
+      - MIMOCK_CORS_ORIGINS=http://localhost:3001 # Add command separated additional origins here
+      - MIMOCK_CORS_METHODS=GET,POST,PUT,DELETE,OPTIONS
+      - MIMOCK_CORS_ALLOWED_HEADERS=Authorization,Content-Type,X-Requested-With,Accept,X-XSRF-TOKEN
+      - MIMOCK_CORS_EXPOSED_HEADERS=Cache-Control,Content-Language,Content-Length,Content-Type,Content-Disposition,Expires,Last-Modified,Pragma
+
+volumes:
+  mimock-volume:
 
 networks:
   mimock-network:
