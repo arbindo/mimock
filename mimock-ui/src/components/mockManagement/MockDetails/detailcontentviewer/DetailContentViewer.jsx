@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	DetailContentViewerContainer,
 	NavTabsContainer,
@@ -26,6 +26,22 @@ function DetailContentViewer({ mock }) {
 	const [showGeneralPane, setShowGeneralPane] = useState(true);
 	const [showRequestPane, setShowRequestPane] = useState(false);
 	const [showResponsePane, setShowResponsePane] = useState(false);
+	const [statusValue, setStatusValue] = useState('');
+	const [httpMethodValue, setHttpMethodValue] = useState('');
+	// #endregion
+
+	// #region hooks
+	useEffect(() => {
+		if (mock != null) {
+			setStatusValue(mock.entityStatus.status);
+		}
+	}, [mock.entityStatus]);
+
+	useEffect(() => {
+		if (mock != null) {
+			setHttpMethodValue(mock.httpMethod.method);
+		}
+	}, [mock.httpMethod]);
 	// #endregion
 
 	// #region Handler functions
@@ -108,8 +124,8 @@ function DetailContentViewer({ mock }) {
 						uniqueId={mock.id}
 						mockName={mock.mockName}
 						description={mock.description}
-						entityStatus={mock.entityStatus.status}
-						httpMethod={mock.httpMethod.method}
+						entityStatus={statusValue}
+						httpMethod={httpMethodValue}
 						route={mock.route}
 						queryParams={
 							mock.queryParams !== '' ? mock.queryParams : labels.fallback

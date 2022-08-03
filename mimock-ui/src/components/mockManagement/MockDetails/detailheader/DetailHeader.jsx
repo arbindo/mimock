@@ -45,7 +45,6 @@ function DetailHeader({ mock, badgeColor }) {
 		if (mock.queryParams.length > 0) {
 			url += `?${mock.queryParams}`;
 		}
-
 		setGeneratedURL(url);
 	}, [mock.route]);
 

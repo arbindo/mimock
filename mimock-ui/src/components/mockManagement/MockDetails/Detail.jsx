@@ -76,7 +76,8 @@ function Detail() {
 		archiveMock(mockId, authCookieRef)
 			.then((res) => {
 				if (res.status == 200) {
-					navigate(`/mimock-ui/mocks`);
+					setMock(res.data.data);
+					setMockId(res.data.data.id);
 					useNotification({
 						type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
 						title: 'Archive success',
@@ -85,7 +86,6 @@ function Detail() {
 						animationOut: 'animate__bounceOut',
 					});
 				}
-				console.log(res.status, res.data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -103,7 +103,8 @@ function Detail() {
 		unarchiveMock(mockId, authCookieRef)
 			.then((res) => {
 				if (res.status == 200) {
-					navigate(`/mimock-ui/mocks`);
+					setMock(res.data.data);
+					setMockId(res.data.data.id);
 					useNotification({
 						type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
 						title: 'Unarchive success',
@@ -112,7 +113,6 @@ function Detail() {
 						animationOut: 'animate__bounceOut',
 					});
 				}
-				console.log(res.status, res.data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -146,7 +146,6 @@ function Detail() {
 						animationOut: 'animate__bounceOut',
 					});
 				}
-				console.log(res.status, res.data);
 			})
 			.catch((err) => {
 				console.log(err);
