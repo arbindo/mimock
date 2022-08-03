@@ -42,6 +42,7 @@ public class UrlConfig {
     // region MOCKS
     public static final String MOCKS = "/mocks";
     public static final String MOCKS_PAGEABLE = "/filter";
+    public static final String MOCKS_SEARCH = "/search";
     public static final String MOCKS_CSV_EXPORT = "/csv/export";
     public static final String MOCKS_CSV_TEMPLATE_EXPORT = "/csv/template/export";
     // endregion
