@@ -51,13 +51,7 @@ function Detail() {
 		if (location.pathname != undefined) {
 			const mockIdString = location.pathname.split('/detail/')[1];
 			setMockId(mockIdString);
-			getMockById(mockIdString, authCookieRef)
-				.then((res) => {
-					setMock(res.data.data);
-					const color = decideBadgeColor(res.data.data.httpMethod.method);
-					setBadgeColor(color);
-				})
-				.catch((err) => console.log(err));
+			getMockAndSetBadgeColor(mockIdString);
 			try {
 				const userDetails = getUserDetails();
 				const isReadOnlyUser =
@@ -137,7 +131,7 @@ function Detail() {
 				setDeletingMock(false);
 				setShowDeletionModal(false);
 				if (res.status == 204) {
-					navigate(`/mimock-ui/mocks`);
+					getMockAndSetBadgeColor(mockId);
 					useNotification({
 						type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
 						title: 'Deletion success',
@@ -163,6 +157,16 @@ function Detail() {
 
 	const performEditMockOperation = () => {
 		navigate(`/mimock-ui/mocks/manage/edit-mock?mockId=${mockId}`);
+	};
+
+	const getMockAndSetBadgeColor = (mockIdString) => {
+		getMockById(mockIdString, authCookieRef)
+			.then((res) => {
+				setMock(res.data.data);
+				const color = decideBadgeColor(res.data.data.httpMethod.method);
+				setBadgeColor(color);
+			})
+			.catch((err) => console.log(err));
 	};
 	// #endregion
 
