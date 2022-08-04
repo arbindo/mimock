@@ -78,4 +78,13 @@ describe('getMockById.service', () => {
 			binaryFile: null,
 		});
 	});
+
+	it('should reject with error when getMockById call fails', async () => {
+		getMockById.mockRejectedValue(new Error('Failed to get mock'));
+
+		await getMock('5fde802c-56b6-4473-a68f-5cb9eccca268').catch((e) => {
+			expect(e).toBeInstanceOf(Error);
+			expect(e.message).toEqual('Failed to get mock');
+		});
+	});
 });

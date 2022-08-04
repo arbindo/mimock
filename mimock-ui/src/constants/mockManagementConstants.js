@@ -5,4 +5,7 @@ export const mockManagementConstants = {
 		EDIT: 'edit',
 		CREATE: 'create',
 	},
+	ENTITY_STATUS: {
+		ACTIVE: 'NONE',
+	},
 };

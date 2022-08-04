@@ -10,6 +10,7 @@ const newMockFieldsAtom = atom({
 		description: '',
 		route: '',
 		httpMethod: '',
+		entityStatus: '',
 		responseContentType: 'application/json',
 		responseType: '',
 		queryParams: '',
