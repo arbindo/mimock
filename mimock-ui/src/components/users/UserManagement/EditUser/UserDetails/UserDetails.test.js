@@ -208,7 +208,7 @@ describe('UserDetails', () => {
 
 		expect(getByTestId('edit-user-details-error')).toBeInTheDocument();
 		expect(getByTestId('edit-user-details-error')).toHaveTextContent(
-			'Failed to fetch user details. Please try again later.'
+			/Failed to fetch user details/
 		);
 
 		expect(queryByTestId('edit-user-details')).not.toBeInTheDocument();

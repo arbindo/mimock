@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { useSearchParams } from 'react-router-dom';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
+import { ErrorAlert } from 'styles';
 import newMockFieldsAtom from 'atoms/newMockFieldsAtom';
 import { getMock } from 'services/mockManagement/getMockById.service';
 import { mockManagementConstants } from 'constants/mockManagementConstants';
@@ -43,20 +42,12 @@ export default function EditMock() {
 		<If condition={!isLoading}>
 			<Choose>
 				<When condition={error.isError}>
-					<Alert
-						data-testid='edit-error-banner'
-						severity='error'
-						style={{
-							marginTop: '2rem',
-							width: '60%',
-							marginLeft: 'auto',
-							marginRight: 'auto',
-							padding: '1rem',
-						}}
-					>
-						<AlertTitle>Error</AlertTitle>
-						<strong>Failed to edit mock</strong> - {error.message}
-					</Alert>
+					<ErrorAlert
+						title='Error'
+						subTitle='Failed to edit mock'
+						message={error.message}
+						dataTestId='edit-error-banner'
+					/>
 				</When>
 				<Otherwise>
 					<AddMock mode={mockManagementConstants.mode.EDIT} />

@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import { useRecoilState } from 'recoil';
+import { ErrorAlert } from 'styles';
 import { getUserInfo } from 'services/users';
 import editUserDetailsAtom from 'atoms/editUserDetailsAtom';
 import {
@@ -11,7 +12,6 @@ import {
 	Info,
 	Value,
 	ValueInput,
-	UserDetailsFetchError,
 } from './UserDetails.style';
 import UserRole from './UserRole';
 import UserActivationStatus from './UserActivationStatus';
@@ -67,18 +67,19 @@ export default function UserDetails() {
 				<PasswordUpdateModal userName={userInfo.userName} />
 			</When>
 			<When condition={userFetchError}>
-				<UserDetailsFetchError data-testid='edit-user-details-error'>
-					Failed to fetch user details. Please try again later.
-				</UserDetailsFetchError>
+				<ErrorAlert
+					title='Failed to fetch user details.'
+					subTitle='Please try again'
+					dataTestId='edit-user-details-error'
+				/>
 			</When>
 			<Otherwise>
 				<UserDetailsWrapper data-testid='edit-user-details'>
 					{info('Name', userInfo.name, 'edit-user-name')}
 					{info('User Name', userInfo.userName, 'edit-user-username')}
-					<UserRole
-						userName={userInfo.userName}
-						currentUserRole={userInfo.userRole}
-					/>
+					<If condition={userInfo.userRole}>
+						<UserRole />
+					</If>
 					<UserActivationStatus isUserActive={userInfo.isUserActive} />
 					{info(
 						'Created on',

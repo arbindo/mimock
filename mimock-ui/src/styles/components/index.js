@@ -10,6 +10,7 @@ import Card from './Card';
 import Label from './Label';
 import IconHeader from './IconHeader';
 import { ValidatedInput, TextInput, Select } from './Inputs';
+import { ErrorAlert } from './Alerts';
 
 export {
 	Button,
@@ -25,4 +26,5 @@ export {
 	ValidatedInput,
 	TextInput,
 	Select,
+	ErrorAlert,
 };

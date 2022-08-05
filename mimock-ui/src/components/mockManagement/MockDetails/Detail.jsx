@@ -7,6 +7,7 @@ import {
 	deleteMockById,
 } from 'services/mockManagement/mockManagement.service';
 import { Cookies } from 'react-cookie';
+import { ErrorAlert } from 'styles';
 import { globalConstants } from 'constants/globalConstants';
 import { DetailContainer } from './Detail.style';
 import { decideBadgeColor } from 'utils/badgeColor.js';
@@ -31,6 +32,7 @@ function Detail() {
 	const [badgeColor, setBadgeColor] = useState('');
 	const [showDeletionModal, setShowDeletionModal] = useState(false);
 	const [deletingMock, setDeletingMock] = useState(false);
+	const [getMockError, setGetMockError] = useState(false);
 	const [hideDetailActionsToolbar, setHideDetailActionsToolbar] =
 		useState(false);
 	// #endregion
@@ -166,12 +168,21 @@ function Detail() {
 				const color = decideBadgeColor(res.data.data.httpMethod.method);
 				setBadgeColor(color);
 			})
-			.catch((err) => console.log(err));
+			.catch(() => {
+				setGetMockError(true);
+			});
 	};
 	// #endregion
 
 	return (
 		<DetailContainer data-testid={testIds.detailContainer}>
+			<If condition={getMockError}>
+				<ErrorAlert
+					title='Failed to fetch mock details.'
+					subTitle='Please try again'
+					dataTestId='fetch-mock-details-error'
+				/>
+			</If>
 			<If condition={mock != null}>
 				<If condition={showDeletionModal}>
 					<ConfirmationModal

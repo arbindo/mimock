@@ -107,7 +107,7 @@ describe('UserTable', () => {
 
 		expect(getByTestId('fetch-user-error')).toBeInTheDocument();
 		expect(getByTestId('fetch-user-error')).toHaveTextContent(
-			'Failed to fetch users. Please try again later.'
+			/Failed to fetch users/
 		);
 
 		expect(container).toMatchSnapshot();

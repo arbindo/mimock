@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+import { ErrorAlert } from 'styles';
 import { getAllUsers } from 'services/users';
 import deletionModalAtom from 'atoms/deletionModalAtom';
 import UserRow from './UserRow';
 import {
 	UserTableWrapper,
-	Error,
 	NoUsers,
 	NoUsersIcon,
 	NoUserLabel,
@@ -35,9 +35,12 @@ export default function UserTable() {
 		<UserTableWrapper data-testid='user-table'>
 			<Choose>
 				<When condition={!gettingUsers && error}>
-					<Error data-testid='fetch-user-error'>
-						Failed to fetch users. Please try again later.
-					</Error>
+					<ErrorAlert
+						title='Failed to fetch users'
+						subTitle='Please try again'
+						message={error.message}
+						dataTestId='fetch-user-error'
+					/>
 				</When>
 				<When condition={!gettingUsers && users.length === 0}>
 					<NoUsers data-testid='no-users-error'>
