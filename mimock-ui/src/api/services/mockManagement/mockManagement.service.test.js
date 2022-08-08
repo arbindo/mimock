@@ -186,10 +186,10 @@ describe('Mock management service', () => {
 				data: { message: "Mock 'mock-1' deleted" },
 			});
 
-			const response = await deleteMockById(1, 'token');
+			const response = await deleteMockById(1);
 
 			expect(remove).toHaveBeenCalledTimes(1);
-			expect(remove).toHaveBeenCalledWith('/mocks/1', 'token');
+			expect(remove).toHaveBeenCalledWith('/mocks/1');
 
 			expect(response).toBeTruthy();
 			expect(response.data.message).toBe("Mock 'mock-1' deleted");
@@ -198,9 +198,9 @@ describe('Mock management service', () => {
 		it('should return error when deleting existing mock', async () => {
 			remove.mockRejectedValue(new Error('Failed to delete mock 1'));
 
-			await deleteMockById(1, 'token').catch((err) => {
+			await deleteMockById(1).catch((err) => {
 				expect(remove).toHaveBeenCalledTimes(1);
-				expect(remove).toHaveBeenCalledWith('/mocks/1', 'token');
+				expect(remove).toHaveBeenCalledWith('/mocks/1');
 
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);
@@ -215,10 +215,10 @@ describe('Mock management service', () => {
 				message: "Mock 'mock-1' deleted",
 			});
 
-			const response = await forceDeleteMockById(1, 'token');
+			const response = await forceDeleteMockById(1);
 
 			expect(remove).toHaveBeenCalledTimes(1);
-			expect(remove).toHaveBeenCalledWith('/mocks/1:forceDelete', 'token');
+			expect(remove).toHaveBeenCalledWith('/mocks/1:forceDelete');
 
 			expect(response).toBeTruthy();
 			expect(response.message).toBe("Mock 'mock-1' deleted");
@@ -227,9 +227,9 @@ describe('Mock management service', () => {
 		it('should return error when deleting existing mock forcefully', async () => {
 			remove.mockRejectedValue(new Error('Failed to delete mock 1'));
 
-			await forceDeleteMockById(1, 'token').catch(async (err) => {
+			await forceDeleteMockById(1).catch(async (err) => {
 				expect(remove).toHaveBeenCalledTimes(1);
-				expect(remove).toHaveBeenCalledWith('/mocks/1:forceDelete', 'token');
+				expect(remove).toHaveBeenCalledWith('/mocks/1:forceDelete');
 
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);
@@ -428,10 +428,10 @@ describe('Mock management service', () => {
 				},
 			});
 
-			const response = await archiveMock(1, 'token');
+			const response = await archiveMock(1);
 
 			expect(post).toHaveBeenCalledTimes(1);
-			expect(post).toHaveBeenCalledWith('/mocks/1:archive', null, 'token');
+			expect(post).toHaveBeenCalledWith('/mocks/1:archive', null);
 
 			expect(response).toBeTruthy();
 			expect(response.data.message).toBe('Mock-1 archived successfully');
@@ -440,9 +440,9 @@ describe('Mock management service', () => {
 		it('should return error archiving mock fails', async () => {
 			post.mockRejectedValue(new Error('Failed to archive mock 1'));
 
-			await archiveMock(1, 'token').catch((err) => {
+			await archiveMock(1).catch((err) => {
 				expect(post).toHaveBeenCalledTimes(1);
-				expect(post).toHaveBeenCalledWith('/mocks/1:archive', null, 'token');
+				expect(post).toHaveBeenCalledWith('/mocks/1:archive', null);
 
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);
@@ -459,10 +459,10 @@ describe('Mock management service', () => {
 				},
 			});
 
-			const response = await unarchiveMock(1, 'token');
+			const response = await unarchiveMock(1);
 
 			expect(post).toHaveBeenCalledTimes(1);
-			expect(post).toHaveBeenCalledWith('/mocks/1:unarchive', null, 'token');
+			expect(post).toHaveBeenCalledWith('/mocks/1:unarchive', null);
 
 			expect(response).toBeTruthy();
 			expect(response.data.message).toBe(
@@ -473,9 +473,9 @@ describe('Mock management service', () => {
 		it('should return error archiving mock fails', async () => {
 			post.mockRejectedValue(new Error('Failed to unarchive mock 1'));
 
-			await unarchiveMock(1, 'token').catch((err) => {
+			await unarchiveMock(1).catch((err) => {
 				expect(post).toHaveBeenCalledTimes(1);
-				expect(post).toHaveBeenCalledWith('/mocks/1:unarchive', null, 'token');
+				expect(post).toHaveBeenCalledWith('/mocks/1:unarchive', null);
 
 				expect(err).toBeTruthy();
 				expect(err).toBeInstanceOf(Error);

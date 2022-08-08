@@ -42,7 +42,7 @@ function DetailHeader({ mock, badgeColor }) {
 	// #region Effects
 	useEffect(() => {
 		let url = `${config.hostName[process.env.NODE_ENV]}${mock.route}`;
-		if (mock.queryParams.length > 0) {
+		if (mock.queryParams?.length > 0) {
 			url += `?${mock.queryParams}`;
 		}
 		setGeneratedURL(url);

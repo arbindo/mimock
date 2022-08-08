@@ -8,4 +8,5 @@ export const constants = {
 		confirmButtonLabel: 'Delete Mock',
 		loadingMessage: 'Deleting mock. Please wait...',
 	},
+	editPath: '/mimock-ui/mocks/manage/edit-mock?mockId=',
 };

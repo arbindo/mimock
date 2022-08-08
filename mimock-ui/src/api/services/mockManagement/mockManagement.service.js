@@ -28,12 +28,12 @@ const updateMock = async (id, requestData) => {
 	);
 };
 
-const deleteMockById = async (id, token) => {
-	return await remove(`/mocks/${id}`, token);
+const deleteMockById = async (id) => {
+	return await remove(`/mocks/${id}`);
 };
 
-const forceDeleteMockById = async (id, token) => {
-	return await remove(`/mocks/${id}:forceDelete`, token);
+const forceDeleteMockById = async (id) => {
+	return await remove(`/mocks/${id}:forceDelete`);
 };
 
 const listMocks = async (token, pageNumber) => {
@@ -88,12 +88,12 @@ const listMocksWithMultipleFilters = async (
 	return await get(urlToBeQueried, token);
 };
 
-const archiveMock = async (id, token) => {
-	return await post(`/mocks/${id}:archive`, null, token);
+const archiveMock = async (id) => {
+	return await post(`/mocks/${id}:archive`, null);
 };
 
-const unarchiveMock = async (id, token) => {
-	return await post(`/mocks/${id}:unarchive`, null, token);
+const unarchiveMock = async (id) => {
+	return await post(`/mocks/${id}:unarchive`, null);
 };
 
 export {

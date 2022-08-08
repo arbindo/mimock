@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
 	getMockById,
@@ -6,9 +6,7 @@ import {
 	unarchiveMock,
 	deleteMockById,
 } from 'services/mockManagement/mockManagement.service';
-import { Cookies } from 'react-cookie';
 import { ErrorAlert } from 'styles';
-import { globalConstants } from 'constants/globalConstants';
 import { DetailContainer } from './Detail.style';
 import { decideBadgeColor } from 'utils/badgeColor.js';
 import { notificationTypes } from 'constants/notificationConstants';
@@ -22,8 +20,7 @@ import { constants } from './constants';
 
 function Detail() {
 	// #region Defaults
-	const cookies = new Cookies();
-	const { testIds, confirmationModal } = constants;
+	const { testIds, confirmationModal, editPath } = constants;
 	// #endregion
 
 	// #region States
@@ -41,50 +38,37 @@ function Detail() {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const authCookieRef = useRef('');
-	const csrfCookieRef = useRef('');
-
 	useEffect(() => {
-		authCookieRef.current = cookies.get(globalConstants.AUTH_TOKEN_COOKIE_NAME);
-		csrfCookieRef.current = cookies.get(globalConstants.XSRF_COOKIE_NAME);
-	}, []);
-
-	useEffect(() => {
-		if (location.pathname != undefined) {
-			const mockIdString = location.pathname.split('/detail/')[1];
-			setMockId(mockIdString);
-			getMockAndSetBadgeColor(mockIdString);
-			try {
-				const userDetails = getUserDetails();
-				const isReadOnlyUser =
-					userDetails && userDetails.userRole === 'ROLE_VIEWER';
-				setHideDetailActionsToolbar(isReadOnlyUser);
-			} catch (e) {
-				console.log(e);
-				setHideDetailActionsToolbar(false);
-			}
+		const mockIdString = location.pathname.split('/detail/')[1];
+		setMockId(mockIdString);
+		getMockAndSetBadgeColor(mockIdString);
+		try {
+			const userDetails = getUserDetails();
+			const isReadOnlyUser =
+				userDetails && userDetails.userRole === 'ROLE_VIEWER';
+			setHideDetailActionsToolbar(isReadOnlyUser);
+		} catch (e) {
+			console.log(e);
+			setHideDetailActionsToolbar(true);
 		}
 	}, []);
 	// #endregion
 
 	// #region Handler functions
-	const performArchiveMockOperation = () => {
-		archiveMock(mockId, authCookieRef)
+	const handleArchive = () => {
+		archiveMock(mockId)
 			.then((res) => {
-				if (res.status == 200) {
-					setMock(res.data.data);
-					setMockId(res.data.data.id);
-					useNotification({
-						type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
-						title: 'Archive success',
-						message: `${res.data.data.mockName}: ${res.data.message}`,
-						animationIn: 'animate__bounceIn',
-						animationOut: 'animate__bounceOut',
-					});
-				}
+				setMock(res.data.data);
+				setMockId(res.data.data.id);
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					title: 'Archive success',
+					message: `${res.data.data.mockName}: ${res.data.message}`,
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
 			})
 			.catch((err) => {
-				console.log(err);
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
 					title: 'Failed to archive mock',
@@ -95,23 +79,20 @@ function Detail() {
 			});
 	};
 
-	const performUnarchiveMockOperation = () => {
-		unarchiveMock(mockId, authCookieRef)
+	const handleUnArchive = () => {
+		unarchiveMock(mockId)
 			.then((res) => {
-				if (res.status == 200) {
-					setMock(res.data.data);
-					setMockId(res.data.data.id);
-					useNotification({
-						type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
-						title: 'Unarchive success',
-						message: `${res.data.data.mockName}: ${res.data.message}`,
-						animationIn: 'animate__bounceIn',
-						animationOut: 'animate__bounceOut',
-					});
-				}
+				setMock(res.data?.data);
+				setMockId(res.data?.data?.id);
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					title: 'Unarchive success',
+					message: `${res.data?.data?.mockName}: ${res.data?.message}`,
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
 			})
 			.catch((err) => {
-				console.log(err);
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
 					title: 'Failed to unarchive mock',
@@ -122,26 +103,25 @@ function Detail() {
 			});
 	};
 
-	const performDeleteMockOperation = () => {
+	const handleDelete = () => {
 		setShowDeletionModal(true);
 	};
 
 	const handleDeleteMock = async () => {
 		setDeletingMock(true);
-		await deleteMockById(mockId, authCookieRef)
-			.then((res) => {
+		await deleteMockById(mockId)
+			.then(() => {
 				setDeletingMock(false);
 				setShowDeletionModal(false);
-				if (res.status == 204) {
-					getMockAndSetBadgeColor(mockId);
-					useNotification({
-						type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
-						title: 'Deletion success',
-						message: `Deleted resource successfully!`,
-						animationIn: 'animate__bounceIn',
-						animationOut: 'animate__bounceOut',
-					});
-				}
+
+				getMockAndSetBadgeColor(mockId);
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					title: 'Deletion success',
+					message: `Deleted resource successfully!`,
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
 			})
 			.catch((err) => {
 				console.log(err);
@@ -150,19 +130,19 @@ function Detail() {
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
 					title: 'Failed to delete mock',
-					message: `${err.message}`,
+					message: err.message,
 					animationIn: 'animate__bounceIn',
 					animationOut: 'animate__bounceOut',
 				});
 			});
 	};
 
-	const performEditMockOperation = () => {
-		navigate(`/mimock-ui/mocks/manage/edit-mock?mockId=${mockId}`);
+	const editMock = () => {
+		navigate(editPath + mockId);
 	};
 
 	const getMockAndSetBadgeColor = (mockIdString) => {
-		getMockById(mockIdString, authCookieRef)
+		getMockById(mockIdString)
 			.then((res) => {
 				setMock(res.data.data);
 				const color = decideBadgeColor(res.data.data.httpMethod.method);
@@ -202,10 +182,10 @@ function Detail() {
 				<DetailToolbar
 					hideDetailActionsToolbar={hideDetailActionsToolbar}
 					status={mock.entityStatus.status}
-					performArchiveMockOperation={performArchiveMockOperation}
-					performUnarchiveMockOperation={performUnarchiveMockOperation}
-					performDeleteMockOperation={performDeleteMockOperation}
-					performEditMockOperation={performEditMockOperation}
+					performArchiveMockOperation={handleArchive}
+					performUnarchiveMockOperation={handleUnArchive}
+					performDeleteMockOperation={handleDelete}
+					performEditMockOperation={editMock}
 				/>
 				<DetailHeader mock={mock} badgeColor={badgeColor} />
 				<DetailContentViewer mock={mock} />
