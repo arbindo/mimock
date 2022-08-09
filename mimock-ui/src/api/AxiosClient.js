@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
 import { globalConstants } from 'constants/globalConstants';
-import { LogError } from './logger/Logger';
 import { config } from '../Config';
 
 const cookies = new Cookies();
@@ -28,7 +27,7 @@ const get = async (url, config = {}) => {
 			...config,
 		})
 		.catch((err) => {
-			LogError(err);
+			console.error(err);
 			return Promise.reject(err);
 		});
 };
@@ -61,7 +60,7 @@ const authenticate = async (url, requestData, config = {}) => {
 			...config,
 		})
 		.catch((err) => {
-			LogError(err);
+			console.error(err);
 			return Promise.reject(err);
 		});
 };
@@ -76,7 +75,7 @@ const put = async (url, data, contentType = 'application/json', config) => {
 			...config,
 		})
 		.catch((err) => {
-			LogError(err);
+			console.error(err);
 			return Promise.reject(err);
 		});
 };
@@ -90,7 +89,7 @@ const remove = async (url, config) => {
 			...config,
 		})
 		.catch((err) => {
-			LogError(err);
+			console.error(err);
 			return Promise.reject(err);
 		});
 };
@@ -104,7 +103,7 @@ const options = async (url, config) => {
 			...config,
 		})
 		.catch((err) => {
-			LogError(err);
+			console.error(err);
 			return Promise.reject(err);
 		});
 };
