@@ -55,12 +55,12 @@ exports[`DetailHeader should render detail header component 1`] = `
           </a>
           <div
             class="ml-2 mt-1"
-            data-testid="copy-url-button"
           >
             <button
               aria-label="Copy URL"
               class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
               data-mui-internal-clone-element="true"
+              data-testid="copy-url-button"
               tabindex="0"
               type="button"
             >

@@ -22,6 +22,8 @@ jest.mock('react-notifications-component', () => {
 	return { Store };
 });
 
+jest.useFakeTimers();
+
 const data = {
 	id: '4708bf6f-8122-4ca5-915f-1b098aa362b8',
 	mockName: 'Test mock',
@@ -107,6 +109,72 @@ describe('Detail', () => {
 	});
 
 	it('should render detail component for ADMIN', async () => {
+		jest.spyOn(global, 'setTimeout');
+
+		let tree;
+		await act(async () => {
+			tree = await render(<Detail />);
+		});
+
+		const { container, getByTestId, queryByTestId } = tree;
+
+		expect(getByTestId('detail-container')).toBeInTheDocument();
+		expect(getByTestId('detail-toolbar-container')).toBeInTheDocument();
+		expect(queryByTestId('fetch-mock-details-error')).not.toBeInTheDocument();
+
+		await act(async () => {
+			await fireEvent.click(getByTestId('copy-url-button'));
+		});
+
+		await act(() => {
+			jest.advanceTimersByTime(1500);
+			expect(setTimeout).toHaveBeenCalledTimes(1);
+			expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1000);
+		});
+		expect(container).toMatchSnapshot();
+	});
+
+	it('should render detail component for VIEWER', async () => {
+		getMockById.mockResolvedValue({
+			data: {
+				data: {
+					...data,
+					queryParams: '',
+				},
+			},
+		});
+
+		getUserDetails.mockImplementation(() => ({
+			userRole: 'ROLE_VIEWER',
+		}));
+
+		let tree;
+		await act(async () => {
+			tree = await render(<Detail />);
+		});
+
+		const { container, getByTestId, queryByTestId } = tree;
+
+		expect(getByTestId('detail-container')).toBeInTheDocument();
+		expect(queryByTestId('operations-container')).not.toBeInTheDocument();
+		expect(queryByTestId('fetch-mock-details-error')).not.toBeInTheDocument();
+
+		expect(container).toMatchSnapshot();
+	});
+
+	it('should render ARCHIVED mock details', async () => {
+		getMockById.mockResolvedValue({
+			data: {
+				data: {
+					...data,
+					entityStatus: {
+						status: 'ARCHIVED',
+					},
+					archived: true,
+				},
+			},
+		});
+
 		let tree;
 		await act(async () => {
 			tree = await render(<Detail />);
@@ -121,10 +189,18 @@ describe('Detail', () => {
 		expect(container).toMatchSnapshot();
 	});
 
-	it('should render detail component for VIEWER', async () => {
-		getUserDetails.mockImplementation(() => ({
-			userRole: 'ROLE_VIEWER',
-		}));
+	it('should render DELETED mock details', async () => {
+		getMockById.mockResolvedValue({
+			data: {
+				data: {
+					...data,
+					entityStatus: {
+						status: 'DELETED',
+					},
+					deleted: true,
+				},
+			},
+		});
 
 		let tree;
 		await act(async () => {
@@ -134,7 +210,8 @@ describe('Detail', () => {
 		const { container, getByTestId, queryByTestId } = tree;
 
 		expect(getByTestId('detail-container')).toBeInTheDocument();
-		expect(queryByTestId('operations-container')).not.toBeInTheDocument();
+		expect(getByTestId('warning-message-operations')).toBeInTheDocument();
+
 		expect(queryByTestId('fetch-mock-details-error')).not.toBeInTheDocument();
 
 		expect(container).toMatchSnapshot();

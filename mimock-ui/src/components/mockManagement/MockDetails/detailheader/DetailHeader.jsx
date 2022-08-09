@@ -27,11 +27,6 @@ import {
 function DetailHeader({ mock, badgeColor }) {
 	// #region Defaults
 	const { testIds } = constants;
-	const crossBadgeText = mock.deleted
-		? 'DELETED'
-		: mock.archived
-		? 'ARCHIVED'
-		: '';
 	// #endregion
 
 	// #region State
@@ -57,13 +52,22 @@ function DetailHeader({ mock, badgeColor }) {
 	}, [isCopied]);
 	// #endregion
 
+	// #child region
+	const badge = () => {
+		if (mock.deleted) {
+			return <CardTopBadge $isDeleted={mock.deleted}>DELETED</CardTopBadge>;
+		}
+		if (mock.archived) {
+			return <CardTopBadge $isArchived={mock.archived}>ARCHIVED</CardTopBadge>;
+		}
+
+		return null;
+	};
+	// #endregion
+
 	return (
 		<HeaderContainer data-testid={testIds.detailHeaderContainer}>
-			<If condition={crossBadgeText !== ''}>
-				<CardTopBadge $isDeleted={mock.deleted} $isArchived={mock.archived}>
-					{crossBadgeText}
-				</CardTopBadge>
-			</If>
+			{badge()}
 			<TitleContainer data-testid={testIds.titleContainer}>
 				<Title data-testid={testIds.mockTitle}>{mock.mockName}</Title>
 				<Subtitle data-testid={testIds.mockSubtitle}>
@@ -77,13 +81,13 @@ function DetailHeader({ mock, badgeColor }) {
 						<LinkText href={generatedURL} target='_blank'>
 							{mock.route}
 						</LinkText>
-						<CopyLink data-testid='copy-url-button' key='copy-url'>
+						<CopyLink key='copy-url'>
 							<CopyToClipboard
 								text={generatedURL}
 								onCopy={() => setIsCopied(true)}
 							>
 								<Tooltip title={isCopied ? 'URL Copied' : 'Copy URL'}>
-									<IconButton>
+									<IconButton data-testid='copy-url-button'>
 										<CopyIcon />
 									</IconButton>
 								</Tooltip>

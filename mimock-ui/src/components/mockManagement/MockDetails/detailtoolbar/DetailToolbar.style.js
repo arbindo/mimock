@@ -82,5 +82,5 @@ export const ReportProblemIcon = tw(MdOutlineReportProblem)`
 `;
 
 export const BackIcon = tw(FaArrowCircleLeft)`
-    ${() => iconStyle}
+    text-2xl text-gray-600
 `;
