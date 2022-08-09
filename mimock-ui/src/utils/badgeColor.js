@@ -1,36 +1,17 @@
 export const decideBadgeColor = (httpMethod) => {
-	let color = '';
-	switch (httpMethod) {
-		case 'GET':
-			color = 'blue-500';
-			break;
-		case 'POST':
-			color = 'green-500';
-			break;
-		case 'PUT':
-			color = 'yellow-500';
-			break;
-		case 'DELETE':
-			color = 'red-500';
-			break;
-		case 'PATCH':
-			color = 'yellow-900';
-			break;
-		case 'CONNECT':
-			color = 'pink-500';
-			break;
-		case 'HEAD':
-			color = 'indigo-500';
-			break;
-		case 'TRACE':
-			color = 'violet-500';
-			break;
-		case 'OPTIONS':
-			color = 'gray-500';
-			break;
-		default:
-			color = 'gray-500';
-			break;
-	}
+	const colorMap = {
+		GET: 'blue-500',
+		POST: 'green-500',
+		PUT: 'yellow-500',
+		DELETE: 'red-500',
+		PATCH: 'yellow-900',
+		CONNECT: 'pink-500',
+		HEAD: 'indigo-500',
+		TRACE: 'violet-500',
+		OPTIONS: 'gray-500',
+	};
+
+	const color = colorMap[httpMethod] || 'gray-500';
+
 	return `border-2 border-${color} text-${color}`;
 };
