@@ -1,0 +1,98 @@
+logging:
+  level:
+    root: INFO
+
+server:
+  ssl:
+    enabled: 'false'
+    key-store: ''
+    key-store-password: ''
+    key-store-type: PKCS12
+    enabled-protocols: TLSv1.3
+
+spring:
+  main:
+    banner-mode: off
+
+  h2:
+    console:
+      enabled: true
+
+  web:
+    resources:
+      static-locations: classpath:/static/mimock-ui/
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      resolve-lazily: true
+
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+  devtools:
+    restart:
+      enabled: 'true'
+      poll-interval: 1s
+    livereload:
+      enabled: 'true'
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        types:
+          print:
+            banner: false
+
+  datasource:
+    url: jdbc:h2:file:~/data/mimock_db
+    username: mimock
+    password: ironclaw
+    driver-class-name: org.h2.Driver
+
+  liquibase:
+    change-log: classpath:/db/h2/liquibase-changelog.xml
+    user: mimock
+    password: ironclaw
+
+app:
+  security:
+    # NOTES
+    # Session timeout value accepts time tokens such as 1s, 2h, 35m etc.,
+    # Allowed values
+    # s - seconds | m - minutes | h - hours | d - days | w - weeks | M - months | y - years
+    # It accepts only whole numeric values (E.g: 210m => Valid ; 3.5h => Invalid)
+    # If the token is invalid, then the default timeout value will be used ( 1 Hour )
+    jwt-expiry-duration: 24h
+    # End
+    jwt-secret-key: B4982E53863B4DA7FDA4E1236C4BAF8A
+    cors-config:
+      allowed-origins: http://localhost:3000
+      allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+      allowed-headers: Authorization,Content-Type,X-Requested-With,Accept,X-XSRF-TOKEN
+      exposed-headers: Cache-Control,Content-Language,Content-Length,Content-Type,Content-Disposition,Expires,Last-Modified,Pragma
+
+
+springdoc:
+  swagger-ui:
+    doc-expansion: none
+    csrf:
+      enabled: true
+      header-name: X-XSRF-TOKEN
+
+flush-bin-cron-expression: "0 0 3 1 * *"
+
+management:
+  endpoints:
+    web:
+      base-path: "/api/mimock/monitoring"
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus

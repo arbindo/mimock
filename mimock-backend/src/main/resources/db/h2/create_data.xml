@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="SVNPC (generated)" id="1665155869135-1">
+        <createSequence sequenceName="binary_responses_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-2">
+        <createSequence sequenceName="entity_status_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-3">
+        <createSequence sequenceName="http_methods_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-4">
+        <createSequence sequenceName="platform_settings_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-5">
+        <createSequence sequenceName="request_bodies_for_mock_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-6">
+        <createSequence sequenceName="request_body_types_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-7">
+        <createSequence sequenceName="request_headers_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-8">
+        <createSequence sequenceName="response_content_types_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-9">
+        <createSequence sequenceName="response_headers_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-10">
+        <createSequence sequenceName="response_types_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-11">
+        <createSequence sequenceName="textual_responses_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-12">
+        <createSequence sequenceName="user_roles_id_seq"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-13">
+        <createTable tableName="binary_responses">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="binary_responses_pkey"/>
+            </column>
+            <column name="response_file" type="BYTEA">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-14">
+        <createTable tableName="entity_status">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="entity_status_pkey"/>
+            </column>
+            <column name="status" type="VARCHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-15">
+        <createTable tableName="http_methods">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="http_methods_pkey"/>
+            </column>
+            <column name="method" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-16">
+        <createTable tableName="mocks">
+            <column name="mock_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mock_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="route" type="VARCHAR(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="method_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="response_content_type_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="200" name="status_code" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="query_params" type="VARCHAR(1024)"/>
+            <column name="textual_response_id" type="INT"/>
+            <column name="binary_response_id" type="INT"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="entity_status_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="request_header_id" type="INT"/>
+            <column name="response_header_id" type="INT"/>
+            <column name="request_body_id" type="INT"/>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="query_param_values" type="JSONB(2147483647)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-17">
+        <createTable tableName="platform_settings">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="platform_settings_pkey"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_category_execution_enabled" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_steps_execution_enabled" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_export_import_enabled" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_flush_bin_cron_enabled" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-18">
+        <createTable tableName="request_body_types">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="request_body_types_pkey"/>
+            </column>
+            <column name="request_body_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-19">
+        <createTable tableName="request_bodies_for_mock">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="request_bodies_for_mock_pkey"/>
+            </column>
+            <column name="request_body" type="JSONB(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column defaultValueComputed="SELECT id FROM request_body_types WHERE request_body_type = 'application/json'"
+                    name="request_body_type_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-20">
+        <createTable tableName="request_headers">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="request_headers_pkey"/>
+            </column>
+            <column name="request_header" type="JSONB(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="match_exact" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-21">
+        <createTable tableName="response_content_types">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="response_content_types_pkey"/>
+            </column>
+            <column name="content_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="response_type_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-22">
+        <createTable tableName="response_headers">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="response_headers_pkey"/>
+            </column>
+            <column name="response_header" type="JSONB(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-23">
+        <createTable tableName="response_types">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="response_types_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-24">
+        <createTable tableName="textual_responses">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="textual_responses_pkey"/>
+            </column>
+            <column name="response_body" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-25">
+        <createTable tableName="user_roles">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="user_roles_pkey"/>
+            </column>
+            <column name="role_name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-26">
+        <createTable tableName="users">
+            <column name="user_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_user_active" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_user_blocked" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="is_session_active" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_login_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="password_updated_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="role_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created_at" type="TIMESTAMP(9) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+            <column name="deleted_at" type="TIMESTAMP(9) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-27">
+        <addPrimaryKey columnNames="mock_id" constraintName="mocks_pkey" tableName="mocks"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-28">
+        <addPrimaryKey columnNames="user_id" constraintName="users_pkey" tableName="users"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-29">
+        <addUniqueConstraint columnNames="method_id, route, query_param_values, request_body_id, request_header_id"
+                             constraintName="mock_unique" tableName="mocks"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-30">
+        <addUniqueConstraint columnNames="content_type" constraintName="unique_content_type"
+                             tableName="response_content_types"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-31">
+        <addUniqueConstraint columnNames="method" constraintName="unique_http_method" tableName="http_methods"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-32">
+        <addUniqueConstraint columnNames="mock_name" constraintName="unique_mock_name" tableName="mocks"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-33">
+        <addUniqueConstraint columnNames="name" constraintName="unique_response_types_name" tableName="response_types"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-34">
+        <addUniqueConstraint columnNames="role_name" constraintName="unique_role_name" tableName="user_roles"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-35">
+        <addUniqueConstraint columnNames="status" constraintName="unique_status" tableName="entity_status"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-36">
+        <addUniqueConstraint columnNames="user_name" constraintName="unique_user_name" tableName="users"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-37">
+        <addForeignKeyConstraint baseColumnNames="binary_response_id" baseTableName="mocks"
+                                 constraintName="binary_response_fk" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="binary_responses"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-38">
+        <addForeignKeyConstraint baseColumnNames="entity_status_id" baseTableName="mocks"
+                                 constraintName="entity_status_fk" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="entity_status"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-39">
+        <addForeignKeyConstraint baseColumnNames="method_id" baseTableName="mocks" constraintName="http_method_fk"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="http_methods"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-40">
+        <addForeignKeyConstraint baseColumnNames="request_body_id" baseTableName="mocks"
+                                 constraintName="mocks_request_body_id_fkey" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="request_bodies_for_mock"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-41">
+        <addForeignKeyConstraint baseColumnNames="request_header_id" baseTableName="mocks"
+                                 constraintName="mocks_request_header_id_fkey" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="request_headers"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-42">
+        <addForeignKeyConstraint baseColumnNames="response_header_id" baseTableName="mocks"
+                                 constraintName="mocks_response_header_id_fkey" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="response_headers"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-43">
+        <addForeignKeyConstraint baseColumnNames="request_body_type_id" baseTableName="request_bodies_for_mock"
+                                 constraintName="request_bodies_for_mock_request_body_type_id_fkey" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="request_body_types"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-44">
+        <addForeignKeyConstraint baseColumnNames="response_content_type_id" baseTableName="mocks"
+                                 constraintName="response_content_type_fk" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="response_content_types"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-45">
+        <addForeignKeyConstraint baseColumnNames="response_type_id" baseTableName="response_content_types"
+                                 constraintName="response_content_types_response_type_id_fkey" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="response_types"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-46">
+        <addForeignKeyConstraint baseColumnNames="textual_response_id" baseTableName="mocks"
+                                 constraintName="textual_response_fk" deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id"
+                                 referencedTableName="textual_responses"/>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665155869135-47">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users" constraintName="users_role_id_fkey"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user_roles"/>
+    </changeSet>
+</databaseChangeLog>

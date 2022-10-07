@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="SVNPC (generated)" id="1665165915133-1">
+        <insert tableName="entity_status">
+            <column name="id" valueNumeric="1"/>
+            <column name="status" value="NONE"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.292892"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="entity_status">
+            <column name="id" valueNumeric="2"/>
+            <column name="status" value="ARCHIVED"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.292892"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="entity_status">
+            <column name="id" valueNumeric="3"/>
+            <column name="status" value="DELETED"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.292892"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665165915133-2">
+        <insert tableName="http_methods">
+            <column name="id" valueNumeric="1"/>
+            <column name="method" value="GET"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.262089"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="http_methods">
+            <column name="id" valueNumeric="2"/>
+            <column name="method" value="HEAD"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.262089"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="http_methods">
+            <column name="id" valueNumeric="3"/>
+            <column name="method" value="POST"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.262089"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="http_methods">
+            <column name="id" valueNumeric="4"/>
+            <column name="method" value="PUT"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.262089"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="http_methods">
+            <column name="id" valueNumeric="5"/>
+            <column name="method" value="DELETE"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.262089"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="http_methods">
+            <column name="id" valueNumeric="6"/>
+            <column name="method" value="CONNECT"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.262089"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="http_methods">
+            <column name="id" valueNumeric="8"/>
+            <column name="method" value="TRACE"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.262089"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="http_methods">
+            <column name="id" valueNumeric="9"/>
+            <column name="method" value="PATCH"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.262089"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665165915133-3">
+        <insert tableName="platform_settings">
+            <column name="id" valueNumeric="1"/>
+            <column name="is_category_execution_enabled" valueBoolean="false"/>
+            <column name="is_steps_execution_enabled" valueBoolean="false"/>
+            <column name="is_export_import_enabled" valueBoolean="true"/>
+            <column name="is_flush_bin_cron_enabled" valueBoolean="true"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.622996"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665165915133-4">
+        <insert tableName="request_body_types">
+            <column name="id" valueNumeric="1"/>
+            <column name="request_body_type" value="application/json"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.48962"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="request_body_types">
+            <column name="id" valueNumeric="2"/>
+            <column name="request_body_type" value="application/x-www-form-urlencoded"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.48962"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="request_body_types">
+            <column name="id" valueNumeric="3"/>
+            <column name="request_body_type" value="multipart/form-data"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.48962"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665165915133-5">
+        <insert tableName="response_types">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="TEXTUAL_RESPONSE"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.358016"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="response_types">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="BINARY_RESPONSE"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.358016"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="response_types">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="EMPTY_RESPONSE"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.358016"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665165915133-6">
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="1"/>
+            <column name="content_type" value="audio/aac"/>
+            <column name="description" value="AAC audio"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="2"/>
+            <column name="content_type" value="application/x-abiword"/>
+            <column name="description" value="AbiWord document"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="3"/>
+            <column name="content_type" value="application/x-freearc"/>
+            <column name="description" value="Archive document (multiple files embedded)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="4"/>
+            <column name="content_type" value="video/x-msvideo"/>
+            <column name="description" value="AVI: Audio Video Interleave"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="5"/>
+            <column name="content_type" value="application/vnd.amazon.ebook"/>
+            <column name="description" value="Amazon Kindle eBook format"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="6"/>
+            <column name="content_type" value="application/octet-stream"/>
+            <column name="description" value="Any kind of binary data"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="7"/>
+            <column name="content_type" value="image/bmp"/>
+            <column name="description" value="Windows OS/2 Bitmap Graphics"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="8"/>
+            <column name="content_type" value="application/x-bzip"/>
+            <column name="description" value="BZip archive"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="9"/>
+            <column name="content_type" value="application/x-bzip2"/>
+            <column name="description" value="BZip2 archive"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="10"/>
+            <column name="content_type" value="application/x-cdf"/>
+            <column name="description" value="CD audio"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="11"/>
+            <column name="content_type" value="application/x-csh"/>
+            <column name="description" value="C-Shell script"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="14"/>
+            <column name="content_type" value="application/msword"/>
+            <column name="description" value="Microsoft Word"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="15"/>
+            <column name="content_type"
+                    value="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+            <column name="description" value="Microsoft Word (OpenXML)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="16"/>
+            <column name="content_type" value="application/vnd.ms-fontobject"/>
+            <column name="description" value="MS Embedded OpenType fonts"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="17"/>
+            <column name="content_type" value="application/epub+zip"/>
+            <column name="description" value="Electronic publication (EPUB)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="18"/>
+            <column name="content_type" value="application/gzip"/>
+            <column name="description" value="GZip Compressed Archive"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="19"/>
+            <column name="content_type" value="image/gif"/>
+            <column name="description" value="Graphics Interchange Format (GIF)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="21"/>
+            <column name="content_type" value="image/vnd.microsoft.icon"/>
+            <column name="description" value="Icon format"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="23"/>
+            <column name="content_type" value="application/java-archive"/>
+            <column name="description" value="Java Archive (JAR)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="24"/>
+            <column name="content_type" value="image/jpeg"/>
+            <column name="description" value="JPEG images"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="28"/>
+            <column name="content_type" value="audio/midi"/>
+            <column name="description" value="Musical Instrument Digital Interface (MIDI)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="29"/>
+            <column name="content_type" value="audio/x-midi"/>
+            <column name="description" value="Musical Instrument Digital Interface (MIDI)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="30"/>
+            <column name="content_type" value="audio/mpeg"/>
+            <column name="description" value="MP3 audio"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="31"/>
+            <column name="content_type" value="video/mp4"/>
+            <column name="description" value="MP4 video"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="32"/>
+            <column name="content_type" value="video/mpeg"/>
+            <column name="description" value="MPEG Video"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="33"/>
+            <column name="content_type" value="application/vnd.apple.installer+xml"/>
+            <column name="description" value="Apple Installer Package"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="34"/>
+            <column name="content_type" value="application/vnd.oasis.opendocument.presentation"/>
+            <column name="description" value="OpenDocument presentation document"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="35"/>
+            <column name="content_type" value="application/vnd.oasis.opendocument.spreadsheet"/>
+            <column name="description" value="OpenDocument spreadsheet document"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="36"/>
+            <column name="content_type" value="application/vnd.oasis.opendocument.text"/>
+            <column name="description" value="OpenDocument text document"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="37"/>
+            <column name="content_type" value="audio/ogg"/>
+            <column name="description" value="OGG audio"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="38"/>
+            <column name="content_type" value="video/ogg"/>
+            <column name="description" value="OGG video"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="39"/>
+            <column name="content_type" value="application/ogg"/>
+            <column name="description" value="OGG"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="40"/>
+            <column name="content_type" value="audio/opus"/>
+            <column name="description" value="Opus audio"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="41"/>
+            <column name="content_type" value="font/otf"/>
+            <column name="description" value="OpenType font"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="42"/>
+            <column name="content_type" value="image/png"/>
+            <column name="description" value="Portable Network Graphics"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="43"/>
+            <column name="content_type" value="application/pdf"/>
+            <column name="description" value="Adobe Portable Document Format (PDF)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="44"/>
+            <column name="content_type" value="application/x-httpd-php"/>
+            <column name="description" value="Hypertext Preprocessor"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="45"/>
+            <column name="content_type" value="application/vnd.ms-powerpoint"/>
+            <column name="description" value="Microsoft PowerPoint"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="46"/>
+            <column name="content_type"
+                    value="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+            <column name="description" value="Microsoft PowerPoint (OpenXML)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="47"/>
+            <column name="content_type" value="application/vnd.rar"/>
+            <column name="description" value="RAR archive"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="48"/>
+            <column name="content_type" value="application/rtf"/>
+            <column name="description" value="Rich Text Format (RTF)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="49"/>
+            <column name="content_type" value="application/x-sh"/>
+            <column name="description" value="Bourne shell script"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="50"/>
+            <column name="content_type" value="image/svg+xml"/>
+            <column name="description" value="Scalable Vector Graphics (SVG)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="51"/>
+            <column name="content_type" value="application/x-shockwave-flash"/>
+            <column name="description" value="Small web format (SWF) or Adobe Flash document"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="52"/>
+            <column name="content_type" value="application/x-tar"/>
+            <column name="description" value="Tape Archive (TAR)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="53"/>
+            <column name="content_type" value="image/tiff"/>
+            <column name="description" value="Tagged Image File Format (TIFF)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="54"/>
+            <column name="content_type" value="video/mp2t"/>
+            <column name="description" value="MPEG transport stream"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="55"/>
+            <column name="content_type" value="font/ttf"/>
+            <column name="description" value="TrueType Font"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="57"/>
+            <column name="content_type" value="application/vnd.visio"/>
+            <column name="description" value="Microsoft Visio"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="58"/>
+            <column name="content_type" value="audio/wav"/>
+            <column name="description" value="Waveform Audio Format"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="59"/>
+            <column name="content_type" value="audio/webm"/>
+            <column name="description" value="WEBM audio"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="60"/>
+            <column name="content_type" value="video/webm"/>
+            <column name="description" value="WEBM video"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="61"/>
+            <column name="content_type" value="image/webp"/>
+            <column name="description" value="WEBP image"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="62"/>
+            <column name="content_type" value="font/woff"/>
+            <column name="description" value="Web Open Font Format (WOFF)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="63"/>
+            <column name="content_type" value="font/woff2"/>
+            <column name="description" value="Web Open Font Format (WOFF)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="65"/>
+            <column name="content_type" value="application/vnd.ms-excel"/>
+            <column name="description" value="Microsoft Excel"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="66"/>
+            <column name="content_type" value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+            <column name="description" value="Microsoft Excel (OpenXML)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="69"/>
+            <column name="content_type" value="application/zip"/>
+            <column name="description" value="ZIP archive"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="70"/>
+            <column name="content_type" value="video/3gpp"/>
+            <column name="description" value="3GPP video container"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="71"/>
+            <column name="content_type" value="audio/3gpp"/>
+            <column name="description" value="3GPP audio container"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="72"/>
+            <column name="content_type" value="video/3gpp2"/>
+            <column name="description" value="3GPP2 video container"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="73"/>
+            <column name="content_type" value="audio/3gpp2"/>
+            <column name="description" value="3GPP2 audio container"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="74"/>
+            <column name="content_type" value="application/x-7z-compressed"/>
+            <column name="description" value="7-zip archive"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="12"/>
+            <column name="content_type" value="text/css"/>
+            <column name="description" value="Cascading Style Sheets (CSS)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="13"/>
+            <column name="content_type" value="text/csv"/>
+            <column name="description" value="Comma-separated values (CSV)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="20"/>
+            <column name="content_type" value="text/html"/>
+            <column name="description" value="HyperText Markup Language (HTML)"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="22"/>
+            <column name="content_type" value="text/calendar"/>
+            <column name="description" value="iCalendar format"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="25"/>
+            <column name="content_type" value="text/javascript"/>
+            <column name="description" value="JavaScript"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="26"/>
+            <column name="content_type" value="application/json"/>
+            <column name="description" value="JSON format"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="27"/>
+            <column name="content_type" value="application/ld+json"/>
+            <column name="description" value="JSON-LD format"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="56"/>
+            <column name="content_type" value="text/plain"/>
+            <column name="description" value="Text"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="64"/>
+            <column name="content_type" value="application/xhtml+xml"/>
+            <column name="description" value="XHTML"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="67"/>
+            <column name="content_type" value="application/xml"/>
+            <column name="description" value="XML"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="response_content_types">
+            <column name="id" valueNumeric="68"/>
+            <column name="content_type" value="application/vnd.mozilla.xul+xml"/>
+            <column name="description" value="XUL"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.185867"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+            <column name="response_type_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665165915133-7">
+        <insert tableName="user_roles">
+            <column name="id" valueNumeric="1"/>
+            <column name="role_name" value="ADMIN"/>
+            <column name="role_description"
+                    value="Administrator can create and manage mocks, and also has user management privileges"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.546249"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="id" valueNumeric="2"/>
+            <column name="role_name" value="MANAGER"/>
+            <column name="role_description" value="Manager can create and manage mocks, but cannot manage users"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.546249"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="id" valueNumeric="3"/>
+            <column name="role_name" value="VIEWER"/>
+            <column name="role_description" value="Viewer can only view mocks"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.546249"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+    </changeSet>
+    <changeSet author="SVNPC (generated)" id="1665165915133-8">
+        <insert tableName="users">
+            <column name="user_id" value="00000000-0000-0000-0000-000000000000"/>
+            <column name="name" value="Mimock Admin"/>
+            <column name="user_name" value="mimock_admin"/>
+            <column name="password" value="$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau"/>
+            <column name="is_user_active" valueBoolean="true"/>
+            <column name="is_user_blocked" valueBoolean="false"/>
+            <column name="is_session_active" valueBoolean="false"/>
+            <column name="last_login_at"/>
+            <column name="password_updated_at"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="created_at" valueDate="2022-10-07 20:10:38.596406"/>
+            <column name="updated_at"/>
+            <column name="deleted_at"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
