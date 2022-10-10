@@ -54,6 +54,60 @@ docker run --name mimock-db -d -p 5427:5432 mimock-pg-database
 
 - The required tables are set up using `liquibase` migrations and the contributors are encouraged to add the table-related changes as new liquibase changesets. This will ensure that the Database is up to date before the springboot application starts
 
+## Starting the application
+
+**Starting the UI**
+
+Install the dependencies and start the UI
+
+```shell
+cd mimock-ui
+
+yarn
+
+yarn start
+```
+
+The UI app will be available on [http://localhost:3000](http://localhost:3000)
+
+**Starting the Backend**
+
+The backend can be started using the following command
+
+```shell
+cd ./mimock-backend
+
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+```
+
+Use the following default user to login
+
+| Username       | Password   | Role    |
+| -------------- | ---------- | ------- |
+| `mimock_admin` | `password` | `ADMIN` |
+
+## UI Format check + Lint
+
+```shell
+yarn format:check
+
+yarn lint:all
+```
+
+## Running Tests
+
+**UI Tests**
+
+```shell
+yarn test
+```
+
+**Backend tests**
+
+```shell
+./mvnw -ntp clean initialize verify -P startDatabase -P coverage -Dspring.config.location=classpath:/application.yml
+```
+
 ### Support
 
 Have questions? You can reach out to the community members using the following channels
