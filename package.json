@@ -8,7 +8,7 @@
   "license": "Apache-2.0",
   "private": false,
   "devDependencies": {
-    "@escape.tech/mookme": "^2.1.1",
+    "@escape.tech/mookme": "^2.2.0",
     "husky": "^7.0.0"
   },
   "scripts": {
