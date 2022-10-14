@@ -2,22 +2,16 @@
 # yarn lockfile v1
 
 
-"@escape.tech/mookme@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@escape.tech/mookme/-/mookme-2.1.1.tgz#839de1dffb11222b3c1a9bb7fd2da0809d2bf99c"
-  integrity sha512-P+9op+iByYejA0yiuk6x+zfEGWNF9oj0pF3l/FoCXmJQP31Sua0vBmr//aPFFmxH5bIoEN62y9eFU7YdSl3aQw==
+"@escape.tech/mookme@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@escape.tech/mookme/-/mookme-2.2.0.tgz#6848a61bff70d22eb21123fab011b54f3d5a7a00"
+  integrity sha512-dkh0sYTw54SEEP5/pBGm7WuR3R+3v/uJTs7A5lCKZeD/QnBW2xlBsSCYVewS7ydVcoZfjKFwug6+LP8Po45Erg==
   dependencies:
-    "@types/node" "^15.0.2"
     chalk "^4.1.1"
     commander "^7.2.0"
     debug "^4.3.4"
     inquirer "^8.0.0"
     wildcard-match "^5.1.0"
-
-"@types/node@^15.0.2":
-  version "15.14.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.14.9.tgz#bc43c990c3c9be7281868bbc7b8fdd6e2b57adfa"
-  integrity sha512-qjd88DrCxupx/kJD5yQgZdcYKZKSIGBVDIBE1/LTGcNm3d2Np/jxojkdePDdfnBHJc5W7vSMpbJ1aB7p/Py69A==
 
 ansi-escapes@^4.2.1:
   version "4.3.2"
