@@ -72,7 +72,7 @@
         "@testing-library/react-hooks": "^7.0.2",
         "@testing-library/user-event": "^14.0.4",
         "animate.css": "^4.1.1",
-        "axios": "^0.26.0",
+        "axios": "^1.1.2",
         "babel-plugin-prismjs": "^2.1.0",
         "babel-plugin-transform-remove-console": "^6.9.4",
         "bcryptjs": "^2.4.3",
