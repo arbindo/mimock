@@ -1,0 +1,20 @@
+version: 2
+updates:
+
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Maintain dependencies for yarn
+  - package-ecosystem: "yarn"
+    directory: "/mimock-ui"
+    schedule:
+      interval: "weekly"
+
+  # Maintain dependencies for maven
+  - package-ecosystem: "maven"
+    directory: "/mimock-backend"
+    schedule:
+      interval: "weekly"
