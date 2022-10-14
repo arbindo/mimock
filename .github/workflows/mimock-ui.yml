@@ -62,7 +62,7 @@ jobs:
         run: yarn test --maxWorkers=4
       
       - name: Upload test coverage report to artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: jest-coverage-report
           path: mimock-ui/src/coverage
@@ -98,7 +98,7 @@ jobs:
         run: yarn build
 
       - name: Upload test coverage report to artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-react-bundle
           path: mimock-ui/dist

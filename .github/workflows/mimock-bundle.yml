@@ -26,21 +26,21 @@ jobs:
           tar czf mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz --directory=installation lib start mimock.properties setup_database psql_setup.sql
 
       - name: Publish JAR
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}-jar.zip
           path: |
             ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar
 
       - name: Publish Linux Bundle
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz
           path: |
             mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz
 
       - name: Publish Windows Bundle
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip
           path: |

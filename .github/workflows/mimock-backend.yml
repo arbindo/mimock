@@ -35,7 +35,7 @@ jobs:
         run: ./mvnw -ntp clean site
 
       - name: Publish style report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: checkstyle-report
           path: |
@@ -71,7 +71,7 @@ jobs:
           commit_parent: ${{ github.sha }}
 
       - name: Publish coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-coverage-report
           path: |
@@ -99,7 +99,7 @@ jobs:
         run: ./mvnw -ntp clean package -P packageJar -Dmaven.test.skip=true
 
       - name: Publish JAR
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-jar
           path: |
