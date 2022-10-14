@@ -8,7 +8,7 @@ updates:
       interval: "weekly"
 
   # Maintain dependencies for yarn
-  - package-ecosystem: "yarn"
+  - package-ecosystem: "npm"
     directory: "/mimock-ui"
     schedule:
       interval: "weekly"
