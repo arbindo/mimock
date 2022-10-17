@@ -65,7 +65,7 @@ jobs:
         run: ./mvnw -ntp clean initialize verify -P startDatabase -P coverage -Dspring.config.location=classpath:/application.yml
 
       - name: Publish coverage report codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           commit_parent: ${{ github.sha }}

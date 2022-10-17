@@ -68,7 +68,7 @@ jobs:
           path: mimock-ui/src/coverage
           
       - name: Publish coverage report codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           commit_parent: ${{ github.sha }}
