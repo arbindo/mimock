@@ -1,11 +1,9 @@
-FROM alpine:3.15.0
+FROM eclipse-temurin:11.0.16.1_1-jre
 
 WORKDIR /home/mimock
 
-COPY ${PWD}/mimock-backend/target/mimock*.jar .
-
-RUN apk add openjdk11-jre
+COPY ${PWD}/mimock-backend/target/mimock*.jar mimock.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","mimock-0.0.1.jar"]
+ENTRYPOINT ["java","-jar","mimock.jar"]
