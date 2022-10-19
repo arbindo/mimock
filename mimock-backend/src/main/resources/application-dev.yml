@@ -71,7 +71,7 @@ spring:
 app:
   security:
     jwt-expiry-duration: 10d
-    jwt-secret-key: B4982E53863B4DA7FDA4E1236C4BAF8A # Only for development. Do not use this in production.
+    jwt-secret-key: ${random.value} # Only for development. Do not use this in production.
     cors-config:
       allowed-origins: http://localhost:3000,http://localhost:3001
       allowed-methods: POST,GET,PUT,DELETE,OPTIONS

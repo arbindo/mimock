@@ -70,7 +70,7 @@ app:
     # If the token is invalid, then the default timeout value will be used ( 1 Hour )
     jwt-expiry-duration: 24h
     # End
-    jwt-secret-key: B4982E53863B4DA7FDA4E1236C4BAF8A
+    jwt-secret-key: ${random.value}
     cors-config:
       allowed-origins: http://localhost:3000
       allowed-methods: GET,POST,PUT,DELETE,OPTIONS
