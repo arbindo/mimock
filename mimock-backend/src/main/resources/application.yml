@@ -4,9 +4,9 @@ logging:
 
 server:
   ssl:
-    enabled: '${MIMOCK_KEYSTORE_ENABLE}'
-    key-store: '${MIMOCK_KEYSTORE_PATH}'
-    key-store-password: '${MIMOCK_KEYSTORE_PASSWORD}'
+    enabled: ${MIMOCK_KEYSTORE_ENABLE:false}
+    key-store: ${MIMOCK_KEYSTORE_PATH:""}
+    key-store-password: ${MIMOCK_KEYSTORE_PASSWORD:""}
     key-store-type: PKCS12
     enabled-protocols: TLSv1.3
 
@@ -29,10 +29,10 @@ spring:
 
   devtools:
     restart:
-      enabled: 'true'
+      enabled: true
       poll-interval: 1s
     livereload:
-      enabled: 'true'
+      enabled: true
 
   jpa:
     hibernate:
@@ -41,25 +41,25 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: ${MIMOCK_DB_SCHEMA}
+        default_schema: ${MIMOCK_DB_SCHEMA:mimock_schema}
         types:
           print:
             banner: false
 
   datasource:
-    url: ${MIMOCK_DB_URL} # E.g: jdbc:postgresql://localhost:5432/mimock_db
-    username: ${MIMOCK_DB_USER}
-    password: ${MIMOCK_DB_PASSWORD}
+    url: ${MIMOCK_DB_URL:jdbc:postgresql://localhost:5432/mimock_db} # E.g: jdbc:postgresql://localhost:5432/mimock_db
+    username: ${MIMOCK_DB_USER:mimock}
+    password: ${MIMOCK_DB_PASSWORD:ironclaw}
     driver-class-name: org.postgresql.Driver
     hikari:
-      schema: ${MIMOCK_DB_SCHEMA}
+      schema: ${MIMOCK_DB_SCHEMA:mimock_schema}
 
   liquibase:
     change-log: classpath:/db/liquibase-changelog.xml
-    default-schema: ${MIMOCK_DB_SCHEMA}
-    liquibase-schema: ${MIMOCK_DB_SCHEMA}
-    user: ${MIMOCK_DB_USER}
-    password: ${MIMOCK_DB_PASSWORD}
+    default-schema: ${MIMOCK_DB_SCHEMA:mimock_schema}
+    liquibase-schema: ${MIMOCK_DB_SCHEMA:mimock_schema}
+    user: ${MIMOCK_DB_USER:mimock}
+    password: ${MIMOCK_DB_PASSWORD:ironclaw}
 
 app:
   security:
@@ -69,14 +69,14 @@ app:
     # s - seconds | m - minutes | h - hours | d - days | w - weeks | M - months | y - years
     # It accepts only whole numeric values (E.g: 210m => Valid ; 3.5h => Invalid)
     # If the token is invalid, then the default timeout value will be used ( 1 Hour )
-    jwt-expiry-duration: ${MIMOCK_JWT_EXPIRY_DURATION}
+    jwt-expiry-duration: ${MIMOCK_JWT_EXPIRY_DURATION:24h}
     # End
-    jwt-secret-key: ${MIMOCK_JWT_SECRET}
+    jwt-secret-key: ${MIMOCK_JWT_SECRET:${random.value}}
     cors-config:
-      allowed-origins: ${MIMOCK_CORS_ORIGINS}
-      allowed-methods: ${MIMOCK_CORS_METHODS}
-      allowed-headers: ${MIMOCK_CORS_ALLOWED_HEADERS}
-      exposed-headers: ${MIMOCK_CORS_EXPOSED_HEADERS}
+      allowed-origins: ${MIMOCK_CORS_ORIGINS:http://localhost:3001}
+      allowed-methods: ${MIMOCK_CORS_METHODS:GET,POST,PUT,DELETE,OPTIONS}
+      allowed-headers: ${MIMOCK_CORS_ALLOWED_HEADERS:GET,POST,PUT,DELETE,OPTIONS}
+      exposed-headers: ${MIMOCK_CORS_EXPOSED_HEADERS:Cache-Control,Content-Language,Content-Length,Content-Type,Content-Disposition,Expires,Last-Modified,Pragma}
 
 
 springdoc:
