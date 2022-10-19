@@ -266,7 +266,7 @@
                     <systemProperties>
                         <property>
                             <name>spring.datasource.url</name>
-                            <value>jdbc:postgresql://localhost:5427/mimock_db</value>
+                            <value>jdbc:postgresql://localhost:5432/mimock_db</value>
                         </property>
                         <property>
                             <name>spring.config.location</name>

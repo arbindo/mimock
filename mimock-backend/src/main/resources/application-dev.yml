@@ -53,7 +53,7 @@ spring:
             banner: false
 
   datasource:
-    url: jdbc:postgresql://localhost:5427/mimock_db
+    url: jdbc:postgresql://localhost:5432/mimock_db
     username: mimock
     password: ironclaw
     driver-class-name: org.postgresql.Driver
