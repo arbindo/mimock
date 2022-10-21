@@ -11,8 +11,16 @@ jobs:
   cypress-e2e-chrome:
     name: Running mimock e2e tests on chrome
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
 
     steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -25,7 +33,7 @@ jobs:
           browser: chrome
           working-directory: e2e
           record: true
-          tag: node-16
+          tag: node-${{ matrix.node-version }}
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
