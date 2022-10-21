@@ -35,7 +35,7 @@ describe("Admin", () => {
 
     cy.getByTestId("edit-manager").click();
     cy.get(".jss10").check();
-    cy.get(".rnc__notification-title").click();
+    cy.get(".rnc__notification-title").click({ multiple: true });
 
     cy.getByTestId("go-back-btn").click();
     cy.getByTestId("status-label-true").should("exist");
@@ -48,6 +48,7 @@ describe("Admin", () => {
     cy.getByTestId("confirmation-modal-cancel-btn").click();
     cy.getByTestId("delete-manager").click();
     cy.getByTestId("confirmation-modal-confirm-btn").click();
+    cy.get(".rnc__notification-title").click({ multiple: true });
 
     cy.getByTestId("no-users-error").should("exist");
   });
