@@ -19,14 +19,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        working-directory: e2e
-        run: yarn
+      - name: Start mimock
+        run: SKIP_TESTS=true make start-app-container
 
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
           browser: ${{ matrix.browser }}
+          working-directory: e2e
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
