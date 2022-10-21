@@ -39,7 +39,8 @@ describe("Admin", () => {
       .getByTestId("add-user-submit-button")
       .click();
 
-    cy.getByTestId("edit-manager")
+    cy.waitForLoader()
+      .getByTestId("edit-manager")
       .click()
       .get(".jss10")
       .check()
@@ -151,9 +152,8 @@ describe("Admin", () => {
       .click()
       .waitForLoader()
       .getByTestId("update-password-btn")
-      .click();
-
-    cy.getByTestId("new-password-input")
+      .click()
+      .getByTestId("new-password-input")
       .type(password)
       .getByTestId("confirm-password-input")
       .type(password)

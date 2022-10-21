@@ -54,8 +54,9 @@ describe("Mock management for admin", () => {
       .getByTestId("request-header-wrapper > view-mode > view-mode-text")
       .click()
       .getByTestId("save-requestHeader-button")
+      .click()
+      .get("#panel-1-header")
       .click();
-    cy.get("#panel-1-header").click();
 
     cy.get("#panel-2-header")
       .click()
@@ -68,8 +69,9 @@ describe("Mock management for admin", () => {
       .getByTestId("request-body-wrapper > view-mode > view-mode-text")
       .click()
       .getByTestId("save-requestBody-button")
+      .click()
+      .get("#panel-2-header")
       .click();
-    cy.get("#panel-2-header").click();
 
     cy.get("#panel-3-header")
       .click()
@@ -80,8 +82,9 @@ describe("Mock management for admin", () => {
       .clear()
       .type(data.expectedTextResponse, { parseSpecialCharSequences: false })
       .getByTestId("save-response-button")
+      .click()
+      .get("#panel-3-header")
       .click();
-    cy.get("#panel-3-header").click();
 
     cy.get("#panel-4-header")
       .click()
@@ -92,8 +95,9 @@ describe("Mock management for admin", () => {
       .getByTestId("response-headers-wrapper > view-mode > view-mode-text")
       .click()
       .getByTestId("save-responseHeader-button")
+      .click()
+      .get("#panel-4-header")
       .click();
-    cy.get("#panel-4-header").click();
 
     cy.getByTestId("create-mock-button")
       .click()
