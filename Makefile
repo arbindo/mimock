@@ -29,7 +29,7 @@ create-network:
 
 start-database: create-network
 	@docker build -t mimock-pg-database . -f Dockerfile.pg
-	@docker inspect mimock-db --format "imageName: {{.ImageName}}" || docker run --name mimock-db -p 5427:5432 --network mimock-network -d mimock-pg-database
+	@docker inspect mimock-db --format "imageName: {{.ImageName}}" || docker run --name mimock-db -p 5432:5432 --network mimock-network -d mimock-pg-database
 
 start-app-local: start-database
 	./mimock-backend/mvnw clean spring-boot:run -Dspring.config.location=$(APP_CONFIG_FILE) -Dspring.datasource.url=$(APP_DB_URL)
