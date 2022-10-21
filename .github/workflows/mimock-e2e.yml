@@ -1,0 +1,34 @@
+name: Mimock E2E Pipeline
+
+on:
+  push:
+    branches: [main]
+
+  pull_request:
+    branches: [main]
+
+jobs:
+  cypress-e2e:
+    name: Running mimock e2e tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        working-directory: e2e
+        run: yarn
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          start: yarn test
+          browser: ${{ matrix.browser }}
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
