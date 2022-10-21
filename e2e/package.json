@@ -1,0 +1,16 @@
+{
+  "name": "mimock-e2e",
+  "version": "0.0.1",
+  "description": "E2E test suites for mimock",
+  "main": "index.js",
+  "repository": "https://github.com/arbindo/mimock",
+  "author": "arbindo",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cypress": "^10.10.0"
+  },
+  "scripts": {
+    "test": "cypress run",
+    "e2e": "cypress open"
+  }
+}

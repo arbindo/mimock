@@ -7,3 +7,4 @@ node_modules/
 /installation/**/*.jks
 
 *.jks
+/.vscode/

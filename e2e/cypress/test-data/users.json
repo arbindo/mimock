@@ -1,0 +1,23 @@
+{
+  "admin": {
+    "userName": "mimock_admin",
+    "password": "password",
+    "role": "ADMIN"
+  },
+  "invalid": {
+    "userName": "test",
+    "password": "test"
+  },
+  "manager": {
+    "name": "Manager",
+    "userName": "manager",
+    "password": "password",
+    "role": "MANAGER"
+  },
+  "viewer": {
+    "name": "Viewer",
+    "userName": "viewer",
+    "password": "password",
+    "role": "VIEWER"
+  }
+}
