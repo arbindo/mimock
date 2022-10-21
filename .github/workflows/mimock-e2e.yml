@@ -25,6 +25,7 @@ jobs:
           browser: chrome
           working-directory: e2e
           record: true
+          tag: node-16
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
