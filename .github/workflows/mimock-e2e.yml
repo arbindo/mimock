@@ -8,12 +8,9 @@ on:
     branches: [main]
 
 jobs:
-  cypress-e2e:
-    name: Running mimock e2e tests
+  cypress-e2e-chrome:
+    name: Running mimock e2e tests on chrome
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        browser: [chrome]
 
     steps:
       - name: Checkout
@@ -25,7 +22,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          browser: ${{ matrix.browser }}
+          browser: chrome
           working-directory: e2e
           record: true
         env:
