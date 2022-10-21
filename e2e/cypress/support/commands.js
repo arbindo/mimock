@@ -29,7 +29,19 @@ Cypress.Commands.add("login", (userName, password) => {
 });
 
 Cypress.Commands.add("getByTestId", (testId) => {
-  cy.get(`[data-testid="${testId}"]`);
+  let processedTestId;
+  if (testId.includes(">")) {
+    processedTestId = testId
+      .split(">")
+      .map((item) => {
+        return `[data-testid="${item.trim().toString()}"]`;
+      })
+      .join(" > ");
+  } else {
+    processedTestId = `[data-testid="${testId}"]`;
+  }
+
+  cy.get(processedTestId);
 });
 
 Cypress.Commands.add("waitForLoader", () => {
