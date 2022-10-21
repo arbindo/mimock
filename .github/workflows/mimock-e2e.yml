@@ -8,13 +8,9 @@ on:
     branches: [main]
 
 jobs:
-  cypress-e2e:
-    name: Running mimock e2e tests
+  cypress-e2e-chrome:
+    name: Running mimock e2e tests on chrome
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        browser: [chrome]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -26,6 +22,45 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           browser: ${{ matrix.browser }}
+          working-directory: e2e
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  cypress-e2e-firefox:
+    name: Running mimock e2e tests on firefox
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node12.16.1-chrome80-ff73
+      options: --user 1001 # Refer https://github.com/cypress-io/github-action/issues/104
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Start mimock
+        run: SKIP_TESTS=true make start-app-container
+
+      - uses: cypress-io/github-action@v4
+        with:
+          browser: firefox
+          working-directory: e2e
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  cypress-e2e-edge:
+    name: Running mimock e2e tests on edge
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Start mimock
+        run: SKIP_TESTS=true make start-app-container
+
+      - uses: cypress-io/github-action@v4
+        with:
+          browser: edge
           working-directory: e2e
           record: true
         env:
