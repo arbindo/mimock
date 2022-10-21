@@ -50,6 +50,56 @@ describe("Admin", () => {
     cy.getByTestId("status-label-true").should("exist");
   });
 
+  it("should update existing user role", () => {
+    cy.visit("/mimock-ui/admin/users");
+
+    cy.waitForLoader()
+      .getByTestId("edit-manager")
+      .click()
+      .waitForLoader()
+      .getByTestId("input-role")
+      .select("VIEWER")
+      .getByTestId("update-role-btn")
+      .click()
+      .getByTestId("confirmation-modal-confirm-btn")
+      .click()
+      .get(".rnc__notification-title")
+      .click();
+
+    cy.getByTestId("go-back-btn")
+      .click()
+      .waitForLoader()
+      .getByTestId("role-pill-VIEWER")
+      .should("have.text", "VIEWER");
+  });
+
+  it("should update existing user password", () => {
+    const newPassword = "viewer123";
+
+    cy.visit("/mimock-ui/admin/users");
+
+    cy.waitForLoader()
+      .getByTestId("edit-manager")
+      .click()
+      .waitForLoader()
+      .getByTestId("update-password-btn")
+      .click()
+      .getByTestId("new-password-input")
+      .type(newPassword)
+      .getByTestId("confirm-password-input")
+      .type(newPassword)
+      .getByTestId("password-update-confirm-button")
+      .click()
+      .get(".rnc__notification-message")
+      .click({ multiple: true });
+
+    cy.getByTestId("go-back-btn")
+      .click()
+      .waitForLoader()
+      .getByTestId("role-pill-VIEWER")
+      .should("have.text", "VIEWER");
+  });
+
   it("should delete existing user", () => {
     cy.getByTestId("menu-item-users")
       .click()

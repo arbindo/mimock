@@ -10,9 +10,9 @@
 //
 //
 
-Cypress.Commands.overwrite("visit", (originalFn, url, options) => {
+Cypress.Commands.overwrite("visit", (originalFn, url = "/", options) => {
   cy.viewport(1280, 1000);
-  originalFn("/");
+  originalFn(url);
 });
 
 Cypress.Commands.add("login", (userName, password) => {
