@@ -17,7 +17,6 @@ Cypress.Commands.overwrite("visit", (originalFn, url = "/", options) => {
 
 Cypress.Commands.add("login", (userName, password) => {
   cy.visit("/")
-    .viewport(1280, 1000)
     .clearCookies()
     .get('[data-testid="login-username-input"]')
     .type(userName)
