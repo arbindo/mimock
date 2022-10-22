@@ -108,6 +108,19 @@ yarn test
 ./mvnw -ntp clean initialize verify -P startDatabase -P coverage -Dspring.config.location=classpath:/application.yml
 ```
 
+**End-to-end tests**
+
+Any breaking change to the UI or backend will need changes to the existing e2e test suites. To run the e2e tests locally, follow [these instructions](https://github.com/arbindo/mimock/blob/main/e2e/README.md)
+
+## Raising a Pull Request
+
+To push your development contributions to mimock, fork this repo and commit your changes to a new branch in the forked repo. Once the changes are finalized, raise a PR to the `main` branch of this repo. The following are some guidelines to get the PRs reviewed with ease
+
+- Ensure the commit messages state the change precisely
+- Add the area of change as a prefix to the PR. `E.g: UI: Fix user sorting order`
+- Ensure that supporting test cases (unit tests or e2e tests) are in place
+- The PR will go through code review from the maintainers. If the PR needs quick attention, then tag `@maintainers` in the discussions
+
 ### Support
 
 Have questions? You can reach out to the community members using the following channels
