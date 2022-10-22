@@ -11,7 +11,8 @@
   },
   "scripts": {
     "test": "cypress run",
-    "start": "cypress open"
+    "start": "cypress open",
+    "run:headed": "cypress run --browser chrome --headed"
   },
   "devDependencies": {
     "cy-verify-downloads": "^0.1.11",
