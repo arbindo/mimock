@@ -10,8 +10,8 @@
     "cypress": "^10.10.0"
   },
   "scripts": {
-    "test": "cypress run",
     "start": "cypress open",
+    "test": "cypress run --browser chrome --headless",
     "run:headed": "cypress run --browser chrome --headed"
   },
   "devDependencies": {
