@@ -260,6 +260,7 @@ describe("Mock management for admin", () => {
       .click()
       .getByTestId("edit-btn")
       .click()
+      .waitForLoader()
       .get("#query")
       .click()
       .getByTestId("remove-param-tooltip-1")
