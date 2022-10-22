@@ -11,6 +11,9 @@
   },
   "scripts": {
     "test": "cypress run",
-    "e2e": "cypress open"
+    "start": "cypress open"
+  },
+  "devDependencies": {
+    "cy-verify-downloads": "^0.1.11"
   }
 }

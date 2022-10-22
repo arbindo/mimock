@@ -1,4 +1,5 @@
 const { defineConfig } = require("cypress");
+const { verifyDownloadTasks } = require("cy-verify-downloads");
 
 module.exports = defineConfig({
   projectId: "1j76yz",
@@ -7,7 +8,7 @@ module.exports = defineConfig({
     experimentalStudio: true,
     specPattern: "cypress/**/*.cy.{js,ts}",
     setupNodeEvents(on, config) {
-      on("task", {});
+      on("task", verifyDownloadTasks);
     },
   },
 });
