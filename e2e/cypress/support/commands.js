@@ -10,14 +10,13 @@
 //
 //
 
-Cypress.Commands.overwrite("visit", (originalFn, url, options) => {
-  cy.viewport(1280, 1000);
-  originalFn("/");
+Cypress.Commands.overwrite("visit", (originalFn, url = "/", options) => {
+  originalFn(url);
 });
 
 Cypress.Commands.add("login", (userName, password) => {
   cy.visit("/")
-    .viewport(1280, 1000)
+    .clearCookies()
     .get('[data-testid="login-username-input"]')
     .type(userName)
     .get('[data-testid="login-password-input"]')
@@ -29,7 +28,19 @@ Cypress.Commands.add("login", (userName, password) => {
 });
 
 Cypress.Commands.add("getByTestId", (testId) => {
-  cy.get(`[data-testid="${testId}"]`);
+  let processedTestId;
+  if (testId.includes(">")) {
+    processedTestId = testId
+      .split(">")
+      .map((item) => {
+        return `[data-testid="${item.trim().toString()}"]`;
+      })
+      .join(" > ");
+  } else {
+    processedTestId = `[data-testid="${testId}"]`;
+  }
+
+  cy.get(processedTestId);
 });
 
 Cypress.Commands.add("waitForLoader", () => {

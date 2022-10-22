@@ -217,7 +217,7 @@ function AddMockForm({ mode }) {
 			</If>
 			<HttpMethod selectedMethod={mockData.httpMethod || 'GET'} />
 			<For each='accordionItem' index='idx' of={accordionData}>
-				<AccordionWrapper key={accordionItem.id}>
+				<AccordionWrapper key={accordionItem.id} id={accordionItem.id}>
 					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls={`panel-${idx}-content`}

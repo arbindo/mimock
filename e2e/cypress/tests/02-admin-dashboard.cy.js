@@ -1,6 +1,21 @@
 import users from "../test-data/users.json";
+import queries from "../support/extensions/pgQueries";
 
 describe("Admin", () => {
+  before(() => {
+    cy.task("queryTestDb", queries.deleteNonAdminUsers)
+      .task("queryTestDb", queries.deleteAllMocks)
+      .task("queryTestDb", queries.deleteTextResponse)
+      .task("queryTestDb", queries.deleteBinaryResponse);
+  });
+
+  after(() => {
+    cy.task("queryTestDb", queries.deleteNonAdminUsers)
+      .task("queryTestDb", queries.deleteAllMocks)
+      .task("queryTestDb", queries.deleteTextResponse)
+      .task("queryTestDb", queries.deleteBinaryResponse);
+  });
+
   beforeEach(() => {
     const { userName, password } = users.admin;
     cy.login(userName, password);
@@ -18,38 +33,136 @@ describe("Admin", () => {
   });
 
   it("should create and activate new user", () => {
-    cy.getByTestId("menu-item-users").click();
-    cy.waitForLoader();
+    cy.getByTestId("menu-item-users").click().waitForLoader();
     cy.getByTestId("no-users-error").should(
       "have.text",
       'No users found. Click on "ADD USER" to create a new user'
     );
-    cy.getByTestId("add-user-btn").click();
 
-    cy.getByTestId("input-name").type("Manager");
-    cy.getByTestId("input-userName").type("manager");
-    cy.getByTestId("input-password").type("password");
-    cy.getByTestId("input-confirmPassword").type("password");
-    cy.getByTestId("input-role").select("MANAGER");
-    cy.getByTestId("add-user-submit-button").click();
+    cy.getByTestId("add-user-btn")
+      .click()
+      .getByTestId("input-name")
+      .type("Manager")
+      .getByTestId("input-userName")
+      .type("manager")
+      .getByTestId("input-password")
+      .type("password")
+      .getByTestId("input-confirmPassword")
+      .type("password")
+      .getByTestId("input-role")
+      .select("MANAGER")
+      .getByTestId("add-user-submit-button")
+      .click();
 
-    cy.getByTestId("edit-manager").click();
-    cy.get(".jss10").check();
-    cy.get(".rnc__notification-title").click({ multiple: true });
+    cy.waitForLoader()
+      .getByTestId("edit-manager")
+      .click()
+      .get(".jss10")
+      .check();
 
     cy.getByTestId("go-back-btn").click();
     cy.getByTestId("status-label-true").should("exist");
   });
 
-  it("should delete existing user", () => {
-    cy.getByTestId("menu-item-users").click();
+  it("should update existing user role", () => {
+    cy.visit("/mimock-ui/admin/users");
 
-    cy.getByTestId("delete-manager").click();
-    cy.getByTestId("confirmation-modal-cancel-btn").click();
-    cy.getByTestId("delete-manager").click();
-    cy.getByTestId("confirmation-modal-confirm-btn").click();
-    cy.get(".rnc__notification-title").click({ multiple: true });
+    cy.waitForLoader()
+      .getByTestId("edit-manager")
+      .click()
+      .waitForLoader()
+      .getByTestId("input-role")
+      .select("VIEWER")
+      .getByTestId("update-role-btn")
+      .click()
+      .getByTestId("confirmation-modal-confirm-btn")
+      .click();
+
+    cy.getByTestId("go-back-btn")
+      .click()
+      .waitForLoader()
+      .getByTestId("role-pill-VIEWER")
+      .should("have.text", "VIEWER");
+  });
+
+  it("should update existing user password", () => {
+    const newPassword = "viewer123";
+
+    cy.visit("/mimock-ui/admin/users");
+
+    cy.waitForLoader()
+      .getByTestId("edit-manager")
+      .click()
+      .waitForLoader()
+      .getByTestId("update-password-btn")
+      .click()
+      .getByTestId("new-password-input")
+      .type(newPassword)
+      .getByTestId("confirm-password-input")
+      .type(newPassword)
+      .getByTestId("password-update-confirm-button")
+      .click()
+      .waitForLoader()
+      .getByTestId("password-updated-date")
+      .should("exist");
+  });
+
+  it("should delete existing user", () => {
+    cy.getByTestId("menu-item-users")
+      .click()
+      .getByTestId("delete-manager")
+      .click()
+      .getByTestId("confirmation-modal-cancel-btn")
+      .click()
+      .getByTestId("delete-manager")
+      .click()
+      .getByTestId("confirmation-modal-confirm-btn")
+      .click()
+      .waitForLoader();
 
     cy.getByTestId("no-users-error").should("exist");
+  });
+
+  it("should update password", () => {
+    const newPassword = "password1";
+
+    cy.getByTestId("menu-option-settings")
+      .click()
+      .waitForLoader()
+      .getByTestId("update-password-btn")
+      .click();
+
+    cy.getByTestId("new-password-input")
+      .type(newPassword)
+      .getByTestId("confirm-password-input")
+      .type(newPassword)
+      .getByTestId("password-update-confirm-button")
+      .click()
+      .get(".rnc__notification-message")
+      .click({ multiple: true })
+      .getByTestId("menu-option-logout")
+      .click()
+      .waitForLoader();
+
+    const { userName, password } = users.admin;
+    cy.getByTestId("login-username-input")
+      .type(userName)
+      .getByTestId("login-password-input")
+      .type(newPassword)
+      .getByTestId("login-submit")
+      .click()
+      .waitForLoader();
+
+    cy.getByTestId("menu-option-settings")
+      .click()
+      .waitForLoader()
+      .getByTestId("update-password-btn")
+      .click()
+      .getByTestId("new-password-input")
+      .type(password)
+      .getByTestId("confirm-password-input")
+      .type(password)
+      .getByTestId("password-update-confirm-button")
+      .click();
   });
 });

@@ -194,6 +194,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to details 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="query"
     >
       <div
         aria-controls="panel-0-content"
@@ -400,6 +401,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to details 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestHeader"
     >
       <div
         aria-controls="panel-1-content"
@@ -670,6 +672,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to details 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestBody"
     >
       <div
         aria-controls="panel-2-content"
@@ -911,6 +914,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to details 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="response"
     >
       <div
         aria-controls="panel-3-content"
@@ -1194,6 +1198,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to details 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="responseHeaders"
     >
       <div
         aria-controls="panel-4-content"
@@ -1612,6 +1617,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to previous
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="query"
     >
       <div
         aria-controls="panel-0-content"
@@ -1818,6 +1824,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to previous
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestHeader"
     >
       <div
         aria-controls="panel-1-content"
@@ -2088,6 +2095,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to previous
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestBody"
     >
       <div
         aria-controls="panel-2-content"
@@ -2329,6 +2337,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to previous
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="response"
     >
       <div
         aria-controls="panel-3-content"
@@ -2612,6 +2621,7 @@ exports[`AddMockFrom create mock should create new mock and navigate to previous
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="responseHeaders"
     >
       <div
         aria-controls="panel-4-content"
@@ -3030,6 +3040,7 @@ exports[`AddMockFrom create mock should render AddMockForm with all input fields
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="query"
     >
       <div
         aria-controls="panel-0-content"
@@ -3236,6 +3247,7 @@ exports[`AddMockFrom create mock should render AddMockForm with all input fields
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestHeader"
     >
       <div
         aria-controls="panel-1-content"
@@ -3506,6 +3518,7 @@ exports[`AddMockFrom create mock should render AddMockForm with all input fields
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestBody"
     >
       <div
         aria-controls="panel-2-content"
@@ -3747,6 +3760,7 @@ exports[`AddMockFrom create mock should render AddMockForm with all input fields
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="response"
     >
       <div
         aria-controls="panel-3-content"
@@ -4030,6 +4044,7 @@ exports[`AddMockFrom create mock should render AddMockForm with all input fields
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="responseHeaders"
     >
       <div
         aria-controls="panel-4-content"
@@ -4448,6 +4463,7 @@ exports[`AddMockFrom create mock should reset form data on clicking reset button
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="query"
     >
       <div
         aria-controls="panel-0-content"
@@ -4654,6 +4670,7 @@ exports[`AddMockFrom create mock should reset form data on clicking reset button
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestHeader"
     >
       <div
         aria-controls="panel-1-content"
@@ -4924,6 +4941,7 @@ exports[`AddMockFrom create mock should reset form data on clicking reset button
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestBody"
     >
       <div
         aria-controls="panel-2-content"
@@ -5165,6 +5183,7 @@ exports[`AddMockFrom create mock should reset form data on clicking reset button
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="response"
     >
       <div
         aria-controls="panel-3-content"
@@ -5448,6 +5467,7 @@ exports[`AddMockFrom create mock should reset form data on clicking reset button
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="responseHeaders"
     >
       <div
         aria-controls="panel-4-content"
@@ -5866,6 +5886,7 @@ exports[`AddMockFrom create mock should show error notification when createMock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="query"
     >
       <div
         aria-controls="panel-0-content"
@@ -6072,6 +6093,7 @@ exports[`AddMockFrom create mock should show error notification when createMock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestHeader"
     >
       <div
         aria-controls="panel-1-content"
@@ -6342,6 +6364,7 @@ exports[`AddMockFrom create mock should show error notification when createMock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestBody"
     >
       <div
         aria-controls="panel-2-content"
@@ -6583,6 +6606,7 @@ exports[`AddMockFrom create mock should show error notification when createMock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="response"
     >
       <div
         aria-controls="panel-3-content"
@@ -6866,6 +6890,7 @@ exports[`AddMockFrom create mock should show error notification when createMock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="responseHeaders"
     >
       <div
         aria-controls="panel-4-content"
@@ -7284,6 +7309,7 @@ exports[`AddMockFrom edit mock should render AddMockForm with pre-filled inputs 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="query"
     >
       <div
         aria-controls="panel-0-content"
@@ -7490,6 +7516,7 @@ exports[`AddMockFrom edit mock should render AddMockForm with pre-filled inputs 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestHeader"
     >
       <div
         aria-controls="panel-1-content"
@@ -7760,6 +7787,7 @@ exports[`AddMockFrom edit mock should render AddMockForm with pre-filled inputs 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestBody"
     >
       <div
         aria-controls="panel-2-content"
@@ -8001,6 +8029,7 @@ exports[`AddMockFrom edit mock should render AddMockForm with pre-filled inputs 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="response"
     >
       <div
         aria-controls="panel-3-content"
@@ -8293,6 +8322,7 @@ exports[`AddMockFrom edit mock should render AddMockForm with pre-filled inputs 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="responseHeaders"
     >
       <div
         aria-controls="panel-4-content"
@@ -8705,6 +8735,7 @@ exports[`AddMockFrom edit mock should show error notification when updateMock ca
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="query"
     >
       <div
         aria-controls="panel-0-content"
@@ -8911,6 +8942,7 @@ exports[`AddMockFrom edit mock should show error notification when updateMock ca
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestHeader"
     >
       <div
         aria-controls="panel-1-content"
@@ -9181,6 +9213,7 @@ exports[`AddMockFrom edit mock should show error notification when updateMock ca
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestBody"
     >
       <div
         aria-controls="panel-2-content"
@@ -9422,6 +9455,7 @@ exports[`AddMockFrom edit mock should show error notification when updateMock ca
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="response"
     >
       <div
         aria-controls="panel-3-content"
@@ -9714,6 +9748,7 @@ exports[`AddMockFrom edit mock should show error notification when updateMock ca
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="responseHeaders"
     >
       <div
         aria-controls="panel-4-content"
@@ -10126,6 +10161,7 @@ exports[`AddMockFrom edit mock should update existing mock and navigate to mock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="query"
     >
       <div
         aria-controls="panel-0-content"
@@ -10332,6 +10368,7 @@ exports[`AddMockFrom edit mock should update existing mock and navigate to mock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestHeader"
     >
       <div
         aria-controls="panel-1-content"
@@ -10602,6 +10639,7 @@ exports[`AddMockFrom edit mock should update existing mock and navigate to mock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestBody"
     >
       <div
         aria-controls="panel-2-content"
@@ -10843,6 +10881,7 @@ exports[`AddMockFrom edit mock should update existing mock and navigate to mock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="response"
     >
       <div
         aria-controls="panel-3-content"
@@ -11135,6 +11174,7 @@ exports[`AddMockFrom edit mock should update existing mock and navigate to mock 
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="responseHeaders"
     >
       <div
         aria-controls="panel-4-content"
@@ -11547,6 +11587,7 @@ exports[`AddMockFrom edit mock should update existing mock on clicking submit 1`
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="query"
     >
       <div
         aria-controls="panel-0-content"
@@ -11753,6 +11794,7 @@ exports[`AddMockFrom edit mock should update existing mock on clicking submit 1`
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestHeader"
     >
       <div
         aria-controls="panel-1-content"
@@ -12023,6 +12065,7 @@ exports[`AddMockFrom edit mock should update existing mock on clicking submit 1`
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="requestBody"
     >
       <div
         aria-controls="panel-2-content"
@@ -12264,6 +12307,7 @@ exports[`AddMockFrom edit mock should update existing mock on clicking submit 1`
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="response"
     >
       <div
         aria-controls="panel-3-content"
@@ -12556,6 +12600,7 @@ exports[`AddMockFrom edit mock should update existing mock on clicking submit 1`
     </div>
     <div
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiAccordion-root MuiAccordion-rounded MuiAccordion-gutters w-1/2 my-8 p-2 css-1elwnq4-MuiPaper-root-MuiAccordion-root"
+      id="responseHeaders"
     >
       <div
         aria-controls="panel-4-content"

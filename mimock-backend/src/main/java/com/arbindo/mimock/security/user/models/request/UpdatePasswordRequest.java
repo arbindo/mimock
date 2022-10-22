@@ -1,6 +1,5 @@
 package com.arbindo.mimock.security.user.models.request;
 
-import com.arbindo.mimock.constraints.ValidPassword;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +23,5 @@ public class UpdatePasswordRequest {
             example = "$2a$12$GekvNjpI6TOSDXJRYMNzguU4edoaHaTXs1jvHELi27AW2zsNopTxm",
             description = "BCrypt encoded password"
     )
-    @ValidPassword
     private String password;
 }

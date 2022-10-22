@@ -10,7 +10,12 @@
     "cypress": "^10.10.0"
   },
   "scripts": {
-    "test": "cypress run",
-    "e2e": "cypress open"
+    "start": "cypress open",
+    "test": "cypress run --browser chrome --headless",
+    "run:headed": "cypress run --browser chrome --headed"
+  },
+  "devDependencies": {
+    "cy-verify-downloads": "^0.1.11",
+    "pg": "^8.8.0"
   }
 }

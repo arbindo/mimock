@@ -57,7 +57,7 @@ function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
 				return error;
 			}
 
-			const fileType = mime.getType(file.path);
+			const fileType = mime.getType(file.name);
 
 			if (
 				responseContentType !== 'application/octet-stream' &&

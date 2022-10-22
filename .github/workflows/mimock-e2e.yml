@@ -8,26 +8,32 @@ on:
     branches: [main]
 
 jobs:
-  cypress-e2e:
-    name: Running mimock e2e tests
+  cypress-e2e-chrome:
+    name: Running mimock e2e tests on chrome
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browser: [chrome]
+        node-version: [16.x]
 
     steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        working-directory: e2e
-        run: yarn
+      - name: Start mimock
+        run: SKIP_TESTS=true make start-app-container
 
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          browser: ${{ matrix.browser }}
+          browser: chrome
+          working-directory: e2e
           record: true
+          tag: node-${{ matrix.node-version }}
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
