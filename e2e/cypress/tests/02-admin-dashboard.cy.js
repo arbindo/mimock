@@ -1,6 +1,15 @@
 import users from "../test-data/users.json";
+import queries from "../support/extensions/pgQueries";
 
 describe("Admin", () => {
+  before(() => {
+    cy.task("queryTestDb", queries.deleteNonAdminUsers);
+  });
+
+  after(() => {
+    cy.task("queryTestDb", queries.deleteNonAdminUsers);
+  });
+
   beforeEach(() => {
     const { userName, password } = users.admin;
     cy.login(userName, password);

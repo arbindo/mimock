@@ -29,7 +29,7 @@ describe("Mock management for admin", () => {
     cy.getByTestId("input-route").type(textMockData.route);
     cy.getByTestId("http-methods").select(textMockData.httpMethod);
 
-    cy.get("#panel-0-header")
+    cy.get("#query")
       .click()
       .getByTestId("query-param-wrapper > view-mode > view-mode-code")
       .click()
@@ -55,10 +55,11 @@ describe("Mock management for admin", () => {
       .getByTestId("queryParam_1_value")
       .type("true")
       .getByTestId("save-queryParam-button")
+      .click()
+      .get("#query")
       .click();
-    cy.get("#panel-0-header").click();
 
-    cy.get("#panel-1-header")
+    cy.get("#requestHeader")
       .click()
       .getByTestId("request-header-wrapper > view-mode > view-mode-code")
       .click()
@@ -70,10 +71,10 @@ describe("Mock management for admin", () => {
       .click()
       .getByTestId("save-requestHeader-button")
       .click()
-      .get("#panel-1-header")
+      .get("#requestHeader")
       .click();
 
-    cy.get("#panel-2-header")
+    cy.get("#requestBody")
       .click()
       .getByTestId("request-body-type")
       .select(textMockData.requestBodyType)
@@ -85,10 +86,10 @@ describe("Mock management for admin", () => {
       .click()
       .getByTestId("save-requestBody-button")
       .click()
-      .get("#panel-2-header")
+      .get("#requestBody")
       .click();
 
-    cy.get("#panel-3-header")
+    cy.get("#response")
       .click()
       .get('[type="radio"]')
       .first()
@@ -100,10 +101,10 @@ describe("Mock management for admin", () => {
       })
       .getByTestId("save-response-button")
       .click()
-      .get("#panel-3-header")
+      .get("#response")
       .click();
 
-    cy.get("#panel-4-header")
+    cy.get("#responseHeaders")
       .click()
       .getByTestId("response-headers-wrapper > view-mode > view-mode-code")
       .click()
@@ -113,7 +114,7 @@ describe("Mock management for admin", () => {
       .click()
       .getByTestId("save-responseHeader-button")
       .click()
-      .get("#panel-4-header")
+      .get("#responseHeaders")
       .click();
 
     cy.getByTestId("create-mock-button").click();
@@ -203,7 +204,7 @@ describe("Mock management for admin", () => {
       .type(imageMockData.route)
       .getByTestId("http-methods")
       .select(imageMockData.httpMethod)
-      .get("#panel-3-header")
+      .get("#response")
       .click()
       .get(":nth-child(2) > .MuiRadio-root > .PrivateSwitchBase-input")
       .check()
@@ -259,7 +260,7 @@ describe("Mock management for admin", () => {
       .click()
       .getByTestId("edit-btn")
       .click()
-      .get("#panel-0-header")
+      .get("#query")
       .click()
       .getByTestId("remove-param-tooltip-1")
       .click()
