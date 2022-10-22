@@ -4,10 +4,12 @@ import queries from "../support/extensions/pgQueries";
 describe("Admin", () => {
   before(() => {
     cy.task("queryTestDb", queries.deleteNonAdminUsers);
+    cy.task("queryTestDb", queries.deleteAllMocks);
   });
 
   after(() => {
     cy.task("queryTestDb", queries.deleteNonAdminUsers);
+    cy.task("queryTestDb", queries.deleteAllMocks);
   });
 
   beforeEach(() => {
