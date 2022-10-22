@@ -1,5 +1,5 @@
 export default {
-  deleteNonAdminUsers: `DELETE FROM mimock_schema_dev.USERS where user_name <> 'mimock_admin'`,
+  deleteNonAdminUsers: `DELETE FROM USERS where user_name <> 'mimock_admin'`,
   deleteAllMocks: `delete from mocks`,
   deleteTextResponse: `delete from textual_responses`,
   deleteBinaryResponse: `delete from binary_responses`,

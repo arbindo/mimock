@@ -6,18 +6,16 @@ describe("Mock management for admin", () => {
   let mockId;
 
   before(() => {
-    const { userName, password } = user.admin;
-    cy.login(userName, password);
+    cy.task("queryTestDb", queries.deleteAllMocks);
+  });
+
+  after(() => {
     cy.task("queryTestDb", queries.deleteAllMocks);
   });
 
   beforeEach(() => {
     const { userName, password } = user.admin;
     cy.login(userName, password);
-  });
-
-  after(() => {
-    cy.task("queryTestDb", queries.deleteAllMocks);
   });
 
   it("should add new mock with text response", () => {

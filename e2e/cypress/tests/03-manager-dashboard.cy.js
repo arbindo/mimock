@@ -6,16 +6,16 @@ describe("Manager", () => {
   before(() => {
     const { userName, name } = users[roles.manager.toLowerCase()];
 
-    cy.task("queryTestDb", queries.deleteNonAdminUsers);
-
-    cy.task(
-      "queryTestDb",
-      `
+    cy.task("queryTestDb", queries.deleteNonAdminUsers)
+      .task("queryTestDb", queries.deleteAllMocks)
+      .task(
+        "queryTestDb",
+        `
         insert into users(user_id, name, user_name, password, is_user_active, role_id, created_at)
         values (gen_random_uuid(), '${name}', '${userName}', '$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau', 
         true, (select id from user_roles where role_name = 'MANAGER') , current_timestamp)
      `
-    );
+      );
   });
 
   after(() => {
@@ -40,8 +40,7 @@ describe("Manager", () => {
 
   it("should not be permitted to access user management", () => {
     cy.visit("/mimock-ui/admin/users");
-    cy.getByTestId("permission-error-home-link").click();
-    cy.waitForLoader();
+    cy.getByTestId("permission-error-home-link").click().waitForLoader();
 
     cy.getByTestId("list-empty-container").should(
       "have.text",
