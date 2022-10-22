@@ -43,9 +43,7 @@ describe("Admin", () => {
       .getByTestId("edit-manager")
       .click()
       .get(".jss10")
-      .check()
-      .get(".rnc__notification-title")
-      .click({ multiple: true });
+      .check();
 
     cy.getByTestId("go-back-btn").click();
     cy.getByTestId("status-label-true").should("exist");
@@ -63,8 +61,6 @@ describe("Admin", () => {
       .getByTestId("update-role-btn")
       .click()
       .getByTestId("confirmation-modal-confirm-btn")
-      .click()
-      .get(".rnc__notification-title")
       .click();
 
     cy.getByTestId("go-back-btn")
@@ -91,14 +87,9 @@ describe("Admin", () => {
       .type(newPassword)
       .getByTestId("password-update-confirm-button")
       .click()
-      .get(".rnc__notification-message")
-      .click({ multiple: true });
-
-    cy.getByTestId("go-back-btn")
-      .click()
       .waitForLoader()
-      .getByTestId("role-pill-VIEWER")
-      .should("have.text", "VIEWER");
+      .getByTestId("password-updated-date")
+      .should("exist");
   });
 
   it("should delete existing user", () => {
@@ -112,8 +103,7 @@ describe("Admin", () => {
       .click()
       .getByTestId("confirmation-modal-confirm-btn")
       .click()
-      .get(".rnc__notification-title")
-      .click({ multiple: true });
+      .waitForLoader();
 
     cy.getByTestId("no-users-error").should("exist");
   });
@@ -158,8 +148,6 @@ describe("Admin", () => {
       .getByTestId("confirm-password-input")
       .type(password)
       .getByTestId("password-update-confirm-button")
-      .click()
-      .get(".rnc__notification-message")
-      .click({ multiple: true });
+      .click();
   });
 });

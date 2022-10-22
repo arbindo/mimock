@@ -14,6 +14,7 @@
     "start": "cypress open"
   },
   "devDependencies": {
-    "cy-verify-downloads": "^0.1.11"
+    "cy-verify-downloads": "^0.1.11",
+    "pg": "^8.8.0"
   }
 }

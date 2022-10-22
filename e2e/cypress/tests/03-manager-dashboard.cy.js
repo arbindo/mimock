@@ -1,13 +1,25 @@
 import users from "../test-data/users.json";
 import roles from "../test-data/userRoles.json";
+import queries from "../support/extensions/pgQueries";
 
 describe("Manager", () => {
   before(() => {
-    cy.addUser(roles.manager);
+    const { userName, name } = users[roles.manager.toLowerCase()];
+
+    cy.task("queryTestDb", queries.deleteNonAdminUsers);
+
+    cy.task(
+      "queryTestDb",
+      `
+        insert into users(user_id, name, user_name, password, is_user_active, role_id, created_at)
+        values (gen_random_uuid(), '${name}', '${userName}', '$2a$12$ZlN1NFw1WRhLb7Hn1BSFt.W.PkWjRa/I598Aab/WuXP4PM0QH9yau', 
+        true, (select id from user_roles where role_name = 'MANAGER') , current_timestamp)
+     `
+    );
   });
 
   after(() => {
-    cy.deleteUser(roles.manager);
+    cy.task("queryTestDb", queries.deleteNonAdminUsers);
   });
 
   beforeEach(() => {
@@ -79,7 +91,8 @@ describe("Manager", () => {
       .type(password)
       .getByTestId("password-update-confirm-button")
       .click()
-      .get(".rnc__notification-message")
-      .click({ multiple: true });
+      .waitForLoader()
+      .getByTestId("update-password-container")
+      .should("exist");
   });
 });

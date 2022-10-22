@@ -1,5 +1,6 @@
 import { textMockData, imageMockData } from "../test-data/mockData";
 import user from "../test-data/users.json";
+import queries from "../support/extensions/pgQueries";
 
 describe("Mock management for admin", () => {
   let mockId;
@@ -7,11 +8,16 @@ describe("Mock management for admin", () => {
   before(() => {
     const { userName, password } = user.admin;
     cy.login(userName, password);
+    cy.task("queryTestDb", queries.deleteAllMocks);
   });
 
   beforeEach(() => {
     const { userName, password } = user.admin;
     cy.login(userName, password);
+  });
+
+  after(() => {
+    cy.task("queryTestDb", queries.deleteAllMocks);
   });
 
   it("should add new mock with text response", () => {
