@@ -11,6 +11,8 @@ const pool = new Pool({
 
 module.exports = defineConfig({
   projectId: "1j76yz",
+  viewportWidth: 1280,
+  viewportHeight: 1000,
   e2e: {
     baseUrl: "https://localhost:8080",
     experimentalStudio: true,
@@ -24,8 +26,9 @@ module.exports = defineConfig({
 
           try {
             await client.query("BEGIN");
-            const res = await client.query(query, [...args]);
+            res = await client.query(query, [...args]);
             await client.query("COMMIT");
+            console.info(`Query ${query} executed successfully`);
           } catch (e) {
             console.error(e);
             await client.query("ROLLBACK");
@@ -34,7 +37,7 @@ module.exports = defineConfig({
             client.release();
           }
 
-          return res;
+          return Promise.resolve(res);
         },
       });
     },

@@ -11,7 +11,6 @@
 //
 
 Cypress.Commands.overwrite("visit", (originalFn, url = "/", options) => {
-  cy.viewport(1280, 1000);
   originalFn(url);
 });
 
