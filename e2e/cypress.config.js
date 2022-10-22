@@ -19,8 +19,21 @@ module.exports = defineConfig({
       on("task", {
         ...verifyDownloadTasks,
         async queryTestDb(query, args = []) {
-          await pool.connect();
-          const res = await pool.query(query, [...args]);
+          const client = await pool.connect();
+          let res = "";
+
+          try {
+            await client.query("BEGIN");
+            const res = await client.query(query, [...args]);
+            await client.query("COMMIT");
+          } catch (e) {
+            console.error(e);
+            await client.query("ROLLBACK");
+            return Promise.reject(e);
+          } finally {
+            client.release();
+          }
+
           return res;
         },
       });

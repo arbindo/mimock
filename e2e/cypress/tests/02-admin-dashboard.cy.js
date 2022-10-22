@@ -3,13 +3,17 @@ import queries from "../support/extensions/pgQueries";
 
 describe("Admin", () => {
   before(() => {
-    cy.task("queryTestDb", queries.deleteNonAdminUsers);
-    cy.task("queryTestDb", queries.deleteAllMocks);
+    cy.task("queryTestDb", queries.deleteNonAdminUsers)
+      .task("queryTestDb", queries.deleteAllMocks)
+      .task("queryTestDb", queries.deleteTextResponse)
+      .task("queryTestDb", queries.deleteBinaryResponse);
   });
 
   after(() => {
-    cy.task("queryTestDb", queries.deleteNonAdminUsers);
-    cy.task("queryTestDb", queries.deleteAllMocks);
+    cy.task("queryTestDb", queries.deleteNonAdminUsers)
+      .task("queryTestDb", queries.deleteAllMocks)
+      .task("queryTestDb", queries.deleteTextResponse)
+      .task("queryTestDb", queries.deleteBinaryResponse);
   });
 
   beforeEach(() => {
