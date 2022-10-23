@@ -5,7 +5,8 @@ export default {
   statusCode: "200",
   httpMethod: "POST",
   queryParams: "version=1.0&shouldRemove=true",
-  requestHeader: '{"location": "London"}',
+  requestHeader:
+    '{"authorization": "Bearer eyJpYXQiOiJT.dW4gT2N0IDIzIDIxOjI0OjMxIElTVCAyMDIyIiwiYWxnIjoiSFMyNTYifQ"}',
   responseContentType: "application/json",
   shouldDoExactHeaderMatching: "false",
   requestBody: '{"galaxy": "unknown","shipName": "x-wing"}',

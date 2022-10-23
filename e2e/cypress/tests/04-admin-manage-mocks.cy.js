@@ -179,8 +179,8 @@ describe("Mock management for admin", () => {
     cy.request({
       method: "POST",
       url: "/search?includeImage=true&version=2.0",
-      body: { galaxy: "unknown", shipName: "x-wing" },
-      headers: { location: "London" },
+      body: JSON.parse(textMockData.requestBody),
+      headers: JSON.parse(textMockData.requestHeader),
     })
       .its("body")
       .should(
@@ -274,8 +274,8 @@ describe("Mock management for admin", () => {
     cy.request({
       method: "POST",
       url: "/search?includeImage=true",
-      body: { galaxy: "unknown", shipName: "x-wing" },
-      headers: { location: "London" },
+      body: JSON.parse(textMockData.requestBody),
+      headers: JSON.parse(textMockData.requestHeader),
     })
       .its("body")
       .should(
@@ -296,8 +296,8 @@ describe("Mock management for admin", () => {
     cy.request({
       method: "POST",
       url: "/search?includeImage=true",
-      body: { galaxy: "unknown", shipName: "x-wing" },
-      headers: { location: "London" },
+      body: JSON.parse(textMockData.requestBody),
+      headers: JSON.parse(textMockData.requestHeader),
       failOnStatusCode: false,
     }).then((res) => {
       expect(res.status).to.eq(404);
@@ -312,8 +312,8 @@ describe("Mock management for admin", () => {
     cy.request({
       method: "POST",
       url: "/search?includeImage=true",
-      body: { galaxy: "unknown", shipName: "x-wing" },
-      headers: { location: "London" },
+      body: JSON.parse(textMockData.requestBody),
+      headers: JSON.parse(textMockData.requestHeader),
     })
       .its("body")
       .should(
@@ -338,8 +338,8 @@ describe("Mock management for admin", () => {
     cy.request({
       method: "POST",
       url: "/search?includeImage=true",
-      body: { galaxy: "unknown", shipName: "x-wing" },
-      headers: { location: "London" },
+      body: JSON.parse(textMockData.requestBody),
+      headers: JSON.parse(textMockData.requestHeader),
       failOnStatusCode: false,
     }).then((res) => {
       expect(res.status).to.eq(404);

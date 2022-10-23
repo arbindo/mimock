@@ -14,6 +14,7 @@ module.exports = defineConfig({
   viewportWidth: 1280,
   viewportHeight: 1000,
   e2e: {
+    retries: 1,
     baseUrl: "https://localhost:8080",
     experimentalStudio: true,
     specPattern: "cypress/**/*.cy.{js,ts}",
