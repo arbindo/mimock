@@ -34,6 +34,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
+        if (isNotAMimockEndpoint(request)) {
+            log.log(Level.DEBUG, "Filter invoked for a mock request. Skipping JWT filter");
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String authHeader = request.getHeader("Authorization");
         String authToken = null;
         String userName = null;
@@ -64,6 +70,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private static boolean isNotAMimockEndpoint(HttpServletRequest request) {
+        return !request.getRequestURL().toString().contains("/api/mimock");
     }
 
 

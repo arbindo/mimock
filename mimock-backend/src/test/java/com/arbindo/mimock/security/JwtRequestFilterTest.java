@@ -12,13 +12,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.lenient;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @SpringBootTest
 class JwtRequestFilterTest {
@@ -58,10 +61,30 @@ class JwtRequestFilterTest {
     }
 
     @Test
+    public void shouldSkipActualFiltration_WhenEndpointIsNotAMimockApi() throws ServletException, IOException {
+        MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
+        String token = "eyJpYXQiOiJTYXQgTWFyIDA1IDIyOjE4OjEyIElTVCAyMDIyIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiJ0ZXN0YWRtaW4iLCJleHAiOjE2NDY1MDA5MTF9.bzx58OY0Jj7vrlxv5gUIJI1pg_iW17W_cWNqGDZAY1E";
+        mockHttpServletRequest.addHeader("Authorization", "Bearer " + token);
+        mockHttpServletRequest.setRequestURI("/api/mock/this-is-a-mock-endpoint");
+
+        MockHttpServletResponse mockHttpServletResponse = new MockHttpServletResponse();
+        MockFilterChain mockFilterChain = new MockFilterChain();
+
+        verify(jwtUtils, times(0)).extractUsername(anyString());
+        verify(jwtUtils, times(0)).validateToken(anyString(), any(UserDetails.class));
+        verify(userDetailsService, times(0)).loadUserByUsername(anyString());
+
+        jwtRequestFilter.doFilterInternal(mockHttpServletRequest, mockHttpServletResponse, mockFilterChain);
+
+        assertEquals(200, mockHttpServletResponse.getStatus());
+    }
+
+    @Test
     public void shouldRespondWithStatusUnAuthorized_WhenTokenIsInValid() throws ServletException, IOException {
         MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
         String token = "exxyJpYXQiOiJTYXQgTWFyIDA1IDIyOjE4OjEyIElTVCAyMDIyIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiJ0ZXN0YWRtaW4iLCJleHAiOjE2NDY1MDA5MTF9.bzx58OY0Jj7vrlxv5gUIJI1pg_iW17W_cWNqGDZAY1E";
         mockHttpServletRequest.addHeader("Authorization", "Bearer " + token);
+        mockHttpServletRequest.setRequestURI("/api/mimock/v1/some-path");
 
         MockHttpServletResponse mockHttpServletResponse = new MockHttpServletResponse();
         MockFilterChain mockFilterChain = new MockFilterChain();
@@ -87,6 +110,7 @@ class JwtRequestFilterTest {
     public void shouldRespondWithStatusUnAuthorized_WhenUserIsNotPresent() throws ServletException, IOException {
         MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
         String token = "eyJpYXQiOiJTYXQgTWFyIDA1IDIyOjE4OjEyIElTVCAyMDIyIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiJ0ZXN0YWRtaW4iLCJleHAiOjE2NDY1MDA5MTF9.bzx58OY0Jj7vrlxv5gUIJI1pg_iW17W_cWNqGDZAY1E";
+        mockHttpServletRequest.setRequestURI("/api/mimock/v1/some-path");
         mockHttpServletRequest.addHeader("Authorization", "Bearer " + token);
 
         MockHttpServletResponse mockHttpServletResponse = new MockHttpServletResponse();
