@@ -38,7 +38,7 @@
         "eslint-plugin-jsx-control-statements": "^2.2.1",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^6.0.0",
-        "eslint-plugin-react": "^7.26.1",
+        "eslint-plugin-react": "^7.31.10",
         "file-loader": "^6.2.0",
         "html-webpack-plugin": "^5.3.2",
         "husky": "^7.0.4",
