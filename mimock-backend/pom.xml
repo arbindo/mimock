@@ -112,7 +112,7 @@
         <dependency>
             <groupId>net.lbruun.springboot</groupId>
             <artifactId>preliquibase-spring-boot-starter</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
