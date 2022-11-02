@@ -59,6 +59,7 @@ public class MockManagementController {
 
         try {
             mock = mockManagementService.createMock(RequestModelMapper.map(request));
+            mock = mockManagementService.saveMock(mock);
         } catch (MockAlreadyExistsException e) {
             log.log(Level.ERROR, e.getMessage());
 

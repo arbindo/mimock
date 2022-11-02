@@ -42,15 +42,20 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
+        jdbc:
+          batch_size: 1000
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         default_schema: mimock_schema_dev
         types:
           print:
             banner: false
+        generate_statistics: true
+        order_inserts: true
+        order_updates: true
 
   datasource:
     url: jdbc:postgresql://localhost:5432/mimock_db
