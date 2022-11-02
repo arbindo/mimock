@@ -23,7 +23,13 @@ import {
 } from './Response.style';
 import { DeleteIcon, ActionToolTip } from '../FormCommon.style';
 
-function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
+function FileUpload({
+	responseContentType,
+	binaryFile,
+	setBinaryFile,
+	binaryFileName,
+	setBinaryFileName,
+}) {
 	const [mockData] = useRecoilState(newMockFieldsAtom);
 
 	const [isError, setIsError] = useState({
@@ -57,7 +63,8 @@ function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
 				return error;
 			}
 
-			const fileType = mime.getType(file.name);
+			const fileName = file.name;
+			const fileType = mime.getType(fileName);
 
 			if (
 				responseContentType !== 'application/octet-stream' &&
@@ -72,6 +79,7 @@ function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
 				return error;
 			}
 
+			setBinaryFileName(fileName);
 			return null;
 		},
 	});
@@ -79,9 +87,11 @@ function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
 	const downloadFile = (e) => {
 		e.preventDefault();
 
-		const fileName = `${mockData.id}.${
-			mime.getExtension(mockData.responseContentType) || 'bin'
-		}`;
+		const fileName =
+			binaryFileName ||
+			`${mockData.id}.${
+				mime.getExtension(mockData.responseContentType) || 'bin'
+			}`;
 
 		fileDownload(binaryFile, fileName);
 	};
@@ -167,11 +177,14 @@ function FileUpload({ responseContentType, binaryFile, setBinaryFile }) {
 FileUpload.propTypes = {
 	binaryFile: PropTypes.object,
 	setBinaryFile: PropTypes.func.isRequired,
+	binaryFileName: PropTypes.string,
+	setBinaryFileName: PropTypes.func.isRequired,
 	responseContentType: PropTypes.string.isRequired,
 };
 
 FileUpload.defaultProps = {
 	binaryFile: null,
+	binaryFileName: '',
 };
 
 export default FileUpload;

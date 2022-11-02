@@ -2,10 +2,14 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-
-    <include file="create_data.xml" relativeToChangelogFile="true"/>
-    <include file="insert_data.xml" relativeToChangelogFile="true"/>
-
-    <!--    Common change sets  -->
-    <include file="../changelogs/0034_add_column_file_name.xml" relativeToChangelogFile="true"/>
+    <changeSet author="neel" id="0034_add_column_file_name">
+        <addColumn tableName="binary_responses">
+            <column name="file_name" type="varchar2"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="binary_responses">
+                <column name="file_name"/>
+            </dropColumn>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

@@ -103,7 +103,7 @@ function AddMockForm({ mode }) {
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
 					title: 'Failed to create new mock',
-					message: err?.response?.data?.message,
+					message: err?.response?.data?.message || 'Try again!',
 					animationIn: 'animate__bounceIn',
 					animationOut: 'animate__bounceOut',
 				});
@@ -131,7 +131,7 @@ function AddMockForm({ mode }) {
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
 					title: 'Failed to update mock',
-					message: err?.response?.data?.message,
+					message: err?.response?.data?.message || 'Try again!',
 					animationIn: 'animate__bounceIn',
 					animationOut: 'animate__bounceOut',
 				});
@@ -161,6 +161,7 @@ function AddMockForm({ mode }) {
 		}
 		if (mockData.binaryFile) {
 			formData.append('binaryFile', mockData.binaryFile);
+			formData.append('binaryFileName', mockData.binaryFileName);
 		}
 		formData.append('responseHeaders', mockData.responseHeaders);
 

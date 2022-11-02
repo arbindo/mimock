@@ -18,6 +18,7 @@ export default function Response() {
 	const [responseType, setResponseType] = useState(mockData.responseType);
 	const [textResponse, setTextResponse] = useState('');
 	const [binaryFile, setBinaryFile] = useState(mockData.binaryFile);
+	const [binaryFileName, setBinaryFileName] = useState(mockData.binaryFileName);
 
 	const [responseContentType, setResponseContentType] = useState(
 		mockData.responseContentType
@@ -44,6 +45,7 @@ export default function Response() {
 			setBinaryFile(null);
 			setMockData({
 				...mockData,
+				binaryFileName: '',
 				binaryFile: null,
 			});
 		} else {
@@ -65,12 +67,14 @@ export default function Response() {
 				expectedTextResponse: '',
 				responseType: mockManagementConstants.BINARY_RESPONSE,
 				binaryFile,
+				binaryFileName,
 			});
 		} else {
 			setMockData({
 				...mockData,
 				responseContentType,
 				binaryFile: null,
+				binaryFileName: '',
 				responseType: mockManagementConstants.TEXTUAL_RESPONSE,
 				expectedTextResponse: textResponse,
 			});
@@ -128,6 +132,8 @@ export default function Response() {
 						responseContentType={responseContentType}
 						binaryFile={binaryFile}
 						setBinaryFile={setBinaryFile}
+						binaryFileName={binaryFileName}
+						setBinaryFileName={setBinaryFileName}
 					/>
 				</Otherwise>
 			</Choose>

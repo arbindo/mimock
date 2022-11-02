@@ -30,6 +30,10 @@ public class BinaryResponse {
     @Schema(description = "Expected response file in bytes")
     private byte[] responseFile;
 
+    @Column(name = "file_name")
+    @Schema(example = "testimage.jpeg", description = "Name of the binary file")
+    private String binaryFileName;
+
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
     @Schema(description = "Creation Timestamp")

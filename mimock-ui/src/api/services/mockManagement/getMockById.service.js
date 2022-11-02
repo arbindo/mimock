@@ -37,6 +37,7 @@ export const getMock = async (id) => {
 							// eslint-disable-next-line no-mixed-spaces-and-tabs
 					  ])
 					: null,
+				binaryFileName: mockData.binaryResponse?.binaryFileName,
 			};
 
 			return parsedData;

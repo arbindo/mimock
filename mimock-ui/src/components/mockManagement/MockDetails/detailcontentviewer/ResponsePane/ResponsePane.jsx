@@ -24,6 +24,7 @@ function ResponsePane({
 	mockId,
 	textResponse,
 	binaryResponse,
+	binaryFileName,
 	responseType,
 }) {
 	// #region Defaults
@@ -40,7 +41,8 @@ function ResponsePane({
 	const downloadFile = (e) => {
 		e.preventDefault();
 
-		const fileName = `${mockId}.${mime.getExtension(contentType) || '.bin'}`;
+		const fileName =
+			binaryFileName || `${mockId}.${mime.getExtension(contentType) || '.bin'}`;
 		const blob = new Blob([Base64.toUint8Array(binaryResponse)]);
 
 		fileDownload(blob, fileName);
@@ -101,6 +103,7 @@ ResponsePane.propTypes = {
 	responseType: PropTypes.string.isRequired,
 	mockId: PropTypes.string.isRequired,
 	binaryResponse: PropTypes.string,
+	binaryFileName: PropTypes.string,
 	textResponse: PropTypes.string,
 };
 

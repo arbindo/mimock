@@ -12,6 +12,7 @@ jest.mock('js-file-download');
 jest.mock('mime');
 
 const mockSetBinaryFile = jest.fn();
+const mockSetBinaryFileName = jest.fn();
 
 describe('FileUpload', () => {
 	beforeEach(() => {
@@ -25,6 +26,7 @@ describe('FileUpload', () => {
 					expectedTextResponse: '',
 					binaryFile: null,
 					mode: 'create',
+					binaryFileName: '',
 				},
 				mockedRecoilFn,
 			];
@@ -68,6 +70,7 @@ describe('FileUpload', () => {
 				<FileUpload
 					responseContentType='image/png'
 					setBinaryFile={mockSetBinaryFile}
+					setBinaryFileName={mockSetBinaryFileName}
 				/>
 			);
 		});
@@ -87,6 +90,9 @@ describe('FileUpload', () => {
 
 		expect(mockSetBinaryFile).toHaveBeenCalledTimes(1);
 		expect(mockSetBinaryFile).toHaveBeenCalledWith(file);
+
+		expect(mockSetBinaryFileName).toHaveBeenCalledTimes(1);
+		expect(mockSetBinaryFileName).toHaveBeenCalledWith('ping.png');
 
 		await act(async () => {
 			rerender(
@@ -165,6 +171,7 @@ describe('FileUpload', () => {
 					expectedTextResponse: '',
 					binaryFile: null,
 					mode: 'create',
+					binaryFileName: '',
 				},
 				mockedRecoilFn,
 			];
@@ -179,6 +186,7 @@ describe('FileUpload', () => {
 				<FileUpload
 					responseContentType='application/octet-stream'
 					setBinaryFile={mockSetBinaryFile}
+					setBinaryFileName={mockSetBinaryFileName}
 				/>
 			);
 		});
@@ -198,6 +206,9 @@ describe('FileUpload', () => {
 
 		expect(mockSetBinaryFile).toHaveBeenCalledTimes(1);
 		expect(mockSetBinaryFile).toHaveBeenCalledWith(file);
+
+		expect(mockSetBinaryFileName).toHaveBeenCalledTimes(1);
+		expect(mockSetBinaryFileName).toHaveBeenCalledWith('ping.jpeg');
 
 		await act(async () => {
 			rerender(

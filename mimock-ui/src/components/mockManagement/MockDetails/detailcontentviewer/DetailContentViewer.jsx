@@ -181,6 +181,7 @@ function DetailContentViewer({ mock }) {
 								: labels.fallback
 						}
 						binaryResponse={mock.binaryResponse?.responseFile || null}
+						binaryFileName={mock.binaryResponse?.binaryFileName}
 					/>
 				</If>
 			</NavTabContent>

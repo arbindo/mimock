@@ -26,4 +26,5 @@ public class ProcessedMockRequest {
     private String requestBodyType;
     private String expectedTextResponse;
     private MultipartFile binaryFile;
+    private String binaryFileName;
 }

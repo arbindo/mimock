@@ -37,4 +37,5 @@
     <include file="changelogs/0031_alter_mocks_add_column_query_param_value.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0032_update_unique_selectors_for_mocks.xml" relativeToChangelogFile="true"/>
     <include file="changelogs/0033_delete_options_from_http_methods.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/0034_add_column_file_name.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

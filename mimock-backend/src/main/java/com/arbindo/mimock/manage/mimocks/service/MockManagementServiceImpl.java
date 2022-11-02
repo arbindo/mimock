@@ -131,6 +131,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             MultipartFile file = request.getBinaryFile();
             BinaryResponse binaryResponse = BinaryResponse.builder()
                     .responseFile(file.getBytes())
+                    .binaryFileName(request.getBinaryFileName())
                     .createdAt(ZonedDateTime.now())
                     .build();
             binaryResponseRepository.save(binaryResponse);
@@ -280,6 +281,7 @@ public class MockManagementServiceImpl implements MockManagementService {
             if (existingBinaryResponse != null) {
                 existingBinaryResponse.setResponseFile(file.getBytes());
                 existingBinaryResponse.setUpdatedAt(ZonedDateTime.now());
+                existingBinaryResponse.setBinaryFileName(request.getBinaryFileName());
                 binaryResponseRepository.save(existingBinaryResponse);
                 updatedMock.setBinaryResponse(existingBinaryResponse);
             } else {

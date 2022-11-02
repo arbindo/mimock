@@ -23,6 +23,7 @@ describe('Response', () => {
 					responseContentType: 'application/json',
 					expectedTextResponse: '',
 					binaryFile: null,
+					binaryFileName: '',
 				},
 				mockedRecoilFn,
 			];
@@ -56,6 +57,7 @@ describe('Response', () => {
 					responseContentType: 'application/pdf',
 					expectedTextResponse: '',
 					binaryFile: null,
+					binaryFileName: '',
 				},
 				mockedRecoilFn,
 			];
@@ -146,6 +148,7 @@ describe('Response', () => {
 			responseContentType: 'text/plain',
 			expectedTextResponse: 'This is a test response',
 			binaryFile: null,
+			binaryFileName: '',
 		});
 
 		expect(container).toMatchSnapshot();
@@ -163,6 +166,7 @@ describe('Response', () => {
 					responseContentType: 'image/png',
 					expectedTextResponse: '',
 					binaryFile: null,
+					binaryFileName: 'ping.png',
 				},
 				mockedRecoilFn,
 			];
@@ -199,6 +203,7 @@ describe('Response', () => {
 
 		expect(mockedRecoilFn).toHaveBeenNthCalledWith(1, {
 			binaryFile: file,
+			binaryFileName: 'ping.png',
 			expectedTextResponse: '',
 			name: 'Tester',
 			responseContentType: 'image/png',

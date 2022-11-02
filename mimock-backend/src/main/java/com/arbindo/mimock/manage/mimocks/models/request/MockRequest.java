@@ -76,4 +76,6 @@ public class MockRequest {
     @Schema(description = "Represents the expected binary response")
     private MultipartFile binaryFile;
 
+    @Schema(description = "Name of the file if binary response is selected")
+    private String binaryFileName;
 }

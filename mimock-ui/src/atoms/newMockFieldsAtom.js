@@ -22,6 +22,7 @@ const newMockFieldsAtom = atom({
 		expectedTextResponse: '',
 		responseHeaders: '',
 		binaryFile: null,
+		binaryFileName: '',
 	},
 });
 

@@ -46,6 +46,7 @@ public class RequestModelMapper {
                 .responseHeaders(getHeadersMap(request.getResponseHeaders()))
                 .expectedTextResponse(request.getExpectedTextResponse())
                 .binaryFile(request.getBinaryFile())
+                .binaryFileName(request.getBinaryFileName())
                 .build();
     }
 
