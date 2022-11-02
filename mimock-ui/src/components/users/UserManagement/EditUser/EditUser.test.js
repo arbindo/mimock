@@ -8,7 +8,9 @@ jest.mock('./UserDetails', () => {
 		<div data-testid='edit-user-details'>User Details</div>
 	);
 
-	return () => UserDetailsMock;
+	const userDetailsMock = () => UserDetailsMock;
+
+	return userDetailsMock;
 });
 
 describe('EditUser', () => {

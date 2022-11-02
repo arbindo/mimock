@@ -17,7 +17,9 @@ jest.mock('./UserRole', () => {
 		</div>
 	);
 
-	return () => UserRoleMock;
+	const userRoleMock = () => UserRoleMock;
+
+	return userRoleMock;
 });
 jest.mock('./UserActivationStatus', () => {
 	const UserActivationStatusMock = (
@@ -27,7 +29,9 @@ jest.mock('./UserActivationStatus', () => {
 		</div>
 	);
 
-	return () => UserActivationStatusMock;
+	const userActivationStatusMock = () => UserActivationStatusMock;
+
+	return userActivationStatusMock;
 });
 jest.mock('./UserPasswordUpdate', () => {
 	const UserPasswordUpdateMock = (
@@ -37,7 +41,9 @@ jest.mock('./UserPasswordUpdate', () => {
 		</div>
 	);
 
-	return () => UserPasswordUpdateMock;
+	const userPasswordUpdateMock = () => UserPasswordUpdateMock;
+
+	return userPasswordUpdateMock;
 });
 jest.mock('./UserPasswordUpdate/PasswordUpdateModal', () => {
 	const UserPasswordUpdateMock = (
@@ -46,7 +52,9 @@ jest.mock('./UserPasswordUpdate/PasswordUpdateModal', () => {
 		</div>
 	);
 
-	return () => UserPasswordUpdateMock;
+	const userPasswordUpdateMock = () => UserPasswordUpdateMock;
+
+	return userPasswordUpdateMock;
 });
 jest.mock('services/users');
 jest.mock('react-router-dom', () => ({
