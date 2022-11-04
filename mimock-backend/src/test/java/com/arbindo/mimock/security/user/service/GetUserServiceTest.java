@@ -56,7 +56,7 @@ class GetUserServiceTest {
         userList.add(user1);
         userList.add(user2);
 
-        lenient().when(userRepository.findAllByDeletedAtIsNull()).thenReturn(userList);
+        lenient().when(userRepository.findAllByDeletedAtIsNullOrderByName()).thenReturn(userList);
 
         UserInfo userInfo1 = UserInfo.builder()
                 .userId(user1.getId().toString())
@@ -92,7 +92,7 @@ class GetUserServiceTest {
 
     @Test
     void shouldReturnNull_WhenNoUsersExistInDB() {
-        lenient().when(userRepository.findAllByDeletedAtIsNull()).thenReturn(null);
+        lenient().when(userRepository.findAllByDeletedAtIsNullOrderByName()).thenReturn(null);
 
         Users allUsers = userService.getAllUsers();
 

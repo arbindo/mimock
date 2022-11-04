@@ -28,7 +28,7 @@ public class GetUserService {
 
     public Users getAllUsers() {
         log.log(Level.INFO, "Fetching all users from Database");
-        List<User> allUsers = userRepository.findAllByDeletedAtIsNull();
+        List<User> allUsers = userRepository.findAllByDeletedAtIsNullOrderByName();
 
         if (CollectionUtils.isEmpty(allUsers)) {
             log.log(Level.INFO, "No users currently exist in the Database");
