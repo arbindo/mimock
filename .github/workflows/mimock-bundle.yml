@@ -77,7 +77,7 @@ jobs:
 
       - name: Build mimock docker image
         run: |
-          docker system prune -f --volume
+          docker system prune -f
 
           docker build -t mimock/mimock:slim . -f ./Dockerfile.slim
           docker tag mimock/mimock:slim mimock/mimock:$MIMOCK_CURRENT_VERSION-slim
