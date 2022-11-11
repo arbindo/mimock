@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.arbindo</groupId>
     <artifactId>mimock</artifactId>
-    <version>0.0.2-snapshot</version>
+    <version>${revision}</version>
     <name>mimock</name>
     <description>Platform to set up rest api mocks</description>
     <properties>

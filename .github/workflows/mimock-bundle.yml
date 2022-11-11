@@ -6,6 +6,8 @@ jobs:
   bundle-app:
     name: Bundle spring-boot app with UI
     runs-on: ubuntu-latest
+    env:
+      MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -16,35 +18,35 @@ jobs:
 
       - name: Build platform bundles
         run: |
-          cp -p ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar ./installation/lib/mimock.jar
+          cp -p ./mimock-backend/target/mimock-$MIMOCK_CURRENT_VERSION.jar ./installation/lib/mimock.jar
 
           cd ./installation
-          zip -r mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip lib/*
-          cd .. && mv ./installation/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip .
-          zip -ju mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip installation/*.bat installation/mimock.properties installation/psql_setup.sql
+          zip -r mimock-$MIMOCK_CURRENT_VERSION.zip lib/*
+          cd .. && mv ./installation/mimock-$MIMOCK_CURRENT_VERSION.zip .
+          zip -ju mimock-$MIMOCK_CURRENT_VERSION.zip installation/*.bat installation/mimock.properties installation/psql_setup.sql
 
-          tar czf mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz --directory=installation lib start mimock.properties setup_database psql_setup.sql
+          tar czf mimock-$MIMOCK_CURRENT_VERSION.tar.gz --directory=installation lib start mimock.properties setup_database psql_setup.sql
 
       - name: Publish JAR
         uses: actions/upload-artifact@v2
         with:
-          name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}-jar.zip
+          name: mimock-$MIMOCK_CURRENT_VERSION-jar.zip
           path: |
-            ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar
+            ./mimock-backend/target/mimock-$MIMOCK_CURRENT_VERSION.jar
 
       - name: Publish Linux Bundle
         uses: actions/upload-artifact@v2
         with:
-          name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz
+          name: mimock-$MIMOCK_CURRENT_VERSION.tar.gz
           path: |
-            mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz
+            mimock-$MIMOCK_CURRENT_VERSION.tar.gz
 
       - name: Publish Windows Bundle
         uses: actions/upload-artifact@v2
         with:
-          name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip
+          name: mimock-$MIMOCK_CURRENT_VERSION.zip
           path: |
-            mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip
+            mimock-$MIMOCK_CURRENT_VERSION.zip
 
   hold-release:
     name: Wait for review
@@ -62,6 +64,8 @@ jobs:
     name: Push Docker image to Docker Hub
     needs: hold-release
     runs-on: ubuntu-latest
+    env:
+      MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -76,10 +80,10 @@ jobs:
           docker system prune -f --volume
 
           docker build -t mimock/mimock:slim . -f ./Dockerfile.slim
-          docker tag mimock/mimock:slim mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
+          docker tag mimock/mimock:slim mimock/mimock:$MIMOCK_CURRENT_VERSION-slim
 
           docker build -t mimock/mimock:latest . -f ./Dockerfile.complete
-          docker tag mimock/mimock:latest mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}
+          docker tag mimock/mimock:latest mimock/mimock:$MIMOCK_CURRENT_VERSION
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -97,4 +101,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }},mimock/mimock:latest,mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
+          tags: mimock/mimock:$MIMOCK_CURRENT_VERSION,mimock/mimock:latest,mimock/mimock:$MIMOCK_CURRENT_VERSION-slim

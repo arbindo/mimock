@@ -7,14 +7,14 @@ TEST_CONFIG_FILE := 'classpath:/application.test.yml'
 TEST_DB_URL := 'jdbc:postgresql://localhost:5427/mimock_db'
 
 STATIC_DIR := '../mimock-backend/src/main/resources/static/mimock-ui'
-VERSION := '0.0.1'
+VERSION := $$MIMOCK_CURRENT_VERSION
 
 ifdef SKIP_TESTS
-BUILD_BACKEND := cd ./mimock-backend && ./mvnw -ntp clean package -Dmaven.test.skip=true && cd ..
+BUILD_BACKEND := cd ./mimock-backend && ./mvnw -ntp clean package -Dmaven.test.skip=true -Drevision=$(VERSION) && cd ..
 BUILD_UI := cd ./mimock-ui && yarn && NODE_NEV=production yarn build
 else
 BUILD_UI := cd ./mimock-ui && yarn && yarn test && NODE_NEV=production yarn build
-BUILD_BACKEND := cd ./mimock-backend && ./mvnw -ntp clean package && cd ..
+BUILD_BACKEND := cd ./mimock-backend && ./mvnw -ntp clean package -Drevision=$(VERSION) && cd ..
 endif
 
 cd_backend:
