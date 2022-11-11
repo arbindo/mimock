@@ -11,6 +11,8 @@ jobs:
   cypress-e2e-chrome:
     name: Running mimock e2e tests on chrome
     runs-on: ubuntu-latest
+    env:
+      MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     strategy:
       matrix:
         node-version: [16.x]
