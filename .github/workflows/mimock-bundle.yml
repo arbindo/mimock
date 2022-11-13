@@ -6,6 +6,8 @@ jobs:
   bundle-app:
     name: Bundle spring-boot app with UI
     runs-on: ubuntu-latest
+    env:
+      MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -62,6 +64,8 @@ jobs:
     name: Push Docker image to Docker Hub
     needs: hold-release
     runs-on: ubuntu-latest
+    env:
+      MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
