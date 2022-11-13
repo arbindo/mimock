@@ -58,9 +58,9 @@ Some of the key features offered by the Mimock are as follows
 
 Mimock is a Java based application, hence it requires `Java 8+` to run the application. 
 
-- [**Windows**](https://github.com/arbindo/mimock/releases/download/alpha-v0.0.1/mimock-0.0.1.zip)
-- [**Linux**](https://github.com/arbindo/mimock/releases/download/alpha-v0.0.1/mimock-0.0.1.tar.gz)
-- [**MacOS**](https://github.com/arbindo/mimock/releases/download/alpha-v0.0.1/mimock-0.0.1.tar.gz)
+- [**Windows**](https://github.com/arbindo/mimock/releases/download/0.0.2/mimock-0.0.2.zip)
+- [**Linux**](https://github.com/arbindo/mimock/releases/download/0.0.2/mimock-0.0.2.tar.gz)
+- [**MacOS**](https://github.com/arbindo/mimock/releases/download/0.0.2/mimock-0.0.2.tar.gz)
 
 ### Docker image
 
