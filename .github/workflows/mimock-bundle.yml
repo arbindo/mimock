@@ -101,4 +101,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: mimock/mimock:$MIMOCK_CURRENT_VERSION,mimock/mimock:latest,mimock/mimock:$MIMOCK_CURRENT_VERSION-slim
+          tags: mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }},mimock/mimock:latest,mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
