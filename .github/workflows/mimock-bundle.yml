@@ -32,21 +32,21 @@ jobs:
         with:
           name: mimock-$MIMOCK_CURRENT_VERSION-jar.zip
           path: |
-            ./mimock-backend/target/mimock-$MIMOCK_CURRENT_VERSION.jar
+            ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }.jar
 
       - name: Publish Linux Bundle
         uses: actions/upload-artifact@v2
         with:
           name: mimock-$MIMOCK_CURRENT_VERSION.tar.gz
           path: |
-            mimock-$MIMOCK_CURRENT_VERSION.tar.gz
+            mimock-${{ secrets.MIMOCK_CURRENT_VERSION }.tar.gz
 
       - name: Publish Windows Bundle
         uses: actions/upload-artifact@v2
         with:
           name: mimock-$MIMOCK_CURRENT_VERSION.zip
           path: |
-            mimock-$MIMOCK_CURRENT_VERSION.zip
+            mimock-${{ secrets.MIMOCK_CURRENT_VERSION }.zip
 
   hold-release:
     name: Wait for review
