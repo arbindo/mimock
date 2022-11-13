@@ -2,7 +2,7 @@ FROM alpine:3.15.0
 
 WORKDIR /home/mimock
 
-COPY ${PWD}/mimock-backend/target/mimock*.jar .
+COPY ${PWD}/mimock-backend/target/mimock*.jar mimock.jar
 
 RUN apk add openjdk11-jre
 RUN apk add postgresql13
@@ -37,4 +37,4 @@ ENV MIMOCK_CORS_EXPOSED_HEADERS=Cache-Control,Content-Language,Content-Length,Co
 
 EXPOSE 8080
 
-CMD export MIMOCK_JWT_SECRET=$(cat /tmp/jwt.password) && export MIMOCK_KEYSTORE_PASSWORD=$(cat /tmp/key.password) && export MIMOCK_DB_PASSWORD=$(cat /tmp/db.password) && su - postgres -c "pg_ctl restart -D /var/lib/postgresql/data -l /var/lib/postgresql/log.log" && java -jar mimock-0.0.1.jar
+CMD export MIMOCK_JWT_SECRET=$(cat /tmp/jwt.password) && export MIMOCK_KEYSTORE_PASSWORD=$(cat /tmp/key.password) && export MIMOCK_DB_PASSWORD=$(cat /tmp/db.password) && su - postgres -c "pg_ctl restart -D /var/lib/postgresql/data -l /var/lib/postgresql/log.log" && java -jar mimock.jar
