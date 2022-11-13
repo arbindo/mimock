@@ -24,7 +24,7 @@ Setup mocks for REST endpoints
   </a>
 
   <a href="https://hub.docker.com/r/mimock/mimock">
-    <img src="https://img.shields.io/static/v1?label=mimock/mimock&message=v0.0.1&color=blue&logo=docker" />
+    <img src="https://img.shields.io/static/v1?label=mimock/mimock&message=latest&color=blue&logo=docker" />
   </a>
 </div>
 
