@@ -73,7 +73,7 @@ jobs:
       - name: Build JAR bundle-app
         working-directory: mimock-backend
         run: |
-          ./mvnw -ntp clean package -P packageJar -Dmaven.test.skip=true
+          SKIP_TESTS=true make bundle-app
 
       - name: Build mimock docker image
         run: |
