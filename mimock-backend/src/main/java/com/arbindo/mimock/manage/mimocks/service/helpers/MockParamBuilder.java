@@ -1,8 +1,11 @@
 package com.arbindo.mimock.manage.mimocks.service.helpers;
 
 import com.arbindo.mimock.entities.*;
+import com.arbindo.mimock.manage.mimocks.CachedStaticDataSupplier;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
-import com.arbindo.mimock.repository.*;
+import com.arbindo.mimock.repository.RequestBodiesForMockRepository;
+import com.arbindo.mimock.repository.RequestHeadersRepository;
+import com.arbindo.mimock.repository.ResponseHeadersRepository;
 import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -21,10 +24,8 @@ import java.util.Optional;
 public class MockParamBuilder {
     private RequestHeadersRepository requestHeadersRepository;
     private ResponseHeadersRepository responseHeadersRepository;
-    private RequestBodyTypeRepository requestBodyTypeRepository;
     private RequestBodiesForMockRepository requestBodiesForMockRepository;
-    private HttpMethodsRepository httpMethodsRepository;
-    private ResponseContentTypesRepository responseContentTypesRepository;
+    private CachedStaticDataSupplier cachedStaticDataSupplier;
 
     @Setter
     private ProcessedMockRequest request;
@@ -32,21 +33,17 @@ public class MockParamBuilder {
     @Autowired
     public MockParamBuilder(RequestHeadersRepository requestHeadersRepository,
                             ResponseHeadersRepository responseHeadersRepository,
-                            RequestBodyTypeRepository requestBodyTypeRepository,
                             RequestBodiesForMockRepository requestBodiesForMockRepository,
-                            HttpMethodsRepository httpMethodsRepository,
-                            ResponseContentTypesRepository responseContentTypesRepository) {
+                            CachedStaticDataSupplier cachedStaticDataSupplier) {
         this.requestHeadersRepository = requestHeadersRepository;
         this.responseHeadersRepository = responseHeadersRepository;
-        this.requestBodyTypeRepository = requestBodyTypeRepository;
         this.requestBodiesForMockRepository = requestBodiesForMockRepository;
-        this.httpMethodsRepository = httpMethodsRepository;
-        this.responseContentTypesRepository = responseContentTypesRepository;
+        this.cachedStaticDataSupplier = cachedStaticDataSupplier;
     }
 
     public RequestBodiesForMock requestBody() {
         if (request.getRequestBody() != null && !request.getRequestBody().isEmpty()) {
-            RequestBodyType requestBodyType = requestBodyTypeRepository.findOneByRequestBodyType(request.getRequestBodyType());
+            RequestBodyType requestBodyType = cachedStaticDataSupplier.getRequestBodyTypeFor(request.getRequestBodyType());
             RequestBodiesForMock requestBodiesForMock = RequestBodiesForMock.builder()
                     .requestBodyType(requestBodyType)
                     .requestBody(request.getRequestBody())
@@ -104,9 +101,9 @@ public class MockParamBuilder {
     }
 
     public HttpMethod findHttpMethodFromQueryString(String httpMethod) {
-        try{
+        try {
             return findHttpMethodInternal(httpMethod);
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
@@ -118,14 +115,14 @@ public class MockParamBuilder {
 
     private HttpMethod findHttpMethodInternal(String httpMethod) throws Exception {
         if (ValidationUtil.isNotNullOrEmpty(httpMethod)) {
-            return httpMethodsRepository.findByMethod(httpMethod);
+            return cachedStaticDataSupplier.getHttpMethodFor(httpMethod);
         }
         throw new Exception(String.format("Unable to extract HTTP Method!! Invalid method: %s", httpMethod));
     }
 
     public ResponseContentType responseContentType(String responseContentTypeString) throws Exception {
         if (ValidationUtil.isNotNullOrEmpty(responseContentTypeString)) {
-            return responseContentTypesRepository.findByContentType(responseContentTypeString);
+            return cachedStaticDataSupplier.getResponseContentTypeFor(responseContentTypeString);
         }
         throw new Exception(String.format("Unable to extract Response Content Type!! Invalid responseContentType: %s",
                 responseContentTypeString));
