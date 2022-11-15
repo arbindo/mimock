@@ -11,6 +11,9 @@ server:
     enabled-protocols: TLSv1.3
 
 spring:
+  application:
+    name: mimock
+
   main:
     banner-mode: off
 

@@ -15,7 +15,15 @@ server:
     key-store-type: PKCS12
     enabled-protocols: TLSv1.3
 
+opentracing:
+  jaeger:
+    log-spans: true
+    service-name: mimock
+
 spring:
+  application:
+    name: mimock
+
   main:
     banner-mode: off
 
