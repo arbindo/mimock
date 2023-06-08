@@ -33,7 +33,7 @@ public class RequestHeader {
 
     @Column(name = "match_exact", nullable = false)
     @Schema(description = "Flag to denote if header matching should be done loosely or strictly")
-    private Boolean matchExact = false;
+    private Boolean matchExact;
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp

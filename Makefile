@@ -10,11 +10,11 @@ STATIC_DIR := '../mimock-backend/src/main/resources/static/mimock-ui'
 VERSION := $$MIMOCK_CURRENT_VERSION
 
 ifdef SKIP_TESTS
-BUILD_BACKEND := cd ./mimock-backend && ./mvnw -ntp clean package -Dmaven.test.skip=true -Drevision=$(VERSION) && cd ..
+BUILD_BACKEND := cd ./mimock-backend && ./gradlew build -x test && cd ..
 BUILD_UI := cd ./mimock-ui && yarn && NODE_NEV=production yarn build
 else
 BUILD_UI := cd ./mimock-ui && yarn && yarn test && NODE_NEV=production yarn build
-BUILD_BACKEND := cd ./mimock-backend && ./mvnw -ntp clean package -Drevision=$(VERSION) && cd ..
+BUILD_BACKEND := cd ./mimock-backend && ./gradlew build && cd ..
 endif
 
 cd_backend:
@@ -32,16 +32,13 @@ start-database: create-network
 	@docker inspect mimock-db --format "imageName: {{.Id}}" || docker run --name mimock-db -p 5432:5432 --network mimock-network -d mimock-pg-database
 
 start-app-local: start-database
-	./mimock-backend/mvnw clean spring-boot:run -Dspring.config.location=$(APP_CONFIG_FILE) -Dspring.datasource.url=$(APP_DB_URL)
+	./mimock-backend/gradlew bootRun -Dspring.config.location=$(APP_CONFIG_FILE) -Dspring.datasource.url=$(APP_DB_URL)
 
 format-check:
-	./mimock-backend/mvnw checkstyle:check
-
-format-report:
-	./mimock-backend/mvnw  clean site
+	./mimock-backend/gradlew checkstyleMain
 
 test-local: start-database
-	./mimock-backend/mvnw clean test -Dspring.config.location=$(TEST_CONFIG_FILE) -Dspring.datasource.url=$(TEST_DB_URL) -P startDatabase
+	./mimock-backend/gradlew test -Dspring.config.location=$(TEST_CONFIG_FILE) -Dspring.datasource.url=$(TEST_DB_URL) -P startDatabase
 
 test-ci:
 	docker-compose -f docker-compose.test.yml up --abort-on-container-exit --exit-code-from mimock-test

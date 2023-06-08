@@ -31,13 +31,13 @@ public class User {
     private String password;
 
     @Column(name = "is_user_active", nullable = false)
-    private Boolean isUserActive = false;
+    private Boolean isUserActive;
 
     @Column(name = "is_user_blocked", nullable = false)
-    private Boolean isUserBlocked = false;
+    private Boolean isUserBlocked;
 
     @Column(name = "is_session_active", nullable = false)
-    private Boolean isSessionActive = false;
+    private Boolean isSessionActive;
 
     @Column(name = "last_login_at")
     private ZonedDateTime lastLoginAt;
