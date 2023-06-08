@@ -42,7 +42,7 @@ public class MimockApplication {
 
     @Bean
     public DatabaseStartupValidator databaseStartupValidator(DataSource dataSource) {
-        var validator = new DatabaseStartupValidator();
+        DatabaseStartupValidator validator = new DatabaseStartupValidator();
         validator.setDataSource(dataSource);
         validator.setInterval(5);
         validator.setTimeout(60);

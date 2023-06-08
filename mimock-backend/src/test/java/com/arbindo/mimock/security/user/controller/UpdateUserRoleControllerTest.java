@@ -6,11 +6,8 @@ import com.arbindo.mimock.entities.UserRole;
 import com.arbindo.mimock.helpers.general.JsonMapper;
 import com.arbindo.mimock.interceptor.DefaultHttpInterceptor;
 import com.arbindo.mimock.security.JwtRequestFilter;
-import com.arbindo.mimock.security.user.models.request.UpdatePasswordRequest;
 import com.arbindo.mimock.security.user.models.request.UpdateUserRoleRequest;
-import com.arbindo.mimock.security.user.service.UpdatePasswordService;
 import com.arbindo.mimock.security.user.service.UpdateUserRoleService;
-import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -29,11 +26,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import javax.sql.DataSource;
-
 import java.util.Map;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;

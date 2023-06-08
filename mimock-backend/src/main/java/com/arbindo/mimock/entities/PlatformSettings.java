@@ -25,19 +25,19 @@ public class PlatformSettings {
 
     @Column(name = "is_category_execution_enabled", nullable = false)
     @Schema(example = "false", description = "Category Based Execution Enabled/Disabled")
-    private Boolean isCategoryExecutionEnabled = false;
+    private Boolean isCategoryExecutionEnabled;
 
     @Column(name = "is_steps_execution_enabled", nullable = false)
     @Schema(example = "false", description = "Steps Based Execution Enabled/Disabled")
-    private Boolean isStepsExecutionEnabled = false;
+    private Boolean isStepsExecutionEnabled;
 
     @Column(name = "is_export_import_enabled", nullable = false)
     @Schema(example = "true", description = "Export and Import Feature Enabled/Disabled")
-    private Boolean isExportImportEnabled = true;
+    private Boolean isExportImportEnabled;
 
     @Column(name = "is_flush_bin_cron_enabled", nullable = false)
     @Schema(example = "true", description = "Flush Bin CRON Feature Enabled/Disabled")
-    private Boolean isFlushBinCronEnabled = true;
+    private Boolean isFlushBinCronEnabled;
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
