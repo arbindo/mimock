@@ -13,6 +13,6 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "backend:pre-push": "cd mimock-backend && ./mvnw -ntp clean initialize verify -P coverage -Dspring.config.location=classpath:/application.yml"
+    "backend:pre-push": "cd mimock-backend && ./gradlew build"
   }
 }
