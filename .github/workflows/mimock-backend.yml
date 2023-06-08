@@ -92,5 +92,5 @@ jobs:
 
       - name: Build mimock docker image
         run: |
-          docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.slim && echo "Docker image build validated"
+          docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.slim --build-arg MIMOCK_CURRENT_VERSION=$MIMOCK_CURRENT_VERSION && echo "Docker image build validated"
           docker system prune && docker image prune --all
