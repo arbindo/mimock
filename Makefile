@@ -54,7 +54,7 @@ bundle-app: start-database build-app
 
 build-docker-image:
 	@echo "Building docker image" && \
-	docker build -t mimock/mimock:$(VERSION) . -f ./Dockerfile.slim --build-arg MIMOCK_CURRENT_VERSION=$MIMOCK_CURRENT_VERSION
+	docker build -t mimock/mimock:$(VERSION) . -f ./Dockerfile.slim --build-arg MIMOCK_CURRENT_VERSION=$(VERSION)
 
 generate-keystore:
 	@echo "Generating keystore" && \
