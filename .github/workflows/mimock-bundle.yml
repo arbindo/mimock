@@ -81,7 +81,7 @@ jobs:
           docker build -t mimock/mimock:slim . -f ./Dockerfile.slim
           docker tag mimock/mimock:slim mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
 
-          docker build -t mimock/mimock:latest . -f ./Dockerfile.complete
+          docker build -t mimock/mimock:latest . -f ./Dockerfile.complete --build-arg MIMOCK_VERSION=${{ secrets.MIMOCK_CURRENT_VERSION }}
           docker tag mimock/mimock:latest mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}
 
       - name: Log in to Docker Hub

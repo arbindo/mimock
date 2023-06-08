@@ -2,7 +2,9 @@ FROM eclipse-temurin:11.0.16.1_1-jre
 
 WORKDIR /home/mimock
 
-COPY ${PWD}/mimock-backend/build/libs/mimock*.jar mimock.jar
+ARG MIMOCK_CURRENT_VERSION=0.0.0
+
+COPY ${PWD}/mimock-backend/build/libs/mimock-${MIMOCK_CURRENT_VERSION}.jar mimock.jar
 
 EXPOSE 8080
 
