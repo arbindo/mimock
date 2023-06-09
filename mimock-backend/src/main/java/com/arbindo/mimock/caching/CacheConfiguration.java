@@ -1,6 +1,7 @@
 package com.arbindo.mimock.caching;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.cache.interceptor.KeyGenerator;
@@ -11,9 +12,18 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class CacheConfiguration {
+    @Value("${spring.cache.caffeine.expiryInMinutes}")
+    private String expiryInMinutes = "60";
+
+    @Value("${spring.cache.caffeine.maximumSize}")
+    private String maximumSize = "1000";
+
     @Bean
     public Caffeine caffeineConfig() {
-        return Caffeine.newBuilder().expireAfterAccess(60, TimeUnit.MINUTES).maximumSize(1000);
+        return Caffeine.
+                newBuilder().
+                expireAfterAccess(Long.parseLong(expiryInMinutes), TimeUnit.MINUTES).
+                maximumSize(Long.parseLong(maximumSize));
     }
 
     @Bean

@@ -41,6 +41,11 @@ spring:
     user: mimock
     password: ironclaw
 
+  cache:
+    caffeine:
+      expiryInMinutes: 60
+      maximumSize: 1000
+
 app:
   url_prefix: /api/mimock
   security:
