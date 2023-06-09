@@ -18,7 +18,9 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      
+      - uses: gradle/wrapper-validation-action@v1
 
       - name: Gradle Cache
         uses: burrunan/gradle-cache-action@v1
@@ -28,7 +30,7 @@ jobs:
         run: ./gradlew checkstyleMain
 
       - name: Publish style report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: checkstyle-report
           path: |
@@ -43,7 +45,7 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Gradle Cache
         uses: burrunan/gradle-cache-action@v1
@@ -53,13 +55,13 @@ jobs:
         run: ./gradlew clean startDatabase jacocoTestCoverageVerification -Drevision=$MIMOCK_CURRENT_VERSION -Dspring.config.location=classpath:/application.yml
 
       - name: Publish coverage report codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           commit_parent: ${{ github.sha }}
 
       - name: Publish coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-coverage-report
           path: |
@@ -74,7 +76,7 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Gradle Cache
         uses: burrunan/gradle-cache-action@v1
@@ -84,7 +86,7 @@ jobs:
         run: ./gradlew clean bootJar
 
       - name: Publish JAR
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-jar
           path: |
