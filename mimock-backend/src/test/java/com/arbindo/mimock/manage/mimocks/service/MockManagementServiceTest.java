@@ -3,10 +3,9 @@ package com.arbindo.mimock.manage.mimocks.service;
 import com.arbindo.mimock.audit.AuditorService;
 import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.*;
-import com.arbindo.mimock.manage.mimocks.enums.ExpectedResponseType;
-import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
+import com.arbindo.mimock.manage.mimocks.service.helpers.CacheHelper;
 import com.arbindo.mimock.manage.mimocks.service.helpers.MockParamBuilder;
 import com.arbindo.mimock.repository.BinaryResponseRepository;
 import com.arbindo.mimock.repository.MocksRepository;
@@ -20,12 +19,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -57,6 +51,9 @@ class MockManagementServiceTest {
     @org.mockito.Mock
     MockParamBuilder mockParamBuilder;
 
+    @org.mockito.Mock
+    CacheHelper cacheHelper;
+
     MockManagementService mockManagementService;
 
     @BeforeEach
@@ -68,6 +65,7 @@ class MockManagementServiceTest {
                 .binaryResponseRepository(mockBinaryResponseRepository)
                 .entityStatusService(mockEntityStatusService)
                 .auditorService(mockAuditorService)
+                .cacheHelper(cacheHelper)
                 .build();
     }
 
@@ -152,6 +150,7 @@ class MockManagementServiceTest {
         lenient().when(mockRepository.findOneByMockName(anyString())).thenReturn(emptyMock);
         lenient().when(mockEntityStatusService.findByEntityStatus(anyString())).thenReturn(entityStatus);
         lenient().when(mockRepository.save(any(Mock.class))).thenReturn(expectedMock);
+        doNothing().when(cacheHelper).putInCache(any(Mock.class));
 
         // Act
         Mock result = mockManagementService.createMock(request);
@@ -161,6 +160,7 @@ class MockManagementServiceTest {
         verify(mockTextualResponseRepository, times(1)).save(any(TextualResponse.class));
         verify(mockBinaryResponseRepository, times(1)).save(any(BinaryResponse.class));
         verify(mockRepository, times(1)).save(any(Mock.class));
+        verify(cacheHelper, times(1)).putInCache(any(Mock.class));
     }
 
     @Test

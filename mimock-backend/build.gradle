@@ -30,7 +30,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
     implementation 'org.springdoc:springdoc-openapi-security:1.6.12'
-    implementation 'org.liquibase:liquibase-core:4.5.0'
+    implementation 'org.liquibase:liquibase-core:4.8.0'
     implementation 'org.projectlombok:lombok:1.18.22'
     implementation 'org.hibernate:hibernate-core:5.6.7.Final'
     implementation 'org.springframework.boot:spring-boot-test:2.6.6'
@@ -45,7 +45,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-cache:2.6.6'
     implementation 'com.github.ben-manes.caffeine:caffeine:3.1.5'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools:2.6.6'
-    runtimeOnly 'org.postgresql:postgresql:42.3.3'
+    runtimeOnly 'org.postgresql:postgresql:42.3.8'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     runtimeOnly 'io.micrometer:micrometer-registry-prometheus:1.9.4'
@@ -91,6 +91,10 @@ jacocoTestCoverageVerification {
     }
 
     finalizedBy jacocoTestReport
+}
+
+tasks.register("coverage") {
+    dependsOn("jacocoTestCoverageVerification")
 }
 
 checkstyle {

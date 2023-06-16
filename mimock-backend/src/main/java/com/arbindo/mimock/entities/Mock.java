@@ -1,5 +1,6 @@
 package com.arbindo.mimock.entities;
 
+import com.arbindo.mimock.generic.model.DomainModelForMock;
 import com.arbindo.mimock.manage.mimocks.enums.Status;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -133,4 +134,15 @@ public class Mock {
         return Status.valueOf(getEntityStatus().getStatus()) != Status.DELETED;
     }
 
+    public DomainModelForMock toDomainModelForMock() {
+        return DomainModelForMock.builder()
+                .route(getRoute())
+                .statusCode(getStatusCode())
+                .responseContentType(getResponseContentType() != null ? getResponseContentType().getContentType() : null)
+                .responseHeaders(getResponseHeaders() != null ? getResponseHeaders().getResponseHeader() : null)
+                .responseBody(getTextualResponse() != null ?
+                        getTextualResponse().getResponseBody() :
+                        getBinaryResponse() != null ? getBinaryResponse().getResponseFile() : null)
+                .build();
+    }
 }
