@@ -8,6 +8,7 @@ import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.entities.TextualResponse;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
+import com.arbindo.mimock.manage.mimocks.service.helpers.CacheHelper;
 import com.arbindo.mimock.manage.mimocks.service.helpers.MockParamBuilder;
 import com.arbindo.mimock.repository.BinaryResponseRepository;
 import com.arbindo.mimock.repository.MocksRepository;
@@ -54,6 +55,9 @@ public class MockManagementServiceImpl implements MockManagementService {
     @Autowired
     AuditorService auditorService;
 
+    @Autowired
+    private CacheHelper cacheHelper;
+
     @Override
     public Mock getMockById(String mockId) {
         if (ValidationUtil.isNotNullOrEmpty(mockId)) {
@@ -99,13 +103,15 @@ public class MockManagementServiceImpl implements MockManagementService {
             Mock mock = buildNewMockWith(request, mockParamBuilder, currentAuditor);
             setResponseForNewMock(request, mock);
 
+            cacheHelper.putInCache(mock);
+
             log.log(Level.INFO, "Saving new mock to repository");
             return mocksRepository.save(mock);
         } catch (MockAlreadyExistsException e) {
-            log.log(Level.DEBUG, e.getMessage());
+            log.log(Level.ERROR, e.getMessage());
             throw e;
         } catch (Exception e) {
-            log.log(Level.DEBUG, e.getMessage());
+            log.log(Level.ERROR, e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
