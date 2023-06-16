@@ -1,0 +1,121 @@
+plugins {
+    id 'java-library'
+    id 'java'
+    id 'org.springframework.boot' version '2.6.6'
+
+    id 'checkstyle'
+    id 'jacoco'
+    id 'org.liquibase.gradle' version '2.0.4'
+    id 'io.freefair.lombok' version '8.0.1'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+group = 'com.arbindo'
+version = System.getenv('MIMOCK_CURRENT_VERSION') ?: '0.0.0-SNAPSHOT'
+description = 'mimock'
+java.sourceCompatibility = JavaVersion.VERSION_11
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.6.6'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.6.6'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.6'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.6'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
+    implementation 'org.springdoc:springdoc-openapi-security:1.6.12'
+    implementation 'org.liquibase:liquibase-core:4.8.0'
+    implementation 'org.projectlombok:lombok:1.18.22'
+    implementation 'org.hibernate:hibernate-core:5.6.7.Final'
+    implementation 'org.springframework.boot:spring-boot-test:2.6.6'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
+    implementation 'net.sf.supercsv:super-csv:2.4.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.6'
+    implementation 'net.lbruun.springboot:preliquibase-spring-boot-starter:1.2.1'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'com.vladmihalcea:hibernate-types-55:2.20.0'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.4'
+    implementation 'org.springframework.boot:spring-boot-starter-cache:2.6.6'
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.1.5'
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools:2.6.6'
+    runtimeOnly 'org.postgresql:postgresql:42.3.8'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus:1.9.4'
+    runtimeOnly 'com.h2database:h2:2.1.214'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.6'
+    testImplementation 'org.springframework.security:spring-security-test:5.6.2'
+    testImplementation 'org.awaitility:awaitility:4.1.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation 'org.mockito:mockito-inline:4.8.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.6.1'
+    testImplementation 'junit:junit:4.13.2'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'PACKAGE'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.9
+            }
+        }
+    }
+
+    finalizedBy jacocoTestReport
+}
+
+tasks.register("coverage") {
+    dependsOn("jacocoTestCoverageVerification")
+}
+
+checkstyle {
+    toolVersion '10.3.3'
+    ignoreFailures false
+    showViolations true
+    maxWarnings 0
+    sourceSets = [sourceSets.main]
+}
+
+tasks.register('startDatabase') {
+    doFirst {
+        exec {
+            commandLine 'docker', 'build', '-t', 'mimock-pg-database', '../', '-f', '../Dockerfile.pg'
+        }
+    }
+    doLast {
+        exec {
+            commandLine 'docker', 'run', '-d', '-p', '5432:5432', '--name', 'mimock-db', 'mimock-pg-database'
+        }
+    }
+}
+
+

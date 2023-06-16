@@ -2,7 +2,9 @@ FROM alpine:3.15.0
 
 WORKDIR /home/mimock
 
-COPY ${PWD}/mimock-backend/target/mimock*.jar mimock.jar
+ARG MIMOCK_CURRENT_VERSION=0.0.0
+
+COPY ${PWD}/mimock-backend/build/libs/mimock-${MIMOCK_CURRENT_VERSION}.jar mimock.jar
 
 RUN apk add openjdk11-jre
 RUN apk add postgresql13

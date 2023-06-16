@@ -10,7 +10,9 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      
+      - uses: gradle/wrapper-validation-action@v1
 
       - name: Build Mimock app
         run: |
@@ -18,7 +20,7 @@ jobs:
 
       - name: Build platform bundles
         run: |
-          cp -p ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar ./installation/lib/mimock.jar
+          cp -p ./mimock-backend/build/libs/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar ./installation/lib/mimock.jar
 
           cd ./installation
           zip -r mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip lib/*
@@ -28,21 +30,21 @@ jobs:
           tar czf mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz --directory=installation lib start mimock.properties setup_database psql_setup.sql
 
       - name: Publish JAR
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}-jar.zip
           path: |
-            ./mimock-backend/target/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar
+            ./mimock-backend/build/libs/mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.jar
 
       - name: Publish Linux Bundle
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz
           path: |
             mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.tar.gz
 
       - name: Publish Windows Bundle
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-${{ secrets.MIMOCK_CURRENT_VERSION }}.zip
           path: |
@@ -81,7 +83,7 @@ jobs:
           docker build -t mimock/mimock:slim . -f ./Dockerfile.slim
           docker tag mimock/mimock:slim mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}-slim
 
-          docker build -t mimock/mimock:latest . -f ./Dockerfile.complete
+          docker build -t mimock/mimock:latest . -f ./Dockerfile.complete --build-arg MIMOCK_VERSION=${{ secrets.MIMOCK_CURRENT_VERSION }}
           docker tag mimock/mimock:latest mimock/mimock:${{ secrets.MIMOCK_CURRENT_VERSION }}
 
       - name: Log in to Docker Hub

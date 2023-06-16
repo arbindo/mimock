@@ -35,3 +35,6 @@ build/
 
 /src/main/resources/static/**/*
 !/src/main/resources/static/.gitkeep
+.mvn/
+build/
+.gradle/

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.support.DatabaseStartupValidator;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -22,6 +23,7 @@ import java.util.stream.Stream;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 @EnableScheduling
+@EnableCaching
 public class MimockApplication {
     public static void main(String[] args) {
         SpringApplication.run(MimockApplication.class, args);
@@ -42,7 +44,7 @@ public class MimockApplication {
 
     @Bean
     public DatabaseStartupValidator databaseStartupValidator(DataSource dataSource) {
-        var validator = new DatabaseStartupValidator();
+        DatabaseStartupValidator validator = new DatabaseStartupValidator();
         validator.setDataSource(dataSource);
         validator.setInterval(5);
         validator.setTimeout(60);

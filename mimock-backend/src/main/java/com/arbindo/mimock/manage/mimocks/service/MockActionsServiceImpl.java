@@ -1,15 +1,17 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
+import com.arbindo.mimock.common.constants.CacheNames;
 import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.EntityStatus;
 import com.arbindo.mimock.entities.Mock;
-import com.arbindo.mimock.repository.*;
+import com.arbindo.mimock.repository.MocksRepository;
 import com.arbindo.mimock.utils.ValidationUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -33,6 +35,7 @@ public class MockActionsServiceImpl implements MockActionsService {
 
     @Transactional
     @Override
+    @CacheEvict(value = CacheNames.MOCK_REQUEST_CACHE, allEntries = true)
     public Mock archiveMock(String mockId) {
         if (ValidationUtil.isNotNullOrEmpty(mockId)) {
             try {

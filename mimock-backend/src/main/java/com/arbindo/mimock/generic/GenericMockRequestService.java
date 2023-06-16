@@ -1,5 +1,6 @@
 package com.arbindo.mimock.generic;
 
+import com.arbindo.mimock.common.constants.CacheNames;
 import com.arbindo.mimock.entities.*;
 import com.arbindo.mimock.generic.helpers.RequestHeaderComparator;
 import com.arbindo.mimock.generic.model.DomainModelForMock;
@@ -13,6 +14,7 @@ import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -46,6 +48,7 @@ public class GenericMockRequestService {
         this.httpMethodsRepository = httpMethodsRepository;
     }
 
+    @Cacheable(value = CacheNames.MOCK_REQUEST_CACHE, keyGenerator = "mockKeyGenerator")
     public DomainModelForMock serveMockRequest(GenericRequestModel request) throws MatchingMockNotFoundException {
         log.log(Level.INFO, "Fetching matching mock from the DB");
 

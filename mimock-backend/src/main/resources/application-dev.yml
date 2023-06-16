@@ -68,6 +68,11 @@ spring:
     user: mimock
     password: ironclaw
 
+  cache:
+    caffeine:
+      expiryInMinutes: 60
+      maximumSize: 1000
+
 app:
   security:
     jwt-expiry-duration: 10d

@@ -18,32 +18,23 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      
+      - uses: gradle/wrapper-validation-action@v1
 
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Gradle Cache
+        uses: burrunan/gradle-cache-action@v1
 
       - name: Check format using checkstyle
         working-directory: mimock-backend
-        run: ./mvnw -ntp -Drevision=$MIMOCK_CURRENT_VERSION checkstyle:check
-
-      - name: Generate checkstyle report
-        working-directory: mimock-backend
-        run: ./mvnw -ntp -Drevision=$MIMOCK_CURRENT_VERSION clean site
+        run: ./gradlew checkstyleMain
 
       - name: Publish style report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: checkstyle-report
           path: |
-            mimock-backend/target/site/css
-            mimock-backend/target/site/images
-            mimock-backend/target/site/checkstyle.html
+            mimock-backend/build/reports/checkstyle/*
 
   test:
     needs:
@@ -54,32 +45,27 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Gradle Cache
+        uses: burrunan/gradle-cache-action@v1
 
       - name: Run mimock tests in CI mode
         working-directory: mimock-backend
-        run: ./mvnw -ntp clean initialize verify -P startDatabase -P coverage -Drevision=$MIMOCK_CURRENT_VERSION -Dspring.config.location=classpath:/application.yml
+        run: ./gradlew clean startDatabase jacocoTestCoverageVerification -Drevision=$MIMOCK_CURRENT_VERSION -Dspring.config.location=classpath:/application.yml
 
       - name: Publish coverage report codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           commit_parent: ${{ github.sha }}
 
       - name: Publish coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-coverage-report
           path: |
-            mimock-backend/target/site/jacoco/*
+            mimock-backend/build/reports/jacoco/test/html/*
 
   package-app:
     needs:
@@ -90,28 +76,23 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Gradle Cache
+        uses: burrunan/gradle-cache-action@v1
 
       - name: Build Mimock JAR
         working-directory: mimock-backend
-        run: ./mvnw -ntp clean package -P packageJar -Drevision=$MIMOCK_CURRENT_VERSION -Dmaven.test.skip=true
+        run: ./gradlew clean bootJar
 
       - name: Publish JAR
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mimock-jar
           path: |
-            mimock-backend/target/mimock-*.jar
+            mimock-backend/build/libs/*
 
       - name: Build mimock docker image
         run: |
-          docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.min && echo "Docker image build validated"
+          docker build -t mimock-backend:${{ github.sha }} . -f ./Dockerfile.slim --build-arg MIMOCK_CURRENT_VERSION=$MIMOCK_CURRENT_VERSION && echo "Docker image build validated"
           docker system prune && docker image prune --all

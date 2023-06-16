@@ -61,6 +61,12 @@ spring:
     user: ${MIMOCK_DB_USER:mimock}
     password: ${MIMOCK_DB_PASSWORD:ironclaw}
 
+  cache:
+    caffeine:
+      expiryInMinutes: 60
+      maximumSize: 1000
+
+
 app:
   security:
     # NOTES

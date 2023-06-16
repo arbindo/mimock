@@ -1,12 +1,14 @@
 package com.arbindo.mimock.manage.mimocks.service;
 
 import com.arbindo.mimock.audit.AuditorService;
+import com.arbindo.mimock.common.constants.CacheNames;
 import com.arbindo.mimock.common.services.EntityStatusService;
 import com.arbindo.mimock.entities.BinaryResponse;
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.entities.TextualResponse;
 import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.MockAlreadyExistsException;
+import com.arbindo.mimock.manage.mimocks.service.helpers.CacheHelper;
 import com.arbindo.mimock.manage.mimocks.service.helpers.MockParamBuilder;
 import com.arbindo.mimock.repository.BinaryResponseRepository;
 import com.arbindo.mimock.repository.MocksRepository;
@@ -18,6 +20,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,6 +54,9 @@ public class MockManagementServiceImpl implements MockManagementService {
 
     @Autowired
     AuditorService auditorService;
+
+    @Autowired
+    private CacheHelper cacheHelper;
 
     @Override
     public Mock getMockById(String mockId) {
@@ -97,13 +103,15 @@ public class MockManagementServiceImpl implements MockManagementService {
             Mock mock = buildNewMockWith(request, mockParamBuilder, currentAuditor);
             setResponseForNewMock(request, mock);
 
+            cacheHelper.putInCache(mock);
+
             log.log(Level.INFO, "Saving new mock to repository");
             return mocksRepository.save(mock);
         } catch (MockAlreadyExistsException e) {
-            log.log(Level.DEBUG, e.getMessage());
+            log.log(Level.ERROR, e.getMessage());
             throw e;
         } catch (Exception e) {
-            log.log(Level.DEBUG, e.getMessage());
+            log.log(Level.ERROR, e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -168,6 +176,7 @@ public class MockManagementServiceImpl implements MockManagementService {
     }
 
     @Transactional(rollbackOn = {Exception.class, RuntimeException.class, MockAlreadyExistsException.class})
+    @CacheEvict(value = CacheNames.MOCK_REQUEST_CACHE, allEntries = true)
     @Override
     public Mock updateMock(String mockId, ProcessedMockRequest request) {
         try {
