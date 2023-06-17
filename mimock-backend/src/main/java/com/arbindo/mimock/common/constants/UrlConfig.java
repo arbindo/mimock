@@ -10,13 +10,13 @@ public class UrlConfig {
     public static final String VERSION = "/v1";
     // endregion
 
-    // common api prefix
+    // region COMMON API PREFIX
     public static final String API_PREFIX = API_PATH + VERSION;
-    // end of prefix
+    // endregion
 
-    // role based prefix
+    // region ROLE BASED PREFIX
     public static final String ADMIN = "/admin";
-    // end role based routes
+    // endregion
 
     // region SWAGGER
     public static final String SWAGGER_API_PATH = "/v3/api-docs";
@@ -37,6 +37,7 @@ public class UrlConfig {
     public static final String RESPONSE_CONTENT_TYPE_STATIC_RECORDS = "/response-content-types";
     public static final String ENTITY_STATUS_STATIC_RECORDS = "/entity-status";
     public static final String USER_ROLES_STATIC_RECORDS = "/user-roles";
+    public static final String STATIC_RECORDS_PATH = API_PREFIX + STATIC_RECORDS;
     // endregion
 
     // region MOCKS
@@ -45,14 +46,12 @@ public class UrlConfig {
     public static final String MOCKS_SEARCH = "/search";
     public static final String MOCKS_CSV_EXPORT = "/csv/export";
     public static final String MOCKS_CSV_TEMPLATE_EXPORT = "/csv/template/export";
+    public static final String MOCKS_BULK = "/bulk";
+    public static final String MOCKS_PATH = API_PREFIX + MOCKS;
     // endregion
 
     // region PLATFORM_SETTINGS
     public static final String PLATFORM_SETTINGS = "/platform-settings";
-    // endregion
-
-    public static final String STATIC_RECORDS_PATH = API_PREFIX + STATIC_RECORDS;
-    public static final String MOCKS_PATH = API_PREFIX + MOCKS;
     public static final String PLATFORM_SETTINGS_PATH = API_PREFIX + PLATFORM_SETTINGS;
     // endregion
 
@@ -62,15 +61,15 @@ public class UrlConfig {
     public static final String GET_USER_BY_ID = "/user-info";
     // endregion
 
-    // Authentication paths
+    // region AUTHENTICATION PATH
     public static final String AUTHENTICATE = API_PREFIX + "/user/authenticate";
     public static final String VALIDATE_TOKEN = API_PREFIX + "/auth-token/validate";
-    // end of Authentication paths
+    // endregion
 
-    // user routes
+    // region USER ROUTES
     public static final String USER_ACTIVATION = USER_PATH + "/update-activation";
     public static final String UPDATE_PASSWORD = USER_PATH + "/update-password";
     public static final String UPDATE_ROLE = USER_PATH + "/update-role";
     public static final String DELETE_USER = USER_PATH + "/delete-user";
-    // end of user routes
+    // endregion
 }
