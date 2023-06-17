@@ -34,6 +34,7 @@ import { globalConstants } from 'constants/globalConstants';
 import { notificationTypes } from 'constants/notificationConstants';
 import useNotification from 'hooks/useNotification';
 import fileDownload from 'js-file-download';
+import { importMocks } from 'src/api/services/mockManagement/importMock.service.js';
 
 function Sidebar({
 	handleOnBadgeClick,
@@ -174,6 +175,29 @@ function Sidebar({
 			});
 	};
 
+	const handleImportMocksBtnClick = () => {
+		importMocks(authCookieRef)
+			.then((res) => {
+				console.log(res.data);
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
+					title: 'Import success',
+					message: `Imported mocks successfully.`,
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
+			})
+			.catch((err) => {
+				useNotification({
+					type: notificationTypes.NOTIFICATION_TYPE_ERROR,
+					title: 'Failed to import mocks',
+					message: err.response.data.message,
+					animationIn: 'animate__bounceIn',
+					animationOut: 'animate__bounceOut',
+				});
+			});
+	};
+
 	const handleOnChangeSelect = (e) => {
 		handleOnChangeSortSelector(e.target.value);
 	};
@@ -213,6 +237,7 @@ function Sidebar({
 							id={ids.importMocksBtn}
 							name={name.importMocksBtn}
 							title={title.importMocksBtn}
+							onClick={handleImportMocksBtnClick}
 						>
 							<MiniBtnSpan>
 								<FaFileUpload /> {label.importMocksBtn}

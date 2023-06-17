@@ -45,6 +45,7 @@ public class UrlConfig {
     public static final String MOCKS_PAGEABLE = "/filter";
     public static final String MOCKS_SEARCH = "/search";
     public static final String MOCKS_CSV_EXPORT = "/csv/export";
+    public static final String MOCKS_CSV_IMPORT = "/csv/import";
     public static final String MOCKS_CSV_TEMPLATE_EXPORT = "/csv/template/export";
     public static final String MOCKS_BULK = "/bulk";
     public static final String MOCKS_PATH = API_PREFIX + MOCKS;

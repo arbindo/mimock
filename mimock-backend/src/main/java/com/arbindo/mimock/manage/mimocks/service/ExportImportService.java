@@ -13,4 +13,5 @@ public interface ExportImportService {
     void validateExportImportFeature() throws ExportImportDisabledException;
     void exportMockTemplateCsv(PrintWriter writer) throws IOException;
     void exportMockListToCsv(PrintWriter writer, List<Mock> mockList) throws IOException;
+    void importMocksFromCsv() throws IOException;
 }

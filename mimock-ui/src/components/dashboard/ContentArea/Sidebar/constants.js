@@ -2,7 +2,7 @@ export const constants = {
 	headerTitle: 'Tools',
 	title: {
 		exportMocksBtn: 'Export Mocks',
-		importMocksBtn: 'Coming Soon!!',
+		importMocksBtn: 'Import Mocks',
 	},
 	label: {
 		exportImportComponent: 'Bulk Operations',

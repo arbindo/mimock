@@ -32,6 +32,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(value = ExportImportMockController.class, excludeAutoConfiguration = {
@@ -150,6 +151,35 @@ public class ExportImportMockControllerTest {
     }
 
     @Test
+    void shouldReturnHttpOk_ImportMocksCsv_ReturnsSuccess() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_IMPORT;
+        String expectedContentType = "application/json";
+
+        // Act
+        mockMvc.perform(post(route))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(expectedContentType))
+                .andReturn();
+
+        // Assert
+        verify(exportImportService, times(1)).importMocksFromCsv();
+    }
+
+    @Test
+    void shouldReturnHttpInternalServerError_WhenImportMocksCsv_ThrowsException() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_IMPORT;
+
+        doThrow(IOException.class).when(exportImportService).importMocksFromCsv();
+
+        // Act
+        mockMvc.perform(post(route))
+                .andExpect(status().isInternalServerError())
+                .andReturn();
+    }
+
+    @Test
     void shouldReturnHttpBadRequestError_WhenExportTemplateCsv_ExportImportFeatureIsDisabled() throws Exception {
         // Arrange
         String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_TEMPLATE_EXPORT;
@@ -178,6 +208,19 @@ public class ExportImportMockControllerTest {
 
         // Act
         mockMvc.perform(get(route))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    void shouldReturnHttpBadRequestError_WhenImportMocksCsv_ExportImportFeatureIsDisabled() throws Exception {
+        // Arrange
+        String route = UrlConfig.MOCKS_PATH + UrlConfig.MOCKS_CSV_IMPORT;
+
+        doThrow(ExportImportDisabledException.class).when(exportImportService).validateExportImportFeature();
+
+        // Act
+        mockMvc.perform(post(route))
                 .andExpect(status().isBadRequest())
                 .andReturn();
     }
