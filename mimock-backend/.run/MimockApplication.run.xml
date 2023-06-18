@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="MimockApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-    <option name="ACTIVE_PROFILES" />
+    <option name="ACTIVE_PROFILES" value="dev" />
     <module name="mimock.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.arbindo.mimock.MimockApplication" />
     <method v="2">

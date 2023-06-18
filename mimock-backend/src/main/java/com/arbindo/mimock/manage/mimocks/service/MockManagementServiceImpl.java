@@ -99,7 +99,6 @@ public class MockManagementServiceImpl implements MockManagementService {
             Mock mock = buildNewMockWith(request, mockParamBuilder, currentAuditor);
             setResponseForNewMock(request, mock);
             cacheHelper.putInCache(mock);
-            log.log(Level.INFO, "Saving new mock to repository");
             return mock;
         } catch (MockAlreadyExistsException e) {
             log.log(Level.ERROR, e.getMessage());

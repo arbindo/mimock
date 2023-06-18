@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,20 +30,9 @@ public class BulkMockManagementServiceImpl implements BulkMockManagementService 
     @Transactional(rollbackOn = {Exception.class, RuntimeException.class, MockAlreadyExistsException.class})
     @Override
     public List<Mock> bulkCreateMocks(List<ProcessedMockRequest> processedMockRequestList) {
-        return processedMockRequestList.stream().map((mockRequest) ->
+        List<Mock> mocks = processedMockRequestList.stream().map((mockRequest) ->
                         mockManagementService.createMock(mockRequest))
                 .collect(Collectors.toList());
-    }
-
-    @Transactional(rollbackOn = {Exception.class, RuntimeException.class, MockAlreadyExistsException.class})
-    @Override
-    public List<Mock> bulkUpdateMocks(HashMap<String, ProcessedMockRequest> processedMockRequestList) {
-        return null;
-    }
-
-    @Transactional(rollbackOn = {Exception.class, RuntimeException.class, MockAlreadyExistsException.class})
-    @Override
-    public List<Mock> saveAllMocks(List<Mock> mocks) {
         log.log(Level.INFO, "Saving all new mocks to repository. Total saved = " + mocks.size());
         return mocksRepository.saveAll(mocks);
     }

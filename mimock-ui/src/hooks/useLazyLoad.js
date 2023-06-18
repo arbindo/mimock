@@ -12,7 +12,8 @@ function useLazyLoad(
 	httpMethodFilter,
 	sortColumn,
 	sortDirection,
-	expectedResponseType
+	expectedResponseType,
+	importCompleted
 ) {
 	const cookies = new Cookies();
 	const authCookieRef = useRef('');
@@ -53,6 +54,7 @@ function useLazyLoad(
 		sortColumn,
 		sortDirection,
 		expectedResponseType,
+		importCompleted,
 	]);
 
 	useEffect(() => {
@@ -167,6 +169,7 @@ function useLazyLoad(
 		sortColumn,
 		sortDirection,
 		expectedResponseType,
+		importCompleted,
 	]);
 
 	return { mocksList, listTitle, isFilter, loading, error, hasMore };

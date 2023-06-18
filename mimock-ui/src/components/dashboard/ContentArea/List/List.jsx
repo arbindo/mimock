@@ -36,6 +36,7 @@ function List({
 	sortColumn,
 	sortDirection,
 	expectedResponseType,
+	importCompleted,
 	handleOnClearFilterClick,
 }) {
 	// #region Defaults
@@ -61,7 +62,8 @@ function List({
 			httpMethodFilter,
 			sortColumn,
 			sortDirection,
-			expectedResponseType
+			expectedResponseType,
+			importCompleted
 		);
 	useEffect(() => {
 		setFilterTags(() => {
@@ -260,6 +262,7 @@ List.propTypes = {
 	sortColumn: PropTypes.string.isRequired,
 	sortDirection: PropTypes.string.isRequired,
 	expectedResponseType: PropTypes.string.isRequired,
+	importCompleted: PropTypes.bool.isRequired,
 	handleOnClearFilterClick: PropTypes.func.isRequired,
 };
 

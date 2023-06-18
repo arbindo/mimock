@@ -168,9 +168,32 @@ export const _MiniBtn = tw.div`
     ease-in-out
 `;
 
+export const _ImportMocksFileInput = tw.input`
+    text-center
+    px-2
+    py-1
+    my-1
+    mx-2
+    cursor-pointer
+    bg-white
+    text-gray-500
+    border-l-4
+    border-t-2
+    border-b-2
+    border-r-2
+    rounded-sm
+    border-gray-400
+    shadow-sm
+    hover:bg-black 
+    hover:bg-opacity-5
+    transition 
+    duration-150 
+    ease-in-out
+`;
+
 export const ExportMocksButton = styled(_MiniBtn)``;
 
-export const ImportMocksButton = styled(_MiniBtn)``;
+export const ImportMocksButton = styled(_ImportMocksFileInput)``;
 
 export const SortIconsWrapper = tw.span`
     flex

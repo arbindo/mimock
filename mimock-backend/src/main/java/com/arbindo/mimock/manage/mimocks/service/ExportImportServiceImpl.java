@@ -2,6 +2,7 @@ package com.arbindo.mimock.manage.mimocks.service;
 
 import com.arbindo.mimock.entities.Mock;
 import com.arbindo.mimock.entities.PlatformSettings;
+import com.arbindo.mimock.manage.mimocks.models.request.ProcessedMockRequest;
 import com.arbindo.mimock.manage.mimocks.service.exceptions.ExportImportDisabledException;
 import com.arbindo.mimock.manage.platformsettings.service.PlatformSettingsService;
 import com.arbindo.mimock.utils.ValidationUtil;
@@ -11,17 +12,21 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.supercsv.cellprocessor.Optional;
+import org.supercsv.cellprocessor.ParseInt;
 import org.supercsv.cellprocessor.constraint.NotNull;
 import org.supercsv.cellprocessor.constraint.Unique;
 import org.supercsv.cellprocessor.ift.CellProcessor;
+import org.supercsv.io.CsvBeanReader;
 import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanReader;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -84,9 +89,28 @@ public class ExportImportServiceImpl implements ExportImportService {
     }
 
     @Override
-    public void importMocksFromCsv() throws IOException {
-        // TODO
-        return;
+    public boolean validateMultipartFile(MultipartFile file) {
+        String type = "text/csv";
+        return type.equals(file.getContentType()) && !file.isEmpty();
+    }
+
+    @Override
+    public List<ProcessedMockRequest> importMocksFromCsv(MultipartFile file) throws IOException {
+        try (ICsvBeanReader csvReader = new CsvBeanReader(new BufferedReader(
+                new InputStreamReader(file.getInputStream())), CsvPreference.STANDARD_PREFERENCE)) {
+            final String[] headers = getImportNameMappings();
+            csvReader.getHeader(false);
+            final CellProcessor[] cellProcessors = getImportCellProcessors();
+            List<ProcessedMockRequest> requestList = new ArrayList<>();
+            ProcessedMockRequest request;
+            while ((request = csvReader.read(ProcessedMockRequest.class, headers, cellProcessors)) != null) {
+                requestList.add(request);
+            }
+            return requestList;
+        } catch (Exception e) {
+            log.log(Level.DEBUG, e.getMessage());
+            throw e;
+        }
     }
 
     private void close(ICsvBeanWriter csvWriter) throws IOException {
@@ -127,6 +151,10 @@ public class ExportImportServiceImpl implements ExportImportService {
                 "Query Params", "Request Headers", "Response Headers", "Request Body", "Expected Text Response"};
     }
 
+    private String[] getImportNameMappings() {
+        return new String[]{"name", "description", "route", "httpMethod", "statusCode", "responseContentType"};
+    }
+
     private String[] getNameMappings() {
         return new String[]{"id", "mockName", "description", "route", "httpMethod", "statusCode", "responseContentType",
                 "queryParams", "requestHeaders", "responseHeaders", "requestBodiesForMock", "textualResponse"};
@@ -146,7 +174,17 @@ public class ExportImportServiceImpl implements ExportImportService {
                 new Optional(), // responseHeaders
                 new Optional(), // requestBodiesForMock
                 new Optional(), // textualResponse
+        };
+    }
 
+    private static CellProcessor[] getImportCellProcessors(){
+        return new CellProcessor[]{
+                new Unique(), // name
+                new Optional(), // description
+                new NotNull(), // route
+                new NotNull(), // httpMethod
+                new NotNull(new ParseInt()), // statusCode
+                new Optional(), // responseContentType
         };
     }
 }

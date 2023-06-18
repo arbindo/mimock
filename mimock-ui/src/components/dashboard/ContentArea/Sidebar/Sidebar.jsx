@@ -24,7 +24,6 @@ import { constants } from './constants';
 import {
 	FaCogs,
 	FaFileDownload,
-	FaFileUpload,
 	FaSortAmountUp,
 	FaSortAmountDown,
 } from 'react-icons/fa';
@@ -44,6 +43,7 @@ function Sidebar({
 	handleOnChangeSortSelector,
 	handleOnClickSortDirection,
 	handleOnChangeResponseTypeFilter,
+	handleOnImportCompleted,
 }) {
 	// #region Defaults
 	const cookies = new Cookies();
@@ -175,17 +175,19 @@ function Sidebar({
 			});
 	};
 
-	const handleImportMocksBtnClick = () => {
-		importMocks(authCookieRef)
+	const handleImportMocksBtnClick = ({ target: { files } }) => {
+		let formData = new FormData();
+		formData.append('file', files[0]);
+		importMocks(formData)
 			.then((res) => {
-				console.log(res.data);
 				useNotification({
 					type: notificationTypes.NOTIFICATION_TYPE_SUCCESS,
 					title: 'Import success',
-					message: `Imported mocks successfully.`,
+					message: res.data,
 					animationIn: 'animate__bounceIn',
 					animationOut: 'animate__bounceOut',
 				});
+				handleOnImportCompleted(true);
 			})
 			.catch((err) => {
 				useNotification({
@@ -237,12 +239,9 @@ function Sidebar({
 							id={ids.importMocksBtn}
 							name={name.importMocksBtn}
 							title={title.importMocksBtn}
-							onClick={handleImportMocksBtnClick}
-						>
-							<MiniBtnSpan>
-								<FaFileUpload /> {label.importMocksBtn}
-							</MiniBtnSpan>
-						</ImportMocksButton>
+							onChange={handleImportMocksBtnClick}
+							type='file'
+						></ImportMocksButton>
 					</RowComponentWrapper>
 				</ComponentWrapper>
 				<ComponentWrapper data-testid={testIds.badgeFilterComponent}>
@@ -327,6 +326,7 @@ Sidebar.propTypes = {
 	handleOnChangeSortSelector: PropTypes.func.isRequired,
 	handleOnClickSortDirection: PropTypes.func.isRequired,
 	handleOnChangeResponseTypeFilter: PropTypes.func.isRequired,
+	handleOnImportCompleted: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

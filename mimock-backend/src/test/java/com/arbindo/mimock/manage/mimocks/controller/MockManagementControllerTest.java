@@ -407,6 +407,7 @@ class MockManagementControllerTest {
         String route = UrlConfig.MOCKS_PATH;
 
         lenient().when(mockManagementService.createMock(any(ProcessedMockRequest.class))).thenReturn(createdMock);
+        lenient().when(mockManagementService.saveMock(any(Mock.class))).thenReturn(createdMock);
 
         final String location = "http://localhost" + route + "/" + createdMock.getId();
         GenericResponseWrapper<Mock> genericResponseWrapper = getGenericResponseWrapper(HttpStatus.CREATED,

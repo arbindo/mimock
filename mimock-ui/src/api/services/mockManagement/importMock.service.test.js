@@ -16,10 +16,15 @@ describe('import mocks service', () => {
 		it('should import mocks', async () => {
 			post.mockResolvedValue('Imported Mocks Successfully');
 
-			const response = await importMocks('token');
-
+			var requestData = new FormData();
+			requestData.append('file', 'file');
+			const response = await importMocks(requestData);
 			expect(post).toHaveBeenCalledTimes(1);
-			expect(post).toHaveBeenCalledWith('/mocks/csv/import', 'token');
+			expect(post).toHaveBeenCalledWith(
+				'/mocks/csv/import',
+				requestData,
+				'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03'
+			);
 
 			expect(response).toBeTruthy();
 			expect(response).toEqual('Imported Mocks Successfully');
@@ -27,10 +32,15 @@ describe('import mocks service', () => {
 
 		it('should return error when importing mock fails', async () => {
 			post.mockRejectedValue(new Error('Failed to import mocks'));
-
-			await importMocks('token').catch((error) => {
+			var requestData = new FormData();
+			requestData.append('file', 'file');
+			await importMocks(requestData).catch((error) => {
 				expect(post).toHaveBeenCalledTimes(1);
-				expect(post).toHaveBeenCalledWith('/mocks/csv/import', 'token');
+				expect(post).toHaveBeenCalledWith(
+					'/mocks/csv/import',
+					requestData,
+					'multipart/form-data; boundary=----WebKitFormBoundaryCRo3Ba2zzMcT9X03'
+				);
 
 				expect(error).toBeTruthy();
 				expect(error).toBeInstanceOf(Error);

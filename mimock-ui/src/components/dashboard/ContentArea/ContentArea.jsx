@@ -12,11 +12,13 @@ function ContentArea({
 	sortColumn,
 	sortDirection,
 	expectedResponseType,
+	importCompleted,
 	handleOnClearFilterClick,
 	handleOnBadgeClick,
 	handleOnChangeSortSelector,
 	handleOnClickSortDirection,
 	handleOnChangeResponseTypeFilter,
+	handleOnImportCompleted,
 }) {
 	// #region Defaults
 	const isFilterCleared = httpMethodFilter === '';
@@ -36,6 +38,7 @@ function ContentArea({
 					handleOnChangeSortSelector={handleOnChangeSortSelector}
 					handleOnClickSortDirection={handleOnClickSortDirection}
 					handleOnChangeResponseTypeFilter={handleOnChangeResponseTypeFilter}
+					handleOnImportCompleted={handleOnImportCompleted}
 				/>
 			</If>
 			<List
@@ -44,6 +47,7 @@ function ContentArea({
 				sortColumn={sortColumn}
 				sortDirection={sortDirection}
 				expectedResponseType={expectedResponseType}
+				importCompleted={importCompleted}
 				handleOnClearFilterClick={handleOnClearFilterClick}
 			/>
 		</ContentAreaContainer>
@@ -57,11 +61,13 @@ ContentArea.propTypes = {
 	sortColumn: PropTypes.string.isRequired,
 	sortDirection: PropTypes.string.isRequired,
 	expectedResponseType: PropTypes.string.isRequired,
+	importCompleted: PropTypes.bool.isRequired,
 	handleOnClearFilterClick: PropTypes.func.isRequired,
 	handleOnBadgeClick: PropTypes.func.isRequired,
 	handleOnChangeSortSelector: PropTypes.func.isRequired,
 	handleOnClickSortDirection: PropTypes.func.isRequired,
 	handleOnChangeResponseTypeFilter: PropTypes.func.isRequired,
+	handleOnImportCompleted: PropTypes.func.isRequired,
 };
 
 export default ContentArea;

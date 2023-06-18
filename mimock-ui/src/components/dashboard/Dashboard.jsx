@@ -19,6 +19,7 @@ function Dashboard() {
 	const [sortColumn, setSortColumn] = useState('');
 	const [sortDirection, setSortDirection] = useState('');
 	const [expectedResponseType, setExpectedResponseType] = useState('');
+	const [importCompleted, setImportCompleted] = useState(false);
 	// #endregion
 
 	// #region Recoil States
@@ -81,6 +82,11 @@ function Dashboard() {
 		setExpectedResponseType(responseTypeFilter);
 	};
 
+	const handleOnImportCompleted = (importCompleted) => {
+		setPageNumber(0);
+		setImportCompleted(importCompleted);
+	};
+
 	// #endregion
 
 	return (
@@ -98,11 +104,13 @@ function Dashboard() {
 				sortColumn={sortColumn}
 				sortDirection={sortDirection}
 				expectedResponseType={expectedResponseType}
+				importCompleted={importCompleted}
 				handleOnClearFilterClick={handleOnClearFilterClick}
 				handleOnBadgeClick={handleOnBadgeClick}
 				handleOnChangeSortSelector={handleOnChangeSortSelector}
 				handleOnClickSortDirection={handleOnClickSortDirection}
 				handleOnChangeResponseTypeFilter={handleOnChangeResponseTypeFilter}
+				handleOnImportCompleted={handleOnImportCompleted}
 			/>
 		</>
 	);
