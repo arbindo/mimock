@@ -80,10 +80,8 @@ public class MockManagementServiceImpl implements MockManagementService {
             log.log(Level.ERROR, err);
             throw new MockAlreadyExistsException(err);
         }
-
         try {
             mockParamBuilder.setRequest(request);
-
             log.log(Level.INFO, "Initiating new mock creation");
             Optional<Mock> matchingMock = mocksRepository.findUniqueMock(
                     request.getRoute(),
@@ -92,21 +90,17 @@ public class MockManagementServiceImpl implements MockManagementService {
                     mockParamBuilder.requestBody(),
                     mockParamBuilder.requestHeaders()
             );
-
             if (matchingMock.isPresent()) {
                 String err = "Mock with matching unique selectors already exist";
                 log.log(Level.ERROR, err);
                 throw new MockAlreadyExistsException(err);
             }
-
             String currentAuditor = auditorService.getCurrentAuditor();
             Mock mock = buildNewMockWith(request, mockParamBuilder, currentAuditor);
             setResponseForNewMock(request, mock);
-
             cacheHelper.putInCache(mock);
-
             log.log(Level.INFO, "Saving new mock to repository");
-            return mocksRepository.save(mock);
+            return mock;
         } catch (MockAlreadyExistsException e) {
             log.log(Level.ERROR, e.getMessage());
             throw e;
@@ -228,6 +222,13 @@ public class MockManagementServiceImpl implements MockManagementService {
             log.log(Level.DEBUG, e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @Transactional(rollbackOn = {Exception.class, RuntimeException.class, MockAlreadyExistsException.class})
+    @Override
+    public Mock saveMock(Mock mock) {
+        log.log(Level.INFO, "Saving new mock to repository");
+        return mocksRepository.save(mock);
     }
 
     private void validateMockToBeUpdated(String mockId, Mock mock) {

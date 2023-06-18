@@ -10,4 +10,6 @@ public interface MockManagementService {
     Mock createMock(ProcessedMockRequest request);
 
     Mock updateMock(String mockId, ProcessedMockRequest request);
+
+    Mock saveMock(Mock mock);
 }
