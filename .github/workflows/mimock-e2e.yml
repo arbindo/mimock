@@ -30,7 +30,7 @@ jobs:
         run: SKIP_TESTS=true make start-app-container
 
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
         with:
           browser: chrome
           working-directory: e2e
