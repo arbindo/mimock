@@ -18,7 +18,7 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Cache local Maven repository
         uses: actions/cache@v2
@@ -54,7 +54,7 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Cache local Maven repository
         uses: actions/cache@v2
@@ -90,7 +90,7 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Cache local Maven repository
         uses: actions/cache@v2

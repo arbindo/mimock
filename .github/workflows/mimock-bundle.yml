@@ -10,7 +10,7 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build Mimock app
         run: |
@@ -68,7 +68,7 @@ jobs:
       MIMOCK_CURRENT_VERSION: ${{ secrets.MIMOCK_CURRENT_VERSION }}
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build JAR bundle-app
         run: |
